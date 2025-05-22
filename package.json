@@ -1,0 +1,17 @@
+{
+  "name": "@europeana/sea",
+  "version": "0.0.1",
+  "description": "Europeana Service Experience Architecture (SEA)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Europeana Foundation",
+  "license": "EUPL-1.2",
+  "engines": {
+    "node": "^22",
+    "pnpm": ">= 10.7.1"
+  },
+  "packageManager": "pnpm@10.7.1"
+}
