@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "@europeana/ds4ch",
   "private": true,
   "type": "module",
   "scripts": {
