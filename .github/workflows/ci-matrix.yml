@@ -1,0 +1,23 @@
+name: CI (matrix)
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v[0-9]+.[0-9]+.*'
+  pull_request:
+    branches:
+      - 'main'
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
+  workflow_dispatch:
+
+jobs:
+  version-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [ds4ch]
+    uses: ./.github/workflows/ci-app.yml
+    with:
+      version: ${{ matrix.app }}
