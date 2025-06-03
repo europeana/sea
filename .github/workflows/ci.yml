@@ -136,7 +136,7 @@ jobs:
         # TODO: this should run before the image is pushed
         name: Check image size
         env:
-          DOCKER_IMAGE_SIZE_LIMIT: '150M'
+          DOCKER_IMAGE_SIZE_LIMIT: ${{ vars.DOCKER_IMAGE_SIZE_LIMIT }}
         run: |
           docker_image_size=$(docker image inspect --format '{{.Size}}' ${{ needs.metadata.outputs.docker-full-tag }})
           if [ ${docker_image_size} -gt $(numfmt --from=si ${DOCKER_IMAGE_SIZE_LIMIT}) ]; then
