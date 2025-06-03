@@ -3,6 +3,7 @@ ARG node_version=22
 FROM node:${node_version}-alpine AS build
 
 ARG app
+# TODO: read this from package.json
 ARG pnpm_version=10.7.1
 
 RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/download/v${pnpm_version}/pnpm-linuxstatic-x64"
@@ -21,7 +22,7 @@ RUN pnpm --filter @europeana/${app} install
 
 COPY packages/apps/${app}/ packages/apps/${app}/
 
-RUN pnpm --filter @europeana/${app} build
+RUN pnpm --filter @europeana/${app} run build
 
 
 FROM gcr.io/distroless/nodejs${node_version}-debian12
