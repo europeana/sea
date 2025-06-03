@@ -14,6 +14,7 @@ on:
 
 jobs:
   ci-app:
+    name: CI (app)
     strategy:
       fail-fast: false
       matrix:
