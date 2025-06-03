@@ -20,4 +20,4 @@ jobs:
         app: [ds4ch]
     uses: ./.github/workflows/ci-app.yml
     with:
-      version: ${{ matrix.app }}
+      app: ${{ matrix.app }}
