@@ -1,0 +1,28 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Dataspace for cultural heritage" />
+
+<div>
+<h1>Storybook: Dataspace for cultural heritage</h1>
+
+<h2>Technical configuration notes</h2>
+<p>Storybook configuration files:</p>
+<ul>
+  <li><b>main.ts</b>: Storybook's primary configuration file, which specifies your Storybook project's behavior, including the location of your stories, the addons you use, feature flags and other project-specific settings.</li>
+  <li><b>preview.ts</b>: This configuration file controls the way stories are rendered. You can also use it to run code that applies to all stories.</li>
+  <li><b>vite.config</b>: For any vite config needed for Storybook</li>
+</ul>
+
+<p>Storybook is currently installed at the latest v9, but not using the automatically installed storybook-nuxt module. That is not upgraded for v9. See <a href="https://github.com/storybookjs/storybook/issues/31608">Storybook GitHub issue</a>. 
+It is also an externally maintained module, so perhaps preferable to rely on our own configuration. Some Nuxt features might need to be added. Auto-import is added for components by adding the Components plugin (see vite.config.js).</p>
+<p>Another configuration setting that is needed to render the stories is to define the Vue plugin in vite.config. See <a href="https://github.com/storybookjs/storybook/issues/26306">Storybook GitHub issue</a>.</p>
+<p>Storybook is currently configured with autodocs by default and vue-component-meta. Autodocs can be disabled per story. See the <a href="https://storybook.js.org/docs/writing-docs/autodocs">Storybook docs on autodocs</a></p>
+<p>Features we might want to add:</p>
+<ul>
+  <li>unit testing (Vitest)</li>
+  <li>visual testing (Chromatic)</li>
+  <li>accessibility testing</li>
+  <li>deploy Storybook</li>
+  <li>link Storybook with Figma</li>
+  </ul>
+</div>
