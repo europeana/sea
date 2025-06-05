@@ -24,6 +24,9 @@ importers:
 
   packages/apps/ds4ch:
     dependencies:
+      '@europeana/style':
+        specifier: ^2.9.0
+        version: 2.9.0
       bootstrap:
         specifier: ^5.3.6
         version: 5.3.6(@popperjs/core@2.11.8)
@@ -405,6 +408,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@europeana/style@2.9.0':
+    resolution: {integrity: sha512-XTCgAgesXtubGTcDD92ok2r6r4Ten9qfdBtDhZ3M/ypiLKmTMt73Bjav8gYdqgES9iwrdlorPff8cnfJGmWBug==}
 
   '@fastify/busboy@3.1.1':
     resolution: {integrity: sha512-5DGmA8FTdB2XbDeEwc/5ZXBl6UbBAyBOOLlPuBnZ/N1SwdH9Ii+cOX3tBROlDgcTXxjOYnLMVoKk9+FXAw0CJw==}
@@ -4548,6 +4554,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.4':
     optional: true
+
+  '@europeana/style@2.9.0': {}
 
   '@fastify/busboy@3.1.1': {}
 
