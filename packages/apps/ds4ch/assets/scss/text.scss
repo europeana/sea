@@ -2,7 +2,11 @@
 
 .label-uppercase {
   font-family: $font-family-montserrat;
-  font-size: 0.75rem;
+  font-size: $font-size-12;
   font-weight: 600;
   text-transform: uppercase;
+
+  @media (min-width: ($bp-4k)) {
+    font-size: $font-size-24;
+  }
 }
