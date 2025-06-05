@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+    tags:
+      - "v[0-9]+.[0-9]+.*"
+  pull_request:
+    branches:
+      - "main"
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
+  workflow_dispatch:
+
+jobs:
+  annotate:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && contains(github.head_ref, '/EC-') && github.event.action == 'opened'
+    steps:
+      - name: Extract JIRA ticket number
+        run: echo "JIRA_TICKET_NUMBER=$(echo ${{ github.head_ref }} | sed -r 's|^.*/(EC-[0-9]+).*$|\1|')" >> $GITHUB_ENV
+      - name: Link to JIRA ticket on pull request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `JIRA ticket: ${process.env.JIRA_TICKET_NUMBER}`
+            })
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run prettier
+        run: npx prettier . --check
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run eslint
+        run: npx eslint .
+  ci-app:
+    name: CI (app)
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [ds4ch]
+    uses: ./.github/workflows/ci-app.yml
+    with:
+      app: ${{ matrix.app }}
+    secrets: inherit

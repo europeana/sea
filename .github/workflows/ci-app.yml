@@ -11,53 +11,28 @@ env:
   DOCKER_REPOSITORY: ${{ vars.DOCKER_HUB_ORGANIZATION }}/${{ inputs.app }}
 
 jobs:
-  annotate:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && contains(github.head_ref, '/EC-') && github.event.action == 'opened'
-    steps:
-      -
-        name: Extract JIRA ticket number
-        run: echo "JIRA_TICKET_NUMBER=$(echo ${{ github.head_ref }} | sed -r 's|^.*/(EC-[0-9]+).*$|\1|')" >> $GITHUB_ENV
-      -
-        name: Link to JIRA ticket on pull request
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `JIRA ticket: ${process.env.JIRA_TICKET_NUMBER}`
-            })
-
   metadata:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Git metadata, main dispatch
+      - name: Git metadata, main dispatch
         id: git-main-dispatch
         if: github.event_name == 'workflow_dispatch' && github.event.ref == 'refs/heads/main'
         run: echo "status=true" >> $GITHUB_OUTPUT
-      -
-        name: Git metadata, main push
+      - name: Git metadata, main push
         id: git-main-push
         if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
         run: echo "status=true" >> $GITHUB_OUTPUT
-      -
-        name: Git metadata, PR draft
+      - name: Git metadata, PR draft
         id: git-pr-draft
         if: github.event_name == 'pull_request' && github.event.pull_request.draft == true
         run: echo "status=true" >> $GITHUB_OUTPUT
-      -
-        name: Git metadata, PR ready for review
+      - name: Git metadata, PR ready for review
         id: git-pr-ready
         if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
         run: echo "status=true" >> $GITHUB_OUTPUT
-      -
-        name: Docker metadata
+      - name: Docker metadata
         id: docker
         uses: docker/metadata-action@v5
         with:
@@ -67,8 +42,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=tag
             type=semver,pattern={{version}}
-      -
-        name: Output Docker image full tag
+      - name: Output Docker image full tag
         id: docker-image
         run: |
           echo "full-tag=${{ env.DOCKER_REPOSITORY }}:${{ steps.docker.outputs.version }}" >> $GITHUB_OUTPUT
@@ -89,21 +63,17 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        if: github.actor != 'dependabot[bot]'
+      - if: github.actor != 'dependabot[bot]'
         name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -115,8 +85,7 @@ jobs:
           cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-app
           tags: ${{ needs.metadata.outputs.docker-tags }}
           labels: ${{ needs.metadata.outputs.docker-labels }}
-      -
-        name: Build (from cache) and load app image
+      - name: Build (from cache) and load app image
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -126,8 +95,7 @@ jobs:
           load: true
           tags: ${{ needs.metadata.outputs.docker-full-tag }}
           cache-from: type=gha,scope=${{ github.ref_name }}-app
-      -
-        # TODO: this should run before the image is pushed
+      - # TODO: this should run before the image is pushed
         name: Check image size
         env:
           DOCKER_IMAGE_SIZE_LIMIT: ${{ vars.DOCKER_IMAGE_SIZE_LIMIT }}
