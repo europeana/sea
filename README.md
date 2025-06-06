@@ -6,6 +6,7 @@ A multi-purpose [Dockerfile](./Dockerfile) is included to build any of the
 [apps](./packages/apps/).
 
 Usage:
+
 ```sh
 app=ds4ch
 docker build --build-arg app=${app} -t europeana/${app} .
