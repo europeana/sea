@@ -34,8 +34,8 @@ export default defineConfig([
     extends: ["css/recommended"],
   },
   {
-    files: ['packages/apps/ds4ch/pages/**/*.vue'],
-    rules: { 'vue/multi-word-component-names': 'off' }
+    files: ["packages/apps/ds4ch/pages/**/*.vue"],
+    rules: { "vue/multi-word-component-names": "off" },
   },
   prettier,
 ]);
