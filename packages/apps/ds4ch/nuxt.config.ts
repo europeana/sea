@@ -29,7 +29,6 @@ export default defineNuxtConfig({
       { code: 'en', name: 'English',  file:'./en.json' },
       { code: 'es', name: 'Español',  file:'./es.json' },
       { code: 'et', name: 'Eesti',  file:'./et.json' },
-      { code: 'eu', name: 'Euskara',  file:'./eu.json' },
       { code: 'fi', name: 'Suomi',  file:'./fi.json' },
       { code: 'fr', name: 'Français',  file:'./fr.json' },
       { code: 'ga', name: 'Gaeilge',  file:'./ga.json' },
