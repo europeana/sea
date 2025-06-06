@@ -3,16 +3,16 @@ const logoSrc = "/img/logo.svg";
 
 // TODO: populate URLs when pages exist
 const links = [
-  { url: '/', text: 'nav.home' },
-  { url: '/', text: 'nav.about' },
-  { url: '/', text: 'nav.exploreDataspace' },
-  { url: '/', text: 'nav.exploreData' }
-]
+  { url: "/", text: "nav.home" },
+  { url: "/", text: "nav.about" },
+  { url: "/", text: "nav.exploreDataspace" },
+  { url: "/", text: "nav.exploreData" },
+];
 </script>
 <template>
   <nav role="navigation" class="navbar navbar-expand-lg fixed-top">
     <NuxtLink to="/" class="navbar-brand">
-      <img :src="logoSrc" :alt="$t('nav.home')">
+      <img :src="logoSrc" :alt="$t('nav.home')" />
     </NuxtLink>
     <button
       class="navbar-toggler"
@@ -36,7 +36,9 @@ const links = [
       <div class="offcanvas-body">
         <ul class="navbar-nav">
           <li v-for="(link, index) in links" :key="index" class="nav-item">
-            <NuxtLink class="nav-link" :to="link.url">{{ $t(link.text) }}</NuxtLink>
+            <NuxtLink class="nav-link" :to="link.url">{{
+              $t(link.text)
+            }}</NuxtLink>
           </li>
         </ul>
       </div>

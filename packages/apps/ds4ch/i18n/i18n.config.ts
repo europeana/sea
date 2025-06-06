@@ -1,4 +1,4 @@
 export default {
   legacy: false,
-  fallbackLocale: 'en'
-}
+  fallbackLocale: "en",
+};
