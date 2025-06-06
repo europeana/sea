@@ -24,7 +24,11 @@ const links = [
     >
       <span class="icon-menu text-white"></span>
     </button>
-    <div class="offcanvas offcanvas-end bg-dark border-start border-light" id="offcanvas-navbar" tabindex="-1">
+    <div
+      class="offcanvas offcanvas-end bg-dark border-start border-light"
+      id="offcanvas-navbar"
+      tabindex="-1"
+    >
       <div class="offcanvas-header">
         <button
           type="button"
@@ -36,7 +40,9 @@ const links = [
       <div class="offcanvas-body">
         <ul class="navbar-nav ms-auto">
           <li v-for="(link, index) in links" :key="index" class="nav-item">
-            <NuxtLink class="nav-link label-uppercase" :to="link.url">{{ link.text }}</NuxtLink>
+            <NuxtLink class="nav-link label-uppercase" :to="link.url">
+              {{ link.text }}
+            </NuxtLink>
           </li>
         </ul>
       </div>
@@ -44,8 +50,8 @@ const links = [
   </nav>
 </template>
 <style lang="scss" scoped>
-@import '@europeana/style/scss/variables';
-@import 'assets/scss/variables';
+@import "@europeana/style/scss/variables";
+@import "assets/scss/variables";
 
 .navbar {
   --bs-navbar-padding-x: 2rem;
