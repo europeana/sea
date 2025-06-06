@@ -1,0 +1,22 @@
+@import '../variables';
+
+// Extends breakpoint definitions so responsive utilities can be used.
+// Example classes that can now be used: p-wqhd-3, mb-4k-2 etc.
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1880px,
+  wqhd: 2520px,
+  4k: 3020px
+);
+
+// Extends theme color definitions to use ds4ch color palatte.
+// Example classes that can now be use: bg-dark, border-light etc.
+$theme-colors: (
+  dark: $black,
+  light: $grey
+);
