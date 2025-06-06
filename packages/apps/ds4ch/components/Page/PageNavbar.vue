@@ -1,5 +1,5 @@
 <script setup>
-const logoSrc = "/img/logo.svg";
+import logoSrc from "@europeana/style/img/DS4CH/logo.svg";
 
 // TODO: populate URLs when pages exist and translation strings when i18n configured
 const links = [
