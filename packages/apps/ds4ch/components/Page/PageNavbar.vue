@@ -16,11 +16,11 @@ const links = [
     </NuxtLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar"
       aria-controls="offcanvas-navbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="icon-menu text-white"></span>
     </button>
-    <div class="offcanvas offcanvas-end" id="offcanvas-navbar" tabindex="-1">
+    <div class="offcanvas offcanvas-end bg-dark border-start border-light" id="offcanvas-navbar" tabindex="-1">
       <div class="offcanvas-header">
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
+        <button type="button" class="btn-close icon-clear" data-bs-dismiss="offcanvas" aria-label="Close" />
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav ms-auto">
@@ -32,7 +32,6 @@ const links = [
     </div>
   </nav>
 </template>
-
 <style lang="scss" scoped>
 @import '@europeana/style/scss/variables';
 @import 'assets/scss/variables';
@@ -41,6 +40,7 @@ const links = [
   --bs-navbar-padding-x: 2rem;
   --bs-navbar-padding-y: 0.625rem;
   --bs-navbar-brand-padding-y: 0;
+  --bs-navbar-toggler-padding-y: 0.75rem;
 
   @media (min-width: $bp-medium) {
     --bs-navbar-padding-x: 3.5rem;
@@ -52,27 +52,65 @@ const links = [
   }
 }
 
-.navbar-brand img {
-  height: 4rem;
-
-  @media (min-width: $bp-4k) {
-    height: 8rem;
+.navbar-brand {
+  @media (max-width: ($bp-large - 1px)) {
+    margin-left: -0.5rem;
   }
+
+  img {
+    height: 4rem;
+
+    @media (min-width: $bp-4k) {
+      height: 8rem;
+    }
+  }
+}
+
+.navbar-nav {
+  --bs-nav-link-padding-y: 0.75rem;
 }
 
 .nav-link {
   color: $white;
+  transition: color $standard-transition;
 
   &.router-link-exact-active,
   &:hover {
     color: $yellow;
-    transition: $standard-transition;
   }
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
   @media (min-width: $bp-4k) {
     padding: 1rem;
+  }
+}
+
+.navbar-toggler {
+  --bs-navbar-toggler-font-size: 0.75rem;
+  margin-right: -0.75rem;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  .icon-menu {
+    line-height: 1rem;
+    display: inline-block;
+  }
+}
+
+.offcanvas {
+  --bs-offcanvas-width: 16rem;
+
+  .btn-close {
+    --bs-btn-close-color: #{$white};
+    --bs-btn-close-opacity: 1;
+    --bs-btn-close-hover-opacity: 1;
+
+    &:hover {
+      color: $yellow;
+    }
   }
 }
 </style>
