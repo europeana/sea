@@ -1,18 +1,18 @@
 <script setup>
 const logoSrc = "/img/logo.svg";
 
-// TODO: populate URLs when pages exist and translation strings when i18n configured
+// TODO: populate URLs when pages exist
 const links = [
-  { url: "/", text: "Home" },
-  { url: "/", text: "About us" },
-  { url: "/", text: "Explore the Data space" },
-  { url: "/", text: "Explore the data" },
+  { url: "/", text: "nav.home" },
+  { url: "/", text: "nav.about" },
+  { url: "/", text: "nav.exploreDataspace" },
+  { url: "/", text: "nav.exploreData" },
 ];
 </script>
 <template>
   <nav role="navigation" class="navbar navbar-expand-lg fixed-top">
     <NuxtLink to="/" class="navbar-brand">
-      <img :src="logoSrc" alt="Home" />
+      <img :src="logoSrc" :alt="$t('nav.home')" />
     </NuxtLink>
     <button
       class="navbar-toggler"
@@ -20,7 +20,7 @@ const links = [
       data-bs-toggle="offcanvas"
       data-bs-target="#offcanvas-navbar"
       aria-controls="offcanvas-navbar"
-      aria-label="Toggle navigation"
+      :aria-label="$t('nav.toggle')"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,13 +30,15 @@ const links = [
           type="button"
           class="btn-close"
           data-bs-dismiss="offcanvas"
-          aria-label="Close"
+          :aria-label="$t('nav.close')"
         />
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav">
           <li v-for="(link, index) in links" :key="index" class="nav-item">
-            <NuxtLink class="nav-link" :to="link.url">{{ link.text }}</NuxtLink>
+            <NuxtLink class="nav-link" :to="link.url">{{
+              $t(link.text)
+            }}</NuxtLink>
           </li>
         </ul>
       </div>

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"TODO: add tests\"",
-    "prepare": "husky init"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "Europeana Foundation",
@@ -33,7 +33,6 @@
     "vitest": "^3.1.4"
   },
   "lint-staged": {
-    "**/*": "prettier --write",
     "**/*": "eslint --fix"
   }
 }
