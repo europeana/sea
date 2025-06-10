@@ -29,7 +29,10 @@ const links = [
       id="offcanvas-navbar"
       tabindex="-1"
     >
-      <div class="offcanvas-header">
+      <div class="offcanvas-header align-items-start">
+        <NuxtLink to="/" class="navbar-brand">
+          <img :src="logoSrc" alt="Home" />
+        </NuxtLink>
         <button
           type="button"
           class="btn-close icon-clear"
@@ -38,7 +41,7 @@ const links = [
         />
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto text-end">
           <li v-for="(link, index) in links" :key="index" class="nav-item">
             <NuxtLink class="nav-link label-uppercase" :to="link.url">
               {{ link.text }}
@@ -128,6 +131,10 @@ const links = [
     &:hover {
       color: $yellow;
     }
+  }
+
+  .navbar-brand {
+    margin-top: -0.5rem;
   }
 }
 </style>
