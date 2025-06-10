@@ -33,6 +33,7 @@
     "vitest": "^3.1.4"
   },
   "lint-staged": {
+    "**/*": "prettier --write",
     "**/*": "eslint --fix"
   }
 }
