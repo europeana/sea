@@ -1,0 +1,10 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About us",
+    "exploreDataspace": "Explore the Dataspace",
+    "exploreData": "Explore the data",
+    "toggle": "Show menu",
+    "close": "Close menu"
+  }
+}

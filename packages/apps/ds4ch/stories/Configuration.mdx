@@ -8,9 +8,18 @@ import { Meta } from "@storybook/addon-docs/blocks";
 <h2>Technical configuration notes</h2>
 <p>Storybook configuration files:</p>
 <ul>
-  <li><b>main.ts</b>: Storybook's primary configuration file, which specifies your Storybook project's behavior, including the location of your stories, the addons you use, feature flags and other project-specific settings.</li>
-  <li><b>preview.ts</b>: This configuration file controls the way stories are rendered. You can also use it to run code that applies to all stories.</li>
-  <li><b>vite.config</b>: For any vite config needed for Storybook</li>
+  <li>
+    <b>main.ts</b>: Storybook's primary configuration file, which specifies your
+    Storybook project's behavior, including the location of your stories, the
+    addons you use, feature flags and other project-specific settings.
+  </li>
+  <li>
+    <b>preview.ts</b>: This configuration file controls the way stories are
+    rendered. You can also use it to run code that applies to all stories.
+  </li>
+  <li>
+    <b>vite.config</b>: For any vite config needed for Storybook
+  </li>
 </ul>
 
 <p>Storybook is currently installed at the latest v9, but not using the automatically installed storybook-nuxt module. That is not upgraded for v9. See <a href="https://github.com/storybookjs/storybook/issues/31608">Storybook GitHub issue</a>. 
