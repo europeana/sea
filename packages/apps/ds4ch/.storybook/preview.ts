@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle";
 
 import type { Preview } from "@nuxtjs/storybook";
 import { watch } from "vue";
+import i18nLocales from "../i18n/locales";
 
 const defaultLocale = "en";
 
@@ -15,10 +16,10 @@ const preview: Preview = {
       defaultValue: defaultLocale,
       toolbar: {
         icon: "globe",
-        items: [
-          { value: "en", title: "English" },
-          { value: "de", title: "Deutsch" },
-        ],
+        items: i18nLocales.map((locale) => ({
+          value: locale.code,
+          title: locale.name,
+        })),
       },
     },
   },
