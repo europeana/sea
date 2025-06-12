@@ -1,4 +1,4 @@
-import type { StorybookConfig } from "@storybook/vue3-vite";
+import type { StorybookConfig } from "@storybook-vue/nuxt";
 
 const config: StorybookConfig = {
   stories: [
@@ -12,7 +12,7 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
   ],
   framework: {
-    name: "@storybook/vue3-vite",
+    name: "@storybook-vue/nuxt",
     options: {
       docgen: "vue-component-meta",
     },
