@@ -2,5 +2,6 @@
   <div>
     <NuxtRouteAnnouncer />
     <PageHeader />
+    <NuxtPage />
   </div>
 </template>
