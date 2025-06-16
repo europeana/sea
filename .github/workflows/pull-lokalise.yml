@@ -28,4 +28,4 @@ jobs:
             --export-sort=a_z
             --replace-breaks=false
             --add-newline-eof=true
-            --language-mapping='[{"original_language_iso":"en_GB","custom_language_iso":"en"},{"original_language_iso":"mt_MT","custom_language_iso":"mt"},{"original_language_iso":"ga_IE","custom_language_iso":"ga"}]'
+            --language-mapping=[{"original_language_iso":"en_GB","custom_language_iso":"en"},{"original_language_iso":"mt_MT","custom_language_iso":"mt"},{"original_language_iso":"ga_IE","custom_language_iso":"ga"}]
