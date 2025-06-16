@@ -1,0 +1,30 @@
+name: Pull from Lokalise
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Pull from Lokalise
+        uses: lokalise/lokalise-pull-action@v3.9.1
+        with:
+          api_token: ${{ secrets.LOKALISE_API_TOKEN }}
+          project_id: ${{ secrets.LOKALISE_PROJECT_ID }}
+          file_format: json
+          translations_path: packages/apps/ds4ch/i18n/locales/%LANG_ISO%
+          base_lang: en_GB
+          flat_naming: true
+          always_pull_base: true
+          git_commit_message: "chore: Translations update"
+          additional_params: |
+            --indentation=2sp
+            --export-empty-as=skip
+            --export-sort=a_z
+            --replace-breaks=false
+            --language-mapping=[{"original_language_iso":"en_GB","custom_language_iso":"en"}, {"original_language_iso":"mt_MT","custom_language_iso":"mt"}, {"original_language_iso":"ga_IE","custom_language_iso":"ga"} ]
