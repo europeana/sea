@@ -20,6 +20,7 @@ jobs:
           translations_path: packages/apps/ds4ch/i18n/locales
           base_lang: en_GB
           flat_naming: true
+          skip_include_tags: true
           always_pull_base: true
           git_commit_message: "chore: Translations update"
           additional_params: |
