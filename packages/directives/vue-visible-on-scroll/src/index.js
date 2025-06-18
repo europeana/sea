@@ -9,7 +9,7 @@ export default {
     routeWithHash = binding.value.routeHash;
     desktopBreakpoint = binding.value.desktopBreakpoint;
 
-    if (process.browser && onDesktop()) {
+    if (onDesktop()) {
       enableVisibleOnScroll();
     }
 
