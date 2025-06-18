@@ -1,6 +1,4 @@
-// import bootstrap css and js
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle";
+import "../assets/scss/main.scss";
 
 import type { Preview } from "@nuxtjs/storybook";
 import { watch } from "vue";
