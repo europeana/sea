@@ -28,6 +28,7 @@ const links = [
       class="offcanvas offcanvas-end bg-dark border-start border-light"
       id="offcanvas-navbar"
       tabindex="-1"
+      data-bs-scroll="true"
     >
       <div class="offcanvas-header align-items-start">
         <NuxtLink to="/" class="navbar-brand">
@@ -122,6 +123,7 @@ const links = [
 
 .offcanvas {
   --bs-offcanvas-width: 16rem;
+  height: 100vh;
 
   .btn-close {
     --bs-btn-close-color: #{$white};

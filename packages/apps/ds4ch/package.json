@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@europeana/vue-visible-on-scroll": "workspace:*",
     "@europeana/style": "^2.9.0",
     "@nuxtjs/i18n": "^9.5.5",
     "bootstrap": "^5.3.6",
