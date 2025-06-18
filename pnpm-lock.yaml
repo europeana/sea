@@ -52,6 +52,9 @@ importers:
 
   packages/apps/ds4ch:
     dependencies:
+      "@europeana/style":
+        specifier: ^2.9.0
+        version: 2.9.0
       "@nuxtjs/i18n":
         specifier: ^9.5.5
         version: 9.5.5(@vue/compiler-dom@3.5.16)(eslint@9.28.0(jiti@2.4.2))(magicast@0.3.5)(rollup@4.41.1)(vue@3.5.16(typescript@5.8.3))
@@ -800,6 +803,12 @@ packages:
         integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==,
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
+
+  "@europeana/style@2.9.0":
+    resolution:
+      {
+        integrity: sha512-XTCgAgesXtubGTcDD92ok2r6r4Ten9qfdBtDhZ3M/ypiLKmTMt73Bjav8gYdqgES9iwrdlorPff8cnfJGmWBug==,
+      }
 
   "@fastify/busboy@3.1.1":
     resolution:
@@ -9057,6 +9066,8 @@ snapshots:
     dependencies:
       "@eslint/core": 0.14.0
       levn: 0.4.1
+
+  "@europeana/style@2.9.0": {}
 
   "@fastify/busboy@3.1.1": {}
 
