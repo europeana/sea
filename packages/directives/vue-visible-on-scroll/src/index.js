@@ -1,3 +1,6 @@
+let element;
+let routeWithHash;
+
 export default {
   mounted(el, binding) {
     element = el;
@@ -12,9 +15,6 @@ export default {
 
   // TODO remove even listeners on unmounted? Current use in header, is always mounted
 };
-
-let element;
-let routeWithHash;
 
 let enabled = false;
 const desktopWidth = 992; // Must match $bp-large
