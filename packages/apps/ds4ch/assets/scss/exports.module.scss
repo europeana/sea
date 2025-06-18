@@ -1,0 +1,6 @@
+// exports scss variables needed in javaScript
+@import "@europeana/style/scss/variables";
+
+:export {
+  bpLarge: #{$bp-large};
+}

@@ -1,10 +1,13 @@
 let element;
 let routeWithHash;
+let desktopBreakpoint;
 
 export default {
   mounted(el, binding) {
     element = el;
-    routeWithHash = binding.value; // expects $route.hash to be passed
+    // expects $route.hash and desktop breakpoint to be passed
+    routeWithHash = binding.value.routeHash;
+    desktopBreakpoint = binding.value.desktopBreakpoint;
 
     if (process.browser && onDesktop()) {
       enableVisibleOnScroll();
@@ -17,9 +20,8 @@ export default {
 };
 
 let enabled = false;
-const desktopWidth = 992; // Must match $bp-large
 
-const onDesktop = () => window.innerWidth >= desktopWidth;
+const onDesktop = () => window.innerWidth >= desktopBreakpoint;
 
 const handleScroll = () => {
   const oldPosition = element.scrollPosition ?? 0;
