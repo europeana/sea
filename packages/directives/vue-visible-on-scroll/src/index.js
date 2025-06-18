@@ -16,7 +16,14 @@ export default {
     window.addEventListener("resize", handleResize);
   },
 
-  // TODO remove even listeners on unmounted? Current use in header, is always mounted
+  unmounted() {
+    disableVisibleOnScroll();
+    window.removeEventListener("resize", handleResize);
+
+    element = null;
+    routeWithHash = null;
+    desktopBreakpoint = null;
+  },
 };
 
 let enabled = false;
