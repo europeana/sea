@@ -3,21 +3,17 @@ let routeWithHash;
 let desktopBreakpoint;
 
 export default {
+  // Vue 3
   mounted(el, binding) {
-    element = el;
-    // expects $route.hash and desktop breakpoint to be passed
-    routeWithHash = binding.value?.routeHash;
-    desktopBreakpoint = binding.value?.desktopBreakpoint;
-
-    if (onDesktop() || !desktopBreakpoint) {
-      enableVisibleOnScroll();
-    }
-
-    if (desktopBreakpoint) {
-      window.addEventListener("resize", handleResize);
-    }
+    initOnMounted(el, binding);
   },
 
+  // Vue 2
+  inserted(el, binding) {
+    initOnMounted(el, binding);
+  },
+
+  // Vue 3
   unmounted() {
     disableVisibleOnScroll();
     window.removeEventListener("resize", handleResize);
@@ -26,6 +22,20 @@ export default {
     routeWithHash = null;
     desktopBreakpoint = null;
   },
+};
+
+const initOnMounted = (el, binding) => {
+  element = el;
+  routeWithHash = binding.value?.routeHash;
+  desktopBreakpoint = binding.value?.desktopBreakpoint;
+
+  if (onDesktop() || !desktopBreakpoint) {
+    enableVisibleOnScroll();
+  }
+
+  if (desktopBreakpoint) {
+    window.addEventListener("resize", handleResize);
+  }
 };
 
 let enabled = false;
