@@ -15,6 +15,6 @@ const bpLarge = parseInt(variables.bpLarge);
 @import "@europeana/style/scss/variables";
 
 header {
-  transition: $standard-transition;
+  transition: transform $standard-transition;
 }
 </style>

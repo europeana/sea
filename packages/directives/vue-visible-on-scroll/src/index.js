@@ -6,14 +6,16 @@ export default {
   mounted(el, binding) {
     element = el;
     // expects $route.hash and desktop breakpoint to be passed
-    routeWithHash = binding.value.routeHash;
-    desktopBreakpoint = binding.value.desktopBreakpoint;
+    routeWithHash = binding.value?.routeHash;
+    desktopBreakpoint = binding.value?.desktopBreakpoint;
 
-    if (onDesktop()) {
+    if (onDesktop() || !desktopBreakpoint) {
       enableVisibleOnScroll();
     }
 
-    window.addEventListener("resize", handleResize);
+    if (desktopBreakpoint) {
+      window.addEventListener("resize", handleResize);
+    }
   },
 
   unmounted() {
