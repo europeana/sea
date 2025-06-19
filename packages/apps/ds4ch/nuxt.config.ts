@@ -14,12 +14,29 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    // The private keys which are only available server-side
+    // apiSecret: '123',
+    // Keys within public are also exposed client-side
+    public: {
+      contentful: {
+        graphQlOrigin: null,
+        spaceId: null,
+        environmentId: null,
+        accessToken: {
+          delivery: null,
+          preview: null,
+        },
+      },
+    },
+  },
   i18n: {
     bundle: {
       optimizeTranslationDirective: false,
     },
     defaultLocale: "en",
     strategy: "prefix",
+    // TODO: mv this to somewhere it can be imported from
     locales: [
       { code: "bg", name: "Български", file: "./bg.json" },
       { code: "cs", name: "Čeština", file: "./cs.json" },
