@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   css: ["/assets/scss/main.scss"],
   devtools: { enabled: true },
-  modules: ["@nuxtjs/i18n"],
+  modules: ["@nuxtjs/i18n", "@nuxt/test-utils/module"],
   vite: {
     css: {
       preprocessorOptions: {
