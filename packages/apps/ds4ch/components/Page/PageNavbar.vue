@@ -1,5 +1,6 @@
 <script setup>
 import logoSrc from "@europeana/style/img/DS4CH/logo.svg";
+const localePath = useLocalePath();
 
 // TODO: populate URLs when pages exist
 const links = [
@@ -11,7 +12,7 @@ const links = [
 </script>
 <template>
   <nav role="navigation" class="navbar navbar-expand-lg">
-    <NuxtLink to="/" class="navbar-brand">
+    <NuxtLink :to="localePath('/')" class="navbar-brand">
       <img :src="logoSrc" :alt="$t('nav.home')" />
     </NuxtLink>
     <button
@@ -25,12 +26,12 @@ const links = [
       <span class="icon-menu text-white"></span>
     </button>
     <div
-      class="offcanvas offcanvas-end bg-dark border-start border-light"
       id="offcanvas-navbar"
+      class="offcanvas offcanvas-end bg-dark border-start border-light"
       tabindex="-1"
     >
       <div class="offcanvas-header align-items-start">
-        <NuxtLink to="/" class="navbar-brand">
+        <NuxtLink :to="localePath('/')" class="navbar-brand">
           <img :src="logoSrc" alt="Home" />
         </NuxtLink>
         <button
@@ -43,7 +44,10 @@ const links = [
       <div class="offcanvas-body">
         <ul class="navbar-nav ms-auto text-end">
           <li v-for="(link, index) in links" :key="index" class="nav-item">
-            <NuxtLink class="nav-link label-uppercase" :to="link.url">
+            <NuxtLink
+              class="nav-link label-uppercase"
+              :to="localePath(link.url)"
+            >
               {{ $t(link.text) }}
             </NuxtLink>
           </li>
