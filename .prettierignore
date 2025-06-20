@@ -2,3 +2,4 @@
 .husky
 .prettierignore
 pnpm-lock.yaml
+Dockerfile

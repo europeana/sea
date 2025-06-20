@@ -24,5 +24,9 @@ logs
 .env.*
 !.env.example
 
-# vitest/v8 coverage directory
+# Storybook
+storybook-static
+*storybook.log
+
+# test coverage
 coverage

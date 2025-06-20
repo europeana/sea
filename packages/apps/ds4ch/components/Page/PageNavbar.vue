@@ -11,7 +11,7 @@ const links = [
 ];
 </script>
 <template>
-  <nav role="navigation" class="navbar navbar-expand-lg">
+  <nav role="navigation" class="navbar navbar-expand-lg bg-dark">
     <NuxtLink :to="localePath('/')" class="navbar-brand">
       <img :src="logoSrc" :alt="$t('nav.home')" />
     </NuxtLink>
