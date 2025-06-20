@@ -141,4 +141,5 @@ jobs:
           push: ${{ github.actor != 'dependabot[bot]' }}
           cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
           cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
-          tags: ${{ steps.docker-metadata.outputs.full-tag }}-storybook
+          tags: ${{ steps.docker-metadata.outputs.tags }}
+          labels: ${{ steps.docker-metadata.outputs.labels }}
