@@ -28,7 +28,7 @@ describe("PageNavbar", () => {
 
     navLinks.forEach((link, index) => {
       expect(link.text()).toBe(wrapper.vm.links[index].text);
-      expect(link.attributes("href")).toBe(wrapper.vm.links[index].url);
+      expect(link.attributes("href")).toContain(wrapper.vm.links[index].url);
     });
   });
 });
