@@ -32,25 +32,7 @@ jobs:
         id: git-pr-ready
         if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
         run: echo "status=true" >> $GITHUB_OUTPUT
-      - name: Docker metadata
-        id: docker
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.DOCKER_REPOSITORY }}
-          tags: |
-            type=ref,event=pr
-            type=ref,event=branch
-            type=ref,event=tag
-            type=semver,pattern={{version}}
-      - name: Output Docker image full tag
-        id: docker-image
-        run: |
-          echo "full-tag=${{ env.DOCKER_REPOSITORY }}:${{ steps.docker.outputs.version }}" >> $GITHUB_OUTPUT
     outputs:
-      docker-full-tag: ${{ steps.docker-image.outputs.full-tag }}
-      docker-labels: ${{ steps.docker.outputs.labels }}
-      docker-tags: ${{ steps.docker.outputs.tags }}
-      docker-version: ${{ steps.docker.outputs.version }}
       git-main-dispatch: ${{ steps.git-main-dispatch.outputs.status }}
       git-main-push: ${{ steps.git-main-push.outputs.status }}
       git-pr-draft: ${{ steps.git-pr-draft.outputs.status }}
@@ -65,6 +47,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Docker metadata
+        id: docker-metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_REPOSITORY }}
+          tags: |
+            type=ref,event=pr
+            type=ref,event=branch
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+      - name: Output Docker image full tag
+        id: docker-image
+        run: |
+          echo "full-tag=${{ env.DOCKER_REPOSITORY }}:${{ steps.docker-metadata.outputs.version }}" >> $GITHUB_OUTPUT
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - if: github.actor != 'dependabot[bot]'
@@ -83,8 +79,8 @@ jobs:
           push: ${{ github.actor != 'dependabot[bot]' }}
           cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-app
           cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-app
-          tags: ${{ needs.metadata.outputs.docker-tags }}
-          labels: ${{ needs.metadata.outputs.docker-labels }}
+          tags: ${{ steps.docker-metadata.outputs.tags }}
+          labels: ${{ steps.docker-metadata.outputs.labels }}
       - name: Build (from cache) and load app image
         uses: docker/build-push-action@v6
         with:
@@ -93,14 +89,14 @@ jobs:
           build-args: app=${{ inputs.app }}
           pull: true
           load: true
-          tags: ${{ needs.metadata.outputs.docker-full-tag }}
+          tags: ${{ steps.docker-image.outputs.full-tag }}
           cache-from: type=gha,scope=${{ github.ref_name }}-app
       - # TODO: this should run before the image is pushed
         name: Check image size
         env:
           DOCKER_IMAGE_SIZE_LIMIT: ${{ vars.DOCKER_IMAGE_SIZE_LIMIT }}
         run: |
-          docker_image_size=$(docker image inspect --format '{{.Size}}' ${{ needs.metadata.outputs.docker-full-tag }})
+          docker_image_size=$(docker image inspect --format '{{.Size}}' ${{ steps.docker-image.outputs.full-tag }})
           if [ ${docker_image_size} -gt $(numfmt --from=si ${DOCKER_IMAGE_SIZE_LIMIT}) ]; then
             echo "::error ::Image size $(numfmt --to=si ${docker_image_size}) exceeds limit ${DOCKER_IMAGE_SIZE_LIMIT}"
             exit 1
@@ -116,6 +112,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Docker metadata
+        id: docker-metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_REPOSITORY }}-storybook
+          tags: |
+            type=ref,event=pr
+            type=ref,event=branch
+            type=ref,event=tag
+            type=semver,pattern={{version}}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - if: github.actor != 'dependabot[bot]'
@@ -135,4 +141,4 @@ jobs:
           push: ${{ github.actor != 'dependabot[bot]' }}
           cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
           cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
-          tags: ${{ needs.metadata.outputs.docker-full-tag }}-storybook
+          tags: ${{ steps.docker-metadata.outputs.full-tag }}-storybook
