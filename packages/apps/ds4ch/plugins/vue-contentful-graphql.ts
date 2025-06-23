@@ -1,3 +1,5 @@
+// TODO: typescript
+
 // TODO: make this into its own pkg given that it will be used by other
 //       apps too? or an optional extra (Nuxt) module of the
 //       @europeana/vue-contentful-graphql pkg?

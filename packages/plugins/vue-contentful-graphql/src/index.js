@@ -1,3 +1,4 @@
+// TODO: typescript
 // QUESTION: use @vue/apollo-composable instead?
 
 import fetch from "node-fetch-native";
