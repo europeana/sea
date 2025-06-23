@@ -32,8 +32,23 @@ jobs:
         id: git-pr-ready
         if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
         run: echo "status=true" >> $GITHUB_OUTPUT
+    outputs:
+      git-main-dispatch: ${{ steps.git-main-dispatch.outputs.status }}
+      git-main-push: ${{ steps.git-main-push.outputs.status }}
+      git-pr-draft: ${{ steps.git-pr-draft.outputs.status }}
+      git-pr-ready: ${{ steps.git-pr-ready.outputs.status }}
+
+  # Build, and push to Docker Hub, the final-stage production-ready Docker image,
+  # for use throughout other jobs, and for deployment.
+  docker-build-app:
+    needs: [metadata]
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Docker metadata
-        id: docker
+        id: docker-metadata
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.DOCKER_REPOSITORY }}
@@ -45,26 +60,7 @@ jobs:
       - name: Output Docker image full tag
         id: docker-image
         run: |
-          echo "full-tag=${{ env.DOCKER_REPOSITORY }}:${{ steps.docker.outputs.version }}" >> $GITHUB_OUTPUT
-    outputs:
-      docker-full-tag: ${{ steps.docker-image.outputs.full-tag }}
-      docker-labels: ${{ steps.docker.outputs.labels }}
-      docker-tags: ${{ steps.docker.outputs.tags }}
-      docker-version: ${{ steps.docker.outputs.version }}
-      git-main-dispatch: ${{ steps.git-main-dispatch.outputs.status }}
-      git-main-push: ${{ steps.git-main-push.outputs.status }}
-      git-pr-draft: ${{ steps.git-pr-draft.outputs.status }}
-      git-pr-ready: ${{ steps.git-pr-ready.outputs.status }}
-
-  # Build, and push to Docker Hub, the final-stage production-ready Docker image,
-  # for use throughout other jobs, and for deployment.
-  docker-build:
-    needs: [metadata]
-    runs-on: ubuntu-latest
-    if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+          echo "full-tag=${{ env.DOCKER_REPOSITORY }}:${{ steps.docker-metadata.outputs.version }}" >> $GITHUB_OUTPUT
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - if: github.actor != 'dependabot[bot]'
@@ -81,10 +77,10 @@ jobs:
           build-args: app=${{ inputs.app }}
           pull: true
           push: ${{ github.actor != 'dependabot[bot]' }}
-          cache-from: type=gha,scope=${{ github.ref_name }}-app
-          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-app
-          tags: ${{ needs.metadata.outputs.docker-tags }}
-          labels: ${{ needs.metadata.outputs.docker-labels }}
+          cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-app
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-app
+          tags: ${{ steps.docker-metadata.outputs.tags }}
+          labels: ${{ steps.docker-metadata.outputs.labels }}
       - name: Build (from cache) and load app image
         uses: docker/build-push-action@v6
         with:
@@ -93,17 +89,57 @@ jobs:
           build-args: app=${{ inputs.app }}
           pull: true
           load: true
-          tags: ${{ needs.metadata.outputs.docker-full-tag }}
+          tags: ${{ steps.docker-image.outputs.full-tag }}
           cache-from: type=gha,scope=${{ github.ref_name }}-app
       - # TODO: this should run before the image is pushed
         name: Check image size
         env:
           DOCKER_IMAGE_SIZE_LIMIT: ${{ vars.DOCKER_IMAGE_SIZE_LIMIT }}
         run: |
-          docker_image_size=$(docker image inspect --format '{{.Size}}' ${{ needs.metadata.outputs.docker-full-tag }})
+          docker_image_size=$(docker image inspect --format '{{.Size}}' ${{ steps.docker-image.outputs.full-tag }})
           if [ ${docker_image_size} -gt $(numfmt --from=si ${DOCKER_IMAGE_SIZE_LIMIT}) ]; then
             echo "::error ::Image size $(numfmt --to=si ${docker_image_size}) exceeds limit ${DOCKER_IMAGE_SIZE_LIMIT}"
             exit 1
           else
             echo "::notice ::Image size $(numfmt --to=si ${docker_image_size}) within limit ${DOCKER_IMAGE_SIZE_LIMIT}"
           fi
+
+  # Build, and push to Docker Hub, the app's Storybook.
+  docker-build-storybook:
+    needs: [metadata]
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Docker metadata
+        id: docker-metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_REPOSITORY }}-storybook
+          tags: |
+            type=ref,event=pr
+            type=ref,event=branch
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - if: github.actor != 'dependabot[bot]'
+        name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: app=${{ inputs.app }}
+          target: run-storybook
+          pull: true
+          push: ${{ github.actor != 'dependabot[bot]' }}
+          cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
+          tags: ${{ steps.docker-metadata.outputs.tags }}
+          labels: ${{ steps.docker-metadata.outputs.labels }}
