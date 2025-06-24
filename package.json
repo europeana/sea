@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "pnpm -r test",
-    "test:coverage": "pnpm -r test:coverage",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "prepare": "husky"
   },
   "keywords": [],
