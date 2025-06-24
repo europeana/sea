@@ -60,17 +60,17 @@ const sections = {
   <footer class="page-footer" role="contentinfo">
     <!-- TODO: make "footer-section" a distinct component? -->
     <div class="footer-section">
-      <h2>
+      <h3>
         {{ $t(sections.mission.header) }}
-      </h2>
+      </h3>
       <span>
         {{ $t(sections.mission.text) }}
       </span>
     </div>
     <div class="footer-section">
-      <h2>
+      <h3>
         {{ $t(sections.info.header) }}
-      </h2>
+      </h3>
       <ul>
         <li
           v-for="(link, index) in sections.info.links"
@@ -84,9 +84,9 @@ const sections = {
       </ul>
     </div>
     <div class="footer-section">
-      <h2>
+      <h3>
         {{ $t(sections.help.header) }}
-      </h2>
+      </h3>
       <ul>
         <li
           v-for="(link, index) in sections.help.links"
@@ -100,9 +100,9 @@ const sections = {
       </ul>
     </div>
     <div class="footer-section">
-      <h2>
+      <h3>
         {{ $t(sections.language.header) }}
-      </h2>
+      </h3>
       <!-- TODO: add language selector -->
       <span>
         <!-- TODO: add translation icon -->
@@ -110,9 +110,9 @@ const sections = {
       </span>
     </div>
     <div class="footer-section">
-      <h2>
+      <h3>
         {{ $t(sections.supportingPartners.header) }}
-      </h2>
+      </h3>
       <ul>
         <li
           v-for="(link, index) in sections.supportingPartners.links"
@@ -136,6 +136,9 @@ const sections = {
 @import "assets/scss/variables";
 
 .page-footer {
+  background-color: $black;
+  color: $white;
+
   @media (min-width: $bp-medium) {
   }
 
