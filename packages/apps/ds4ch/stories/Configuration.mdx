@@ -1,0 +1,34 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Dataspace for cultural heritage" />
+
+<div>
+<h1>Storybook: Dataspace for cultural heritage</h1>
+
+<h2>Technical configuration notes</h2>
+<p>Storybook configuration files:</p>
+<ul>
+  <li>
+    <b>main.ts</b>: Storybook's primary configuration file, which specifies your
+    Storybook project's behavior, including the location of your stories, the
+    addons you use, feature flags and other project-specific settings.
+  </li>
+  <li>
+    <b>preview.ts</b>: This configuration file controls the way stories are
+    rendered. You can also use it to run code that applies to all stories.
+  </li>
+</ul>
+
+<p>Storybook is currently installed at the latest v9, together with the storybook-nuxt module. When running storybook, there is a warning about the storybook-nuxt module being incompatible, as it's not upgraded for v9 yet. There should be an upgrade ready soon, see <a href="https://github.com/storybookjs/storybook/issues/31608">Storybook GitHub issue</a>.</p>
+<p>Storybook is currently configured with autodocs by default and vue-component-meta. Autodocs can be disabled per story. See the <a href="https://storybook.js.org/docs/writing-docs/autodocs">Storybook docs on autodocs</a></p>
+<p>There's a custom translations menu added relying on Storybook globalTypes and decoratives features. Translations work for components set up with Nuxt i18n. There is a bug that after selecting a language in a story, it requires a refresh.</p>
+<p>Features we might want to add:</p>
+<ul>
+  <li>custom Storybook theme (update favicon and logo to DS/europeana)</li>
+  <li>unit testing (Vitest)</li>
+  <li>visual testing (Chromatic)</li>
+  <li>accessibility testing</li>
+  <li>deploy Storybook</li>
+  <li>link Storybook with Figma</li>
+  </ul>
+</div>

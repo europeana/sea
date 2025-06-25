@@ -23,3 +23,10 @@ logs
 .env
 .env.*
 !.env.example
+
+# Storybook
+storybook-static
+*storybook.log
+
+# test coverage
+coverage

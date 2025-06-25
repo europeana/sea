@@ -1,6 +1,6 @@
 ARG node_version=22
 
-FROM node:${node_version}-alpine AS build
+FROM node:${node_version}-alpine AS build-base
 
 ARG app
 # TODO: read this from package.json
@@ -23,10 +23,29 @@ RUN pnpm --filter @europeana/${app} install
 
 COPY packages/apps/${app}/ packages/apps/${app}/
 
+
+FROM build-base AS build-app
+
+ARG app
+
 RUN pnpm --filter @europeana/${app} run build
 
 
-FROM gcr.io/distroless/nodejs${node_version}-debian12
+FROM build-base AS build-storybook
+
+ARG app
+
+RUN pnpm --filter @europeana/${app} run build-storybook
+
+
+FROM nginx:stable AS run-storybook
+ARG app
+
+COPY --from=build-storybook /build/packages/apps/${app}/storybook-static /usr/share/nginx/html
+RUN ls /usr/share/nginx/html/
+
+
+FROM gcr.io/distroless/nodejs${node_version}-debian12 AS run-app
 ARG app
 
 ENV PORT=8080
@@ -35,7 +54,7 @@ EXPOSE ${PORT}
 
 WORKDIR /app
 
-COPY --from=build /build/packages/apps/${app}/.output .
+COPY --from=build-app /build/packages/apps/${app}/.output .
 
 USER 1000
 

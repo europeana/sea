@@ -5,8 +5,8 @@ const bpLarge = parseInt(variables.bpLarge);
 </script>
 <template>
   <header
-    class="bg-dark border-bottom border-light fixed-top"
     v-visible-on-scroll="{ routeHash: $route.hash, desktopBreakpoint: bpLarge }"
+    class="bg-dark border-bottom border-light fixed-top"
   >
     <PageNavbar />
   </header>
