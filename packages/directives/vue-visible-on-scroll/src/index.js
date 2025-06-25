@@ -7,20 +7,16 @@ export default {
   mounted(el, binding) {
     initOnMounted(el, binding);
   },
+  unmounted() {
+    onUnmounted();
+  },
 
   // Vue 2
   inserted(el, binding) {
     initOnMounted(el, binding);
   },
-
-  // Vue 3
-  unmounted() {
-    disableVisibleOnScroll();
-    window.removeEventListener("resize", handleResize);
-
-    element = null;
-    routeWithHash = null;
-    desktopBreakpoint = null;
+  unbind() {
+    onUnmounted();
   },
 };
 
@@ -36,6 +32,15 @@ const initOnMounted = (el, binding) => {
   if (desktopBreakpoint) {
     window.addEventListener("resize", handleResize);
   }
+};
+
+const onUnmounted = () => {
+  disableVisibleOnScroll();
+  window.removeEventListener("resize", handleResize);
+
+  element = null;
+  routeWithHash = null;
+  desktopBreakpoint = null;
 };
 
 let enabled = false;
@@ -77,8 +82,10 @@ const enableVisibleOnScroll = () => {
 const disableVisibleOnScroll = () => {
   window.removeEventListener("scroll", handleScroll);
   window.removeEventListener("hashchange", handleHashChange);
-  element.style.transform = "translate3d(0, 0, 0)";
-  element.classList.remove("show");
+  if (element) {
+    element.style.transform = "translate3d(0, 0, 0)";
+    element.classList.remove("show");
+  }
   enabled = false;
 };
 
