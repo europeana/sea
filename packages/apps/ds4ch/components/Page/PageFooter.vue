@@ -17,21 +17,43 @@ const sections = {
     links: [
       { url: "/about", text: "footer.about" },
       { url: "/news", text: "footer.news" },
-      { url: "/events", text: "footer.events" },
+      { url: "/", text: "footer.events" },
     ],
   },
   help: {
     header: "footer.help",
     links: [
-      { url: "/terms", text: "footer.terms" },
-      { url: "/privacy", text: "footer.privacy" },
-      { url: "/accessibility", text: "footer.accessibility" },
-      { url: "/cookies", text: "footer.cookies" },
+      {
+        url: "https://www.europeana.eu/rights",
+        text: "footer.terms",
+        external: true,
+      },
+      {
+        url: "https://www.europeana.eu/privacy-statement",
+        text: "footer.privacy",
+        external: true,
+      },
+      {
+        url: "https://www.europeana.eu/rights/accessibility-policy",
+        text: "footer.accessibility",
+        external: true,
+      },
+      {
+        url: "https://www.europeana.eu/rights/cookies-policy",
+        text: "footer.cookies",
+        external: true,
+      },
     ],
   },
   language: {
     header: "footer.language",
-    text: "footer.translationInfo",
+    links: [
+      {
+        url: "https://commission.europa.eu/resources/etranslation_en",
+        text: "footer.translationInfo",
+        external: true,
+      },
+    ],
   },
   supportingPartners: {
     header: "footer.supportingPartners",
@@ -39,15 +61,17 @@ const sections = {
       {
         url: "https://www.contentful.com",
         text: "footer.partners.contentful",
+        external: true,
         image: contentfulLogoSrc,
       },
       {
         url: "https://lokalise.com",
         text: "footer.partners.lokalise",
+        external: true,
         image: lokaliseLogoSrc,
       },
       // TODO: update when the style package contains webp files.
-      // { url: "https://www.cloudflare.com/galileo/", text: "footer.partners.cloudflare", image: "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp" }
+      // { url: "https://www.cloudflare.com/galileo/", text: "footer.partners.cloudflare", external: true, image: "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp" }
     ],
   },
   disclaimer: {
@@ -77,7 +101,11 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <NuxtLink class="nav-link label-uppercase" :to="localePath(link.url)">
+          <NuxtLink
+            class="nav-link label-uppercase"
+            :to="localePath(link.url)"
+            :external="link.external"
+          >
             {{ $t(link.text) }}
           </NuxtLink>
         </li>
@@ -93,7 +121,11 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <NuxtLink class="nav-link label-uppercase" :to="localePath(link.url)">
+          <NuxtLink
+            class="nav-link label-uppercase"
+            :to="localePath(link.url)"
+            :external="link.external"
+          >
             {{ $t(link.text) }}
           </NuxtLink>
         </li>
@@ -106,7 +138,13 @@ const sections = {
       <!-- TODO: add language selector -->
       <span>
         <!-- TODO: add translation icon -->
-        {{ $t(sections.language.text) }}
+        <NuxtLink
+          class="nav-link label-uppercase"
+          :to="localePath(sections.language.links[0].url)"
+          :external="sections.language.links[0].external"
+        >
+          {{ $t(sections.language.links[0].text) }}
+        </NuxtLink>
       </span>
     </div>
     <div class="footer-section">
@@ -119,7 +157,11 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <NuxtLink class="nav-link label-uppercase" :to="localePath(link.url)">
+          <NuxtLink
+            class="nav-link label-uppercase"
+            :to="localePath(link.url)"
+            :external="link.external"
+          >
             <img :src="link.image" :alt="$t(link.text)" />
           </NuxtLink>
         </li>
