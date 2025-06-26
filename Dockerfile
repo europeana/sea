@@ -17,8 +17,9 @@ RUN mkdir -p packages/apps/${app}
 
 COPY package.json pnpm-* ./
 COPY packages/apps/${app}/package.json ./packages/apps/${app}/
+COPY packages/plugins/ packages/
 
-RUN pnpm --filter @europeana/${app} install
+RUN pnpm install
 
 COPY packages/apps/${app}/ packages/apps/${app}/
 
