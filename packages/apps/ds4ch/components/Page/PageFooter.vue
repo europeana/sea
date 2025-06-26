@@ -1,7 +1,7 @@
 <script setup>
 import contentfulLogoSrc from "@europeana/style/img/supporting-technical-partners/Contentful-logo.svg";
 import lokaliseLogoSrc from "@europeana/style/img/supporting-technical-partners/Lokalise-logo.svg";
-// TODO: ensure disclaimer logo is using translated version for current locale
+import galileoLogoSrc from "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp";
 import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the EU_NEG.svg";
 
 const localePath = useLocalePath();
@@ -70,8 +70,12 @@ const sections = {
         external: true,
         image: lokaliseLogoSrc,
       },
-      // TODO: update when the style package contains webp files.
-      // { url: "https://www.cloudflare.com/galileo/", text: "footer.partners.cloudflare", external: true, image: "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp" }
+      {
+        url: "https://www.cloudflare.com/galileo/",
+        text: "footer.partners.cloudflare",
+        external: true,
+        image: galileoLogoSrc,
+      },
     ],
   },
   disclaimer: {
