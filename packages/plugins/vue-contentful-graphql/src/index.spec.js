@@ -33,6 +33,13 @@ describe("VueContentfulGraphql", () => {
     //     default: mockFetch,
     //   };
     // });
+    vi.mock("node-fetch-native", () => {
+      return {
+        default: vi
+          .fn()
+          .mockResolvedValue({ json: () => Promise.resolve({ data: {} }) }),
+      };
+    });
   });
   afterEach(() => {
     vi.clearAllMocks();
@@ -82,15 +89,15 @@ describe("VueContentfulGraphql", () => {
   //   const ast = gql`
   //     ${query}
   //   `;
-  //
+
   //   it("queries the Contentful GraphQL endpoint with supplied query and variables", async () => {
   //     const app = { prototype: {} };
   //     const variables = { url: "/" };
   //     VueContentfulGraphql.install(app, config);
-  //
+
   //     await app.prototype.$contentful.query(ast, variables);
-  //
-  //     expect(mockFetch).toHaveBeenCalledWith(
+
+  //     expect(fetch).toHaveBeenCalledWith(
   //       `${config.graphQlOrigin}/content/v1/spaces/${config.spaceId}/environments/${config.environmentId}?url=/&_query=Page`,
   //       {
   //         body: {
@@ -101,8 +108,8 @@ describe("VueContentfulGraphql", () => {
   //           authorization: `Bearer ${config.accessToken.delivery}`,
   //           "content-type": "application/json",
   //         },
-  //         method: 'post'
-  //       }
+  //         method: "post",
+  //       },
   //     );
   //   });
   // });
