@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Meist",
+    "close": "Sule menüü",
+    "exploreData": "Uurige andmeid",
+    "exploreDataspace": "Uuri andmeruumi",
+    "home": "Avaleht",
+    "toggle": "Kuva menüü"
+  }
+}

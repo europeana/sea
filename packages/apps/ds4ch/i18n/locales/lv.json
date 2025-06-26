@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Par mums",
+    "close": "Aizvērt izvēlni",
+    "exploreData": "Izpētiet datus",
+    "exploreDataspace": "Izpētiet datu telpu",
+    "home": "Sākumlapa",
+    "toggle": "Rādīt izvēlni"
+  }
+}

@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Om os",
+    "close": "Luk menu",
+    "exploreData": "Udforsk dataene",
+    "exploreDataspace": "Udforsk dataspace",
+    "home": "Hjem",
+    "toggle": "Vis menu"
+  }
+}
