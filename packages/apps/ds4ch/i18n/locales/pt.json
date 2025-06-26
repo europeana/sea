@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Sobre nós",
+    "close": "Fechar menu",
+    "exploreData": "Explore os dados",
+    "exploreDataspace": "Explorar o Espaço de Dados",
+    "home": "Início",
+    "toggle": "Mostrar menu"
+  }
+}
