@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Om oss",
+    "close": "Stäng menyn",
+    "exploreData": "Utforska data",
+    "exploreDataspace": "Utforska dataområdet",
+    "home": "Hem",
+    "toggle": "Visa meny"
+  }
+}

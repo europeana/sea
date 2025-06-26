@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Despre noi",
+    "close": "Închide meniul",
+    "exploreData": "Explorează datele",
+    "exploreDataspace": "Explorați spațiul de date",
+    "home": "Acasă",
+    "toggle": "Afișează meniul"
+  }
+}

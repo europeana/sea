@@ -1,7 +1,10 @@
 {
   "nav": {
+    "about": "Über uns",
+    "close": "Menü schließen",
+    "exploreData": "Erkunden Sie die Daten",
+    "exploreDataspace": "Erkunden Sie den Datenraum",
     "home": "Startseite",
-    "exploreDataspace": "Erkunden sie den Dataspace",
-    "exploreData": "Erkunden sie die Data"
+    "toggle": "Menü anzeigen"
   }
 }
