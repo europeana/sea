@@ -24,6 +24,7 @@ jobs:
           skip_include_tags: true
           always_pull_base: true
           git_commit_message: "chore(ds4ch): update translations"
+          custom_github_token: "${{ secrets.GIT_PAT_LOKALISE }}"
           additional_params: |
             --indentation=2sp
             --export-empty-as=skip
