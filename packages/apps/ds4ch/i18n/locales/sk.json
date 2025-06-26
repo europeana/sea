@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "O nás",
+    "close": "Zatvoriť ponuku",
+    "exploreData": "Preskúmajte údaje",
+    "exploreDataspace": "Preskúmajte dátový priestor",
+    "home": "Domov",
+    "toggle": "Zobraziť ponuku"
+  }
+}

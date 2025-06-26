@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "O nama",
+    "close": "Zatvori izbornik",
+    "exploreData": "Istražite podatke",
+    "exploreDataspace": "Istražite podatkovni prostor",
+    "home": "Početna",
+    "toggle": "Prikaži izbornik"
+  }
+}
