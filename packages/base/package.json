@@ -1,0 +1,11 @@
+{
+  "name": "base-nuxt-layer",
+  "type": "module",
+  "version": "0.0.1",
+  "main": "./nuxt.config.ts",
+  "devDependencies": {
+    "@europeana/style": "^2.11.2",
+    "nuxt": "^3.17.4",
+    "vue": "^3.5.14"
+  }
+}
