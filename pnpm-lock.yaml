@@ -63,8 +63,8 @@ importers:
   packages/apps/ds4ch:
     dependencies:
       '@europeana/style':
-        specifier: ^2.9.0
-        version: 2.9.0
+        specifier: ^2.11.2
+        version: 2.11.2
       '@europeana/vue-visible-on-scroll':
         specifier: workspace:*
         version: link:../../directives/vue-visible-on-scroll
@@ -588,8 +588,8 @@ packages:
     resolution: {integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@europeana/style@2.9.0':
-    resolution: {integrity: sha512-XTCgAgesXtubGTcDD92ok2r6r4Ten9qfdBtDhZ3M/ypiLKmTMt73Bjav8gYdqgES9iwrdlorPff8cnfJGmWBug==}
+  '@europeana/style@2.11.2':
+    resolution: {integrity: sha512-TbIHowxHmg4QVE32WulUEhJomV1Vs0qp4Sh+/02wWSKbF3Vw2S1L9T0Z+QhWaoC1ea2PKRu6x1l7JIQF8xCfBg==}
 
   '@fastify/busboy@3.1.1':
     resolution: {integrity: sha512-5DGmA8FTdB2XbDeEwc/5ZXBl6UbBAyBOOLlPuBnZ/N1SwdH9Ii+cOX3tBROlDgcTXxjOYnLMVoKk9+FXAw0CJw==}
@@ -6220,7 +6220,7 @@ snapshots:
       '@eslint/core': 0.14.0
       levn: 0.4.1
 
-  '@europeana/style@2.9.0': {}
+  '@europeana/style@2.11.2': {}
 
   '@fastify/busboy@3.1.1': {}
 
