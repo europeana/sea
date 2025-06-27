@@ -86,6 +86,9 @@ const sections = {
 </script>
 <template>
   <footer class="page-footer" role="contentinfo">
+    <h2 class="visually-hidden">
+      {{ $t("footer.footer") }}
+    </h2>
     <!-- TODO: make "footer-section" a distinct component? -->
     <div class="footer-section">
       <h3>
