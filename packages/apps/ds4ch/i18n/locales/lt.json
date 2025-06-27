@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Apie mus",
+    "close": "Uždaryti meniu",
+    "exploreData": "Išnagrinėkite duomenis",
+    "exploreDataspace": "Naršykite duomenų erdvę",
+    "home": "Pradžia",
+    "toggle": "Rodyti meniu"
+  }
+}
