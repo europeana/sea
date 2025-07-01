@@ -1,19 +1,23 @@
-import { describe, it, expect, vi } from "vitest";
+import { mockNuxtImport } from "@nuxt/test-utils/runtime";
+import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 
 import LanguageSelector from "./LanguageSelector.vue";
 
-vi.mock("vue-i18n", () => ({
-  useI18n: () => ({
-    locale: { value: "en" },
-    locales: {
-      value: [
-        { code: "en", name: "English" },
-        { code: "nl", name: "Nederlands" },
-      ],
-    },
-  }),
-}));
+mockNuxtImport("useI18n", () => {
+  return () => {
+    return {
+      locale: { value: "en" },
+      locales: {
+        value: [
+          { code: "cs", name: "Čeština" },
+          { code: "en", name: "English" },
+          { code: "nl", name: "Nederlands" },
+        ],
+      },
+    };
+  };
+});
 
 describe("LanguageSelector", () => {
   it("renders a dropdown", async () => {
@@ -25,7 +29,7 @@ describe("LanguageSelector", () => {
 
   it("has the current locale name as a button label", async () => {
     const wrapper = await shallowMount(LanguageSelector);
-    const button = wrapper.find("button .dropdown-toggle");
+    const button = wrapper.find("button.dropdown-toggle");
 
     expect(button.text()).toBe("English");
   });

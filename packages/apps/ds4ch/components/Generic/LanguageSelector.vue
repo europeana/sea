@@ -30,9 +30,9 @@ const selectedLocale = computed(() => {
     </button>
 
     <ul class="dropdown-menu">
-      <li v-for="locale in availableLocales" :key="locale.code">
-        <NuxtLink class="dropdown-item" :to="switchLocalePath(locale.code)">
-          {{ locale.name }}
+      <li v-for="l in availableLocales" :key="l.code">
+        <NuxtLink class="dropdown-item" :to="switchLocalePath(l.code)">
+          {{ l.name }}
         </NuxtLink>
       </li>
     </ul>

@@ -6,10 +6,6 @@ config.global.plugins.push(
   createI18n({
     legacy: false,
     locale: "en",
-    messages: {
-      en: {},
-      nl: {},
-    },
   }),
 );
 
