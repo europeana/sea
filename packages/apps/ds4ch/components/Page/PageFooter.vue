@@ -5,8 +5,6 @@ import galileoLogoSrc from "@europeana/style/img/supporting-technical-partners/G
 import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the EU_NEG.svg";
 import SmartLink from "../Generic/SmartLink.vue";
 
-const localePath = useLocalePath();
-
 // TODO: ensure links go to correct locations
 const sections = {
   mission: {
@@ -27,22 +25,18 @@ const sections = {
       {
         url: "https://www.europeana.eu/rights",
         text: "footer.terms",
-        external: true,
       },
       {
         url: "https://www.europeana.eu/privacy-statement",
         text: "footer.privacy",
-        external: true,
       },
       {
         url: "https://www.europeana.eu/rights/accessibility-policy",
         text: "footer.accessibility",
-        external: true,
       },
       {
         url: "https://www.europeana.eu/rights/cookies-policy",
         text: "footer.cookies",
-        external: true,
       },
     ],
   },
@@ -52,7 +46,6 @@ const sections = {
       {
         url: "https://commission.europa.eu/resources/etranslation_en",
         text: "footer.translationInfo",
-        external: true,
       },
     ],
   },
@@ -62,19 +55,16 @@ const sections = {
       {
         url: "https://www.contentful.com",
         text: "footer.partners.contentful",
-        external: true,
         image: contentfulLogoSrc,
       },
       {
         url: "https://lokalise.com",
         text: "footer.partners.lokalise",
-        external: true,
         image: lokaliseLogoSrc,
       },
       {
         url: "https://www.cloudflare.com/galileo/",
         text: "footer.partners.cloudflare",
-        external: true,
         image: galileoLogoSrc,
       },
     ],
@@ -109,13 +99,9 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <NuxtLink
-            class="nav-link label-uppercase"
-            :to="localePath(link.url)"
-            :external="link.external"
-          >
+          <SmartLink class="nav-link label-uppercase" :destination="link.url">
             {{ $t(link.text) }}
-          </NuxtLink>
+          </SmartLink>
         </li>
       </ul>
     </div>
@@ -142,13 +128,13 @@ const sections = {
       <!-- TODO: add language selector -->
       <span>
         <!-- TODO: add translation icon -->
-        <NuxtLink
+        <SmartLink
           class="nav-link label-uppercase"
-          :to="localePath(sections.language.links[0].url)"
-          :external="sections.language.links[0].external"
+          :destination="sections.language.links[0].url"
+          :hide-external-icon="true"
         >
           {{ $t(sections.language.links[0].text) }}
-        </NuxtLink>
+        </SmartLink>
       </span>
     </div>
     <div class="footer-section">
@@ -161,13 +147,13 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <NuxtLink
+          <SmartLink
             class="nav-link label-uppercase"
-            :to="localePath(link.url)"
-            :external="link.external"
+            :destination="link.url"
+            :hide-external-icon="true"
           >
             <img :src="link.image" :alt="$t(link.text)" />
-          </NuxtLink>
+          </SmartLink>
         </li>
       </ul>
     </div>
