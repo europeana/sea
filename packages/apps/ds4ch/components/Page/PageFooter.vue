@@ -177,7 +177,7 @@ const sections = {
     </div>
     <hr />
     <div class="footer-section">
-      <img :src="sections.disclaimer.logoSrc" />
+      <EULogo />
     </div>
   </footer>
 </template>
