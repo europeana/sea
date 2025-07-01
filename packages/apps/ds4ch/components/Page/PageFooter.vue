@@ -3,6 +3,7 @@ import contentfulLogoSrc from "@europeana/style/img/supporting-technical-partner
 import lokaliseLogoSrc from "@europeana/style/img/supporting-technical-partners/Lokalise-logo.svg";
 import galileoLogoSrc from "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp";
 import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the EU_NEG.svg";
+import LanguageSelector from "../Generic/LanguageSelector.vue";
 
 const localePath = useLocalePath();
 
@@ -142,7 +143,7 @@ const sections = {
       <h3>
         {{ $t(sections.language.header) }}
       </h3>
-      <!-- TODO: add language selector -->
+      <LanguageSelector />
       <span>
         <!-- TODO: add translation icon -->
         <NuxtLink
