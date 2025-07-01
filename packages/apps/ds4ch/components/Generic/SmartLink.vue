@@ -42,6 +42,8 @@ const isExternalLink = computed(() => {
       v-if="isExternalLink && !props.hideExternalIcon"
       class="icon-external-link"
     />
-    <span v-if="isExternalLink" class="sr-only"> ({{ $t("newWindow") }}) </span>
+    <span v-if="isExternalLink" class="visually-hidden">
+      ({{ $t("newWindow") }})
+    </span>
   </NuxtLink>
 </template>
