@@ -29,5 +29,6 @@
     "exploreDataspace": "Explore the Dataspace",
     "home": "Home",
     "toggle": "Show menu"
-  }
+  },
+  "newWindow": "opens in new window"
 }

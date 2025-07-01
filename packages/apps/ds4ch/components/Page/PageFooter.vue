@@ -3,6 +3,7 @@ import contentfulLogoSrc from "@europeana/style/img/supporting-technical-partner
 import lokaliseLogoSrc from "@europeana/style/img/supporting-technical-partners/Lokalise-logo.svg";
 import galileoLogoSrc from "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp";
 import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the EU_NEG.svg";
+import SmartLink from "../Generic/SmartLink.vue";
 
 const localePath = useLocalePath();
 
@@ -128,13 +129,9 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <NuxtLink
-            class="nav-link label-uppercase"
-            :to="localePath(link.url)"
-            :external="link.external"
-          >
+          <SmartLink class="nav-link label-uppercase" :destination="link.url">
             {{ $t(link.text) }}
-          </NuxtLink>
+          </SmartLink>
         </li>
       </ul>
     </div>
