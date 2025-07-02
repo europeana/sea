@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-import EULogo from "./EULogo.vue";
+import EULogo from "./ImageEULogo.vue";
 
 vi.mock("vue-i18n", () => ({
   useI18n: () => ({
