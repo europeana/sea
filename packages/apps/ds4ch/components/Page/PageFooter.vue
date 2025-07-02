@@ -125,7 +125,7 @@ const sections = {
       <h3>
         {{ $t(sections.language.header) }}
       </h3>
-      <!-- TODO: add language selector -->
+      <GenericLanguageSelector />
       <span>
         <!-- TODO: add translation icon -->
         <SmartLink
@@ -159,7 +159,7 @@ const sections = {
     </div>
     <hr />
     <div class="footer-section">
-      <img :src="sections.disclaimer.logoSrc" />
+      <ImageEULogo />
     </div>
   </footer>
 </template>
