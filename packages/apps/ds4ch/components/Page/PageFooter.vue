@@ -142,7 +142,7 @@ const sections = {
       <h3>
         {{ $t(sections.language.header) }}
       </h3>
-      <LanguageSelector />
+      <GenericLanguageSelector />
       <span>
         <!-- TODO: add translation icon -->
         <NuxtLink

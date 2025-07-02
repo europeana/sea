@@ -7,4 +7,3 @@ Read more on [Nuxt layers in the docs](https://nuxt.com/docs/guide/going-further
 ## To do or consider:
 
 - Add directives and plugins to this base layer
-- Add storybook

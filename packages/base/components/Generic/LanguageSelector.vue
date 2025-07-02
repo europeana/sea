@@ -18,14 +18,13 @@ const selectedLocale = computed(() => {
 </script>
 
 <template>
-  <div class="dropdown" variant="light" toggle-class="text-decoration-none">
+  <div class="dropdown" variant="light">
     <button
       class="btn btn-secondary dropdown-toggle"
       type="button"
       data-bs-toggle="dropdown"
-      aria-expanded="false"
     >
-      <span class="icon-language mr-2" />
+      <span class="icon-language" />
       {{ selectedLocale }}
     </button>
 
@@ -38,13 +37,3 @@ const selectedLocale = computed(() => {
     </ul>
   </div>
 </template>
-
-<style lang="scss" scoped>
-@import "@europeana/style/scss/variables";
-
-.dropdown {
-  .icon-language {
-    line-height: 1;
-  }
-}
-</style>
