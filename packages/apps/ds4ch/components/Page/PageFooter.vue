@@ -3,7 +3,6 @@ import contentfulLogoSrc from "@europeana/style/img/supporting-technical-partner
 import lokaliseLogoSrc from "@europeana/style/img/supporting-technical-partners/Lokalise-logo.svg";
 import galileoLogoSrc from "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp";
 import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the EU_NEG.svg";
-import SmartLink from "../Generic/SmartLink.vue";
 
 // TODO: ensure links go to correct locations
 const sections = {
@@ -99,9 +98,12 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <SmartLink class="nav-link label-uppercase" :destination="link.url">
+          <GenericSmartLink
+            class="nav-link label-uppercase"
+            :destination="link.url"
+          >
             {{ $t(link.text) }}
-          </SmartLink>
+          </GenericSmartLink>
         </li>
       </ul>
     </div>
@@ -115,9 +117,12 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <SmartLink class="nav-link label-uppercase" :destination="link.url">
+          <GenericSmartLink
+            class="nav-link label-uppercase"
+            :destination="link.url"
+          >
             {{ $t(link.text) }}
-          </SmartLink>
+          </GenericSmartLink>
         </li>
       </ul>
     </div>
@@ -128,13 +133,13 @@ const sections = {
       <GenericLanguageSelector />
       <span>
         <!-- TODO: add translation icon -->
-        <SmartLink
+        <GenericSmartLink
           class="nav-link label-uppercase"
           :destination="sections.language.links[0].url"
           :hide-external-icon="true"
         >
           {{ $t(sections.language.links[0].text) }}
-        </SmartLink>
+        </GenericSmartLink>
       </span>
     </div>
     <div class="footer-section">
@@ -147,13 +152,13 @@ const sections = {
           :key="index"
           class="footer-link"
         >
-          <SmartLink
+          <GenericSmartLink
             class="nav-link label-uppercase"
             :destination="link.url"
             :hide-external-icon="true"
           >
             <img :src="link.image" :alt="$t(link.text)" />
-          </SmartLink>
+          </GenericSmartLink>
         </li>
       </ul>
     </div>
