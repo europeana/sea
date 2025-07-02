@@ -17,6 +17,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      internalLinkDomain: "",
+    },
+  },
   i18n: {
     bundle: {
       optimizeTranslationDirective: false,
