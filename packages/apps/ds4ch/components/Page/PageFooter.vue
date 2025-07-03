@@ -98,7 +98,7 @@ const sections = {
             </h3>
             <ul>
               <li v-for="(link, index) in sections.info.links" :key="index">
-                <GenericSmartLink class="nav-link" :destination="link.url">
+                <GenericSmartLink :destination="link.url">
                   {{ $t(link.text) }}
                 </GenericSmartLink>
               </li>
@@ -112,7 +112,7 @@ const sections = {
             </h3>
             <ul>
               <li v-for="(link, index) in sections.help.links" :key="index">
-                <GenericSmartLink class="nav-link" :destination="link.url">
+                <GenericSmartLink :destination="link.url">
                   {{ $t(link.text) }}
                 </GenericSmartLink>
               </li>
@@ -125,15 +125,19 @@ const sections = {
               {{ $t(sections.language.header) }}
             </h3>
             <GenericLanguageSelector />
-            <span>
-              <!-- TODO: add translation icon -->
-              <GenericSmartLink
-                class="nav-link"
-                :destination="sections.language.links[0].url"
-                :hide-external-icon="true"
-              >
-                {{ $t(sections.language.links[0].text) }}
-              </GenericSmartLink>
+            <span class="info-text d-inline-flex mt-1 mt-4k-2">
+              <span class="icon-automated mt-1 mt-4k-2 me-2 me-4k-3" />
+              <i18n-t :keypath="sections.language.links[0].text" tag="span">
+                <template #service>
+                  <GenericSmartLink
+                    :destination="sections.language.links[0].url"
+                    :hide-external-icon="true"
+                    class="text-decoration-underline"
+                  >
+                    {{ $t("footer.translationService") }}
+                  </GenericSmartLink>
+                </template>
+              </i18n-t>
             </span>
           </div>
           <div class="footer-section col col-sm-6 col-wqhd-4 order-sm-4">
@@ -147,7 +151,7 @@ const sections = {
                 class="tech-partner mb-2"
               >
                 <GenericSmartLink
-                  class="nav-link m-wqhd-3"
+                  class="m-wqhd-3"
                   :destination="link.url"
                   :hide-external-icon="true"
                 >
@@ -207,6 +211,36 @@ hr {
       margin-bottom: 4rem;
     }
   }
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.info-text {
+  color: $middlegrey;
+  font-size: $font-size-12;
+  margin-bottom: 2rem;
+  max-width: 13rem;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-24;
+    margin-bottom: 4rem;
+    max-width: 26rem;
+  }
+
+  .icon-automated {
+    font-size: $font-size-20;
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-40;
+    }
+  }
+
+  a {
+    color: $middlegrey;
+  }
 }
 
 .tech-partner img {
@@ -220,5 +254,9 @@ hr {
 
 p.disclaimer {
   font-size: $font-size-10;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-20;
+  }
 }
 </style>
