@@ -92,7 +92,7 @@ const sections = {
         </div>
         <hr class="d-lg-none opacity-100 text-light" />
         <div class="row">
-          <div class="footer-section col col-sm-6 col-wqhd-4">
+          <div class="footer-section col col-12 col-sm-6 col-wqhd-4">
             <h3 class="label-uppercase">
               {{ $t(sections.info.header) }}
             </h3>
@@ -105,7 +105,7 @@ const sections = {
             </ul>
           </div>
           <div
-            class="footer-section col col-sm-6 col-wqhd-4 order-sm-3 order-wqhd-2"
+            class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-3 order-wqhd-2"
           >
             <h3 class="label-uppercase">
               {{ $t(sections.help.header) }}
@@ -162,6 +162,7 @@ const sections = {
       <div class="row">
         <div class="footer-section col col-lg-6">
           <ImageEULogo />
+          <p class="disclaimer mt-3 mb-0">{{ $t(sections.disclaimer.text) }}</p>
         </div>
       </div>
     </div>
@@ -215,5 +216,9 @@ hr {
   @media (min-width: $bp-4k) {
     width: 200px;
   }
+}
+
+p.disclaimer {
+  font-size: $font-size-10;
 }
 </style>
