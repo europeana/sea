@@ -119,7 +119,7 @@ const sections = {
             </ul>
           </div>
           <div
-            class="footer-section col col-sm-6 col-wqhd-4 order-sm-2 order-wqhd-3"
+            class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-2 order-wqhd-3"
           >
             <h3 class="label-uppercase">
               {{ $t(sections.language.header) }}
@@ -140,7 +140,7 @@ const sections = {
               </i18n-t>
             </span>
           </div>
-          <div class="footer-section col col-sm-6 col-wqhd-4 order-sm-4">
+          <div class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-4">
             <h3 class="label-uppercase mb-3 mb-4k-4">
               {{ $t(sections.supportingPartners.header) }}
             </h3>
