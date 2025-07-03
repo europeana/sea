@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xxl-page">
     <NuxtRouteAnnouncer />
     <PageHeader />
     <NuxtPage />

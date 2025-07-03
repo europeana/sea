@@ -69,6 +69,12 @@ const localisedEULogo = computed(() => {
 @import "@europeana/style/scss/variables";
 
 img {
+  height: 35px;
+
+  @media (min-width: $bp-small) {
+    height: 64px;
+  }
+
   @media (min-width: $bp-4k) {
     height: 96px;
   }

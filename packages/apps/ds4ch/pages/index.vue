@@ -1,3 +1,3 @@
 <template>
-  <div class="bg-dark" style="height: 200vh" />
+  <div class="bg-light" style="height: 200px" />
 </template>
