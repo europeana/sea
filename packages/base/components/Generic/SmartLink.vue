@@ -40,7 +40,7 @@ const isExternalLink = computed(() => {
     <slot />
     <span
       v-if="isExternalLink && !props.hideExternalIcon"
-      class="icon-external-link"
+      class="icon-external-link ms-2"
     />
     <span v-if="isExternalLink" class="visually-hidden">
       ({{ $t("newWindow") }})
