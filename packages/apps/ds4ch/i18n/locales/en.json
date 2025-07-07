@@ -21,7 +21,8 @@
     "privacy": "Privacy policy",
     "supportingPartners": "Supporting technical partners",
     "terms": "Terms & Policies",
-    "translationInfo": "Automated traslations using the eTranslationService"
+    "translationInfo": "Automated traslations using the {service}",
+    "translationService": "eTranslation Service"
   },
   "nav": {
     "about": "About us",
