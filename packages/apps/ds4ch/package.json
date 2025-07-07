@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@europeana/sea-base-layer": "workspace:*",
     "@europeana/style": "^2.11.2",
     "@europeana/vue-visible-on-scroll": "workspace:*",
     "@nuxtjs/i18n": "^9.5.6",
