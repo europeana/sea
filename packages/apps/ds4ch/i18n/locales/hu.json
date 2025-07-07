@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Rólunk",
+    "close": "Menü bezárása",
+    "exploreData": "Fedezze fel az adatokat",
+    "exploreDataspace": "Fedezd fel az adatteret",
+    "home": "Kezdőlap",
+    "toggle": "Menü megjelenítése"
+  }
+}

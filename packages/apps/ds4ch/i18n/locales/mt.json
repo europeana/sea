@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Dwarna",
+    "close": "Agħlaq il-menù",
+    "exploreData": "Esplora d-dejta",
+    "exploreDataspace": "Esplora l-Ispazju tad-Data",
+    "home": "Paġna Ewlenija",
+    "toggle": "Uri l-menù"
+  }
+}

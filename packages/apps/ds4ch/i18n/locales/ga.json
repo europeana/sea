@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "about": "Fúinn",
+    "close": "Dún roghchlár",
+    "exploreData": "Déan iniúchadh ar na sonraí",
+    "exploreDataspace": "Déan iniúchadh ar an spás sonraí",
+    "home": "Baile",
+    "toggle": "Taispeáin roghchlár"
+  }
+}
