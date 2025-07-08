@@ -26,7 +26,7 @@ const sections = {
         text: "footer.terms",
       },
       {
-        url: "https://www.europeana.eu/privacy-statement",
+        url: "https://www.europeana.eu/rights/privacy-statement",
         text: "footer.privacy",
       },
       {
