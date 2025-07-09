@@ -22,7 +22,7 @@ jobs:
       - name: Push files to Lokalise
         uses: lokalise/lokalise-push-action@v3.6.0
         with:
-          api_token: ${{ secrets.LOKALISE_API_TOKEN }}
+          api_token: ${{ secrets.LOKALISE_API_TOKEN_RW }}
           project_id: ${{ secrets.LOKALISE_PROJECT_ID }}
           file_format: json
           translations_path: packages/apps/ds4ch/i18n/locales
