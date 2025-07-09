@@ -72,7 +72,6 @@ const optimisedWidth = computed(() => {
 const optimisedHeight = computed(() => {
   return Math.round(optimisedWidth.value / aspectRatio.value);
 });
-console.log(optimisedWidth.value, optimisedHeight.value, aspectRatio.value);
 
 const optimisedImageSrc = computed(() => {
   return optimisedSrc(
