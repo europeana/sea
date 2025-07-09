@@ -28,6 +28,5 @@ jobs:
           translations_path: packages/apps/ds4ch/i18n/locales
           base_lang: en_GB
           flat_naming: true
+          name_pattern: en.json
           rambo_mode: ${{ inputs.force }}
-          additional_params: |
-            --include-path
