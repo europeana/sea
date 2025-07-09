@@ -22,8 +22,6 @@ jobs:
           translations_path: packages/apps/ds4ch/i18n/locales
           base_lang: en_GB
           flat_naming: true
-          git_commit_message: "chore(ds4ch): update translations"
-          custom_github_token: "${{ secrets.GIT_PAT_LOKALISE }}"
           additional_params: |
             --indentation=2sp
             --export-empty-as=skip
