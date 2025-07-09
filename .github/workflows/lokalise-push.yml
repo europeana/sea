@@ -29,10 +29,3 @@ jobs:
           base_lang: en_GB
           flat_naming: true
           rambo_mode: ${{ inputs.force }}
-          additional_params: |
-            --indentation=2sp
-            --export-empty-as=skip
-            --export-sort=a_z
-            --replace-breaks=false
-            --add-newline-eof=true
-            --language-mapping=[{"original_language_iso":"en_GB","custom_language_iso":"en"},{"original_language_iso":"mt_MT","custom_language_iso":"mt"},{"original_language_iso":"ga_IE","custom_language_iso":"ga"}]
