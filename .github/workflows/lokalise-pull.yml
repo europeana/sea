@@ -1,4 +1,4 @@
-name: Pull from Lokalise
+name: "Lokalise: pull"
 
 on:
   workflow_dispatch:

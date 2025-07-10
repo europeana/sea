@@ -62,6 +62,9 @@ importers:
 
   packages/apps/ds4ch:
     dependencies:
+      '@europeana/sea-base-layer':
+        specifier: workspace:*
+        version: link:../../base
       '@europeana/style':
         specifier: ^2.11.2
         version: 2.11.2
