@@ -7,8 +7,8 @@ import {
   it,
   vi,
 } from "vitest";
-// import gql from "graphql-tag";
-// import fetch from "node-fetch-native";
+import gql from "graphql-tag";
+import fetch from "node-fetch-native";
 
 import VueContentfulGraphql from "./index.js";
 
@@ -22,17 +22,7 @@ const config = {
 };
 
 describe("VueContentfulGraphql", () => {
-  // const mockFetch = vi.fn().mockReturnValue({ data: {} });
-
   beforeAll(() => {
-    // mock/stub fetch: attempt #1
-    // vi.stubGlobal("fetch", mockFetch);
-    // mock/stub fetch: attempt #2
-    // vi.mock("node-fetch-native", () => {
-    //   return {
-    //     default: mockFetch,
-    //   };
-    // });
     vi.mock("node-fetch-native", () => {
       return {
         default: vi
@@ -41,14 +31,9 @@ describe("VueContentfulGraphql", () => {
       };
     });
   });
+
   afterEach(() => {
     vi.clearAllMocks();
-  });
-  afterAll(() => {
-    // mock/stub fetch: attempt #1
-    // vi.unstubAllGlobals();
-    // mock/stub fetch: attempt #2
-    // vi.unmock("node-fetch-native")
   });
 
   describe("install", () => {
@@ -78,39 +63,45 @@ describe("VueContentfulGraphql", () => {
     });
   });
 
-  // describe("query", () => {
-  //   const query = `query Page($url: String!) {
-  //     PageCollection(url: $url) {
-  //       items {
-  //         name
-  //       }
-  //     }
-  //   }`;
-  //   const ast = gql`
-  //     ${query}
-  //   `;
+  describe("query", () => {
+    afterAll(() => {
+      vi.unstubAllGlobals();
+    });
 
-  //   it("queries the Contentful GraphQL endpoint with supplied query and variables", async () => {
-  //     const app = { prototype: {} };
-  //     const variables = { url: "/" };
-  //     VueContentfulGraphql.install(app, config);
+    const query = `
+query Page($url: String!) {
+  PageCollection(url: $url) {
+    items {
+      name
+    }
+  }
+}
+    `.trim();
+    const ast = gql`
+      ${query}
+    `;
 
-  //     await app.prototype.$contentful.query(ast, variables);
+    it("queries the Contentful GraphQL endpoint with supplied query and variables", async () => {
+      const app = { prototype: {} };
+      const variables = { url: "/" };
+      VueContentfulGraphql.install(app, config);
 
-  //     expect(fetch).toHaveBeenCalledWith(
-  //       `${config.graphQlOrigin}/content/v1/spaces/${config.spaceId}/environments/${config.environmentId}?url=/&_query=Page`,
-  //       {
-  //         body: {
-  //           query,
-  //           variables,
-  //         },
-  //         headers: {
-  //           authorization: `Bearer ${config.accessToken.delivery}`,
-  //           "content-type": "application/json",
-  //         },
-  //         method: "post",
-  //       },
-  //     );
-  //   });
-  // });
+      await app.prototype.$contentful.query(ast, variables);
+
+      expect(fetch).toHaveBeenCalledWith(
+        `${config.graphQlOrigin}/content/v1/spaces/${config.spaceId}/environments/${config.environmentId}?_query=Page&url=%2F`,
+        {
+          body: JSON.stringify({
+            query,
+            variables,
+          }),
+          headers: {
+            authorization: `Bearer ${config.accessToken.delivery}`,
+            "content-type": "application/json",
+          },
+          method: "post",
+        },
+      );
+    });
+  });
 });

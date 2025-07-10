@@ -25,19 +25,20 @@ const createQueryInstance = (config = {}) => {
     }).toString();
 
     const query = printGraphql(ast);
+
     const body = JSON.stringify({
       query,
       variables,
     });
 
     const headers = {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+      "content-type": "application/json",
     };
 
     const method = "post";
 
-    const response = await fetch(url, {
+    const response = await fetch(url.toString(), {
       body,
       headers,
       method,
