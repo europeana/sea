@@ -32,6 +32,7 @@ export const NoUrl: Story = {
     creator: "Johannes Vermeer",
     provider: "Rijksmuseum",
     rightsStatement: "http://creativecommons.org/publicdomain/mark/1.0/",
+    extended: true,
   },
 };
 
