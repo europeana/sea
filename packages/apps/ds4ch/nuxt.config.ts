@@ -19,6 +19,15 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      contentful: {
+        graphQlOrigin: null,
+        spaceId: null,
+        environmentId: null,
+        accessToken: {
+          delivery: null,
+          preview: null,
+        },
+      },
       internalLinkDomain: "",
     },
   },
