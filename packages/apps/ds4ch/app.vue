@@ -2,7 +2,9 @@
   <div class="xxl-page">
     <NuxtRouteAnnouncer />
     <PageHeader />
-    <NuxtPage />
+    <main class="bg-light">
+      <NuxtPage />
+    </main>
     <PageFooter />
   </div>
 </template>
