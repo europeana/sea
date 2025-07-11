@@ -15,7 +15,7 @@ const { name: title } = response.data?.landingPageCollection?.items?.[0] || {};
 </script>
 
 <template>
-  <div class="bg-light" style="height: 200px">
+  <div style="height: 200px">
     <h1>{{ title }}</h1>
   </div>
 </template>
