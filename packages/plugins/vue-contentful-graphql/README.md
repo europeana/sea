@@ -62,6 +62,8 @@ accessible to any component.
 
 #### Example
 
+<!-- TODO: rewrite using Composition API syntax -->
+
 ```js
 import Vue, { inject } from "vue";
 import gql from "graphql-tag";
