@@ -1,4 +1,5 @@
 import i18nLocales from "./i18n/locales";
+import rollupPluginGraphql from "@rollup/plugin-graphql";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -16,6 +17,7 @@ export default defineNuxtConfig({
         },
       },
     },
+    plugins: [rollupPluginGraphql()],
   },
   runtimeConfig: {
     public: {
@@ -42,4 +44,5 @@ export default defineNuxtConfig({
       file: `./${locale.code}.json`,
     })),
   },
+  watch: ["graphql", "i18n"],
 });
