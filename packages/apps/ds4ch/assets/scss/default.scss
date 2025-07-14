@@ -1,0 +1,7 @@
+main {
+  margin-top: $page-header-height; // leave space for the fixed positioned header
+
+  @media (min-width: $bp-4k) {
+    margin-top: $page-header-height-4k;
+  }
+}

@@ -17,10 +17,9 @@ RUN mkdir -p packages/apps/${app}
 
 COPY package.json pnpm-* ./
 COPY packages/apps/${app}/package.json ./packages/apps/${app}/
-COPY packages/directives/ packages/
-COPY packages/base/ packages/
+COPY packages/base packages/directives packages/plugins packages/
 
-RUN pnpm --filter @europeana/${app} --filter @europeana/sea-base-layer install
+RUN pnpm install
 
 COPY packages/apps/${app}/ packages/apps/${app}/
 

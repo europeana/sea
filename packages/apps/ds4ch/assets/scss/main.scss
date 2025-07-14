@@ -1,6 +1,7 @@
 @import "./bootstrap.scss";
 
 @import "@europeana/style/scss/variables";
+@import "@europeana/style/scss/mixins";
 // TODO: split out Montserrat for ds4ch, Ubuntu for Europeana and Open Sans in shared style package
 @import "@europeana/style/scss/fonts";
 @import "@europeana/style/scss/default";
@@ -10,5 +11,6 @@
 
 @import "fonts";
 @import "variables";
+@import "default";
 @import "buttons";
 @import "text";
