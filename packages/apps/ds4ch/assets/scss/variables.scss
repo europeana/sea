@@ -1,3 +1,5 @@
+@import "@europeana/style/scss/variables";
+
 // Colors
 $white: #fff;
 $black: #191817;
@@ -18,6 +20,27 @@ $font-size-32: 2rem;
 $font-size-34: 2.125rem;
 $font-size-38: 2.375rem;
 $font-size-40: 2.5rem;
+$font-size-56: 3.5rem;
 
 $page-header-height: 5.25rem;
 $page-header-height-4k: 10.5rem;
+%title-2 {
+  font-family: $font-family-montserrat;
+  font-size: $font-size-20;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: $bp-large) {
+    font-size: $font-size-28;
+  }
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-56;
+  }
+}
+
+%title-3 {
+  font-family: $font-family-montserrat;
+  font-weight: 700;
+}
