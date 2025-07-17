@@ -19,7 +19,7 @@ const props = defineProps({
    */
   ctaClasses: {
     type: String,
-    default: "btn-secondary icon-chevron",
+    default: "btn-secondary",
   },
   /**
    * Image sizes for responsive images

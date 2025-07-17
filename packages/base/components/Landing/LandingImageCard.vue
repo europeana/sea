@@ -86,16 +86,12 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
       <!-- eslint-disable vue/no-v-html -->
       <div class="text" v-html="parseMarkdown(props.card.text)" />
       <!-- eslint-enable vue/no-v-html -->
-      <GenericSmartLink
+      <GenericCallToAction
         v-if="props.card.link"
-        :destination="props.card.link.url"
-        data-qa="call to action"
-        class="btn"
-        :class="props.ctaClasses"
-        hide-external-icon
-      >
-        {{ props.card.link.text }}
-      </GenericSmartLink>
+        :url="props.card.link.url"
+        :text="props.card.link.text"
+        :classes="props.ctaClasses"
+      />
     </div>
   </div>
 </template>

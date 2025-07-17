@@ -21,19 +21,21 @@
       border-radius: 0;
     }
 
-    &::after {
-      @extend %icon-font;
-      content: "\e91b";
+    &.icon-chevron {
+      line-height: 1.5;
+      &::before {
+        @extend %icon-font;
+        order: 2;
+        display: inline-flex;
+        align-items: center;
+        transform: rotate(-90deg);
+        font-size: 0.625rem;
+        margin-left: 0.625rem;
 
-      display: inline-flex;
-      align-items: center;
-      transform: rotate(-90deg);
-      font-size: 0.625rem;
-      margin-left: 0.625rem;
-
-      @media (min-width: ($bp-4k)) {
-        font-size: 1.75rem;
-        margin-left: 1.75rem;
+        @media (min-width: ($bp-4k)) {
+          font-size: 1.75rem;
+          margin-left: 1.75rem;
+        }
       }
     }
 
