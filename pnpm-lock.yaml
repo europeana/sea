@@ -66,8 +66,8 @@ importers:
         specifier: workspace:*
         version: link:../../base
       '@europeana/style':
-        specifier: ^2.11.2
-        version: 2.11.2
+        specifier: ^2.12.1
+        version: 2.12.1
       '@europeana/vue-contentful-graphql':
         specifier: workspace:*
         version: link:../../plugins/vue-contentful-graphql
@@ -621,9 +621,6 @@ packages:
   '@eslint/plugin-kit@0.3.1':
     resolution: {integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@europeana/style@2.11.2':
-    resolution: {integrity: sha512-TbIHowxHmg4QVE32WulUEhJomV1Vs0qp4Sh+/02wWSKbF3Vw2S1L9T0Z+QhWaoC1ea2PKRu6x1l7JIQF8xCfBg==}
 
   '@europeana/style@2.12.1':
     resolution: {integrity: sha512-iupGmWkJbuXiQfV5YxARkOqxc6dz7oCswf2Hf5yWrKwhv0r4jQTlg2tj64VxYMHLI/onjFzZ0Alo9ai4p3e0yw==}
@@ -6274,8 +6271,6 @@ snapshots:
     dependencies:
       '@eslint/core': 0.14.0
       levn: 0.4.1
-
-  '@europeana/style@2.11.2': {}
 
   '@europeana/style@2.12.1': {}
 
