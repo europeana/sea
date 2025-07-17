@@ -35,6 +35,7 @@ const getClasses = (section) => {
 <template>
   <div>
     <h1>{{ page.name }}</h1>
+    <!-- TODO: create reusable sections component so this could be reused on other pages. Perhaps in base layer. -->
     <div
       v-for="(section, index) in sections"
       :id="sectionId(section)"
