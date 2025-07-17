@@ -1,0 +1,18 @@
+query LandingPage(
+  $identifier: String!
+  $locale: String!
+  $site: String = "dataspace-culturalheritage.eu"
+  $preview: Boolean = false
+) {
+  landingPageCollection(
+    preview: $preview
+    locale: $locale
+    where: { identifier: $identifier, site: $site }
+    limit: 1
+  ) {
+    items {
+      identifier
+      name
+    }
+  }
+}
