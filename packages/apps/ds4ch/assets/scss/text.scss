@@ -1,4 +1,10 @@
-// TODO: define title styles
+h2 {
+  @extend %title-2;
+}
+
+h3 {
+  @extend %title-3;
+}
 
 .label-uppercase {
   font-family: $font-family-montserrat;

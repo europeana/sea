@@ -16,7 +16,7 @@ const { data: page } = await useAsyncData("homePage", async () => {
 </script>
 
 <template>
-  <div style="height: 200px">
+  <div>
     <h1>{{ page.name }}</h1>
   </div>
 </template>
