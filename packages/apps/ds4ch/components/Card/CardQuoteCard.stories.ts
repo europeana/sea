@@ -13,15 +13,13 @@ export const Default: Story = {
   args: {
     quoteText:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    initials: "M",
-    organisation: "Museum X",
+    attribution: "M, Museum X",
   },
 };
 
-export const NoOrganisation: Story = {
+export const NoAttribution: Story = {
   args: {
     quoteText:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    initials: "M",
   },
 };

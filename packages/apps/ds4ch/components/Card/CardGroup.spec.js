@@ -8,15 +8,13 @@ const testProps = {
     {
       quoteText:
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      initials: "M",
-      organisation: "Museum X",
+      attribution: "M, Museum X",
       variant: "quote",
     },
     {
       quoteText:
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      initials: "A. B.",
-      organisation: "European Commission",
+      attribution: "A. B., European Commission",
       variant: "quote",
     },
   ],

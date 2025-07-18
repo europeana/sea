@@ -12,8 +12,7 @@ const props = defineProps({
       <CardQuoteCard
         v-if="card.variant === 'quote'"
         :quote-text="card.quoteText"
-        :initials="card.initials"
-        :organisation="card.organisation"
+        :attribution="card.attribution"
       />
     </div>
   </div>

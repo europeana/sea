@@ -4,24 +4,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  initials: {
+  attribution: {
     type: String,
     default: null,
   },
-  organisation: {
-    type: String,
-    default: null,
-  },
-});
-
-const caption = computed(() => {
-  if (props.initials && props.organisation) {
-    return `- ${props.initials}, ${props.organisation}`;
-  } else if (props.initials || props.organisation) {
-    return `- ${props.initials || props.organisation}`;
-  } else {
-    return null;
-  }
 });
 </script>
 <template>
@@ -32,8 +18,8 @@ const caption = computed(() => {
         <blockquote class="mx-0 mb-4 fst-normal">
           <p>{{ props.quoteText }}</p>
         </blockquote>
-        <figcaption v-if="caption" class="fw-semibold">
-          {{ caption }}
+        <figcaption v-if="attribution" class="fw-semibold">
+          - {{ attribution }}
         </figcaption>
       </figure>
     </div>
