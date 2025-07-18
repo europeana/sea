@@ -11,12 +11,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: "Default CTA",
+    text: "Default (primary) CTA",
+    classes: "btn-primary icon-chevron",
   },
 };
-export const PrimaryCta: Story = {
+export const SecondaryCta: Story = {
   args: {
-    text: "Primary CTA",
-    classes: "btn-primary",
+    text: "Secondary CTA",
+    classes: "btn-secondary icon-chevron",
   },
 };

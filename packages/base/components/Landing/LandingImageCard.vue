@@ -75,22 +75,22 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
         :content-type="cardImageWithAttribution.image.contentType"
         :attribution="cardImageWithAttribution"
         :contentful-image-crop-presets="isSVG ? null : imageSrcSet"
-        :contentful-image-display-profile="props.card?.profile"
+        :contentful-image-display-profile="card?.profile"
         :image-sizes="isSVG ? null : imageSizes"
       />
     </div>
     <div class="text-wrapper">
-      <component :is="props.titleTag" class="title">
-        {{ props.card.name }}
+      <component :is="titleTag" class="title">
+        {{ card.name }}
       </component>
       <!-- eslint-disable vue/no-v-html -->
-      <div class="text" v-html="parseMarkdown(props.card.text)" />
+      <div class="text" v-html="parseMarkdown(card.text)" />
       <!-- eslint-enable vue/no-v-html -->
       <GenericCallToAction
-        v-if="props.card.link"
-        :url="props.card.link.url"
-        :text="props.card.link.text"
-        :classes="props.ctaClasses"
+        v-if="card.link"
+        :url="card.link.url"
+        :text="card.link.text"
+        :classes="ctaClasses"
       />
     </div>
   </div>

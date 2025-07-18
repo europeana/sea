@@ -1,47 +1,29 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount, config } from "@vue/test-utils";
-import CallToActionBanner from "./CallToActionBanner.vue";
+import ContentPrimaryCallToAction from "./ContentPrimaryCallToAction.vue";
 
 config.global.renderStubDefaultSlot = true;
 
 const factory = (props) =>
-  shallowMount(CallToActionBanner, {
+  shallowMount(ContentPrimaryCallToAction, {
     props,
   });
 
-describe("components/generic/CallToAction", () => {
+describe("components/Content/ContentPrimaryCallToAction", () => {
   const props = {
-    name: "Call to action headline",
-    nameEnglish: "Call to action headline",
+    title: "Call to action headline",
     text: "Description with _markup_!",
     link: {
       url: "https://example.org/cta",
       text: "button text",
     },
-    illustration: {
-      image: {
-        description: "Image description",
-        url: "https://example.org/image.jpg",
-        width: 600,
-        height: 400,
-        contentType: "image/jpeg",
-      },
-    },
   };
-  it(`has an illustration`, () => {
-    const wrapper = factory(props);
-
-    const illustartion = wrapper.find("image-optimised-stub");
-    expect(illustartion.attributes("src")).toBe(
-      "https://example.org/image.jpg",
-    );
-  });
 
   it(`renders the text and name from the props`, () => {
     const wrapper = factory(props);
 
     const headline = wrapper.find("h2");
-    const text = wrapper.find(".cta-content div");
+    const text = wrapper.find(".primary-cta div");
     expect(headline.text()).toBe("Call to action headline");
     expect(text.text()).toBe("Description with markup!");
   });

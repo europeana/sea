@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   /**
    * Any custom classes to apply
    * to the cta.
@@ -7,7 +7,7 @@ const props = defineProps({
    */
   classes: {
     type: String,
-    default: "btn-secondary",
+    default: "btn-primary",
   },
   /**
    * The URL to which the CTA
@@ -30,12 +30,12 @@ const props = defineProps({
 <template>
   <div>
     <GenericSmartLink
-      :destination="props.url"
-      class="btn btn-cta icon-chevron"
-      :class="props.classes"
+      :destination="url"
+      class="btn btn-cta"
+      :class="classes"
       hide-external-icon
     >
-      {{ props.text }}
+      {{ text }}
     </GenericSmartLink>
   </div>
 </template>
