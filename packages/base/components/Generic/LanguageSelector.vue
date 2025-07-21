@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from "vue";
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 

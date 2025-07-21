@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from "vue";
 import { responsiveBackgroundImageCSSVars } from "../../utils/contentful/assets.js";
 
 const props = defineProps({
