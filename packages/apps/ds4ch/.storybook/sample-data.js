@@ -16,4 +16,30 @@ export default {
       },
     },
   ],
+  backgroundImages: [
+    {
+      image: {
+        contentType: "image/svg+xml",
+        url: "https://images.ctfassets.net/i01duvb6kq77/563nWMAsbl2t3M7oe98OrH/3d956ec737a2f6ffa43d22a7e86f3879/DS4CH_Banner_Yellow.svg",
+        width: 890,
+        height: 724,
+      },
+    },
+    {
+      image: {
+        contentType: "image/svg+xml",
+        url: "https://images.ctfassets.net/i01duvb6kq77/2XQEVsP8dRnHZB73Lyci5k/c2a740d9504620142568782683932886/Black_Banner_-_desktop.svg",
+        width: 890,
+        height: 724,
+      },
+    },
+    {
+      image: {
+        contentType: "image/svg+xml",
+        url: "https://images.ctfassets.net/i01duvb6kq77/2YNOyoyhclcdaybf0aWJ9/f3cf3dd71d3ec2737b09f069de84e575/DS4CH_Banner_Grey.svg",
+        width: 890,
+        height: 724,
+      },
+    },
+  ],
 };

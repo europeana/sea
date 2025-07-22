@@ -1,4 +1,23 @@
 .btn {
+  &.icon-chevron {
+    line-height: 1.5;
+
+    &::before {
+      @extend %icon-font;
+      order: 2;
+      display: inline-flex;
+      align-items: center;
+      transform: rotate(-90deg);
+      font-size: 0.625rem;
+      margin-left: 0.625rem;
+
+      @media (min-width: ($bp-4k)) {
+        font-size: 1.75rem;
+        margin-left: 1.75rem;
+      }
+    }
+  }
+
   &.btn-primary {
     border: none;
     border-radius: 0;
@@ -19,22 +38,6 @@
       font-size: 2.625rem;
       padding: 2rem 2.625rem;
       border-radius: 0;
-    }
-
-    &::after {
-      @extend %icon-font;
-      content: "\e91b";
-
-      display: inline-flex;
-      align-items: center;
-      transform: rotate(-90deg);
-      font-size: 0.625rem;
-      margin-left: 0.625rem;
-
-      @media (min-width: ($bp-4k)) {
-        font-size: 1.75rem;
-        margin-left: 1.75rem;
-      }
     }
 
     &:hover,
@@ -63,24 +66,8 @@
       padding: 2rem 2.625rem;
     }
 
-    &.icon-chevron {
-      line-height: 1.5;
-
-      &::before {
-        @extend %icon-font;
-        order: 2;
-        display: inline-flex;
-        align-items: center;
-        transform: rotate(-90deg);
-        font-size: 0.625rem;
-        margin-left: 0.625rem;
-        color: $white;
-
-        @media (min-width: ($bp-4k)) {
-          font-size: 1.75rem;
-          margin-left: 1.75rem;
-        }
-      }
+    &.icon-chevron::before {
+      color: $white;
     }
 
     &:hover,

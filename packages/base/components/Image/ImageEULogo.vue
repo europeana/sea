@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 // TODO: consider moving the logos out of the style package and into the base layer to enable use of dynamic imports.
 import bgLogo from "@europeana/style/img/eu-funded/bg-Funded by the EU_NEG.svg";
