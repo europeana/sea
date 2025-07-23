@@ -1,6 +1,6 @@
 <script setup>
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
-import kebabCase from "lodash/kebabCase";
+import { kebabCase } from "lodash-es";
 import contentfulEntryHasContentType from "@europeana/sea-base-layer/utils/contentful/entryHasContentType.js";
 
 const contentful = inject("$contentful");
