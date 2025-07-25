@@ -56,8 +56,9 @@ const getClasses = (section) => {
         class="container"
       >
         <CardGroup
+          :title="section.name"
+          :text="section.text"
           :cards="section.hasPartCollection.items"
-          variant="testimonial"
         />
       </div>
     </div>

@@ -13,7 +13,7 @@ const props = defineProps({
 <template>
   <div class="card">
     <div class="card-body">
-      <span class="icon-quote d-inline-block mb-4" />
+      <span class="icon-quote d-inline-block mb-4 mb-4k-5" />
       <figure>
         <blockquote class="mx-0 mb-4 fst-normal">
           <p>{{ props.testimonialText }}</p>
@@ -32,16 +32,44 @@ const props = defineProps({
 .card {
   --bs-border-width: 0;
   max-width: $max-card-width;
+
+  @media (min-width: $bp-4k) {
+    max-width: 35rem;
+  }
+
+  .card-body {
+    padding: 0;
+
+    @media (min-width: $bp-medium) {
+      padding: 1rem;
+    }
+  }
 }
 
 .icon-quote {
   font-size: $font-size-24;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-48;
+  }
 }
 
 blockquote {
-  p:before,
-  p:after {
-    content: none;
+  p {
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-32;
+    }
+
+    &:before,
+    &:after {
+      content: none;
+    }
+  }
+}
+
+figcaption {
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-32;
   }
 }
 </style>
