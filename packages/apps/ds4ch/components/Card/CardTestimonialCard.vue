@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  quoteText: {
+  testimonialText: {
     type: String,
     default: null,
   },
@@ -16,7 +16,7 @@ const props = defineProps({
       <span class="icon-quote d-inline-block mb-4" />
       <figure>
         <blockquote class="mx-0 mb-4 fst-normal">
-          <p>{{ props.quoteText }}</p>
+          <p>{{ props.testimonialText }}</p>
         </blockquote>
         <figcaption v-if="attribution" class="fw-semibold">
           - {{ attribution }}
