@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 
-import CardQuoteCard from "./CardQuoteCard.vue";
+import CardTestimonialCard from "./CardTestimonialCard.vue";
 
 const meta = {
-  component: CardQuoteCard,
-} satisfies Meta<typeof CardQuoteCard>;
+  component: CardTestimonialCard,
+} satisfies Meta<typeof CardTestimonialCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    quoteText:
+    testimonialText:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     attribution: "M, Museum X",
   },
@@ -19,7 +19,7 @@ export const Default: Story = {
 
 export const NoAttribution: Story = {
   args: {
-    quoteText:
+    testimonialText:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
 };

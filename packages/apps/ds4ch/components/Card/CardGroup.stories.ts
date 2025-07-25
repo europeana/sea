@@ -9,26 +9,25 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const QuoteCardGroup: Story = {
+export const TestimonialCardGroup: Story = {
   args: {
+    title: "Testimonial card group title",
+    text: "Text to introduce or add more info to the testimonial card group. Can contain __marked__ text and [links](#).",
     cards: [
       {
-        quoteText:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         attribution: "M, Museum X",
-        variant: "quote",
+        __typename: "TestimonialCard",
       },
       {
-        quoteText:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         attribution: "A. B., European Commission",
-        variant: "quote",
+        __typename: "TestimonialCard",
       },
       {
-        quoteText:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         attribution: "K, Ministry of Culture",
-        variant: "quote",
+        __typename: "TestimonialCard",
       },
     ],
   },

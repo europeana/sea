@@ -49,6 +49,18 @@ const getClasses = (section) => {
       >
         <ImageTextCard :card="section" />
       </div>
+      <div
+        v-else-if="
+          contentfulEntryHasContentType(section, 'TestimonialCardGroup')
+        "
+        class="container"
+      >
+        <CardGroup
+          :title="section.name"
+          :text="section.text"
+          :cards="section.hasPartCollection.items"
+        />
+      </div>
     </div>
   </div>
 </template>
