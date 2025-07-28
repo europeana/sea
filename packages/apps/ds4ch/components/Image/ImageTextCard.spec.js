@@ -34,7 +34,7 @@ describe("components/landing/ImageTextCard", () => {
 
       const LandingImageCard = wrapper.find("landing-image-card-stub");
       expect(LandingImageCard.attributes("imagesizes")).toEqual(
-        wrapper.vm.props.imageSizes,
+        wrapper.vm.imageSizes,
       );
       expect(LandingImageCard.attributes("imagesrcset")).not.toBeFalsy();
     });

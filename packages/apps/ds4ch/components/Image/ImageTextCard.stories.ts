@@ -29,7 +29,7 @@ export const PrimaryCta: Story = {
       image: sampleData.imagesWithAttribution[0],
       link: { text: "read more", url: "/" },
     },
-    ctaClasses: "btn-primary",
+    ctaClasses: "btn-primary icon-chevron",
   },
 };
 

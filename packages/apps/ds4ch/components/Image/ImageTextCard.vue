@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   /**
    * Image card
    */
@@ -55,11 +55,11 @@ const props = defineProps({
 </script>
 <template>
   <LandingImageCard
-    :card="props.card"
-    :title-tag="props.titleTag"
-    :cta-classes="props.ctaClasses"
-    :image-sizes="props.imageSizes"
-    :image-src-set="props.imageSrcSet"
+    :card="card"
+    :title-tag="titleTag"
+    :cta-classes="ctaClasses"
+    :image-sizes="imageSizes"
+    :image-src-set="imageSrcSet"
   />
 </template>
 <style lang="scss">
