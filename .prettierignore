@@ -1,5 +1,6 @@
 .gitignore
 .husky
 .prettierignore
+.env*
 pnpm-lock.yaml
 Dockerfile
