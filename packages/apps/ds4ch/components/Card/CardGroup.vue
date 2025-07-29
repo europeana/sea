@@ -41,9 +41,7 @@ const props = defineProps({
     <div v-if="text" class="text mb-3" v-html="parseMarkdown(text)" />
     <!-- eslint-enable vue/no-v-html -->
   </div>
-  <div
-    class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 justify-content-xl-center"
-  >
+  <div class="row row-cols-1 row-cols-xl-4 g-4 justify-content-center">
     <div v-for="(card, index) in props.cards" :key="index" class="col">
       <CardTestimonialCard
         v-if="card['__typename'] === 'TestimonialCard'"

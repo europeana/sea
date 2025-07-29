@@ -11,7 +11,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div class="card">
+  <div class="card mx-auto">
     <div class="card-body">
       <span class="icon-quote d-inline-block mb-4 mb-4k-5" />
       <figure>
