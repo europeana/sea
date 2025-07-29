@@ -26,6 +26,9 @@ query LandingPage(
           ... on PrimaryCallToAction {
             ...primaryCallToActionFields
           }
+          ... on TestimonialCardGroup {
+            ...testimonialCardGroupFields
+          }
         }
       }
     }
@@ -42,7 +45,6 @@ fragment landingPageImageWithAttributionFields on ImageWithAttribution {
     ...imageFields
   }
 }
-
 fragment imageCardFields on ImageCard {
   name
   nameEN: name(locale: "en-GB")
@@ -57,4 +59,21 @@ fragment imageCardFields on ImageCard {
   profile {
     ...imageDisplayProfileFields
   }
+}
+fragment testimonialCardGroupFields on TestimonialCardGroup {
+  name
+  nameEN: name(locale: "en-GB")
+  text
+  hasPartCollection {
+    items {
+      __typename
+      ... on TestimonialCard {
+        ...testimonialCardFields
+      }
+    }
+  }
+}
+fragment testimonialCardFields on TestimonialCard {
+  text
+  attribution
 }

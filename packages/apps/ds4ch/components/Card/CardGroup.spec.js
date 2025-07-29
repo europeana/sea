@@ -6,16 +6,16 @@ import CardGroup from "./CardGroup.vue";
 const testProps = {
   cards: [
     {
-      quoteText:
+      testimonialText:
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       attribution: "M, Museum X",
-      variant: "quote",
+      __typename: "TestimonialCard",
     },
     {
-      quoteText:
+      testimonialText:
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       attribution: "A. B., European Commission",
-      variant: "quote",
+      __typename: "TestimonialCard",
     },
   ],
 };
@@ -28,13 +28,13 @@ describe("components/landing/CardGroup", () => {
     expect(column.isVisible()).toBe(true);
   });
 
-  describe("when card variant is quote", () => {
-    it("renders a quote card", () => {
+  describe("when card type is testimonial", () => {
+    it("renders a testimonial card", () => {
       const wrapper = shallowMount(CardGroup, { props: testProps });
 
-      const quoteCards = wrapper.findAll("card-quote-card-stub");
+      const testimonialCards = wrapper.findAll("card-testimonial-card-stub");
 
-      expect(quoteCards.length).toBe(2);
+      expect(testimonialCards.length).toBe(2);
     });
   });
 });
