@@ -22,6 +22,9 @@ query LandingPage(
           ... on ImageCard {
             ...imageCardFields
           }
+          ... on TestimonialCardGroup {
+            ...testimonialCardGroupFields
+          }
           ... on LandingSubSection {
             name
             nameEN: name(locale: "en-GB")
@@ -65,4 +68,21 @@ fragment imageCardFields on ImageCard {
   profile {
     ...imageDisplayProfileFields
   }
+}
+fragment testimonialCardGroupFields on TestimonialCardGroup {
+  name
+  nameEN: name(locale: "en-GB")
+  text
+  hasPartCollection {
+    items {
+      __typename
+      ... on TestimonialCard {
+        ...testimonialCardFields
+      }
+    }
+  }
+}
+fragment testimonialCardFields on TestimonialCard {
+  text
+  attribution
 }
