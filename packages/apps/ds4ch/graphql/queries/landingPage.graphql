@@ -22,6 +22,19 @@ query LandingPage(
           ... on ImageCard {
             ...imageCardFields
           }
+          ... on LandingSubSection {
+            name
+            nameEN: name(locale: "en-GB")
+            text
+            hasPartCollection(limit: 6) {
+              items {
+                __typename
+                ... on ImageCard {
+                  ...imageCardFields
+                }
+              }
+            }
+          }
         }
       }
     }

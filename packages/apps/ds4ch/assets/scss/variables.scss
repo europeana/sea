@@ -21,9 +21,25 @@ $font-size-34: 2.125rem;
 $font-size-38: 2.375rem;
 $font-size-40: 2.5rem;
 $font-size-56: 3.5rem;
+$font-size-68: 4.25rem;
 
 $page-header-height: 5.25rem;
 $page-header-height-4k: 10.5rem;
+
+%title-1 {
+  font-family: $font-family-montserrat;
+  font-size: $font-size-24;
+  font-weight: 700;
+
+  @media (min-width: $bp-large) {
+    font-size: $font-size-34;
+  }
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-68;
+  }
+}
+
 %title-2 {
   font-family: $font-family-montserrat;
   font-size: $font-size-20;
