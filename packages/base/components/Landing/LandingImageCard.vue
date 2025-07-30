@@ -96,7 +96,7 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@europeana/style/scss/variables";
 
 .image-card {
@@ -149,7 +149,6 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   .text-wrapper {
     @media (min-width: $bp-large) {
       flex: 0 0 51%;
-      background-color: $white;
       padding-left: 3.625rem;
       padding-right: 2rem;
     }
@@ -187,23 +186,18 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
     }
   }
 
-  :deep(figure) {
+  figure {
     margin: 0;
     width: 100%;
     height: auto;
-  }
 
-  figure {
-    width: 100%;
-    height: auto;
-
-    :deep(img) {
+    img {
       width: 100%;
       height: auto;
     }
   }
 
-  :deep(figcaption) {
+  figcaption {
     @media (min-width: $bp-4k) {
       .icon-info {
         width: 3.125rem;
@@ -239,7 +233,6 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   }
 
   .text {
-    color: $darkgrey;
     text-align: left;
   }
 }
