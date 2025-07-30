@@ -1,5 +1,6 @@
 #import "../fragments/imageDisplayProfileFields.graphql"
 #import "../fragments/imageFields.graphql"
+#import "../fragments/primaryCallToActionFields.graphql"
 
 query LandingPage(
   $identifier: String!
@@ -21,6 +22,9 @@ query LandingPage(
           __typename
           ... on ImageCard {
             ...imageCardFields
+          }
+          ... on PrimaryCallToAction {
+            ...primaryCallToActionFields
           }
           ... on TestimonialCardGroup {
             ...testimonialCardGroupFields

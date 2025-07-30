@@ -2,6 +2,7 @@
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 import { kebabCase } from "lodash-es";
 import contentfulEntryHasContentType from "@europeana/sea-base-layer/utils/contentful/entryHasContentType.js";
+import CallToActionBanner from "~/components/Generic/CallToActionBanner.vue";
 
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
@@ -61,6 +62,15 @@ const getClasses = (section) => {
           :cards="section.hasPartCollection.items"
         />
       </div>
+      <CallToActionBanner
+        v-else-if="
+          contentfulEntryHasContentType(section, 'PrimaryCallToAction')
+        "
+        :title="section.name"
+        :text="section.text"
+        :link="section.relatedLink"
+        :background-image="section.image"
+      />
     </div>
   </div>
 </template>
