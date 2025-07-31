@@ -17,6 +17,7 @@ query LandingPage(
     items {
       identifier
       name
+      headline
       hasPartCollection(limit: 20) {
         items {
           __typename
