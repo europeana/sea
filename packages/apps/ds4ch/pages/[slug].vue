@@ -15,10 +15,12 @@ const { data: page } = await useAsyncData("landingPage", async () => {
   const response = await contentful.query(landingPageQuery, variables);
   return response.data?.landingPageCollection?.items?.[0] || {};
 });
+
+const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 </script>
 <template>
   <div>
-    <h1>{{ page.headline }}</h1>
-    {{ page }}
+    <h1>{{ page.headline || route.fullPath }}</h1>
+    <PageSections :sections="sections" />
   </div>
 </template>
