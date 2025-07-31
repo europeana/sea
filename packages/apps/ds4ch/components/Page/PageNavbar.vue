@@ -5,7 +5,7 @@ const localePath = useLocalePath();
 // TODO: populate URLs when pages exist
 const links = [
   { url: "/", text: "nav.home" },
-  { url: "/about", text: "nav.about" },
+  { url: "/about-us", text: "nav.about" },
   { url: "/data-space", text: "nav.exploreDataspace" },
   { url: "/data", text: "nav.exploreData" },
 ];

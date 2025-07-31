@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
-import IndexPage from "./index.vue";
+import slugPage from "./[slug].vue";
 
 mockNuxtImport("useI18n", () => {
   return () => {
@@ -10,7 +10,7 @@ mockNuxtImport("useI18n", () => {
   };
 });
 
-const title = "DS4CH home page";
+const title = "DS4CH about us";
 const contentfulResponse = {
   data: {
     landingPageCollection: {
@@ -23,7 +23,7 @@ const contentfulResponse = {
   },
 };
 const factory = async () =>
-  await mountSuspended(IndexPage, {
+  await mountSuspended(slugPage, {
     global: {
       provide: {
         $contentful: {
@@ -33,8 +33,8 @@ const factory = async () =>
     },
   });
 
-describe("IndexPage", () => {
-  it("renders an h1 element with the page title from Contentful", async () => {
+describe("slugPage", () => {
+  it("renders an h1 element with the page headline from Contentful", async () => {
     const wrapper = await factory();
 
     const h1 = wrapper.find("h1");
