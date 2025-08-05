@@ -13,7 +13,7 @@ const sections = {
   info: {
     header: "footer.info",
     links: [
-      { url: "/about", text: "footer.about" },
+      { url: "/about-us", text: "footer.about" },
       { url: "/news", text: "footer.news" },
       { url: "/", text: "footer.events" },
     ],
