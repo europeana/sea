@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "À propos de l'espace de données",
+    "accessibility": "Accessibilité",
+    "cookies": "Cookies",
+    "disclaimer": "L'espace européen commun de données pour le patrimoine culturel est une initiative de l'Union européenne, financée par le programme \"Europe numérique\" de l'Union européenne. Les services de l'espace de données, y compris ce site web, sont gérés par un consortium dirigé par la Fondation Europeana dans le cadre d'un contrat de service avec la Commission européenne, numéro de contrat LC-01901432.",
+    "events": "Événements",
+    "footer": "Pied de page",
+    "help": "Aide",
+    "imageDescription": "Financé par l'Union européenne",
+    "info": "Plus d'informations",
+    "language": "Personnaliser la langue du site web",
+    "mission": "Notre mission",
+    "missionStatement": "Grâce à l’espace de données, Europeana accompagne le secteur du patrimoine culturel dans sa transformation numérique. Nous développons des expertises, des outils et des politiques pour favoriser l’adoption du numérique et encourager des partenariats qui stimulent l’innovation. Nous facilitons l’utilisation du patrimoine culturel pour l’éducation, la recherche, la création et les activités récréatives. Notre travail contribue à une société ouverte, informée et créative.",
+    "news": "Actualités",
+    "partners": {
+      "cloudflare": "Propulsé par Project Galileo",
+      "contentful": "Propulsé par Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Déclaration de confidentialité",
+    "supportingPartners": "Soutenir les partenaires techniques",
+    "terms": "Conditions et politiques",
+    "translationInfo": "Traductions automatisées à l'aide de %1$s",
+    "translationService": "Service eTranslation"
+  },
   "nav": {
     "about": "À propos",
     "close": "Fermer le menu",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Explorer l'espace de données",
     "home": "Accueil",
     "toggle": "Afficher le menu"
-  }
+  },
+  "newWindow": "s'ouvre dans une nouvelle fenêtre"
 }

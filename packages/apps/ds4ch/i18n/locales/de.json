@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Über den Datenraum",
+    "accessibility": "Barrierefreiheit",
+    "cookies": "Cookies",
+    "disclaimer": "Der gemeinsame europäische Datenraum für das kulturelle Erbe ist eine Initiative der Europäischen Union, die durch das Programm ‘Digitales Europa’ der Europäischen Union finanziert wird. Die Dienste des Datenraums, einschließlich dieser Website, werden von einem Konsortium unter der Leitung der Europeana Foundation im Rahmen eines Dienstleistungsvertrags mit der Europäischen Kommission betrieben, Vertragsnummer LC-01901432.",
+    "events": "Veranstaltungen",
+    "footer": "Fußzeile",
+    "help": "Hilfe",
+    "imageDescription": "Finanziert von der Europäischen Union",
+    "info": "Mehr Infos",
+    "language": "Sprache der Website anpassen",
+    "mission": "Unser Auftrag",
+    "missionStatement": "Durch den Datenraum unterstützt Europeana den Sektor des kulturellen Erbes bei seiner digitalen Transformation. Wir entwickeln Fachwissen, Werkzeuge und Richtlinien, um den digitalen Wandel zu unterstützen und fördern Partnerschaften, die Innovation vorantreiben. Wir erleichtern es den Menschen, Kulturerbe für Bildung, Forschung, Kreation und Erholung zu nutzen. Unsere Arbeit trägt zu einer offenen, wissenden und kreativen Gesellschaft bei.",
+    "news": "Nachrichten",
+    "partners": {
+      "cloudflare": "Unterstützt durch Project Galileo",
+      "contentful": "Unterstützt durch Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Datenschutzerklärung",
+    "supportingPartners": "Unterstützung technischer Partner",
+    "terms": "Bedingungen und Richtlinien",
+    "translationInfo": "Automatische Übersetzungen mit dem %1$s",
+    "translationService": "eTranslation-Dienst"
+  },
   "nav": {
     "about": "Über uns",
     "close": "Menü schließen",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Erkunden Sie den Datenraum",
     "home": "Startseite",
     "toggle": "Menü anzeigen"
-  }
+  },
+  "newWindow": "öffnet sich in einem neuen Fenster"
 }

@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Om dataområdet",
+    "accessibility": "Tilgængelighed",
+    "cookies": "Cookies",
+    "disclaimer": "Det fælles europæiske datarum for kulturarv er et EU-initiativ, der finansieres af EU's program for et digitalt Europa. Tjenesterne i datarummet, herunder dette websted, drives af et konsortium ledet af Europeana Foundation i henhold til en servicekontrakt med Europa-Kommissionen, kontraktnummer LC-01901432.",
+    "events": "Begivenheder",
+    "footer": "Sidefod",
+    "help": "Hjælp",
+    "imageDescription": "Finansieret af Den Europæiske Union",
+    "info": "Mere information",
+    "language": "Tilpas hjemmesidens sprog",
+    "mission": "Vores mission",
+    "missionStatement": "Gennem datarummet styrker Europeana kulturarvssektoren i dens digitale transformation. Vi udvikler ekspertise, værktøjer og politikker til at omfavne digital forandring og fremme partnerskaber, der fostrer innovation. Vi gør det lettere for mennesker at bruge kulturarv til uddannelse, forskning, skabelse og rekreation. Vores arbejde bidrager til et åbent, vidende og kreativt samfund.",
+    "news": "Nyheder",
+    "partners": {
+      "cloudflare": "Drevet af Project Galileo",
+      "contentful": "Drevet af Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privatlivspolitik",
+    "supportingPartners": "Support til tekniske partnere",
+    "terms": "Vilkår og politikker",
+    "translationInfo": "Automatiserede oversættelser ved hjælp af %1$s",
+    "translationService": "eTranslation tjeneste"
+  },
   "nav": {
     "about": "Om os",
     "close": "Luk menu",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Udforsk dataspace",
     "home": "Hjem",
     "toggle": "Vis menu"
-  }
+  },
+  "newWindow": "åbner i nyt vindue"
 }

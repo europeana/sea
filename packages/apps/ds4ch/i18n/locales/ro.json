@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Despre spațiul de date",
+    "accessibility": "Accesibilitate",
+    "cookies": "Cookie-uri",
+    "disclaimer": "Spațiul european comun de date pentru patrimoniul cultural este o inițiativă a Uniunii Europene, finanțată de Programul Europa digitală al Uniunii Europene. Serviciile de spațiu de date, inclusiv acest site web, sunt operate de un consorțiu condus de Fundația Europeana în cadrul unui contract de servicii cu Comisia Europeană, numărul contractului LC-01901432.",
+    "events": "Evenimente",
+    "footer": "Subsol",
+    "help": "Ajutor",
+    "imageDescription": "Finanțat de Uniunea Europeană",
+    "info": "Mai multe informații",
+    "language": "Personalizați limba de pe pagina de internet",
+    "mission": "Misiunea noastră",
+    "missionStatement": "Prin intermediul spațiului de date, Europeana capacitează sectorul patrimoniului cultural în transformarea sa digitală. Dezvoltăm expertiză, instrumente și politici pentru a adopta schimbarea digitală și încurajăm parteneriatele care stimulează inovația. Facilităm utilizarea patrimoniului cultural pentru educație, cercetare, creație și recreere. Munca noastră contribuie la o societate deschisă, informată și creativă.",
+    "news": "Știri",
+    "partners": {
+      "cloudflare": "Susținut de Project Galileo",
+      "contentful": "Alimentat de Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Declarație de confidențialitate",
+    "supportingPartners": "Sprijinirea partenerilor tehnici",
+    "terms": "Termeni și politici",
+    "translationInfo": "Traduceri automate folosind %1$s",
+    "translationService": "Serviciul eTranslation"
+  },
   "nav": {
     "about": "Despre noi",
     "close": "Închide meniul",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Explorați spațiul de date",
     "home": "Acasă",
     "toggle": "Afișează meniul"
-  }
+  },
+  "newWindow": "se deschide într-o fereastră nouă"
 }

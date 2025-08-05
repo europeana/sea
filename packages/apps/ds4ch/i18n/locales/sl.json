@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "O podatkovnem prostoru",
+    "accessibility": "Dostopnost",
+    "cookies": "Piškotki",
+    "disclaimer": "Skupni evropski podatkovni prostor za kulturno dediščino je pobuda Evropske unije, ki jo financira program Evropske unije za digitalno Evropo. Storitve podatkovnega prostora, vključno s tem spletnim mestom, upravlja konzorcij, ki ga vodi fundacija Europeana v okviru pogodbe o storitvah z Evropsko komisijo, številka pogodbe LC-01901432.",
+    "events": "Dogodki",
+    "footer": "Noga",
+    "help": "Pomoč",
+    "imageDescription": "Financira Evropska unija",
+    "info": "Več informacij",
+    "language": "Prilagoditev jezika spletnega mesta",
+    "mission": "Naše poslanstvo",
+    "missionStatement": "Europeana prek podatkovnega prostora krepi sektor kulturne dediščine pri njegovi digitalni preobrazbi. Razvijamo strokovno znanje, orodja in politike za sprejemanje digitalnih sprememb ter spodbujamo partnerstva, ki pospešujejo inovacije. Ljudem olajšamo uporabo kulturne dediščine za izobraževanje, raziskovanje, ustvarjanje in rekreacijo. Naše delo prispeva k odprti, razgledani in ustvarjalni družbi.",
+    "news": "Novice",
+    "partners": {
+      "cloudflare": "Poganja Project Galileo",
+      "contentful": "Poganja Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Izjava o zasebnosti",
+    "supportingPartners": "Podpora tehničnim partnerjem",
+    "terms": "Pogoji in pravilniki",
+    "translationInfo": "Samodejni prevodi z uporabo %1$s",
+    "translationService": "Storitev eTranslation"
+  },
   "nav": {
     "about": "O nas",
     "close": "Zapri meni",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Raziščite podatkovni prostor",
     "home": "Domov",
     "toggle": "Pokaži meni"
-  }
+  },
+  "newWindow": "odpre se v novem oknu"
 }

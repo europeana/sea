@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "O dátovom priestore",
+    "accessibility": "Prístupnosť",
+    "cookies": "Cookies",
+    "disclaimer": "Spoločný európsky dátový priestor pre kultúrne dedičstvo je iniciatívou Európskej únie financovanou z programu Európskej únie Digitálna Európa. Služby dátového priestoru vrátane tejto webovej stránky prevádzkuje konzorcium vedené nadáciou Europeana na základe zmluvy o poskytovaní služieb s Európskou komisiou, číslo zmluvy LC-01901432.",
+    "events": "Udalosti",
+    "footer": "Päta",
+    "help": "Pomoc",
+    "imageDescription": "Financované Európskou úniou",
+    "info": "Viac informácií",
+    "language": "Prispôsobenie jazyka webovej lokality",
+    "mission": "Naše poslanie",
+    "missionStatement": "Prostredníctvom dátového priestoru umožňuje Europeana sektoru kultúrneho dedičstva digitálnu transformáciu. Rozvíjame odborné znalosti, nástroje a politiky na prijatie digitálnych zmien a podporujeme partnerstvá, ktoré podnecujú inovácie. Uľahčujeme ľuďom využívanie kultúrneho dedičstva na vzdelávanie, výskum, tvorbu a voľnočasové aktivity. Naša práca prispieva k otvorenej, vzdelanej a tvorivej spoločnosti.",
+    "news": "Novinky",
+    "partners": {
+      "cloudflare": "Poháňané systémom Project Galileo",
+      "contentful": "Poháňané systémom Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Vyhlásenie o ochrane osobných údajov",
+    "supportingPartners": "Podpora technických partnerov",
+    "terms": "Podmienky a zásady",
+    "translationInfo": "Automatizované preklady pomocou %1$s",
+    "translationService": "Služba eTranslation"
+  },
   "nav": {
     "about": "O nás",
     "close": "Zatvoriť ponuku",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Preskúmajte dátový priestor",
     "home": "Domov",
     "toggle": "Zobraziť ponuku"
-  }
+  },
+  "newWindow": "otvorí sa v novom okne"
 }

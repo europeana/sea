@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Par datu telpu",
+    "accessibility": "Pieejamība",
+    "cookies": "Sīkdatnes",
+    "disclaimer": "Kopējā Eiropas kultūras mantojuma datu telpa ir Eiropas Savienības iniciatīva, ko finansē Eiropas Savienības programma \"Digitālā Eiropa\". Datu telpas pakalpojumus, tostarp šo tīmekļa vietni, pārvalda konsorcijs, ko vada Europeana fonds saskaņā ar pakalpojumu līgumu ar Eiropas Komisiju, līguma numurs LC-01901432.",
+    "events": "Notikumi",
+    "footer": "Kājene",
+    "help": "Palīdzība",
+    "imageDescription": "Finansē Eiropas Savienība",
+    "info": "Vairāk informācijas",
+    "language": "Pielāgojiet vietnes valodu",
+    "mission": "Mūsu misija",
+    "missionStatement": "Izmantojot datu telpu, Europeana sniedz iespēju kultūras mantojuma nozarei veikt digitālo transformāciju. Mēs izstrādājam zināšanas, rīkus un politikas, lai veicinātu digitālās pārmaiņas un atbalstītu partnerības, kas sekmē inovācijas. Mēs atvieglojam cilvēkiem kultūras mantojuma izmantošanu izglītībā, pētniecībā, radošajā darbībā un atpūtā. Mūsu darbs veicina atvērtu, zinošu un radošu sabiedrību.",
+    "news": "Ziņas",
+    "partners": {
+      "cloudflare": "Darbojas ar Project Galileo",
+      "contentful": "Darbojas ar Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Konfidencialitātes paziņojums",
+    "supportingPartners": "Atbalsta tehniskie partneri",
+    "terms": "Noteikumi un politikas",
+    "translationInfo": "Automatizētie tulkojumi, izmantojot %1$s",
+    "translationService": "eTranslation pakalpojums"
+  },
   "nav": {
     "about": "Par mums",
     "close": "Aizvērt izvēlni",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Izpētiet datu telpu",
     "home": "Sākumlapa",
     "toggle": "Rādīt izvēlni"
-  }
+  },
+  "newWindow": "atveras jaunā logā"
 }

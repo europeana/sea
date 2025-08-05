@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Teave andmeruumi kohta",
+    "accessibility": "Juurdepääsetavus",
+    "cookies": "Küpsised",
+    "disclaimer": "Ühine Euroopa kultuuripärandi andmeruum on Euroopa Liidu algatus, mida rahastatakse Euroopa Liidu programmi Digitaalne Euroopa kaudu. Andmeruumi teenuseid, sealhulgas seda veebisaiti, haldab konsortsium, mida juhib Europeana Fond Euroopa Komisjoni teenuslepingu alusel, lepingu number LC-01901432.",
+    "events": "Sündmused",
+    "footer": "Jalus",
+    "help": "Abi",
+    "imageDescription": "Rahastab Euroopa Liit",
+    "info": "Rohkem infot",
+    "language": "Kohandage veebisaidi keelt",
+    "mission": "Meie missioon",
+    "missionStatement": "Andmeruumi kaudu võimestab Europeana kultuuripärandi sektorit selle digiüleminekul. Me arendame oskusteavet, tööriistu ja poliitikat, et toetada digitaalset muutust ning soodustada innovatsiooni edendavaid partnerlusi. Muudame inimestele kultuuripärandi kasutamise lihtsamaks hariduses, teaduses, loometöös ja vaba aja veetmisel. Meie töö aitab kaasa avatud, teadliku ja loova ühiskonna kujunemisele.",
+    "news": "Uudised",
+    "partners": {
+      "cloudflare": "Toetab Project Galileo",
+      "contentful": "Töötab Contentfuli toel",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privaatsusavaldus",
+    "supportingPartners": "Tehniliste partnerite toetamine",
+    "terms": "Tingimused ja eeskirjad",
+    "translationInfo": "Automaatsed tõlked kasutades %1$s",
+    "translationService": "eTranslation teenus"
+  },
   "nav": {
     "about": "Meist",
     "close": "Sule menüü",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Uuri andmeruumi",
     "home": "Avaleht",
     "toggle": "Kuva menüü"
-  }
+  },
+  "newWindow": "avaneb uues aknas"
 }
