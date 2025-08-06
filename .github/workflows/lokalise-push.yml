@@ -29,4 +29,5 @@ jobs:
           base_lang: en_GB
           flat_naming: true
           name_pattern: en.json
+          use_tag_tracking: true
           rambo_mode: ${{ inputs.force }}
