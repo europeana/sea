@@ -23,7 +23,11 @@ const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 </script>
 <template>
   <div>
-    <h1>{{ page.headline || route.fullPath }}</h1>
+    <LandingHero
+      :headline="page.headline || route.fullPath"
+      :text="page.text"
+      :hero-image="page.primaryImageOfPage"
+    />
     <PageSections :sections="sections" />
   </div>
 </template>

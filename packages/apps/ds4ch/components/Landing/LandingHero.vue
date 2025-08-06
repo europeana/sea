@@ -69,7 +69,7 @@ const imageCSSVars = computed(() => {
 
 const buttonClass = computed(() => {
   if (["highlight"].includes(props.heroImage?.profile?.background)) {
-    return "btn-primary";
+    return "btn-light";
   } else {
     return "btn-secondary";
   }

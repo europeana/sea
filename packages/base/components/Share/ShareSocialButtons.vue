@@ -45,7 +45,6 @@ const networks = computed(() => {
     <button
       v-for="(network, index) in networks"
       :key="index"
-      v-b-tooltip.bottom
       :title="network.tooltip || ''"
       :class="`social-share mr-2 ${network.identifier}`"
       :data-qa="`share ${network.identifier} button`"
