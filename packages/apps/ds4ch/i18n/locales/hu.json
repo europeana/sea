@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Alkotó:",
+    "institution": "Intézmény:",
+    "show": "Attribúció megjelenítése",
+    "title": "Cím:"
+  },
   "footer": {
     "about": "Az adattérről",
     "accessibility": "Akadálymentesség",

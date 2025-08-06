@@ -27,7 +27,7 @@
     "privacy": "Privacy statement",
     "supportingPartners": "Supporting technical partners",
     "terms": "Terms & Policies",
-    "translationInfo": "Automated translations using the {service}",
+    "translationInfo": "Automated translations using the %1$s",
     "translationService": "eTranslation Service"
   },
   "nav": {

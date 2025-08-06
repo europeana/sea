@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Ustvarjalec:",
+    "institution": "Ustanova:",
+    "show": "Prikaži navedbo vira",
+    "title": "Naslov:"
+  },
   "footer": {
     "about": "O podatkovnem prostoru",
     "accessibility": "Dostopnost",

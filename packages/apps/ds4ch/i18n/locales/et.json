@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Looja:",
+    "institution": "Institutsioon:",
+    "show": "Kuva atribuutika",
+    "title": "Pealkiri:"
+  },
   "footer": {
     "about": "Teave andmeruumi kohta",
     "accessibility": "Juurdepääsetavus",

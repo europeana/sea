@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Creator:",
+    "institution": "Instituție:",
+    "show": "Arată atribuirea",
+    "title": "Titlu:"
+  },
   "footer": {
     "about": "Despre spațiul de date",
     "accessibility": "Accesibilitate",

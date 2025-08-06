@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Autorius:",
+    "institution": "Įstaiga:",
+    "show": "Rodyti priskyrimą",
+    "title": "Pavadinimas:"
+  },
   "footer": {
     "about": "Apie duomenų erdvę",
     "accessibility": "Prieinamumas",

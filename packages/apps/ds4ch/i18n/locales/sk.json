@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Autor:",
+    "institution": "Inštitúcia:",
+    "show": "Zobraziť atribút",
+    "title": "Názov:"
+  },
   "footer": {
     "about": "O dátovom priestore",
     "accessibility": "Prístupnosť",

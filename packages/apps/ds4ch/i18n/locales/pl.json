@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Twórca:",
+    "institution": "Instytucja:",
+    "show": "Pokaż atrybucję",
+    "title": "Tytuł:"
+  },
   "footer": {
     "about": "O przestrzeni danych",
     "accessibility": "Dostępność",

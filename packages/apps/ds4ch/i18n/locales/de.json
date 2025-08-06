@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Urheber:",
+    "institution": "Institution:",
+    "show": "Namensnennung anzeigen",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Über den Datenraum",
     "accessibility": "Barrierefreiheit",

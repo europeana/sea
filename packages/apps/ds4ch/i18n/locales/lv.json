@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Autors:",
+    "institution": "Iestāde:",
+    "show": "Rādīt attiecinājumu",
+    "title": "Nosaukums:"
+  },
   "footer": {
     "about": "Par datu telpu",
     "accessibility": "Pieejamība",

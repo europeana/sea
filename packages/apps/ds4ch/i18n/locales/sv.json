@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Skapare:",
+    "institution": "Institution:",
+    "show": "Visa attribution",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Om datarummet",
     "accessibility": "Tillgänglighet",

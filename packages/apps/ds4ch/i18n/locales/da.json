@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Oprettet af:",
+    "institution": "Institution:",
+    "show": "Vis tilskrivning",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Om dataområdet",
     "accessibility": "Tilgængelighed",
