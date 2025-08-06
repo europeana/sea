@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Maidir leis an spás sonraí",
+    "accessibility": "Inrochtaineacht",
+    "cookies": "Fianáin",
+    "disclaimer": "Is tionscnamh de chuid an Aontais Eorpaigh é an spás sonraí Eorpach coiteann d'oidhreacht chultúrtha, atá maoinithe ag Clár Dhigiteach na hEorpa de chuid an Aontais Eorpaigh. Tá na seirbhísí spáis sonraí, lena n-áirítear an suíomh gréasáin seo, á n-oibriú ag comhaontas faoi cheannaireacht Fhondúireacht Europeana faoi chonradh seirbhíse leis an gCoimisiún Eorpach, uimhir chonartha LC-01901432.",
+    "events": "Imeachtaí",
+    "footer": "Buntásc",
+    "help": "Cabhair",
+    "imageDescription": "Maoinithe ag an Aontas Eorpach",
+    "info": "Tuilleadh eolais",
+    "language": "Saincheap teanga na láithreáin ghréasáin",
+    "mission": "Ár Misean",
+    "missionStatement": "Trí spás sonraí, tugann Europeana cumhacht don earnáil oidhreachta cultúrtha ina claochlú digiteach. Forbraímid saineolas, uirlisí agus beartais chun glactha le hathrú digiteach agus spreagaimid comhpháirtíochtaí a chothaíonn nuálaíocht. Déanaimid é níos fusa do dhaoine oidhreacht chultúrtha a úsáid le haghaidh oideachais, taighde, cruthaitheachta agus caitheamh aimsire. Cuireann ár gcuid oibre le sochaí oscailte, eolach agus chruthaitheach.",
+    "news": "Nuacht",
+    "partners": {
+      "cloudflare": "Cumhachtaithe ag Project Galileo",
+      "contentful": "Cumhachtaithe ag Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Ráiteas príobháideachta",
+    "supportingPartners": "Tacú le comhpháirtithe teicniúla",
+    "terms": "Téarmaí & Beartais",
+    "translationInfo": "Aistriúcháin uathoibrithe ag úsáid na seirbhíse %1$s",
+    "translationService": "Seirbhís eAistriúcháin"
+  },
   "nav": {
     "about": "Fúinn",
     "close": "Dún roghchlár",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Déan iniúchadh ar an spás sonraí",
     "home": "Baile",
     "toggle": "Taispeáin roghchlár"
-  }
+  },
+  "newWindow": "osclaíonn i bhfuinneog nua"
 }

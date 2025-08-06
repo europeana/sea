@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Tietoa data-avaruudesta",
+    "accessibility": "Saavutettavuus",
+    "cookies": "Evästeet",
+    "disclaimer": "Kulttuuriperinnön yhteinen eurooppalainen data-avaruus on Euroopan unionin aloite, jota rahoitetaan Euroopan unionin Digitaalinen Eurooppa -ohjelmasta. Data-avaruuspalveluja, mukaan lukien tämä verkkosivusto, ylläpitää Europeana-säätiön johtama konsortio Euroopan komission kanssa tehdyn palvelusopimuksen nojalla, sopimusnumero LC-01901432.",
+    "events": "Tapahtumat",
+    "footer": "Alatunniste",
+    "help": "Apua",
+    "imageDescription": "Euroopan unionin rahoittama",
+    "info": "Lisätietoja",
+    "language": "Muokkaa verkkosivuston kieltä",
+    "mission": "Tehtävämme",
+    "missionStatement": "Datatilan kautta Europeana tukee kulttuuriperintösektoria sen digitaalisessa muutoksessa. Kehitämme asiantuntemusta, työkaluja ja politiikkoja digitaalisen muutoksen omaksumiseen sekä kannustamme kumppanuuksiin, jotka edistävät innovaatioita. Teemme kulttuuriperinnön hyödyntämisestä helpompaa opetuksessa, tutkimuksessa, luovassa työssä ja virkistyksessä. Työmme edistää avointa, sivistynyttä ja luovaa yhteiskuntaa.",
+    "news": "Uutiset",
+    "partners": {
+      "cloudflare": "Voimanlähteenä Project Galileo",
+      "contentful": "Contentfulin tarjoama",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Tietosuojaseloste",
+    "supportingPartners": "Teknisten kumppanien tukeminen",
+    "terms": "Ehdot ja käytännöt",
+    "translationInfo": "Automaattiset käännökset käyttäen %1$s",
+    "translationService": "eTranslation-palvelu"
+  },
   "nav": {
     "about": "Tietoa meistä",
     "close": "Sulje valikko",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Tutustu dataspaceen",
     "home": "Etusivu",
     "toggle": "Näytä valikko"
-  }
+  },
+  "newWindow": "avautuu uuteen ikkunaan"
 }

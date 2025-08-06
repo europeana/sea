@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "Apie duomenų erdvę",
+    "accessibility": "Prieinamumas",
+    "cookies": "Slapukai",
+    "disclaimer": "Europos bendra kultūros paveldo duomenų erdvė yra Europos Sąjungos iniciatyva, finansuojama pagal Europos Sąjungos Skaitmeninės Europos programą. Duomenų erdvės paslaugas, įskaitant šią interneto svetainę, teikia Europeana fondo vadovaujamas konsorciumas pagal paslaugų sutartį su Europos Komisija, sutarties numeris LC-01901432.",
+    "events": "Renginiai",
+    "footer": "Poraštė",
+    "help": "Pagalba",
+    "imageDescription": "Finansuoja Europos Sąjunga",
+    "info": "Daugiau informacijos",
+    "language": "Pasirinkti tinklalapio kalbą",
+    "mission": "Mūsų misija",
+    "missionStatement": "Per duomenų erdvę „Europeana“ suteikia galimybę kultūros paveldo sektoriui skaitmeninės transformacijos procese. Mes kuriame kompetencijas, įrankius ir politiką, kad būtų lengviau priimti skaitmeninius pokyčius ir skatinti partnerystes, kurios skatina inovacijas. Mes palengviname žmonėms galimybę naudotis kultūros paveldu švietimui, moksliniams tyrimams, kūrybai ir laisvalaikiui. Mūsų veikla prisideda prie atviros, žiniomis grįstos ir kūrybingos visuomenės kūrimo.",
+    "news": "Naujienos",
+    "partners": {
+      "cloudflare": "Veikia su Project Galileo",
+      "contentful": "Veikia su Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privatumo pareiškimas",
+    "supportingPartners": "Techninių partnerių palaikymas",
+    "terms": "Sąlygos ir politika",
+    "translationInfo": "Automatiniai vertimai naudojant %1$s",
+    "translationService": "eVertimo paslauga"
+  },
   "nav": {
     "about": "Apie mus",
     "close": "Uždaryti meniu",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Naršykite duomenų erdvę",
     "home": "Pradžia",
     "toggle": "Rodyti meniu"
-  }
+  },
+  "newWindow": "atsidaro naujame lange"
 }

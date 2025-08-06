@@ -1,4 +1,29 @@
 {
+  "footer": {
+    "about": "O podatkovnom prostoru",
+    "accessibility": "Pristupačnost",
+    "cookies": "Kolačići",
+    "disclaimer": "Zajednički europski podatkovni prostor za kulturnu baštinu inicijativa je Europske unije koja se financira iz programa Europske unije Digitalna Europa. Uslugama podatkovnog prostora, uključujući ovu internetsku stranicu, upravlja konzorcij pod vodstvom Zaklade Europeana na temelju ugovora o uslugama s Europskom komisijom, broj ugovora LC-01901432.",
+    "events": "Događaji",
+    "footer": "Podnožje",
+    "help": "Pomoć",
+    "imageDescription": "Financira Europska unija",
+    "info": "Više informacija",
+    "language": "Prilagodite jezik internetske stranice",
+    "mission": "Naša misija",
+    "missionStatement": "Kroz podatkovni prostor Europeana osnažuje sektor kulturne baštine u njegovoj digitalnoj transformaciji. Razvijamo stručnost, alate i politike kako bismo prihvatili digitalne promjene i potaknuli partnerstva koja potiču inovacije. Olakšavamo ljudima korištenje kulturne baštine za obrazovanje, istraživanje, stvaranje i rekreaciju. Naš rad doprinosi otvorenom, informiranom i kreativnom društvu.",
+    "news": "Vijesti",
+    "partners": {
+      "cloudflare": "Pokreće Project Galileo",
+      "contentful": "Pokreće Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Izjava o privatnosti",
+    "supportingPartners": "Podrška tehničkim partnerima",
+    "terms": "Uvjeti i politike",
+    "translationInfo": "Automatizirani prijevodi pomoću %1$s",
+    "translationService": "eTranslation usluga"
+  },
   "nav": {
     "about": "O nama",
     "close": "Zatvori izbornik",
@@ -6,5 +31,6 @@
     "exploreDataspace": "Istražite podatkovni prostor",
     "home": "Početna",
     "toggle": "Prikaži izbornik"
-  }
+  },
+  "newWindow": "otvara se u novom prozoru"
 }
