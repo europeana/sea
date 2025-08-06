@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Създател:",
+    "institution": "Институция:",
+    "show": "Показване на атрибуция",
+    "title": "Заглавие:"
+  },
   "footer": {
     "about": "Относно пространството за данни",
     "accessibility": "Достъпност",
@@ -21,7 +27,7 @@
     "privacy": "Политика за поверителност",
     "supportingPartners": "Подкрепа на технически партньори",
     "terms": "Условия и политики",
-    "translationInfo": "Автоматизирани преводи с помощта на %1$s",
+    "translationInfo": "Автоматизирани преводи с помощта на {service}",
     "translationService": "Услуга eTranslation"
   },
   "nav": {

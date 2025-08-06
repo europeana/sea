@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Twórca:",
+    "institution": "Instytucja:",
+    "show": "Pokaż atrybucję",
+    "title": "Tytuł:"
+  },
   "footer": {
     "about": "O przestrzeni danych",
     "accessibility": "Dostępność",
@@ -21,7 +27,7 @@
     "privacy": "Polityka prywatności",
     "supportingPartners": "Wspieranie partnerów technicznych",
     "terms": "Warunki i zasady",
-    "translationInfo": "Automatyczne tłumaczenia przy użyciu %1$s",
+    "translationInfo": "Automatyczne tłumaczenia przy użyciu {service}",
     "translationService": "Usługa eTranslation"
   },
   "nav": {

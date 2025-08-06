@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Autorius:",
+    "institution": "Įstaiga:",
+    "show": "Rodyti priskyrimą",
+    "title": "Pavadinimas:"
+  },
   "footer": {
     "about": "Apie duomenų erdvę",
     "accessibility": "Prieinamumas",
@@ -21,7 +27,7 @@
     "privacy": "Privatumo pareiškimas",
     "supportingPartners": "Techninių partnerių palaikymas",
     "terms": "Sąlygos ir politika",
-    "translationInfo": "Automatiniai vertimai naudojant %1$s",
+    "translationInfo": "Automatiniai vertimai naudojant {service}",
     "translationService": "eVertimo paslauga"
   },
   "nav": {
