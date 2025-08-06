@@ -30,6 +30,19 @@ query LandingPage(
           ... on TestimonialCardGroup {
             ...testimonialCardGroupFields
           }
+          ... on LandingSubSection {
+            name
+            nameEN: name(locale: "en-GB")
+            text
+            hasPartCollection(limit: 6) {
+              items {
+                __typename
+                ... on ImageCard {
+                  ...imageCardFields
+                }
+              }
+            }
+          }
         }
       }
     }
