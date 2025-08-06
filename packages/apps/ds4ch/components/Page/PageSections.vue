@@ -55,6 +55,13 @@ const getClasses = (section) => {
       :link="section.relatedLink"
       :background-image="section.image"
     />
+    <LandingSubSection
+      v-else-if="contentfulEntryHasContentType(section, 'LandingSubSection')"
+      :title="section.name"
+      :text="section.text"
+      :sections="section.hasPartCollection && section.hasPartCollection.items"
+      image-card-cta-classes="btn-primary icon-chevron"
+    />
   </div>
 </template>
 <style lang="scss">

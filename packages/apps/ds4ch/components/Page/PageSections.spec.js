@@ -7,6 +7,7 @@ const props = {
     { __typename: "ImageCard", nameEN: "about us" },
     { __typename: "PrimaryCallToAction", nameEN: "Use APIs" },
     { __typename: "TestimonialCardGroup", nameEN: "Testimonial quotes" },
+    { __typename: "LandingSubSection", nameEN: "Landing Sub-Section" },
   ],
 };
 
@@ -41,6 +42,15 @@ describe("components/Page/PageSections", () => {
       const wrapper = shallowMount(PageSections, { props });
 
       const cardGroup = wrapper.find("card-group-stub");
+
+      expect(cardGroup.exists()).toBe(true);
+    });
+  });
+  describe("landing sub-sections", () => {
+    it("renders the section as a landing sub section", () => {
+      const wrapper = shallowMount(PageSections, { props });
+
+      const cardGroup = wrapper.find("landing-sub-section-stub");
 
       expect(cardGroup.exists()).toBe(true);
     });
