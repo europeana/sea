@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Luoja:",
+    "institution": "kulttuuriperintölaitos:",
+    "show": "Näytä attribuutio",
+    "title": "Otsikko:"
+  },
   "footer": {
     "about": "Tietoa data-avaruudesta",
     "accessibility": "Saavutettavuus",
@@ -21,7 +27,7 @@
     "privacy": "Tietosuojaseloste",
     "supportingPartners": "Teknisten kumppanien tukeminen",
     "terms": "Ehdot ja käytännöt",
-    "translationInfo": "Automaattiset käännökset käyttäen %1$s",
+    "translationInfo": "Automaattiset käännökset käyttäen {service}",
     "translationService": "eTranslation-palvelu"
   },
   "nav": {

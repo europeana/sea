@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Ustvarjalec:",
+    "institution": "Ustanova:",
+    "show": "Prikaži navedbo vira",
+    "title": "Naslov:"
+  },
   "footer": {
     "about": "O podatkovnem prostoru",
     "accessibility": "Dostopnost",
@@ -21,7 +27,7 @@
     "privacy": "Izjava o zasebnosti",
     "supportingPartners": "Podpora tehničnim partnerjem",
     "terms": "Pogoji in pravilniki",
-    "translationInfo": "Samodejni prevodi z uporabo %1$s",
+    "translationInfo": "Samodejni prevodi z uporabo {service}",
     "translationService": "Storitev eTranslation"
   },
   "nav": {

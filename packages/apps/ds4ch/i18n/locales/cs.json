@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Tvůrce:",
+    "institution": "Instituce:",
+    "show": "Zobrazit atribuci",
+    "title": "Název:"
+  },
   "footer": {
     "about": "O datovém prostoru",
     "accessibility": "Přístupnost",
@@ -21,7 +27,7 @@
     "privacy": "Prohlášení o ochraně osobních údajů",
     "supportingPartners": "Podpora technických partnerů",
     "terms": "Podmínky a zásady",
-    "translationInfo": "Automatizované překlady pomocí %1$s",
+    "translationInfo": "Automatizované překlady pomocí {service}",
     "translationService": "Služba eTranslation"
   },
   "nav": {

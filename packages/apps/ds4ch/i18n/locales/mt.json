@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Kreatur:",
+    "institution": "Istituzzjoni:",
+    "show": "Uri l-attribuzzjoni",
+    "title": "Titlu:"
+  },
   "footer": {
     "about": "Dwar l-ispazju tad-dejta",
     "accessibility": "Aċċessibilità",
@@ -21,7 +27,7 @@
     "privacy": "Dikjarazzjoni tal-privatezza",
     "supportingPartners": "Appoġġ għall-imsieħba tekniċi",
     "terms": "Termini u Politiki",
-    "translationInfo": "Traduzzjonijiet awtomatizzati bl-użu ta' %1$s",
+    "translationInfo": "Traduzzjonijiet awtomatizzati bl-użu ta' {service}",
     "translationService": "Servizz ta' Traduzzjoni Elettronika"
   },
   "nav": {
