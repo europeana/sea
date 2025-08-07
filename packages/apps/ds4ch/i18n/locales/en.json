@@ -5,6 +5,10 @@
     "show": "Show attribution",
     "title": "Title:"
   },
+  "authored": {
+    "by": "by",
+    "publishedDate": "Published {date}"
+  },
   "footer": {
     "about": "About the data space",
     "accessibility": "Accessibility",
@@ -38,5 +42,6 @@
     "home": "Home",
     "toggle": "Show menu"
   },
+  "news": "News",
   "newWindow": "opens in new window"
 }
