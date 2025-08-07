@@ -13,7 +13,7 @@ defineProps({
     class="btn share-button d-inline-flex align-items-center"
     :class="variant"
   >
-    <span class="icon-share d-inline-flex pr-1" />
+    <span class="icon-share d-inline-flex me-1 me-4k-3" />
     {{ $t("actions.share") }}
   </button>
 </template>
