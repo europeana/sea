@@ -20,10 +20,87 @@ const { data: page } = await useAsyncData(
 );
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+
+const authors =
+  page.value.authorCollection?.items.length > 0
+    ? page.value.authorCollection.items
+    : null;
 </script>
 <template>
-  <div>
-    <h1>{{ page.name || route.fullPath }}</h1>
-    {{ sections }}
+  <div class="page text-page">
+    <AuthoredHead
+      :title="page.name"
+      :description="page.introduction"
+      :hero="page.primaryImageOfPage"
+      :context-label="$t('news')"
+    />
+    <div class="container footer-margin">
+      <div class="row justify-content-center">
+        <div class="col col-12 col-lg-8">
+          <article>
+            <!-- eslint-disable vue/no-v-html -->
+            <div class="published fw-bold d-block">
+              <time
+                v-if="page.datePublished"
+                class="d-inline-block"
+                data-qa="date"
+                :datetime="page.datePublished"
+              >
+                {{
+                  $t("authored.publishedDate", {
+                    date: $d(
+                      new Date(page.datePublished),
+                      "short",
+                      localeProperties.language,
+                    ),
+                  })
+                }}
+              </time>
+              <span v-if="authors">
+                {{ ` ${$t("authored.by")} ` }}
+              </span>
+              <template v-for="(author, index) in authors" :key="index">
+                <BlogAuthor
+                  class="author d-inline"
+                  :name="author.name"
+                  :organisation="author.affiliation"
+                  :url="author.url"
+                />
+              </template>
+            </div>
+            <div class="my-4 d-flex align-items-center">
+              <!-- TODO: add Share component -->
+              <!-- <ShareButton class="mr-4" />
+              <ShareSocialModal :media-url="hero ? hero.image.url : null" /> -->
+            </div>
+            <div class="authored-section">
+              <ContentSection
+                v-for="(section, index) in sections"
+                :key="index"
+                :section="section"
+                :rich-text-is-card="false"
+                data-qa="blog-sections"
+              />
+            </div>
+            <!-- eslint-enable vue/no-v-html -->
+          </article>
+          <!-- TODO: add tags -->
+          <!-- <RelatedCategoryTags
+            v-if="tags?.length"
+            :tags="tags"
+            class="related-container"
+          /> -->
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "@europeana/style/scss/variables";
+@import "assets/scss/variables";
+
+.published {
+  font-size: $font-size-base;
+}
+</style>
