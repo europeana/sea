@@ -18,6 +18,10 @@ query LandingPage(
       identifier
       name
       headline
+      text
+      primaryImageOfPage {
+        ...landingPageImageWithAttributionFields
+      }
       hasPartCollection(limit: 20) {
         items {
           __typename

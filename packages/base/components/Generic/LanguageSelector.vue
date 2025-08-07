@@ -18,11 +18,7 @@ const selectedLocale = computed(() => {
 
 <template>
   <div class="dropdown" variant="light">
-    <button
-      class="btn btn-light dropdown-toggle"
-      type="button"
-      data-bs-toggle="dropdown"
-    >
+    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
       <span class="icon-language me-2" />
       {{ selectedLocale }}
     </button>
