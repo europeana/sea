@@ -40,6 +40,10 @@ query LandingPage(
                 ... on ImageCard {
                   ...imageCardFields
                 }
+                __typename
+                ... on AutomatedCardGroup {
+                  genre
+                }
               }
             }
           }
