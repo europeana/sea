@@ -6,6 +6,10 @@ h3 {
   @extend %title-3;
 }
 
+h5 {
+  @extend %title-5;
+}
+
 .label-uppercase {
   font-family: $font-family-montserrat;
   font-size: $font-size-12;

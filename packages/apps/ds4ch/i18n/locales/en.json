@@ -30,6 +30,15 @@
     "translationInfo": "Automated translations using the {service}",
     "translationService": "eTranslation Service"
   },
+  "landing": {
+    "counts": {
+      "items": "Items",
+      "networkMembers": "Network members",
+      "dataProviders": "Providing Institutions",
+      "hqData": "Increase in hihg-quality data per year",
+      "apiRequests": "Monthly Api Requests, on average"
+    }
+  },
   "nav": {
     "about": "About us",
     "close": "Close menu",

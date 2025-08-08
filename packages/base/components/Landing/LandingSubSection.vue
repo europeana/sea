@@ -56,6 +56,10 @@ defineProps({
           title-tag="h3"
           :cta-classes="imageCardCtaClasses"
         />
+        <LandingAutomatedCardGroup
+          v-if="contentfulEntryHasContentType(section, 'AutomatedCardGroup')"
+          :genre="section.genre"
+        />
       </div>
     </div>
   </div>

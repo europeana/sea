@@ -18,7 +18,7 @@ const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 </script>
 
 <template>
-  <div>
+  <div class="home-page">
     <h1>{{ page.headline }}</h1>
     <PageSections :sections="sections" />
   </div>
