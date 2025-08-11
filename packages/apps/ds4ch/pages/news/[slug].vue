@@ -38,6 +38,7 @@ const authors =
       <div class="row justify-content-center">
         <div class="col col-12 col-lg-8">
           <article>
+            <!-- TODO: create separate component for 'published ... by ...' -->
             <!-- eslint-disable vue/no-v-html -->
             <div class="published fw-bold d-block">
               <time

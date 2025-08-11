@@ -23,7 +23,7 @@ const props = defineProps({
 });
 
 let embedCode = props.html;
-let widthWrapper = 0;
+const widthWrapper = ref(0);
 
 const heightAsPercentOfWidth = computed(() => {
   return (props.height * 100) / props.width;
@@ -48,7 +48,7 @@ onMounted(() => {
 const setWidthWrapper = () => {
   if (responsiveWrapperTemplateRef.value) {
     const wrapperHeight = responsiveWrapperTemplateRef.value.clientHeight;
-    widthWrapper = (props.width * wrapperHeight) / props.height;
+    widthWrapper.value = (props.width * wrapperHeight) / props.height;
   }
 };
 

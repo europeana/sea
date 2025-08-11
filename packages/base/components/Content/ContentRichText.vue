@@ -25,9 +25,11 @@ const html = computed(() => marked.parse(props.text));
   >
     <div class="col col-12" :class="richTextIsCard ? 'col-lg-6' : 'col-lg-9'">
       <div v-if="html && richTextIsCard" class="card">
-        <!-- eslint-disable vue/no-v-html -->
-        <div v-html="html" />
-        <!-- eslint-enable vue/no-v-html -->
+        <div class="card-body">
+          <!-- eslint-disable vue/no-v-html -->
+          <div v-html="html" />
+          <!-- eslint-enable vue/no-v-html -->
+        </div>
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <div v-else-if="html && !richTextIsCard" v-html="html" />
