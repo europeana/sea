@@ -18,23 +18,18 @@ const props = defineProps({
     default: null,
   },
   /**
-   * CTA button to link to a URL or section of the page
-   */
-  // cta: {
-  // type: Object,
-  // default: null
-  // },
-  // ctaHelpText: {
-  // type: String,
-  // default: null
-  // },
-  /**
    * Image used as a background - no attribution.
-   * May contain a display profile in order to
-   * change text and share button style/colour.
    */
   heroImage: {
     type: Object,
+    default: null,
+  },
+  /**
+   * Variant to determine alternate styling for text/button colours.
+   * @values highlight
+   */
+  variant: {
+    type: String,
     default: null,
   },
 });
@@ -68,7 +63,7 @@ const imageCSSVars = computed(() => {
 });
 
 const buttonClass = computed(() => {
-  if (props.heroImage?.profile?.background === "highlight") {
+  if (props.variant === "highlight") {
     return "btn-light";
   } else {
     return "btn-secondary";
@@ -89,9 +84,7 @@ const buttonClass = computed(() => {
         <div class="col col-12 col-lg-7">
           <header
             class="hero-content"
-            :class="
-              heroImage?.profile?.background === 'highlight' ? 'text-white' : ''
-            "
+            :class="variant === 'highlight' ? 'text-white' : ''"
           >
             <!-- eslint-disable vue/no-v-html -->
             <div v-html="parseMarkdown(`# ${headline}\n${text}`)" />

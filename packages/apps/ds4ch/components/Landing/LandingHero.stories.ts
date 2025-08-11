@@ -23,28 +23,13 @@ export const Default: Story = {
   },
 };
 
-export const Alternate: Story = {
-  args: {
-    headline: "Hero title",
-    text: "This is a landing hero _with_ *markup* and a [link](https://www.europeana.eu)!",
-    heroImage: {
-      ...sampleData.backgroundImages[2],
-      profile: {
-        background: "alternate",
-      },
-    },
-  },
-};
-
 export const Highlight: Story = {
   args: {
     headline: "Hero title",
     text: "This is a landing hero _with_ *markup* and a [link](https://www.europeana.eu)!",
     heroImage: {
       ...sampleData.backgroundImages[1],
-      profile: {
-        background: "highlight",
-      },
     },
+    variant: "highlight",
   },
 };
