@@ -135,10 +135,11 @@ const findAndReappendScripts = () => {
 }
 
 .responsive-embed-wrapper {
-  @include media-viewer-height;
   margin: 0 auto;
   width: 100%;
   max-width: 100%;
+
+  @include media-viewer-height;
 
   .html-embed {
     display: block;

@@ -13,9 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: "Title of an authored piece of content",
-    subtitle: "This is a subtitle of an authored piece of content",
-    description:
-      "This is a description of an authored piece of content. It will substitute the subtitle when not present. Otherwise it is not displayed, but used for SEO.",
+    description: "This is a description of an authored piece of content.",
     hero: sampleData.imagesWithAttribution[0],
     contextLabel: "label",
   },

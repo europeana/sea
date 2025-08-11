@@ -7,11 +7,6 @@ const props = defineProps({
     required: true,
   },
 
-  subtitle: {
-    type: String,
-    default: "",
-  },
-
   description: {
     type: String,
     default: "",
@@ -51,11 +46,6 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
             <h1 class="mb-2">
               {{ title }}
             </h1>
-            <p
-              v-if="subtitle || description"
-              class="subtitle mb-2"
-              v-html="parseMarkdown(subtitle || description)"
-            />
           </div>
         </article>
       </div>
@@ -71,6 +61,17 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
           :alt="heroImageAlt"
           hero
         />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col col-12 col-lg-8 mb-3 mb-lg-4">
+        <!-- eslint-disable vue/no-v-html -->
+        <div
+          v-if="description"
+          class="subtitle mb-2"
+          v-html="parseMarkdown(description)"
+        />
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </div>
