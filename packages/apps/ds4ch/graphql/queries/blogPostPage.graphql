@@ -19,6 +19,12 @@ query BlogPostPage(
       introduction
       datePublished
       relatedLink
+      associatedMediaCollection {
+        items {
+          url
+          title
+        }
+      }
       categoriesCollection {
         items {
           name

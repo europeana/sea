@@ -27,7 +27,7 @@ const authors =
     : null;
 </script>
 <template>
-  <div class="page text-page">
+  <div class="page text-page mb-5">
     <AuthoredHead
       :title="page.name"
       :description="page.introduction"
@@ -74,7 +74,7 @@ const authors =
               <!-- <ShareButton class="mr-4" />
               <ShareSocialModal :media-url="hero ? hero.image.url : null" /> -->
             </div>
-            <div class="authored-section">
+            <div class="authored-section mb-5">
               <ContentSection
                 v-for="(section, index) in sections"
                 :key="index"
@@ -84,6 +84,21 @@ const authors =
               />
             </div>
             <!-- eslint-enable vue/no-v-html -->
+            <!-- TODO: create separate component -->
+            <div>
+              <NuxtLink
+                v-for="(attachment, index) in page.associatedMediaCollection
+                  ?.items"
+                :key="index"
+                class="btn btn-secondary mb-3"
+                target="_blank"
+                :download="true"
+                :to="attachment.url"
+              >
+                <span class="icon-ic-download text-white me-2"></span>
+                {{ attachment.title }}
+              </NuxtLink>
+            </div>
           </article>
           <!-- TODO: add tags -->
           <!-- <RelatedCategoryTags
