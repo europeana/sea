@@ -32,6 +32,9 @@ export default defineNuxtConfig({
       },
       internalLinkDomain: "",
     },
+    redis: {
+      url: null,
+    },
   },
   i18n: {
     bundle: {
