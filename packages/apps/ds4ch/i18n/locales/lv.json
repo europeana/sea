@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Autors:",
+    "institution": "Iestāde:",
+    "show": "Rādīt attiecinājumu",
+    "title": "Nosaukums:"
+  },
   "footer": {
     "about": "Par datu telpu",
     "accessibility": "Pieejamība",
@@ -21,7 +27,7 @@
     "privacy": "Konfidencialitātes paziņojums",
     "supportingPartners": "Atbalsta tehniskie partneri",
     "terms": "Noteikumi un politikas",
-    "translationInfo": "Automatizētie tulkojumi, izmantojot %1$s",
+    "translationInfo": "Automatizētie tulkojumi, izmantojot {service}",
     "translationService": "eTranslation pakalpojums"
   },
   "nav": {

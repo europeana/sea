@@ -119,15 +119,19 @@ const sections = {
             </ul>
           </div>
           <div
-            class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-2 order-wqhd-3"
+            class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-2 order-wqhd-3 d-flex flex-column"
           >
-            <h3 class="label-uppercase">
+            <h3 class="label-uppercase d-inline-block">
               {{ $t(sections.language.header) }}
             </h3>
             <GenericLanguageSelector />
             <span class="info-text d-inline-flex mt-1 mt-4k-2">
               <span class="icon-automated mt-1 mt-4k-2 me-2 me-4k-3" />
-              <i18n-t :keypath="sections.language.links[0].text" tag="span">
+              <i18n-t
+                :keypath="sections.language.links[0].text"
+                tag="span"
+                class="info-text-text"
+              >
                 <template #service>
                   <GenericSmartLink
                     :destination="sections.language.links[0].url"
@@ -193,6 +197,14 @@ hr {
 }
 
 .footer-section {
+  &.d-flex.flex-column {
+    width: auto;
+
+    @media (min-width: $bp-small) {
+      max-width: 50%;
+    }
+  }
+
   h3.label-uppercase {
     font-size: $font-size-14;
 
@@ -222,12 +234,10 @@ hr {
   color: $middlegrey;
   font-size: $font-size-12;
   margin-bottom: 2rem;
-  max-width: 13rem;
 
   @media (min-width: $bp-4k) {
     font-size: $font-size-24;
     margin-bottom: 4rem;
-    max-width: 26rem;
   }
 
   .icon-automated {
@@ -236,6 +246,11 @@ hr {
     @media (min-width: $bp-4k) {
       font-size: $font-size-40;
     }
+  }
+
+  .info-text-text {
+    width: 0;
+    flex-grow: 1;
   }
 
   a {

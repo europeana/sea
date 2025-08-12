@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Looja:",
+    "institution": "Institutsioon:",
+    "show": "Kuva atribuutika",
+    "title": "Pealkiri:"
+  },
   "footer": {
     "about": "Teave andmeruumi kohta",
     "accessibility": "Juurdepääsetavus",
@@ -21,7 +27,7 @@
     "privacy": "Privaatsusavaldus",
     "supportingPartners": "Tehniliste partnerite toetamine",
     "terms": "Tingimused ja eeskirjad",
-    "translationInfo": "Automaatsed tõlked kasutades %1$s",
+    "translationInfo": "Automaatsed tõlked kasutades {service}",
     "translationService": "eTranslation teenus"
   },
   "nav": {

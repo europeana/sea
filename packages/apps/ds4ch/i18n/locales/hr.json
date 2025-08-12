@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Stvorio\/la:",
+    "institution": "Institucija:",
+    "show": "Prikaži atribuciju",
+    "title": "Naslov:"
+  },
   "footer": {
     "about": "O podatkovnom prostoru",
     "accessibility": "Pristupačnost",
@@ -21,7 +27,7 @@
     "privacy": "Izjava o privatnosti",
     "supportingPartners": "Podrška tehničkim partnerima",
     "terms": "Uvjeti i politike",
-    "translationInfo": "Automatizirani prijevodi pomoću %1$s",
+    "translationInfo": "Automatizirani prijevodi pomoću {service}",
     "translationService": "eTranslation usluga"
   },
   "nav": {

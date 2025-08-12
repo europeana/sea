@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Creator:",
+    "institution": "Instituție:",
+    "show": "Arată atribuirea",
+    "title": "Titlu:"
+  },
   "footer": {
     "about": "Despre spațiul de date",
     "accessibility": "Accesibilitate",
@@ -21,7 +27,7 @@
     "privacy": "Declarație de confidențialitate",
     "supportingPartners": "Sprijinirea partenerilor tehnici",
     "terms": "Termeni și politici",
-    "translationInfo": "Traduceri automate folosind %1$s",
+    "translationInfo": "Traduceri automate folosind {service}",
     "translationService": "Serviciul eTranslation"
   },
   "nav": {

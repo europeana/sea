@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Skapare:",
+    "institution": "Institution:",
+    "show": "Visa attribution",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Om datarummet",
     "accessibility": "Tillgänglighet",
@@ -21,7 +27,7 @@
     "privacy": "Integritetspolicy",
     "supportingPartners": "Stödja tekniska partners",
     "terms": "Villkor och policyer",
-    "translationInfo": "Automatiska översättningar med hjälp av %1$s",
+    "translationInfo": "Automatiska översättningar med hjälp av {service}",
     "translationService": "tjänsten eTranslation"
   },
   "nav": {

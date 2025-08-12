@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Alkotó:",
+    "institution": "Intézmény:",
+    "show": "Attribúció megjelenítése",
+    "title": "Cím:"
+  },
   "footer": {
     "about": "Az adattérről",
     "accessibility": "Akadálymentesség",
@@ -21,7 +27,7 @@
     "privacy": "Adatvédelmi nyilatkozat",
     "supportingPartners": "Technikai támogató partnereink",
     "terms": "Felhasználási feltételek és szabályzatok",
-    "translationInfo": "Automatikus fordítások a %1$s használatával",
+    "translationInfo": "Automatikus fordítások a {service} használatával",
     "translationService": "eTranslation szolgáltatás"
   },
   "nav": {

@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Maker:",
+    "institution": "Instelling:",
+    "show": "Toon toeschrijving",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Over de dataspace",
     "accessibility": "Toegankelijkheid",
@@ -21,7 +27,7 @@
     "privacy": "Privacyverklaring",
     "supportingPartners": "Ondersteunende technische partners",
     "terms": "Voorwaarden en beleid",
-    "translationInfo": "Geautomatiseerde vertalingen met behulp van de %1$s",
+    "translationInfo": "Geautomatiseerde vertalingen met behulp van de {service}",
     "translationService": "eTranslation Service"
   },
   "nav": {

@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Δημιουργός:",
+    "institution": "Ίδρυμα:",
+    "show": "Εμφάνιση απόδοσης",
+    "title": "Τίτλος:"
+  },
   "footer": {
     "about": "Σχετικά με τον χώρο δεδομένων",
     "accessibility": "Προσβασιμότητα",
@@ -21,7 +27,7 @@
     "privacy": "Δήλωση απορρήτου",
     "supportingPartners": "Υποστηρίζοντας τεχνικούς συνεργάτες",
     "terms": "Όροι & Πολιτικές",
-    "translationInfo": "Αυτόματες μεταφράσεις με χρήση του %1$s",
+    "translationInfo": "Αυτόματες μεταφράσεις με χρήση του {service}",
     "translationService": "Υπηρεσία eTranslation"
   },
   "nav": {

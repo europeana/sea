@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Urheber:",
+    "institution": "Institution:",
+    "show": "Namensnennung anzeigen",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Über den Datenraum",
     "accessibility": "Barrierefreiheit",
@@ -21,7 +27,7 @@
     "privacy": "Datenschutzerklärung",
     "supportingPartners": "Unterstützung technischer Partner",
     "terms": "Bedingungen und Richtlinien",
-    "translationInfo": "Automatische Übersetzungen mit dem %1$s",
+    "translationInfo": "Automatische Übersetzungen mit dem {service}",
     "translationService": "eTranslation-Dienst"
   },
   "nav": {

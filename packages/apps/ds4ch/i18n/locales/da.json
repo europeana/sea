@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Oprettet af:",
+    "institution": "Institution:",
+    "show": "Vis tilskrivning",
+    "title": "Titel:"
+  },
   "footer": {
     "about": "Om dataområdet",
     "accessibility": "Tilgængelighed",
@@ -21,7 +27,7 @@
     "privacy": "Privatlivspolitik",
     "supportingPartners": "Support til tekniske partnere",
     "terms": "Vilkår og politikker",
-    "translationInfo": "Automatiserede oversættelser ved hjælp af %1$s",
+    "translationInfo": "Automatiserede oversættelser ved hjælp af {service}",
     "translationService": "eTranslation tjeneste"
   },
   "nav": {

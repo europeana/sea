@@ -1,4 +1,10 @@
 {
+  "attribution": {
+    "creator": "Cruthaitheoir:",
+    "institution": "Institiúid:",
+    "show": "Taispeáin sannadh",
+    "title": "Teideal:"
+  },
   "footer": {
     "about": "Maidir leis an spás sonraí",
     "accessibility": "Inrochtaineacht",
@@ -21,7 +27,7 @@
     "privacy": "Ráiteas príobháideachta",
     "supportingPartners": "Tacú le comhpháirtithe teicniúla",
     "terms": "Téarmaí & Beartais",
-    "translationInfo": "Aistriúcháin uathoibrithe ag úsáid na seirbhíse %1$s",
+    "translationInfo": "Aistriúcháin uathoibrithe ag úsáid na seirbhíse {service}",
     "translationService": "Seirbhís eAistriúcháin"
   },
   "nav": {
