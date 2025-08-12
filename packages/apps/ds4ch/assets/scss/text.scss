@@ -16,3 +16,15 @@ h3 {
     font-size: $font-size-24;
   }
 }
+
+.text-page {
+  .subtitle {
+    font-size: $font-size-18;
+  }
+
+  h2.related-heading {
+    font-size: $font-size-14;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+}

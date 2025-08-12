@@ -43,5 +43,10 @@
     "toggle": "Show menu"
   },
   "news": "News",
-  "newWindow": "opens in new window"
+  "newWindow": "opens in new window",
+  "related": {
+    "categoryTags": {
+      "title": "Discover related content"
+    }
+  }
 }

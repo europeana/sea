@@ -25,6 +25,11 @@ const authors =
   page.value.authorCollection?.items.length > 0
     ? page.value.authorCollection.items
     : null;
+
+const tags =
+  page.value.categoriesCollection?.items.length > 0
+    ? page.value.categoriesCollection.items
+    : null;
 </script>
 <template>
   <div class="page text-page mb-5">
@@ -100,12 +105,13 @@ const authors =
               </NuxtLink>
             </div>
           </article>
-          <!-- TODO: add tags -->
-          <!-- <RelatedCategoryTags
-            v-if="tags?.length"
+          <RelatedCategoryTags
+            v-if="tags"
             :tags="tags"
             class="related-container"
-          /> -->
+            scope="data-space"
+            badge-variant="badge-secondary"
+          />
         </div>
       </div>
     </div>
