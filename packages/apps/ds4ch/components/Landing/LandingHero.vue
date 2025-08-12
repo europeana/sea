@@ -26,7 +26,7 @@ const props = defineProps({
   },
   /**
    * Variant to determine alternate styling for text/button colours.
-   * @values highlight
+   * @values alternate
    */
   variant: {
     type: String,
@@ -63,7 +63,7 @@ const imageCSSVars = computed(() => {
 });
 
 const buttonClass = computed(() => {
-  if (props.variant === "highlight") {
+  if (props.variant === "alternate") {
     return "btn-light";
   } else {
     return "btn-secondary";
@@ -84,7 +84,7 @@ const buttonClass = computed(() => {
         <div class="col col-12 col-lg-7">
           <header
             class="hero-content"
-            :class="variant === 'highlight' ? 'text-white' : ''"
+            :class="variant === 'alternate' ? 'text-white' : ''"
           >
             <!-- eslint-disable vue/no-v-html -->
             <div v-html="parseMarkdown(`# ${headline}\n${text}`)" />

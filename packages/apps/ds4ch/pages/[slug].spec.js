@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import slugPage from "./[slug].vue";
 
@@ -8,6 +8,18 @@ mockNuxtImport("useI18n", () => {
       localeProperties: { value: { language: "en-GB" } },
     };
   };
+});
+
+const { useRouteMock } = vi.hoisted(() => {
+  return {
+    useRouteMock: vi.fn(() => {
+      return { params: { slug: "example" } };
+    }),
+  };
+});
+
+mockNuxtImport("useRoute", () => {
+  return useRouteMock;
 });
 
 const title = "DS4CH about us";
@@ -44,5 +56,16 @@ describe("slugPage", () => {
 
     expect(landingHero.text()).toContain(title);
     expect(landingHero.text()).toContain(description);
+  });
+
+  describe('when the slug is "data-space"', () => {
+    it("renders the alternate variant of the hero", async () => {
+      useRouteMock.mockImplementation(() => {
+        return { params: { slug: "data-space" } };
+      });
+      const wrapper = await factory();
+
+      expect(wrapper.vm.heroVariant).toBe("alternate");
+    });
   });
 });
