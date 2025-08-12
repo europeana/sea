@@ -52,8 +52,12 @@ const props = defineProps({
 </script>
 <template>
   <figure>
+    <ImageLottiePlayer
+      v-if="props.src && props.contentType === 'application/json'"
+      :src="props.src"
+    />
     <ImageOptimised
-      v-if="props.src"
+      v-else-if="props.src"
       ref="image"
       :src="props.src"
       :width="props.width"
