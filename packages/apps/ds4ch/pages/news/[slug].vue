@@ -77,10 +77,8 @@ const tags =
             <div
               class="mt-3 mt-md-4 mb-4 pb-2 pt-md-2 py-4k-5 d-flex align-items-center"
             >
-              <!-- TODO: add Share component -->
-              <button class="btn btn-secondary">Share</button>
-              <!-- <ShareButton class="mr-4" />
-              <ShareSocialModal :media-url="hero ? hero.image.url : null" /> -->
+              <ShareButton class="mr-4" />
+              <ShareSocialModal :media-url="hero ? hero.image.url : null" />
             </div>
             <div class="authored-section mb-5">
               <ContentSection
