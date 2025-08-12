@@ -98,7 +98,7 @@ const handleRight = (event) => {
           <NuxtLink
             v-for="(tag, index) in tags.filter((tag) => !!tag)"
             :key="index"
-            class="badge ms-2 mb-2"
+            class="badge ms-2 ms-4k-3 mb-2 mb-4k-3"
             :class="badgeVariant"
             :active="isActive(tag.identifier)"
             :to="badgeLink(tag.identifier)"

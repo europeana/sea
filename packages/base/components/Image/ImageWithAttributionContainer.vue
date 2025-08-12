@@ -72,6 +72,11 @@ defineProps({
     display: none;
   }
 
+  :deep(img) {
+    height: auto;
+    width: auto;
+  }
+
   &.hero {
     min-height: initial;
 

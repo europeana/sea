@@ -28,6 +28,7 @@ const attributionFields = (fields) => {
     v-if="contentfulEntryHasContentType(section, 'ContentTypeRichText')"
     :text="section.text"
     :rich-text-is-card="richTextIsCard"
+    class="mb-4 mb-md-5 pb-4k-5"
   />
   <!-- TODO: add EmbedGateway -->
   <!-- <EmbedGateway
@@ -39,7 +40,7 @@ const attributionFields = (fields) => {
     v-else-if="contentfulEntryHasContentType(section, 'Embed')"
     :html="section.embed"
     :title="section.title"
-    class="mb-5"
+    class="mb-4 mb-md-5 pb-4k-5"
   />
   <!-- </EmbedGateway> -->
   <ImageWithAttributionContainer
@@ -55,11 +56,13 @@ const attributionFields = (fields) => {
     "
     :attribution="attributionFields(section)"
     :rights-statement="section.license"
+    class="mb-4 mb-md-5 pb-4k-5"
   />
   <GenericCallToAction
     v-else-if="contentfulEntryHasContentType(section, 'Link')"
     :text="section.text"
     :url="section.url"
+    class="mb-4 mb-md-5 pb-4k-5"
   />
 </template>
 

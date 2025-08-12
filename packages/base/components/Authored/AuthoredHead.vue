@@ -32,12 +32,12 @@ const heroImage = computed(() => (props.hero ? props.hero.image : null));
 const heroImageAlt = computed(() => heroImage.value?.description || "");
 </script>
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row justify-content-center">
-      <div class="col col-12 col-lg-8 mb-3 mb-lg-4">
+      <div class="col col-12 col-lg-8 mb-md-3 mb-lg-4">
         <article>
           <div class="title">
-            <div v-if="contextLabel" class="context-label mb-1">
+            <div v-if="contextLabel" class="context-label">
               {{ contextLabel }}
             </div>
             <h2 v-if="exhibitionTitle" class="subtitle">
@@ -64,11 +64,11 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col col-12 col-lg-8 mb-3 mb-lg-4">
+      <div class="col col-12 col-lg-8 mb-md-3">
         <!-- eslint-disable vue/no-v-html -->
         <div
           v-if="description"
-          class="subtitle mb-2"
+          class="subtitle"
           v-html="parseMarkdown(description)"
         />
         <!-- eslint-enable vue/no-v-html -->

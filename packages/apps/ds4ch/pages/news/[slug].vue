@@ -32,14 +32,14 @@ const tags =
     : null;
 </script>
 <template>
-  <div class="page text-page mb-5">
+  <div class="page xxl-page text-page mb-5">
     <AuthoredHead
       :title="page.name"
       :description="page.introduction"
       :hero="page.primaryImageOfPage"
       :context-label="$t('news')"
     />
-    <div class="container footer-margin">
+    <div class="container footer-margin pb-4k-5">
       <div class="row justify-content-center">
         <div class="col col-12 col-lg-8">
           <article>
@@ -74,8 +74,11 @@ const tags =
                 />
               </template>
             </div>
-            <div class="my-4 d-flex align-items-center">
+            <div
+              class="mt-3 mt-md-4 mb-4 pb-2 pt-md-2 py-4k-5 d-flex align-items-center"
+            >
               <!-- TODO: add Share component -->
+              <button class="btn btn-secondary">Share</button>
               <!-- <ShareButton class="mr-4" />
               <ShareSocialModal :media-url="hero ? hero.image.url : null" /> -->
             </div>
@@ -124,5 +127,16 @@ const tags =
 
 .published {
   font-size: $font-size-base;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-32;
+  }
+}
+
+.xxl-page :deep(.icon-ic-tag) {
+  @media (min-width: $bp-4k) {
+    line-height: 4rem;
+    font-size: 3rem;
+  }
 }
 </style>

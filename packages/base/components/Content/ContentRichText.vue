@@ -45,10 +45,22 @@ const html = computed(() => marked.parse(props.text));
   max-width: 100%;
 }
 
+:deep(h2) {
+  margin-bottom: 1rem !important;
+
+  @media (min-width: $bp-large) {
+    margin-bottom: 2rem !important;
+  }
+}
+
 .xxl-page {
   .col,
   .card {
     max-width: $max-text-column-width;
+
+    @media (min-width: $bp-4k) {
+      max-width: $max-text-column-width-landing-4k;
+    }
   }
 }
 </style>
