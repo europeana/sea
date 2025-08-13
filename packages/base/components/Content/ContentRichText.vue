@@ -24,7 +24,7 @@ const html = computed(() => marked.parse(props.text));
     tag="section"
   >
     <div class="col col-12" :class="richTextIsCard ? 'col-lg-6' : 'col-lg-9'">
-      <div v-if="html && richTextIsCard" class="card">
+      <div v-if="richTextIsCard" class="card">
         <div class="card-body">
           <!-- eslint-disable vue/no-v-html -->
           <div v-html="html" />
@@ -32,7 +32,7 @@ const html = computed(() => marked.parse(props.text));
         </div>
       </div>
       <!-- eslint-disable vue/no-v-html -->
-      <div v-else-if="html && !richTextIsCard" v-html="html" />
+      <div v-else-if="!richTextIsCard" v-html="html" />
       <!-- eslint-enable vue/no-v-html -->
     </div>
   </div>

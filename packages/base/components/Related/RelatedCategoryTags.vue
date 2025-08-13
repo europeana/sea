@@ -25,12 +25,12 @@ const props = defineProps({
     default: true,
   },
   /**
-   * Scope of the categories
+   * route name which the tags link to
    * @values stories, data-space
    */
-  scope: {
+  routeName: {
     type: String,
-    default: "stories",
+    required: true,
   },
   /**
    * Variant of the badges

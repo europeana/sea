@@ -12,11 +12,6 @@ const props = defineProps({
     default: "",
   },
 
-  exhibitionTitle: {
-    type: String,
-    default: "",
-  },
-
   hero: {
     type: Object,
     default: null,
@@ -35,19 +30,14 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
   <div class="container mt-3">
     <div class="row justify-content-center">
       <div class="col col-12 col-lg-8 mb-md-3 mb-lg-4">
-        <article>
-          <div class="title">
-            <div v-if="contextLabel" class="context-label">
-              {{ contextLabel }}
-            </div>
-            <h2 v-if="exhibitionTitle" class="subtitle">
-              {{ exhibitionTitle }}
-            </h2>
-            <h1 class="mb-2">
-              {{ title }}
-            </h1>
+        <div class="title">
+          <div v-if="contextLabel" class="context-label">
+            {{ contextLabel }}
           </div>
-        </article>
+          <h1 class="mb-2">
+            {{ title }}
+          </h1>
+        </div>
       </div>
     </div>
     <div class="row justify-content-center">

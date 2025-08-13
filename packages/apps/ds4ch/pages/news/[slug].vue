@@ -44,7 +44,6 @@ const tags =
         <div class="col col-12 col-lg-8">
           <article>
             <!-- TODO: create separate component for 'published ... by ...' -->
-            <!-- eslint-disable vue/no-v-html -->
             <div class="published fw-bold d-block">
               <time
                 v-if="page.datePublished"
@@ -91,7 +90,6 @@ const tags =
                 data-qa="blog-sections"
               />
             </div>
-            <!-- eslint-enable vue/no-v-html -->
             <!-- TODO: create separate component -->
             <div>
               <NuxtLink
@@ -112,7 +110,7 @@ const tags =
             v-if="tags"
             :tags="tags"
             class="related-container"
-            scope="data-space"
+            route-name="data-space"
             badge-variant="badge-secondary"
           />
         </div>
