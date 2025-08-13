@@ -2,10 +2,6 @@
 import contentfulEntryHasContentType from "@/utils/contentful/entryHasContentType.js";
 
 defineProps({
-  richTextIsCard: {
-    type: Boolean,
-    default: true,
-  },
   section: {
     type: Object,
     required: true,
@@ -27,7 +23,6 @@ const attributionFields = (fields) => {
   <ContentRichText
     v-if="contentfulEntryHasContentType(section, 'ContentTypeRichText')"
     :text="section.text"
-    :rich-text-is-card="richTextIsCard"
     class="mb-4 mb-md-5 pb-4k-5"
   />
   <!-- TODO: add EmbedGateway -->

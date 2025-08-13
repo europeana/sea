@@ -86,7 +86,6 @@ const tags =
                 v-for="(section, index) in sections"
                 :key="index"
                 :section="section"
-                :rich-text-is-card="false"
                 data-qa="blog-sections"
               />
             </div>

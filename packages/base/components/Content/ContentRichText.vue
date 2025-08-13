@@ -6,33 +6,15 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  // TODO: find a better and cleaner solution
-  // or remove in the future?
-  richTextIsCard: {
-    type: Boolean,
-    default: true,
-  },
 });
 
 const html = computed(() => marked.parse(props.text));
 </script>
 <template>
-  <div
-    data-qa="markdown"
-    class="row"
-    :class="{ 'mb-5': richTextIsCard }"
-    tag="section"
-  >
-    <div class="col col-12" :class="richTextIsCard ? 'col-lg-6' : 'col-lg-9'">
-      <div v-if="richTextIsCard" class="card">
-        <div class="card-body">
-          <!-- eslint-disable vue/no-v-html -->
-          <div v-html="html" />
-          <!-- eslint-enable vue/no-v-html -->
-        </div>
-      </div>
+  <div data-qa="markdown" class="row" tag="section">
+    <div class="col col-12 col-lg-9">
       <!-- eslint-disable vue/no-v-html -->
-      <div v-else-if="!richTextIsCard" v-html="html" />
+      <div v-html="html" />
       <!-- eslint-enable vue/no-v-html -->
     </div>
   </div>
@@ -54,8 +36,7 @@ const html = computed(() => marked.parse(props.text));
 }
 
 .xxl-page {
-  .col,
-  .card {
+  .col {
     max-width: $max-text-column-width;
 
     @media (min-width: $bp-4k) {

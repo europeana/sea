@@ -17,17 +17,8 @@ describe("components/Content/ContentRichText", () => {
     expect(markdown.html()).toContain("<strong>This is bold text</strong>");
   });
 
-  it("shows in a card", async () => {
-    const wrapper = factory();
-    await wrapper.setProps({ richTextIsCard: true });
-
-    const markdown = wrapper.find('[data-qa="markdown"]');
-    expect(markdown.find("div.card").exists()).toBe(true);
-  });
-
   it("shows in as text", async () => {
     const wrapper = factory();
-    await wrapper.setProps({ richTextIsCard: false });
 
     const markdown = wrapper.find('[data-qa="markdown"]');
     expect(markdown.find("div.card").exists()).toBe(false);
