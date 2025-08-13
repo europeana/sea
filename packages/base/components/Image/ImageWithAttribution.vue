@@ -49,18 +49,17 @@ const props = defineProps({
     default: true,
   },
 });
+
+const isLottieFile = computed(
+  () =>
+    props.src.endsWith(".lottie") && props.contentType === "application/zip",
+);
 </script>
 <template>
   <figure>
-    <ImageLottiePlayer
-      v-if="
-        props.src &&
-        ['application/json', 'application/zip'].includes(props.contentType)
-      "
-      :src="props.src"
-    />
+    <ImageLottiePlayer v-if="isLottieFile" :src="props.src" />
     <ImageOptimised
-      v-else-if="props.src"
+      v-else
       ref="image"
       :src="props.src"
       :width="props.width"
