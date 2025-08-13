@@ -6,10 +6,18 @@ main {
   }
 }
 
+.home-page {
+  // base component DS4CH specific overrides
+  div.landing-sub-section {
+    background-color: $black;
+    color: $white;
+  }
+}
+
 // base component DS4CH specific overrides
 div.landing-sub-section {
-  background-color: $black;
-  color: $white;
+  background-color: $lightgrey;
+  color: $black;
 
   .header {
     padding-bottom: 2rem;
