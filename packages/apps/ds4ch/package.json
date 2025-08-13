@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@europeana/sea-base-layer": "workspace:*",
-    "@europeana/style": "^2.12.1",
+    "@europeana/style": "^2.13.0",
     "@europeana/vue-contentful-graphql": "workspace:*",
     "@europeana/vue-visible-on-scroll": "workspace:*",
     "@nuxtjs/i18n": "^9.5.6",
