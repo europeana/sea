@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "close",
+    "shareOn": "Share on {social}",
     "share": "share"
   },
   "attribution": {

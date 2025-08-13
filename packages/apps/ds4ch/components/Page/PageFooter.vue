@@ -131,6 +131,7 @@ const sections = {
                 :keypath="sections.language.links[0].text"
                 tag="span"
                 class="info-text-text"
+                scope="global"
               >
                 <template #service>
                   <GenericSmartLink
