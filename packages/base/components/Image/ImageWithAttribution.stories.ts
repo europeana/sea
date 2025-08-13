@@ -43,3 +43,14 @@ export const CroppedFullViewport: Story = {
     },
   },
 };
+
+export const LottieFile: Story = {
+  args: {
+    src: sampleData.imagesWithAttribution[1].image.url,
+    width: sampleData.imagesWithAttribution[1].image.width,
+    height: "auto",
+    alt: sampleData.imagesWithAttribution[1].image.description,
+    contentType: sampleData.imagesWithAttribution[1].image.contentType,
+    attribution: sampleData.imagesWithAttribution[1],
+  },
+};
