@@ -45,19 +45,17 @@ const attributionFields = (fields) => {
   <!-- </EmbedGateway> -->
   <ImageWithAttributionContainer
     v-else-if="contentfulEntryHasContentType(section, 'ImageWithAttribution')"
-    :src="section.image ? section.image.url : null"
-    :content-type="section.image ? section.image.contentType : null"
-    :width="section.image ? section.image.width : null"
-    :height="section.image ? section.image.height : null"
-    :alt="
-      section.image && section.image.description
-        ? section.image.description
-        : ''
-    "
-    :attribution="attributionFields(section)"
-    :rights-statement="section.license"
     class="mb-4 mb-md-5 pb-4k-5"
-  />
+  >
+    <ImageWithAttribution
+      :src="section.image?.url || null"
+      :content-type="section.image?.contentType || null"
+      :width="section.image?.width || null"
+      :height="section.image?.height || null"
+      :alt="section.image?.description || ''"
+      :attribution="attributionFields(section)"
+    />
+  </ImageWithAttributionContainer>
   <GenericCallToAction
     v-else-if="contentfulEntryHasContentType(section, 'Link')"
     :text="section.text"

@@ -40,17 +40,18 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
         </div>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div v-if="heroImage" class="row justify-content-center">
       <div class="col col-12 col-lg-8">
-        <ImageWithAttributionContainer
-          v-if="heroImage"
-          :src="heroImage.url"
-          :content-type="heroImage.contentType"
-          :rights-statement="hero.license"
-          :attribution="hero"
-          :alt="heroImageAlt"
-          hero
-        />
+        <ImageWithAttributionContainer hero>
+          <ImageWithAttribution
+            :src="heroImage.url"
+            :content-type="heroImage.contentType"
+            :attribution="hero"
+            :alt="heroImageAlt"
+            :width="heroImage.width || null"
+            :height="heroImage.height || null"
+          />
+        </ImageWithAttributionContainer>
       </div>
     </div>
     <div class="row justify-content-center">

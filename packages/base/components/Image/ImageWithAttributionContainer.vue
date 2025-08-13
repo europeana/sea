@@ -1,29 +1,5 @@
 <script setup>
 defineProps({
-  src: {
-    type: String,
-    default: null,
-  },
-  width: {
-    type: Number,
-    default: 550,
-  },
-  height: {
-    type: Number,
-    default: 790,
-  },
-  alt: {
-    type: String,
-    default: "",
-  },
-  contentType: {
-    type: String,
-    default: null,
-  },
-  attribution: {
-    type: Object,
-    required: true,
-  },
   hero: {
     type: Boolean,
     default: false,
@@ -34,14 +10,7 @@ defineProps({
 <template>
   <div class="container-fluid image-wrapper">
     <div class="jumbotron mt-0" :class="hero ? 'hero' : ''">
-      <ImageWithAttribution
-        :src="src"
-        :width="width"
-        :height="height"
-        :alt="alt"
-        :content-type="contentType"
-        :attribution="attribution"
-      />
+      <slot />
     </div>
   </div>
 </template>
