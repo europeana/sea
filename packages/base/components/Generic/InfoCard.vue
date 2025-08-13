@@ -1,4 +1,7 @@
 <script setup>
+// explicit import needed for dynamic components: https://nuxt.com/docs/guide/directory-structure/components#dynamic-components
+import { GenericSmartLink } from "#components";
+
 const props = defineProps({
   url: {
     type: Object,
@@ -29,21 +32,22 @@ const cardClass = computed(() => {
 </script>
 
 <template>
-  <div class="text-center info-card" :class="cardClass">
+  <div class="card text-center info-card" :class="cardClass">
     <component
-      :is="url ? 'SmartLink' : 'div'"
+      :is="url ? GenericSmartLink : 'div'"
       :destination="url"
       :link-class="url ? 'card-link' : null"
+      hide-external-icon
     >
       <div v-if="image" class="card-img">
         <span :class="image" />
       </div>
-      <div>
-        <h3 v-if="info" title-tag="div">
+      <div class="card-body">
+        <div v-if="info" class="card-title">
           <span>
             {{ info }}
           </span>
-        </h3>
+        </div>
         <div class="card-text text-uppercase">
           {{ label }}
         </div>

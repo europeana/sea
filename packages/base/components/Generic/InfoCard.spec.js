@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { shallowMount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 import InfoCard from "./InfoCard.vue";
 
@@ -12,8 +12,9 @@ const testProps = {
 };
 
 const factory = (props = testProps) =>
-  shallowMount(InfoCard, {
+  mount(InfoCard, {
     props,
+    global: { stubs: ["RouterLink"] },
   });
 
 describe("components/Generic/InfoCard", () => {
@@ -27,7 +28,7 @@ describe("components/Generic/InfoCard", () => {
   it("shows a smartlink for the url", async () => {
     const wrapper = factory();
 
-    expect(wrapper.findAll("smartlink").length).toBe(1);
+    expect(wrapper.findComponent({ name: "SmartLink" }).exists()).toBe(true);
   });
   it("shows an icon based of the passed in image", async () => {
     const wrapper = factory();
@@ -37,7 +38,7 @@ describe("components/Generic/InfoCard", () => {
   it("contains the info", async () => {
     const wrapper = factory();
 
-    expect(wrapper.find(".info-card h3").text()).toBe("12,000,000");
+    expect(wrapper.find(".info-card .card-title").text()).toBe("12,000,000");
   });
   it("contains the label", async () => {
     const wrapper = factory();
