@@ -138,6 +138,7 @@ const hasPartCollectionItems = computed(() => {
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
+@import "assets/scss/variables";
 
 .landing-automated-card-group {
   margin-bottom: 2rem;
@@ -183,16 +184,26 @@ const hasPartCollectionItems = computed(() => {
       @extend %title-2;
       color: $black;
       margin-bottom: 0.875rem;
+      font-weight: 600;
 
       @media (min-width: $bp-medium) {
         margin-bottom: 1rem;
         white-space: nowrap;
       }
+
+      @media (min-width: $bp-large) {
+        font-size: $font-size-34;
+        font-weight: 700;
+      }
+
+      @media (min-width: $bp-4k) {
+        font-size: $font-size-68;
+        margin-bottom: 2rem;
+      }
     }
 
     .card-text {
       @extend %title-5;
-      color: $darkgrey;
       max-width: 145px;
 
       @media (min-width: $bp-small) {
