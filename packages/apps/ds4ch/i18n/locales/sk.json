@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "zatvoriť",
+    "share": "zdieľať"
+  },
   "attribution": {
     "creator": "Autor:",
     "institution": "Inštitúcia:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatizované preklady pomocou {service}",
     "translationService": "Služba eTranslation"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Priemerný počet mesačných API požiadaviek",
+      "dataProviders": "Správcovské Inštitúcie",
+      "hqData": "Nárast kvalitných údajov za rok",
+      "items": "Objekty",
+      "networkMembers": "Členovia siete"
+    }
+  },
   "nav": {
     "about": "O nás",
     "close": "Zatvoriť ponuku",
@@ -38,5 +51,6 @@
     "home": "Domov",
     "toggle": "Zobraziť ponuku"
   },
-  "newWindow": "otvorí sa v novom okne"
+  "newWindow": "otvorí sa v novom okne",
+  "shareWhere": "Kde by ste to chceli zdieľať?"
 }

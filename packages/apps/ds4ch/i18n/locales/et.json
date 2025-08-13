@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "Sulge",
+    "share": "jaga"
+  },
   "attribution": {
     "creator": "Looja:",
     "institution": "Institutsioon:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automaatsed tõlked kasutades {service}",
     "translationService": "eTranslation teenus"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Igakuised API taotlused keskmiselt",
+      "dataProviders": "Pakkuja Institutsioon",
+      "hqData": "Kõrgekvaliteediliste andmete kasv aastas",
+      "items": "Üksused",
+      "networkMembers": "Võrgustiku liikmed"
+    }
+  },
   "nav": {
     "about": "Meist",
     "close": "Sule menüü",
@@ -38,5 +51,6 @@
     "home": "Avaleht",
     "toggle": "Kuva menüü"
   },
-  "newWindow": "avaneb uues aknas"
+  "newWindow": "avaneb uues aknas",
+  "shareWhere": "Kus soovite seda jagada?"
 }

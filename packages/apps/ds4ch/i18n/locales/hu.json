@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "bezárás",
+    "share": "megosztás"
+  },
   "attribution": {
     "creator": "Alkotó:",
     "institution": "Intézmény:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatikus fordítások a {service} használatával",
     "translationService": "eTranslation szolgáltatás"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Átlagos havi API-kérés",
+      "dataProviders": "Szolgáltató Intézmény",
+      "hqData": "A magas minőségű adatok mennyiségének éves növekedése",
+      "items": "Elemek",
+      "networkMembers": "Hálózati tag"
+    }
+  },
   "nav": {
     "about": "Rólunk",
     "close": "Menü bezárása",
@@ -38,5 +51,6 @@
     "home": "Kezdőlap",
     "toggle": "Menü megjelenítése"
   },
-  "newWindow": "új ablakban nyílik meg"
+  "newWindow": "új ablakban nyílik meg",
+  "shareWhere": "Hol szeretnéd megosztani?"
 }
