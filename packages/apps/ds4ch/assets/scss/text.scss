@@ -22,6 +22,16 @@ h5 {
 }
 
 .text-page {
+  @at-root .xxl-page & .container {
+    @media (min-width: $bp-xxl) {
+      max-width: 1140px;
+    }
+
+    @media (min-width: $bp-4k) {
+      max-width: 3015px;
+    }
+  }
+
   article {
     @media (min-width: $bp-4k) {
       font-size: $font-size-36;

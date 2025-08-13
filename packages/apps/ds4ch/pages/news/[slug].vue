@@ -32,7 +32,7 @@ const tags =
     : null;
 </script>
 <template>
-  <div class="page xxl-page text-page mb-5">
+  <div class="page text-page mb-5">
     <AuthoredHead
       :title="page.name"
       :description="page.introduction"
