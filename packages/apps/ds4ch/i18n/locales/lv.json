@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "aizvērt",
+    "share": "dalīties"
+  },
   "attribution": {
     "creator": "Autors:",
     "institution": "Iestāde:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatizētie tulkojumi, izmantojot {service}",
     "translationService": "eTranslation pakalpojums"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Vidēji ikmēneša API pieprasījumi",
+      "dataProviders": "Piegādājošās iestādes",
+      "hqData": "Augstas kvalitātes datu pieaugums gadā",
+      "items": "Digitālie objekti",
+      "networkMembers": "Tīkla dalībnieki"
+    }
+  },
   "nav": {
     "about": "Par mums",
     "close": "Aizvērt izvēlni",
@@ -38,5 +51,6 @@
     "home": "Sākumlapa",
     "toggle": "Rādīt izvēlni"
   },
-  "newWindow": "atveras jaunā logā"
+  "newWindow": "atveras jaunā logā",
+  "shareWhere": "Kur jūs vēlētos dalīties ar šo?"
 }

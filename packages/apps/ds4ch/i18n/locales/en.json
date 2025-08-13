@@ -1,7 +1,7 @@
 {
   "actions": {
-    "share": "share",
-    "close": "close"
+    "close": "close",
+    "share": "share"
   },
   "attribution": {
     "creator": "Creator:",
@@ -36,11 +36,11 @@
   },
   "landing": {
     "counts": {
-      "items": "Items",
-      "networkMembers": "Network members",
+      "apiRequests": "Monthly API Requests, on average",
       "dataProviders": "Providing Institutions",
       "hqData": "Increase in high-quality data per year",
-      "apiRequests": "Monthly Api Requests, on average"
+      "items": "Items",
+      "networkMembers": "Network members"
     }
   },
   "nav": {

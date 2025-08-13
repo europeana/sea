@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "sulje",
+    "share": "jaa"
+  },
   "attribution": {
     "creator": "Luoja:",
     "institution": "kulttuuriperintölaitos:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automaattiset käännökset käyttäen {service}",
     "translationService": "eTranslation-palvelu"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Kuukausittaiset API-pyynnöt keskimäärin",
+      "dataProviders": "Aineiston Tarjoajat",
+      "hqData": "Korkealaatuisten tietojen lisääntyminen vuodessa",
+      "items": "Aineistot",
+      "networkMembers": "Verkoston jäsenet"
+    }
+  },
   "nav": {
     "about": "Tietoa meistä",
     "close": "Sulje valikko",
@@ -38,5 +51,6 @@
     "home": "Etusivu",
     "toggle": "Näytä valikko"
   },
-  "newWindow": "avautuu uuteen ikkunaan"
+  "newWindow": "avautuu uuteen ikkunaan",
+  "shareWhere": "Missä haluaisit jakaa tämän?"
 }

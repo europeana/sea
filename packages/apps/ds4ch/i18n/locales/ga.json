@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "dún",
+    "share": "roinn"
+  },
   "attribution": {
     "creator": "Cruthaitheoir:",
     "institution": "Institiúid:",
@@ -30,6 +34,15 @@
     "translationInfo": "Aistriúcháin uathoibrithe ag úsáid na seirbhíse {service}",
     "translationService": "Seirbhís eAistriúcháin"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Iarratais API míosúla, ar an meán",
+      "dataProviders": "Institiúidí Soláthartha",
+      "hqData": "Méadú ar shonraí ardchaighdeáin in aghaidh na bliana",
+      "items": "Míreanna",
+      "networkMembers": "Baill líonra"
+    }
+  },
   "nav": {
     "about": "Fúinn",
     "close": "Dún roghchlár",
@@ -38,5 +51,6 @@
     "home": "Baile",
     "toggle": "Taispeáin roghchlár"
   },
-  "newWindow": "osclaíonn i bhfuinneog nua"
+  "newWindow": "osclaíonn i bhfuinneog nua",
+  "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?"
 }

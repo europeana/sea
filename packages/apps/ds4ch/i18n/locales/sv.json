@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "stäng",
+    "share": "dela"
+  },
   "attribution": {
     "creator": "Skapare:",
     "institution": "Institution:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatiska översättningar med hjälp av {service}",
     "translationService": "tjänsten eTranslation"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Månatliga API-förfrågningar, i genomsnitt",
+      "dataProviders": "Tillhandahållande Institutioner",
+      "hqData": "Ökning av data av hög kvalitet per år",
+      "items": "Objekt",
+      "networkMembers": "Nätverksmedlemmar"
+    }
+  },
   "nav": {
     "about": "Om oss",
     "close": "Stäng menyn",
@@ -38,5 +51,6 @@
     "home": "Hem",
     "toggle": "Visa meny"
   },
-  "newWindow": "öppnas i nytt fönster"
+  "newWindow": "öppnas i nytt fönster",
+  "shareWhere": "Var skulle du vilja dela detta?"
 }
