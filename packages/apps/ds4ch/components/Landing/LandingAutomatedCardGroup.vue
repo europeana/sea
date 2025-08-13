@@ -154,16 +154,8 @@ const hasPartCollectionItems = computed(() => {
     max-width: 2000px;
   }
 
-  ::v-deep(.info-card) {
-    .card-title {
-      @extend %title-2;
-      color: $black;
-    }
-
-    .card-text {
-      @extend %title-5;
-    }
-    background: none;
+  :deep(.info-card) {
+    background-color: transparent;
 
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -189,6 +181,7 @@ const hasPartCollectionItems = computed(() => {
 
     .card-title {
       @extend %title-2;
+      color: $black;
       margin-bottom: 0.875rem;
 
       @media (min-width: $bp-medium) {
