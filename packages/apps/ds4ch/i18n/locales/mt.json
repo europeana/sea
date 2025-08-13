@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "agħlaq",
+    "share": "ixxerja"
+  },
   "attribution": {
     "creator": "Kreatur:",
     "institution": "Istituzzjoni:",
@@ -30,6 +34,15 @@
     "translationInfo": "Traduzzjonijiet awtomatizzati bl-użu ta' {service}",
     "translationService": "Servizz ta' Traduzzjoni Elettronika"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Talbiet API ta' kull xahar, bħala medja",
+      "dataProviders": "Istituzzjonijiet Fornitriċi",
+      "hqData": "Żieda fl-data ta' kwalità għolja kull sena",
+      "items": "Oġġetti",
+      "networkMembers": "Membri tan-netwerk"
+    }
+  },
   "nav": {
     "about": "Dwarna",
     "close": "Agħlaq il-menù",
@@ -38,5 +51,6 @@
     "home": "Paġna Ewlenija",
     "toggle": "Uri l-menù"
   },
-  "newWindow": "jiftaħ f'tieqa ġdida"
+  "newWindow": "jiftaħ f'tieqa ġdida",
+  "shareWhere": "Fejn tixtieq taqsam dan?"
 }

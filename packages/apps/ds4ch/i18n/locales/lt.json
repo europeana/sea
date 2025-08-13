@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "uždaryti",
+    "share": "dalintis"
+  },
   "attribution": {
     "creator": "Autorius:",
     "institution": "Įstaiga:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatiniai vertimai naudojant {service}",
     "translationService": "eVertimo paslauga"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Mėnesio API užklausos, vidutiniškai",
+      "dataProviders": "Teikėjai",
+      "hqData": "Aukštos kokybės duomenų padidėjimas per metus",
+      "items": "Skaitmeniniai objektai",
+      "networkMembers": "Tinklo nariai"
+    }
+  },
   "nav": {
     "about": "Apie mus",
     "close": "Uždaryti meniu",
@@ -38,5 +51,6 @@
     "home": "Pradžia",
     "toggle": "Rodyti meniu"
   },
-  "newWindow": "atsidaro naujame lange"
+  "newWindow": "atsidaro naujame lange",
+  "shareWhere": "Kur norėtumėte tuo pasidalinti?"
 }

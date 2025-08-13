@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "zatvori",
+    "share": "podijeli"
+  },
   "attribution": {
     "creator": "Stvorio\/la:",
     "institution": "Institucija:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatizirani prijevodi pomoću {service}",
     "translationService": "eTranslation usluga"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Mjesečni API zahtjevi, u prosjeku",
+      "dataProviders": "Institucije",
+      "hqData": "Povećanje visokokvalitetnih podataka godišnje",
+      "items": "Predmeti",
+      "networkMembers": "Članovi mreže"
+    }
+  },
   "nav": {
     "about": "O nama",
     "close": "Zatvori izbornik",
@@ -38,5 +51,6 @@
     "home": "Početna",
     "toggle": "Prikaži izbornik"
   },
-  "newWindow": "otvara se u novom prozoru"
+  "newWindow": "otvara se u novom prozoru",
+  "shareWhere": "Gdje biste to htjeli podijeliti?"
 }

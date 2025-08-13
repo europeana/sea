@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "zamknij",
+    "share": "udostępnij"
+  },
   "attribution": {
     "creator": "Twórca:",
     "institution": "Instytucja:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatyczne tłumaczenia przy użyciu {service}",
     "translationService": "Usługa eTranslation"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Średnia liczba miesięcznych żądań API",
+      "dataProviders": "Dostawcy Danych",
+      "hqData": "Wzrost wysokiej jakości danych na rok",
+      "items": "Obiekty cyfrowe",
+      "networkMembers": "Członkowie sieci"
+    }
+  },
   "nav": {
     "about": "O nas",
     "close": "Zamknij menu",
@@ -38,5 +51,6 @@
     "home": "Strona główna",
     "toggle": "Pokaż menu"
   },
-  "newWindow": "otwiera się w nowym oknie"
+  "newWindow": "otwiera się w nowym oknie",
+  "shareWhere": "Gdzie chcesz się tym podzielić?"
 }

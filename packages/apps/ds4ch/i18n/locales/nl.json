@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "sluiten",
+    "share": "delen"
+  },
   "attribution": {
     "creator": "Maker:",
     "institution": "Instelling:",
@@ -30,6 +34,15 @@
     "translationInfo": "Geautomatiseerde vertalingen met behulp van de {service}",
     "translationService": "eTranslation Service"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Gemiddeld maandelijkse API-verzoeken",
+      "dataProviders": "Deelnemende Erfgoedorganisaties",
+      "hqData": "Toename van hoogwaardige data per jaar",
+      "items": "Objecten",
+      "networkMembers": "Netwerk leden"
+    }
+  },
   "nav": {
     "about": "Over ons",
     "close": "Menu sluiten",
@@ -38,5 +51,6 @@
     "home": "Home",
     "toggle": "Menu weergeven"
   },
-  "newWindow": "opent in nieuw venster"
+  "newWindow": "opent in nieuw venster",
+  "shareWhere": "Waar wilt u dit delen?"
 }
