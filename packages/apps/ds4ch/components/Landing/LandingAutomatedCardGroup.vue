@@ -156,6 +156,7 @@ const hasPartCollectionItems = computed(() => {
   }
 
   :deep(.info-card) {
+    flex-basis: 100%;
     background-color: transparent;
 
     padding-left: 0.5rem;
@@ -204,11 +205,7 @@ const hasPartCollectionItems = computed(() => {
 
     .card-text {
       @extend %title-5;
-      max-width: 145px;
-
-      @media (min-width: $bp-small) {
-        max-width: 200px;
-      }
+      max-width: 200px;
 
       @media (min-width: $bp-4k) {
         max-width: 510px;
