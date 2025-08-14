@@ -20,12 +20,14 @@ const factory = ({ props, mocks } = {}) =>
   });
 
 describe("components/related/RelatedCategoryTags", () => {
+  const routeName = "news";
+
   describe("template", () => {
     describe("when there are no tags", () => {
       const tags = [];
 
       it("does not display the tag icon", () => {
-        const wrapper = factory({ props: { tags } });
+        const wrapper = factory({ props: { routeName, tags } });
 
         const tagIcon = wrapper.find(".icon-ic-tag");
 
@@ -40,7 +42,7 @@ describe("components/related/RelatedCategoryTags", () => {
       ];
 
       it("displays the tag icon", () => {
-        const wrapper = factory({ props: { tags } });
+        const wrapper = factory({ props: { routeName, tags } });
 
         const tagIcon = wrapper.find(".icon-ic-tag");
 
@@ -48,7 +50,7 @@ describe("components/related/RelatedCategoryTags", () => {
       });
 
       it("displays a badge for each tag", () => {
-        const wrapper = factory({ props: { tags } });
+        const wrapper = factory({ props: { routeName, tags } });
 
         const badges = wrapper.findAll(".badge");
 
@@ -56,7 +58,9 @@ describe("components/related/RelatedCategoryTags", () => {
       });
 
       it("excludes null tags", () => {
-        const wrapper = factory({ props: { tags: tags.concat([null]) } });
+        const wrapper = factory({
+          props: { routeName, tags: tags.concat([null]) },
+        });
 
         const badges = wrapper.findAll(".badge");
 
@@ -65,7 +69,7 @@ describe("components/related/RelatedCategoryTags", () => {
 
       // describe("clicking the badge", () => {
       //   it("tracks selecting tag", () => {
-      //     const wrapper = factory({ props: { tags } });
+      //     const wrapper = factory({ props: { routeName, tags } });
 
       //     const badge = wrapper.find(".badge");
 
@@ -82,7 +86,7 @@ describe("components/related/RelatedCategoryTags", () => {
 
       //   it("tracks deselecting tag", () => {
       //     const wrapper = factory({
-      //       props: { tags, selected: [tags[0].identifier] },
+      //       props: { routeName, tags, selected: [tags[0].identifier] },
       //     });
 
       //     const badge = wrapper.find(".badge");
@@ -106,26 +110,26 @@ describe("components/related/RelatedCategoryTags", () => {
 
       describe("badgeLink", () => {
         it("adds the tag to the url", () => {
-          const wrapper = factory({ props: { tags } });
+          const wrapper = factory({ props: { routeName, tags } });
           const link = wrapper.vm.badgeLink("red tape");
           expect(link.query.tags).toBe("red tape");
         });
 
         it("adds another tag to the url", () => {
-          const wrapper = factory({ props: { tags, selected } });
+          const wrapper = factory({ props: { routeName, tags, selected } });
           const link = wrapper.vm.badgeLink("blue tape");
           expect(link.query.tags).toBe("red tape,blue tape");
         });
 
         it("removes the only tag from the url", () => {
-          const wrapper = factory({ props: { tags, selected } });
+          const wrapper = factory({ props: { routeName, tags, selected } });
           const link = wrapper.vm.badgeLink("red tape");
           expect(link.query.tags).toBe(undefined);
         });
 
         it("removes a tag from the url", () => {
           const wrapper = factory({
-            props: { tags, selected: ["red tape", "blue tape"] },
+            props: { routeName, tags, selected: ["red tape", "blue tape"] },
           });
           const link = wrapper.vm.badgeLink("blue tape");
           expect(link.query.tags).toBe("red tape");
@@ -134,7 +138,7 @@ describe("components/related/RelatedCategoryTags", () => {
         describe("when on page beyond the first page", () => {
           it("resets the page query", () => {
             const wrapper = factory({
-              props: { tags },
+              props: { routeName, tags },
               mocks: { $route: { query: { page: 2 } } },
             });
 
@@ -146,13 +150,13 @@ describe("components/related/RelatedCategoryTags", () => {
 
       describe("isActive", () => {
         it("returns true when there is an active tag", () => {
-          const wrapper = factory({ props: { tags, selected } });
+          const wrapper = factory({ props: { routeName, tags, selected } });
           const active = wrapper.vm.isActive("red tape");
 
           expect(active).toBe(true);
         });
         it("returns false when there is not an active tag", () => {
-          const wrapper = factory({ props: { tags } });
+          const wrapper = factory({ props: { routeName, tags } });
           const active = wrapper.vm.isActive("red tape");
 
           expect(active).toBe(false);

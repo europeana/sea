@@ -25,8 +25,7 @@ const props = defineProps({
     default: true,
   },
   /**
-   * route name which the tags link to
-   * @values stories, data-space
+   * Name of the route which the tags link to
    */
   routeName: {
     type: String,
@@ -42,7 +41,7 @@ const props = defineProps({
 });
 
 const badgeLink = (tagId) => {
-  const newRoute = { name: props.scope };
+  const newRoute = { name: props.routeName };
 
   if (props.selected.includes(tagId)) {
     const tagsWithoutCurrent = props.selected.filter((item) => item !== tagId);
