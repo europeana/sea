@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
-import slugPage from "./[slug].vue";
+import dataSpacePage from "./data-space.vue";
 
 mockNuxtImport("useI18n", () => {
   return () => {
@@ -10,7 +10,7 @@ mockNuxtImport("useI18n", () => {
   };
 });
 
-const title = "DS4CH about us";
+const title = "Explore the data space";
 const description = "DS4CH text";
 const contentfulResponse = {
   data: {
@@ -19,14 +19,14 @@ const contentfulResponse = {
         {
           headline: title,
           text: description,
-          primaryImageOfPage: { image: "stubed Image" },
+          primaryImageOfPage: { image: "stubbed Image" },
         },
       ],
     },
   },
 };
 const factory = async () =>
-  await mountSuspended(slugPage, {
+  await mountSuspended(dataSpacePage, {
     global: {
       provide: {
         $contentful: {
@@ -36,7 +36,7 @@ const factory = async () =>
     },
   });
 
-describe("slugPage", () => {
+describe("dataSpacePage", () => {
   it("renders landing hero with the attributes from Contentful", async () => {
     const wrapper = await factory();
 
@@ -44,5 +44,13 @@ describe("slugPage", () => {
 
     expect(landingHero.text()).toContain(title);
     expect(landingHero.text()).toContain(description);
+  });
+
+  it("renders the alternate variant of the hero", async () => {
+    const wrapper = await factory();
+
+    const hero = wrapper.findComponent({ name: "LandingHero" });
+
+    expect(hero.props("variant")).toBe("alternate");
   });
 });
