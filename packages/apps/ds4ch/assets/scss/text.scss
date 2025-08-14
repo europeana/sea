@@ -20,3 +20,77 @@ h5 {
     font-size: $font-size-24;
   }
 }
+
+.text-page {
+  @at-root .xxl-page & .container {
+    @media (min-width: $bp-xxl) {
+      max-width: 1140px;
+    }
+
+    @media (min-width: $bp-4k) {
+      max-width: 3015px;
+    }
+  }
+
+  article {
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-36;
+    }
+  }
+
+  .col {
+    @media (min-width: $bp-4k) {
+      max-width: $max-text-column-width-landing-4k;
+    }
+  }
+
+  .context-label {
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-24;
+    }
+  }
+
+  h1 {
+    font-size: $font-size-24;
+
+    @media (min-width: $bp-large) {
+      font-size: $font-size-28;
+    }
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-56;
+    }
+  }
+
+  .subtitle {
+    font-size: $font-size-16;
+
+    @media (min-width: $bp-small) {
+      font-size: $font-size-18;
+    }
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-36;
+    }
+  }
+
+  h2.related-heading {
+    font-size: $font-size-14;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-28;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .related-container {
+    margin-top: 1.5rem;
+
+    @media (min-width: $bp-4k) {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+}

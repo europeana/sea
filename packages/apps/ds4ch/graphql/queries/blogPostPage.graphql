@@ -1,0 +1,65 @@
+#import "../fragments/imageWithAttributionFields.graphql"
+
+query BlogPostPage(
+  $identifier: String!
+  $locale: String!
+  $site: String = "dataspace-culturalheritage.eu"
+  $preview: Boolean = false
+) {
+  blogPostingCollection(
+    preview: $preview
+    locale: $locale
+    where: { identifier: $identifier, site: $site }
+    limit: 1
+  ) {
+    items {
+      identifier
+      name
+      description
+      introduction
+      datePublished
+      relatedLink
+      associatedMediaCollection {
+        items {
+          url
+          title
+        }
+      }
+      categoriesCollection {
+        items {
+          name
+          identifier
+        }
+      }
+      primaryImageOfPage {
+        ...imageWithAttributionFields
+      }
+      hasPartCollection(limit: 40) {
+        total
+        items {
+          __typename
+          ... on ContentTypeRichText {
+            text
+          }
+          ... on Embed {
+            embed
+          }
+          ... on ImageWithAttribution {
+            ...imageWithAttributionFields
+          }
+          ... on Link {
+            url
+            text
+          }
+        }
+      }
+      authorCollection {
+        items {
+          name
+          affiliation
+          url
+        }
+      }
+    }
+  }
+}

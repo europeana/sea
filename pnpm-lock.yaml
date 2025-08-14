@@ -66,8 +66,8 @@ importers:
         specifier: workspace:*
         version: link:../../base
       '@europeana/style':
-        specifier: ^2.12.1
-        version: 2.12.1
+        specifier: ^2.13.0
+        version: 2.13.0
       '@europeana/vue-contentful-graphql':
         specifier: workspace:*
         version: link:../../plugins/vue-contentful-graphql
@@ -136,8 +136,8 @@ importers:
   packages/base:
     devDependencies:
       '@europeana/style':
-        specifier: ^2.12.1
-        version: 2.12.1
+        specifier: ^2.13.0
+        version: 2.13.0
       marked:
         specifier: ^16.0.0
         version: 16.0.0
@@ -634,8 +634,8 @@ packages:
     resolution: {integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@europeana/style@2.12.1':
-    resolution: {integrity: sha512-iupGmWkJbuXiQfV5YxARkOqxc6dz7oCswf2Hf5yWrKwhv0r4jQTlg2tj64VxYMHLI/onjFzZ0Alo9ai4p3e0yw==}
+  '@europeana/style@2.13.0':
+    resolution: {integrity: sha512-jjdkRDXhtPr93oZCaOj/RJd9pfAvDk42GrQw9JB8v2FVeF5qgYF4BV4tdz8UzVMzzqFcVKlQACjk5S6PKGrMUw==}
 
   '@fastify/busboy@3.1.1':
     resolution: {integrity: sha512-5DGmA8FTdB2XbDeEwc/5ZXBl6UbBAyBOOLlPuBnZ/N1SwdH9Ii+cOX3tBROlDgcTXxjOYnLMVoKk9+FXAw0CJw==}
@@ -6306,7 +6306,7 @@ snapshots:
       '@eslint/core': 0.14.0
       levn: 0.4.1
 
-  '@europeana/style@2.12.1': {}
+  '@europeana/style@2.13.0': {}
 
   '@fastify/busboy@3.1.1': {}
 
