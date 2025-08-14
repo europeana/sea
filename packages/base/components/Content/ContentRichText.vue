@@ -1,5 +1,5 @@
 <script setup>
-import { marked } from "marked";
+import parseMarkdown from "@/utils/markdown/parse.js";
 
 const props = defineProps({
   text: {
@@ -8,7 +8,7 @@ const props = defineProps({
   },
 });
 
-const html = computed(() => marked.parse(props.text));
+const html = computed(() => parseMarkdown(props.text));
 </script>
 <template>
   <div data-qa="markdown" class="row" tag="section">
