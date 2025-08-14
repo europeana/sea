@@ -23,7 +23,12 @@ const heroVariant = ["data-space"].includes(route.params.slug)
   : null;
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+
+useHead({
+  title: page.value.headline,
+});
 </script>
+
 <template>
   <div>
     <LandingHero

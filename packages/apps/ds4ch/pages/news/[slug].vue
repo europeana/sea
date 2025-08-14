@@ -30,7 +30,12 @@ const tags =
   page.value.categoriesCollection?.items.length > 0
     ? page.value.categoriesCollection.items
     : null;
+
+useHead({
+  title: page.value.name,
+});
 </script>
+
 <template>
   <div class="page text-page mb-5">
     <AuthoredHead
