@@ -2,7 +2,6 @@
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const route = useRoute();
-
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
@@ -20,10 +19,19 @@ const { data: page } = await useAsyncData(
 );
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+
+useHead({
+  title: page.value.headline,
+});
 </script>
+
 <template>
   <div>
-    <h1>{{ page.headline || route.fullPath }}</h1>
+    <LandingHero
+      :headline="page.headline || route.fullPath"
+      :text="page.text"
+      :hero-image="page.primaryImageOfPage"
+    />
     <PageSections :sections="sections" />
   </div>
 </template>

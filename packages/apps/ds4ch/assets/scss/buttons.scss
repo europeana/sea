@@ -78,6 +78,34 @@
     }
   }
 
+  &.btn-light {
+    border-radius: 0;
+    background-color: $white;
+    color: $black;
+    display: inline-flex;
+    align-items: center;
+    font-family: $font-family-montserrat;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    transition: all 400ms ease-in-out;
+    text-transform: uppercase;
+
+    @media (min-width: ($bp-4k)) {
+      font-size: 2.625rem;
+      padding: 2rem 2.625rem;
+    }
+
+    &.icon-chevron::before {
+      color: $white;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      box-shadow: none;
+    }
+  }
+
   &.btn-light-flat {
     background-color: transparent;
     color: $white;

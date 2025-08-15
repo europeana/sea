@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "închidere",
+    "share": "distribuiți"
+  },
   "attribution": {
     "creator": "Creator:",
     "institution": "Instituție:",
@@ -30,6 +34,15 @@
     "translationInfo": "Traduceri automate folosind {service}",
     "translationService": "Serviciul eTranslation"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Solicitări API lunare, în medie",
+      "dataProviders": "Instituții Furnizoare",
+      "hqData": "Creșterea numărului de date de înaltă calitate pe an",
+      "items": "Resurse culturale",
+      "networkMembers": "Membrii rețelei"
+    }
+  },
   "nav": {
     "about": "Despre noi",
     "close": "Închide meniul",
@@ -38,5 +51,6 @@
     "home": "Acasă",
     "toggle": "Afișează meniul"
   },
-  "newWindow": "se deschide într-o fereastră nouă"
+  "newWindow": "se deschide într-o fereastră nouă",
+  "shareWhere": "Unde ai vrea să împărtășești asta?"
 }

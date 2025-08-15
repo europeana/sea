@@ -15,6 +15,18 @@ export default {
         height: 1691,
       },
     },
+    {
+      name: "Lottie Explore Europeana",
+      creator: "Ana Moreno",
+      url: "https://assets.ctfassets.net/i01duvb6kq77/4V6Zd5D0zkz8SwQp6p5HDq/8a6a7d1ed60a39a6d7089868c0813c71/optimized-lottie.lottie",
+      license: "http://creativecommons.org/publicdomain/mark/1.0/",
+      provider: "Europeana Foundation",
+      image: {
+        contentType: "application/zip",
+        url: "https://assets.ctfassets.net/i01duvb6kq77/4V6Zd5D0zkz8SwQp6p5HDq/8a6a7d1ed60a39a6d7089868c0813c71/optimized-lottie.lottie",
+        description: "animation of artworks sliding out",
+      },
+    },
   ],
   backgroundImages: [
     {

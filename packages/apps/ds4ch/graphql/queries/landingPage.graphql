@@ -19,6 +19,10 @@ query LandingPage(
       identifier
       name
       headline
+      text
+      primaryImageOfPage {
+        ...landingPageImageWithAttributionFields
+      }
       hasPartCollection(limit: 20) {
         items {
           ... on IllustrationGroup {
@@ -43,6 +47,10 @@ query LandingPage(
                 __typename
                 ... on ImageCard {
                   ...imageCardFields
+                }
+                __typename
+                ... on AutomatedCardGroup {
+                  genre
                 }
               }
             }

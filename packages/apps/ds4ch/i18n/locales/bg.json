@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "затвори",
+    "share": "споделяне"
+  },
   "attribution": {
     "creator": "Създател:",
     "institution": "Институция:",
@@ -30,6 +34,15 @@
     "translationInfo": "Автоматизирани преводи с помощта на {service}",
     "translationService": "Услуга eTranslation"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Средно месечни заявки за API",
+      "dataProviders": "Доставчици на данни",
+      "hqData": "Увеличаване на висококачествените данни на година",
+      "items": "обекта",
+      "networkMembers": "Членове на мрежата"
+    }
+  },
   "nav": {
     "about": "За нас",
     "close": "Затвори менюто",
@@ -38,5 +51,6 @@
     "home": "Начало",
     "toggle": "Покажи менюто"
   },
-  "newWindow": "отваря се в нов прозорец"
+  "newWindow": "отваря се в нов прозорец",
+  "shareWhere": "Къде бихте искали да споделите това?"
 }

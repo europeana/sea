@@ -13,9 +13,9 @@ const propsData = {
   },
 };
 
-const factory = () =>
+const factory = (props = propsData) =>
   shallowMount(ImageWithAttribution, {
-    propsData,
+    propsData: props,
   });
 
 describe("components/image/ImageWithAttribution", () => {
@@ -23,5 +23,17 @@ describe("components/image/ImageWithAttribution", () => {
     const wrapper = factory();
     const image = wrapper.find('figure [data-qa="image"]');
     expect(image.attributes().src).toBe(propsData.src);
+  });
+
+  describe("when the image is a Lottie file", () => {
+    it("renders the Lottie player", () => {
+      const wrapper = factory({
+        src: "https://www.example.org/image.lottie",
+        contentType: "application/zip",
+        attribution: {},
+      });
+      const lottiePlayer = wrapper.find("image-lottie-player-stub");
+      expect(lottiePlayer.exists()).toBe(true);
+    });
   });
 });

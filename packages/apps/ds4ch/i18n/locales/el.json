@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "κλείσιμο",
+    "share": "κοινοποίηση"
+  },
   "attribution": {
     "creator": "Δημιουργός:",
     "institution": "Ίδρυμα:",
@@ -30,6 +34,15 @@
     "translationInfo": "Αυτόματες μεταφράσεις με χρήση του {service}",
     "translationService": "Υπηρεσία eTranslation"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Μηνιαία αιτήματα API, κατά μέσο όρο",
+      "dataProviders": "Φορείς προέλευσης",
+      "hqData": "Αύξηση των δεδομένων υψηλής ποιότητας ανά έτος",
+      "items": "Τεκμήρια",
+      "networkMembers": "Μέλη του δικτύου"
+    }
+  },
   "nav": {
     "about": "Σχετικά με εμάς",
     "close": "Κλείσιμο μενού",
@@ -38,5 +51,6 @@
     "home": "Αρχική",
     "toggle": "Εμφάνιση μενού"
   },
-  "newWindow": "ανοίγει σε νέο παράθυρο"
+  "newWindow": "ανοίγει σε νέο παράθυρο",
+  "shareWhere": "Πού θα θέλατε να το μοιραστείτε αυτό;"
 }

@@ -1,4 +1,8 @@
 {
+  "actions": {
+    "close": "luk",
+    "share": "del"
+  },
   "attribution": {
     "creator": "Oprettet af:",
     "institution": "Institution:",
@@ -30,6 +34,15 @@
     "translationInfo": "Automatiserede oversættelser ved hjælp af {service}",
     "translationService": "eTranslation tjeneste"
   },
+  "landing": {
+    "counts": {
+      "apiRequests": "Månedlige API-anmodninger i gennemsnit",
+      "dataProviders": "Ejerinstitutioner",
+      "hqData": "Forøgelse af data af høj kvalitet om året",
+      "items": "Genstande",
+      "networkMembers": "Netværksmedlemmer"
+    }
+  },
   "nav": {
     "about": "Om os",
     "close": "Luk menu",
@@ -38,5 +51,6 @@
     "home": "Hjem",
     "toggle": "Vis menu"
   },
-  "newWindow": "åbner i nyt vindue"
+  "newWindow": "åbner i nyt vindue",
+  "shareWhere": "Hvor vil du gerne dele dette?"
 }

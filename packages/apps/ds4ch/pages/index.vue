@@ -1,4 +1,5 @@
 <script setup>
+import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const contentful = inject("$contentful");
@@ -15,10 +16,14 @@ const { data: page } = await useAsyncData("homePage", async () => {
 });
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+
+useHead({
+  title: stripMarkdown(page.value.headline),
+});
 </script>
 
 <template>
-  <div>
+  <div class="home-page">
     <h1>{{ page.headline }}</h1>
     <PageSections :sections="sections" />
   </div>

@@ -11,12 +11,15 @@ mockNuxtImport("useI18n", () => {
 });
 
 const title = "DS4CH about us";
+const description = "DS4CH text";
 const contentfulResponse = {
   data: {
     landingPageCollection: {
       items: [
         {
           headline: title,
+          text: description,
+          primaryImageOfPage: { image: "stubed Image" },
         },
       ],
     },
@@ -34,11 +37,12 @@ const factory = async () =>
   });
 
 describe("slugPage", () => {
-  it("renders an h1 element with the page headline from Contentful", async () => {
+  it("renders landing hero with the attributes from Contentful", async () => {
     const wrapper = await factory();
 
-    const h1 = wrapper.find("h1");
+    const landingHero = wrapper.find(".landing-hero");
 
-    expect(h1.text()).toBe(title);
+    expect(landingHero.text()).toContain(title);
+    expect(landingHero.text()).toContain(description);
   });
 });
