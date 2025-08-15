@@ -14,6 +14,14 @@ const title = "Explore the data space";
 const description = "DS4CH text";
 const contentfulResponse = {
   data: {
+    blogPostingCollection: {
+      items: [
+        {
+          name: "News post",
+          identifier: "post",
+        },
+      ],
+    },
     landingPageCollection: {
       items: [
         {
@@ -52,5 +60,13 @@ describe("dataSpacePage", () => {
     const hero = wrapper.findComponent({ name: "LandingHero" });
 
     expect(hero.props("variant")).toBe("alternate");
+  });
+
+  it("renders links to the retrieved news posts", async () => {
+    const wrapper = await factory();
+
+    const postLink = wrapper.find("ol li a");
+
+    expect(postLink.attributes().href).toBe("/en/news/post");
   });
 });
