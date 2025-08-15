@@ -1,6 +1,5 @@
 <script setup>
 const route = useRoute();
-const localePath = useLocalePath();
 
 const props = defineProps({
   /**
@@ -62,7 +61,7 @@ const badgeLink = (tagId) => {
     newRoute.query = newQuery;
   }
 
-  return localePath(newRoute);
+  return newRoute;
 };
 const isActive = (tagId) => {
   return props.selected.includes(tagId);
@@ -94,7 +93,7 @@ const handleRight = (event) => {
       <div class="d-flex">
         <span class="icon-ic-tag" />
         <div>
-          <NuxtLink
+          <NuxtLinkLocale
             v-for="(tag, index) in tags.filter((tag) => !!tag)"
             :key="index"
             class="badge ms-2 ms-4k-3 mb-2 mb-4k-3"
@@ -111,7 +110,7 @@ const handleRight = (event) => {
               v-if="isActive(tag.identifier)"
               class="icon icon-clear clear-indicator"
             />
-          </NuxtLink>
+          </NuxtLinkLocale>
         </div>
       </div>
     </div>

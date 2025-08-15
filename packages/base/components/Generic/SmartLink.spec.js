@@ -19,7 +19,9 @@ describe("SmartLink", () => {
         props: { destination },
       });
 
-      expect(wrapper.find("nuxt-link-stub").attributes("to")).toBe(destination);
+      expect(wrapper.find("nuxt-link-locale-stub").attributes("to")).toBe(
+        destination,
+      );
     });
   });
 
