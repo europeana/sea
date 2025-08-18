@@ -3,6 +3,7 @@ import parseMarkdown from "@europeana/sea-base-layer/utils/markdown/parse.js";
 import useSwiper from "@europeana/sea-base-layer/composables/swiper";
 import "swiper/css/grid"; // for mobile
 import { A11y, Grid, Keyboard, Navigation, Pagination } from "swiper/modules";
+import { GenericSmartLink } from "#components"; // explicit import needed for dynamic components: https://nuxt.com/docs/guide/directory-structure/components#dynamic-components
 
 const { t } = useI18n();
 
@@ -109,7 +110,7 @@ const { swiperReady } = useSwiper(swiperOptions);
             class="swiper-slide text-center"
           >
             <component
-              :is="slide.url ? 'SmartLink' : 'div'"
+              :is="slide.url ? GenericSmartLink : 'div'"
               :destination="slide.url"
               class="image-wrapper"
             >
@@ -119,6 +120,7 @@ const { swiperReady } = useSwiper(swiperOptions);
                 :image-sizes="imageSizes"
                 :width="slide.image.width"
                 :height="slide.image.height"
+                :max-width="254"
                 :alt="slide.name || ''"
                 class="swiper-lazy"
               />
@@ -153,6 +155,7 @@ const { swiperReady } = useSwiper(swiperOptions);
     margin-bottom: 15rem;
   }
 }
+
 .header {
   padding-bottom: 1rem;
 
@@ -239,7 +242,7 @@ $swiper-pagination-height-4k: 124px;
       height: $swiper-slide-width-height-4k;
     }
 
-    ::deep(picture) {
+    :deep(picture) {
       width: 100%;
       height: 100%;
       display: inline-flex;
@@ -247,12 +250,14 @@ $swiper-pagination-height-4k: 124px;
       justify-content: center;
     }
 
-    ::deep(img) {
+    :deep(img) {
       mix-blend-mode: multiply; // fixes logo img with white background
       max-height: 100%;
+      height: auto;
+      width: auto;
     }
 
-    ::deep(.icon-external-link) {
+    :deep(.icon-external-link) {
       display: none;
     }
   }
@@ -310,7 +315,7 @@ $swiper-pagination-height-4k: 124px;
   }
 }
 
-::deep(.swiper-pagination-bullet) {
+:deep(.swiper-pagination-bullet) {
   height: 12px;
   width: 12px;
   color: $black;
@@ -334,9 +339,9 @@ $swiper-pagination-height-4k: 124px;
     margin-right: 0;
   }
 
-  // &-active {
-  //   background-color: $black;
-  // }
+  &.swiper-pagination-bullet-active {
+    background-color: $black;
+  }
 }
 
 .landing-illustration-group.ds4ch {
@@ -409,7 +414,7 @@ $swiper-pagination-height-4k: 124px;
     }
   }
 
-  ::deep(.swiper-pagination-bullet) {
+  :deep(.swiper-pagination-bullet) {
     border: 2px solid $black;
 
     @media (min-width: $bp-4k) {
@@ -423,9 +428,9 @@ $swiper-pagination-height-4k: 124px;
       }
     }
 
-    // &-active {
-    //   background-color: $black;
-    // }
+    &.swiper-pagination-bullet-active {
+      background-color: $black;
+    }
   }
 }
 </style>
