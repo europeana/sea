@@ -43,8 +43,17 @@ const props = defineProps({
   </div>
   <div class="row row-cols-1 row-cols-xl-4 g-4 justify-content-center">
     <div v-for="(card, index) in props.cards" :key="index" class="col">
+      <ContentCard
+        v-if="card['__typename'] === 'ContentCard'"
+        :title="card.name"
+        :url="card.url"
+        :image-url="card.primaryImageOfPage?.image?.url"
+        :image-content-type="card.primaryImageOfPage?.image?.contentType"
+        :image-width="card.primaryImageOfPage?.image?.width"
+        :image-height="card.primaryImageOfPage?.image?.height"
+      />
       <CardTestimonialCard
-        v-if="card['__typename'] === 'TestimonialCard'"
+        v-else-if="card['__typename'] === 'TestimonialCard'"
         :testimonial-text="card.text"
         :attribution="card.attribution"
       />

@@ -32,6 +32,14 @@ const { data } = await useAsyncData(`landingPage:${slug}`, async () => {
   };
 });
 
+const cards = computed(() =>
+  data.value.posts.map((post) => ({
+    ...post,
+    __typename: "ContentCard",
+    url: { name: "news-slug", params: { slug: post.identifier } },
+  })),
+);
+
 useHead({
   title: data.value.page.headline,
 });
@@ -45,14 +53,6 @@ useHead({
       :hero-image="data.page.primaryImageOfPage"
       variant="alternate"
     />
-    <ol v-if="data.posts.length > 0">
-      <li v-for="(post, index) in data.posts" :key="index">
-        <NuxtLinkLocale
-          :to="{ name: 'news-slug', params: { slug: post.identifier } }"
-        >
-          {{ post.name }}
-        </NuxtLinkLocale>
-      </li>
-    </ol>
+    <CardGroup v-if="cards.length > 0" title="posts" :cards="cards" />
   </div>
 </template>
