@@ -165,9 +165,7 @@ const imageNotFound = () => {
           </div>
           <template v-if="cardText">
             <div class="card-text">
-              <!-- eslint-disable vue/no-v-html -->
-              <p v-html="cardText" />
-              <!-- eslint-enable vue/no-v-html -->
+              <p>{{ cardText }}</p>
             </div>
           </template>
         </div>
