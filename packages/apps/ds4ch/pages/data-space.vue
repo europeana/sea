@@ -50,7 +50,7 @@ useHead({
         <NuxtLinkLocale
           :to="{ name: 'news-slug', params: { slug: post.identifier } }"
         >
-          {{ post.name }} - {{ post.introduction }}
+          {{ post.name }}
         </NuxtLinkLocale>
       </li>
     </ol>
