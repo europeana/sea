@@ -58,6 +58,7 @@
   },
   "news": "News",
   "newWindow": "opens in new window",
+  "project": "Project",
   "related": {
     "categoryTags": {
       "title": "Discover related content"

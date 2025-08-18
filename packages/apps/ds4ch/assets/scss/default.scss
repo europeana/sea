@@ -76,3 +76,9 @@ div.landing-sub-section {
     }
   }
 }
+
+// base component DS4CH specific overrides
+.content-card .card-text {
+  color: $black;
+  font-size: $font-size-base;
+}
