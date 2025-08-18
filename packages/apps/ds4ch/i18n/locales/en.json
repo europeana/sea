@@ -58,6 +58,13 @@
   },
   "news": "News",
   "newWindow": "opens in new window",
+  "pagination": {
+    "label": "Pagination",
+    "next": "Next",
+    "of": "Of",
+    "pageNumber": "Page number",
+    "previous": "Previous"
+  },
   "related": {
     "categoryTags": {
       "title": "Discover related content"
