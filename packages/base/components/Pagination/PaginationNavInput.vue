@@ -112,14 +112,14 @@ const linkGen = (page) => {
     data-qa="pagination navigation"
     class="pagination-nav-input"
   >
-    <ul class="pl-0 d-flex justify-content-center align-items-center">
+    <ul class="ps-0 d-flex justify-content-center align-items-center">
       <li
         :class="{
           disabled: prevDisabled,
           'btn-text': buttonText,
-          'mr-md-3': pageInput,
+          'me-md-3 me-4k-5': pageInput,
         }"
-        class="page-item btn-prev d-flex pl-0 mr-2"
+        class="page-item btn-prev d-flex ps-0 me-2"
         data-qa="prev button"
       >
         <GenericSmartLink
@@ -136,7 +136,7 @@ const linkGen = (page) => {
             :class="[
               buttonIconClass,
               {
-                'mr-1': buttonText,
+                'me-1 me-4k-2': buttonText,
               },
             ]"
             data-qa="prev button icon"
@@ -164,10 +164,10 @@ const linkGen = (page) => {
         :class="{
           'btn-text': buttonText,
           disabled: nextDisabled,
-          'ml-2 ml-md-3': pageInput,
-          'mr-2': progress,
+          'ms-2 ms-md-3 ms-4k-5': pageInput,
+          'me-2': progress,
         }"
-        class="page-item btn-next d-flex pr-0"
+        class="page-item btn-next d-flex pe-0"
         data-qa="next button"
       >
         <GenericSmartLink
@@ -186,7 +186,7 @@ const linkGen = (page) => {
             :class="[
               buttonIconClass,
               {
-                'ml-1': buttonText,
+                'ms-1 ms-4k-2': buttonText,
               },
             ]"
             data-qa="next button icon"

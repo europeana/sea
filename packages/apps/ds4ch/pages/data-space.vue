@@ -65,3 +65,8 @@ useHead({
     <PaginationNavInput :total-items="data.totalItems" />
   </div>
 </template>
+
+<style lang="scss">
+@import "assets/scss/variables";
+@import "assets/scss/pagination";
+</style>
