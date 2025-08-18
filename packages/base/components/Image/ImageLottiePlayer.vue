@@ -9,15 +9,36 @@ const props = defineProps({
 });
 
 const lottiePlayer = ref(null);
-const loadSrc = ref(null);
+const played = ref(false);
+const intersecting = ref(false);
 
 let observer;
 
 onMounted(() => {
+  const playerInstance = lottiePlayer.value?.getDotLottieInstance();
+
+  function playHandler() {
+    played.value = true;
+    playerInstance.removeEventListener("play", playHandler);
+  }
+  playerInstance.addEventListener("play", playHandler);
+
+  function loadHandler() {
+    // Play Lottie when in viewport on initial render
+    if (intersecting.value) {
+      playerInstance.play();
+    }
+  }
+  playerInstance.addEventListener("load", loadHandler);
+
   observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting || entry.intersectionRatio > 0) {
-        loadSrc.value = props.src;
+        intersecting.value = true;
+        // If Lottie not yet played at initial render, play when intersecting
+        if (!played.value) {
+          playerInstance.play();
+        }
       }
     },
     {
@@ -38,5 +59,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <DotLottieVue ref="lottiePlayer" autoplay :src="loadSrc" />
+  <DotLottieVue ref="lottiePlayer" :src="props.src" />
 </template>
