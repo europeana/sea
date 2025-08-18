@@ -20,11 +20,11 @@ query BlogPostListingPage(
       primaryImageOfPage {
         image {
           url
-          description
           contentType
         }
       }
       datePublished
+      description
     }
   }
 }
