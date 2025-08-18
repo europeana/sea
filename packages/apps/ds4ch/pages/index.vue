@@ -24,7 +24,12 @@ useHead({
 
 <template>
   <div class="home-page">
-    <h1>{{ page.headline }}</h1>
+    <HomeHero
+      :cta="page.relatedLink"
+      :headline="page.headline || page.name"
+      :hero-image="page.primaryImageOfPage"
+      :text="page.text"
+    />
     <PageSections :sections="sections" />
   </div>
 </template>
