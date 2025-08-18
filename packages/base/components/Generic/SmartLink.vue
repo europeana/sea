@@ -10,8 +10,6 @@ const props = defineProps({
   },
 });
 
-const localePath = useLocalePath();
-
 const internalDomain = useRuntimeConfig().public.internalLinkDomain;
 
 const isExternalLink = computed(() => {
@@ -32,8 +30,8 @@ const isExternalLink = computed(() => {
 });
 </script>
 <template>
-  <NuxtLink
-    :to="localePath(destination)"
+  <NuxtLinkLocale
+    :to="destination"
     :target="isExternalLink ? '_blank' : null"
     :external="isExternalLink"
   >
@@ -45,5 +43,5 @@ const isExternalLink = computed(() => {
     <span v-if="isExternalLink" class="visually-hidden">
       ({{ $t("newWindow") }})
     </span>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
