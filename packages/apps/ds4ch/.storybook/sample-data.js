@@ -54,4 +54,8 @@ export default {
       },
     },
   ],
+  thumbnails: [
+    "https://api.europeana.eu/thumbnail/v3/400/3fa6a7d3f040cb177dc5b3f02d5570ab", // An eruption of Mount Etna at night https://www.europeana.eu/en/item/9200579/czyxv8m8,
+    "https://api.europeana.eu/thumbnail/v3/400/3bc0291af7adc6b013a4be826af1f794", // Portrait of a young Woman, with 'Puck' the Dog https://www.europeana.eu/en/item/90402/SK_A_1703
+  ],
 };
