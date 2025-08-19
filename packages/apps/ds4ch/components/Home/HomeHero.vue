@@ -70,13 +70,13 @@ const imageCSSVars = computed(() =>
           v-html="parseMarkdown(`# ${headline}\n${text}`)"
         />
         <!-- eslint-enable vue/no-v-html -->
-        <SmartLink
+        <GenericSmartLink
           v-if="cta"
           :destination="cta.url"
           class="btn btn-primary d-inline-flex align-items-center mt-1 mt-md-4 mb-0"
         >
           {{ cta.text }}
-        </SmartLink>
+        </GenericSmartLink>
       </header>
       <div id="europeana-logo">
         <p class="text-uppercase mb-0">
@@ -163,7 +163,7 @@ const imageCSSVars = computed(() =>
       }
     }
 
-    ::v-deep h1 {
+    :deep(h1) {
       color: $white;
       text-align: left;
       font-family: $font-family-montserrat;
@@ -200,7 +200,7 @@ const imageCSSVars = computed(() =>
       }
     }
 
-    ::v-deep p {
+    :deep(p) {
       color: $white;
       text-align: left;
 
@@ -210,48 +210,6 @@ const imageCSSVars = computed(() =>
 
       @media (min-width: $bp-4k) {
         font-size: 3.3125rem;
-      }
-    }
-
-    // before and after for internal border
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 2rem;
-      right: 2rem;
-      bottom: 0;
-      border-left: 1px solid $grey;
-      border-right: 1px solid $grey;
-      @media (min-width: ($bp-medium)) {
-        left: 4rem;
-        right: 4rem;
-      }
-
-      @media (min-width: ($bp-4k)) {
-        left: 8rem;
-        right: 8rem;
-      }
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 7.25rem;
-      left: 0;
-      right: 0;
-      bottom: 2rem;
-      border-top: 1px solid $grey;
-      border-bottom: 1px solid $grey;
-
-      @media (min-width: ($bp-medium)) {
-        top: 9.25rem;
-        bottom: 4rem;
-      }
-
-      @media (min-width: ($bp-4k)) {
-        top: 18.625rem;
-        bottom: 8rem;
       }
     }
   }

@@ -22,6 +22,10 @@ query LandingPage(
       primaryImageOfPage {
         ...landingPageImageWithAttributionFields
       }
+      relatedLink {
+        url
+        text
+      }
       hasPartCollection(limit: 20) {
         items {
           __typename
