@@ -24,7 +24,6 @@ query BlogPostListingPage(
         }
       }
       datePublished
-      introduction
     }
   }
 }
