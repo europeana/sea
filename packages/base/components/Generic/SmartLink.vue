@@ -4,6 +4,10 @@ const props = defineProps({
     type: [String, Object],
     default: "",
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   hideExternalIcon: {
     type: Boolean,
     default: false,
@@ -31,7 +35,7 @@ const isExternalLink = computed(() => {
 </script>
 <template>
   <NuxtLinkLocale
-    :to="destination"
+    :to="props.disabled ? null : destination"
     :target="isExternalLink ? '_blank' : null"
     :external="isExternalLink"
   >
