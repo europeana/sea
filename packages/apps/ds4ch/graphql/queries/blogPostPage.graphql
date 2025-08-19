@@ -18,7 +18,6 @@ query BlogPostPage(
       description
       introduction
       datePublished
-      relatedLink
       associatedMediaCollection {
         items {
           url
