@@ -1,7 +1,10 @@
 <script setup>
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 import blogPostListingPageQuery from "@/graphql/queries/blogPostListingPage.graphql";
+import useScrollTo from "@europeana/sea-base-layer/composables/scrollTo";
 
+const { scrollToSelector } = useScrollTo();
+const { t } = useI18n({ useScope: "global" });
 const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
@@ -40,28 +43,37 @@ const { data } = await useAsyncData(
   },
 );
 
+watch(page, () => {
+  scrollToSelector("#results", { offsetTop: -100 });
+});
+
+const cards = computed(() =>
+  data.value.posts.map((post) => ({
+    ...post,
+    __typename: "ContentCard",
+    url: { name: "news-slug", params: { slug: post.identifier } },
+  })),
+);
+
 useHead({
   title: data.value.page.headline,
 });
 </script>
 
 <template>
-  <div>
+  <div class="mb-5">
     <LandingHero
       :headline="data.page.headline || ''"
       :text="data.page.text"
       :hero-image="data.page.primaryImageOfPage"
       variant="alternate"
     />
-    <ol v-if="data.posts.length > 0" :start="(page - 1) * limit + 1">
-      <li v-for="(post, index) in data.posts" :key="index">
-        <NuxtLinkLocale
-          :to="{ name: 'news-slug', params: { slug: post.identifier } }"
-        >
-          {{ post.name }}
-        </NuxtLinkLocale>
-      </li>
-    </ol>
+    <div id="results" class="container mt-5 mb-5">
+      <output class="context-label mb-4 mb-4k-5">
+        {{ t("results", { count: data.totalItems }) }}
+      </output>
+      <CardGroup v-if="cards.length > 0" :cards="cards" />
+    </div>
     <PaginationNavInput :total-items="data.totalItems" />
   </div>
 </template>
@@ -69,4 +81,12 @@ useHead({
 <style lang="scss">
 @import "assets/scss/variables";
 @import "assets/scss/pagination";
+
+.xxl-page output.context-label {
+  font-size: $font-size-14;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-28;
+  }
+}
 </style>

@@ -6,6 +6,10 @@ import CardGroup from "./CardGroup.vue";
 const testProps = {
   cards: [
     {
+      name: "News post",
+      __typename: "ContentCard",
+    },
+    {
       testimonialText:
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       attribution: "M, Museum X",
@@ -26,6 +30,16 @@ describe("components/landing/CardGroup", () => {
 
     const column = wrapper.find(".row .col");
     expect(column.isVisible()).toBe(true);
+  });
+
+  describe("when card type is content", () => {
+    it("renders a content card", () => {
+      const wrapper = shallowMount(CardGroup, { props: testProps });
+
+      const testimonialCards = wrapper.findAll("content-card-stub");
+
+      expect(testimonialCards.length).toBe(1);
+    });
   });
 
   describe("when card type is testimonial", () => {

@@ -6,6 +6,7 @@ mockNuxtImport("useI18n", () => {
   return () => {
     return {
       localeProperties: { value: { language: "en-GB" } },
+      t: (key) => key,
     };
   };
 });
@@ -62,11 +63,11 @@ describe("dataSpacePage", () => {
     expect(hero.props("variant")).toBe("alternate");
   });
 
-  it("renders links to the retrieved news posts", async () => {
+  it("renders content card links to the retrieved news posts", async () => {
     const wrapper = await factory();
 
-    const postLink = wrapper.find("ol li a");
+    const contentCardLink = wrapper.find(".content-card a");
 
-    expect(postLink.attributes().href).toBe("/en/news/post");
+    expect(contentCardLink.attributes().href).toBe("/en/news/post");
   });
 });
