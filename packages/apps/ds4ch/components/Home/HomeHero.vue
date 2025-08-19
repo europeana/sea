@@ -35,15 +35,15 @@ const props = defineProps({
 });
 
 const CSS_VARS_PRESETS = {
-  small: { w: 576, h: 896, fit: "fill", q: 100, f: "right" },
-  medium: { w: 768, h: 1080, fit: "fill", q: 100, f: "right" },
-  large: { w: 992, h: 1080, fit: "fill", q: 100, f: "right" },
-  xl: { w: 1200, h: 1080, fit: "fill", q: 100, f: "right" },
-  xxl: { w: 1400, h: 1080, fit: "fill", q: 100, f: "right" },
-  xxxl: { w: 1880, h: 1080, fit: "fill", q: 100, f: "right" },
-  wqhd: { w: 2520, h: 1440, fit: "fill", q: 100, f: "right" },
-  "4k": { w: 3020, h: 1440, fit: "fill", q: 100, f: "right" },
-  "4k+": { w: 3840, h: 2160, fit: "fill", q: 100, f: "right" },
+  small: { w: 650, h: 850, fit: "crop", q: 100, f: "top" },
+  medium: { w: 850, h: 850, fit: "crop", q: 100, f: "top" },
+  large: { w: 992, h: 992, fit: "crop", q: 100, f: "top" },
+  xl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
+  xxl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
+  xxxl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
+  wqhd: { w: 1200, h: 1200, fit: "crop", q: 100, f: "left" },
+  "4k": { w: 1440, h: 1440, fit: "crop", q: 100, f: "left" },
+  "4k+": { w: 2160, h: 2160, fit: "crop", q: 100, f: "left" },
 };
 
 const imageCSSVars = computed(() =>
@@ -63,7 +63,7 @@ const imageCSSVars = computed(() =>
       :alt="heroImage?.image?.description"
     />
     <div class="hero-content d-flex">
-      <header class="mt-auto mb-auto">
+      <header class="mt-5 mt-xl-auto mb-md-auto">
         <!-- eslint-disable vue/no-v-html -->
         <div
           class="hero-content-text-block"
@@ -73,7 +73,7 @@ const imageCSSVars = computed(() =>
         <GenericSmartLink
           v-if="cta"
           :destination="cta.url"
-          class="btn btn-primary d-inline-flex align-items-center mt-1 mt-md-4 mb-0"
+          class="btn btn-primary icon-chevron d-inline-flex align-items-center mt-1 mt-md-4 mb-0"
         >
           {{ cta.text }}
         </GenericSmartLink>
@@ -89,25 +89,18 @@ const imageCSSVars = computed(() =>
 </template>
 
 <style lang="scss" scoped>
-@import "@europeana/style/scss/DS4CH/variables";
+@import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/responsive-background-image";
+@import "assets/scss/variables";
 
 .landing-hero {
   overflow: hidden;
-  height: 100vh;
-  min-height: 37rem;
+  min-height: 100vh;
   position: relative;
   background-color: $black;
 
-  @media (min-width: ($bp-small)) {
-    min-height: 30rem;
-  }
-
-  @media (min-width: ($bp-medium)) {
-    min-height: 40rem;
-  }
-
   @media (min-width: ($bp-large)) {
+    height: 100vh;
     min-height: 46rem;
   }
 
@@ -124,14 +117,19 @@ const imageCSSVars = computed(() =>
     top: 3.5rem;
     right: 0;
     bottom: 0;
-    position: absolute;
+    position: relative;
     margin: -3.5rem 0 0 0;
-    padding: 7.5rem 4rem 4rem;
+    padding: 6.5rem 2rem 90vw;
     max-width: 100%;
     flex-direction: column;
 
-    @media (min-width: ($bp-medium)) {
-      padding: 8rem;
+    @media (min-width: ($bp-small)) {
+      padding: 8rem 5rem 62vw;
+    }
+
+    @media (min-width: ($bp-large)) {
+      position: absolute;
+      padding: 8rem 5rem 2rem;
     }
 
     @media (min-width: ($bp-wqhd)) {
@@ -146,18 +144,35 @@ const imageCSSVars = computed(() =>
     header {
       position: relative;
       z-index: 1;
+      text-align: center;
+
+      @media (min-width: ($bp-large)) {
+        text-align: left;
+      }
     }
+
     .hero-content-text-block {
-      margin-bottom: auto;
-      margin-top: auto;
+      margin-bottom: 2rem;
 
       @media (min-width: ($bp-small)) {
         max-width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (min-width: ($bp-medium)) {
+        max-width: 36rem;
       }
 
       @media (min-width: ($bp-large)) {
-        max-width: 36rem;
+        margin-left: 0;
       }
+
+      @media (min-width: ($bp-extralarge)) {
+        margin-bottom: auto;
+        margin-top: auto;
+      }
+
       @media (min-width: ($bp-4k)) {
         max-width: 72rem;
       }
@@ -165,19 +180,24 @@ const imageCSSVars = computed(() =>
 
     :deep(h1) {
       color: $white;
-      text-align: left;
+      text-align: center;
       font-family: $font-family-montserrat;
-      font-size: $font-size-extrasmall;
+      font-size: $font-size-12;
       font-weight: 600;
       text-transform: uppercase;
       margin-bottom: 1rem;
 
       @media (min-width: ($bp-medium)) {
         margin-bottom: 1.5rem;
+        font-size: $font-size-14;
+      }
+
+      @media (min-width: ($bp-large)) {
+        text-align: left;
       }
 
       @media (min-width: $bp-4k) {
-        font-size: 2rem;
+        font-size: $font-size-28;
         margin-bottom: 4rem;
       }
 
@@ -185,31 +205,35 @@ const imageCSSVars = computed(() =>
         display: block;
         color: $white;
         font-style: normal;
-        font-size: $font-size-large;
+        font-size: $font-size-24;
         font-weight: 700;
         text-transform: none;
 
         @media (min-width: ($bp-medium)) {
-          font-size: 2.25rem;
+          font-size: $font-size-36;
           line-height: 1.2;
         }
 
         @media (min-width: $bp-4k) {
-          font-size: 6rem;
+          font-size: $font-size-72;
         }
       }
     }
 
     :deep(p) {
       color: $white;
-      text-align: left;
+      text-align: center;
 
       @media (min-width: ($bp-medium)) {
-        font-size: $font-size-medium;
+        font-size: $font-size-20;
+      }
+
+      @media (min-width: ($bp-large)) {
+        text-align: left;
       }
 
       @media (min-width: $bp-4k) {
-        font-size: 3.3125rem;
+        font-size: $font-size-40;
       }
     }
   }
@@ -220,43 +244,44 @@ const imageCSSVars = computed(() =>
     right: 0;
     bottom: 0;
     position: absolute;
-    background-size: cover;
+    background-size: 100% auto;
+    background-position: bottom;
     background-repeat: no-repeat;
     background-color: $black;
 
-    // overlay to keep image & text contrast
-    @media (max-width: $bp-extralarge) {
-      &::after {
-        content: "";
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-image: linear-gradient(
-          0deg,
-          rgba(25, 24, 23, 0.8),
-          rgba(25, 24, 23, 0.8)
-        );
-        mix-blend-mode: multiply;
-        position: absolute;
-      }
+    @media (min-width: $bp-large) {
+      background-size: auto 100%;
+      background-position: right;
     }
 
-    @media (min-width: ($bp-wqhd)) {
-      top: 5.125rem;
+    @media (min-width: $bp-extralarge) {
+      background-size: auto 125%;
+      background-position: right;
+    }
+
+    @media (min-width: $bp-xxxl) {
+      background-size: auto 150%;
+      background-position: right;
     }
   }
 
   #europeana-logo {
-    p {
-      font-size: $font-size-smallest;
+    order: -1;
 
-      @media (min-width: ($bp-medium)) {
-        font-size: $font-size-extrasmall;
+    @media (min-width: ($bp-large)) {
+      order: 1;
+    }
+
+    p {
+      font-size: $font-size-14;
+      text-align: right;
+
+      @media (min-width: ($bp-large)) {
+        text-align: left;
       }
 
       @media (min-width: ($bp-4k)) {
-        font-size: 1.875rem;
+        font-size: $font-size-28;
       }
     }
 
@@ -265,10 +290,15 @@ const imageCSSVars = computed(() =>
       margin-top: 0.25rem;
       width: 100px;
       filter: invert(1);
+      margin-left: auto;
 
       @media (min-width: ($bp-medium)) {
         margin-top: 0.75rem;
         width: 176px;
+      }
+
+      @media (min-width: ($bp-large)) {
+        margin-left: 0;
       }
 
       @media (min-width: ($bp-4k)) {
