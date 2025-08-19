@@ -1,7 +1,7 @@
 <script setup>
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 import blogPostListingPageQuery from "@/graphql/queries/blogPostListingPage.graphql";
-
+const { t } = useI18n({ useScope: "global" });
 const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
@@ -54,14 +54,19 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div class="mb-5">
     <LandingHero
       :headline="data.page.headline || ''"
       :text="data.page.text"
       :hero-image="data.page.primaryImageOfPage"
       variant="alternate"
     />
-    <CardGroup v-if="cards.length > 0" :cards="cards" />
+    <div class="container mt-5 mb-5">
+      <output class="context-label mb-4 mb-4k-5">
+        {{ t("results", { count: data.totalItems }) }}
+      </output>
+      <CardGroup v-if="cards.length > 0" :cards="cards" />
+    </div>
     <PaginationNavInput :total-items="data.totalItems" />
   </div>
 </template>
@@ -69,4 +74,12 @@ useHead({
 <style lang="scss">
 @import "assets/scss/variables";
 @import "assets/scss/pagination";
+
+.xxl-page output.context-label {
+  font-size: $font-size-14;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-28;
+  }
+}
 </style>

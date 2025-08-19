@@ -30,6 +30,10 @@ const props = defineProps({
     type: Array,
     default: null,
   },
+  cardGroupClasses: {
+    type: String,
+    default: "row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-wqhd-6",
+  },
 });
 </script>
 <template>
@@ -44,7 +48,7 @@ const props = defineProps({
     <div v-if="text" class="text mb-3" v-html="parseMarkdown(text)" />
     <!-- eslint-enable vue/no-v-html -->
   </div>
-  <div class="row row-cols-1 row-cols-xl-4 g-4 justify-content-center">
+  <div class="row g-4 justify-content-center" :class="cardGroupClasses">
     <div v-for="(card, index) in props.cards" :key="index" class="col">
       <ContentCard
         v-if="card['__typename'] === 'ContentCard'"
@@ -93,18 +97,6 @@ const props = defineProps({
       font-size: $font-size-56;
       margin-bottom: 2rem;
     }
-  }
-}
-
-.row {
-  padding-bottom: 3rem;
-
-  @media (min-width: $bp-medium) {
-    padding-bottom: 6rem;
-  }
-
-  @media (min-width: $bp-4k) {
-    padding-bottom: 12rem;
   }
 }
 </style>
