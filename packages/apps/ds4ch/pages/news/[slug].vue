@@ -127,6 +127,14 @@ useHead({
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
 
+.text-page {
+  margin-top: $page-header-height; // leave space for the fixed positioned header
+
+  @media (min-width: $bp-4k) {
+    margin-top: $page-header-height-4k;
+  }
+}
+
 .published {
   font-size: $font-size-base;
 
