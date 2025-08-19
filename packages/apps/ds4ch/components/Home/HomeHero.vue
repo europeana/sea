@@ -43,7 +43,7 @@ const CSS_VARS_PRESETS = {
   xxxl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
   wqhd: { w: 1200, h: 1200, fit: "crop", q: 100, f: "left" },
   "4k": { w: 1440, h: 1440, fit: "crop", q: 100, f: "left" },
-  "4k+": { w: 2160, h: 2160, fit: "crop", q: 100, f: "left" },
+  "4k+": { w: 1440, h: 1440, fit: "crop", q: 100, f: "left" },
 };
 
 const imageCSSVars = computed(() =>
