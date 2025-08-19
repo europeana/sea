@@ -1,13 +1,29 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { shallowMount } from "@vue/test-utils";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { mount } from "@vue/test-utils";
 import ImageLottiePlayer from "./ImageLottiePlayer.vue";
 
+const removeEventSpy = vi.fn();
+const addEventSpy = vi.fn();
+const playSpy = vi.fn();
+
+const lottieInstance = {
+  play: playSpy,
+  removeEventListener: removeEventSpy,
+  addEventListener: addEventSpy,
+};
+
 vi.mock("@lottiefiles/dotlottie-vue", () => ({
-  DotLottieVue: { name: "DotLottieVue", template: "<div><slot /></div>" },
+  DotLottieVue: {
+    name: "DotLottieVue",
+    template: "<div id='lotti-vue' :src='src'><slot /></div>",
+    methods: {
+      getDotLottieInstance: () => lottieInstance,
+    },
+  },
 }));
 
 const factory = () =>
-  shallowMount(ImageLottiePlayer, {
+  mount(ImageLottiePlayer, {
     attachTo: document.body,
     props: {
       src: "https://www.example.org/image.lottie",
@@ -25,27 +41,54 @@ describe("components/image/ImageLottiePlayer", () => {
     };
     window.IntersectionObserverEntry = class {};
   });
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
 
   it("renders the Lottie player", () => {
     const wrapper = factory();
-    const lottiePlayer = wrapper.find("dot-lottie-vue-stub");
+    const lottiePlayer = wrapper.find("#lotti-vue");
     expect(lottiePlayer.exists()).toBe(true);
   });
 
-  describe("when component intersect viewport", () => {
-    it("sets loadSrc", () => {
-      const wrapper = factory();
+  it("uses the src prop for the lottie src", () => {
+    const wrapper = factory();
+    const lottiePlayer = wrapper.find("#lotti-vue");
+    expect(lottiePlayer.attributes("src")).toBe(
+      "https://www.example.org/image.lottie",
+    );
+  });
 
-      expect(wrapper.vm.observer).toBeInstanceOf(IntersectionObserver);
-      expect(wrapper.vm.loadSrc).toBe(null);
+  describe("when component scrolls to intersect viewport", () => {
+    describe("when the animation hasn't played yet", () => {
+      it("triggers a play call", () => {
+        const wrapper = factory();
 
-      // Simulate the intersection
-      const entries = [
-        { intersectionRatio: 0.5, target: wrapper.vm.lottiePlayer.$el },
-      ];
-      wrapper.vm.observer.callback(entries);
+        expect(wrapper.vm.observer).toBeInstanceOf(IntersectionObserver);
 
-      expect(wrapper.vm.loadSrc).toBe("https://www.example.org/image.lottie");
+        // Simulate the intersection
+        const entries = [
+          { intersectionRatio: 0.5, target: wrapper.vm.lottiePlayer.$el },
+        ];
+        wrapper.vm.observer.callback(entries);
+
+        expect(lottieInstance.play).toHaveBeenCalled();
+      });
+    });
+    describe("when the animation has been played already", () => {
+      it("does not re-trigger a play call", () => {
+        const wrapper = factory();
+        wrapper.vm.played = true;
+        expect(wrapper.vm.observer).toBeInstanceOf(IntersectionObserver);
+
+        // Simulate the intersection
+        const entries = [
+          { intersectionRatio: 0.5, target: wrapper.vm.lottiePlayer.$el },
+        ];
+        wrapper.vm.observer.callback(entries);
+
+        expect(lottieInstance.play).toHaveBeenCalledTimes(0);
+      });
     });
   });
 
