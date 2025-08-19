@@ -12,6 +12,7 @@ describe("components/home/HomeHero", () => {
     describe("when there is a hero image available", () => {
       it("returns background style definitions", () => {
         const wrapper = factory({
+          headline: "hero title",
           heroImage: { image: { url: "https://www.europeana.eu/example.jpg" } },
         });
 
