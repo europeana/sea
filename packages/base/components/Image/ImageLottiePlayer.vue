@@ -14,6 +14,9 @@ const intersecting = ref(false);
 
 let observer;
 
+// TODO: refactor to use watchEffect, checking intersecting and loaded values
+//       before playing, then unwatching
+
 onMounted(() => {
   const playerInstance = lottiePlayer.value?.getDotLottieInstance();
 
