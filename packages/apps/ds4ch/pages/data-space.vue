@@ -1,6 +1,9 @@
 <script setup>
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 import blogPostListingPageQuery from "@/graphql/queries/blogPostListingPage.graphql";
+import useScrollTo from "@europeana/sea-base-layer/composables/scrollTo";
+
+const { scrollToSelector } = useScrollTo();
 const { t } = useI18n({ useScope: "global" });
 const slug = "data-space";
 const contentful = inject("$contentful");
@@ -40,6 +43,10 @@ const { data } = await useAsyncData(
   },
 );
 
+watch(page, () => {
+  scrollToSelector("#results", { offsetTop: -100 });
+});
+
 const cards = computed(() =>
   data.value.posts.map((post) => ({
     ...post,
@@ -61,7 +68,7 @@ useHead({
       :hero-image="data.page.primaryImageOfPage"
       variant="alternate"
     />
-    <div class="container mt-5 mb-5">
+    <div id="results" class="container mt-5 mb-5">
       <output class="context-label mb-4 mb-4k-5">
         {{ t("results", { count: data.totalItems }) }}
       </output>

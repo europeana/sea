@@ -49,26 +49,33 @@ const props = defineProps({
     <!-- eslint-enable vue/no-v-html -->
   </div>
   <div class="row g-4 justify-content-center" :class="cardGroupClasses">
-    <div v-for="(card, index) in props.cards" :key="index" class="col">
-      <ContentCard
-        v-if="card['__typename'] === 'ContentCard'"
-        :title="card.name"
-        :url="card.url"
-        :image-url="card.primaryImageOfPage?.image?.url"
-        :image-content-type="card.primaryImageOfPage?.image?.contentType"
-        :image-width="card.primaryImageOfPage?.image?.width"
-        :image-height="card.primaryImageOfPage?.image?.height"
-      />
-      <CardTestimonialCard
-        v-else-if="card['__typename'] === 'TestimonialCard'"
-        :testimonial-text="card.text"
-        :attribution="card.attribution"
-      />
+    <div
+      v-for="(card, index) in props.cards"
+      :key="card.url || index"
+      class="col"
+    >
+      <transition appear name="fade">
+        <ContentCard
+          v-if="card['__typename'] === 'ContentCard'"
+          :title="card.name"
+          :url="card.url"
+          :image-url="card.primaryImageOfPage?.image?.url"
+          :image-content-type="card.primaryImageOfPage?.image?.contentType"
+          :image-width="card.primaryImageOfPage?.image?.width"
+          :image-height="card.primaryImageOfPage?.image?.height"
+        />
+        <CardTestimonialCard
+          v-else-if="card['__typename'] === 'TestimonialCard'"
+          :testimonial-text="card.text"
+          :attribution="card.attribution"
+        />
+      </transition>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
+@import "@europeana/style/scss/transitions";
 @import "assets/scss/variables";
 
 .card-group-header {
