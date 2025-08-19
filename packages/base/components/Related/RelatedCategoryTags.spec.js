@@ -1,12 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 
 import RelatedCategoryTags from "./RelatedCategoryTags.vue";
-
-mockNuxtImport("useLocalePath", () => {
-  return () => (opts) => opts;
-});
 
 const factory = ({ props, mocks } = {}) =>
   shallowMount(RelatedCategoryTags, {
