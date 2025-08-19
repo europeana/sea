@@ -33,8 +33,11 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div class="card-group-header col col-lg-8 text-center mx-auto px-0">
-    <component :is="titleTag">
+  <div
+    v-if="title || text"
+    class="card-group-header col col-lg-8 text-center mx-auto px-0"
+  >
+    <component :is="titleTag" v-if="title">
       {{ title }}
     </component>
     <!-- eslint-disable vue/no-v-html -->

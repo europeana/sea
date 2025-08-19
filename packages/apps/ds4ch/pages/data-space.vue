@@ -61,7 +61,7 @@ useHead({
       :hero-image="data.page.primaryImageOfPage"
       variant="alternate"
     />
-    <CardGroup v-if="cards.length > 0" title="posts" :cards="cards" />
+    <CardGroup v-if="cards.length > 0" :cards="cards" />
     <PaginationNavInput :total-items="data.totalItems" />
   </div>
 </template>
