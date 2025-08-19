@@ -43,7 +43,7 @@ const CSS_VARS_PRESETS = {
   xxxl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
   wqhd: { w: 1200, h: 1200, fit: "crop", q: 100, f: "left" },
   "4k": { w: 1400, h: 1400, fit: "crop", q: 100, f: "left" },
-  "4k+": { w: 1400, h: 1400, fit: "crop", q: 100, f: "left" },
+  "4kup": { w: 1400, h: 1400, fit: "crop", q: 100, f: "left" },
 };
 
 const imageCSSVars = computed(() =>
@@ -56,7 +56,7 @@ const imageCSSVars = computed(() =>
 <template>
   <div class="landing-hero">
     <div
-      class="hero-background responsive-backround-image"
+      class="hero-background responsive-background-image"
       :style="imageCSSVars"
       role="img"
       :aria-label="heroImage?.image?.description"
@@ -90,7 +90,7 @@ const imageCSSVars = computed(() =>
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
-@import "@europeana/style/scss/responsive-background-image";
+@import "assets/scss/responsive-background-image";
 @import "assets/scss/variables";
 
 .landing-hero {

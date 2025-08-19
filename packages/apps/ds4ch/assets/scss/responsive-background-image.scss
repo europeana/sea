@@ -1,0 +1,38 @@
+// TODO: refactor and replace the portal styles with this: min-width at bp (not + 1px), update 4k+ to 4kup and fix classname typo.
+.responsive-background-image {
+  @media (max-width: $bp-small) {
+    background-image: var(--bg-img-small);
+  }
+
+  @media (min-width: $bp-small) and (max-width: ($bp-medium - 1px)) {
+    background-image: var(--bg-img-medium, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-medium) and (max-width: ($bp-large - 1px)) {
+    background-image: var(--bg-img-large, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-large) and (max-width: ($bp-extralarge - 1px)) {
+    background-image: var(--bg-img-xl, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-extralarge) and (max-width: ($bp-xxl - 1px)) {
+    background-image: var(--bg-img-xxl, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-xxl) and (max-width: ($bp-xxxl - 1px)) {
+    background-image: var(--bg-img-xxxl, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-xxxl) and (max-width: ($bp-wqhd - 1px)) {
+    background-image: var(--bg-img-wqhd, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-wqhd) and (max-width: ($bp-4k - 1px)) {
+    background-image: var(--bg-img-4k, var(--bg-img-small));
+  }
+
+  @media (min-width: $bp-4k) {
+    background-image: var(--bg-img-4kup, var(--bg-img-small));
+  }
+}

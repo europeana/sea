@@ -43,7 +43,7 @@ const SRCSET_PRESETS = {
   xxxl: { w: 1880, h: 300, fit: "fill" },
   wqhd: { w: 2520, h: 350, fit: "fill" },
   "4k": { w: 3020, h: 350, fit: "fill" },
-  "4k+": { w: 3840, h: 680, fit: "fill" },
+  "4kup": { w: 3840, h: 680, fit: "fill" },
 };
 
 const imageCSSVars = computed(() => {
@@ -75,7 +75,7 @@ const buttonClass = computed(() => {
   <div class="landing-hero position-relative">
     <div
       v-if="heroImage"
-      class="hero-background responsive-backround-image"
+      class="hero-background responsive-background-image"
       :style="imageCSSVars"
       role="img"
     />
@@ -101,6 +101,7 @@ const buttonClass = computed(() => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
+@import "assets/scss/responsive-background-image";
 
 .landing-hero {
   padding-top: $page-header-height; // leave space for the fixed positioned header
