@@ -102,6 +102,14 @@ const buttonClass = computed(() => {
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
 
+.landing-hero {
+  padding-top: $page-header-height; // leave space for the fixed positioned header
+
+  @media (min-width: $bp-4k) {
+    padding-top: $page-header-height-4k;
+  }
+}
+
 .hero-background {
   left: 0;
   top: 0;

@@ -39,6 +39,9 @@
     "translationInfo": "Automated translations using the {service}",
     "translationService": "eTranslation Service"
   },
+  "home": {
+    "broughtBy": "Brought to you by"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Monthly API Requests, on average",

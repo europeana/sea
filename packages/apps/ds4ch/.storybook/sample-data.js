@@ -53,6 +53,14 @@ export default {
         height: 724,
       },
     },
+    {
+      image: {
+        contentType: "image/png",
+        url: "https://images.ctfassets.net/i01duvb6kq77/5T8ghxDoiistC7bcb9R9Q9/398fb844f50e932f971d712dfafcb572/square_ds4ch_test_transparent.png",
+        width: 1440,
+        height: 1440,
+      },
+    },
   ],
   thumbnails: [
     "https://api.europeana.eu/thumbnail/v3/400/3fa6a7d3f040cb177dc5b3f02d5570ab", // An eruption of Mount Etna at night https://www.europeana.eu/en/item/9200579/czyxv8m8,
