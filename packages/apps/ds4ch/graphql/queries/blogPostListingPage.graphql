@@ -1,3 +1,5 @@
+#import "../fragments/imageFields.graphql"
+
 query BlogPostListingPage(
   $locale: String!
   $preview: Boolean = false
@@ -19,8 +21,7 @@ query BlogPostListingPage(
       name
       primaryImageOfPage {
         image {
-          url
-          contentType
+          ...imageFields
         }
       }
       datePublished

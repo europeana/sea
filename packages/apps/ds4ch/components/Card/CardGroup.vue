@@ -30,29 +30,52 @@ const props = defineProps({
     type: Array,
     default: null,
   },
+  cardGroupClasses: {
+    type: String,
+    default: "row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-wqhd-6",
+  },
 });
 </script>
 <template>
-  <div class="card-group-header col col-lg-8 text-center mx-auto px-0">
-    <component :is="titleTag">
+  <div
+    v-if="title || text"
+    class="card-group-header col col-lg-8 text-center mx-auto px-0"
+  >
+    <component :is="titleTag" v-if="title">
       {{ title }}
     </component>
     <!-- eslint-disable vue/no-v-html -->
     <div v-if="text" class="text mb-3" v-html="parseMarkdown(text)" />
     <!-- eslint-enable vue/no-v-html -->
   </div>
-  <div class="row row-cols-1 row-cols-xl-4 g-4 justify-content-center">
-    <div v-for="(card, index) in props.cards" :key="index" class="col">
-      <CardTestimonialCard
-        v-if="card['__typename'] === 'TestimonialCard'"
-        :testimonial-text="card.text"
-        :attribution="card.attribution"
-      />
+  <div class="row g-4 justify-content-center" :class="cardGroupClasses">
+    <div
+      v-for="(card, index) in props.cards"
+      :key="card.url || index"
+      class="col"
+    >
+      <transition appear name="fade">
+        <ContentCard
+          v-if="card['__typename'] === 'ContentCard'"
+          :title="card.name"
+          :url="card.url"
+          :image-url="card.primaryImageOfPage?.image?.url"
+          :image-content-type="card.primaryImageOfPage?.image?.contentType"
+          :image-width="card.primaryImageOfPage?.image?.width"
+          :image-height="card.primaryImageOfPage?.image?.height"
+        />
+        <CardTestimonialCard
+          v-else-if="card['__typename'] === 'TestimonialCard'"
+          :testimonial-text="card.text"
+          :attribution="card.attribution"
+        />
+      </transition>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
+@import "@europeana/style/scss/transitions";
 @import "assets/scss/variables";
 
 .card-group-header {
@@ -81,18 +104,6 @@ const props = defineProps({
       font-size: $font-size-56;
       margin-bottom: 2rem;
     }
-  }
-}
-
-.row {
-  padding-bottom: 3rem;
-
-  @media (min-width: $bp-medium) {
-    padding-bottom: 6rem;
-  }
-
-  @media (min-width: $bp-4k) {
-    padding-bottom: 12rem;
   }
 }
 </style>

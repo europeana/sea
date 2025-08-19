@@ -48,12 +48,13 @@ const getClasses = (section) => {
     />
     <div
       v-else-if="contentfulEntryHasContentType(section, 'TestimonialCardGroup')"
-      class="container"
+      class="container testimonial-card-container"
     >
       <CardGroup
         :title="section.name"
         :text="section.text"
         :cards="section.hasPartCollection?.items"
+        card-group-classes="row-cols-1 row-cols-xl-4"
       />
     </div>
     <GenericCallToActionBanner
@@ -80,6 +81,18 @@ const getClasses = (section) => {
     max-width: none;
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+.testimonial-card-container {
+  padding-bottom: 3rem;
+
+  @media (min-width: $bp-medium) {
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: $bp-4k) {
+    padding-bottom: 12rem;
   }
 }
 </style>
