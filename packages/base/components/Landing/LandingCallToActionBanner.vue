@@ -48,7 +48,7 @@ const CSS_VARS_PRESETS = {
   xxxl: { w: 1880, h: 300, fit: "fill" },
   wqhd: { w: 2520, h: 350, fit: "fill" },
   "4k": { w: 3020, h: 350, fit: "fill" },
-  "4k+": { w: 3840, h: 680, fit: "fill" },
+  "4kup": { w: 3840, h: 680, fit: "fill" },
 };
 
 const backgroundImageClasses = {
@@ -79,7 +79,7 @@ const imageCSSVars = computed(() => {
   <div class="landing-cta position-relative">
     <div
       v-if="props.backgroundImage"
-      class="background-image responsive-backround-image"
+      class="background-image responsive-background-image"
       :class="backgroundImageClasses"
       :style="imageCSSVars"
     />
@@ -103,6 +103,7 @@ const imageCSSVars = computed(() => {
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
+@import "assets/scss/responsive-background-image";
 
 .background-image {
   left: 0;
