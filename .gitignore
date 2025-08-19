@@ -28,5 +28,8 @@ logs
 storybook-static
 *storybook.log
 
-# test coverage
+# Test coverage
 coverage
+
+# Temporary files
+tmp/
