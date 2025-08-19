@@ -32,20 +32,22 @@ describe("components/image/ImageLottiePlayer", () => {
     expect(lottiePlayer.exists()).toBe(true);
   });
 
-  describe("when component intersect viewport", () => {
-    it("sets loadSrc", () => {
+  describe("when component intersects viewport", () => {
+    it("sets autoplay attribute", async () => {
       const wrapper = factory();
+      const lottiePlayer = wrapper.find("dot-lottie-vue-stub");
 
       expect(wrapper.vm.observer).toBeInstanceOf(IntersectionObserver);
-      expect(wrapper.vm.loadSrc).toBe(null);
+      expect(lottiePlayer.attributes("autoplay")).toBe("false");
 
       // Simulate the intersection
       const entries = [
         { intersectionRatio: 0.5, target: wrapper.vm.lottiePlayer.$el },
       ];
       wrapper.vm.observer.callback(entries);
+      await wrapper.vm.$nextTick();
 
-      expect(wrapper.vm.loadSrc).toBe("https://www.example.org/image.lottie");
+      expect(lottiePlayer.attributes("autoplay")).toBe("true");
     });
   });
 

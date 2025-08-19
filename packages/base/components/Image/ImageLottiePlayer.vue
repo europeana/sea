@@ -9,16 +9,14 @@ const props = defineProps({
 });
 
 const lottiePlayer = ref(null);
-const loadSrc = ref(null);
+const intersecting = ref(false);
 
 let observer;
 
 onMounted(() => {
   observer = new IntersectionObserver(
     ([entry]) => {
-      if (entry.isIntersecting || entry.intersectionRatio > 0) {
-        loadSrc.value = props.src;
-      }
+      intersecting.value = entry.isIntersecting || entry.intersectionRatio > 0;
     },
     {
       threshold: 0.5,
@@ -38,5 +36,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <DotLottieVue ref="lottiePlayer" autoplay :src="loadSrc" />
+  <DotLottieVue ref="lottiePlayer" :src="props.src" :autoplay="intersecting" />
 </template>
