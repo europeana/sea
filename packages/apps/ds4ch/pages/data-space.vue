@@ -9,28 +9,36 @@ const route = useRoute();
 
 const page = computed(() => Number(route.query.page) || 1);
 const limit = 24;
-const skip = computed(() => (page.value - 1) * limit);
 
-const { data } = await useAsyncData(`landingPage:${slug}`, async () => {
-  const variables = {
-    identifier: slug,
-    locale: localeProperties.value.language,
-  };
+const { data } = await useAsyncData(
+  `landingPage:${slug}`,
+  async () => {
+    const skip = (page.value - 1) * limit;
 
-  const responses = await Promise.all([
-    contentful.query(landingPageQuery, variables),
-    contentful.query(blogPostListingPageQuery, {
-      ...variables,
-      limit,
-      skip: skip.value,
-    }),
-  ]);
+    const variables = {
+      identifier: slug,
+      locale: localeProperties.value.language,
+    };
 
-  return {
-    page: responses[0].data?.landingPageCollection?.items?.[0] || {},
-    posts: responses[1].data?.blogPostingCollection?.items || [],
-  };
-});
+    const responses = await Promise.all([
+      contentful.query(landingPageQuery, variables),
+      contentful.query(blogPostListingPageQuery, {
+        ...variables,
+        limit,
+        skip,
+      }),
+    ]);
+
+    return {
+      page: responses[0].data?.landingPageCollection?.items?.[0] || {},
+      posts: responses[1].data?.blogPostingCollection?.items || [],
+      totalItems: responses[1].data?.blogPostingCollection?.total || 0,
+    };
+  },
+  {
+    watch: [page],
+  },
+);
 
 const cards = computed(() =>
   data.value.posts.map((post) => ({
@@ -54,5 +62,11 @@ useHead({
       variant="alternate"
     />
     <CardGroup v-if="cards.length > 0" title="posts" :cards="cards" />
+    <PaginationNavInput :total-items="data.totalItems" />
   </div>
 </template>
+
+<style lang="scss">
+@import "assets/scss/variables";
+@import "assets/scss/pagination";
+</style>
