@@ -35,15 +35,15 @@ const props = defineProps({
 });
 
 const CSS_VARS_PRESETS = {
-  small: { w: 650, h: 850, fit: "crop", q: 100, f: "top" },
-  medium: { w: 850, h: 850, fit: "crop", q: 100, f: "top" },
-  large: { w: 992, h: 992, fit: "crop", q: 100, f: "top" },
-  xl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
-  xxl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
-  xxxl: { w: 1080, h: 1080, fit: "crop", q: 100, f: "left" },
-  wqhd: { w: 1200, h: 1200, fit: "crop", q: 100, f: "left" },
-  "4k": { w: 1400, h: 1400, fit: "crop", q: 100, f: "left" },
-  "4kup": { w: 1400, h: 1400, fit: "crop", q: 100, f: "left" },
+  small: { w: 975, h: 1275, fit: "crop", q: 100, f: "top" },
+  medium: { w: 1275, h: 1275, fit: "crop", q: 100, f: "top" },
+  large: { w: 1488, h: 1488, fit: "crop", q: 100, f: "top" },
+  xl: { w: 1488, h: 1080, fit: "crop", q: 100, f: "left" },
+  xxl: { w: 1488, h: 1080, fit: "crop", q: 100, f: "left" },
+  xxxl: { w: 1620, h: 850, fit: "crop", q: 100, f: "left" },
+  wqhd: { w: 1700, h: 850, fit: "crop", q: 100, f: "left" },
+  "4k": { w: 1700, h: 850, fit: "crop", q: 100, f: "left" },
+  "4kup": { w: 1700, h: 850, fit: "crop", q: 100, f: "left" },
 };
 
 const imageCSSVars = computed(() =>
@@ -114,11 +114,11 @@ const imageCSSVars = computed(() =>
 
   .hero-content {
     left: 0;
-    top: 3.5rem;
+    top: $page-header-height;
     right: 0;
     bottom: 0;
     position: relative;
-    margin: -3.5rem 0 0 0;
+    margin: -$page-header-height 0 0 0;
     padding: 6.5rem 2rem 90vw;
     max-width: 100%;
     flex-direction: column;
@@ -137,8 +137,8 @@ const imageCSSVars = computed(() =>
     }
 
     @media (min-width: ($bp-4k)) {
-      top: 5.125rem;
-      margin: -5.125rem 0 0 0;
+      top: $page-header-height-4k;
+      margin: -$page-header-height-4k 0 0 0;
     }
 
     header {
@@ -240,7 +240,7 @@ const imageCSSVars = computed(() =>
 
   .hero-background {
     left: 0;
-    top: 3.5rem;
+    top: $page-header-height;
     right: 0;
     bottom: 0;
     position: absolute;
@@ -254,14 +254,8 @@ const imageCSSVars = computed(() =>
       background-position: right;
     }
 
-    @media (min-width: $bp-extralarge) {
-      background-size: auto 125%;
-      background-position: right;
-    }
-
-    @media (min-width: $bp-xxxl) {
-      background-size: auto 150%;
-      background-position: right;
+    @media (min-width: ($bp-4k)) {
+      top: $page-header-height-4k;
     }
   }
 
