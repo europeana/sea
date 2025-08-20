@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 
 import LandingIllustrationGroup from "./LandingIllustrationGroup.vue";
-import sampleData from "../../.storybook/sample-data.js";
+import sampleData from "@europeana/ds4ch/.storybook/sample-data.js";
 
 const meta = {
   component: LandingIllustrationGroup,
