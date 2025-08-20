@@ -5,6 +5,7 @@ import dataSpacePage from "./data-space.vue";
 mockNuxtImport("useI18n", () => {
   return () => {
     return {
+      d: (datetime) => datetime,
       localeProperties: { value: { language: "en-GB" } },
       t: (key) => key,
     };
