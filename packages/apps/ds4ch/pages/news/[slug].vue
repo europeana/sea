@@ -1,5 +1,6 @@
 <script setup>
 import blogPostPageQuery from "@/graphql/queries/blogPostPage.graphql";
+import truncate from "@europeana/sea-base-layer/utils/text/truncate.js";
 
 const route = useRoute();
 
@@ -34,6 +35,13 @@ const tags =
 useHead({
   title: page.value.name,
 });
+
+const truncatedAttachmentLabel = (name) => {
+  const splitFilename = name.split(".");
+  const fileName = splitFilename[0];
+  const extension = splitFilename[1];
+  return `${truncate(fileName, 20)}.${extension}`;
+};
 </script>
 
 <template>
@@ -95,18 +103,19 @@ useHead({
               />
             </div>
             <!-- TODO: create separate component -->
-            <div>
+            <div class="d-inline-flex flex-column mw-100">
               <NuxtLink
                 v-for="(attachment, index) in page.associatedMediaCollection
                   ?.items"
                 :key="index"
-                class="btn btn-secondary mb-3"
+                class="btn btn-secondary text-transform-none mb-3"
                 target="_blank"
                 :download="true"
                 :to="attachment.url"
+                :aria-label="$t('download', { file: attachment.title })"
               >
                 <span class="icon-ic-download text-white me-2"></span>
-                {{ attachment.title }}
+                {{ truncatedAttachmentLabel(attachment.title) }}
               </NuxtLink>
             </div>
           </article>

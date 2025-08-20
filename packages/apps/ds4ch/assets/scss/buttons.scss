@@ -76,6 +76,10 @@
     &:active {
       box-shadow: none;
     }
+
+    &.text-transform-none {
+      text-transform: none;
+    }
   }
 
   &.btn-light {
