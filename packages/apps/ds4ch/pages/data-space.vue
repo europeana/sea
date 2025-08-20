@@ -47,11 +47,16 @@ watch(page, () => {
   scrollToSelector("#results", { offsetTop: -100 });
 });
 
+const defaultCardThumbnail = {
+  image: { url: useRuntimeConfig().public.defaultThumbnail },
+};
+
 const cards = computed(() =>
   data.value.posts.map((post) => ({
     ...post,
     __typename: "ContentCard",
     url: { name: "news-slug", params: { slug: post.identifier } },
+    primaryImageOfPage: post.primaryImageOfPage || defaultCardThumbnail,
   })),
 );
 
