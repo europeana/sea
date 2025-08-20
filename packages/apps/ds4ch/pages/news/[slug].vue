@@ -113,6 +113,7 @@ const truncatedAttachmentLabel = (name) => {
                 :download="true"
                 :to="attachment.url"
                 :aria-label="$t('download', { file: attachment.title })"
+                :title="attachment.title"
               >
                 <span class="icon-ic-download text-white me-2"></span>
                 {{ truncatedAttachmentLabel(attachment.title) }}
