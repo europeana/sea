@@ -58,6 +58,7 @@ const props = defineProps({
         <ContentCard
           v-if="card['__typename'] === 'ContentCard'"
           :title="card.name"
+          :text="card.text"
           :url="card.url"
           :image-url="card.primaryImageOfPage?.image?.url"
           :image-content-type="card.primaryImageOfPage?.image?.contentType"
