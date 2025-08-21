@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "close",
+    "downloadFile": "download {file}",
     "share": "share",
     "shareOn": "Share on {social}"
   },
