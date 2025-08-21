@@ -2,6 +2,20 @@ import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import dataSpacePage from "./data-space.vue";
 
+const defaultThumbnail = "https://www.example.org/image.jpg";
+
+mockNuxtImport("useRuntimeConfig", () => {
+  return () => ({
+    public: {
+      defaultThumbnail,
+      i18n: {
+        // NOTE: without this in the mock, link generation fails...
+        routesNameSeparator: "___",
+      },
+    },
+  });
+});
+
 mockNuxtImport("useI18n", () => {
   return () => {
     return {
@@ -79,11 +93,12 @@ describe("dataSpacePage", () => {
     );
 
     const wrapper = await factory(contentfulResponseNoImage);
+
     expect(wrapper.vm.cards.every((card) => !!card.primaryImageOfPage)).toBe(
       true,
     );
-    expect(wrapper.vm.cards[0].primaryImageOfPage.image.url).not.toBe(
-      undefined,
+    expect(wrapper.vm.cards[0].primaryImageOfPage.image.url).toBe(
+      defaultThumbnail,
     );
   });
 });
