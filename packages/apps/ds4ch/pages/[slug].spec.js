@@ -20,6 +20,16 @@ const contentfulResponse = {
           headline: title,
           text: description,
           primaryImageOfPage: { image: "stubed Image" },
+          hasPartCollection: {
+            items: [
+              {
+                __typename: "ImageCard",
+              },
+              {
+                __typename: "ImageCard",
+              },
+            ],
+          },
         },
       ],
     },
@@ -44,5 +54,14 @@ describe("slugPage", () => {
 
     expect(landingHero.text()).toContain(title);
     expect(landingHero.text()).toContain(description);
+  });
+
+  it("annotates parity of image cards", async () => {
+    const wrapper = await factory();
+
+    const imageCards = wrapper.findAll(".image-card");
+
+    expect(imageCards[0].classes()).toContain("image-card-odd");
+    expect(imageCards[1].classes()).toContain("image-card-even");
   });
 });

@@ -46,9 +46,14 @@ const props = defineProps({
 
 const imagecard = ref(null);
 
-const cardClasses = props.card?.profile?.background
-  ? `bg-color-${props.card.profile.background}`
-  : "";
+const cardClasses = [];
+if (props.card?.profile?.background) {
+  cardClasses.push(`bg-color-${props.card.profile.background}`);
+}
+if (props.card?.parity) {
+  cardClasses.push(`image-card-${props.card.parity}`);
+}
+
 const cardImageWithAttribution = props.card?.image;
 const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
 </script>
@@ -57,7 +62,7 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   <div
     ref="imagecard"
     class="image-card d-lg-flex justify-content-center"
-    :class="[cardClasses, `image-card-${card.parity}`]"
+    :class="cardClasses"
   >
     <div
       v-if="cardImageWithAttribution && cardImageWithAttribution.image"
