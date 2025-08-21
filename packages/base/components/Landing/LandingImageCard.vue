@@ -1,5 +1,4 @@
 <script setup>
-import useRefParity from "../../composables/refParity.js";
 import parseMarkdown from "../../utils/markdown/parse.js";
 
 const props = defineProps({
@@ -46,7 +45,6 @@ const props = defineProps({
 });
 
 const imagecard = ref(null);
-const { parity } = useRefParity("image-card", imagecard);
 
 const cardClasses = props.card?.profile?.background
   ? `bg-color-${props.card.profile.background}`
@@ -59,7 +57,7 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   <div
     ref="imagecard"
     class="image-card d-lg-flex justify-content-center"
-    :class="[cardClasses, `image-card-${parity}`]"
+    :class="[cardClasses, `image-card-${card.parity}`]"
   >
     <div
       v-if="cardImageWithAttribution && cardImageWithAttribution.image"
