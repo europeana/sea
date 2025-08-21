@@ -1,8 +1,8 @@
 {
   "actions": {
     "close": "close",
-    "shareOn": "Share on {social}",
-    "share": "share"
+    "share": "share",
+    "shareOn": "Share on {social}"
   },
   "attribution": {
     "creator": "Creator:",
@@ -59,8 +59,8 @@
     "home": "Home",
     "toggle": "Show menu"
   },
-  "news": "News",
   "newWindow": "opens in new window",
+  "news": "News",
   "pagination": {
     "label": "Pagination",
     "next": "Next",

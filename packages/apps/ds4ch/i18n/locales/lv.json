@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "aizvērt",
-    "share": "dalīties"
+    "share": "dalīties",
+    "shareOn": "Dalīties {social}"
   },
   "attribution": {
     "creator": "Autors:",
     "institution": "Iestāde:",
     "show": "Rādīt attiecinājumu",
     "title": "Nosaukums:"
+  },
+  "authored": {
+    "by": "autors",
+    "publishedDate": "Publicēts {date}"
   },
   "footer": {
     "about": "Par datu telpu",
@@ -34,6 +39,9 @@
     "translationInfo": "Automatizētie tulkojumi, izmantojot {service}",
     "translationService": "eTranslation pakalpojums"
   },
+  "home": {
+    "broughtBy": "Jums piedāvā"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Vidēji ikmēneša API pieprasījumi",
@@ -52,5 +60,31 @@
     "toggle": "Rādīt izvēlni"
   },
   "newWindow": "atveras jaunā logā",
-  "shareWhere": "Kur jūs vēlētos dalīties ar šo?"
+  "news": "Ziņas",
+  "pagination": {
+    "label": "Lapu šķirošana",
+    "next": "Nākamais",
+    "of": "No",
+    "pageNumber": "Lapas numurs",
+    "previous": "Iepriekšējais"
+  },
+  "project": "Projekts",
+  "related": {
+    "categoryTags": {
+      "title": "Atklājiet saistītu saturu"
+    }
+  },
+  "results": "{count} rezultāts | {count} rezultāti",
+  "shareWhere": "Kur jūs vēlētos dalīties ar šo?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Šis ir pirmais slaids",
+      "lastSlide": "Šis ir pēdējais slaids",
+      "nextSlide": "Nākamais slaids",
+      "paginationBullet": "Slaids {page}",
+      "paginationBulletGroupedSlides": "Slaidu grupa {page}",
+      "previousSlide": "Iepriekšējais slaids",
+      "slideLabel": "Slaids {slide} no {totalSlides}"
+    }
+  }
 }

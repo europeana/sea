@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "închidere",
-    "share": "distribuiți"
+    "share": "distribuiți",
+    "shareOn": "Distribuie pe {social}"
   },
   "attribution": {
     "creator": "Creator:",
     "institution": "Instituție:",
     "show": "Arată atribuirea",
     "title": "Titlu:"
+  },
+  "authored": {
+    "by": "de",
+    "publishedDate": "Publicat {date}"
   },
   "footer": {
     "about": "Despre spațiul de date",
@@ -34,6 +39,9 @@
     "translationInfo": "Traduceri automate folosind {service}",
     "translationService": "Serviciul eTranslation"
   },
+  "home": {
+    "broughtBy": "Adus vouă de"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Solicitări API lunare, în medie",
@@ -52,5 +60,31 @@
     "toggle": "Afișează meniul"
   },
   "newWindow": "se deschide într-o fereastră nouă",
-  "shareWhere": "Unde ai vrea să împărtășești asta?"
+  "news": "Știri",
+  "pagination": {
+    "label": "Paginare",
+    "next": "Următorul",
+    "of": "De",
+    "pageNumber": "Numărul paginii",
+    "previous": "Anterior"
+  },
+  "project": "Proiect",
+  "related": {
+    "categoryTags": {
+      "title": "Descoperiți conținuturi conexe"
+    }
+  },
+  "results": "{count} rezultat | {count} rezultate",
+  "shareWhere": "Unde ai vrea să împărtășești asta?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Acesta este primul diapozitiv",
+      "lastSlide": "Acesta este ultimul diapozitiv",
+      "nextSlide": "Următorul diapozitiv",
+      "paginationBullet": "Diapozitiv {page}",
+      "paginationBulletGroupedSlides": "Grup de diapozitive {page}",
+      "previousSlide": "Diapozitivul anterior",
+      "slideLabel": "Diapozitiv {slide} de {totalSlides}"
+    }
+  }
 }

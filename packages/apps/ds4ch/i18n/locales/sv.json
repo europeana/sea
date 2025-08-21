@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "stäng",
-    "share": "dela"
+    "share": "dela",
+    "shareOn": "Dela på {social}"
   },
   "attribution": {
     "creator": "Skapare:",
     "institution": "Institution:",
     "show": "Visa attribution",
     "title": "Titel:"
+  },
+  "authored": {
+    "by": "av",
+    "publishedDate": "Publicerad {date}"
   },
   "footer": {
     "about": "Om datarummet",
@@ -34,6 +39,9 @@
     "translationInfo": "Automatiska översättningar med hjälp av {service}",
     "translationService": "tjänsten eTranslation"
   },
+  "home": {
+    "broughtBy": "Tillhandahålls av"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Månatliga API-förfrågningar, i genomsnitt",
@@ -52,5 +60,31 @@
     "toggle": "Visa meny"
   },
   "newWindow": "öppnas i nytt fönster",
-  "shareWhere": "Var skulle du vilja dela detta?"
+  "news": "Nyheter",
+  "pagination": {
+    "label": "Paginering",
+    "next": "Nästa",
+    "of": "Av",
+    "pageNumber": "Sidonummer",
+    "previous": "Föregående"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Upptäck relaterat innehåll"
+    }
+  },
+  "results": "{count} resultat | {count} resultat",
+  "shareWhere": "Var skulle du vilja dela detta?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Detta är den första bilden",
+      "lastSlide": "Detta är den sista bilden",
+      "nextSlide": "Nästa bild",
+      "paginationBullet": "Bild {page}",
+      "paginationBulletGroupedSlides": "Bildgrupp {page}",
+      "previousSlide": "Föregående bild",
+      "slideLabel": "Bild {slide} av {totalSlides}"
+    }
+  }
 }

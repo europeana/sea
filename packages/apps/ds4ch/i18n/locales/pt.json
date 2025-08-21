@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "fechar",
-    "share": "partilhar"
+    "share": "partilhar",
+    "shareOn": "Partilhe em {social}"
   },
   "attribution": {
     "creator": "Criador:",
     "institution": "Instituição:",
     "show": "Mostrar atribuição",
     "title": "Título:"
+  },
+  "authored": {
+    "by": "por",
+    "publishedDate": "Publicado {date}"
   },
   "footer": {
     "about": "Sobre o espaço de dados",
@@ -34,6 +39,9 @@
     "translationInfo": "Traduções automáticas usando o {service}",
     "translationService": "Serviço eTranslation"
   },
+  "home": {
+    "broughtBy": "Trazido até si por"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Pedidos de API mensais, em média",
@@ -52,5 +60,31 @@
     "toggle": "Mostrar menu"
   },
   "newWindow": "abre numa nova janela",
-  "shareWhere": "Onde gostaria de compartilhar isso?"
+  "news": "Notícias",
+  "pagination": {
+    "label": "Paginação",
+    "next": "Próximo",
+    "of": "De",
+    "pageNumber": "Número de página",
+    "previous": "Anterior"
+  },
+  "project": "Projeto",
+  "related": {
+    "categoryTags": {
+      "title": "Descubra conteúdo relacionado"
+    }
+  },
+  "results": "{count} resultado | {count} resultados",
+  "shareWhere": "Onde gostaria de compartilhar isso?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Este é o primeiro slide",
+      "lastSlide": "Este é o último slide",
+      "nextSlide": "Próximo slide",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Grupo de slides {page}",
+      "previousSlide": "Slide anterior",
+      "slideLabel": "Slide {slide} de {totalSlides}"
+    }
+  }
 }

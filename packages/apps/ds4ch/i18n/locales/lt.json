@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "uždaryti",
-    "share": "dalintis"
+    "share": "dalintis",
+    "shareOn": "Dalintis {social}"
   },
   "attribution": {
     "creator": "Autorius:",
     "institution": "Įstaiga:",
     "show": "Rodyti priskyrimą",
     "title": "Pavadinimas:"
+  },
+  "authored": {
+    "by": "pagal",
+    "publishedDate": "Paskelbta {date}"
   },
   "footer": {
     "about": "Apie duomenų erdvę",
@@ -34,6 +39,9 @@
     "translationInfo": "Automatiniai vertimai naudojant {service}",
     "translationService": "eVertimo paslauga"
   },
+  "home": {
+    "broughtBy": "Jums pristato"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Mėnesio API užklausos, vidutiniškai",
@@ -52,5 +60,31 @@
     "toggle": "Rodyti meniu"
   },
   "newWindow": "atsidaro naujame lange",
-  "shareWhere": "Kur norėtumėte tuo pasidalinti?"
+  "news": "Naujienos",
+  "pagination": {
+    "label": "Numeracija",
+    "next": "Kitas",
+    "of": "Iš",
+    "pageNumber": "Puslapio numeris",
+    "previous": "Ankstesnis"
+  },
+  "project": "Projektas",
+  "related": {
+    "categoryTags": {
+      "title": "Atraskite susijusį turinį"
+    }
+  },
+  "results": "{count} rezultatas | {count} rezultatai",
+  "shareWhere": "Kur norėtumėte tuo pasidalinti?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Tai pirmoji skaidrė",
+      "lastSlide": "Tai paskutinė skaidrė",
+      "nextSlide": "Kita skaidrė",
+      "paginationBullet": "Skaidrė {page}",
+      "paginationBulletGroupedSlides": "Skaidrių grupė {page}",
+      "previousSlide": "Ankstesnė skaidrė",
+      "slideLabel": "Skaidrė {slide} iš {totalSlides}"
+    }
+  }
 }
