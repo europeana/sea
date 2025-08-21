@@ -10,11 +10,12 @@ const props = defineProps({
   },
 });
 
-const appConfig = useAppConfig();
-const router = useRouter();
+const appConfig = useRuntimeConfig().public;
+const route = useRoute();
 // TODO: use canonical URL without locale here.
-const shareUrl = `${appConfig.baseUrl}${router.path}`;
+const shareUrl = `${appConfig.baseUrl}${route.path}`;
 
+// TODO: pass in optional pinterest and linkedin
 const networks = computed(() => {
   return [
     {
@@ -27,13 +28,6 @@ const networks = computed(() => {
       name: "Bluesky",
       url: `https://bsky.app/intent/compose?text=${shareUrl}`,
     },
-    {
-      identifier: "pinterest",
-      name: "Pinterest",
-      url:
-        `https://pinterest.com/pin/create/link/?url=${shareUrl}` +
-        (props.mediaUrl ? `&media=${props.mediaUrl}` : ""),
-    },
   ].concat(props.shareTo);
 });
 
@@ -42,45 +36,25 @@ const networks = computed(() => {
 
 <template>
   <div>
-    <button
+    <NuxtLink
       v-for="(network, index) in networks"
       :key="index"
-      :title="network.tooltip || ''"
-      :class="`social-share mr-2 ${network.identifier}`"
-      :data-qa="`share ${network.identifier} button`"
-      :href="network.url"
+      :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center me-2 mb-2 me-4k-3 mb-4k-4`"
+      :to="network.url"
       target="_blank"
-      variant="outline-primary"
       :aria-label="$t('actions.shareOn', { social: network.name })"
     >
       <span :class="`icon-${network.identifier}`" />
       <span class="text">{{ network.name }} </span>
-    </button>
+    </NuxtLink>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 
-.btn {
-  align-items: center;
-  display: inline-flex;
-  width: calc(100% / 3 - 10px);
-
-  @media (max-width: $bp-small) {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  @media (min-width: $bp-4k) {
-    width: calc(100% / 3 - 15px);
-    margin-bottom: 15px;
-    margin-right: 0.75rem !important;
-  }
-
-  &:hover {
-    background: $white;
-  }
+.btn.btn-secondary {
+  flex-basis: 33%;
 
   &:last-child {
     margin-right: 0 !important;
@@ -88,15 +62,15 @@ const networks = computed(() => {
 
   &.facebook {
     $facebook-blue: #0866ff;
-
     border: solid 1px $facebook-blue;
-    color: $facebook-blue;
+    background-color: $facebook-blue;
+    color: $white;
 
     &:not(:disabled):not(.disabled) {
       &:active,
       &.active {
-        color: $facebook-blue;
-        background-color: $white;
+        color: $white;
+        background-color: $facebook-blue;
         border-color: $facebook-blue;
       }
     }
@@ -105,71 +79,21 @@ const networks = computed(() => {
   &.bsky {
     $bsky-blue: #0085ff;
     border: solid 1px $bsky-blue;
-    color: $bsky-blue;
+    color: $white;
+    background-color: $bsky-blue;
 
     &:not(:disabled):not(.disabled) {
       &:active,
       &.active {
-        color: $bsky-blue;
-        background-color: $white;
+        color: $white;
+        background-color: $bsky-blue;
         border-color: $bsky-blue;
-      }
-    }
-  }
-
-  &.pinterest {
-    $pinterest-red: #e60023;
-
-    border: solid 1px $pinterest-red;
-    color: $pinterest-red;
-
-    &:not(:disabled):not(.disabled) {
-      &:active,
-      &.active {
-        color: $pinterest-red;
-        background-color: $white;
-        border-color: $pinterest-red;
-      }
-    }
-  }
-
-  &.weavex {
-    $weavex-green: #3e861c;
-
-    border: solid 1px $weavex-green;
-    color: $weavex-green;
-
-    &:not(:disabled):not(.disabled) {
-      &:active,
-      &.active {
-        color: $weavex-green;
-        background-color: $white;
-        border-color: $weavex-green;
-      }
-    }
-
-    .icon-weavex {
-      font-size: $font-size-small;
-
-      @media (min-width: $bp-4k) {
-        font-size: $font-size-small-4k;
-      }
-
-      &::before {
-        content: "W";
-        font-family: $font-family-sans-serif;
-        font-weight: 800;
-        font-style: italic;
       }
     }
   }
 
   [class^="icon"] {
     font-size: $font-size-base;
-
-    @media (min-width: $bp-4k) {
-      font-size: $font-size-base-4k;
-    }
   }
 
   span.text {
