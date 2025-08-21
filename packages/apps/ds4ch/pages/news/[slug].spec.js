@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
-import slugPage from "./[slug].vue";
+import NewsSlugPage from "./[slug].vue";
 
 mockNuxtImport("useI18n", () => {
   return () => {
@@ -16,6 +16,14 @@ const contentfulResponse = {
     blogPostingCollection: {
       items: [
         {
+          associatedMediaCollection: {
+            items: [
+              {
+                title: "Data Space Annual Report, 2025",
+                url: "https://www.example.org/Data_Space_Annual_Report.2025.pdf",
+              },
+            ],
+          },
           name: title,
         },
       ],
@@ -23,7 +31,7 @@ const contentfulResponse = {
   },
 };
 const factory = async () =>
-  await mountSuspended(slugPage, {
+  await mountSuspended(NewsSlugPage, {
     global: {
       provide: {
         $contentful: {
@@ -34,12 +42,24 @@ const factory = async () =>
   });
 
 // TODO: add more tests
-describe("slugPage", () => {
+describe("NewsSlugPage", () => {
   it("renders an h1 element with the page name from Contentful", async () => {
     const wrapper = await factory();
 
     const h1 = wrapper.find("h1");
 
     expect(h1.text()).toBe(title);
+  });
+
+  describe("associated media links", () => {
+    it("truncates the title and appends the filename extension in parentheses", async () => {
+      const wrapper = await factory();
+
+      const associatedMediaLink = wrapper.find(
+        '[data-qa="associated media"] a',
+      );
+
+      expect(associatedMediaLink.text()).toBe("Data Space Annual Re… (PDF)");
+    });
   });
 });

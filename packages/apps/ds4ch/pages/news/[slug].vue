@@ -36,11 +36,9 @@ useHead({
   title: page.value.name,
 });
 
-const truncatedAttachmentLabel = (name) => {
-  const splitFilename = name.split(".");
-  const fileName = splitFilename[0];
-  const extension = splitFilename[1];
-  return `${truncate(fileName, 20)}.${extension}`;
+const truncatedAttachmentLabel = (attachment) => {
+  const extension = attachment.url.split(".").pop();
+  return `${truncate(attachment.title, 20)} (${extension.toUpperCase()})`;
 };
 </script>
 
@@ -103,7 +101,10 @@ const truncatedAttachmentLabel = (name) => {
               />
             </div>
             <!-- TODO: create separate component -->
-            <div class="d-inline-flex flex-column mw-100">
+            <div
+              class="d-inline-flex flex-column mw-100"
+              data-qa="associated media"
+            >
               <NuxtLink
                 v-for="(attachment, index) in page.associatedMediaCollection
                   ?.items"
@@ -118,7 +119,7 @@ const truncatedAttachmentLabel = (name) => {
                 :title="attachment.title"
               >
                 <span class="icon-ic-download text-white me-2"></span>
-                {{ truncatedAttachmentLabel(attachment.title) }}
+                {{ truncatedAttachmentLabel(attachment) }}
               </NuxtLink>
             </div>
           </article>
