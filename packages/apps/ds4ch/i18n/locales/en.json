@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "close",
+    "downloadFile": "download {file}",
     "shareOn": "Share on {social}",
     "share": "share"
   },
@@ -14,7 +15,6 @@
     "by": "by",
     "publishedDate": "Published {date}"
   },
-  "download": "download {file}",
   "footer": {
     "about": "About the data space",
     "accessibility": "Accessibility",
