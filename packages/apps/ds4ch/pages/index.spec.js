@@ -17,6 +17,16 @@ const contentfulResponse = {
       items: [
         {
           headline: title,
+          hasPartCollection: {
+            items: [
+              {
+                __typename: "ImageCard",
+              },
+              {
+                __typename: "ImageCard",
+              },
+            ],
+          },
         },
       ],
     },
@@ -40,5 +50,14 @@ describe("IndexPage", () => {
     const h1 = wrapper.find("h1");
 
     expect(h1.text()).toBe(title);
+  });
+
+  it("annotates parity of image cards", async () => {
+    const wrapper = await factory();
+
+    const imageCards = wrapper.findAll(".image-card");
+
+    expect(imageCards[0].classes()).toContain("image-card-odd");
+    expect(imageCards[1].classes()).toContain("image-card-even");
   });
 });
