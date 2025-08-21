@@ -1,9 +1,9 @@
 <script setup>
 import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
-import landingPageQuery from "@/graphql/queries/landingPage.graphql";
-
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
+
+import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();

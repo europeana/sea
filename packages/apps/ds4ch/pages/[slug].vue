@@ -1,4 +1,7 @@
 <script setup>
+import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
+import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
+
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const route = useRoute();
@@ -19,6 +22,8 @@ const { data: page } = await useAsyncData(
 );
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+
+annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
 useHead({
   title: page.value.headline,
