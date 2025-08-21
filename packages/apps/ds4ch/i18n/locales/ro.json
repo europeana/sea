@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "închidere",
+    "downloadFile": "descărcare {file}",
     "share": "distribuiți",
     "shareOn": "Distribuie pe {social}"
   },

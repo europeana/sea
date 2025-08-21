@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "uždaryti",
+    "downloadFile": "parsisiųsti {file}",
     "share": "dalintis",
     "shareOn": "Dalintis {social}"
   },

@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "luk",
+    "downloadFile": "hent {file}",
     "share": "del",
     "shareOn": "Del på {social}"
   },

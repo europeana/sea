@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "κλείσιμο",
+    "downloadFile": "κατεβάστε {file}",
     "share": "κοινοποίηση",
     "shareOn": "Κοινοποίηση στο {social}"
   },

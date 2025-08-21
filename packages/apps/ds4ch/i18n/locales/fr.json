@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "fermer",
+    "downloadFile": "télécharger {file}",
     "share": "partager",
     "shareOn": "Partager sur {social}"
   },

@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "bezárás",
+    "downloadFile": "letöltés {file}",
     "share": "megosztás",
     "shareOn": "Megosztás a {social}"
   },

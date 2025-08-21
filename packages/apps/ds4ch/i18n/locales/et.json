@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "Sulge",
+    "downloadFile": "lae alla {file}",
     "share": "jaga",
     "shareOn": "Jaga {social}"
   },
