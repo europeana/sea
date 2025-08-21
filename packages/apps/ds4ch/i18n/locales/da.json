@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "luk",
-    "share": "del"
+    "share": "del",
+    "shareOn": "Del på {social}"
   },
   "attribution": {
     "creator": "Oprettet af:",
     "institution": "Institution:",
     "show": "Vis tilskrivning",
     "title": "Titel:"
+  },
+  "authored": {
+    "by": "ved",
+    "publishedDate": "Offentliggjort {date}"
   },
   "footer": {
     "about": "Om dataområdet",
@@ -34,6 +39,9 @@
     "translationInfo": "Automatiserede oversættelser ved hjælp af {service}",
     "translationService": "eTranslation tjeneste"
   },
+  "home": {
+    "broughtBy": "Bragt til dig af"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Månedlige API-anmodninger i gennemsnit",
@@ -52,5 +60,31 @@
     "toggle": "Vis menu"
   },
   "newWindow": "åbner i nyt vindue",
-  "shareWhere": "Hvor vil du gerne dele dette?"
+  "news": "Nyheder",
+  "pagination": {
+    "label": "Paginering",
+    "next": "Næste",
+    "of": "Af",
+    "pageNumber": "Side nummer",
+    "previous": "Forrige"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Opdag relateret indhold"
+    }
+  },
+  "results": "{count} resultat | {count} resultater",
+  "shareWhere": "Hvor vil du gerne dele dette?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Dette er den første slide",
+      "lastSlide": "Dette er det sidste slide",
+      "nextSlide": "Næste slide",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Slide-gruppe {page}",
+      "previousSlide": "Forrige slide",
+      "slideLabel": "Slide {slide} af {totalSlides}"
+    }
+  }
 }

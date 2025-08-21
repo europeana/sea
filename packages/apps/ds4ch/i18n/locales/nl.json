@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "sluiten",
-    "share": "delen"
+    "share": "delen",
+    "shareOn": "Delen op {social}"
   },
   "attribution": {
     "creator": "Maker:",
     "institution": "Instelling:",
     "show": "Toon toeschrijving",
     "title": "Titel:"
+  },
+  "authored": {
+    "by": "door",
+    "publishedDate": "Gepubliceerd {date}"
   },
   "footer": {
     "about": "Over de dataspace",
@@ -34,6 +39,9 @@
     "translationInfo": "Geautomatiseerde vertalingen met behulp van de {service}",
     "translationService": "eTranslation Service"
   },
+  "home": {
+    "broughtBy": "Aangeboden door"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Gemiddeld maandelijkse API-verzoeken",
@@ -52,5 +60,31 @@
     "toggle": "Menu weergeven"
   },
   "newWindow": "opent in nieuw venster",
-  "shareWhere": "Waar wilt u dit delen?"
+  "news": "Nieuws",
+  "pagination": {
+    "label": "Paginering",
+    "next": "Volgende",
+    "of": "Van",
+    "pageNumber": "Paginanummer",
+    "previous": "Vorige"
+  },
+  "project": "Project",
+  "related": {
+    "categoryTags": {
+      "title": "Ontdek gerelateerde content"
+    }
+  },
+  "results": "{count} resultaat | {count} resultaten",
+  "shareWhere": "Waar wilt u dit delen?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Dit is de eerste slide",
+      "lastSlide": "Dit is de laatste slide",
+      "nextSlide": "Volgende slide",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Slide groep {page}",
+      "previousSlide": "Vorige slide",
+      "slideLabel": "Slide {slide} van {totalSlides}"
+    }
+  }
 }

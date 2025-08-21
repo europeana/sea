@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "κλείσιμο",
-    "share": "κοινοποίηση"
+    "share": "κοινοποίηση",
+    "shareOn": "Κοινοποίηση στο {social}"
   },
   "attribution": {
     "creator": "Δημιουργός:",
     "institution": "Ίδρυμα:",
     "show": "Εμφάνιση απόδοσης",
     "title": "Τίτλος:"
+  },
+  "authored": {
+    "by": "με",
+    "publishedDate": "Δημοσιεύτηκε {date}"
   },
   "footer": {
     "about": "Σχετικά με τον χώρο δεδομένων",
@@ -34,6 +39,9 @@
     "translationInfo": "Αυτόματες μεταφράσεις με χρήση του {service}",
     "translationService": "Υπηρεσία eTranslation"
   },
+  "home": {
+    "broughtBy": "Σας το προσφέρει η"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Μηνιαία αιτήματα API, κατά μέσο όρο",
@@ -52,5 +60,31 @@
     "toggle": "Εμφάνιση μενού"
   },
   "newWindow": "ανοίγει σε νέο παράθυρο",
-  "shareWhere": "Πού θα θέλατε να το μοιραστείτε αυτό;"
+  "news": "Ειδήσεις",
+  "pagination": {
+    "label": "Σελιδοποίηση",
+    "next": "Επόμενο",
+    "of": "Του",
+    "pageNumber": "Αριθμός σελίδας",
+    "previous": "Προηγούμενος"
+  },
+  "project": "Έργο",
+  "related": {
+    "categoryTags": {
+      "title": "Ανακαλύψτε σχετικό περιεχόμενο"
+    }
+  },
+  "results": "{count} αποτέλεσμα | {count} αποτελέσματα",
+  "shareWhere": "Πού θα θέλατε να το μοιραστείτε αυτό;",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Αυτή είναι η πρώτη διαφάνεια",
+      "lastSlide": "Αυτή είναι η τελευταία διαφάνεια",
+      "nextSlide": "Επόμενη διαφάνεια",
+      "paginationBullet": "Διαφάνεια {page}",
+      "paginationBulletGroupedSlides": "Ομάδα διαφανειών {page}",
+      "previousSlide": "Προηγούμενη διαφάνεια",
+      "slideLabel": "Διαφάνεια {slide} από {totalSlides}"
+    }
+  }
 }

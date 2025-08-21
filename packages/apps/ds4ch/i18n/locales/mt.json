@@ -1,13 +1,18 @@
 {
   "actions": {
     "close": "agħlaq",
-    "share": "ixxerja"
+    "share": "ixxerja",
+    "shareOn": "Ixxerja fuq {social}"
   },
   "attribution": {
     "creator": "Kreatur:",
     "institution": "Istituzzjoni:",
     "show": "Uri l-attribuzzjoni",
     "title": "Titlu:"
+  },
+  "authored": {
+    "by": "minn",
+    "publishedDate": "Ippubblikat {date}"
   },
   "footer": {
     "about": "Dwar l-ispazju tad-dejta",
@@ -34,6 +39,9 @@
     "translationInfo": "Traduzzjonijiet awtomatizzati bl-użu ta' {service}",
     "translationService": "Servizz ta' Traduzzjoni Elettronika"
   },
+  "home": {
+    "broughtBy": "Miġjuba lilek minn"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Talbiet API ta' kull xahar, bħala medja",
@@ -52,5 +60,31 @@
     "toggle": "Uri l-menù"
   },
   "newWindow": "jiftaħ f'tieqa ġdida",
-  "shareWhere": "Fejn tixtieq taqsam dan?"
+  "news": "Aħbarijiet",
+  "pagination": {
+    "label": "Paġinazzjoni",
+    "next": "Li jmiss",
+    "of": "Ta",
+    "pageNumber": "Numru tal-paġna",
+    "previous": "Preċedenti"
+  },
+  "project": "Proġett",
+  "related": {
+    "categoryTags": {
+      "title": "Skopri kontenut relatat"
+    }
+  },
+  "results": "{count} riżultat | {count} riżultati",
+  "shareWhere": "Fejn tixtieq taqsam dan?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Din hija l-ewwel slide",
+      "lastSlide": "Din hija l-aħħar slide",
+      "nextSlide": "Slide li jmiss",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Grupp ta' slides {page}",
+      "previousSlide": "Slide preċedenti",
+      "slideLabel": "Slide {slide} Ta {totalSlides}"
+    }
+  }
 }
