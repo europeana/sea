@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "zapri",
+    "downloadFile": "prenesi {file}",
     "share": "deli",
     "shareOn": "Deli prek {social}"
   },

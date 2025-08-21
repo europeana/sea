@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "stäng",
+    "downloadFile": "ladda ner {file}",
     "share": "dela",
     "shareOn": "Dela på {social}"
   },

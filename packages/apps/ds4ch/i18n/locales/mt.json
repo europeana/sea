@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "agħlaq",
+    "downloadFile": "niżżel {file}",
     "share": "ixxerja",
     "shareOn": "Ixxerja fuq {social}"
   },

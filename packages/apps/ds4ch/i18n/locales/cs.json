@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "zavřít",
+    "downloadFile": "stáhnout {file}",
     "share": "sdílet",
     "shareOn": "Sdílet na {social}"
   },

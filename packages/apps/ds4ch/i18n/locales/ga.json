@@ -1,6 +1,7 @@
 {
   "actions": {
     "close": "dún",
+    "downloadFile": "íoslódáil {file}",
     "share": "roinn",
     "shareOn": "Roinn ar {social}"
   },
