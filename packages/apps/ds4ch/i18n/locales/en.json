@@ -2,7 +2,7 @@
   "actions": {
     "close": "close",
     "downloadFile": "download {file}",
-    "share": "share",
+    "share": "Share",
     "shareOn": "Share on {social}"
   },
   "attribution": {

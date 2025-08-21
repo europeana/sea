@@ -15,7 +15,7 @@ defineProps({
   <div id="share-modal" class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-block">
           <h2 class="modal-title">{{ $t("actions.share") }}</h2>
         </div>
         <div class="modal-body">
