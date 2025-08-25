@@ -15,18 +15,19 @@ const lottieInstance = {
 vi.mock("@lottiefiles/dotlottie-vue", () => ({
   DotLottieVue: {
     name: "DotLottieVue",
-    template: "<div id='lotti-vue' :src='src'><slot /></div>",
+    template: "<div></div>",
     methods: {
       getDotLottieInstance: () => lottieInstance,
     },
   },
 }));
+const lottieSrc = "https://www.example.org/image.lottie";
 
 const factory = () =>
   mount(ImageLottiePlayer, {
     attachTo: document.body,
     props: {
-      src: "https://www.example.org/image.lottie",
+      src: lottieSrc,
     },
   });
 
@@ -47,16 +48,14 @@ describe("components/image/ImageLottiePlayer", () => {
 
   it("renders the Lottie player", () => {
     const wrapper = factory();
-    const lottiePlayer = wrapper.find("#lotti-vue");
+    const lottiePlayer = wrapper.findComponent({ name: "DotLottieVue" });
     expect(lottiePlayer.exists()).toBe(true);
   });
 
   it("uses the src prop for the lottie src", () => {
     const wrapper = factory();
-    const lottiePlayer = wrapper.find("#lotti-vue");
-    expect(lottiePlayer.attributes("src")).toBe(
-      "https://www.example.org/image.lottie",
-    );
+    const lottiePlayer = wrapper.findComponent({ name: "DotLottieVue" });
+    expect(lottiePlayer.attributes("src")).toBe(lottieSrc);
   });
 
   describe("when component scrolls to intersect viewport", () => {

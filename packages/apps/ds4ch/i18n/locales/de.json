@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "schließen",
-    "share": "Teilen"
+    "downloadFile": "herunterladen {file}",
+    "share": "Teilen",
+    "shareOn": "Teilen auf {social}"
   },
   "attribution": {
     "creator": "Urheber:",
     "institution": "Institution:",
     "show": "Namensnennung anzeigen",
     "title": "Titel:"
+  },
+  "authored": {
+    "by": "von",
+    "publishedDate": "Veröffentlicht {date}"
   },
   "footer": {
     "about": "Über den Datenraum",
@@ -34,6 +40,9 @@
     "translationInfo": "Automatische Übersetzungen mit dem {service}",
     "translationService": "eTranslation-Dienst"
   },
+  "home": {
+    "broughtBy": "Präsentiert von"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Monatliche API-Anfragen, im Durchschnitt",
@@ -52,5 +61,31 @@
     "toggle": "Menü anzeigen"
   },
   "newWindow": "öffnet sich in einem neuen Fenster",
-  "shareWhere": "Wo möchtest du das teilen?"
+  "news": "Nachrichten",
+  "pagination": {
+    "label": "Paginierung",
+    "next": "Weiter",
+    "of": "Von",
+    "pageNumber": "Seitennummer",
+    "previous": "Vorherige"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Entdecken Sie verwandte Inhalte"
+    }
+  },
+  "results": "{count} Ergebnis | {count} Ergebnisse",
+  "shareWhere": "Wo möchtest du das teilen?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Dies ist die erste Folie",
+      "lastSlide": "Dies ist die letzte Folie",
+      "nextSlide": "Nächste Folie",
+      "paginationBullet": "Folie {page}",
+      "paginationBulletGroupedSlides": "Foliengruppe {page}",
+      "previousSlide": "Vorherige Folie",
+      "slideLabel": "Folie {slide} von {totalSlides}"
+    }
+  }
 }

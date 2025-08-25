@@ -1,5 +1,4 @@
-import locales from "./locales";
-const isoCodes = locales.map((locale) => locale.language);
+import locales from "./locales.js";
 
 const defaults = {
   numeric: {
@@ -14,7 +13,7 @@ const defaults = {
   },
 };
 
-export default isoCodes.reduce((memo, code) => {
-  memo[code] = defaults;
+export default locales.reduce((memo, locale) => {
+  memo[locale.code] = defaults;
   return memo;
 }, {});

@@ -4,7 +4,7 @@ import blogPostListingPageQuery from "@/graphql/queries/blogPostListingPage.grap
 import useScrollTo from "@europeana/sea-base-layer/composables/scrollTo";
 
 const { scrollToSelector } = useScrollTo();
-const { t } = useI18n({ useScope: "global" });
+const { d, t } = useI18n({ useScope: "global" });
 const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
@@ -47,11 +47,17 @@ watch(page, () => {
   scrollToSelector("#results", { offsetTop: -100 });
 });
 
+const defaultCardThumbnail = {
+  image: { url: useRuntimeConfig().public.defaultThumbnail },
+};
+
 const cards = computed(() =>
   data.value.posts.map((post) => ({
     ...post,
     __typename: "ContentCard",
+    text: t("authored.createdDate", { date: d(post.datePublished, "short") }),
     url: { name: "news-slug", params: { slug: post.identifier } },
+    primaryImageOfPage: post.primaryImageOfPage || defaultCardThumbnail,
   })),
 );
 

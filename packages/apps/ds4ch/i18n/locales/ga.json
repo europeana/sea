@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "dún",
-    "share": "roinn"
+    "downloadFile": "íoslódáil {file}",
+    "share": "roinn",
+    "shareOn": "Roinn ar {social}"
   },
   "attribution": {
     "creator": "Cruthaitheoir:",
     "institution": "Institiúid:",
     "show": "Taispeáin sannadh",
     "title": "Teideal:"
+  },
+  "authored": {
+    "by": "le",
+    "publishedDate": "Foilsithe {date}"
   },
   "footer": {
     "about": "Maidir leis an spás sonraí",
@@ -34,6 +40,9 @@
     "translationInfo": "Aistriúcháin uathoibrithe ag úsáid na seirbhíse {service}",
     "translationService": "Seirbhís eAistriúcháin"
   },
+  "home": {
+    "broughtBy": "Curtha ar fáil ag"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Iarratais API míosúla, ar an meán",
@@ -52,5 +61,31 @@
     "toggle": "Taispeáin roghchlár"
   },
   "newWindow": "osclaíonn i bhfuinneog nua",
-  "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?"
+  "news": "Nuacht",
+  "pagination": {
+    "label": "Leathanaigh",
+    "next": "Ar Aghaidh",
+    "of": "De",
+    "pageNumber": "Uimhir an leathanaigh",
+    "previous": "Roimhe Seo"
+  },
+  "project": "Tionscadal",
+  "related": {
+    "categoryTags": {
+      "title": "Faigh amach ábhar gaolmhar"
+    }
+  },
+  "results": "{count} toradh | {count} torthaí",
+  "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Is é seo an chéad sleamhnán",
+      "lastSlide": "Is é seo an sleamhnán deireanach",
+      "nextSlide": "Sleamhnán seo chugainn",
+      "paginationBullet": "Sleamhnán {page}",
+      "paginationBulletGroupedSlides": "Grúpa sleamhnán {page}",
+      "previousSlide": "Sleamhnán roimhe seo",
+      "slideLabel": "Sleamhnán {slide} de {totalSlides}"
+    }
+  }
 }

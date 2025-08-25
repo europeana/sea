@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "zatvoriť",
-    "share": "zdieľať"
+    "downloadFile": "stiahnuť {file}",
+    "share": "zdieľať",
+    "shareOn": "Zdieľať na {social}"
   },
   "attribution": {
     "creator": "Autor:",
     "institution": "Inštitúcia:",
     "show": "Zobraziť atribút",
     "title": "Názov:"
+  },
+  "authored": {
+    "by": "od",
+    "publishedDate": "Zverejnené {date}"
   },
   "footer": {
     "about": "O dátovom priestore",
@@ -34,6 +40,9 @@
     "translationInfo": "Automatizované preklady pomocou {service}",
     "translationService": "Služba eTranslation"
   },
+  "home": {
+    "broughtBy": "Prináša vám"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Priemerný počet mesačných API požiadaviek",
@@ -52,5 +61,31 @@
     "toggle": "Zobraziť ponuku"
   },
   "newWindow": "otvorí sa v novom okne",
-  "shareWhere": "Kde by ste to chceli zdieľať?"
+  "news": "Novinky",
+  "pagination": {
+    "label": "Stránkovanie",
+    "next": "Ďalšie",
+    "of": "Z",
+    "pageNumber": "Číslo strany",
+    "previous": "Predchádzajúce"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Objavte súvisiaci obsah"
+    }
+  },
+  "results": "{count} výsledok | {count} výsledkov",
+  "shareWhere": "Kde by ste to chceli zdieľať?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Toto je prvá snímka",
+      "lastSlide": "Toto je posledná snímka",
+      "nextSlide": "Ďalšia snímka",
+      "paginationBullet": "Snímka {page}",
+      "paginationBulletGroupedSlides": "Skupina snímok {page}",
+      "previousSlide": "Predchádzajúca snímka",
+      "slideLabel": "Snímka {slide} z {totalSlides}"
+    }
+  }
 }

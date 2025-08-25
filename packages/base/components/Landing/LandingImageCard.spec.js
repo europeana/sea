@@ -12,6 +12,7 @@ const testProps = {
         contentType: "image/jpeg",
       },
     },
+    parity: "odd",
   },
 };
 
@@ -21,11 +22,20 @@ const factory = (props = testProps) =>
   });
 
 describe("components/landing/LandingImageCard", () => {
+  it("sets a class based on card's parity property", () => {
+    const wrapper = factory();
+
+    const imageCard = wrapper.find(".image-card");
+
+    expect(imageCard.classes()).toContain("image-card-odd");
+  });
+
   describe("when there are no imageSrcSet and imageSizes props set", () => {
     it("passes default image srcset and sizes", () => {
       const wrapper = factory();
 
       const imageWithAttribution = wrapper.find("image-with-attribution-stub");
+
       expect(imageWithAttribution.attributes("imagesizes")).toEqual(
         wrapper.vm.props.imageSizes,
       );

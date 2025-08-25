@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "bezárás",
-    "share": "megosztás"
+    "downloadFile": "letöltés {file}",
+    "share": "megosztás",
+    "shareOn": "Megosztás a {social}"
   },
   "attribution": {
     "creator": "Alkotó:",
     "institution": "Intézmény:",
     "show": "Attribúció megjelenítése",
     "title": "Cím:"
+  },
+  "authored": {
+    "by": "Szerző:",
+    "publishedDate": "Közzétéve {date}"
   },
   "footer": {
     "about": "Az adattérről",
@@ -34,6 +40,9 @@
     "translationInfo": "Automatikus fordítások a {service} használatával",
     "translationService": "eTranslation szolgáltatás"
   },
+  "home": {
+    "broughtBy": "Készítő:"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Átlagos havi API-kérés",
@@ -52,5 +61,31 @@
     "toggle": "Menü megjelenítése"
   },
   "newWindow": "új ablakban nyílik meg",
-  "shareWhere": "Hol szeretnéd megosztani?"
+  "news": "Hírek",
+  "pagination": {
+    "label": "Lapszámozás",
+    "next": "Következő",
+    "of": "A",
+    "pageNumber": "Oldalszám",
+    "previous": "Előző"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Fedezze fel a kapcsolódó tartalmakat"
+    }
+  },
+  "results": "{count} eredmény | {count} eredmények",
+  "shareWhere": "Hol szeretnéd megosztani?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Ez az első dia",
+      "lastSlide": "Ez az utolsó dia",
+      "nextSlide": "Következő dia",
+      "paginationBullet": "Dia {page}",
+      "paginationBulletGroupedSlides": "Diacsoport {page}",
+      "previousSlide": "Előző dia",
+      "slideLabel": "{slide} dia a {totalSlides} diából"
+    }
+  }
 }

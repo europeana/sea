@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "zatvori",
-    "share": "podijeli"
+    "downloadFile": "preuzmi {file}",
+    "share": "podijeli",
+    "shareOn": "Podijelite na {social}"
   },
   "attribution": {
     "creator": "Stvorio\/la:",
     "institution": "Institucija:",
     "show": "Prikaži atribuciju",
     "title": "Naslov:"
+  },
+  "authored": {
+    "by": "po",
+    "publishedDate": "Objavljeno {date}"
   },
   "footer": {
     "about": "O podatkovnom prostoru",
@@ -34,6 +40,9 @@
     "translationInfo": "Automatizirani prijevodi pomoću {service}",
     "translationService": "eTranslation usluga"
   },
+  "home": {
+    "broughtBy": "Predstavljeno vam od"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Mjesečni API zahtjevi, u prosjeku",
@@ -52,5 +61,31 @@
     "toggle": "Prikaži izbornik"
   },
   "newWindow": "otvara se u novom prozoru",
-  "shareWhere": "Gdje biste to htjeli podijeliti?"
+  "news": "Vijesti",
+  "pagination": {
+    "label": "Paginacija",
+    "next": "Sljedeći",
+    "of": "Od",
+    "pageNumber": "Broj stranice",
+    "previous": "Prethodni"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Otkrijte povezani sadržaj"
+    }
+  },
+  "results": "{count} rezultat | {count} rezultata",
+  "shareWhere": "Gdje biste to htjeli podijeliti?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Ovo je prvi slajd",
+      "lastSlide": "Ovo je zadnji slajd",
+      "nextSlide": "Sljedeći slajd",
+      "paginationBullet": "Slajd {page}",
+      "paginationBulletGroupedSlides": "Grupa slajdova {page}",
+      "previousSlide": "Prethodni slajd",
+      "slideLabel": "Slajd {slide} od {totalSlides}"
+    }
+  }
 }

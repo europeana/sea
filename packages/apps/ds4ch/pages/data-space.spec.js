@@ -2,9 +2,24 @@ import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import dataSpacePage from "./data-space.vue";
 
+const defaultThumbnail = "https://www.example.org/image.jpg";
+
+mockNuxtImport("useRuntimeConfig", () => {
+  return () => ({
+    public: {
+      defaultThumbnail,
+      i18n: {
+        // NOTE: without this in the mock, link generation fails...
+        routesNameSeparator: "___",
+      },
+    },
+  });
+});
+
 mockNuxtImport("useI18n", () => {
   return () => {
     return {
+      d: (datetime) => datetime,
       localeProperties: { value: { language: "en-GB" } },
       t: (key) => key,
     };
@@ -13,13 +28,14 @@ mockNuxtImport("useI18n", () => {
 
 const title = "Explore the data space";
 const description = "DS4CH text";
-const contentfulResponse = {
+const defaultContentfulResponse = {
   data: {
     blogPostingCollection: {
       items: [
         {
           name: "News post",
           identifier: "post",
+          primaryImageOfPage: { image: {} },
         },
       ],
     },
@@ -34,7 +50,7 @@ const contentfulResponse = {
     },
   },
 };
-const factory = async () =>
+const factory = async (contentfulResponse = defaultContentfulResponse) =>
   await mountSuspended(dataSpacePage, {
     global: {
       provide: {
@@ -69,5 +85,21 @@ describe("dataSpacePage", () => {
     const contentCardLink = wrapper.find(".content-card a");
 
     expect(contentCardLink.attributes().href).toBe("/en/news/post");
+  });
+
+  it("sets a default thumbnail for cards without an image", async () => {
+    const contentfulResponseNoImage = { ...defaultContentfulResponse };
+    contentfulResponseNoImage.data.blogPostingCollection.items.forEach(
+      (item) => delete item.primaryImageOfPage,
+    );
+
+    const wrapper = await factory(contentfulResponseNoImage);
+
+    expect(wrapper.vm.cards.every((card) => !!card.primaryImageOfPage)).toBe(
+      true,
+    );
+    expect(wrapper.vm.cards[0].primaryImageOfPage.image.url).toBe(
+      defaultThumbnail,
+    );
   });
 });

@@ -1,0 +1,14 @@
+#import "./illustrationFields.graphql"
+
+fragment illustrationGroupFields on IllustrationGroup {
+  name
+  nameEN: name(locale: "en-GB")
+  text
+  hasPartCollection(limit: 20) {
+    items {
+      ... on Illustration {
+        ...illustrationFields
+      }
+    }
+  }
+}

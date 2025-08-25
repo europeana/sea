@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "zapri",
-    "share": "deli"
+    "downloadFile": "prenesi {file}",
+    "share": "deli",
+    "shareOn": "Deli prek {social}"
   },
   "attribution": {
     "creator": "Ustvarjalec:",
     "institution": "Ustanova:",
     "show": "Prikaži navedbo vira",
     "title": "Naslov:"
+  },
+  "authored": {
+    "by": "po",
+    "publishedDate": "Objavljeno {date}"
   },
   "footer": {
     "about": "O podatkovnem prostoru",
@@ -34,6 +40,9 @@
     "translationInfo": "Samodejni prevodi z uporabo {service}",
     "translationService": "Storitev eTranslation"
   },
+  "home": {
+    "broughtBy": "Prinesel vam"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Povprečno število mesečnih zahtev API",
@@ -52,5 +61,31 @@
     "toggle": "Pokaži meni"
   },
   "newWindow": "odpre se v novem oknu",
-  "shareWhere": "Kje želite to deliti?"
+  "news": "Novice",
+  "pagination": {
+    "label": "Paginacija",
+    "next": "Naslednji",
+    "of": "Od",
+    "pageNumber": "Številka strani",
+    "previous": "Prejšnji"
+  },
+  "project": "Projekt",
+  "related": {
+    "categoryTags": {
+      "title": "Odkrijte povezano vsebino"
+    }
+  },
+  "results": "{count} rezultat | {count} rezultatov",
+  "shareWhere": "Kje želite to deliti?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "To je prvi diapozitiv",
+      "lastSlide": "To je zadnji diapozitiv",
+      "nextSlide": "Naslednji diapozitiv",
+      "paginationBullet": "Diapozitiv {page}",
+      "paginationBulletGroupedSlides": "Skupina diapozitivov {page}",
+      "previousSlide": "Prejšnji diapozitiv",
+      "slideLabel": "Diapozitiv {slide} od {totalSlides}"
+    }
+  }
 }

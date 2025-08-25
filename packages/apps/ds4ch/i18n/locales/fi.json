@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "sulje",
-    "share": "jaa"
+    "downloadFile": "lataa {file}",
+    "share": "jaa",
+    "shareOn": "Jaa {social}"
   },
   "attribution": {
     "creator": "Luoja:",
     "institution": "kulttuuriperintölaitos:",
     "show": "Näytä attribuutio",
     "title": "Otsikko:"
+  },
+  "authored": {
+    "by": "by",
+    "publishedDate": "Julkaistu {date}"
   },
   "footer": {
     "about": "Tietoa data-avaruudesta",
@@ -34,6 +40,9 @@
     "translationInfo": "Automaattiset käännökset käyttäen {service}",
     "translationService": "eTranslation-palvelu"
   },
+  "home": {
+    "broughtBy": "Tuotu sinulle"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Kuukausittaiset API-pyynnöt keskimäärin",
@@ -52,5 +61,31 @@
     "toggle": "Näytä valikko"
   },
   "newWindow": "avautuu uuteen ikkunaan",
-  "shareWhere": "Missä haluaisit jakaa tämän?"
+  "news": "Uutiset",
+  "pagination": {
+    "label": "Sivunumerointi",
+    "next": "Seuraava",
+    "of": "Of",
+    "pageNumber": "Sivunumero",
+    "previous": "Edellinen"
+  },
+  "project": "Projekti",
+  "related": {
+    "categoryTags": {
+      "title": "Tutustu aiheeseen liittyvään sisältöön"
+    }
+  },
+  "results": "{count} tulos | {count} tulokset",
+  "shareWhere": "Missä haluaisit jakaa tämän?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Tämä on ensimmäinen dia",
+      "lastSlide": "Tämä on viimeinen dia",
+      "nextSlide": "Seuraava dia",
+      "paginationBullet": "Dia {page}",
+      "paginationBulletGroupedSlides": "Dia-ryhmä {page}",
+      "previousSlide": "Edellinen dia",
+      "slideLabel": "Dia {slide} \/ {totalSlides}"
+    }
+  }
 }

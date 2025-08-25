@@ -1,13 +1,19 @@
 {
   "actions": {
     "close": "cerrar",
-    "share": "compartir"
+    "downloadFile": "descargar {file}",
+    "share": "compartir",
+    "shareOn": "Compartir en {social}"
   },
   "attribution": {
     "creator": "Creador:",
     "institution": "Institución:",
     "show": "Mostrar atribución",
     "title": "Título:"
+  },
+  "authored": {
+    "by": "por",
+    "publishedDate": "Publicado {date}"
   },
   "footer": {
     "about": "Acerca del espacio de datos",
@@ -34,6 +40,9 @@
     "translationInfo": "Traducciones automáticas mediante el {service}",
     "translationService": "Servicio eTranslation"
   },
+  "home": {
+    "broughtBy": "Presentado por"
+  },
   "landing": {
     "counts": {
       "apiRequests": "Solicitudes API mensuales, en promedio",
@@ -52,5 +61,31 @@
     "toggle": "Mostrar menú"
   },
   "newWindow": "se abre en una nueva ventana",
-  "shareWhere": "¿Dónde te gustaría compartir esto?"
+  "news": "Noticias",
+  "pagination": {
+    "label": "Paginación",
+    "next": "Próximo",
+    "of": "De",
+    "pageNumber": "Número de página",
+    "previous": "Anterior"
+  },
+  "project": "Proyecto",
+  "related": {
+    "categoryTags": {
+      "title": "Descubre contenido relacionado"
+    }
+  },
+  "results": "{count} resultado | {count} resultados",
+  "shareWhere": "¿Dónde te gustaría compartir esto?",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Esta es la primera diapositiva",
+      "lastSlide": "Esta es la última diapositiva",
+      "nextSlide": "Diapositiva siguiente",
+      "paginationBullet": "Diapositiva {page}",
+      "paginationBulletGroupedSlides": "Grupo de diapositivas {page}",
+      "previousSlide": "Diapositiva anterior",
+      "slideLabel": "Diapositiva {slide} de {totalSlides}"
+    }
+  }
 }
