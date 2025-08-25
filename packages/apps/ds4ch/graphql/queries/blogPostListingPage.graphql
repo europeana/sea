@@ -1,4 +1,4 @@
-#import "../fragments/imageFields.graphql"
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
 
 query BlogPostListingPage(
   $locale: String!

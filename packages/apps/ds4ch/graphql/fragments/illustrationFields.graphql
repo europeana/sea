@@ -1,5 +1,5 @@
 #import "./imageDisplayProfileFields.graphql"
-#import "./imageFields.graphql"
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
 
 fragment illustrationFields on Illustration {
   name

@@ -1,0 +1,32 @@
+query BlogPostingListingMinimal(
+  $locale: String!
+  $preview: Boolean = false
+  $site: String!
+  $query: String = ""
+  $excludeSysId: String = ""
+) {
+  blogPostingCollection(
+    preview: $preview
+    locale: $locale
+    order: datePublished_DESC
+    limit: 1500
+    where: {
+      name_contains: $query
+      sys: { id_not: $excludeSysId }
+      site: $site
+    }
+  ) {
+    items {
+      __typename
+      date: datePublished
+      sys {
+        id
+      }
+      cats: categoriesCollection(limit: 5) {
+        items {
+          id: identifier
+        }
+      }
+    }
+  }
+}
