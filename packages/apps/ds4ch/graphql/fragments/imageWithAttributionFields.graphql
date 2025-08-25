@@ -1,4 +1,4 @@
-#import "./imageFields.graphql"
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
 
 fragment imageWithAttributionFields on ImageWithAttribution {
   name

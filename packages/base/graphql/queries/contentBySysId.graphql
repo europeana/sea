@@ -1,0 +1,95 @@
+#import "../fragments/imageFields.graphql"
+
+query ContentBySysId(
+  $locale: String!
+  $preview: Boolean = false
+  $ids: [String]!
+  $site: String = ""
+  $limit: Int!
+  $query: String = ""
+) {
+  exhibitionPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: { AND: [{ sys: { id_in: $ids } }, { name_contains: $query }] }
+  ) {
+    ...exhibitionPageCollectionFields
+  }
+  storyCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: { AND: [{ sys: { id_in: $ids } }, { name_contains: $query }] }
+  ) {
+    ...storyCollectionFields
+  }
+  blogPostingCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: {
+      AND: [
+        { sys: { id_in: $ids } }
+        { name_contains: $query }
+        { site: $site }
+      ]
+    }
+  ) {
+    ...blogPostingCollectionFields
+  }
+}
+
+fragment exhibitionPageCollectionFields on ExhibitionPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      ...storiesBySysIdImageWithAttributionFields
+    }
+  }
+}
+
+fragment storyCollectionFields on StoryCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      ...storiesBySysIdImageWithAttributionFields
+    }
+  }
+}
+
+fragment storiesBySysIdImageWithAttributionFields on ImageWithAttribution {
+  image {
+    url
+    contentType
+    width
+    height
+  }
+}
+
+fragment blogPostingCollectionFields on BlogPostingCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+    datePublished
+  }
+}

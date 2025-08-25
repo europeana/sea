@@ -1,5 +1,5 @@
 #import "../fragments/imageDisplayProfileFields.graphql"
-#import "../fragments/imageFields.graphql"
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
 #import "../fragments/primaryCallToActionFields.graphql"
 
 query LandingPage(
