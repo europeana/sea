@@ -86,10 +86,11 @@ const buttonClass = computed(() => {
             class="hero-content"
             :class="variant === 'alternate' ? 'text-white' : ''"
           >
+            <h1>{{ headline }}</h1>
             <!-- eslint-disable vue/no-v-html -->
-            <div v-html="parseMarkdown(`# ${headline}\n${text}`)" />
+            <div class="text pb-3" v-html="parseMarkdown(text)" />
             <!-- eslint-enable vue/no-v-html -->
-            <ShareButton :variant="buttonClass" class="mt-3 mt-sm-4" />
+            <ShareButton :variant="buttonClass" />
             <ShareSocialModal />
           </header>
         </div>
@@ -136,7 +137,7 @@ const buttonClass = computed(() => {
     padding-bottom: 6rem;
   }
 
-  :deep(h1) {
+  h1 {
     font-size: $font-size-24;
     font-weight: 700;
     margin-bottom: 0.75rem;
@@ -152,8 +153,15 @@ const buttonClass = computed(() => {
     }
   }
 
-  :deep(p) {
+  .text {
     font-weight: 400;
+
+    @media (min-width: $bp-medium) {
+      font-size: $font-size-20;
+    }
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-40;
+    }
   }
 
   &.text-white {
