@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      baseUrl: "",
       contentful: {
         graphQlOrigin: null,
         spaceId: null,
