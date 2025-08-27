@@ -84,6 +84,7 @@
 
   &.btn-light {
     border-radius: 0;
+    border-color: $white;
     background-color: $white;
     color: $black;
     display: inline-flex;
@@ -95,7 +96,7 @@
     text-transform: uppercase;
 
     @media (min-width: ($bp-4k)) {
-      font-size: $font-size-18;
+      font-size: $font-size-28;
       padding: 0.875rem 1.25rem;
     }
 
