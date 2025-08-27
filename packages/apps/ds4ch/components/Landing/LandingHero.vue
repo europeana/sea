@@ -122,10 +122,6 @@ const buttonClass = computed(() => {
 }
 
 .container {
-  @media (min-width: $bp-xxl) {
-    max-width: 1320px;
-  }
-
   @media (min-width: $bp-4k) {
     max-width: 3015px;
   }

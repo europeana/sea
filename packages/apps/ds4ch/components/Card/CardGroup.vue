@@ -32,7 +32,7 @@ const props = defineProps({
   },
   cardGroupClasses: {
     type: String,
-    default: "row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-wqhd-6",
+    default: "row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-4k-6",
   },
 });
 </script>
