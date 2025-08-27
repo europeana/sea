@@ -1,4 +1,7 @@
 <script setup>
+import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl";
+const { urlWithOnlyQuery } = useCanonicalUrl();
+
 const props = defineProps({
   network: {
     type: String,
@@ -6,26 +9,21 @@ const props = defineProps({
   },
 });
 
-const appConfig = useRuntimeConfig().public;
-const route = useRoute();
-// TODO: use canonical URL without locale when canonicalUrl composable is available.
-const shareUrl = `${appConfig.baseUrl}${route.path}`;
-
 const allNetworks = {
   bluesky: {
     identifier: "bsky",
     name: "Bluesky",
-    url: `https://bsky.app/intent/compose?text=${shareUrl}`,
+    url: `https://bsky.app/intent/compose?text=${urlWithOnlyQuery?.value}`,
   },
   facebook: {
     identifier: "facebook",
     name: "Facebook",
-    url: `https://www.facebook.com/sharer/sharer.php?display=page&u=${shareUrl}`,
+    url: `https://www.facebook.com/sharer/sharer.php?display=page&u=${urlWithOnlyQuery?.value}`,
   },
   linkedin: {
     identifier: "linkedin",
     name: "LinkedIn",
-    url: `https://www.linkedin.com/shareArticle?url=${shareUrl}`,
+    url: `https://www.linkedin.com/shareArticle?url=${urlWithOnlyQuery?.value}`,
   },
 };
 

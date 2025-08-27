@@ -1,7 +1,10 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-
 import ShareSocialLink from "./ShareSocialLink.vue";
+
+vi.mock("@europeana/sea-base-layer/composables/canonicalUrl", () => ({
+  default: () => ({ urlWithOnlyQuery: ref("/en/page") }),
+}));
 
 const testProps = {
   network: "bluesky",

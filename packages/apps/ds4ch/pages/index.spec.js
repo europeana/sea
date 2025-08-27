@@ -5,6 +5,7 @@ import IndexPage from "./index.vue";
 mockNuxtImport("useI18n", () => {
   return () => {
     return {
+      locale: "en",
       localeProperties: { value: { language: "en-GB" } },
     };
   };
