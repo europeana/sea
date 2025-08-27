@@ -70,13 +70,12 @@ const imageCSSVars = computed(() =>
           v-html="parseMarkdown(`# ${headline}\n${text}`)"
         />
         <!-- eslint-enable vue/no-v-html -->
-        <GenericSmartLink
+        <GenericCallToAction
           v-if="cta"
-          :destination="cta.url"
-          class="btn btn-primary icon-chevron d-inline-flex align-items-center mt-1 mt-md-4 mb-0"
-        >
-          {{ cta.text }}
-        </GenericSmartLink>
+          :url="cta.url"
+          :text="cta.text"
+          classes="btn-primary icon-chevron mt-1 mt-md-4 mb-0"
+        />
       </header>
       <div id="europeana-logo">
         <p class="text-uppercase mb-0">
