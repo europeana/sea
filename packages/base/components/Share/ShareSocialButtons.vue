@@ -1,53 +1,54 @@
 <script setup>
 const props = defineProps({
-  mediaUrl: {
-    type: String,
-    default: "",
-  },
+  // Array of network strings to add to the modal
   shareTo: {
     type: Array,
-    default: () => [],
+    default: () => ["bluesky", "facebook"],
   },
 });
 
 const appConfig = useRuntimeConfig().public;
 const route = useRoute();
-// TODO: use canonical URL without locale here.
+// TODO: use canonical URL without locale when canonicalUrl composable is available.
 const shareUrl = `${appConfig.baseUrl}${route.path}`;
 
+const allNetworks = {
+  linkedin: {
+    identifier: "linkedin",
+    name: "LinkedIn",
+    url: `https://www.linkedin.com/shareArticle?url=${shareUrl}`,
+  },
+  bluesky: {
+    identifier: "bsky",
+    name: "Bluesky",
+    url: `https://bsky.app/intent/compose?text=${shareUrl}`,
+  },
+  facebook: {
+    identifier: "facebook",
+    name: "Facebook",
+    url: `https://www.facebook.com/sharer/sharer.php?display=page&u=${shareUrl}`,
+  },
+};
 // TODO: pass in optional pinterest and linkedin
 const networks = computed(() => {
-  return [
-    {
-      identifier: "facebook",
-      name: "Facebook",
-      url: `https://www.facebook.com/sharer/sharer.php?display=page&u=${shareUrl}`,
-    },
-    {
-      identifier: "bsky",
-      name: "Bluesky",
-      url: `https://bsky.app/intent/compose?text=${shareUrl}`,
-    },
-  ].concat(props.shareTo);
+  return props.shareTo.map((network) => allNetworks[network]);
 });
 
 // TODO: add event tracking to matomo
 </script>
 
 <template>
-  <div>
-    <NuxtLink
-      v-for="(network, index) in networks"
-      :key="index"
-      :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center me-2 mb-2 me-4k-3 mb-4k-4`"
-      :to="network.url"
-      target="_blank"
-      :aria-label="$t('actions.shareOn', { social: network.name })"
-    >
-      <span :class="`icon-${network.identifier}`" />
-      <span class="text">{{ network.name }} </span>
-    </NuxtLink>
-  </div>
+  <NuxtLink
+    v-for="(network, index) in networks"
+    :key="index"
+    :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center me-sm-2 mb-2 me-4k-4 mb-4k-4`"
+    :to="network.url"
+    target="_blank"
+    :aria-label="$t('actions.shareOn', { social: network.name })"
+  >
+    <span :class="`icon-${network.identifier}`" />
+    <span class="text">{{ network.name }} </span>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
@@ -58,6 +59,23 @@ const networks = computed(() => {
 
   &:last-child {
     margin-right: 0 !important;
+  }
+
+  [class^="icon"] {
+    font-size: $font-size-extrasmall;
+    align-items: center;
+    background-color: $white;
+    border-radius: 50%;
+    display: flex;
+    height: 1.125rem;
+    justify-content: center;
+    width: 1.125rem;
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-large;
+      height: 2.25rem;
+      width: 2.25rem;
+    }
   }
 
   &.facebook {
@@ -72,6 +90,16 @@ const networks = computed(() => {
         color: $white;
         background-color: $facebook-blue;
         border-color: $facebook-blue;
+      }
+    }
+
+    .icon-facebook {
+      background-color: $facebook-blue;
+      color: $white;
+      font-size: 1.125rem;
+
+      @media (min-width: $bp-4k) {
+        font-size: 2.25rem;
       }
     }
   }
@@ -90,10 +118,30 @@ const networks = computed(() => {
         border-color: $bsky-blue;
       }
     }
+
+    .icon-bsky {
+      color: $bsky-blue;
+    }
   }
 
-  [class^="icon"] {
-    font-size: $font-size-base;
+  &.linkedin {
+    $linkedin-blue: #0072b1;
+    border: solid 1px $linkedin-blue;
+    background-color: $linkedin-blue;
+    color: $white;
+
+    &:not(:disabled):not(.disabled) {
+      &:active,
+      &.active {
+        color: $white;
+        background-color: $linkedin-blue;
+        border-color: $linkedin-blue;
+      }
+    }
+
+    .icon-linkedin {
+      color: $linkedin-blue;
+    }
   }
 
   span.text {

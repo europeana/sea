@@ -89,7 +89,7 @@ const truncatedAttachmentLabel = (attachment) => {
             >
               <ShareButton class="mr-4" />
               <ShareSocialModal
-                :media-url="page.primaryImageOfPage?.image?.url || null"
+                :share-to="['linkedin', 'bluesky', 'facebook']"
               />
             </div>
             <div class="authored-section mb-5">
