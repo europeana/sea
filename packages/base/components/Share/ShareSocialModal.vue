@@ -1,9 +1,9 @@
 <script setup>
 defineProps({
-  mediaUrl: {
-    type: String,
-    default: null,
-  },
+  /**
+   * Social media networks to display
+   *
+   */
   shareTo: {
     type: Array,
     default: () => ["bluesky", "facebook"],
@@ -21,7 +21,12 @@ defineProps({
         <div class="modal-body">
           <p>{{ $t("shareWhere") }}</p>
           <div class="d-flex flex-column flex-sm-row justify-content-between">
-            <ShareSocialButtons :share-to="shareTo" />
+            <ShareSocialLink
+              v-for="(network, index) in shareTo"
+              :key="index"
+              :network="network"
+              class="share-button me-sm-2 me-4k-4 mb-2 mb-4k-4"
+            />
           </div>
           <div class="modal-footer">
             <button
@@ -37,3 +42,13 @@ defineProps({
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.share-button {
+  flex-basis: 33%;
+
+  &:last-child {
+    margin-right: 0 !important;
+  }
+}
+</style>

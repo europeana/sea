@@ -1,9 +1,8 @@
 <script setup>
 const props = defineProps({
-  // Array of network strings to add to the modal
-  shareTo: {
-    type: Array,
-    default: () => ["bluesky", "facebook"],
+  network: {
+    type: String,
+    required: true,
   },
 });
 
@@ -13,11 +12,6 @@ const route = useRoute();
 const shareUrl = `${appConfig.baseUrl}${route.path}`;
 
 const allNetworks = {
-  linkedin: {
-    identifier: "linkedin",
-    name: "LinkedIn",
-    url: `https://www.linkedin.com/shareArticle?url=${shareUrl}`,
-  },
   bluesky: {
     identifier: "bsky",
     name: "Bluesky",
@@ -28,26 +22,26 @@ const allNetworks = {
     name: "Facebook",
     url: `https://www.facebook.com/sharer/sharer.php?display=page&u=${shareUrl}`,
   },
+  linkedin: {
+    identifier: "linkedin",
+    name: "LinkedIn",
+    url: `https://www.linkedin.com/shareArticle?url=${shareUrl}`,
+  },
 };
-// TODO: pass in optional pinterest and linkedin
-const networks = computed(() => {
-  return props.shareTo.map((network) => allNetworks[network]);
-});
 
+const network = allNetworks[props.network];
 // TODO: add event tracking to matomo
 </script>
 
 <template>
   <NuxtLink
-    v-for="(network, index) in networks"
-    :key="index"
-    :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center me-sm-2 mb-2 me-4k-4 mb-4k-4`"
+    :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center`"
     :to="network.url"
     target="_blank"
     :aria-label="$t('actions.shareOn', { social: network.name })"
   >
     <span :class="`icon-${network.identifier}`" />
-    <span class="text">{{ network.name }} </span>
+    <span class="ms-2">{{ network.name }} </span>
   </NuxtLink>
 </template>
 
@@ -78,6 +72,26 @@ const networks = computed(() => {
     }
   }
 
+  &.bsky {
+    $bsky-blue: #0085ff;
+    border: solid 1px $bsky-blue;
+    color: $white;
+    background-color: $bsky-blue;
+
+    &:not(:disabled):not(.disabled) {
+      &:active,
+      &.active {
+        color: $white;
+        background-color: $bsky-blue;
+        border-color: $bsky-blue;
+      }
+    }
+
+    .icon-bsky {
+      color: $bsky-blue;
+    }
+  }
+
   &.facebook {
     $facebook-blue: #0866ff;
     border: solid 1px $facebook-blue;
@@ -104,26 +118,6 @@ const networks = computed(() => {
     }
   }
 
-  &.bsky {
-    $bsky-blue: #0085ff;
-    border: solid 1px $bsky-blue;
-    color: $white;
-    background-color: $bsky-blue;
-
-    &:not(:disabled):not(.disabled) {
-      &:active,
-      &.active {
-        color: $white;
-        background-color: $bsky-blue;
-        border-color: $bsky-blue;
-      }
-    }
-
-    .icon-bsky {
-      color: $bsky-blue;
-    }
-  }
-
   &.linkedin {
     $linkedin-blue: #0072b1;
     border: solid 1px $linkedin-blue;
@@ -142,12 +136,6 @@ const networks = computed(() => {
     .icon-linkedin {
       color: $linkedin-blue;
     }
-  }
-
-  span.text {
-    font-family: $font-family-sans-serif;
-    font-weight: 600;
-    padding-left: 0.75rem;
   }
 }
 </style>
