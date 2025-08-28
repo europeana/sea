@@ -214,13 +214,12 @@ watch(page, () => {
 
 <template>
   <div id="content-interface">
-    <!--client-only>
-      <StoriesTagsDropdown
+    <client-only>
+      <ContentTagsDropdown
         :filtered-tags="filteredTags"
         :selected-tags="selectedTags"
-        data-qa="stories tags dropdown"
       />
-    </client-only-->
+    </client-only>
     <div id="temp-tags-display">
       <span v-for="tag in filteredTags" :key="tag"> {{ tag }}, </span>
     </div>

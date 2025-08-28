@@ -16,6 +16,11 @@
     "createdDate": "Created {date}",
     "publishedDate": "Published {date}"
   },
+  "categories": {
+    "label": "Explore results by tag",
+    "noOptions": "There are no more tags to select",
+    "search": "Explore results by tag"
+  },
   "footer": {
     "about": "About the data space",
     "accessibility": "Accessibility",
