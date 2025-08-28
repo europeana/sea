@@ -20,6 +20,7 @@ mockNuxtImport("useI18n", () => {
   return () => {
     return {
       d: (datetime) => datetime,
+      locale: "en",
       localeProperties: { value: { language: "en-GB" } },
       t: (key) => key,
     };

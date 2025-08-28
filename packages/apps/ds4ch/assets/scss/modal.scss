@@ -1,0 +1,32 @@
+.modal {
+  .modal-dialog {
+    @media (min-width: $bp-4k) {
+      max-width: 74rem;
+    }
+  }
+
+  .modal-content {
+    .modal-header {
+      @media (min-width: $bp-4k) {
+        padding: 4rem 4rem 0;
+      }
+    }
+
+    .modal-body {
+      @media (min-width: $bp-4k) {
+        font-size: $font-size-32;
+        padding: 4rem;
+      }
+    }
+
+    .modal-title {
+      @extend %title-2;
+
+      margin-bottom: 0;
+    }
+  }
+
+  .modal-footer > * {
+    margin: 0;
+  }
+}

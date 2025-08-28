@@ -91,7 +91,7 @@ const buttonClass = computed(() => {
             <div class="text pb-3" v-html="parseMarkdown(text)" />
             <!-- eslint-enable vue/no-v-html -->
             <ShareButton :variant="buttonClass" />
-            <ShareSocialModal />
+            <ShareSocialModal :share-to="['linkedin', 'bluesky', 'facebook']" />
           </header>
         </div>
       </div>
