@@ -1,6 +1,4 @@
 <script setup>
-// TODO: make vClickOutside work
-import vClickOutside from "v-click-outside";
 import categoriesQuery from "@/graphql/queries/categories.graphql";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
@@ -93,7 +91,6 @@ const handleEsc = () => {
   handleClickOutside();
 };
 
-// https://www.npmjs.com/package/v-click-outside
 const clickOutsideConfig = ref({
   capture: true,
   events: ["click", "dblclick", "focusin", "touchstart"],

@@ -17,9 +17,9 @@
     "publishedDate": "Published {date}"
   },
   "categories": {
-    "label": "Explore results by tag",
+    "label": "Explore by tag",
     "noOptions": "There are no more tags to select",
-    "search": "Explore results by tag"
+    "search": "Explore by tag"
   },
   "footer": {
     "about": "About the data space",
