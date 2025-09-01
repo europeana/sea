@@ -3,7 +3,7 @@ import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
-// import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
+import exhibitionPagesListingMinimalGraphql from "@/graphql/queries/exhibitionPagesListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
 
@@ -26,7 +26,7 @@ const props = defineProps({
   },
   /**
    * Content types to include in the interface.
-   * @values blogPostings, exhibitions, stories
+   * @values blogPostings, exhibitionPages, stories
    */
   contentTypes: {
     type: Array[String],
@@ -86,8 +86,8 @@ const relevantContentMetadata = computed(() => {
       // Is this specific enough?
       return contentEntry["__typename"].toLowerCase().includes(selectedType);
       // Otherwise restore and extend:
-      // return (this.selectedType === 'exhibition' && story['__typename'] === 'ExhibitionPage') ||
-      //   (this.selectedType === 'story' && story['__typename'] === 'Story');
+      // return (this.selectedType === 'exhibition' && contentEntry['__typename'] === 'ExhibitionPage') ||
+      //   (this.selectedType === 'story' && contentEntry['__typename'] === 'Story');
     });
   }
   if (selectedTags.value.length > 0) {
@@ -168,6 +168,8 @@ async function fetchContentMetadata() {
   const contentIds = [];
   // Splits sthe request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
+  // TODO: when selectedType is already set, only retrieve those entries
+  // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
   if (props.contentTypes.includes("blogPostings")) {
     const blogPostingsResponse = await contentful.query(
       blogPostingsListingMinimalGraphql,
@@ -177,9 +179,17 @@ async function fetchContentMetadata() {
       blogPostingsResponse.data.blogPostingCollection?.items || [];
     contentIds.push(...blogPostings);
   }
+  if (props.contentTypes.includes("exhibitionPages")) {
+    const exhibitionPagesResponse = await contentful.query(
+      exhibitionPagesListingMinimalGraphql,
+      contentIdsVariables,
+    );
+    const exhibitionPages =
+      exhibitionPagesResponse.data.blogPostingCollection?.items || [];
+    contentIds.push(...exhibitionPages);
+  }
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,
-  // exhibitionsResponse.data.exhibitionPageCollection?.items,
 
   // Simplify categories
   for (const contentEntry of contentIds) {
