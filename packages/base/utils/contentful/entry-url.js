@@ -2,6 +2,9 @@ export const contentfulEntryUrl = (entry) => {
   let urlPrefix;
 
   switch (entry["__typename"]) {
+    case "BlogPosting":
+      urlPrefix = "/news";
+      break;
     case "ExhibitionPage":
       urlPrefix = "/exhibitions";
       break;
