@@ -1,5 +1,6 @@
 <script setup>
 import categoriesQuery from "@/graphql/queries/categories.graphql";
+const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
@@ -34,6 +35,7 @@ const { data: tags } = await useAsyncData("allCategories", async () => {
 const displayTags = computed(() => {
   let displayTags;
   const keyword = trimmedKeyword.value;
+
   if (props.filteredTags) {
     // use filteredTags as those are sorted by most used
     displayTags = props.filteredTags
@@ -62,26 +64,20 @@ const trimmedKeyword = computed(() => {
 });
 
 watch(
-  () => "$route.query.tags",
+  () => route.query.tags,
   () => {
     showDropdown.value = false;
   },
 );
 
 const setClickOutsideConfigIsActive = (isActive) => {
-  // need to do this instead of just setting isActive due to
-  // https://github.com/ndelvalle/v-click-outside/issues/143
-  clickOutsideConfig.value = {
-    ...clickOutsideConfig.value,
-    isActive,
-  };
+  clickOutsideConfig.value.isActive = isActive;
 };
 const handleFocusin = () => {
   setClickOutsideConfigIsActive(true);
   showDropdown.value = true;
 };
 const handleClickOutside = () => {
-  console.log("handleClickOutside");
   setClickOutsideConfigIsActive(false);
   showDropdown.value = false;
 };
