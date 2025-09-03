@@ -167,8 +167,8 @@ const contentfulQueryMock = vi.fn((graphQL) => {
 const factory = ({ data, propsData = {} } = {}) =>
   mountSuspended(ContentInterface, {
     global: {
-      mocks: {
-        contentful: {
+      provide: {
+        $contentful: {
           query: contentfulQueryMock,
         },
       },
@@ -206,9 +206,7 @@ describe("components/stories/ContentInterface", () => {
 
   describe("data", () => {
     it("fetches all content with minimal data from Contentful", async () => {
-      const wrapper = factory();
-
-      await wrapper.vm.fetch();
+      await factory();
 
       expect(
         contentfulQueryMock.calls[0].toBe("graphqlquery", {
@@ -262,9 +260,7 @@ describe("components/stories/ContentInterface", () => {
     // });
 
     it("fetches page of content with full data from Contentful", async () => {
-      const wrapper = factory();
-
-      await wrapper.vm.fetch();
+      await factory();
 
       expect(
         contentfulQueryMock.calls[1].toBe("graphqlquery", {
@@ -284,7 +280,7 @@ describe("components/stories/ContentInterface", () => {
   describe("computed properties", () => {
     describe("selectedTags", () => {
       it("defaults to an empty array", async () => {
-        const wrapper = factory();
+        const wrapper = await factory();
 
         expect(wrapper.vm.selectedTags).toEqual([]);
       });
@@ -295,7 +291,7 @@ describe("components/stories/ContentInterface", () => {
             tags: "network",
           },
         }));
-        const wrapper = factory();
+        const wrapper = await factory();
         expect(wrapper.vm.selectedTags.length).toBe(1);
       });
 
@@ -305,26 +301,26 @@ describe("components/stories/ContentInterface", () => {
             tags: "network,art,manuscripts",
           },
         }));
-        const wrapper = factory();
+        const wrapper = await factory();
 
         expect(wrapper.vm.selectedTags.length).toBe(3);
       });
     });
 
     describe("selectedType", () => {
-      it("defaults to false", () => {
-        const wrapper = factory();
+      it("defaults to false", async () => {
+        const wrapper = await factory();
 
         expect(wrapper.vm.selectedType).toBe(false);
       });
 
-      it('is set to "exhibition" when the type is set in the URL', () => {
+      it('is set to "exhibition" when the type is set in the URL', async () => {
         useRouteMock.mockImplementation(() => ({
           query: {
             type: "exhibition",
           },
         }));
-        const wrapper = factory();
+        const wrapper = await factory();
 
         expect(wrapper.vm.selectedType).toBe("exhibition");
       });
@@ -338,7 +334,7 @@ describe("components/stories/ContentInterface", () => {
               tags: "network",
             },
           }));
-          const wrapper = factory({ data: { allContentMetadata } });
+          const wrapper = await factory({ data: { allContentMetadata } });
 
           const filteredTags = wrapper.vm.filteredTags;
 
@@ -350,7 +346,7 @@ describe("components/stories/ContentInterface", () => {
     describe("relevantContentMetadata", () => {
       describe("when no tags are selected", () => {
         it("defaults to all content", async () => {
-          const wrapper = factory({ data: { allContentMetadata } });
+          const wrapper = await factory({ data: { allContentMetadata } });
 
           const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
 
@@ -365,7 +361,7 @@ describe("components/stories/ContentInterface", () => {
               tags: "network",
             },
           }));
-          const wrapper = factory({ data: { allContentMetadata } });
+          const wrapper = await factory({ data: { allContentMetadata } });
 
           const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
 
@@ -383,7 +379,7 @@ describe("components/stories/ContentInterface", () => {
               type: "exhibition",
             },
           }));
-          const wrapper = factory({ data: { allContentMetadata } });
+          const wrapper = await factory({ data: { allContentMetadata } });
 
           const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
 
@@ -397,7 +393,7 @@ describe("components/stories/ContentInterface", () => {
 
     describe("total", () => {
       it("defaults to 0", async () => {
-        const wrapper = factory();
+        const wrapper = await factory();
 
         const total = wrapper.vm.total;
 
@@ -405,7 +401,7 @@ describe("components/stories/ContentInterface", () => {
       });
 
       it("is based of the relevantContentMetadata length", async () => {
-        const wrapper = factory({ data: { allContentMetadata } });
+        const wrapper = await factory({ data: { allContentMetadata } });
 
         const total = wrapper.vm.total;
 
@@ -418,7 +414,7 @@ describe("components/stories/ContentInterface", () => {
             tags: "network",
           },
         }));
-        const wrapper = factory({ data: { allContentMetadata } });
+        const wrapper = await factory({ data: { allContentMetadata } });
 
         const total = wrapper.vm.total;
 
@@ -428,7 +424,7 @@ describe("components/stories/ContentInterface", () => {
 
     describe("page", () => {
       it("defaults to 1 when no other value is in the URL", async () => {
-        const wrapper = factory();
+        const wrapper = await factory();
 
         const page = wrapper.vm.page;
 
@@ -441,7 +437,7 @@ describe("components/stories/ContentInterface", () => {
             page: "3",
           },
         }));
-        const wrapper = factory();
+        const wrapper = await factory();
 
         const page = wrapper.vm.page;
 
@@ -453,7 +449,7 @@ describe("components/stories/ContentInterface", () => {
   describe("functions", () => {
     describe("fetchContentMetadata", () => {
       it("returns all the metadata with simplified tag data", async () => {
-        const wrapper = factory();
+        const wrapper = await factory();
 
         const result = await wrapper.vm.fetchContentMetadata();
 
@@ -464,7 +460,7 @@ describe("components/stories/ContentInterface", () => {
     describe("fetchContent", () => {
       describe("when fetching without selected tags", () => {
         it("fetches from all the contentTypes", async () => {
-          const wrapper = factory({ data: { allContentMetadata } });
+          const wrapper = await factory({ data: { allContentMetadata } });
 
           await wrapper.vm.fetchContent();
 
@@ -483,7 +479,9 @@ describe("components/stories/ContentInterface", () => {
         });
 
         it("orders stories by date published and inserts the CTA", async () => {
-          const wrapper = factory({ data: { allContentMetadata, perPage: 2 } });
+          const wrapper = await factory({
+            data: { allContentMetadata, perPage: 2 },
+          });
           const expected = [
             exhibitionPagesListingMinimalContentfulResponse.data
               .exhibitionPageCollection.items[0],
@@ -530,7 +528,7 @@ describe("components/stories/ContentInterface", () => {
               tags: "network",
             },
           }));
-          const wrapper = factory({ data: { allContentMetadata } });
+          const wrapper = await factory({ data: { allContentMetadata } });
           const fetchedContent = await wrapper.vm.fetchContent();
 
           expect(fetchedContent.length).toBe(2);
@@ -579,7 +577,7 @@ describe("components/stories/ContentInterface", () => {
 
   describe("when paginating", () => {
     it("scrolls to the top of the page", async () => {
-      const wrapper = factory();
+      const wrapper = await factory();
       wrapper.vm.scrollToSelector = vi.mock();
 
       await wrapper.vm.watch.page.call(wrapper.vm, { page: 2 });
