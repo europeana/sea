@@ -214,16 +214,12 @@ watch(page, () => {
 
 <template>
   <div id="content-interface">
-    <!--client-only>
-      <StoriesTagsDropdown
+    <client-only>
+      <ContentTagsDropdown
         :filtered-tags="filteredTags"
         :selected-tags="selectedTags"
-        data-qa="stories tags dropdown"
       />
-    </client-only-->
-    <div id="temp-tags-display">
-      <span v-for="tag in filteredTags" :key="tag"> {{ tag }}, </span>
-    </div>
+    </client-only>
     <div class="d-flex justify-content-between align-items-center mb-4">
       <span class="context-label">
         {{ $t("results", total, { count: total }) }}

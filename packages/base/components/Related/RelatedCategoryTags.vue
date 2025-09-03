@@ -66,7 +66,8 @@ const badgeLink = (tagId) => {
 const isActive = (tagId) => {
   return props.selected.includes(tagId);
 };
-// TODO: add matomo tracking on click
+// TODO: add matomo tracking on click for each NuxtLinkLocale
+// > @click="clickBadge(tag.identifier)"
 // const clickBadge = (tagId =>) {
 //   if ($matomo) {
 //     const action = isActive(tagId) ? "Deselect tag" : "Select tag";
@@ -101,7 +102,6 @@ const handleRight = (event) => {
             :active="isActive(tag.identifier)"
             :to="badgeLink(tag.identifier)"
             :data-qa="`${tag.name} category tag`"
-            @click="clickBadge(tag.identifier)"
             @keydown.left="handleLeft"
             @keydown.right="handleRight"
           >
