@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "autors",
+    "createdDate": "Izveidots {date}",
     "publishedDate": "Publicēts {date}"
+  },
+  "categories": {
+    "label": "Izpētīt pēc birkas",
+    "noOptions": "Nav vairs neviena atzīme, ko atlasīt",
+    "search": "Izpētīt pēc birkas"
   },
   "footer": {
     "about": "Par datu telpu",

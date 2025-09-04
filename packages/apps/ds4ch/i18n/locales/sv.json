@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "av",
+    "createdDate": "Skapad {date}",
     "publishedDate": "Publicerad {date}"
+  },
+  "categories": {
+    "label": "Utforska efter tagg",
+    "noOptions": "Det finns inga fler taggar att välja",
+    "search": "Utforska efter tagg"
   },
   "footer": {
     "about": "Om datarummet",

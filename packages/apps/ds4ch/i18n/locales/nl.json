@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "door",
+    "createdDate": "Gemaakt {date}",
     "publishedDate": "Gepubliceerd {date}"
+  },
+  "categories": {
+    "label": "Verkennen op tag",
+    "noOptions": "Er zijn geen tags meer om te selecteren",
+    "search": "Verkennen op tag"
   },
   "footer": {
     "about": "Over de dataspace",

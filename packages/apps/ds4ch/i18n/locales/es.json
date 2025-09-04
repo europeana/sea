@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "por",
+    "createdDate": "Creado {date}",
     "publishedDate": "Publicado {date}"
+  },
+  "categories": {
+    "label": "Explorar por etiqueta",
+    "noOptions": "No hay más etiquetas para seleccionar",
+    "search": "Explorar por etiqueta"
   },
   "footer": {
     "about": "Acerca del espacio de datos",

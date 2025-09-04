@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "ved",
+    "createdDate": "Oprettet {date}",
     "publishedDate": "Offentliggjort {date}"
+  },
+  "categories": {
+    "label": "Udforsk efter tag",
+    "noOptions": "Der er ikke flere tags at vælge",
+    "search": "Udforsk efter tag"
   },
   "footer": {
     "about": "Om dataområdet",

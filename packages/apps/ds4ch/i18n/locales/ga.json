@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "le",
+    "createdDate": "Cruthaithe {date}",
     "publishedDate": "Foilsithe {date}"
+  },
+  "categories": {
+    "label": "Déan iniúchadh de réir clibe",
+    "noOptions": "Níl a thuilleadh clibeanna le roghnú",
+    "search": "Déan iniúchadh de réir clibe"
   },
   "footer": {
     "about": "Maidir leis an spás sonraí",
