@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "Szerző:",
+    "createdDate": "Létrehozva {date}",
     "publishedDate": "Közzétéve {date}"
+  },
+  "categories": {
+    "label": "Felfedezés címke szerint",
+    "noOptions": "Nincs több kiválasztható címke",
+    "search": "Felfedezés címke szerint"
   },
   "footer": {
     "about": "Az adattérről",

@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "po",
+    "createdDate": "Kreirano {date}",
     "publishedDate": "Objavljeno {date}"
+  },
+  "categories": {
+    "label": "Istraži po oznaci",
+    "noOptions": "Nema više oznaka za odabir",
+    "search": "Istraži po oznaci"
   },
   "footer": {
     "about": "O podatkovnom prostoru",

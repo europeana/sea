@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "od",
+    "createdDate": "Vytvorené {date}",
     "publishedDate": "Zverejnené {date}"
+  },
+  "categories": {
+    "label": "Preskúmať podľa značky",
+    "noOptions": "Už nie sú žiadne tagy na výber",
+    "search": "Preskúmať podľa značky"
   },
   "footer": {
     "about": "O dátovom priestore",

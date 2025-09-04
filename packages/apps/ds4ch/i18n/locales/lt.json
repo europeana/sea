@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "pagal",
+    "createdDate": "Sukurta {date}",
     "publishedDate": "Paskelbta {date}"
+  },
+  "categories": {
+    "label": "Naršyti pagal žymą",
+    "noOptions": "Daugiau pasirinktinų žymų nėra",
+    "search": "Naršyti pagal žymą"
   },
   "footer": {
     "about": "Apie duomenų erdvę",

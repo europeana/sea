@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "von",
+    "createdDate": "Erstellt {date}",
     "publishedDate": "Veröffentlicht {date}"
+  },
+  "categories": {
+    "label": "Nach Tag erkunden",
+    "noOptions": "Es gibt keine weiteren Tags zur Auswahl",
+    "search": "Nach Tag erkunden"
   },
   "footer": {
     "about": "Über den Datenraum",

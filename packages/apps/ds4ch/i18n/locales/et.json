@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "poolt",
+    "createdDate": "Loodud {date}",
     "publishedDate": "Avaldatud {date}"
+  },
+  "categories": {
+    "label": "Uuri sildi järgi",
+    "noOptions": "Rohkem silte pole valida",
+    "search": "Uuri sildi järgi"
   },
   "footer": {
     "about": "Teave andmeruumi kohta",
