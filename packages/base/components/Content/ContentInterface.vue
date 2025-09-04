@@ -6,6 +6,7 @@ import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsLis
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
+const { d, t } = useI18n({ useScope: "global" });
 
 const props = defineProps({
   callToAction: {
@@ -15,6 +16,15 @@ const props = defineProps({
   featuredEntry: {
     type: Object,
     default: () => {},
+  },
+  /**
+   * Contentful Image to use for cards which don't have any image.
+   * @param {Object} defaultCardThumbnail.image - image object
+   * @param {string} defaultCardThumbnail.image.url - Image URL
+   */
+  defaultCardThumbnail: {
+    type: Object,
+    default: null,
   },
   /**
    * The site value by which to restrict the query
@@ -138,14 +148,16 @@ async function fetchContent() {
   );
 
   const fullContent = [
-    contentResponse.data.storyCollection.items,
-    contentResponse.data.exhibitionPageCollection.items,
-    contentResponse.data.blogPostingCollection.items,
+    contentResponse.data.storyCollection?.items,
+    contentResponse.data.exhibitionPageCollection?.items,
+    contentResponse.data.blogPostingCollection?.items,
   ].flat();
 
   const retrievedContentEntries = contentSysIds
     .map((sysId) =>
-      fullContent.find((contentEntry) => contentEntry.sys.id === sysId),
+      normaliseCard(
+        fullContent.find((contentEntry) => contentEntry?.sys?.id === sysId),
+      ),
     )
     .filter(Boolean);
   // This adds a 'cta-banner' entry, to be used as a placeholder for one cta.
@@ -153,7 +165,23 @@ async function fetchContent() {
   if (page.value === 1 && selectedTags.value.length === 0) {
     retrievedContentEntries.splice(12, 0, ctaBanner);
   }
+
   return retrievedContentEntries;
+}
+
+// TODO: Only works for blogPostings, make distinct normalisation functions per supported type,
+// consider passing a normalisation function in per type as a prop.
+function normaliseCard(entry) {
+  if (entry) {
+    return {
+      ...entry,
+      text: t("authored.createdDate", {
+        date: d(entry.datePublished, "short"),
+      }),
+      primaryImageOfPage:
+        entry.primaryImageOfPage || props.defaultCardThumbnail,
+    };
+  }
 }
 
 async function fetchContentMetadata() {
@@ -260,19 +288,20 @@ watch(page, () => {
               :illustration="callToAction.image"
             />
           </div>
-          <ContentCard
-            v-else
-            :key="entry.sysId"
-            :title="entry.name"
-            :url="contentfulEntryUrl(entry)"
-            :image-url="
-              entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
-            "
-            :image-content-type="
-              entry.primaryImageOfPage &&
-              entry.primaryImageOfPage.image.contentType
-            "
-          />
+          <div v-else :key="entry.sysId" class="col">
+            <ContentCard
+              :title="entry.name"
+              :url="contentfulEntryUrl(entry)"
+              :text="entry.text"
+              :image-url="
+                entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
+              "
+              :image-content-type="
+                entry.primaryImageOfPage &&
+                entry.primaryImageOfPage.image.contentType
+              "
+            />
+          </div>
         </template>
       </div>
     </transition>
