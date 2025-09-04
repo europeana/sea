@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "de",
+    "createdDate": "Creat {date}",
     "publishedDate": "Publicat {date}"
+  },
+  "categories": {
+    "label": "Explorează după etichetă",
+    "noOptions": "Nu mai sunt etichete de selectat",
+    "search": "Explorează după etichetă"
   },
   "footer": {
     "about": "Despre spațiul de date",

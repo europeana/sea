@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "podle",
+    "createdDate": "Vytvořeno {date}",
     "publishedDate": "Publikováno {date}"
+  },
+  "categories": {
+    "label": "Procházet podle štítku",
+    "noOptions": "Nejsou k dispozici žádné další tagy.",
+    "search": "Procházet podle štítku"
   },
   "footer": {
     "about": "O datovém prostoru",

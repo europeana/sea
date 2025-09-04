@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "di",
+    "createdDate": "Creato {date}",
     "publishedDate": "Pubblicato {date}"
+  },
+  "categories": {
+    "label": "Esplora per tag",
+    "noOptions": "Non ci sono più tag da selezionare",
+    "search": "Esplora per tag"
   },
   "footer": {
     "about": "Informazioni sullo spazio dati",

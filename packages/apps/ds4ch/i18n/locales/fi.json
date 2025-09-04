@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "by",
+    "createdDate": "Luotu {date}",
     "publishedDate": "Julkaistu {date}"
+  },
+  "categories": {
+    "label": "Tutki tunnisteen mukaan",
+    "noOptions": "Ei ole enää valittavia tunnisteita",
+    "search": "Tutki tunnisteen mukaan"
   },
   "footer": {
     "about": "Tietoa data-avaruudesta",

@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "przez",
+    "createdDate": "Utworzono {date}",
     "publishedDate": "Opublikowano {date}"
+  },
+  "categories": {
+    "label": "Przeglądaj według tagu",
+    "noOptions": "Nie ma więcej tagów do wybrania",
+    "search": "Przeglądaj według tagu"
   },
   "footer": {
     "about": "O przestrzeni danych",

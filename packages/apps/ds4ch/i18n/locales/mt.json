@@ -13,7 +13,13 @@
   },
   "authored": {
     "by": "minn",
+    "createdDate": "Maħluq {date}",
     "publishedDate": "Ippubblikat {date}"
+  },
+  "categories": {
+    "label": "Esplora skont it-tikketta",
+    "noOptions": "M'hemmx aktar tags biex tagħżel",
+    "search": "Esplora skont it-tikketta"
   },
   "footer": {
     "about": "Dwar l-ispazju tad-dejta",
