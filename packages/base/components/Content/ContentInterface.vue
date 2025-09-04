@@ -265,15 +265,17 @@ watch(page, () => {
       v-if="$fetchState.pending"
       class="container position-absolute flex-md-row py-4 text-center"
     /-->
-    <transition appear name="fade">
-      <div
-        class="row g-4 justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-wqhd-6"
-      >
-        <!--featuredEntryCard
-          v-if="showFeaturedEntry"
-          :featured-entry="featuredEntry"
-        /-->
-        <template v-for="entry in contentEntries">
+    <div
+      class="row g-4 justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-4k-6"
+    >
+      <!--featuredEntryCard
+        v-if="showFeaturedEntry"
+        :featured-entry="featuredEntry"
+      /-->
+      <template v-for="entry in contentEntries">
+        <!-- eslint-disable vue/valid-v-for -->
+        <transition appear name="fade">
+          <!-- eslint-enable vue/valid-v-for -->
           <div
             v-if="entry === ctaBanner"
             :key="entry"
@@ -302,9 +304,9 @@ watch(page, () => {
               "
             />
           </div>
-        </template>
-      </div>
-    </transition>
+        </transition>
+      </template>
+    </div>
     <PaginationNavInput
       v-if="total > perPage"
       :per-page="perPage"
@@ -316,6 +318,7 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
+@import "assets/scss/variables";
 
 .context-label {
   font-size: $font-size-small;
