@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
-import ContentInterface from "../ContentInterface.vue";
+import ContentInterface from "./ContentInterface.vue";
 
 const { useRouteMock } = vi.hoisted(() => ({
   useRouteMock: vi.fn(() => {}),
@@ -164,7 +164,7 @@ const contentfulQueryMock = vi.fn((graphQL) => {
   }
 });
 
-const factory = ({ data, propsData = {} } = {}) =>
+const factory = ({ data, props = {} } = {}) =>
   mountSuspended(ContentInterface, {
     global: {
       provide: {
@@ -174,7 +174,11 @@ const factory = ({ data, propsData = {} } = {}) =>
       },
     },
     data,
-    propsData,
+    propsData: {
+      site: "dataspace-culturalheritage.eu",
+      contentTypes: ["blogPostings"],
+      ...props,
+    },
   });
 
 describe("components/stories/ContentInterface", () => {

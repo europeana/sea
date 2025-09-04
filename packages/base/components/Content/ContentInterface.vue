@@ -57,7 +57,7 @@ const selectedTags = computed(() => {
 });
 
 const selectedType = computed(() => {
-  return route.query?.type || false;
+  return route.query.type || false;
 });
 
 const filteredTags = computed(() => {
