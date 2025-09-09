@@ -66,7 +66,6 @@ useHead({
       :hero="page.primaryImageOfPage"
       :context-label="$t('project')"
     />
-    {{ page }}
     <div class="container footer-margin pb-4k-5">
       <div class="row justify-content-center">
         <div class="col col-12 col-lg-8">
