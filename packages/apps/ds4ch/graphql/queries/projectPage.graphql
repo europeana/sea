@@ -1,0 +1,69 @@
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
+#import "@europeana/sea-base-layer/graphql/fragments/pdfDocumentFields.graphql"
+
+query ProjectPage(
+  $identifier: String!
+  $locale: String!
+  $preview: Boolean = false
+) {
+  projectCollection(
+    preview: $preview
+    locale: $locale
+    where: { identifier: $identifier }
+    limit: 1
+  ) {
+    items {
+      identifier
+      name
+      logo {
+        ...imageFields
+      }
+      primaryImageOfPage {
+        ...imageWithAttributionFields
+      }
+      headline
+      startDate
+      endDate
+      description
+      goals
+      testimonial {
+        ...testimonialCardFields
+      }
+      partners
+      partnerEntities
+      fundingStream {
+        url
+        text
+      }
+      fundingLogoUrl
+      contactNumber
+      fundingLogo {
+        ...imageFields
+      }
+      impactMetrics
+      reportsCollection {
+        items {
+          ...pdfDocumentFields
+        }
+      }
+      factSheet {
+        ...pdfDocumentFields
+      }
+    }
+  }
+}
+fragment imageWithAttributionFields on ImageWithAttribution {
+  name
+  nameEN: name(locale: "en-GB")
+  creator
+  provider
+  license
+  url
+  image {
+    ...imageFields
+  }
+}
+fragment testimonialCardFields on TestimonialCard {
+  text
+  attribution
+}

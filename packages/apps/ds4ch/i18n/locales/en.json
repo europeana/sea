@@ -76,6 +76,19 @@
     "previous": "Previous"
   },
   "project": "Project",
+  "projects": {
+    "dates": "{startDate} - {endDate}",
+    "reports": "Project reports",
+    "factSheet": "Project fact sheet",
+    "impact": "Key project impact",
+    "funding": "Funding information",
+    "partners": "Project partners",
+    "goals": "Project goals",
+    "viewFactSheet": "View fact sheet",
+    "downaloadFactSheet": "Download fact sheet",
+    "fundingStream": "Funding stream",
+    "contact": "Contact number"
+  },
   "related": {
     "categoryTags": {
       "title": "Discover related content"
