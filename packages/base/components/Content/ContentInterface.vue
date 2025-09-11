@@ -36,7 +36,7 @@ const props = defineProps({
   },
   /**
    * Content types to include in the interface.
-   * @values blogPostings, exhibitions, stories
+   * @values "blog post", "exhibition", "project", "story"
    */
   contentTypes: {
     type: Array[String],
@@ -196,7 +196,7 @@ async function fetchContentMetadata() {
   const contentIds = [];
   // Splits sthe request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
-  if (props.contentTypes.includes("blogPostings")) {
+  if (props.contentTypes.includes("blog post")) {
     const blogPostingsResponse = await contentful.query(
       blogPostingsListingMinimalGraphql,
       contentIdsVariables,

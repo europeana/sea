@@ -1,20 +1,23 @@
 <script setup>
-import landingPageQuery from "@/graphql/queries/landingPage.graphql";
+import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 
-const slug = "data-space";
+const slug = "data-space-hub";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(`landingPage:${slug}`, async () => {
-  const variables = {
-    identifier: slug,
-    locale: localeProperties.value.language,
-  };
+const { data: page } = await useAsyncData(
+  `contentHubPage:${slug}`,
+  async () => {
+    const variables = {
+      identifier: slug,
+      locale: localeProperties.value.language,
+    };
 
-  const response = await contentful.query(landingPageQuery, variables);
+    const response = await contentful.query(contentHubPageQuery, variables);
 
-  return response.data?.landingPageCollection?.items?.[0] || {};
-});
+    return response.data?.contentHubPageCollection?.items?.[0] || {};
+  },
+);
 
 useHead({
   title: page.value.headline,
@@ -28,15 +31,15 @@ const defaultCardThumbnail = {
 <template>
   <div class="mb-5">
     <LandingHero
-      :headline="page.headline || ''"
-      :text="page.text"
+      :headline="page.name"
+      :text="page.headline"
       :hero-image="page.primaryImageOfPage"
       variant="alternate"
     />
     <ContentInterface
       class="container mt-5 mb-5"
       site="dataspace-culturalheritage.eu"
-      :content-types="['blogPostings']"
+      :content-types="page.contentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
     />
   </div>
