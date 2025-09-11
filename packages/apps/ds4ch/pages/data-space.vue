@@ -1,7 +1,7 @@
 <script setup>
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 
-const slug = "data-space-hub";
+const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
