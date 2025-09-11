@@ -92,14 +92,15 @@ const contentBySysIdContentfulResponse = {
   },
 };
 
-const landingPageContentfulResponse = {
+const contentHubPageContentfulResponse = {
   data: {
-    landingPageCollection: {
+    contentHubPageCollection: {
       items: [
         {
-          headline: title,
-          text: description,
+          name: title,
+          headline: description,
           primaryImageOfPage: { image: "stubbed Image" },
+          contentTypes: ["blog post"],
         },
       ],
     },
@@ -130,8 +131,8 @@ const handleContentfulQuery = (graphQL) => {
   if (graphQL.definitions?.[0]?.name?.value === "BlogPostingListingMinimal") {
     return blogPostingListingMinimalContentfulResponse;
   }
-  if (graphQL.definitions?.[0]?.name?.value === "LandingPage") {
-    return landingPageContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "ContentHubPage") {
+    return contentHubPageContentfulResponse;
   }
   if (graphQL.definitions?.[0]?.name?.value === "Categories") {
     return categoriesContentfulResponse;
