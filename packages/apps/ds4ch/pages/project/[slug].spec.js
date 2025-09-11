@@ -7,6 +7,7 @@ mockNuxtImport("useI18n", () => {
     return {
       locale: "en",
       localeProperties: { value: { language: "en-GB" } },
+      t: (key) => key,
     };
   };
 });
@@ -28,8 +29,7 @@ const contentfulResponse = {
             "- Strengthen and enrich the common European data space.\n- Advance the digital transformation of cultural heritage institutions.",
           partners: "- A, Italy \n- B, Belgium \n- C, Netherlands",
           partnerEntities: null,
-          fundingLogoUrl: "https://eu.eu",
-          contactNumber: "#101174054",
+          contractNumber: "#101174054",
           impactMetrics: [
             "scenarios: 3000",
             "Online training events organized: 4",
@@ -43,14 +43,16 @@ const contentfulResponse = {
             url: "https://digital-strategy.ec.europa.eu/en/activities/digital-programme",
             text: "The Digital Europe Programme (DIGITAL)",
           },
-          fundingLogo: {
-            contentType: "image/png",
-            height: 149,
-            url: "https://example.org/image.png",
-            width: 1067,
-            description: null,
-            title: "Logo - Co-financed by the European Union",
-          },
+          fundingLogoCollection: [
+            {
+              contentType: "image/png",
+              height: 149,
+              url: "https://example.org/image.png",
+              width: 1067,
+              description: null,
+              title: "Logo - Co-financed by the European Union",
+            },
+          ],
           reportsCollection: {
             items: [
               {

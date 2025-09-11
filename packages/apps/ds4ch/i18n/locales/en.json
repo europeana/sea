@@ -85,9 +85,9 @@
     "partners": "Project partners",
     "goals": "Project goals",
     "viewFactSheet": "View fact sheet",
-    "downaloadFactSheet": "Download fact sheet",
+    "downloadFactSheet": "Download fact sheet",
     "fundingStream": "Funding stream",
-    "contact": "Contact number"
+    "contract": "Contract number"
   },
   "related": {
     "categoryTags": {

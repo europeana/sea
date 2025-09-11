@@ -15,47 +15,63 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(projectPageQuery, variables);
+    console.log(response);
     return response.data?.projectCollection?.items?.[0] || {};
   },
 );
 
-const partnerList = computed(() => {
-  if (!page.value.partnerEntities) {
-    return page.value.partners;
-  }
-  let returnVal = page.partners;
-  page.value.partnerEntities.forEach((entity) => {
-    returnVal = returnVal.concat(` - ${entity}`);
-  });
-  return returnVal;
+const partnerList = page.value.partners;
+// TODO: It was intened to allow editors to add Europeana organisation entities
+// as partnerEntities via contentful. These would need to be retrieved via the
+// Europeana entity API to have their prefLabels added as list items here.
+//   if (!page.value.partnerEntities) {
+//     return page.value.partners;
+//   }
+//   const formattedEntities  = page.value.partnerEntities.join('\n - ')
+//   return `${page.value.partners}\n- ${formattedEntities}`;
+
+const impactMetrics = page.value.impactMetrics.map((metric) => {
+  const parts = metric.split(":");
+  return { label: parts[0], value: parts[1] };
 });
 
-const impactMetrics = computed(() => {
-  return page.value.impactMetrics.map((metric) => {
-    const parts = metric.split(":");
-    return { label: parts[0], value: parts[1] };
-  });
+const reports = page.value.reportsCollection?.items.map((report) => {
+  return { label: report.title, icon: "download", url: report.url };
 });
 
-const reports = computed(() => {
-  return page.value.reportsCollection.items.map((report) => {
-    return { label: report.title, icon: "download", url: report.url };
-  });
-});
+const fundingInfo = [
+  {
+    label: t("projects.fundingStream"),
+    value: page.value.fundingStream?.text,
+    url: page.value.fundingStream?.url,
+  },
+  { label: t("projects.contract"), value: page.value.contractNumber },
+];
 
-const fundingInfo = computed(() => {
-  return [
-    {
-      label: t("projects.fundingStream"),
-      value: page.value.fundingStream.text,
-      url: page.value.fundingStream.url,
-    },
-    { label: t("projects.contact"), value: page.value.contactNumber },
-  ];
-});
+const tags =
+  page.value.categoriesCollection?.items.length > 0
+    ? page.value.categoriesCollection.items
+    : null;
 
 useHead({
   title: page.value.name,
+  meta: [
+    {
+      hid: "og:type",
+      property: "og:type",
+      content: "article",
+    },
+    {
+      hid: "og:image",
+      property: "og:image",
+      content: page.value.image?.url,
+    },
+    {
+      hid: "og:description",
+      property: "og:description",
+      content: page.value.description,
+    },
+  ],
 });
 </script>
 
@@ -123,8 +139,12 @@ useHead({
                 {{ $t("projects.funding") }}
               </h2>
               <GenericInfoTable :table-data="fundingInfo" />
-              <GenericSmartLink :destination="page.fundingLogoUrl">
-                <img :src="page.fundingLogo.url" class="funding-logo" />
+              <GenericSmartLink
+                v-for="fundingLogo in page.fundingLogoCollection"
+                :key="fundingLogo.url"
+                :destination="fundingLogo.url"
+              >
+                <img :src="fundingLogo.image?.url" class="funding-logo" />
               </GenericSmartLink>
               <h2>
                 {{ $t("projects.impact") }}
@@ -138,14 +158,22 @@ useHead({
                 <h2>
                   {{ $t("projects.factSheet") }}
                 </h2>
-                <button>{{ $t("projects.viewFactSheet") }}</button>
-                <button>{{ $t("projects.downloadFactSheet") }}</button>
+                <a :href="page.factSheet.url" class="btn btn-secondary mr-4">
+                  {{ $t("projects.viewFactSheet") }}
+                </a>
+                <a
+                  :href="page.factSheet.url"
+                  :download="page.factSheet.title"
+                  class="btn btn-secondary"
+                >
+                  {{ $t("projects.downloadFactSheet") }}
+                </a>
               </template>
             </div>
           </article>
           <RelatedCategoryTags
-            v-if="page.tags"
-            :tags="page.tags"
+            v-if="tags"
+            :tags="tags"
             class="related-container"
             route-name="data-space"
             badge-variant="badge-secondary"

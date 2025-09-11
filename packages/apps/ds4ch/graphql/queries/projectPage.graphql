@@ -1,5 +1,6 @@
 #import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
 #import "@europeana/sea-base-layer/graphql/fragments/pdfDocumentFields.graphql"
+#import "../fragments/illustrationFields.graphql"
 
 query ProjectPage(
   $identifier: String!
@@ -16,6 +17,9 @@ query ProjectPage(
       identifier
       name
       logo {
+        ...illustrationFields
+      }
+      image {
         ...imageFields
       }
       primaryImageOfPage {
@@ -35,11 +39,12 @@ query ProjectPage(
         url
         text
       }
-      fundingLogoUrl
-      contactNumber
-      fundingLogo {
-        ...imageFields
+      fundingLogoCollection {
+        items {
+          ...illustrationFields
+        }
       }
+      contractNumber
       impactMetrics
       reportsCollection {
         items {
@@ -48,6 +53,12 @@ query ProjectPage(
       }
       factSheet {
         ...pdfDocumentFields
+      }
+      categoriesCollection {
+        items {
+          name
+          identifier
+        }
       }
     }
   }
