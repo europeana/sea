@@ -1,13 +1,12 @@
 #import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
-#import "@europeana/sea-base-layer/graphql/fragments/pdfDocumentFields.graphql"
-#import "../fragments/illustrationFields.graphql"
+#import "../fragments/projectFields.graphql"
 
 query ProjectPage(
   $identifier: String!
   $locale: String!
   $preview: Boolean = false
 ) {
-  projectCollection(
+  projectPageCollection(
     preview: $preview
     locale: $locale
     where: { identifier: $identifier }
@@ -16,9 +15,6 @@ query ProjectPage(
     items {
       identifier
       name
-      logo {
-        ...illustrationFields
-      }
       image {
         ...imageFields
       }
@@ -26,33 +22,9 @@ query ProjectPage(
         ...imageWithAttributionFields
       }
       headline
-      startDate
-      endDate
       description
-      goals
-      testimonial {
-        ...testimonialCardFields
-      }
-      partners
-      partnerEntities
-      fundingStream {
-        url
-        text
-      }
-      fundingLogoCollection {
-        items {
-          ...illustrationFields
-        }
-      }
-      contractNumber
-      impactMetrics
-      reportsCollection {
-        items {
-          ...pdfDocumentFields
-        }
-      }
-      factSheet {
-        ...pdfDocumentFields
+      project {
+        ...projectFields
       }
       categoriesCollection {
         items {
@@ -73,8 +45,4 @@ fragment imageWithAttributionFields on ImageWithAttribution {
   image {
     ...imageFields
   }
-}
-fragment testimonialCardFields on TestimonialCard {
-  text
-  attribution
 }
