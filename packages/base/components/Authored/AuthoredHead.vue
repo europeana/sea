@@ -17,6 +17,14 @@ const props = defineProps({
     default: null,
   },
 
+  /**
+   * If `true` hero image covers 16:9 container
+   */
+  coverHeroImage: {
+    type: Boolean,
+    default: true,
+  },
+
   contextLabel: {
     type: String,
     default: null,
@@ -42,7 +50,7 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
     </div>
     <div v-if="heroImage" class="row justify-content-center">
       <div class="col col-12 col-lg-8">
-        <ImageWithAttributionContainer hero>
+        <ImageWithAttributionContainer :hero="coverHeroImage">
           <ImageWithAttribution
             :src="heroImage.url"
             :content-type="heroImage.contentType"

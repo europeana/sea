@@ -48,6 +48,7 @@ const truncatedAttachmentLabel = (attachment) => {
       :title="page.name"
       :description="page.introduction"
       :hero="page.primaryImageOfPage"
+      :cover-hero-image="false"
       :context-label="$t('news')"
     />
     <div class="container footer-margin pb-4k-5">
