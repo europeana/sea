@@ -81,7 +81,7 @@ useHead({
       :hero="page.primaryImageOfPage"
       :context-label="$t('project')"
     >
-      <img :src="page.project.logo.image.url" class="project-logo" />
+      <img :src="page.project?.logo?.image.url" class="project-logo" />
     </AuthoredHead>
     <div class="container footer-margin pb-4k-5">
       <div class="row justify-content-center">
