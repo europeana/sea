@@ -27,6 +27,8 @@
   }
 
   .badge-outline-light {
-    height: calc(2 * (2rem - 1px));
+    @media (min-width: $bp-4k) {
+      height: calc(2 * (2rem - 1px));
+    }
   }
 }

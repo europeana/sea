@@ -4,6 +4,11 @@
     border-radius: 0.5rem;
   }
 
+  &.card {
+    margin-bottom: 0;
+    height: 100%;
+  }
+
   .card-body {
     @media (min-width: $bp-4k) {
       padding: 2rem;

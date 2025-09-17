@@ -37,10 +37,11 @@ const defaultCardThumbnail = {
       variant="alternate"
     />
     <ContentInterface
-      class="container mt-5 mb-5"
+      class="mt-5 mb-5"
       site="dataspace-culturalheritage.eu"
       :content-types="page.contentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
+      :cta-banners="page.hasPartCollection?.items"
     />
   </div>
 </template>
@@ -49,7 +50,7 @@ const defaultCardThumbnail = {
 @import "assets/scss/variables";
 @import "assets/scss/pagination";
 
-.xxl-page output.context-label {
+.xxl-page .context-label {
   font-size: $font-size-14;
 
   @media (min-width: $bp-4k) {
