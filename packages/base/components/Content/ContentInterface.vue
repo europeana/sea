@@ -3,6 +3,7 @@ import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
+import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
@@ -151,6 +152,7 @@ async function fetchContent() {
     contentResponse.data.storyCollection?.items,
     contentResponse.data.exhibitionPageCollection?.items,
     contentResponse.data.blogPostingCollection?.items,
+    contentResponse.data.projectPageCollection?.items,
   ].flat();
 
   const retrievedContentEntries = contentSysIds
@@ -160,6 +162,7 @@ async function fetchContent() {
       ),
     )
     .filter(Boolean);
+
   // This adds a 'cta-banner' entry, to be used as a placeholder for one cta.
   // TODO: allow muliple of these, each with a unique index. 'cta-banner-0', 'cta-banner-1', 'cta-banner-2'
   if (page.value === 1 && selectedTags.value.length === 0) {
@@ -169,18 +172,27 @@ async function fetchContent() {
   return retrievedContentEntries;
 }
 
-// TODO: Only works for blogPostings, make distinct normalisation functions per supported type,
+// TODO: Only works for blogPostings/projects, make distinct normalisation functions per supported type,
 // consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
-    return {
-      ...entry,
-      text: t("authored.createdDate", {
-        date: d(entry.datePublished, "short"),
-      }),
-      primaryImageOfPage:
-        entry.primaryImageOfPage || props.defaultCardThumbnail,
-    };
+    if (entry.__typename === "BlogPosting") {
+      return {
+        ...entry,
+        text: t("authored.createdDate", {
+          date: d(entry.datePublished, "short"),
+        }),
+        primaryImageOfPage:
+          entry.primaryImageOfPage || props.defaultCardThumbnail,
+      };
+    } else if (entry.__typename === "ProjectPage") {
+      return {
+        ...entry,
+        text: entry.headline,
+        primaryImageOfPage:
+          entry.primaryImageOfPage || props.defaultCardThumbnail,
+      };
+    }
   }
 }
 
@@ -204,6 +216,15 @@ async function fetchContentMetadata() {
     const blogPostings =
       blogPostingsResponse.data.blogPostingCollection?.items || [];
     contentIds.push(...blogPostings);
+  }
+  if (props.contentTypes.includes("project")) {
+    const projectPagesResponse = await contentful.query(
+      projectPagesListingMinimalGraphql,
+      contentIdsVariables,
+    );
+    const projectPages =
+      projectPagesResponse.data.projectPageCollection?.items || [];
+    contentIds.push(...projectPages);
   }
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,
