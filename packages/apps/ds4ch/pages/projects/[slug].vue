@@ -4,7 +4,7 @@ import projectPageQuery from "@/graphql/queries/projectPage.graphql";
 const route = useRoute();
 
 const contentful = inject("$contentful");
-const { localeProperties, t } = useI18n();
+const { localeProperties } = useI18n();
 
 const { data: page } = await useAsyncData(
   `projectPage:${route.params.slug}`,
@@ -38,15 +38,6 @@ const reports = page.value.project?.reportsCollection?.items.map((report) => {
   return { label: report.title, icon: "ic-download", url: report.url };
 });
 
-const fundingInfo = [
-  {
-    label: t("projects.fundingStream"),
-    value: page.value.project?.fundingStream?.text,
-    url: page.value.project?.fundingStream?.url,
-  },
-  { label: t("projects.contract"), value: page.value.project?.contractNumber },
-];
-
 const tags =
   page.value.categoriesCollection?.items.length > 0
     ? page.value.categoriesCollection.items
@@ -62,16 +53,6 @@ const PROJECT_LOGO_SRCSET_PRESETS = {
 const projectLogoImageSizes = [
   "(max-width: 3019px) 24px", // bp-4k
   "48px",
-].join(",");
-
-const FUNDING_LOGO_SRCSET_PRESETS = {
-  "4k": { w: 160, h: 32 },
-  "4k+": { w: 320, h: 64 },
-};
-
-const fundingLogoImageSizes = [
-  "(max-width: 3019px) 32px", // bp-4k
-  "64px",
 ].join(",");
 
 useHead({
@@ -106,6 +87,7 @@ useHead({
       :description="page.headline"
     >
       <ImageOptimised
+        v-if="projectLogoImage"
         class="project-logo me-2 mb-2"
         :src="projectLogoImage?.url"
         :content-type="projectLogoImage?.contentType"
@@ -177,28 +159,7 @@ useHead({
                   <h2>
                     {{ $t("projects.funding") }}
                   </h2>
-                  <GenericInfoTable :table-data="fundingInfo" />
-                  <GenericSmartLink
-                    v-for="fundingLogo in page.project?.fundingLogosCollection
-                      .items"
-                    :key="fundingLogo.url"
-                    :destination="fundingLogo.url"
-                    hide-external-icon
-                  >
-                    <ImageOptimised
-                      class="funding-logo me-2 mb-2"
-                      :src="fundingLogo.image?.url"
-                      :content-type="fundingLogo.image?.contentType"
-                      :contentful-image-crop-presets="
-                        FUNDING_LOGO_SRCSET_PRESETS
-                      "
-                      :image-sizes="fundingLogoImageSizes"
-                      :width="fundingLogo.image?.width"
-                      :height="fundingLogo.image?.height"
-                      :max-width="320"
-                      :alt="fundingLogo.image?.description || ''"
-                    />
-                  </GenericSmartLink>
+                  <ProjectFundingInfoTable :project="page.project" />
                   <h2>
                     {{ $t("projects.impact") }}
                   </h2>
@@ -292,20 +253,6 @@ useHead({
       height: 3rem;
       max-width: 9rem;
     }
-  }
-}
-
-// When SVG img is not nested
-:deep(img.funding-logo),
-.funding-logo :deep(img) {
-  height: 2rem;
-  max-width: 10rem;
-  width: auto;
-  object-fit: contain;
-
-  @media (min-width: $bp-4k) {
-    height: 4rem;
-    max-width: 20rem;
   }
 }
 </style>
