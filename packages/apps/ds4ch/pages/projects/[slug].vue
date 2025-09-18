@@ -52,6 +52,28 @@ const tags =
     ? page.value.categoriesCollection.items
     : null;
 
+const projectLogoImage = page.value.project?.logo?.image;
+
+const PROJECT_LOGO_SRCSET_PRESETS = {
+  "4k": { w: 72, h: 24 },
+  "4k+": { w: 144, h: 48 },
+};
+
+const projectLogoImageSizes = [
+  "(max-width: 3019px) 24px", // bp-4k
+  "48px",
+].join(",");
+
+const FUNDING_LOGO_SRCSET_PRESETS = {
+  "4k": { w: 160, h: 32 },
+  "4k+": { w: 320, h: 64 },
+};
+
+const fundingLogoImageSizes = [
+  "(max-width: 3019px) 32px", // bp-4k
+  "64px",
+].join(",");
+
 useHead({
   title: page.value.name,
   meta: [
@@ -77,19 +99,28 @@ useHead({
 <template>
   <div class="page text-page mb-5">
     <AuthoredHead
+      class="authored-head"
       :title="page.name"
       :hero="page.primaryImageOfPage"
       :context-label="$t('project')"
+      :description="page.headline"
     >
-      <img :src="page.project?.logo?.image.url" class="project-logo" />
+      <ImageOptimised
+        class="project-logo me-2 mb-2"
+        :src="projectLogoImage?.url"
+        :content-type="projectLogoImage?.contentType"
+        :contentful-image-crop-presets="PROJECT_LOGO_SRCSET_PRESETS"
+        :image-sizes="projectLogoImageSizes"
+        :width="projectLogoImage?.width"
+        :height="projectLogoImage?.height"
+        :max-width="144"
+        :alt="projectLogoImage?.description || ''"
+      />
     </AuthoredHead>
     <div class="container footer-margin pb-4k-5">
       <div class="row justify-content-center">
         <div class="col col-12 col-lg-8">
           <article>
-            <p>
-              {{ page.headline }}
-            </p>
             <div class="dates fw-bold d-block">
               <time class="d-inline-block" data-qa="date">
                 {{
@@ -109,7 +140,7 @@ useHead({
               </time>
             </div>
             <div
-              class="mt-3 mt-md-4 mb-4 pb-2 pt-md-2 py-4k-5 d-flex align-items-center"
+              class="mt-3 mt-md-4 mb-4 mb-lg-5 pb-2 pb-lg-0 pt-md-2 py-4k-5 d-flex align-items-center"
             >
               <ShareButton class="mr-4" />
               <ShareSocialModal
@@ -121,7 +152,7 @@ useHead({
                 <div class="col col-12 col-lg-9">
                   <ContentRichText
                     :text="page.description"
-                    class="mb-4 mb-md-5 pb-4k-5"
+                    class="mb-3 pb-3 mb-4k-5"
                   />
                   <h2>
                     {{ $t("projects.goals") }}
@@ -153,7 +184,19 @@ useHead({
                     :destination="fundingLogo.url"
                     hide-external-icon
                   >
-                    <img :src="fundingLogo.image?.url" class="funding-logo" />
+                    <ImageOptimised
+                      class="funding-logo me-2 mb-2"
+                      :src="fundingLogo.image?.url"
+                      :content-type="fundingLogo.image?.contentType"
+                      :contentful-image-crop-presets="
+                        FUNDING_LOGO_SRCSET_PRESETS
+                      "
+                      :image-sizes="fundingLogoImageSizes"
+                      :width="fundingLogo.image?.width"
+                      :height="fundingLogo.image?.height"
+                      :max-width="320"
+                      :alt="fundingLogo.image?.description || ''"
+                    />
                   </GenericSmartLink>
                   <h2>
                     {{ $t("projects.impact") }}
@@ -222,6 +265,46 @@ useHead({
   @media (min-width: $bp-4k) {
     line-height: 4rem;
     font-size: 3rem;
+  }
+}
+
+.authored-head {
+  :deep(.title) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .context-label {
+      flex-basis: 100%;
+    }
+  }
+
+  // When SVG img is not nested
+  :deep(img.project-logo),
+  .project-logo :deep(img) {
+    height: 1.5rem;
+    max-width: 4.5rem;
+    width: auto;
+    object-fit: contain;
+
+    @media (min-width: $bp-4k) {
+      height: 3rem;
+      max-width: 9rem;
+    }
+  }
+}
+
+// When SVG img is not nested
+:deep(img.funding-logo),
+.funding-logo :deep(img) {
+  height: 2rem;
+  max-width: 10rem;
+  width: auto;
+  object-fit: contain;
+
+  @media (min-width: $bp-4k) {
+    height: 4rem;
+    max-width: 20rem;
   }
 }
 </style>
