@@ -68,7 +68,7 @@ useHead({
     {
       hid: "og:description",
       property: "og:description",
-      content: page.value.description,
+      content: page.value.headline,
     },
   ],
 });
