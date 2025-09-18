@@ -97,12 +97,12 @@ useHead({
                     startDate: $d(
                       new Date(page.project?.startDate),
                       "month",
-                      localeProperties.language,
+                      localeProperties.locale,
                     ),
                     endDate: $d(
                       new Date(page.project?.endDate),
                       "month",
-                      localeProperties.language,
+                      localeProperties.locale,
                     ),
                   })
                 }}
