@@ -5,6 +5,9 @@ export const contentfulEntryUrl = (entry) => {
     case "BlogPosting":
       urlPrefix = "/news";
       break;
+    case "ProjectPage":
+      urlPrefix = "/projects";
+      break;
     case "ExhibitionPage":
       urlPrefix = "/exhibitions";
       break;

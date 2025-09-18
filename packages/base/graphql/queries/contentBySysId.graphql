@@ -38,6 +38,14 @@ query ContentBySysId(
   ) {
     ...blogPostingCollectionFields
   }
+  projectPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: { AND: [{ sys: { id_in: $ids } }, { name_contains: $query }] }
+  ) {
+    ...projectPageCollectionFields
+  }
 }
 
 fragment exhibitionPageCollectionFields on ExhibitionPageCollection {
@@ -91,5 +99,22 @@ fragment blogPostingCollectionFields on BlogPostingCollection {
       }
     }
     datePublished
+  }
+}
+
+fragment projectPageCollectionFields on ProjectPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+    headline
   }
 }
