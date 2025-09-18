@@ -165,6 +165,7 @@ useHead({
                     v-if="page.project.testimonial"
                     :testimonial-text="page.project.testimonial.text"
                     :attribution="page.project.testimonial.attribution"
+                    variant="banner"
                   />
                   <h2>
                     {{ $t("projects.partners") }}
