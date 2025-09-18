@@ -1,0 +1,48 @@
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
+#import "../fragments/projectFields.graphql"
+
+query ProjectPage(
+  $identifier: String!
+  $locale: String!
+  $preview: Boolean = false
+) {
+  projectPageCollection(
+    preview: $preview
+    locale: $locale
+    where: { identifier: $identifier }
+    limit: 1
+  ) {
+    items {
+      identifier
+      name
+      image {
+        ...imageFields
+      }
+      primaryImageOfPage {
+        ...imageWithAttributionFields
+      }
+      headline
+      description
+      project {
+        ...projectFields
+      }
+      categoriesCollection {
+        items {
+          name
+          identifier
+        }
+      }
+    }
+  }
+}
+fragment imageWithAttributionFields on ImageWithAttribution {
+  name
+  nameEN: name(locale: "en-GB")
+  creator
+  provider
+  license
+  url
+  image {
+    ...imageFields
+  }
+}

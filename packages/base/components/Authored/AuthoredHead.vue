@@ -42,6 +42,7 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
           <div v-if="contextLabel" class="context-label">
             {{ contextLabel }}
           </div>
+          <slot />
           <h1 class="mb-2">
             {{ title }}
           </h1>
