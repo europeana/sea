@@ -35,7 +35,7 @@ const impactMetrics = page.value.project?.impactMetrics.map((metric) => {
 });
 
 const reports = page.value.project?.reportsCollection?.items.map((report) => {
-  return { label: report.title, icon: "download", url: report.url };
+  return { label: report.title, icon: "ic-download", url: report.url };
 });
 
 const fundingInfo = [
@@ -68,7 +68,7 @@ useHead({
     {
       hid: "og:description",
       property: "og:description",
-      content: page.value.description,
+      content: page.value.headline,
     },
   ],
 });
@@ -80,7 +80,9 @@ useHead({
       :title="page.name"
       :hero="page.primaryImageOfPage"
       :context-label="$t('project')"
-    />
+    >
+      <img :src="page.project?.logo?.image.url" class="project-logo" />
+    </AuthoredHead>
     <div class="container footer-margin pb-4k-5">
       <div class="row justify-content-center">
         <div class="col col-12 col-lg-8">
@@ -95,12 +97,12 @@ useHead({
                     startDate: $d(
                       new Date(page.project?.startDate),
                       "month",
-                      localeProperties.language,
+                      localeProperties.locale,
                     ),
                     endDate: $d(
                       new Date(page.project?.endDate),
                       "month",
-                      localeProperties.language,
+                      localeProperties.locale,
                     ),
                   })
                 }}
@@ -115,66 +117,72 @@ useHead({
               />
             </div>
             <div class="authored-section mb-5">
-              <ContentRichText
-                :text="page.description"
-                class="mb-4 mb-md-5 pb-4k-5"
-              />
-              <h2>
-                {{ $t("projects.goals") }}
-              </h2>
-              <ContentRichText
-                :text="page.project?.goals"
-                class="mb-4 mb-md-5 pb-4k-5"
-              />
-              <CardTestimonialCard
-                v-if="page.testimonial"
-                :testimonial-text="page.testimonial.text"
-                :attribution="page.testimonial.attribution"
-              />
-              <h2>
-                {{ $t("projects.partners") }}
-              </h2>
-              <ContentRichText
-                :text="partnerList"
-                class="mb-4 mb-md-5 pb-4k-5"
-              />
-              <h2>
-                {{ $t("projects.funding") }}
-              </h2>
-              <GenericInfoTable :table-data="fundingInfo" />
-              <GenericSmartLink
-                v-for="fundingLogo in page.project?.fundingLogosCollection"
-                :key="fundingLogo.url"
-                :destination="fundingLogo.url"
-              >
-                <img :src="fundingLogo.image?.url" class="funding-logo" />
-              </GenericSmartLink>
-              <h2>
-                {{ $t("projects.impact") }}
-              </h2>
-              <GenericInfoTable :table-data="impactMetrics" />
-              <h2>
-                {{ $t("projects.reports") }}
-              </h2>
-              <GenericInfoTable :table-data="reports" />
-              <template v-if="page.project?.factSheet">
-                <h2>
-                  {{ $t("projects.factSheet") }}
-                </h2>
-                <a
-                  :href="page.project?.factSheet.url"
-                  class="btn btn-secondary mr-4"
-                >
-                  {{ $t("projects.viewFactSheet") }}
-                </a>
-                <a
-                  :href="page.project?.factSheet.url"
-                  :download="page.project?.factSheet.title"
-                  class="btn btn-secondary"
-                >
-                  {{ $t("projects.downloadFactSheet") }}
-                </a>
-              </template>
+              <div class="row" tag="section">
+                <div class="col col-12 col-lg-9">
+                  <ContentRichText
+                    :text="page.description"
+                    class="mb-4 mb-md-5 pb-4k-5"
+                  />
+                  <h2>
+                    {{ $t("projects.goals") }}
+                  </h2>
+                  <ContentRichText
+                    :text="page.project?.goals"
+                    class="mb-4 mb-md-5 pb-4k-5"
+                  />
+                  <CardTestimonialCard
+                    v-if="page.project.testimonial"
+                    :testimonial-text="page.project.testimonial.text"
+                    :attribution="page.project.testimonial.attribution"
+                  />
+                  <h2>
+                    {{ $t("projects.partners") }}
+                  </h2>
+                  <ContentRichText
+                    :text="partnerList"
+                    class="mb-4 mb-md-5 pb-4k-5"
+                  />
+                  <h2>
+                    {{ $t("projects.funding") }}
+                  </h2>
+                  <GenericInfoTable :table-data="fundingInfo" />
+                  <GenericSmartLink
+                    v-for="fundingLogo in page.project?.fundingLogosCollection
+                      .items"
+                    :key="fundingLogo.url"
+                    :destination="fundingLogo.url"
+                    hide-external-icon
+                  >
+                    <img :src="fundingLogo.image?.url" class="funding-logo" />
+                  </GenericSmartLink>
+                  <h2>
+                    {{ $t("projects.impact") }}
+                  </h2>
+                  <GenericInfoTable :table-data="impactMetrics" />
+                  <h2>
+                    {{ $t("projects.reports") }}
+                  </h2>
+                  <GenericInfoTable :table-data="reports" />
+                  <template v-if="page.project?.factSheet">
+                    <h2>
+                      {{ $t("projects.factSheet") }}
+                    </h2>
+                    <a
+                      :href="page.project?.factSheet.url"
+                      class="btn btn-secondary mr-4"
+                    >
+                      {{ $t("projects.viewFactSheet") }}
+                    </a>
+                    <a
+                      :href="page.project?.factSheet.url"
+                      :download="page.project?.factSheet.title"
+                      class="btn btn-secondary"
+                    >
+                      {{ $t("projects.downloadFactSheet") }}
+                    </a>
+                  </template>
+                </div>
+              </div>
             </div>
           </article>
           <RelatedCategoryTags
@@ -200,10 +208,6 @@ useHead({
   @media (min-width: $bp-4k) {
     margin-top: $page-header-height-4k;
   }
-}
-
-h2 {
-  align-content: left;
 }
 
 .dates {

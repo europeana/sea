@@ -19,7 +19,11 @@ defineProps({
         <tr v-for="(entry, index) in tableData" :key="index">
           <td>{{ entry.label }}</td>
           <td>
-            <GenericSmartLink v-if="entry.url" :destination="entry.url">
+            <GenericSmartLink
+              v-if="entry.url"
+              :destination="entry.url"
+              hide-external-icon
+            >
               <span
                 v-if="entry.icon"
                 class="btn-primary"

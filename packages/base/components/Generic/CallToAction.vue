@@ -31,7 +31,7 @@ defineProps({
   <div>
     <GenericSmartLink
       :destination="url"
-      class="btn btn-cta"
+      class="btn"
       :class="classes"
       hide-external-icon
     >
