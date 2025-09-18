@@ -159,23 +159,33 @@ useHead({
                   <h2>
                     {{ $t("projects.funding") }}
                   </h2>
-                  <ProjectFundingInfoTable :project="page.project" />
+                  <ProjectFundingInfoTable
+                    class="mb-5 pb-4k-5"
+                    :project="page.project"
+                  />
                   <h2>
                     {{ $t("projects.impact") }}
                   </h2>
-                  <GenericInfoTable :table-data="impactMetrics" />
+                  <GenericInfoTable
+                    class="mb-5 pb-4k-5"
+                    :table-data="impactMetrics"
+                  />
                   <h2>
                     {{ $t("projects.reports") }}
                   </h2>
-                  <GenericInfoTable :table-data="reports" />
+                  <GenericInfoTable
+                    class="mb-5 pb-4k-5"
+                    :table-data="reports"
+                  />
                   <template v-if="page.project?.factSheet">
                     <h2>
                       {{ $t("projects.factSheet") }}
                     </h2>
                     <a
                       :href="page.project?.factSheet.url"
-                      class="btn btn-secondary mr-4"
+                      class="btn btn-secondary me-4 me-4k-5 mb-4 mb-sm-0"
                     >
+                      <span class="icon-text-bold me-2" />
                       {{ $t("projects.viewFactSheet") }}
                     </a>
                     <a
@@ -183,6 +193,7 @@ useHead({
                       :download="page.project?.factSheet.title"
                       class="btn btn-secondary"
                     >
+                      <span class="icon-ic-download me-2" />
                       {{ $t("projects.downloadFactSheet") }}
                     </a>
                   </template>
