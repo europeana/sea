@@ -57,8 +57,15 @@ const selectedTags = computed(() => {
   return route.query.tags?.split(",") || [];
 });
 
+const typeLookup = {
+  news: "BlogPosting",
+  project: "ProjectPage",
+  story: "Story",
+  exhibition: "ExhibitionPage",
+};
+
 const selectedType = computed(() => {
-  return route.query?.type || false;
+  return typeLookup[route.query?.type] || false;
 });
 
 const filteredTags = computed(() => {
@@ -94,11 +101,7 @@ const relevantContentMetadata = computed(() => {
   if (selectedType.value) {
     // Filter by selected type
     relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
-      // Is this specific enough?
-      return contentEntry["__typename"].toLowerCase().includes(selectedType);
-      // Otherwise restore and extend:
-      // return (this.selectedType === 'exhibition' && story['__typename'] === 'ExhibitionPage') ||
-      //   (this.selectedType === 'story' && story['__typename'] === 'Story');
+      return contentEntry["__typename"] === selectedType.value;
     });
   }
   if (selectedTags.value.length > 0) {
@@ -273,8 +276,8 @@ watch(page, () => {
       <span class="context-label">
         {{ $t("results", total, { count: total }) }}
       </span>
-      <!-- StoriesTypeFilter />
-      <output
+      <ContentTypeFilter :content-types="contentTypes" />
+      <!--output
         form="stories-tags-search-form"
         class="visually-hidden"
         data-qa="results status message"
