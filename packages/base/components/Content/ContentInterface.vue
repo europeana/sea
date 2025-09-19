@@ -296,7 +296,7 @@ watch(page, () => {
         <div
           v-if="isCtaBanner(section)"
           :key="section"
-          class="cta-banner-wrapper mt-4 my-lg-5 py-4k-5"
+          class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
         >
           <GenericCallToActionBanner
             v-if="ctaBanners.length"
