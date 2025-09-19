@@ -4,7 +4,7 @@ import projectPageQuery from "@/graphql/queries/projectPage.graphql";
 const route = useRoute();
 
 const contentful = inject("$contentful");
-const { localeProperties, t } = useI18n();
+const { localeProperties } = useI18n();
 
 const { data: page } = await useAsyncData(
   `projectPage:${route.params.slug}`,
@@ -38,19 +38,22 @@ const reports = page.value.project?.reportsCollection?.items.map((report) => {
   return { label: report.title, icon: "ic-download", url: report.url };
 });
 
-const fundingInfo = [
-  {
-    label: t("projects.fundingStream"),
-    value: page.value.project?.fundingStream?.text,
-    url: page.value.project?.fundingStream?.url,
-  },
-  { label: t("projects.contract"), value: page.value.project?.contractNumber },
-];
-
 const tags =
   page.value.categoriesCollection?.items.length > 0
     ? page.value.categoriesCollection.items
     : null;
+
+const projectLogoImage = page.value.project?.logo?.image;
+
+const PROJECT_LOGO_SRCSET_PRESETS = {
+  "4k": { w: 72, h: 24 },
+  "4k+": { w: 144, h: 48 },
+};
+
+const projectLogoImageSizes = [
+  "(max-width: 3019px) 24px", // bp-4k
+  "48px",
+].join(",");
 
 useHead({
   title: page.value.name,
@@ -77,19 +80,29 @@ useHead({
 <template>
   <div class="page text-page mb-5">
     <AuthoredHead
+      class="authored-head"
       :title="page.name"
       :hero="page.primaryImageOfPage"
       :context-label="$t('project')"
+      :description="page.headline"
     >
-      <img :src="page.project?.logo?.image.url" class="project-logo" />
+      <ImageOptimised
+        v-if="projectLogoImage"
+        class="project-logo me-2 mb-2"
+        :src="projectLogoImage?.url"
+        :content-type="projectLogoImage?.contentType"
+        :contentful-image-crop-presets="PROJECT_LOGO_SRCSET_PRESETS"
+        :image-sizes="projectLogoImageSizes"
+        :width="projectLogoImage?.width"
+        :height="projectLogoImage?.height"
+        :max-width="144"
+        :alt="projectLogoImage?.description || ''"
+      />
     </AuthoredHead>
     <div class="container footer-margin pb-4k-5">
       <div class="row justify-content-center">
         <div class="col col-12 col-lg-8">
           <article>
-            <p>
-              {{ page.headline }}
-            </p>
             <div class="dates fw-bold d-block">
               <time class="d-inline-block" data-qa="date">
                 {{
@@ -109,7 +122,7 @@ useHead({
               </time>
             </div>
             <div
-              class="mt-3 mt-md-4 mb-4 pb-2 pt-md-2 py-4k-5 d-flex align-items-center"
+              class="mt-3 mt-md-4 mb-4 mb-lg-5 pb-2 pb-lg-0 pt-md-2 py-4k-5 d-flex align-items-center"
             >
               <ShareButton class="mr-4" />
               <ShareSocialModal
@@ -121,7 +134,7 @@ useHead({
                 <div class="col col-12 col-lg-9">
                   <ContentRichText
                     :text="page.description"
-                    class="mb-4 mb-md-5 pb-4k-5"
+                    class="mb-3 pb-3 mb-4k-5"
                   />
                   <h2>
                     {{ $t("projects.goals") }}
@@ -134,6 +147,7 @@ useHead({
                     v-if="page.project.testimonial"
                     :testimonial-text="page.project.testimonial.text"
                     :attribution="page.project.testimonial.attribution"
+                    variant="banner"
                   />
                   <h2>
                     {{ $t("projects.partners") }}
@@ -145,32 +159,33 @@ useHead({
                   <h2>
                     {{ $t("projects.funding") }}
                   </h2>
-                  <GenericInfoTable :table-data="fundingInfo" />
-                  <GenericSmartLink
-                    v-for="fundingLogo in page.project?.fundingLogosCollection
-                      .items"
-                    :key="fundingLogo.url"
-                    :destination="fundingLogo.url"
-                    hide-external-icon
-                  >
-                    <img :src="fundingLogo.image?.url" class="funding-logo" />
-                  </GenericSmartLink>
+                  <ProjectFundingInfoTable
+                    class="mb-5 pb-4k-5"
+                    :project="page.project"
+                  />
                   <h2>
                     {{ $t("projects.impact") }}
                   </h2>
-                  <GenericInfoTable :table-data="impactMetrics" />
+                  <GenericInfoTable
+                    class="mb-5 pb-4k-5"
+                    :table-data="impactMetrics"
+                  />
                   <h2>
                     {{ $t("projects.reports") }}
                   </h2>
-                  <GenericInfoTable :table-data="reports" />
+                  <GenericInfoTable
+                    class="mb-5 pb-4k-5"
+                    :table-data="reports"
+                  />
                   <template v-if="page.project?.factSheet">
                     <h2>
                       {{ $t("projects.factSheet") }}
                     </h2>
                     <a
                       :href="page.project?.factSheet.url"
-                      class="btn btn-secondary mr-4"
+                      class="btn btn-secondary me-4 me-4k-5 mb-4 mb-sm-0"
                     >
+                      <span class="icon-text-bold me-2" />
                       {{ $t("projects.viewFactSheet") }}
                     </a>
                     <a
@@ -178,6 +193,7 @@ useHead({
                       :download="page.project?.factSheet.title"
                       class="btn btn-secondary"
                     >
+                      <span class="icon-ic-download me-2" />
                       {{ $t("projects.downloadFactSheet") }}
                     </a>
                   </template>
@@ -222,6 +238,32 @@ useHead({
   @media (min-width: $bp-4k) {
     line-height: 4rem;
     font-size: 3rem;
+  }
+}
+
+.authored-head {
+  :deep(.title) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .context-label {
+      flex-basis: 100%;
+    }
+  }
+
+  // When SVG img is not nested
+  :deep(img.project-logo),
+  .project-logo :deep(img) {
+    height: 1.5rem;
+    max-width: 4.5rem;
+    width: auto;
+    object-fit: contain;
+
+    @media (min-width: $bp-4k) {
+      height: 3rem;
+      max-width: 9rem;
+    }
   }
 }
 </style>
