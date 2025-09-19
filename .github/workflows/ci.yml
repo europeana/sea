@@ -70,7 +70,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        app: [ds4ch]
+        app: [cats, ds4ch]
     uses: ./.github/workflows/ci-app.yml
     with:
       app: ${{ matrix.app }}
