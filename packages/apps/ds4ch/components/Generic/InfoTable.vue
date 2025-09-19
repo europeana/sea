@@ -21,7 +21,7 @@ defineProps({
           :key="index"
           class="d-flex d-sm-table-row flex-column"
         >
-          <td>{{ entry.label }}</td>
+          <td class="label-cell">{{ entry.label }}</td>
           <td class="value-cell text-sm-end fw-semibold">
             <GenericSmartLink
               v-if="entry.url"
@@ -55,6 +55,10 @@ defineProps({
 @import "assets/scss/table";
 
 .info-table {
+  td.label-cell {
+    line-height: 1.5em;
+    overflow-wrap: anywhere;
+  }
   td.value-cell {
     border-top-width: 0;
     color: $darkgrey;
