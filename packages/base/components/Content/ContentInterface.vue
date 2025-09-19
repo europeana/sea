@@ -9,9 +9,9 @@ import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
 const { d, t } = useI18n({ useScope: "global" });
 
 const props = defineProps({
-  callToAction: {
-    type: Object,
-    default: () => {},
+  ctaBanners: {
+    type: Array,
+    default: () => [],
   },
   featuredEntry: {
     type: Object,
@@ -160,13 +160,28 @@ async function fetchContent() {
       ),
     )
     .filter(Boolean);
-  // This adds a 'cta-banner' entry, to be used as a placeholder for one cta.
-  // TODO: allow muliple of these, each with a unique index. 'cta-banner-0', 'cta-banner-1', 'cta-banner-2'
-  if (page.value === 1 && selectedTags.value.length === 0) {
-    retrievedContentEntries.splice(12, 0, ctaBanner);
+  // This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
+  const entriesWithCtaBanners = [];
+  if (
+    props.ctaBanners.length &&
+    page.value === 1 &&
+    selectedTags.value.length === 0
+  ) {
+    for (let i = 0; i < props.ctaBanners.length; i = i + 1) {
+      entriesWithCtaBanners.push(
+        retrievedContentEntries.slice(i * 8, (i + 1) * 8),
+        `${ctaBanner}-${i}`,
+      );
+    }
+  } else {
+    entriesWithCtaBanners.push(retrievedContentEntries);
   }
 
-  return retrievedContentEntries;
+  return entriesWithCtaBanners;
+}
+
+function isCtaBanner(entry) {
+  return typeof entry === "string" && entry.startsWith(ctaBanner);
 }
 
 // TODO: Only works for blogPostings, make distinct normalisation functions per supported type,
@@ -242,17 +257,20 @@ watch(page, () => {
 
 <template>
   <div id="content-interface">
-    <client-only>
-      <ContentTagsDropdown
-        :filtered-tags="filteredTags"
-        :selected-tags="selectedTags"
-      />
-    </client-only>
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <span class="context-label">
-        {{ $t("results", total, { count: total }) }}
-      </span>
-      <!-- StoriesTypeFilter />
+    <div class="container">
+      <client-only>
+        <ContentTagsDropdown
+          :filtered-tags="filteredTags"
+          :selected-tags="selectedTags"
+        />
+      </client-only>
+      <div
+        class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
+      >
+        <span class="context-label">
+          {{ $t("results", total, { count: total }) }}
+        </span>
+        <!-- StoriesTypeFilter />
       <output
         form="stories-tags-search-form"
         class="visually-hidden"
@@ -260,57 +278,64 @@ watch(page, () => {
       >
         {{ $t('storiesPage.storiesHaveLoaded', [total]) }}
       </output-->
-    </div>
-    <!--LoadingSpinner
+      </div>
+      <!--LoadingSpinner
       v-if="$fetchState.pending"
       class="container position-absolute flex-md-row py-4 text-center"
     /-->
-    <div
-      class="row g-4 justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-4k-6"
-    >
-      <!--featuredEntryCard
+    </div>
+
+    <!--featuredEntryCard
         v-if="showFeaturedEntry"
         :featured-entry="featuredEntry"
       /-->
-      <template v-for="entry in contentEntries">
-        <!-- eslint-disable vue/valid-v-for -->
-        <transition appear name="fade">
-          <!-- eslint-enable vue/valid-v-for -->
+    <template v-for="(section, index) in contentEntries">
+      <!-- eslint-disable vue/valid-v-for -->
+      <transition appear name="fade">
+        <!-- eslint-enable vue/valid-v-for -->
+        <div
+          v-if="isCtaBanner(section)"
+          :key="section"
+          class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
+        >
+          <GenericCallToActionBanner
+            v-if="ctaBanners.length"
+            :name="ctaBanners[section.slice(-1)].name"
+            :name-english="ctaBanners[section.slice(-1)].nameEN"
+            :title="ctaBanners[section.slice(-1)].name"
+            :text="ctaBanners[section.slice(-1)].text"
+            :link="ctaBanners[section.slice(-1)].relatedLink"
+            :illustration="ctaBanners[section.slice(-1)].image"
+            :background-image="ctaBanners[section.slice(-1)].image"
+          />
+        </div>
+        <div v-else :key="index" class="container">
           <div
-            v-if="entry === ctaBanner"
-            :key="entry"
-            class="cta-banner-wrapper"
+            class="row g-4 g-4k-5 justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4"
           >
-            <GenericCallToActionBanner
-              v-if="callToAction"
-              :name="callToAction.name"
-              :name-english="callToAction.nameEN"
-              :text="callToAction.text"
-              :link="callToAction.relatedLink"
-              :illustration="callToAction.image"
-            />
+            <div v-for="entry in section" :key="entry.sysId" class="col">
+              <ContentCard
+                :title="entry.name"
+                :url="contentfulEntryUrl(entry)"
+                :text="entry.text"
+                :image-url="
+                  entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
+                "
+                :image-content-type="
+                  entry.primaryImageOfPage &&
+                  entry.primaryImageOfPage.image.contentType
+                "
+              />
+            </div>
           </div>
-          <div v-else :key="entry.sysId" class="col">
-            <ContentCard
-              :title="entry.name"
-              :url="contentfulEntryUrl(entry)"
-              :text="entry.text"
-              :image-url="
-                entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
-              "
-              :image-content-type="
-                entry.primaryImageOfPage &&
-                entry.primaryImageOfPage.image.contentType
-              "
-            />
-          </div>
-        </transition>
-      </template>
-    </div>
+        </div>
+      </transition>
+    </template>
     <PaginationNavInput
       v-if="total > perPage"
       :per-page="perPage"
       :total-items="total"
+      class="mt-4 mt-lg-5 pt-4k-5"
     />
   </div>
 </template>
@@ -318,27 +343,12 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
-@import "assets/scss/variables";
 
 .context-label {
   font-size: $font-size-small;
 
   @media (min-width: $bp-4k) {
     font-size: $font-size-small-4k;
-  }
-}
-
-.cta-banner-wrapper {
-  flex-basis: 100%;
-
-  @media (min-width: $bp-small) {
-    padding-left: $grid-gutter;
-    padding-right: $grid-gutter;
-  }
-
-  @media (min-width: $bp-xxl) {
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 </style>
