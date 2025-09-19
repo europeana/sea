@@ -1,2 +1,12 @@
-node_modules
-package-lock.json
+**/.DS_Store
+**/.env
+**/.env.*
+**/.fleet
+**/.idea
+**/*.log
+**/coverage
+**/logs
+**/node_modules
+**/package-lock.json
+**/storybook-static
+**/tmp/
