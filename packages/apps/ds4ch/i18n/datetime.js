@@ -11,6 +11,10 @@ const defaults = {
     month: "long",
     day: "numeric",
   },
+  month: {
+    month: "long",
+    year: "numeric",
+  },
 };
 
 export default locales.reduce((memo, locale) => {

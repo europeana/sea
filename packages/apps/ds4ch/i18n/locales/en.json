@@ -62,7 +62,7 @@
     "about": "About",
     "close": "Close menu",
     "exploreData": "Explore the data",
-    "exploreDataspace": "Explore the Dataspace",
+    "exploreDataspace": "Explore the Data space",
     "home": "Home",
     "toggle": "Show menu"
   },
@@ -76,6 +76,20 @@
     "previous": "Previous"
   },
   "project": "Project",
+  "projects": {
+    "dates": "{startDate} - {endDate}",
+    "reports": "Project reports",
+    "factSheet": "Project fact sheet",
+    "funders": "Funders",
+    "impact": "Key project impact",
+    "funding": "Funding information",
+    "partners": "Project partners",
+    "goals": "Project goals",
+    "viewFactSheet": "View fact sheet",
+    "downloadFactSheet": "Download fact sheet",
+    "fundingStream": "Funding stream",
+    "contract": "Contract number"
+  },
   "related": {
     "categoryTags": {
       "title": "Discover related content"

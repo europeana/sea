@@ -123,13 +123,13 @@ const handleRight = (event) => {
 .icon-ic-tag {
   color: $darkgrey;
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: $font-size-large;
   line-height: calc(2rem - 1px);
 
   @at-root .xxl-page & {
     @media (min-width: $bp-4k) {
-      line-height: calc(1.5 * calc(2rem - 1px));
-      font-size: calc(1.5 * 1.5rem);
+      line-height: calc(2 * calc(2rem - 1px));
+      font-size: 3rem;
     }
   }
 }
@@ -148,7 +148,7 @@ const handleRight = (event) => {
 
   @at-root .xxl-page & {
     @media (min-width: $bp-4k) {
-      margin: 0 calc(1.5 * 0.25rem) 0.75rem;
+      margin: 0 0.5rem 0.75rem;
     }
   }
 }

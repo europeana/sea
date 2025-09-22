@@ -80,8 +80,10 @@ const optimisedImageSrc = computed(() => {
   );
 });
 
+const isSVG = props.contentType === "image/svg+xml";
+
 const responsiveImageSrcsets = computed(() => {
-  if (!isContentfulAsset || !props.contentfulImageCropPresets) {
+  if (isSVG || !isContentfulAsset || !props.contentfulImageCropPresets) {
     return null;
   }
 

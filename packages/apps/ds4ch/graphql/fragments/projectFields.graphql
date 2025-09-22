@@ -1,0 +1,39 @@
+#import "../fragments/illustrationFields.graphql"
+#import "@europeana/sea-base-layer/graphql/fragments/pdfDocumentFields.graphql"
+
+fragment projectFields on Project {
+  name
+  logo {
+    ...illustrationFields
+  }
+  startDate
+  endDate
+  goals
+  testimonial {
+    ...testimonialCardFields
+  }
+  partners
+  fundingStream {
+    url
+    text
+  }
+  contractNumber
+  fundingLogosCollection {
+    items {
+      ...illustrationFields
+    }
+  }
+  impactMetrics
+  reportsCollection {
+    items {
+      ...pdfDocumentFields
+    }
+  }
+  factSheet {
+    ...pdfDocumentFields
+  }
+}
+fragment testimonialCardFields on TestimonialCard {
+  text
+  attribution
+}

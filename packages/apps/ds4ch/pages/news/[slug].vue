@@ -68,7 +68,7 @@ const truncatedAttachmentLabel = (attachment) => {
                     date: $d(
                       new Date(page.datePublished),
                       "short",
-                      localeProperties.language,
+                      localeProperties.locale,
                     ),
                   })
                 }}

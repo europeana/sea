@@ -108,7 +108,7 @@ const clickOutsideConfig = ref({
     <div
       ref="tagsdropdown"
       v-click-outside="handleClickOutside"
-      class="position-relative mb-4"
+      class="position-relative mb-4 mb-4k-5"
       data-qa="tags dropdown"
       @keydown.esc="handleEsc"
     >
@@ -175,7 +175,11 @@ const clickOutsideConfig = ref({
   border-bottom-right-radius: 0.5rem;
 
   @media (min-width: $bp-4k) {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    padding: 1rem 0 0 1rem;
+    border-width: 2px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
 }
 

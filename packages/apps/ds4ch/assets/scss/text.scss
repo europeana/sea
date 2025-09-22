@@ -52,6 +52,7 @@ h5 {
 
   h1 {
     font-size: $font-size-24;
+    font-weight: 700;
 
     @media (min-width: $bp-large) {
       font-size: $font-size-28;
