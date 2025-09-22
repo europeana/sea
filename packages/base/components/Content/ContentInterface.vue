@@ -370,18 +370,4 @@ watch(page, () => {
     font-size: $font-size-small-4k;
   }
 }
-
-.cta-banner-wrapper {
-  flex-basis: 100%;
-
-  @media (min-width: $bp-small) {
-    padding-left: $grid-gutter;
-    padding-right: $grid-gutter;
-  }
-
-  @media (min-width: $bp-xxl) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 </style>
