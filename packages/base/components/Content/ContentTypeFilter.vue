@@ -52,57 +52,55 @@ const routeForType = (type) => {
 <template>
   <div>
     <nav class="navbar navbar-expand-sm navbar-light">
-      <div class="container-fluid">
-        <div id="content-filter-navbar" class="collapse navbar-collapse">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-flex">
-            <li
-              v-for="(type, index) in availableContentTypes"
-              :key="index"
-              class="nav-item"
-            >
-              <GenericSmartLink
-                class="nav-link context-label text-decoration-none pr-0"
-                :class="isTypeActive(type) ? 'active' : ''"
-                :aria-current="isTypeActive(type) ? 'page' : ''"
-                :destination="routeForType(type)"
-              >
-                {{ type.name }}
-              </GenericSmartLink>
-            </li>
-          </ul>
-        </div>
-        <div class="nav-item dropdown filter-dropdown d-sm-none">
-          <a
-            id="content-filter-navbar-dropdown"
-            class="nav-link dropdown-toggle btn-light"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            data-bs-target=".filter-dropdown"
-            aria-expanded="false"
+      <div id="content-filter-navbar" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-flex">
+          <li
+            v-for="(type, index) in availableContentTypes"
+            :key="index"
+            class="nav-item"
           >
-            {{ activeType.name }}
-          </a>
-          <ul
-            class="dropdown-menu"
-            aria-labelledby="content-filter-navbar-dropdown"
-          >
-            <li
-              v-for="(type, index) in availableContentTypes"
-              :key="index"
-              class="nav-item d-sm-none"
+            <GenericSmartLink
+              class="nav-link context-label text-decoration-none ps-3 ps-4k-4 pe-0"
+              :class="isTypeActive(type) ? 'active' : ''"
+              :aria-current="isTypeActive(type) ? 'page' : ''"
+              :destination="routeForType(type)"
             >
-              <GenericSmartLink
-                class="dropdown-item context-label text-decoration-none pr-0"
-                :class="isTypeActive(type) ? 'active' : ''"
-                :aria-current="isTypeActive(type) ? 'page' : ''"
-                :destination="routeForType(type)"
-              >
-                {{ type.name }}
-              </GenericSmartLink>
-            </li>
-          </ul>
-        </div>
+              {{ type.name }}
+            </GenericSmartLink>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-item dropdown filter-dropdown d-sm-none">
+        <a
+          id="content-filter-navbar-dropdown"
+          class="nav-link dropdown-toggle btn-light"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          data-bs-target=".filter-dropdown"
+          aria-expanded="false"
+        >
+          {{ activeType.name }}
+        </a>
+        <ul
+          class="dropdown-menu"
+          aria-labelledby="content-filter-navbar-dropdown"
+        >
+          <li
+            v-for="(type, index) in availableContentTypes"
+            :key="index"
+            class="nav-item d-sm-none"
+          >
+            <GenericSmartLink
+              class="dropdown-item context-label text-decoration-none"
+              :class="isTypeActive(type) ? 'active' : ''"
+              :aria-current="isTypeActive(type) ? 'page' : ''"
+              :destination="routeForType(type)"
+            >
+              {{ type.name }}
+            </GenericSmartLink>
+          </li>
+        </ul>
       </div>
     </nav>
   </div>
@@ -124,8 +122,13 @@ const routeForType = (type) => {
     font-size: $font-size-small-4k;
   }
 
+  &:hover {
+    color: $yellow;
+  }
+
   &.active {
     color: $black;
+
     a {
       background-color: $white;
     }
@@ -143,6 +146,7 @@ const routeForType = (type) => {
 .dropdown-toggle {
   font-weight: 600;
   text-transform: uppercase;
+
   &::after {
     padding-left: 0.5rem;
   }
