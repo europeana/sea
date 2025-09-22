@@ -73,7 +73,7 @@ const sections = {
         <div class="row">
           <div class="footer-section col col-12 col-lg-4">
             <ImageEULogo />
-            <p class="disclaimer mt-3 mb-0">
+            <p class="disclaimer mt-2 mt-lg-4 mt-4k-5 mb-0">
               {{ $t(sections.disclaimer.text) }}
             </p>
           </div>
@@ -172,7 +172,7 @@ hr {
 
     @media (min-width: $bp-4k) {
       font-size: $font-size-28;
-      margin-bottom: 1rem;
+      margin-bottom: 1.75rem;
     }
   }
 
@@ -232,7 +232,7 @@ p.disclaimer {
   font-style: italic;
 
   @media (min-width: $bp-4k) {
-    font-size: $font-size-24;
+    font-size: $font-size-32;
   }
 }
 </style>

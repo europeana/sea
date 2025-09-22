@@ -75,7 +75,7 @@ img {
   }
 
   @media (min-width: $bp-4k) {
-    height: 110px;
+    height: 146px;
   }
 }
 </style>
