@@ -26,7 +26,8 @@
       "viewAll": "View all",
       "news": "News",
       "projects": "Projects"
-    }
+    },
+    "resultsHaveLoaded": "{0} results found"
   },
   "footer": {
     "about": "About the data space",

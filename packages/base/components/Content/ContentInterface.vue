@@ -295,13 +295,9 @@ watch(page, () => {
           {{ $t("results", total, { count: total }) }}
         </span>
         <ContentTypeFilter :content-types="contentTypes" />
-        <!--output
-        form="stories-tags-search-form"
-        class="visually-hidden"
-        data-qa="results status message"
-      >
-        {{ $t('storiesPage.storiesHaveLoaded', [total]) }}
-      </output-->
+        <output form="tags-search-form" class="visually-hidden">
+          {{ $t("content.resultsHaveLoaded", [total]) }}
+        </output>
       </div>
       <!--LoadingSpinner
       v-if="$fetchState.pending"
