@@ -6,20 +6,12 @@ import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the E
 
 // TODO: ensure links go to correct locations
 const sections = {
-  mission: {
-    header: "footer.mission",
-    text: "footer.missionStatement",
+  disclaimer: {
+    logoSrc: disclaimerLogoSrc,
+    text: "footer.disclaimer",
   },
   info: {
     header: "footer.info",
-    links: [
-      { url: "/about-us", text: "footer.about" },
-      { url: "/news", text: "footer.news" },
-      { url: "/", text: "footer.events" },
-    ],
-  },
-  help: {
-    header: "footer.help",
     links: [
       {
         url: "https://www.europeana.eu/rights",
@@ -68,10 +60,6 @@ const sections = {
       },
     ],
   },
-  disclaimer: {
-    logoSrc: disclaimerLogoSrc,
-    text: "footer.disclaimer",
-  },
 };
 </script>
 <template>
@@ -82,17 +70,15 @@ const sections = {
       </h2>
       <!-- TODO: make "footer-section" a distinct component? -->
       <div class="d-lg-flex justify-content-between">
-        <div class="footer-section col col-lg-5 col-xxl-4 me-lg-4 pe-lg-5">
-          <h3 class="label-uppercase">
-            {{ $t(sections.mission.header) }}
-          </h3>
-          <p class="fst-italic mb-0">
-            {{ $t(sections.mission.text) }}
-          </p>
-        </div>
-        <hr class="d-lg-none opacity-100 text-light" />
         <div class="row">
-          <div class="footer-section col col-12 col-sm-6 col-wqhd-4">
+          <div class="footer-section col col-12 col-lg-4">
+            <ImageEULogo />
+            <p class="disclaimer mt-2 mt-lg-4 mt-4k-5 mb-0">
+              {{ $t(sections.disclaimer.text) }}
+            </p>
+          </div>
+          <hr class="d-lg-none opacity-100 text-light" />
+          <div class="footer-section col col-12 col-sm-6 col-lg-3 offset-lg-1">
             <h3 class="label-uppercase">
               {{ $t(sections.info.header) }}
             </h3>
@@ -104,23 +90,7 @@ const sections = {
               </li>
             </ul>
           </div>
-          <div
-            class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-3 order-wqhd-2"
-          >
-            <h3 class="label-uppercase">
-              {{ $t(sections.help.header) }}
-            </h3>
-            <ul>
-              <li v-for="(link, index) in sections.help.links" :key="index">
-                <GenericSmartLink :destination="link.url">
-                  {{ $t(link.text) }}
-                </GenericSmartLink>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-2 order-wqhd-3 d-flex flex-column"
-          >
+          <div class="footer-section col col-12 col-sm-6 col-lg-4">
             <h3 class="label-uppercase d-inline-block">
               {{ $t(sections.language.header) }}
             </h3>
@@ -144,8 +114,6 @@ const sections = {
                 </template>
               </i18n-t>
             </span>
-          </div>
-          <div class="footer-section col col-12 col-sm-6 col-wqhd-4 order-sm-4">
             <h3 class="label-uppercase mb-3 mb-4k-4">
               {{ $t(sections.supportingPartners.header) }}
             </h3>
@@ -165,13 +133,6 @@ const sections = {
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="footer-section col col-lg-6">
-          <ImageEULogo />
-          <p class="disclaimer mt-3 mb-0">{{ $t(sections.disclaimer.text) }}</p>
         </div>
       </div>
     </div>
@@ -211,7 +172,7 @@ hr {
 
     @media (min-width: $bp-4k) {
       font-size: $font-size-28;
-      margin-bottom: 1rem;
+      margin-bottom: 1.75rem;
     }
   }
 
@@ -250,7 +211,6 @@ hr {
   }
 
   .info-text-text {
-    width: 0;
     flex-grow: 1;
   }
 
@@ -269,10 +229,10 @@ hr {
 }
 
 p.disclaimer {
-  font-size: $font-size-10;
+  font-style: italic;
 
   @media (min-width: $bp-4k) {
-    font-size: $font-size-20;
+    font-size: $font-size-32;
   }
 }
 </style>

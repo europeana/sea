@@ -59,7 +59,7 @@ const localisedEULogo = computed(() => {
 </script>
 <template>
   <img
-    height="64"
+    height="73"
     :src="localisedEULogo"
     :alt="$t('footer.imageDescription')"
   />
@@ -68,14 +68,14 @@ const localisedEULogo = computed(() => {
 @import "@europeana/style/scss/variables";
 
 img {
-  height: 35px;
+  height: 68px;
 
   @media (min-width: $bp-small) {
-    height: 64px;
+    height: 73px;
   }
 
   @media (min-width: $bp-4k) {
-    height: 96px;
+    height: 146px;
   }
 }
 </style>
