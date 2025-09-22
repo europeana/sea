@@ -13,11 +13,12 @@ describe("PageFooter", () => {
   it("renders the sections", () => {
     const wrapper = shallowMount(PageFooter);
     const footerSections = wrapper.findAll(".footer-section");
-    expect(footerSections.length).toBe(6);
+    expect(footerSections.length).toBe(3);
   });
 
-  //it("renders the Language selector", () => {
-  //  const wrapper = shallowMount(PageHeader);
-  //  expect(wrapper.findComponent(".language-selector").exists()).toBe(true);
-  //});
+  it("renders the Language selector", () => {
+    const wrapper = shallowMount(PageFooter);
+
+    expect(wrapper.findComponent("language-selector-stub").exists()).toBe(true);
+  });
 });
