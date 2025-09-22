@@ -17,6 +17,15 @@ export const Default: Story = {
   },
 };
 
+export const Banner: Story = {
+  args: {
+    testimonialText:
+      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    attribution: "M, Museum X",
+    variant: "banner",
+  },
+};
+
 export const NoAttribution: Story = {
   args: {
     testimonialText:

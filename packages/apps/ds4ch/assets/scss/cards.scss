@@ -1,0 +1,53 @@
+.xxl-page .content-card {
+  @media (min-width: $bp-4k) {
+    min-height: 40rem;
+    border-radius: 0.5rem;
+  }
+
+  &.card {
+    margin-bottom: 0;
+    height: 100%;
+  }
+
+  .card-body {
+    @media (min-width: $bp-4k) {
+      padding: 2rem;
+    }
+  }
+
+  .card-subtitle {
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-24;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .card-title {
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-32;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .card-text {
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-32;
+      line-height: 1.5;
+    }
+  }
+
+  .card-img {
+    @media (min-width: $bp-4k) {
+      max-height: 26rem;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+  }
+}
+
+.row-cols-lg-4 {
+  .card {
+    @media (min-width: $bp-4k) {
+      max-width: none;
+    }
+  }
+}

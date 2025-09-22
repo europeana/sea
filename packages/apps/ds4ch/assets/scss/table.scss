@@ -1,0 +1,12 @@
+@import "@europeana/style/scss/table";
+
+@media (min-width: $bp-4k) {
+  .xxl-page table,
+  .xxl-page .table {
+    font-size: $font-size-28;
+
+    td {
+      padding: 2.25rem 2rem;
+    }
+  }
+}
