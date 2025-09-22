@@ -170,7 +170,8 @@ async function fetchContent() {
   if (
     props.ctaBanners.length &&
     page.value === 1 &&
-    selectedTags.value.length === 0
+    selectedTags.value.length === 0 &&
+    !selectedType.value
   ) {
     for (let i = 0; i < props.ctaBanners.length; i = i + 1) {
       entriesWithCtaBanners.push(
