@@ -21,6 +21,14 @@
     "noOptions": "There are no more tags to select",
     "search": "Explore by tag"
   },
+  "content": {
+    "filter": {
+      "viewAll": "View all",
+      "news": "News",
+      "projects": "Projects"
+    },
+    "resultsHaveLoaded": "{0} results found"
+  },
   "footer": {
     "about": "About the data space",
     "accessibility": "Accessibility",

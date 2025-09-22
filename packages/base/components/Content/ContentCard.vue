@@ -118,7 +118,7 @@ const displayLabelMatchObject = computed(() =>
 );
 
 const displayLabelMatchString = computed(() =>
-  props.url?.match(new RegExp(`/(${displayLabelTypes})[/.]`)),
+  props.url?.match(new RegExp(`/(${displayLabelTypes}).?[/.]`)),
 );
 
 const cardText = computed(() => {

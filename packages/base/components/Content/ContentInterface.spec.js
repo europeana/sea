@@ -20,11 +20,13 @@ const mockContentResponse = {
     exhibitionPageCollection: { items: [] },
     blogPostingCollection: {
       items: Array.from({ length: 24 }, (index) => ({
+        __typename: "BlogPosting",
         sys: { id: `id${index}` },
         datePublished: `2023-01-${index}`,
         name: `Entry ${index}`,
       })),
     },
+    projectPageCollection: { items: [] },
   },
 };
 

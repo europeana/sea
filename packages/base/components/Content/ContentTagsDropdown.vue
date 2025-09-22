@@ -113,7 +113,7 @@ const clickOutsideConfig = ref({
       @keydown.esc="handleEsc"
     >
       <form
-        id="stories-tags-search-form"
+        id="tags-search-form"
         class="form-inline search-form"
         :class="{ show: showDropdown }"
         @submit.stop.prevent="() => {}"

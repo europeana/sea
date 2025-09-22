@@ -3,6 +3,7 @@ import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
+import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
@@ -56,8 +57,15 @@ const selectedTags = computed(() => {
   return route.query.tags?.split(",") || [];
 });
 
+const typeLookup = {
+  news: "BlogPosting",
+  project: "ProjectPage",
+  story: "Story",
+  exhibition: "ExhibitionPage",
+};
+
 const selectedType = computed(() => {
-  return route.query?.type || false;
+  return typeLookup[route.query?.type] || false;
 });
 
 const filteredTags = computed(() => {
@@ -93,11 +101,7 @@ const relevantContentMetadata = computed(() => {
   if (selectedType.value) {
     // Filter by selected type
     relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
-      // Is this specific enough?
-      return contentEntry["__typename"].toLowerCase().includes(selectedType);
-      // Otherwise restore and extend:
-      // return (this.selectedType === 'exhibition' && story['__typename'] === 'ExhibitionPage') ||
-      //   (this.selectedType === 'story' && story['__typename'] === 'Story');
+      return contentEntry["__typename"] === selectedType.value;
     });
   }
   if (selectedTags.value.length > 0) {
@@ -151,6 +155,7 @@ async function fetchContent() {
     contentResponse.data.storyCollection?.items,
     contentResponse.data.exhibitionPageCollection?.items,
     contentResponse.data.blogPostingCollection?.items,
+    contentResponse.data.projectPageCollection?.items,
   ].flat();
 
   const retrievedContentEntries = contentSysIds
@@ -165,7 +170,8 @@ async function fetchContent() {
   if (
     props.ctaBanners.length &&
     page.value === 1 &&
-    selectedTags.value.length === 0
+    selectedTags.value.length === 0 &&
+    !selectedType.value
   ) {
     for (let i = 0; i < props.ctaBanners.length; i = i + 1) {
       entriesWithCtaBanners.push(
@@ -184,18 +190,27 @@ function isCtaBanner(entry) {
   return typeof entry === "string" && entry.startsWith(ctaBanner);
 }
 
-// TODO: Only works for blogPostings, make distinct normalisation functions per supported type,
+// TODO: Only works for blogPostings/projects, make distinct normalisation functions per supported type,
 // consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
-    return {
-      ...entry,
-      text: t("authored.createdDate", {
-        date: d(entry.datePublished, "short"),
-      }),
-      primaryImageOfPage:
-        entry.primaryImageOfPage || props.defaultCardThumbnail,
-    };
+    if (entry.__typename === "BlogPosting") {
+      return {
+        ...entry,
+        text: t("authored.createdDate", {
+          date: d(entry.datePublished, "short"),
+        }),
+        primaryImageOfPage:
+          entry.primaryImageOfPage || props.defaultCardThumbnail,
+      };
+    } else if (entry.__typename === "ProjectPage") {
+      return {
+        ...entry,
+        text: entry.headline,
+        primaryImageOfPage:
+          entry.primaryImageOfPage || props.defaultCardThumbnail,
+      };
+    }
   }
 }
 
@@ -219,6 +234,15 @@ async function fetchContentMetadata() {
     const blogPostings =
       blogPostingsResponse.data.blogPostingCollection?.items || [];
     contentIds.push(...blogPostings);
+  }
+  if (props.contentTypes.includes("project")) {
+    const projectPagesResponse = await contentful.query(
+      projectPagesListingMinimalGraphql,
+      contentIdsVariables,
+    );
+    const projectPages =
+      projectPagesResponse.data.projectPageCollection?.items || [];
+    contentIds.push(...projectPages);
   }
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,
@@ -270,14 +294,10 @@ watch(page, () => {
         <span class="context-label">
           {{ $t("results", total, { count: total }) }}
         </span>
-        <!-- StoriesTypeFilter />
-      <output
-        form="stories-tags-search-form"
-        class="visually-hidden"
-        data-qa="results status message"
-      >
-        {{ $t('storiesPage.storiesHaveLoaded', [total]) }}
-      </output-->
+        <ContentTypeFilter :content-types="contentTypes" />
+        <output form="tags-search-form" class="visually-hidden">
+          {{ $t("content.resultsHaveLoaded", [total]) }}
+        </output>
       </div>
       <!--LoadingSpinner
       v-if="$fetchState.pending"
@@ -310,9 +330,7 @@ watch(page, () => {
           />
         </div>
         <div v-else :key="index" class="container">
-          <div
-            class="row g-4 g-4k-5 justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-4"
-          >
+          <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div v-for="entry in section" :key="entry.sysId" class="col">
               <ContentCard
                 :title="entry.name"
@@ -343,6 +361,7 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
+@import "assets/scss/variables";
 
 .context-label {
   font-size: $font-size-small;
