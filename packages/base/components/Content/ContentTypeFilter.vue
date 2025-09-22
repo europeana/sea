@@ -70,7 +70,7 @@ const routeForType = (type) => {
           </li>
         </ul>
       </div>
-      <div class="nav-item dropdown filter-dropdown d-sm-none">
+      <div class="nav-item dropdown filter-dropdown d-sm-none ms-auto">
         <a
           id="content-filter-navbar-dropdown"
           class="nav-link dropdown-toggle btn-light"

@@ -27,8 +27,8 @@ const factory = (props = { contentTypes: [] }) =>
       plugins: [i18n],
     },
   });
-describe("components/Content/CContentTypeFilter", () => {
-  it("renders buttons the 'view all' button", () => {
+describe("components/Content/ContentTypeFilter", () => {
+  it("renders the 'view all' button", () => {
     const wrapper = factory();
 
     const buttons = wrapper.findAll("#content-filter-navbar smart-link-stub");
