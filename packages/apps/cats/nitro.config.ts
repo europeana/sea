@@ -11,8 +11,9 @@ export default defineNitroConfig({
       accessToken: null,
     },
     eTranslation: {
-      username: null,
+      deliveries: null,
       password: null,
+      username: null,
     },
     redis: {
       tls: {

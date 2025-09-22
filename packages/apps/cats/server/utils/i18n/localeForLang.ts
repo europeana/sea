@@ -1,0 +1,27 @@
+export const localeForLang = (lang) => {
+  return {
+    BG: "bg-BG",
+    CS: "cs-CZ",
+    DA: "da-DK",
+    DE: "de-DE",
+    EL: "el-GR",
+    ES: "es-ES",
+    ET: "et-EE",
+    FI: "fi-FI",
+    FR: "fr-FR",
+    GA: "ga-IE",
+    HR: "hr-HR",
+    HU: "hu-HU",
+    IT: "it-IT",
+    LT: "lt-LT",
+    LV: "lv-LV",
+    MT: "mt-MT",
+    NL: "nl-NL",
+    PL: "pl-PL",
+    PT: "pt-PT",
+    RO: "ro-RO",
+    SK: "sk-SK",
+    SL: "sl-SI",
+    SV: "sv-SE",
+  }[lang];
+};
