@@ -46,93 +46,96 @@ const network = allNetworks[props.network];
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 
-.btn.btn-secondary {
-  flex-basis: 33%;
+.landing-page.xxl-page,
+* {
+  .btn.btn-secondary {
+    flex-basis: 33%;
 
-  &:last-child {
-    margin-right: 0 !important;
-  }
-
-  [class^="icon"] {
-    font-size: $font-size-extrasmall;
-    align-items: center;
-    background-color: $white;
-    border-radius: 50%;
-    display: flex;
-    height: 1.125rem;
-    justify-content: center;
-    width: 1.125rem;
-
-    @media (min-width: $bp-4k) {
-      font-size: $font-size-large;
-      height: 2.25rem;
-      width: 2.25rem;
-    }
-  }
-
-  &.bsky {
-    $bsky-blue: #0085ff;
-    border: solid 1px $bsky-blue;
-    color: $white;
-    background-color: $bsky-blue;
-
-    &:not(:disabled):not(.disabled) {
-      &:active,
-      &.active {
-        color: $white;
-        background-color: $bsky-blue;
-        border-color: $bsky-blue;
-      }
+    &:last-child {
+      margin-right: 0 !important;
     }
 
-    .icon-bsky {
-      color: $bsky-blue;
-    }
-  }
-
-  &.facebook {
-    $facebook-blue: #0866ff;
-    border: solid 1px $facebook-blue;
-    background-color: $facebook-blue;
-    color: $white;
-
-    &:not(:disabled):not(.disabled) {
-      &:active,
-      &.active {
-        color: $white;
-        background-color: $facebook-blue;
-        border-color: $facebook-blue;
-      }
-    }
-
-    .icon-facebook {
-      background-color: $facebook-blue;
-      color: $white;
-      font-size: 1.125rem;
+    [class^="icon"] {
+      font-size: $font-size-extrasmall;
+      align-items: center;
+      background-color: $white;
+      border-radius: 50%;
+      display: flex;
+      height: 1.125rem;
+      justify-content: center;
+      width: 1.125rem;
 
       @media (min-width: $bp-4k) {
-        font-size: 2.25rem;
+        font-size: $font-size-large;
+        height: 2.25rem;
+        width: 2.25rem;
       }
     }
-  }
 
-  &.linkedin {
-    $linkedin-blue: #0072b1;
-    border: solid 1px $linkedin-blue;
-    background-color: $linkedin-blue;
-    color: $white;
+    &.bsky {
+      $bsky-blue: #0085ff;
+      border: solid 1px $bsky-blue;
+      color: $white;
+      background-color: $bsky-blue;
 
-    &:not(:disabled):not(.disabled) {
-      &:active,
-      &.active {
+      &:not(:disabled):not(.disabled) {
+        &:active,
+        &.active {
+          color: $white;
+          background-color: $bsky-blue;
+          border-color: $bsky-blue;
+        }
+      }
+
+      .icon-bsky {
+        color: $bsky-blue;
+      }
+    }
+
+    &.facebook {
+      $facebook-blue: #0866ff;
+      border: solid 1px $facebook-blue;
+      background-color: $facebook-blue;
+      color: $white;
+
+      &:not(:disabled):not(.disabled) {
+        &:active,
+        &.active {
+          color: $white;
+          background-color: $facebook-blue;
+          border-color: $facebook-blue;
+        }
+      }
+
+      .icon-facebook {
+        background-color: $facebook-blue;
         color: $white;
-        background-color: $linkedin-blue;
-        border-color: $linkedin-blue;
+        font-size: 1.125rem;
+
+        @media (min-width: $bp-4k) {
+          font-size: 2.25rem;
+        }
       }
     }
 
-    .icon-linkedin {
-      color: $linkedin-blue;
+    &.linkedin {
+      $linkedin-blue: #0072b1;
+      border: solid 1px $linkedin-blue;
+      background-color: $linkedin-blue;
+      color: $white;
+
+      &:not(:disabled):not(.disabled) {
+        &:active,
+        &.active {
+          color: $white;
+          background-color: $linkedin-blue;
+          border-color: $linkedin-blue;
+        }
+      }
+
+      .icon-linkedin {
+        color: $linkedin-blue;
+      }
     }
   }
 }
