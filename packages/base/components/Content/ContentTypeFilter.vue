@@ -123,7 +123,7 @@ const routeForType = (type) => {
   }
 
   &:hover {
-    color: $yellow;
+    color: $black;
   }
 
   &.active {
