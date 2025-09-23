@@ -2,7 +2,7 @@
   "actions": {
     "close": "sulje",
     "downloadFile": "lataa {file}",
-    "share": "jaa",
+    "share": "Jaa",
     "shareOn": "Jaa {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Tutki tunnisteen mukaan",
     "noOptions": "Ei ole enää valittavia tunnisteita",
     "search": "Tutki tunnisteen mukaan"
+  },
+  "content": {
+    "filter": {
+      "news": "Uutiset",
+      "projects": "Projektit",
+      "viewAll": "Näytä kaikki"
+    },
+    "resultsHaveLoaded": "{0} tuloksia löytyi"
   },
   "footer": {
     "about": "Tietoa data-avaruudesta",
@@ -62,7 +70,7 @@
     "about": "Tietoa meistä",
     "close": "Sulje valikko",
     "exploreData": "Tutki tietoja",
-    "exploreDataspace": "Tutustu dataspaceen",
+    "exploreDataspace": "Tutustu data tilaan",
     "home": "Etusivu",
     "toggle": "Näytä valikko"
   },
@@ -76,6 +84,20 @@
     "previous": "Edellinen"
   },
   "project": "Projekti",
+  "projects": {
+    "contract": "Sopimuksen numero",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Lataa tietolehti",
+    "factSheet": "Hankkeen tietoesite",
+    "funders": "Rahoittajat",
+    "funding": "Rahoitustiedot",
+    "fundingStream": "Rahoitusvirta",
+    "goals": "Projektin tavoitteet",
+    "impact": "Hankkeen keskeinen vaikutus",
+    "partners": "Hankekumppanit",
+    "reports": "Projektiraportit",
+    "viewFactSheet": "Näytä tietoesite"
+  },
   "related": {
     "categoryTags": {
       "title": "Tutustu aiheeseen liittyvään sisältöön"

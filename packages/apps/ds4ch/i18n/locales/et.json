@@ -2,7 +2,7 @@
   "actions": {
     "close": "Sulge",
     "downloadFile": "lae alla {file}",
-    "share": "jaga",
+    "share": "Jaga",
     "shareOn": "Jaga {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Uuri sildi järgi",
     "noOptions": "Rohkem silte pole valida",
     "search": "Uuri sildi järgi"
+  },
+  "content": {
+    "filter": {
+      "news": "Uudised",
+      "projects": "Projektid",
+      "viewAll": "Vaata kõiki"
+    },
+    "resultsHaveLoaded": "{0} tulemusi leitud"
   },
   "footer": {
     "about": "Teave andmeruumi kohta",
@@ -62,7 +70,7 @@
     "about": "Meist",
     "close": "Sule menüü",
     "exploreData": "Uurige andmeid",
-    "exploreDataspace": "Uuri andmeruumi",
+    "exploreDataspace": "Avastage andme ruum",
     "home": "Avaleht",
     "toggle": "Kuva menüü"
   },
@@ -76,6 +84,20 @@
     "previous": "Eelmine"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Lepingu number",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Laadi alla faktileht",
+    "factSheet": "Projekti faktileht",
+    "funders": "Rahastajad",
+    "funding": "Teave rahastamise kohta",
+    "fundingStream": "Rahastamisvoog",
+    "goals": "Projekti eesmärgid",
+    "impact": "Projekti peamine mõju",
+    "partners": "Projekti partnerid",
+    "reports": "Projekti aruanded",
+    "viewFactSheet": "Vaata faktilehte"
+  },
   "related": {
     "categoryTags": {
       "title": "Avasta seotud sisu"

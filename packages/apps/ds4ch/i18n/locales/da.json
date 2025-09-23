@@ -2,7 +2,7 @@
   "actions": {
     "close": "luk",
     "downloadFile": "hent {file}",
-    "share": "del",
+    "share": "Del",
     "shareOn": "Del på {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Udforsk efter tag",
     "noOptions": "Der er ikke flere tags at vælge",
     "search": "Udforsk efter tag"
+  },
+  "content": {
+    "filter": {
+      "news": "Nyheder",
+      "projects": "Projekter",
+      "viewAll": "Se alle"
+    },
+    "resultsHaveLoaded": "{0} resultater fundet"
   },
   "footer": {
     "about": "Om dataområdet",
@@ -62,7 +70,7 @@
     "about": "Om os",
     "close": "Luk menu",
     "exploreData": "Udforsk dataene",
-    "exploreDataspace": "Udforsk dataspace",
+    "exploreDataspace": "Udforsk Data space",
     "home": "Hjem",
     "toggle": "Vis menu"
   },
@@ -76,6 +84,20 @@
     "previous": "Forrige"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Kontraktnummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Download faktaark",
+    "factSheet": "Projektfaktaark",
+    "funders": "Finansiører",
+    "funding": "Finansieringsoplysninger",
+    "fundingStream": "Finansieringsstrøm",
+    "goals": "Projektmål",
+    "impact": "Projektets vigtigste indvirkning",
+    "partners": "Projektpartnere",
+    "reports": "Projektrapporter",
+    "viewFactSheet": "Se faktaark"
+  },
   "related": {
     "categoryTags": {
       "title": "Opdag relateret indhold"

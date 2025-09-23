@@ -2,7 +2,7 @@
   "actions": {
     "close": "sluiten",
     "downloadFile": "download {file}",
-    "share": "delen",
+    "share": "Delen",
     "shareOn": "Delen op {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Verkennen op tag",
     "noOptions": "Er zijn geen tags meer om te selecteren",
     "search": "Verkennen op tag"
+  },
+  "content": {
+    "filter": {
+      "news": "Nieuws",
+      "projects": "Projecten",
+      "viewAll": "Bekijk alles"
+    },
+    "resultsHaveLoaded": "{0} resultaten gevonden"
   },
   "footer": {
     "about": "Over de dataspace",
@@ -62,7 +70,7 @@
     "about": "Over ons",
     "close": "Menu sluiten",
     "exploreData": "Verken de gegevens",
-    "exploreDataspace": "Verken de Dataspace",
+    "exploreDataspace": "Verken de Data space",
     "home": "Home",
     "toggle": "Menu weergeven"
   },
@@ -76,6 +84,20 @@
     "previous": "Vorige"
   },
   "project": "Project",
+  "projects": {
+    "contract": "Contractnummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Download factsheet",
+    "factSheet": "Project factsheet",
+    "funders": "Financiers",
+    "funding": "Financieringsinformatie",
+    "fundingStream": "Financieringsstroom",
+    "goals": "Projectdoelen",
+    "impact": "Belangrijkste impact van het project",
+    "partners": "Projectpartners",
+    "reports": "Projectrapporten",
+    "viewFactSheet": "Bekijk factsheet"
+  },
   "related": {
     "categoryTags": {
       "title": "Ontdek gerelateerde content"

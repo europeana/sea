@@ -2,7 +2,7 @@
   "actions": {
     "close": "uždaryti",
     "downloadFile": "parsisiųsti {file}",
-    "share": "dalintis",
+    "share": "Dalintis",
     "shareOn": "Dalintis {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Naršyti pagal žymą",
     "noOptions": "Daugiau pasirinktinų žymų nėra",
     "search": "Naršyti pagal žymą"
+  },
+  "content": {
+    "filter": {
+      "news": "Naujienos",
+      "projects": "Projektai",
+      "viewAll": "Peržiūrėti visus"
+    },
+    "resultsHaveLoaded": "{0} rasti rezultatai"
   },
   "footer": {
     "about": "Apie duomenų erdvę",
@@ -76,6 +84,20 @@
     "previous": "Ankstesnis"
   },
   "project": "Projektas",
+  "projects": {
+    "contract": "Sutarties numeris",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Atsisiųsti informacinį lapelį",
+    "factSheet": "Projekto informacijos lapas",
+    "funders": "Finansuotojai",
+    "funding": "Finansavimo informacija",
+    "fundingStream": "Finansavimo srautas",
+    "goals": "Projekto tikslai",
+    "impact": "Pagrindinis projekto poveikis",
+    "partners": "Projekto partneriai",
+    "reports": "Projekto ataskaitos",
+    "viewFactSheet": "Peržiūrėti informacinį lapą"
+  },
   "related": {
     "categoryTags": {
       "title": "Atraskite susijusį turinį"

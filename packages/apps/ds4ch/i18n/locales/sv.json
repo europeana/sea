@@ -2,7 +2,7 @@
   "actions": {
     "close": "stäng",
     "downloadFile": "ladda ner {file}",
-    "share": "dela",
+    "share": "Dela",
     "shareOn": "Dela på {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Utforska efter tagg",
     "noOptions": "Det finns inga fler taggar att välja",
     "search": "Utforska efter tagg"
+  },
+  "content": {
+    "filter": {
+      "news": "Nyheter",
+      "projects": "Projekt",
+      "viewAll": "Visa alla"
+    },
+    "resultsHaveLoaded": "{0} resultat hittades"
   },
   "footer": {
     "about": "Om datarummet",
@@ -62,7 +70,7 @@
     "about": "Om oss",
     "close": "Stäng menyn",
     "exploreData": "Utforska data",
-    "exploreDataspace": "Utforska dataområdet",
+    "exploreDataspace": "Utforska data rummet",
     "home": "Hem",
     "toggle": "Visa meny"
   },
@@ -76,6 +84,20 @@
     "previous": "Föregående"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Kontraktets nummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Ladda ner faktablad",
+    "factSheet": "Projektfaktablad",
+    "funders": "Finansiärer",
+    "funding": "Finansieringsinformation",
+    "fundingStream": "Finansieringsström",
+    "goals": "Projektmål",
+    "impact": "Projektets viktigaste inverkan",
+    "partners": "Projektpartners",
+    "reports": "Projektrapporter",
+    "viewFactSheet": "Visa faktablad"
+  },
   "related": {
     "categoryTags": {
       "title": "Upptäck relaterat innehåll"

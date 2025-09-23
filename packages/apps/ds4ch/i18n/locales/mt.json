@@ -2,7 +2,7 @@
   "actions": {
     "close": "agħlaq",
     "downloadFile": "niżżel {file}",
-    "share": "ixxerja",
+    "share": "Ixxerja",
     "shareOn": "Ixxerja fuq {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Esplora skont it-tikketta",
     "noOptions": "M'hemmx aktar tags biex tagħżel",
     "search": "Esplora skont it-tikketta"
+  },
+  "content": {
+    "filter": {
+      "news": "Aħbarijiet",
+      "projects": "Proġetti",
+      "viewAll": "Ara kollha"
+    },
+    "resultsHaveLoaded": "{0} riżultati misjuba"
   },
   "footer": {
     "about": "Dwar l-ispazju tad-dejta",
@@ -76,6 +84,20 @@
     "previous": "Preċedenti"
   },
   "project": "Proġett",
+  "projects": {
+    "contract": "Numru tal-kuntratt",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Niżżel il-folja informattiva",
+    "factSheet": "Folja ta’ informazzjoni tal-proġett",
+    "funders": "Finanzjaturi",
+    "funding": "Informazzjoni dwar il-finanzjament",
+    "fundingStream": "Fluss ta' finanzjament",
+    "goals": "Għanijiet tal-proġett",
+    "impact": "Impatt ewlieni tal-proġett",
+    "partners": "Imsieħba tal-proġett",
+    "reports": "Rapporti tal-proġett",
+    "viewFactSheet": "Ara l-folja ta’ informazzjoni"
+  },
   "related": {
     "categoryTags": {
       "title": "Skopri kontenut relatat"

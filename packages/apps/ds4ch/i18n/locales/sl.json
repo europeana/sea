@@ -2,7 +2,7 @@
   "actions": {
     "close": "zapri",
     "downloadFile": "prenesi {file}",
-    "share": "deli",
+    "share": "Deli",
     "shareOn": "Deli prek {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Razišči po oznaki",
     "noOptions": "Ni več oznak, ki bi jih lahko izbrali",
     "search": "Razišči po oznaki"
+  },
+  "content": {
+    "filter": {
+      "news": "Novice",
+      "projects": "Projekti",
+      "viewAll": "Poglej vse"
+    },
+    "resultsHaveLoaded": "{0} najdenih rezultatov"
   },
   "footer": {
     "about": "O podatkovnem prostoru",
@@ -76,6 +84,20 @@
     "previous": "Prejšnji"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Številka pogodbe",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Prenesite informativni list",
+    "factSheet": "Informacijski list projekta",
+    "funders": "Financerji",
+    "funding": "Informacije o financiranju",
+    "fundingStream": "Tok financiranja",
+    "goals": "Cilji projekta",
+    "impact": "Ključni vpliv projekta",
+    "partners": "Projektni partnerji",
+    "reports": "Poročila o projektih",
+    "viewFactSheet": "Oglejte si informativni list"
+  },
   "related": {
     "categoryTags": {
       "title": "Odkrijte povezano vsebino"

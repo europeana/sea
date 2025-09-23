@@ -2,7 +2,7 @@
   "actions": {
     "close": "dún",
     "downloadFile": "íoslódáil {file}",
-    "share": "roinn",
+    "share": "Roinn",
     "shareOn": "Roinn ar {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Déan iniúchadh de réir clibe",
     "noOptions": "Níl a thuilleadh clibeanna le roghnú",
     "search": "Déan iniúchadh de réir clibe"
+  },
+  "content": {
+    "filter": {
+      "news": "Nuacht",
+      "projects": "Tionscadail",
+      "viewAll": "Féach ar fad"
+    },
+    "resultsHaveLoaded": "{0} torthaí aimsithe"
   },
   "footer": {
     "about": "Maidir leis an spás sonraí",
@@ -76,6 +84,20 @@
     "previous": "Roimhe Seo"
   },
   "project": "Tionscadal",
+  "projects": {
+    "contract": "Uimhir an chonartha",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Íoslódáil bileog eolais",
+    "factSheet": "Bileog eolais an tionscadail",
+    "funders": "Maoinitheoirí",
+    "funding": "Eolas maoinithe",
+    "fundingStream": "Sruth maoinithe",
+    "goals": "Spriocanna an tionscadail",
+    "impact": "Príomhthionchar an tionscadail",
+    "partners": "Comhpháirtithe tionscadail",
+    "reports": "Tuarascálacha tionscadail",
+    "viewFactSheet": "Féach ar bhileog eolais"
+  },
   "related": {
     "categoryTags": {
       "title": "Faigh amach ábhar gaolmhar"

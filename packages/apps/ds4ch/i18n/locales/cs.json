@@ -21,6 +21,14 @@
     "noOptions": "Nejsou k dispozici žádné další tagy.",
     "search": "Procházet podle štítku"
   },
+  "content": {
+    "filter": {
+      "news": "Zprávy",
+      "projects": "Projekty",
+      "viewAll": "Zobrazit vše"
+    },
+    "resultsHaveLoaded": "{0} nalezených výsledků"
+  },
   "footer": {
     "about": "O datovém prostoru",
     "accessibility": "Přístupnost",
@@ -76,6 +84,20 @@
     "previous": "Předchozí"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Číslo smlouvy",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Stáhnout informační list",
+    "factSheet": "Informační list projektu",
+    "funders": "Poskytovatelé financování",
+    "funding": "Informace o financování",
+    "fundingStream": "Tok financování",
+    "goals": "Cíle projektu",
+    "impact": "Klíčový dopad projektu",
+    "partners": "Projektoví partneři",
+    "reports": "Projektové zprávy",
+    "viewFactSheet": "Zobrazit informační list"
+  },
   "related": {
     "categoryTags": {
       "title": "Objevte související obsah"

@@ -2,7 +2,7 @@
   "actions": {
     "close": "zatvoriť",
     "downloadFile": "stiahnuť {file}",
-    "share": "zdieľať",
+    "share": "Zdieľať",
     "shareOn": "Zdieľať na {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Preskúmať podľa značky",
     "noOptions": "Už nie sú žiadne tagy na výber",
     "search": "Preskúmať podľa značky"
+  },
+  "content": {
+    "filter": {
+      "news": "Novinky",
+      "projects": "Projekty",
+      "viewAll": "Zobraziť všetko"
+    },
+    "resultsHaveLoaded": "{0} nájdených výsledkov"
   },
   "footer": {
     "about": "O dátovom priestore",
@@ -76,6 +84,20 @@
     "previous": "Predchádzajúce"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Číslo zmluvy",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Stiahnite si informačný list",
+    "factSheet": "Informačný list projektu",
+    "funders": "Poskytovatelia finančných prostriedkov",
+    "funding": "Informácie o financovaní",
+    "fundingStream": "Tok financovania",
+    "goals": "Ciele projektu",
+    "impact": "Kľúčový vplyv projektu",
+    "partners": "Projektoví partneri",
+    "reports": "Správy o projektoch",
+    "viewFactSheet": "Zobraziť informačný list"
+  },
   "related": {
     "categoryTags": {
       "title": "Objavte súvisiaci obsah"

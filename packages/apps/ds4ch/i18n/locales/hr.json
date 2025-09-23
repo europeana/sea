@@ -2,7 +2,7 @@
   "actions": {
     "close": "zatvori",
     "downloadFile": "preuzmi {file}",
-    "share": "podijeli",
+    "share": "Podijeli",
     "shareOn": "Podijelite na {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Istraži po oznaci",
     "noOptions": "Nema više oznaka za odabir",
     "search": "Istraži po oznaci"
+  },
+  "content": {
+    "filter": {
+      "news": "Vijesti",
+      "projects": "Projekti",
+      "viewAll": "Pogledaj sve"
+    },
+    "resultsHaveLoaded": "{0} pronađenih rezultata"
   },
   "footer": {
     "about": "O podatkovnom prostoru",
@@ -62,7 +70,7 @@
     "about": "O nama",
     "close": "Zatvori izbornik",
     "exploreData": "Istražite podatke",
-    "exploreDataspace": "Istražite podatkovni prostor",
+    "exploreDataspace": "Istražite prostor za podatke",
     "home": "Početna",
     "toggle": "Prikaži izbornik"
   },
@@ -76,6 +84,20 @@
     "previous": "Prethodni"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Broj ugovora",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Preuzmite informativni list",
+    "factSheet": "Informativni list projekta",
+    "funders": "Financijeri",
+    "funding": "Informacije o financiranju",
+    "fundingStream": "Tok financiranja",
+    "goals": "Ciljevi projekta",
+    "impact": "Ključni utjecaj projekta",
+    "partners": "Projektni partneri",
+    "reports": "Projektna izvješća",
+    "viewFactSheet": "Pogledaj informativni list"
+  },
   "related": {
     "categoryTags": {
       "title": "Otkrijte povezani sadržaj"
