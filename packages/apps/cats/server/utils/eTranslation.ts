@@ -29,7 +29,8 @@ export const requestTranslation = async ({
   ).toString("base64");
 
   const response = await fetch(
-    "https://language-tools.ec.europa.eu/etranslation/api/askTranslate",
+    config.url ||
+      "https://language-tools.ec.europa.eu/etranslation/api/askTranslate",
     {
       method: "post",
       body: JSON.stringify(requestBody),

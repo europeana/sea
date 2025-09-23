@@ -13,6 +13,7 @@ export default defineNitroConfig({
     eTranslation: {
       deliveries: null,
       password: null,
+      url: null,
       username: null,
     },
     redis: {
