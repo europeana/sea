@@ -26,7 +26,7 @@ const keys = [
   "items/type-counts",
   "dataspace/network-members",
   "dataspace/data-providers",
-  "dataspace/hq-data",
+  "dataspace/hq-items",
   "dataspace/api-requests",
 ];
 
@@ -66,7 +66,7 @@ const fetchCachedData = () => {
     ],
     "dataspace/network-members": 4000,
     "dataspace/data-providers": 3200,
-    "dataspace/hq-data": "+10%",
+    "dataspace/hq-items": "63.3%",
     "dataspace/api-requests": 28300000,
   };
 };

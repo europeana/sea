@@ -55,7 +55,7 @@
     "counts": {
       "apiRequests": "Monthly API Requests, on average",
       "dataProviders": "Providing Institutions",
-      "hqData": "Increase in high-quality data per year",
+      "hqItems": "of our items are high quality",
       "items": "Items",
       "networkMembers": "Network members"
     }
