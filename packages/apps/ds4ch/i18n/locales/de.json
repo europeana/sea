@@ -21,6 +21,14 @@
     "noOptions": "Es gibt keine weiteren Tags zur Auswahl",
     "search": "Nach Tag erkunden"
   },
+  "content": {
+    "filter": {
+      "news": "Nachrichten",
+      "projects": "Projekte",
+      "viewAll": "Alle anzeigen"
+    },
+    "resultsHaveLoaded": "{0} Ergebnisse gefunden"
+  },
   "footer": {
     "about": "Über den Datenraum",
     "accessibility": "Barrierefreiheit",
@@ -62,7 +70,7 @@
     "about": "Über uns",
     "close": "Menü schließen",
     "exploreData": "Erkunden Sie die Daten",
-    "exploreDataspace": "Erkunden Sie den Datenraum",
+    "exploreDataspace": "Erkunden Sie den Daten raum",
     "home": "Startseite",
     "toggle": "Menü anzeigen"
   },
@@ -76,6 +84,20 @@
     "previous": "Vorherige"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Vertragsnummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Informationsblatt herunterladen",
+    "factSheet": "Projekt-Informationsblatt",
+    "funders": "Förderer",
+    "funding": "Finanzierungsinformationen",
+    "fundingStream": "Finanzierungsstrom",
+    "goals": "Projektziele",
+    "impact": "Wichtigste Auswirkungen des Projekts",
+    "partners": "Projektpartner",
+    "reports": "Projektberichte",
+    "viewFactSheet": "Informationsblatt anzeigen"
+  },
   "related": {
     "categoryTags": {
       "title": "Entdecken Sie verwandte Inhalte"

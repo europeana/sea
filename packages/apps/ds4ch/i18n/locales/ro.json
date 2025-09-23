@@ -2,7 +2,7 @@
   "actions": {
     "close": "închidere",
     "downloadFile": "descărcare {file}",
-    "share": "distribuiți",
+    "share": "Distribuiți",
     "shareOn": "Distribuie pe {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Explorează după etichetă",
     "noOptions": "Nu mai sunt etichete de selectat",
     "search": "Explorează după etichetă"
+  },
+  "content": {
+    "filter": {
+      "news": "Știri",
+      "projects": "Proiecte",
+      "viewAll": "Vizualizează tot"
+    },
+    "resultsHaveLoaded": "{0} rezultate găsite"
   },
   "footer": {
     "about": "Despre spațiul de date",
@@ -76,6 +84,20 @@
     "previous": "Anterior"
   },
   "project": "Proiect",
+  "projects": {
+    "contract": "Numărul contractului",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Descărcați fișa informativă",
+    "factSheet": "Fișă informativă a proiectului",
+    "funders": "Finanțatori",
+    "funding": "Informații despre finanțare",
+    "fundingStream": "Flux de finanțare",
+    "goals": "Obiectivele proiectului",
+    "impact": "Impactul principal al proiectului",
+    "partners": "Parteneri de proiect",
+    "reports": "Rapoarte de proiect",
+    "viewFactSheet": "Vizualizează fișa informativă"
+  },
   "related": {
     "categoryTags": {
       "title": "Descoperiți conținuturi conexe"

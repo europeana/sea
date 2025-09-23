@@ -2,7 +2,7 @@
   "actions": {
     "close": "bezárás",
     "downloadFile": "letöltés {file}",
-    "share": "megosztás",
+    "share": "Megosztás",
     "shareOn": "Megosztás a {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Felfedezés címke szerint",
     "noOptions": "Nincs több kiválasztható címke",
     "search": "Felfedezés címke szerint"
+  },
+  "content": {
+    "filter": {
+      "news": "Hírek",
+      "projects": "Projektek",
+      "viewAll": "Összes megtekintése"
+    },
+    "resultsHaveLoaded": "{0} találat"
   },
   "footer": {
     "about": "Az adattérről",
@@ -62,7 +70,7 @@
     "about": "Rólunk",
     "close": "Menü bezárása",
     "exploreData": "Fedezze fel az adatokat",
-    "exploreDataspace": "Fedezd fel az adatteret",
+    "exploreDataspace": "Fedezze fel az adatok teret",
     "home": "Kezdőlap",
     "toggle": "Menü megjelenítése"
   },
@@ -76,6 +84,20 @@
     "previous": "Előző"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Szerződés száma",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Töltse le a tájékoztatót",
+    "factSheet": "Projekt tájékoztató",
+    "funders": "Támogatók",
+    "funding": "Finanszírozási információk",
+    "fundingStream": "Finanszírozási forrás",
+    "goals": "Projektcélok",
+    "impact": "A projekt legfontosabb hatása",
+    "partners": "Projektpartnerek",
+    "reports": "Projektjelentések",
+    "viewFactSheet": "Tekintse meg a tájékoztatót"
+  },
   "related": {
     "categoryTags": {
       "title": "Fedezze fel a kapcsolódó tartalmakat"

@@ -2,7 +2,7 @@
   "actions": {
     "close": "fechar",
     "downloadFile": "descarregar {file}",
-    "share": "partilhar",
+    "share": "Partilhar",
     "shareOn": "Partilhe em {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Explorar por tag",
     "noOptions": "Não há mais tags para selecionar",
     "search": "Explorar por tag"
+  },
+  "content": {
+    "filter": {
+      "news": "Notícias",
+      "projects": "Projetos",
+      "viewAll": "Ver tudo"
+    },
+    "resultsHaveLoaded": "{0} resultados encontrados"
   },
   "footer": {
     "about": "Sobre o espaço de dados",
@@ -76,6 +84,20 @@
     "previous": "Anterior"
   },
   "project": "Projeto",
+  "projects": {
+    "contract": "Número do contrato",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Descarregar a ficha informativa",
+    "factSheet": "Ficha informativa do projeto",
+    "funders": "Financiadores",
+    "funding": "Informações de financiamento",
+    "fundingStream": "Fluxo de financiamento",
+    "goals": "Objetivos do projeto",
+    "impact": "Impacto principal do projeto",
+    "partners": "Parceiros do projeto",
+    "reports": "Relatórios de projeto",
+    "viewFactSheet": "Ver ficha informativa"
+  },
   "related": {
     "categoryTags": {
       "title": "Descubra conteúdo relacionado"

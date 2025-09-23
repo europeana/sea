@@ -2,7 +2,7 @@
   "actions": {
     "close": "aizvērt",
     "downloadFile": "lejupielādēt {file}",
-    "share": "dalīties",
+    "share": "Dalīties",
     "shareOn": "Dalīties {social}"
   },
   "attribution": {
@@ -20,6 +20,14 @@
     "label": "Izpētīt pēc birkas",
     "noOptions": "Nav vairs neviena atzīme, ko atlasīt",
     "search": "Izpētīt pēc birkas"
+  },
+  "content": {
+    "filter": {
+      "news": "Ziņas",
+      "projects": "Projekti",
+      "viewAll": "Skatīt visu"
+    },
+    "resultsHaveLoaded": "{0} atrastie rezultāti"
   },
   "footer": {
     "about": "Par datu telpu",
@@ -76,6 +84,20 @@
     "previous": "Iepriekšējais"
   },
   "project": "Projekts",
+  "projects": {
+    "contract": "Līguma numurs",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Lejupielādēt faktu lapu",
+    "factSheet": "Projekta faktu lapa",
+    "funders": "Finansētāji",
+    "funding": "Finansējuma informācija",
+    "fundingStream": "Finansējuma plūsma",
+    "goals": "Projekta mērķi",
+    "impact": "Galvenā projekta ietekme",
+    "partners": "Projekta partneri",
+    "reports": "Projektu ziņojumi",
+    "viewFactSheet": "Skatīt faktu lapu"
+  },
   "related": {
     "categoryTags": {
       "title": "Atklājiet saistītu saturu"

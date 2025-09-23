@@ -23,9 +23,9 @@
   },
   "content": {
     "filter": {
-      "viewAll": "View all",
       "news": "News",
-      "projects": "Projects"
+      "projects": "Projects",
+      "viewAll": "View all"
     },
     "resultsHaveLoaded": "{0} results found"
   },
@@ -79,18 +79,18 @@
   },
   "project": "Project",
   "projects": {
+    "contract": "Contract number",
     "dates": "{startDate} - {endDate}",
-    "reports": "Project reports",
+    "downloadFactSheet": "Download fact sheet",
     "factSheet": "Project fact sheet",
     "funders": "Funders",
-    "impact": "Key project impact",
     "funding": "Funding information",
-    "partners": "Project partners",
-    "goals": "Project goals",
-    "viewFactSheet": "View fact sheet",
-    "downloadFactSheet": "Download fact sheet",
     "fundingStream": "Funding stream",
-    "contract": "Contract number"
+    "goals": "Project goals",
+    "impact": "Key project impact",
+    "partners": "Project partners",
+    "reports": "Project reports",
+    "viewFactSheet": "View fact sheet"
   },
   "related": {
     "categoryTags": {
