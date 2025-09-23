@@ -3,7 +3,11 @@ import { Job, WaitingChildrenError, Worker } from "bullmq";
 let contentfulEnvironment;
 
 export const useTranslateQueueWorker = () =>
-  new Worker("translate", translateQueueWorker, useQueueOptions());
+  new Worker("translate", translateQueueWorker, {
+    ...useQueueOptions(),
+    // removeOnComplete: { count: 1000 },
+    // removeOnFail: { count: 5000 },
+  });
 
 export const translateQueueWorker = async (job: Job, token?: string) => {
   console.log("worker(translate)", job.id);
@@ -48,9 +52,10 @@ export const translateQueueWorker = async (job: Job, token?: string) => {
   const shouldWait = await job.moveToWaitingChildren(token);
   if (shouldWait) {
     throw new WaitingChildrenError();
-    return;
   }
 
+  // all per-language receipt children jobs are complete; assemble their values
+  // into the entry's field localisations
   const childrenValues = await job.getChildrenValues();
 
   let entry = await contentfulEnvironment.getEntry(job.data.entry.sys.id);
@@ -62,6 +67,7 @@ export const translateQueueWorker = async (job: Job, token?: string) => {
     }
   }
 
+  // write to Contentful
   entry = await entry.update();
   entry = await entry.publish();
 

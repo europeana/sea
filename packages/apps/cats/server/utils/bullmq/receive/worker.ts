@@ -1,7 +1,11 @@
 import { Job, Worker } from "bullmq";
 
 export const useReceiveQueueWorker = () =>
-  new Worker("receive", receiveQueueWorker, useQueueOptions());
+  new Worker("receive", receiveQueueWorker, {
+    ...useQueueOptions(),
+    // removeOnComplete: { count: 1000 },
+    // removeOnFail: { count: 5000 },
+  });
 
 export const receiveQueueWorker = async (job: Job) => {
   console.log("worker(receive)", job.id);
