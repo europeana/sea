@@ -178,7 +178,7 @@ useHead({
                     :table-data="reports"
                   />
                   <template v-if="page.project?.factSheet">
-                    <h2>
+                    <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.factSheet") }}
                     </h2>
                     <a
