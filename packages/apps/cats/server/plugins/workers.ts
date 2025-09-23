@@ -1,4 +1,4 @@
-export default defineNitroPlugin(async () => {
+export default defineNitroPlugin(() => {
   useReceiveQueueWorker();
   useTranslateQueueWorker();
 });
