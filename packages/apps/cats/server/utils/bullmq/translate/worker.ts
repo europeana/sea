@@ -3,9 +3,7 @@ import { Job, WaitingChildrenError, Worker } from "bullmq";
 let contentfulEnvironment;
 
 export const useTranslateQueueWorker = () =>
-  new Worker("translate", translateQueueWorker, {
-    connection: useRedisConnection(),
-  });
+  new Worker("translate", translateQueueWorker, useQueueOptions());
 
 export const translateQueueWorker = async (job: Job, token?: string) => {
   console.log("worker(translate)", job.id);

@@ -1,9 +1,7 @@
 import { Job, Worker } from "bullmq";
 
 export const useReceiveQueueWorker = () =>
-  new Worker("receive", receiveQueueWorker, {
-    connection: useRedisConnection(),
-  });
+  new Worker("receive", receiveQueueWorker, useQueueOptions());
 
 export const receiveQueueWorker = async (job: Job) => {
   console.log("worker(receive)", job.id);
