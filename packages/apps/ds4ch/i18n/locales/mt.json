@@ -30,19 +30,13 @@
     "resultsHaveLoaded": "{0} riżultati misjuba"
   },
   "footer": {
-    "about": "Dwar l-ispazju tad-dejta",
     "accessibility": "Aċċessibilità",
     "cookies": "Cookies",
     "disclaimer": "L-ispazju komuni Ewropew tad-dejta għall-wirt kulturali huwa inizjattiva tal-Unjoni Ewropea, iffinanzjata mill-Programm Diġitali tal-Ewropa tal-Unjoni Ewropea. Is-servizzi tal-ispazju tad-dejta, inkluż dan is-sit elettroniku, huma mħaddma minn konsorzju mmexxi mill-Fondazzjoni Europeana taħt kuntratt ta’ servizz mal-Kummissjoni Ewropea, numru tal-kuntratt LC-01901432.",
-    "events": "Avvenimenti",
     "footer": "Footer",
-    "help": "Għajnuna",
     "imageDescription": "Ffinanzjat mill-Unjoni Ewropea",
     "info": "Aktar informazzjoni",
     "language": "Ippersonalizza l-lingwa tas-sit web",
-    "mission": "Il-Missjoni Tagħna",
-    "missionStatement": "Permezz tal-ispazju tad-dejta, Europeana tagħti s-setgħa lis-settur tal-wirt kulturali fit-trasformazzjoni diġitali tiegħu. Aħna niżviluppaw għarfien espert, għodod u politiki biex nilqgħu l-bidla diġitali u nħeġġu s-sħubijiet li jrawmu l-innovazzjoni. Nagħmluha aktar faċli għan-nies jużaw il-wirt kulturali għall-edukazzjoni, ir-riċerka, il-ħolqien u d-divertiment. Ix-xogħol tagħna jikkontribwixxi għal soċjetà miftuħa, infurmata u kreattiva.",
-    "news": "Aħbarijiet",
     "partners": {
       "cloudflare": "Imħaddem minn Project Galileo",
       "contentful": "Mħaddem minn Contentful",
@@ -61,7 +55,7 @@
     "counts": {
       "apiRequests": "Talbiet API ta' kull xahar, bħala medja",
       "dataProviders": "Istituzzjonijiet Fornitriċi",
-      "hqData": "Żieda fl-data ta' kwalità għolja kull sena",
+      "hqItems": "tal-oġġetti tagħna huma ta’ kwalità għolja",
       "items": "Oġġetti",
       "networkMembers": "Membri tan-netwerk"
     }
