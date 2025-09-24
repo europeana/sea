@@ -4,10 +4,18 @@ export default eventHandler(async (event) => {
 
   const jobId = getRequestHeader(event, "X-Contentful-Idempotency-Key");
 
-  await addJobToTranslateQueue({
-    entry,
-    jobId,
-  });
+  await useQueue("request").add(
+    "translation",
+    { entry },
+    {
+      jobId,
+      attempts: 5,
+      backoff: {
+        type: "fixed",
+        delay: 60_000,
+      },
+    },
+  );
 
   return "OK";
 });

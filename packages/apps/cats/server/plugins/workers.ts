@@ -1,4 +1,5 @@
 export default defineNitroPlugin(() => {
+  useRequestQueueWorker();
   useReceiveQueueWorker();
-  useTranslateQueueWorker();
+  useStoreQueueWorker();
 });
