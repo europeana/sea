@@ -23,13 +23,13 @@ export default defineNuxtConfig({
     public: {
       baseUrl: "",
       contentful: {
-        graphQlOrigin: null,
-        spaceId: null,
-        environmentId: null,
         accessToken: {
           delivery: null,
           preview: null,
         },
+        environmentId: null,
+        graphqlUrl: null,
+        spaceId: null,
       },
       defaultThumbnail: "",
       internalLinkDomain: "",
@@ -40,6 +40,9 @@ export default defineNuxtConfig({
       optimizeTranslationDirective: false,
     },
     defaultLocale: "en",
+    detectBrowserLanguage: {
+      useCookie: false,
+    },
     strategy: "prefix",
     locales: i18nLocales.map((locale) => ({
       ...locale,

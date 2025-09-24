@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       matomo: {
         host: null,
         siteId: null,
+        disableCookies: true,
       },
     },
   },
