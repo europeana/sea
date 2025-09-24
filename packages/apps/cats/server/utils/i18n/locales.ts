@@ -1,4 +1,4 @@
-const locales = [
+export const supportedLocales = [
   "bg-BG",
   "cs-CZ",
   "da-DK",
@@ -24,9 +24,11 @@ const locales = [
   "sv-SE",
 ];
 
-export const targetLanguages = locales.map((locale) =>
-  locale.split("-").shift().toUpperCase(),
-);
+// export const targetLanguages = (locales) => locales.map((locale) => {
+//   return locale.split("-").shift().toUpperCase();
+// });
 
 export const localeForLang = (lang) =>
-  locales.find((locale) => locale.startsWith(`${lang.toLowerCase()}-`));
+  supportedLocales.find((locale) =>
+    locale.startsWith(`${lang.toLowerCase()}-`),
+  );

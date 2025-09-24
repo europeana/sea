@@ -12,6 +12,10 @@ export default defineNitroConfig({
     },
     eTranslation: {
       deliveries: null,
+      notifications: {
+        failure: null,
+        success: null,
+      },
       password: null,
       url: null,
       username: null,

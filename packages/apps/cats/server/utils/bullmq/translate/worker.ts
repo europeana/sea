@@ -9,6 +9,14 @@ export const useTranslateQueueWorker = () =>
     // removeOnFail: { count: 5000 },
   });
 
+const targetLanguagesFromTags = (tags = []) => {
+  return tags
+    .filter((tag) => tag.sys.id.startsWith("translate."))
+    .map((tag) => tag.sys.id.split(".").pop())
+    .filter((locale) => supportedLocales.includes(locale))
+    .map((locale) => locale.split("-").shift().toUpperCase());
+};
+
 export const translateQueueWorker = async (job: Job, token?: string) => {
   console.log("worker(translate)", job.id);
 
@@ -29,6 +37,14 @@ export const translateQueueWorker = async (job: Job, token?: string) => {
   }
 
   if (!job.data.eTranslationRequestId) {
+    const targetLanguages = targetLanguagesFromTags(
+      job.data.entry.metadata?.tags,
+    );
+
+    if (targetLanguages.length === 0) {
+      // nothing to translate to; goodbye!
+    }
+
     for (const lang of targetLanguages) {
       const jobId = `${job.id}-${lang}`;
 
@@ -45,6 +61,7 @@ export const translateQueueWorker = async (job: Job, token?: string) => {
     const { requestId } = await requestTranslation({
       externalReference: job.id,
       html: job.data.html,
+      targetLanguages,
     });
     await job.updateData({ ...job.data, eTranslationRequestId: requestId });
   }
@@ -62,6 +79,9 @@ export const translateQueueWorker = async (job: Job, token?: string) => {
 
   for (const childValue of Object.values(childrenValues)) {
     for (const fieldId in childValue.fields) {
+      if (!Object.keys(entry.fields).includes(fieldId)) {
+        entry.fields[fieldId] = {};
+      }
       entry.fields[fieldId][localeForLang(childValue.lang)] =
         childValue.fields[fieldId];
     }

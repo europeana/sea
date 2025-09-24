@@ -4,8 +4,17 @@ export const requestTranslation = async ({
   externalReference,
   html,
   sourceLanguage = "EN",
+  targetLanguages,
 }) => {
   const config = useRuntimeConfig().eTranslation;
+
+  const notifications = {};
+  if (config.notifications.failure) {
+    notifications.failure = { http: config.notifications.failure };
+  }
+  if (config.notifications.success) {
+    notifications.success = { http: config.notifications.success };
+  }
 
   const requestBody = {
     callerInformation: {
@@ -22,6 +31,7 @@ export const requestTranslation = async ({
     deliveries: {
       http: config.deliveries,
     },
+    notifications,
   };
 
   const basicAuth = Buffer.from(
