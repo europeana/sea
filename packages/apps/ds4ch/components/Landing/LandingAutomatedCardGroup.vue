@@ -26,7 +26,7 @@ const keys = [
   "items/type-counts",
   "dataspace/network-members",
   "dataspace/data-providers",
-  "dataspace/hq-data",
+  "dataspace/hq-items",
   "dataspace/api-requests",
 ];
 
@@ -45,29 +45,29 @@ const fetchCachedData = () => {
     "items/type-counts": [
       {
         label: "IMAGE",
-        count: 36590873,
+        count: 33257909,
       },
       {
         label: "TEXT",
-        count: 26315791,
+        count: 26343827,
       },
       {
         label: "SOUND",
-        count: 1201557,
+        count: 1202089,
       },
       {
         label: "VIDEO",
-        count: 364755,
+        count: 365322,
       },
       {
         label: "3D",
-        count: 6569,
+        count: 6634,
       },
     ],
-    "dataspace/network-members": 4500,
-    "dataspace/data-providers": 3500,
-    "dataspace/hq-data": "+10%",
-    "dataspace/api-requests": 13000000,
+    "dataspace/network-members": 5500,
+    "dataspace/data-providers": 3200,
+    "dataspace/hq-items": "63.3%",
+    "dataspace/api-requests": 28300000,
   };
 };
 
