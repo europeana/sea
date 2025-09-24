@@ -74,5 +74,16 @@ const selectedLocale = computed(() => {
 .dropdown-menu {
   max-height: 50vh;
   overflow: auto;
+
+  @media (min-width: $bp-4k) {
+    font-size: 2rem;
+    min-width: 20rem;
+  }
+
+  .dropdown-item {
+    @media (min-width: $bp-4k) {
+      padding: 0.5rem 2rem;
+    }
+  }
 }
 </style>
