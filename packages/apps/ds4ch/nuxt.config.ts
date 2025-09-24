@@ -23,13 +23,13 @@ export default defineNuxtConfig({
     public: {
       baseUrl: "",
       contentful: {
-        graphQlOrigin: null,
-        spaceId: null,
-        environmentId: null,
         accessToken: {
           delivery: null,
           preview: null,
         },
+        environmentId: null,
+        graphqlUrl: null,
+        spaceId: null,
       },
       defaultThumbnail: "",
       internalLinkDomain: "",

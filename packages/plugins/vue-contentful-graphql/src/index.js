@@ -6,8 +6,7 @@ import { print as printGraphql } from "graphql/language/printer.js";
 
 // TODO: ensure presence of required config
 const createQueryInstance = (config = {}) => {
-  // TODO: rename graphQlOrigin config property to url
-  const origin = config.graphQlOrigin || "https://graphql.contentful.com";
+  const origin = config.graphqlUrl || "https://graphql.contentful.com";
   const path = `/content/v1/spaces/${config.spaceId}/environments/${config.environmentId || "master"}`;
 
   const queryInstance = async (ast, variables = {}) => {
