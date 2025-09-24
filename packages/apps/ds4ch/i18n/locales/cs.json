@@ -30,19 +30,13 @@
     "resultsHaveLoaded": "{0} nalezených výsledků"
   },
   "footer": {
-    "about": "O datovém prostoru",
     "accessibility": "Přístupnost",
     "cookies": "Cookies",
     "disclaimer": "Společný evropský datový prostor pro kulturní dědictví je iniciativou Evropské unie, financovanou z programu Digitální Evropa Evropské unie. Služby datového prostoru, včetně této webové stránky, provozuje konsorcium vedené nadací Europeana na základě smlouvy o poskytování služeb s Evropskou komisí, číslo smlouvy LC-01901432.",
-    "events": "Události",
     "footer": "Zápatí",
-    "help": "Pomoc",
     "imageDescription": "Financováno Evropskou unií",
     "info": "Více informací",
     "language": "Přizpůsobit jazyk stránky",
-    "mission": "Naše mise",
-    "missionStatement": "Prostřednictvím datového prostoru umožňuje Europeana kulturnímu dědictví digitální transformaci. Vyvíjíme odborné znalosti, nástroje a politiky, které podporují digitální změny a povzbuzují partnerství vedoucí k inovacím. Usnadňujeme lidem využívání kulturního dědictví pro vzdělávání, výzkum, tvorbu i volný čas. Naše práce přispívá k otevřené, vzdělané a kreativní společnosti.",
-    "news": "Zprávy",
     "partners": {
       "cloudflare": "Poháněno Project Galileo",
       "contentful": "Vytvořeno pomocí Contentful",
@@ -61,7 +55,7 @@
     "counts": {
       "apiRequests": "Průměrný měsíční počet požadavků na API",
       "dataProviders": "Poskytující instituce",
-      "hqData": "Nárůst vysoce kvalitních dat za rok",
+      "hqItems": "z našich položek jsou vysoce kvalitní",
       "items": "Položky",
       "networkMembers": "Členové sítě"
     }

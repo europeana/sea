@@ -30,19 +30,13 @@
     "resultsHaveLoaded": "{0} resultat hittades"
   },
   "footer": {
-    "about": "Om datarummet",
     "accessibility": "Tillgänglighet",
     "cookies": "Cookies",
     "disclaimer": "Det gemensamma europeiska datarummet för kulturarv är ett initiativ från Europeiska unionen, finansierat av Europeiska unionens program för ett digitalt Europa. Datarummets tjänster, inklusive denna webbplats, drivs av ett konsortium lett av Europeana Foundation enligt ett tjänsteavtal med Europeiska kommissionen, kontraktsnummer LC-01901432.",
-    "events": "Händelser",
     "footer": "Sidfot",
-    "help": "Hjälp",
     "imageDescription": "Finansieras av Europeiska unionen",
     "info": "Mera info",
     "language": "Anpassa webbplatsens språk",
-    "mission": "Vårt uppdrag",
-    "missionStatement": "Genom datarummet stärker Europeana kulturarvssektorn i dess digitala omvandling. Vi utvecklar expertis, verktyg och riktlinjer för att omfamna den digitala förändringen och uppmuntrar partnerskap som främjar innovation. Vi gör det enklare för människor att använda kulturarv för utbildning, forskning, skapande och rekreation. Vårt arbete bidrar till ett öppet, kunnigt och kreativt samhälle.",
-    "news": "Nyheter",
     "partners": {
       "cloudflare": "Drivs av Project Galileo",
       "contentful": "Drivs av Contentful",
@@ -61,7 +55,7 @@
     "counts": {
       "apiRequests": "Månatliga API-förfrågningar, i genomsnitt",
       "dataProviders": "Tillhandahållande Institutioner",
-      "hqData": "Ökning av data av hög kvalitet per år",
+      "hqItems": "av våra objekt är av hög kvalitet",
       "items": "Objekt",
       "networkMembers": "Nätverksmedlemmar"
     }

@@ -30,19 +30,13 @@
     "resultsHaveLoaded": "{0} resultados encontrados"
   },
   "footer": {
-    "about": "Sobre o espaço de dados",
     "accessibility": "Acessibilidade",
     "cookies": "Cookies",
     "disclaimer": "O espaço comum europeu de dados para o património cultural é uma iniciativa da União Europeia, financiada pelo Programa Europa Digital da União Europeia. Os serviços do espaço de dados, incluindo este site, são operados por um consórcio liderado pela Fundação Europeana ao abrigo de um contrato de prestação de serviços com a Comissão Europeia, número de contrato LC-01901432.",
-    "events": "Eventos",
     "footer": "Rodapé",
-    "help": "Ajuda",
     "imageDescription": "Financiado pela União Europeia",
     "info": "Mais informações",
     "language": "Personalizar o idioma do site",
-    "mission": "Nossa Missão",
-    "missionStatement": "Através do espaço de dados, a Europeana capacita o setor do património cultural na sua transformação digital. Desenvolvemos competências, ferramentas e políticas para abraçar a mudança digital e incentivamos parcerias que promovem a inovação. Facilitamos o acesso das pessoas ao património cultural para fins educativos, de investigação, criação e lazer. O nosso trabalho contribui para uma sociedade aberta, informada e criativa.",
-    "news": "Notícias",
     "partners": {
       "cloudflare": "Impulsionado por Project Galileo",
       "contentful": "Impulsionado por Contentful",
@@ -61,7 +55,7 @@
     "counts": {
       "apiRequests": "Pedidos de API mensais, em média",
       "dataProviders": "Instituições Fornecedoras",
-      "hqData": "Aumento de dados de alta qualidade por ano",
+      "hqItems": "dos nossos itens são de alta qualidade",
       "items": "Itens",
       "networkMembers": "Membros da rede"
     }
