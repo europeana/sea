@@ -1,0 +1,57 @@
+import fetch from "node-fetch-native";
+
+export const requestTranslation = async ({
+  externalReference,
+  html,
+  sourceLanguage = "EN",
+  targetLanguages,
+}) => {
+  const config = useRuntimeConfig().eTranslation;
+
+  const notifications = {};
+  if (config.notifications.failure) {
+    notifications.failure = { http: config.notifications.failure };
+  }
+  if (config.notifications.success) {
+    notifications.success = { http: config.notifications.success };
+  }
+
+  const requestBody = {
+    callerInformation: {
+      externalReference,
+    },
+    documentToTranslate: {
+      document: {
+        format: "html",
+        content: Buffer.from(html).toString("base64"),
+      },
+    },
+    sourceLanguage,
+    targetLanguages,
+    deliveries: {
+      http: config.deliveries,
+    },
+    notifications,
+  };
+
+  const basicAuth = Buffer.from(
+    `${config.username}:${config.password}`,
+  ).toString("base64");
+
+  const response = await fetch(
+    config.url ||
+      "https://language-tools.ec.europa.eu/etranslation/api/askTranslate",
+    {
+      method: "post",
+      body: JSON.stringify(requestBody),
+      headers: {
+        authorization: `Basic ${basicAuth}`,
+        "content-type": "application/json",
+      },
+    },
+  );
+
+  const responseBody = await response.json();
+
+  return responseBody;
+};
