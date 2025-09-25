@@ -6,7 +6,7 @@ let flowProducer;
 export const useRequestQueueWorker = () =>
   new Worker("request", requestQueueWorker, {
     ...useQueueOptions(),
-    // removeOnComplete: { count: 1000 },
+    removeOnComplete: { count: 100 },
     // removeOnFail: { count: 5000 },
     //
     // limit to 10 jobs per minute to not overload eTranslation service

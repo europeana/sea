@@ -5,7 +5,7 @@ let contentfulEnvironment;
 export const useStoreQueueWorker = () =>
   new Worker("store", storeQueueWorker, {
     ...useQueueOptions(),
-    // removeOnComplete: { count: 1000 },
+    removeOnComplete: { count: 100 },
     // removeOnFail: { count: 5000 },
   });
 
