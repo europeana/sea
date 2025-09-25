@@ -2,7 +2,7 @@
   "actions": {
     "close": "Sulge",
     "downloadFile": "lae alla {file}",
-    "share": "jaga",
+    "share": "Jaga",
     "shareOn": "Jaga {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Rohkem silte pole valida",
     "search": "Uuri sildi järgi"
   },
+  "content": {
+    "filter": {
+      "news": "Uudised",
+      "projects": "Projektid",
+      "viewAll": "Vaata kõiki"
+    },
+    "resultsHaveLoaded": "{0} tulemusi leitud"
+  },
   "footer": {
-    "about": "Teave andmeruumi kohta",
     "accessibility": "Juurdepääsetavus",
     "cookies": "Küpsised",
     "disclaimer": "Ühine Euroopa kultuuripärandi andmeruum on Euroopa Liidu algatus, mida rahastatakse Euroopa Liidu programmi Digitaalne Euroopa kaudu. Andmeruumi teenuseid, sealhulgas seda veebisaiti, haldab konsortsium, mida juhib Europeana Fond Euroopa Komisjoni teenuslepingu alusel, lepingu number LC-01901432.",
-    "events": "Sündmused",
     "footer": "Jalus",
-    "help": "Abi",
     "imageDescription": "Rahastab Euroopa Liit",
     "info": "Rohkem infot",
     "language": "Kohandage veebisaidi keelt",
-    "mission": "Meie missioon",
-    "missionStatement": "Andmeruumi kaudu võimestab Europeana kultuuripärandi sektorit selle digiüleminekul. Me arendame oskusteavet, tööriistu ja poliitikat, et toetada digitaalset muutust ning soodustada innovatsiooni edendavaid partnerlusi. Muudame inimestele kultuuripärandi kasutamise lihtsamaks hariduses, teaduses, loometöös ja vaba aja veetmisel. Meie töö aitab kaasa avatud, teadliku ja loova ühiskonna kujunemisele.",
-    "news": "Uudised",
     "partners": {
       "cloudflare": "Toetab Project Galileo",
       "contentful": "Töötab Contentfuli toel",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Igakuised API taotlused keskmiselt",
       "dataProviders": "Pakkuja Institutsioon",
-      "hqData": "Kõrgekvaliteediliste andmete kasv aastas",
+      "hqItems": "meie üksustest on kõrge kvaliteediga",
       "items": "Üksused",
       "networkMembers": "Võrgustiku liikmed"
     }
@@ -62,7 +64,7 @@
     "about": "Meist",
     "close": "Sule menüü",
     "exploreData": "Uurige andmeid",
-    "exploreDataspace": "Uuri andmeruumi",
+    "exploreDataspace": "Avastage andme ruum",
     "home": "Avaleht",
     "toggle": "Kuva menüü"
   },
@@ -76,6 +78,20 @@
     "previous": "Eelmine"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Lepingu number",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Laadi alla faktileht",
+    "factSheet": "Projekti faktileht",
+    "funders": "Rahastajad",
+    "funding": "Teave rahastamise kohta",
+    "fundingStream": "Rahastamisvoog",
+    "goals": "Projekti eesmärgid",
+    "impact": "Projekti peamine mõju",
+    "partners": "Projekti partnerid",
+    "reports": "Projekti aruanded",
+    "viewFactSheet": "Vaata faktilehte"
+  },
   "related": {
     "categoryTags": {
       "title": "Avasta seotud sisu"

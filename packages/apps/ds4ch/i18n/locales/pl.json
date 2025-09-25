@@ -2,7 +2,7 @@
   "actions": {
     "close": "zamknij",
     "downloadFile": "ściągnij {file}",
-    "share": "udostępnij",
+    "share": "Udostępnij",
     "shareOn": "Udostępnij na {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Nie ma więcej tagów do wybrania",
     "search": "Przeglądaj według tagu"
   },
+  "content": {
+    "filter": {
+      "news": "Aktualności",
+      "projects": "Projekty",
+      "viewAll": "Zobacz wszystkie"
+    },
+    "resultsHaveLoaded": "{0} znalezionych wyników"
+  },
   "footer": {
-    "about": "O przestrzeni danych",
     "accessibility": "Dostępność",
     "cookies": "Pliki cookie",
     "disclaimer": "Wspólna europejska przestrzeń danych dla dziedzictwa kulturowego jest inicjatywą Unii Europejskiej, finansowaną z programu Cyfrowa Europa Unii Europejskiej. Usługi przestrzeni danych, w tym ta strona internetowa, są obsługiwane przez konsorcjum pod przewodnictwem Fundacji Europeana na podstawie umowy o świadczenie usług z Komisją Europejską, numer umowy LC-01901432.",
-    "events": "Wydarzenia",
     "footer": "Stopka",
-    "help": "Pomoc",
     "imageDescription": "Finansowane przez Unię Europejską",
     "info": "Więcej informacji",
     "language": "Dostosuj język witryny",
-    "mission": "Nasza Misja",
-    "missionStatement": "Poprzez przestrzeń danych, Europeana wspiera sektor dziedzictwa kulturowego w jego cyfrowej transformacji. Rozwijamy wiedzę specjalistyczną, narzędzia i polityki, aby sprostać cyfrowym zmianom i zachęcamy do partnerstw, które sprzyjają innowacjom. Ułatwiamy ludziom korzystanie z dziedzictwa kulturowego w edukacji, badaniach, twórczości i rekreacji. Nasza praca przyczynia się do budowania otwartego, świadomego i kreatywnego społeczeństwa.",
-    "news": "Aktualności",
     "partners": {
       "cloudflare": "Zasilane przez Project Galileo",
       "contentful": "Zasilane przez Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Średnia liczba miesięcznych żądań API",
       "dataProviders": "Dostawcy Danych",
-      "hqData": "Wzrost wysokiej jakości danych na rok",
+      "hqItems": "naszych obiektów cyfrowych jest wysokiej jakości",
       "items": "Obiekty cyfrowe",
       "networkMembers": "Członkowie sieci"
     }
@@ -76,6 +78,20 @@
     "previous": "Poprzedni"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Numer umowy",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Pobierz arkusz informacyjny",
+    "factSheet": "Arkusz informacyjny projektu",
+    "funders": "Fundatorzy",
+    "funding": "Informacje o finansowaniu",
+    "fundingStream": "Strumień finansowania",
+    "goals": "Cele projektu",
+    "impact": "Kluczowy wpływ projektu",
+    "partners": "Partnerzy projektu",
+    "reports": "Raporty projektowe",
+    "viewFactSheet": "Zobacz arkusz informacyjny"
+  },
   "related": {
     "categoryTags": {
       "title": "Odkryj powiązane treści"

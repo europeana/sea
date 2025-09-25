@@ -2,7 +2,7 @@
   "actions": {
     "close": "fermer",
     "downloadFile": "télécharger {file}",
-    "share": "partager",
+    "share": "Partager",
     "shareOn": "Partager sur {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Il n'y a plus de balises à sélectionner",
     "search": "Explorer par tag"
   },
+  "content": {
+    "filter": {
+      "news": "Actualités",
+      "projects": "Projets",
+      "viewAll": "Voir tout"
+    },
+    "resultsHaveLoaded": "{0} résultats trouvés"
+  },
   "footer": {
-    "about": "À propos de l'espace de données",
     "accessibility": "Accessibilité",
     "cookies": "Cookies",
     "disclaimer": "L'espace européen commun de données pour le patrimoine culturel est une initiative de l'Union européenne, financée par le programme \"Europe numérique\" de l'Union européenne. Les services de l'espace de données, y compris ce site web, sont gérés par un consortium dirigé par la Fondation Europeana dans le cadre d'un contrat de service avec la Commission européenne, numéro de contrat LC-01901432.",
-    "events": "Événements",
     "footer": "Pied de page",
-    "help": "Aide",
     "imageDescription": "Financé par l'Union européenne",
     "info": "Plus d'informations",
     "language": "Personnaliser la langue du site web",
-    "mission": "Notre mission",
-    "missionStatement": "Grâce à l’espace de données, Europeana accompagne le secteur du patrimoine culturel dans sa transformation numérique. Nous développons des expertises, des outils et des politiques pour favoriser l’adoption du numérique et encourager des partenariats qui stimulent l’innovation. Nous facilitons l’utilisation du patrimoine culturel pour l’éducation, la recherche, la création et les activités récréatives. Notre travail contribue à une société ouverte, informée et créative.",
-    "news": "Actualités",
     "partners": {
       "cloudflare": "Propulsé par Project Galileo",
       "contentful": "Propulsé par Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Requêtes API mensuelles, en moyenne",
       "dataProviders": "Institutions Partenaires",
-      "hqData": "Augmentation des données de haute qualité par an",
+      "hqItems": "de nos items sont de haute qualité",
       "items": "Items",
       "networkMembers": "Membres du réseau"
     }
@@ -76,6 +78,20 @@
     "previous": "Précédent"
   },
   "project": "Projet",
+  "projects": {
+    "contract": "Numéro de contrat",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Télécharger la fiche d'information",
+    "factSheet": "Fiche d’information du projet",
+    "funders": "Bailleurs de fonds",
+    "funding": "Informations sur le financement",
+    "fundingStream": "Flux de financement",
+    "goals": "Objectifs du projet",
+    "impact": "Impact clé du projet",
+    "partners": "Partenaires du projet",
+    "reports": "Rapports de projet",
+    "viewFactSheet": "Voir la fiche d’information"
+  },
   "related": {
     "categoryTags": {
       "title": "Découvrir du contenu connexe"

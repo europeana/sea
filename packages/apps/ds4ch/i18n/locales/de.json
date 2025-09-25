@@ -21,20 +21,22 @@
     "noOptions": "Es gibt keine weiteren Tags zur Auswahl",
     "search": "Nach Tag erkunden"
   },
+  "content": {
+    "filter": {
+      "news": "Nachrichten",
+      "projects": "Projekte",
+      "viewAll": "Alle anzeigen"
+    },
+    "resultsHaveLoaded": "{0} Ergebnisse gefunden"
+  },
   "footer": {
-    "about": "Über den Datenraum",
     "accessibility": "Barrierefreiheit",
     "cookies": "Cookies",
     "disclaimer": "Der gemeinsame europäische Datenraum für das kulturelle Erbe ist eine Initiative der Europäischen Union, die durch das Programm ‘Digitales Europa’ der Europäischen Union finanziert wird. Die Dienste des Datenraums, einschließlich dieser Website, werden von einem Konsortium unter der Leitung der Europeana Foundation im Rahmen eines Dienstleistungsvertrags mit der Europäischen Kommission betrieben, Vertragsnummer LC-01901432.",
-    "events": "Veranstaltungen",
     "footer": "Fußzeile",
-    "help": "Hilfe",
     "imageDescription": "Finanziert von der Europäischen Union",
     "info": "Mehr Infos",
     "language": "Sprache der Website anpassen",
-    "mission": "Unser Auftrag",
-    "missionStatement": "Durch den Datenraum unterstützt Europeana den Sektor des kulturellen Erbes bei seiner digitalen Transformation. Wir entwickeln Fachwissen, Werkzeuge und Richtlinien, um den digitalen Wandel zu unterstützen und fördern Partnerschaften, die Innovation vorantreiben. Wir erleichtern es den Menschen, Kulturerbe für Bildung, Forschung, Kreation und Erholung zu nutzen. Unsere Arbeit trägt zu einer offenen, wissenden und kreativen Gesellschaft bei.",
-    "news": "Nachrichten",
     "partners": {
       "cloudflare": "Unterstützt durch Project Galileo",
       "contentful": "Unterstützt durch Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Monatliche API-Anfragen, im Durchschnitt",
       "dataProviders": "Datenpartner",
-      "hqData": "Zunahme der hochwertigen Daten pro Jahr",
+      "hqItems": "unserer Objekte sind von hoher Qualität",
       "items": "Objekte",
       "networkMembers": "Mitglieder des Netzwerks"
     }
@@ -62,7 +64,7 @@
     "about": "Über uns",
     "close": "Menü schließen",
     "exploreData": "Erkunden Sie die Daten",
-    "exploreDataspace": "Erkunden Sie den Datenraum",
+    "exploreDataspace": "Erkunden Sie den Daten raum",
     "home": "Startseite",
     "toggle": "Menü anzeigen"
   },
@@ -76,6 +78,20 @@
     "previous": "Vorherige"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Vertragsnummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Informationsblatt herunterladen",
+    "factSheet": "Projekt-Informationsblatt",
+    "funders": "Förderer",
+    "funding": "Finanzierungsinformationen",
+    "fundingStream": "Finanzierungsstrom",
+    "goals": "Projektziele",
+    "impact": "Wichtigste Auswirkungen des Projekts",
+    "partners": "Projektpartner",
+    "reports": "Projektberichte",
+    "viewFactSheet": "Informationsblatt anzeigen"
+  },
   "related": {
     "categoryTags": {
       "title": "Entdecken Sie verwandte Inhalte"

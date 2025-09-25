@@ -2,7 +2,7 @@
   "actions": {
     "close": "cerrar",
     "downloadFile": "descargar {file}",
-    "share": "compartir",
+    "share": "Compartir",
     "shareOn": "Compartir en {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "No hay más etiquetas para seleccionar",
     "search": "Explorar por etiqueta"
   },
+  "content": {
+    "filter": {
+      "news": "Noticias",
+      "projects": "Proyectos",
+      "viewAll": "Ver todo"
+    },
+    "resultsHaveLoaded": "{0} resultados encontrados"
+  },
   "footer": {
-    "about": "Acerca del espacio de datos",
     "accessibility": "Accesibilidad",
     "cookies": "Cookies",
     "disclaimer": "El espacio común europeo de datos para el patrimonio cultural es una iniciativa de la Unión Europea, financiada por el Programa Europa Digital de la Unión Europea. Los servicios del espacio de datos, incluido este sitio web, son gestionados por un consorcio liderado por la Fundación Europeana en virtud de un contrato de servicios con la Comisión Europea, número de contrato LC-01901432.",
-    "events": "Eventos",
     "footer": "Pie de página",
-    "help": "Ayuda",
     "imageDescription": "Financiado por la Unión Europea",
     "info": "Más información",
     "language": "Personalizar el idioma del sitio web",
-    "mission": "Nuestra misión",
-    "missionStatement": "A través del espacio de datos, Europeana impulsa al sector del patrimonio cultural en su transformación digital. Desarrollamos conocimientos, herramientas y políticas para adoptar el cambio digital y fomentamos alianzas que promueven la innovación. Facilitamos el uso del patrimonio cultural para la educación, la investigación, la creación y el ocio. Nuestro trabajo contribuye a una sociedad abierta, informada y creativa.",
-    "news": "Noticias",
     "partners": {
       "cloudflare": "Desarrollado por Project Galileo",
       "contentful": "Desarrollado por Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Solicitudes API mensuales, en promedio",
       "dataProviders": "Proveedores de datos",
-      "hqData": "Aumento de datos de alta calidad por año",
+      "hqItems": "de nuestros items son de alta calidad",
       "items": "Ítems",
       "networkMembers": "Miembros de la red"
     }
@@ -76,6 +78,20 @@
     "previous": "Anterior"
   },
   "project": "Proyecto",
+  "projects": {
+    "contract": "Número de contrato",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Descargar hoja informativa",
+    "factSheet": "Hoja informativa del proyecto",
+    "funders": "Financiadores",
+    "funding": "Información sobre la financiación",
+    "fundingStream": "Flujo de financiación",
+    "goals": "Objetivos del proyecto",
+    "impact": "Impacto clave del proyecto",
+    "partners": "Socios del proyecto",
+    "reports": "Informes de proyectos",
+    "viewFactSheet": "Ver hoja informativa"
+  },
   "related": {
     "categoryTags": {
       "title": "Descubre contenido relacionado"

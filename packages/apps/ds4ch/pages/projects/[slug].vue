@@ -178,12 +178,12 @@ useHead({
                     :table-data="reports"
                   />
                   <template v-if="page.project?.factSheet">
-                    <h2>
+                    <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.factSheet") }}
                     </h2>
                     <a
                       :href="page.project?.factSheet.url"
-                      class="btn btn-secondary me-4 me-4k-5 mb-4 mb-sm-0"
+                      class="btn btn-secondary me-4 me-4k-5 mb-4 mb-sm-3 mb-4k-4"
                     >
                       <span class="icon-text-bold me-2" />
                       {{ $t("projects.viewFactSheet") }}
@@ -191,7 +191,7 @@ useHead({
                     <a
                       :href="page.project?.factSheet.url"
                       :download="page.project?.factSheet.title"
-                      class="btn btn-secondary"
+                      class="btn btn-secondary mb-4 mb-sm-3 mb-4k-4"
                     >
                       <span class="icon-ic-download me-2" />
                       {{ $t("projects.downloadFactSheet") }}

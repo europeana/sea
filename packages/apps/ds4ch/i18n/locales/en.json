@@ -21,20 +21,22 @@
     "noOptions": "There are no more tags to select",
     "search": "Explore by tag"
   },
+  "content": {
+    "filter": {
+      "news": "News",
+      "projects": "Projects",
+      "viewAll": "View all"
+    },
+    "resultsHaveLoaded": "{0} results found"
+  },
   "footer": {
-    "about": "About the data space",
     "accessibility": "Accessibility",
     "cookies": "Cookies",
     "disclaimer": "The common European data space for cultural heritage is an initiative of the European Union, financed by the European Union’s Digital Europe Programme. The data space services, including this website, are operated by a consortium led by the Europeana Foundation under a service contract with the European Commission, contract number LC-01901432.",
-    "events": "Events",
     "footer": "Footer",
-    "help": "Help",
     "imageDescription": "Funded by the European Union",
     "info": "More info",
     "language": "Customise website language",
-    "mission": "Our Mission",
-    "missionStatement": "Through the data space, Europeana empowers the cultural heritage sector in its digital transformation. We develop expertise, tools and policies to embrace digital change and encourage partnerships that foster innovation. We make it easier for people to use cultural heritage for education, research, creation and recreation. Our work contributes to an open, knowledgeable and creative society.",
-    "news": "News",
     "partners": {
       "cloudflare": "Powered by Project Galileo",
       "contentful": "Powered by Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Monthly API Requests, on average",
       "dataProviders": "Providing Institutions",
-      "hqData": "Increase in high-quality data per year",
+      "hqItems": "of our items are high quality",
       "items": "Items",
       "networkMembers": "Network members"
     }
@@ -77,18 +79,18 @@
   },
   "project": "Project",
   "projects": {
+    "contract": "Contract number",
     "dates": "{startDate} - {endDate}",
-    "reports": "Project reports",
+    "downloadFactSheet": "Download fact sheet",
     "factSheet": "Project fact sheet",
     "funders": "Funders",
-    "impact": "Key project impact",
     "funding": "Funding information",
-    "partners": "Project partners",
-    "goals": "Project goals",
-    "viewFactSheet": "View fact sheet",
-    "downloadFactSheet": "Download fact sheet",
     "fundingStream": "Funding stream",
-    "contract": "Contract number"
+    "goals": "Project goals",
+    "impact": "Key project impact",
+    "partners": "Project partners",
+    "reports": "Project reports",
+    "viewFactSheet": "View fact sheet"
   },
   "related": {
     "categoryTags": {

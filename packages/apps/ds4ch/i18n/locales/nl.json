@@ -2,7 +2,7 @@
   "actions": {
     "close": "sluiten",
     "downloadFile": "download {file}",
-    "share": "delen",
+    "share": "Delen",
     "shareOn": "Delen op {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Er zijn geen tags meer om te selecteren",
     "search": "Verkennen op tag"
   },
+  "content": {
+    "filter": {
+      "news": "Nieuws",
+      "projects": "Projecten",
+      "viewAll": "Bekijk alles"
+    },
+    "resultsHaveLoaded": "{0} resultaten gevonden"
+  },
   "footer": {
-    "about": "Over de dataspace",
     "accessibility": "Toegankelijkheid",
     "cookies": "Cookies",
     "disclaimer": "De gemeenschappelijke Europese dataspace voor cultureel erfgoed is een initiatief van de Europese Unie, gefinancierd door het programma Digitaal Europa van de EU. De dataspace-diensten, waaronder deze website, worden beheerd door een consortium onder leiding van de Europeana Foundation op basis van een dienstverleningsovereenkomst met de Europese Commissie, contractnummer LC-01901432.",
-    "events": "Evenementen",
     "footer": "Voettekst",
-    "help": "Help",
     "imageDescription": "Gefinancierd door de Europese Unie",
     "info": "Meer informatie",
     "language": "Pas de taal van de website aan",
-    "mission": "Onze missie",
-    "missionStatement": "Via de dataruimte stelt Europeana de cultureel erfgoedsector in staat om digitale transformatie te omarmen. We ontwikkelen expertise, tools en beleid om digitale verandering te faciliteren en stimuleren partnerschappen die innovatie bevorderen. We maken het gemakkelijker voor mensen om cultureel erfgoed te gebruiken voor onderwijs, onderzoek, creatie en recreatie. Ons werk draagt bij aan een open, kennisrijke en creatieve samenleving.",
-    "news": "Nieuws",
     "partners": {
       "cloudflare": "Aangedreven door Project Galileo",
       "contentful": "Aangedreven door Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Gemiddeld maandelijkse API-verzoeken",
       "dataProviders": "Deelnemende Erfgoedorganisaties",
-      "hqData": "Toename van hoogwaardige data per jaar",
+      "hqItems": "van onze objecten zijn van hoge kwaliteit",
       "items": "Objecten",
       "networkMembers": "Netwerk leden"
     }
@@ -62,7 +64,7 @@
     "about": "Over ons",
     "close": "Menu sluiten",
     "exploreData": "Verken de gegevens",
-    "exploreDataspace": "Verken de Dataspace",
+    "exploreDataspace": "Verken de Data space",
     "home": "Home",
     "toggle": "Menu weergeven"
   },
@@ -76,6 +78,20 @@
     "previous": "Vorige"
   },
   "project": "Project",
+  "projects": {
+    "contract": "Contractnummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Download factsheet",
+    "factSheet": "Project factsheet",
+    "funders": "Financiers",
+    "funding": "Financieringsinformatie",
+    "fundingStream": "Financieringsstroom",
+    "goals": "Projectdoelen",
+    "impact": "Belangrijkste impact van het project",
+    "partners": "Projectpartners",
+    "reports": "Projectrapporten",
+    "viewFactSheet": "Bekijk factsheet"
+  },
   "related": {
     "categoryTags": {
       "title": "Ontdek gerelateerde content"

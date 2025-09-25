@@ -2,7 +2,7 @@
   "actions": {
     "close": "dún",
     "downloadFile": "íoslódáil {file}",
-    "share": "roinn",
+    "share": "Roinn",
     "shareOn": "Roinn ar {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Níl a thuilleadh clibeanna le roghnú",
     "search": "Déan iniúchadh de réir clibe"
   },
+  "content": {
+    "filter": {
+      "news": "Nuacht",
+      "projects": "Tionscadail",
+      "viewAll": "Féach ar fad"
+    },
+    "resultsHaveLoaded": "{0} torthaí aimsithe"
+  },
   "footer": {
-    "about": "Maidir leis an spás sonraí",
     "accessibility": "Inrochtaineacht",
     "cookies": "Fianáin",
     "disclaimer": "Is tionscnamh de chuid an Aontais Eorpaigh é an spás sonraí Eorpach coiteann d'oidhreacht chultúrtha, atá maoinithe ag Clár Dhigiteach na hEorpa de chuid an Aontais Eorpaigh. Tá na seirbhísí spáis sonraí, lena n-áirítear an suíomh gréasáin seo, á n-oibriú ag comhaontas faoi cheannaireacht Fhondúireacht Europeana faoi chonradh seirbhíse leis an gCoimisiún Eorpach, uimhir chonartha LC-01901432.",
-    "events": "Imeachtaí",
     "footer": "Buntásc",
-    "help": "Cabhair",
     "imageDescription": "Maoinithe ag an Aontas Eorpach",
     "info": "Tuilleadh eolais",
     "language": "Saincheap teanga na láithreáin ghréasáin",
-    "mission": "Ár Misean",
-    "missionStatement": "Trí spás sonraí, tugann Europeana cumhacht don earnáil oidhreachta cultúrtha ina claochlú digiteach. Forbraímid saineolas, uirlisí agus beartais chun glactha le hathrú digiteach agus spreagaimid comhpháirtíochtaí a chothaíonn nuálaíocht. Déanaimid é níos fusa do dhaoine oidhreacht chultúrtha a úsáid le haghaidh oideachais, taighde, cruthaitheachta agus caitheamh aimsire. Cuireann ár gcuid oibre le sochaí oscailte, eolach agus chruthaitheach.",
-    "news": "Nuacht",
     "partners": {
       "cloudflare": "Cumhachtaithe ag Project Galileo",
       "contentful": "Cumhachtaithe ag Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Iarratais API míosúla, ar an meán",
       "dataProviders": "Institiúidí Soláthartha",
-      "hqData": "Méadú ar shonraí ardchaighdeáin in aghaidh na bliana",
+      "hqItems": "dár míreanna ar ardchaighdeán",
       "items": "Míreanna",
       "networkMembers": "Baill líonra"
     }
@@ -76,6 +78,20 @@
     "previous": "Roimhe Seo"
   },
   "project": "Tionscadal",
+  "projects": {
+    "contract": "Uimhir an chonartha",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Íoslódáil bileog eolais",
+    "factSheet": "Bileog eolais an tionscadail",
+    "funders": "Maoinitheoirí",
+    "funding": "Eolas maoinithe",
+    "fundingStream": "Sruth maoinithe",
+    "goals": "Spriocanna an tionscadail",
+    "impact": "Príomhthionchar an tionscadail",
+    "partners": "Comhpháirtithe tionscadail",
+    "reports": "Tuarascálacha tionscadail",
+    "viewFactSheet": "Féach ar bhileog eolais"
+  },
   "related": {
     "categoryTags": {
       "title": "Faigh amach ábhar gaolmhar"

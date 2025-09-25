@@ -1,5 +1,6 @@
 <script setup>
 import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl";
+import favIconImage from "@europeana/style/img/DS4CH/favicon.ico";
 const { urlWithOnlyQuery, urlWithBothLocaleAndQuery } = useCanonicalUrl();
 
 useHead({
@@ -8,6 +9,11 @@ useHead({
       hreflang: "x-default",
       rel: "alternate",
       href: urlWithOnlyQuery,
+    },
+    {
+      rel: "icon",
+      href: favIconImage,
+      type: "image/x-icon",
     },
   ],
   meta: [

@@ -17,7 +17,7 @@ const config = {
     delivery: "access",
   },
   environmentId: "test",
-  graphQlOrigin: "https://graphql.example.org",
+  graphqlUrl: "https://graphql.example.org",
   spaceId: "space",
 };
 
@@ -89,7 +89,7 @@ query Page($url: String!) {
       await app.prototype.$contentful.query(ast, variables);
 
       expect(fetch).toHaveBeenCalledWith(
-        `${config.graphQlOrigin}/content/v1/spaces/${config.spaceId}/environments/${config.environmentId}?_query=Page&url=%2F`,
+        `${config.graphqlUrl}/content/v1/spaces/${config.spaceId}/environments/${config.environmentId}?_query=Page&url=%2F`,
         {
           body: JSON.stringify({
             query,

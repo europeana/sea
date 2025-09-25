@@ -2,7 +2,7 @@
   "actions": {
     "close": "sulje",
     "downloadFile": "lataa {file}",
-    "share": "jaa",
+    "share": "Jaa",
     "shareOn": "Jaa {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Ei ole enää valittavia tunnisteita",
     "search": "Tutki tunnisteen mukaan"
   },
+  "content": {
+    "filter": {
+      "news": "Uutiset",
+      "projects": "Projektit",
+      "viewAll": "Näytä kaikki"
+    },
+    "resultsHaveLoaded": "{0} tuloksia löytyi"
+  },
   "footer": {
-    "about": "Tietoa data-avaruudesta",
     "accessibility": "Saavutettavuus",
     "cookies": "Evästeet",
     "disclaimer": "Kulttuuriperinnön yhteinen eurooppalainen data-avaruus on Euroopan unionin aloite, jota rahoitetaan Euroopan unionin Digitaalinen Eurooppa -ohjelmasta. Data-avaruuspalveluja, mukaan lukien tämä verkkosivusto, ylläpitää Europeana-säätiön johtama konsortio Euroopan komission kanssa tehdyn palvelusopimuksen nojalla, sopimusnumero LC-01901432.",
-    "events": "Tapahtumat",
     "footer": "Alatunniste",
-    "help": "Apua",
     "imageDescription": "Euroopan unionin rahoittama",
     "info": "Lisätietoja",
     "language": "Muokkaa verkkosivuston kieltä",
-    "mission": "Tehtävämme",
-    "missionStatement": "Datatilan kautta Europeana tukee kulttuuriperintösektoria sen digitaalisessa muutoksessa. Kehitämme asiantuntemusta, työkaluja ja politiikkoja digitaalisen muutoksen omaksumiseen sekä kannustamme kumppanuuksiin, jotka edistävät innovaatioita. Teemme kulttuuriperinnön hyödyntämisestä helpompaa opetuksessa, tutkimuksessa, luovassa työssä ja virkistyksessä. Työmme edistää avointa, sivistynyttä ja luovaa yhteiskuntaa.",
-    "news": "Uutiset",
     "partners": {
       "cloudflare": "Voimanlähteenä Project Galileo",
       "contentful": "Contentfulin tarjoama",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Kuukausittaiset API-pyynnöt keskimäärin",
       "dataProviders": "Aineiston Tarjoajat",
-      "hqData": "Korkealaatuisten tietojen lisääntyminen vuodessa",
+      "hqItems": "aineistoistamme on korkealaatuisia",
       "items": "Aineistot",
       "networkMembers": "Verkoston jäsenet"
     }
@@ -62,7 +64,7 @@
     "about": "Tietoa meistä",
     "close": "Sulje valikko",
     "exploreData": "Tutki tietoja",
-    "exploreDataspace": "Tutustu dataspaceen",
+    "exploreDataspace": "Tutustu data tilaan",
     "home": "Etusivu",
     "toggle": "Näytä valikko"
   },
@@ -76,6 +78,20 @@
     "previous": "Edellinen"
   },
   "project": "Projekti",
+  "projects": {
+    "contract": "Sopimuksen numero",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Lataa tietolehti",
+    "factSheet": "Hankkeen tietoesite",
+    "funders": "Rahoittajat",
+    "funding": "Rahoitustiedot",
+    "fundingStream": "Rahoitusvirta",
+    "goals": "Projektin tavoitteet",
+    "impact": "Hankkeen keskeinen vaikutus",
+    "partners": "Hankekumppanit",
+    "reports": "Projektiraportit",
+    "viewFactSheet": "Näytä tietoesite"
+  },
   "related": {
     "categoryTags": {
       "title": "Tutustu aiheeseen liittyvään sisältöön"

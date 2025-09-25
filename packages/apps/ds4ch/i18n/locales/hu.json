@@ -2,7 +2,7 @@
   "actions": {
     "close": "bezárás",
     "downloadFile": "letöltés {file}",
-    "share": "megosztás",
+    "share": "Megosztás",
     "shareOn": "Megosztás a {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Nincs több kiválasztható címke",
     "search": "Felfedezés címke szerint"
   },
+  "content": {
+    "filter": {
+      "news": "Hírek",
+      "projects": "Projektek",
+      "viewAll": "Összes megtekintése"
+    },
+    "resultsHaveLoaded": "{0} találat"
+  },
   "footer": {
-    "about": "Az adattérről",
     "accessibility": "Akadálymentesség",
     "cookies": "Sütik",
     "disclaimer": "A közös európai kulturális örökségadat-tér az Európai Unió kezdeményezése, amelyet az EU Digitális Európa programja finanszíroz. Az adattér szolgáltatásait, beleértve ezt a weboldalt is, az Europeana Alapítvány által vezetett konzorcium működteti az Európai Bizottsággal kötött szolgáltatási szerződés alapján, szerződésszám: LC-01901432.",
-    "events": "Események",
     "footer": "Lábléc",
-    "help": "Súgó",
     "imageDescription": "Az Európai Unió támogatásával",
     "info": "További információ",
     "language": "A webhely nyelvének testreszabása",
-    "mission": "Küldetésünk",
-    "missionStatement": "Az adattéren keresztül az Europeana támogatja a kulturális örökségi ágazatot a digitális átalakulásban. Szakértelmet, eszközöket és irányelveket fejlesztünk a digitális változások befogadására és az innovációt elősegítő partnerségek ösztönzésére. Megkönnyítjük az emberek számára, hogy a kulturális örökséget oktatásra, kutatásra, alkotásra és kikapcsolódásra használják. Munkánk hozzájárul egy nyitott, tájékozott és kreatív társadalom kialakításához.",
-    "news": "Hírek",
     "partners": {
       "cloudflare": "A Project Galileo támogatásával",
       "contentful": "Contentful támogatásával",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Átlagos havi API-kérés",
       "dataProviders": "Szolgáltató Intézmény",
-      "hqData": "A magas minőségű adatok mennyiségének éves növekedése",
+      "hqItems": "tételeink közül magas minőségű",
       "items": "Elemek",
       "networkMembers": "Hálózati tag"
     }
@@ -62,7 +64,7 @@
     "about": "Rólunk",
     "close": "Menü bezárása",
     "exploreData": "Fedezze fel az adatokat",
-    "exploreDataspace": "Fedezd fel az adatteret",
+    "exploreDataspace": "Fedezze fel az adatok teret",
     "home": "Kezdőlap",
     "toggle": "Menü megjelenítése"
   },
@@ -76,6 +78,20 @@
     "previous": "Előző"
   },
   "project": "Projekt",
+  "projects": {
+    "contract": "Szerződés száma",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Töltse le a tájékoztatót",
+    "factSheet": "Projekt tájékoztató",
+    "funders": "Támogatók",
+    "funding": "Finanszírozási információk",
+    "fundingStream": "Finanszírozási forrás",
+    "goals": "Projektcélok",
+    "impact": "A projekt legfontosabb hatása",
+    "partners": "Projektpartnerek",
+    "reports": "Projektjelentések",
+    "viewFactSheet": "Tekintse meg a tájékoztatót"
+  },
   "related": {
     "categoryTags": {
       "title": "Fedezze fel a kapcsolódó tartalmakat"

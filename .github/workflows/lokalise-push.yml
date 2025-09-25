@@ -31,3 +31,5 @@ jobs:
           name_pattern: en.json
           use_tag_tracking: true
           rambo_mode: ${{ inputs.force }}
+          additional_params: |
+            --cleanup-mode

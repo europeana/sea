@@ -2,7 +2,7 @@
   "actions": {
     "close": "uždaryti",
     "downloadFile": "parsisiųsti {file}",
-    "share": "dalintis",
+    "share": "Dalintis",
     "shareOn": "Dalintis {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Daugiau pasirinktinų žymų nėra",
     "search": "Naršyti pagal žymą"
   },
+  "content": {
+    "filter": {
+      "news": "Naujienos",
+      "projects": "Projektai",
+      "viewAll": "Peržiūrėti visus"
+    },
+    "resultsHaveLoaded": "{0} rasti rezultatai"
+  },
   "footer": {
-    "about": "Apie duomenų erdvę",
     "accessibility": "Prieinamumas",
     "cookies": "Slapukai",
     "disclaimer": "Europos bendra kultūros paveldo duomenų erdvė yra Europos Sąjungos iniciatyva, finansuojama pagal Europos Sąjungos Skaitmeninės Europos programą. Duomenų erdvės paslaugas, įskaitant šią interneto svetainę, teikia Europeana fondo vadovaujamas konsorciumas pagal paslaugų sutartį su Europos Komisija, sutarties numeris LC-01901432.",
-    "events": "Renginiai",
     "footer": "Poraštė",
-    "help": "Pagalba",
     "imageDescription": "Finansuoja Europos Sąjunga",
     "info": "Daugiau informacijos",
     "language": "Pasirinkti tinklalapio kalbą",
-    "mission": "Mūsų misija",
-    "missionStatement": "Per duomenų erdvę „Europeana“ suteikia galimybę kultūros paveldo sektoriui skaitmeninės transformacijos procese. Mes kuriame kompetencijas, įrankius ir politiką, kad būtų lengviau priimti skaitmeninius pokyčius ir skatinti partnerystes, kurios skatina inovacijas. Mes palengviname žmonėms galimybę naudotis kultūros paveldu švietimui, moksliniams tyrimams, kūrybai ir laisvalaikiui. Mūsų veikla prisideda prie atviros, žiniomis grįstos ir kūrybingos visuomenės kūrimo.",
-    "news": "Naujienos",
     "partners": {
       "cloudflare": "Veikia su Project Galileo",
       "contentful": "Veikia su Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Mėnesio API užklausos, vidutiniškai",
       "dataProviders": "Teikėjai",
-      "hqData": "Aukštos kokybės duomenų padidėjimas per metus",
+      "hqItems": "mūsų skaitmeninių objektų yra aukštos kokybės",
       "items": "Skaitmeniniai objektai",
       "networkMembers": "Tinklo nariai"
     }
@@ -76,6 +78,20 @@
     "previous": "Ankstesnis"
   },
   "project": "Projektas",
+  "projects": {
+    "contract": "Sutarties numeris",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Atsisiųsti informacinį lapelį",
+    "factSheet": "Projekto informacijos lapas",
+    "funders": "Finansuotojai",
+    "funding": "Finansavimo informacija",
+    "fundingStream": "Finansavimo srautas",
+    "goals": "Projekto tikslai",
+    "impact": "Pagrindinis projekto poveikis",
+    "partners": "Projekto partneriai",
+    "reports": "Projekto ataskaitos",
+    "viewFactSheet": "Peržiūrėti informacinį lapą"
+  },
   "related": {
     "categoryTags": {
       "title": "Atraskite susijusį turinį"

@@ -2,7 +2,7 @@
   "actions": {
     "close": "aizvērt",
     "downloadFile": "lejupielādēt {file}",
-    "share": "dalīties",
+    "share": "Dalīties",
     "shareOn": "Dalīties {social}"
   },
   "attribution": {
@@ -21,20 +21,22 @@
     "noOptions": "Nav vairs neviena atzīme, ko atlasīt",
     "search": "Izpētīt pēc birkas"
   },
+  "content": {
+    "filter": {
+      "news": "Ziņas",
+      "projects": "Projekti",
+      "viewAll": "Skatīt visu"
+    },
+    "resultsHaveLoaded": "{0} atrastie rezultāti"
+  },
   "footer": {
-    "about": "Par datu telpu",
     "accessibility": "Pieejamība",
     "cookies": "Sīkdatnes",
     "disclaimer": "Kopējā Eiropas kultūras mantojuma datu telpa ir Eiropas Savienības iniciatīva, ko finansē Eiropas Savienības programma \"Digitālā Eiropa\". Datu telpas pakalpojumus, tostarp šo tīmekļa vietni, pārvalda konsorcijs, ko vada Europeana fonds saskaņā ar pakalpojumu līgumu ar Eiropas Komisiju, līguma numurs LC-01901432.",
-    "events": "Notikumi",
     "footer": "Kājene",
-    "help": "Palīdzība",
     "imageDescription": "Finansē Eiropas Savienība",
     "info": "Vairāk informācijas",
     "language": "Pielāgojiet vietnes valodu",
-    "mission": "Mūsu misija",
-    "missionStatement": "Izmantojot datu telpu, Europeana sniedz iespēju kultūras mantojuma nozarei veikt digitālo transformāciju. Mēs izstrādājam zināšanas, rīkus un politikas, lai veicinātu digitālās pārmaiņas un atbalstītu partnerības, kas sekmē inovācijas. Mēs atvieglojam cilvēkiem kultūras mantojuma izmantošanu izglītībā, pētniecībā, radošajā darbībā un atpūtā. Mūsu darbs veicina atvērtu, zinošu un radošu sabiedrību.",
-    "news": "Ziņas",
     "partners": {
       "cloudflare": "Darbojas ar Project Galileo",
       "contentful": "Darbojas ar Contentful",
@@ -53,7 +55,7 @@
     "counts": {
       "apiRequests": "Vidēji ikmēneša API pieprasījumi",
       "dataProviders": "Piegādājošās iestādes",
-      "hqData": "Augstas kvalitātes datu pieaugums gadā",
+      "hqItems": "mūsu digitālajiem objektiem ir augsta kvalitāte",
       "items": "Digitālie objekti",
       "networkMembers": "Tīkla dalībnieki"
     }
@@ -76,6 +78,20 @@
     "previous": "Iepriekšējais"
   },
   "project": "Projekts",
+  "projects": {
+    "contract": "Līguma numurs",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Lejupielādēt faktu lapu",
+    "factSheet": "Projekta faktu lapa",
+    "funders": "Finansētāji",
+    "funding": "Finansējuma informācija",
+    "fundingStream": "Finansējuma plūsma",
+    "goals": "Projekta mērķi",
+    "impact": "Galvenā projekta ietekme",
+    "partners": "Projekta partneri",
+    "reports": "Projektu ziņojumi",
+    "viewFactSheet": "Skatīt faktu lapu"
+  },
   "related": {
     "categoryTags": {
       "title": "Atklājiet saistītu saturu"
