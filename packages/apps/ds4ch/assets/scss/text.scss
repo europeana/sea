@@ -75,17 +75,6 @@ h5 {
     }
   }
 
-  h2.related-heading {
-    font-size: $font-size-14;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-
-    @media (min-width: $bp-4k) {
-      font-size: $font-size-28;
-      margin-bottom: 1.5rem;
-    }
-  }
-
   .related-container {
     margin-top: 1.5rem;
 

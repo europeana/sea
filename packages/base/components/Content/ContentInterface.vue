@@ -14,6 +14,14 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  /**
+   * Tags for the category dropdown.
+   * Do not set to omit featured section.
+   */
+  featuredTags: {
+    type: Array,
+    default: null,
+  },
   featuredEntry: {
     type: Object,
     default: () => {},
@@ -284,6 +292,7 @@ watch(page, () => {
     <div class="container">
       <client-only>
         <ContentTagsDropdown
+          :featured-tags="featuredTags"
           :filtered-tags="filteredTags"
           :selected-tags="selectedTags"
         />

@@ -39,7 +39,7 @@ const factory = async (props) =>
         },
       },
     },
-    propsData: props,
+    props,
   });
 
 describe("components/content/contentTagsDropdown", () => {
@@ -67,17 +67,55 @@ describe("components/content/contentTagsDropdown", () => {
     });
   });
 
+  describe("featured tags", () => {
+    describe("when featured tags are supplied as props", () => {
+      it("splits the tags into featured and non-featured sections", async () => {
+        useRouteMock.mockImplementation(() => ({
+          query: {},
+        }));
+        const wrapper = await factory({
+          featuredTags: ["3d"],
+          filteredTags: ["3d", "cooking", "postcards"],
+          selectedTags: ["cooking"],
+        });
+        await wrapper.vm.handleFocusin(); // open dropdown
+
+        const tagSectionHedings = wrapper.findAll("h2.related-heading");
+
+        expect(tagSectionHedings[0].text()).toMatch("categories.featuredTags");
+        expect(tagSectionHedings[1].text()).toMatch("categories.moreTags");
+      });
+    });
+    describe("when no featured tags are supplied", () => {
+      it("does not create seperate sections or add section headers", async () => {
+        useRouteMock.mockImplementation(() => ({
+          query: {},
+        }));
+        const wrapper = await factory({
+          filteredTags: ["3d", "cooking", "postcards"],
+          selectedTags: ["cooking"],
+        });
+        await wrapper.vm.handleFocusin(); // open dropdown
+
+        const tagSectionHedings = wrapper.find("h2.related-heading");
+        expect(tagSectionHedings.exists()).toBe(false);
+      });
+    });
+  });
+
   // TODO: The following tests don't work due to issues with setting data/props
   // and re-calculating computed properties.
 
-  //   describe('when searching for tag', () => {
-  //     it('filters by keyword', async() => {
-  //       const wrapper = await factory();
-  //       expect(wrapper.vm).toBe('post');
-  //       wrapper.vm.searchTag.value = 'post';
-  //       expect(wrapper.vm.displayTags.length).toBe(1);
-  //     });
+  // describe('when searching for tag', () => {
+  //   it('filters by keyword', async() => {
+  //     useRouteMock.mockImplementation(() => ({
+  //       query: {},
+  //     }));
+  //     const wrapper = await factory();
+  //     wrapper.vm.searchTag.value = 'post';
+  //     expect(wrapper.vm.allDisplayTags.length).toBe(1);
   //   });
+  // });
 
   //   describe('showDropdown', () => {
   //     it('toggles the tag dropdown', async() => {

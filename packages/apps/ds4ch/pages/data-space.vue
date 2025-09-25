@@ -23,6 +23,22 @@ useHead({
   title: page.value.headline,
 });
 
+const featuredTags = [
+  "3d",
+  "artificial-intelligence",
+  "copyright",
+  "extended-reality",
+  "academic-research",
+  "education",
+  "tourism",
+  "funding",
+  "impact",
+  "multilinguality",
+  "digital-storytelling",
+  "diversity-and-inclusion",
+  "reuse",
+];
+
 const defaultCardThumbnail = {
   image: { url: useRuntimeConfig().public.defaultThumbnail },
 };
@@ -41,6 +57,7 @@ const defaultCardThumbnail = {
       site="dataspace-culturalheritage.eu"
       :content-types="page.contentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
+      :featured-tags="featuredTags"
       :cta-banners="page.hasPartCollection?.items"
     />
   </div>

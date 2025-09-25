@@ -5,10 +5,24 @@ const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
 const props = defineProps({
+  /**
+   * Tags to split intot the featured tags section.
+   * Do not set to omit featured section.
+   */
+  featuredTags: {
+    type: Array,
+    default: null,
+  },
+  /**
+   * All tags, before any keyword search.
+   */
   filteredTags: {
     type: Array,
     default: null,
   },
+  /**
+   * Array of tags which have already been selected.
+   */
   selectedTags: {
     type: Array,
     default: () => [],
@@ -32,7 +46,7 @@ const { data: tags } = await useAsyncData("allCategories", async () => {
   );
 });
 
-const displayTags = computed(() => {
+const allDisplayTags = computed(() => {
   let displayTags;
   const keyword = trimmedKeyword.value;
 
@@ -54,6 +68,29 @@ const displayTags = computed(() => {
   }
   return displayTags;
 });
+
+const featuredDisplayTags = computed(() => {
+  if (!props.featuredTags) {
+    return [];
+  }
+  return (
+    allDisplayTags.value?.filter((tag) =>
+      props.featuredTags.includes(tag.identifier),
+    ) || []
+  );
+});
+
+const genericDisplayTags = computed(() => {
+  if (!props.featuredTags) {
+    return allDisplayTags.value;
+  }
+  return (
+    allDisplayTags.value?.filter(
+      (tag) => !props.featuredTags.includes(tag.identifier),
+    ) || []
+  );
+});
+
 const displaySelectedTags = computed(() => {
   return tags.value.filter((tag) =>
     props.selectedTags.includes(tag.identifier),
@@ -77,6 +114,7 @@ const handleFocusin = () => {
   setClickOutsideConfigIsActive(true);
   showDropdown.value = true;
 };
+
 const handleClickOutside = () => {
   setClickOutsideConfigIsActive(false);
   showDropdown.value = false;
@@ -101,7 +139,6 @@ const clickOutsideConfig = ref({
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
       :selected="selectedTags"
-      :heading="false"
       class="mb-2"
       route-name="data-space"
     />
@@ -142,16 +179,26 @@ const clickOutsideConfig = ref({
         data-qa="tags search dropdown"
       >
         <RelatedCategoryTags
-          v-if="displayTags.length > 0"
+          v-if="featuredTags && featuredDisplayTags.length > 0"
           ref="relatedCategoryTags"
-          :tags="displayTags"
+          :tags="featuredDisplayTags"
           :selected="selectedTags"
-          :heading="false"
+          :heading="$t('categories.featuredTags')"
           tabindex="-1"
           class="badge-container mb-2"
           route-name="data-space"
         />
-        <p v-else-if="displayTags.length === 0">
+        <RelatedCategoryTags
+          v-if="genericDisplayTags.length > 0"
+          ref="relatedCategoryTags"
+          :tags="genericDisplayTags"
+          :selected="selectedTags"
+          :heading="featuredTags ? $t('categories.moreTags') : undefined"
+          tabindex="-1"
+          class="badge-container mb-2"
+          route-name="data-space"
+        />
+        <p v-if="allDisplayTags.length === 0">
           {{ $t("categories.noOptions") }}
         </p>
       </div>
