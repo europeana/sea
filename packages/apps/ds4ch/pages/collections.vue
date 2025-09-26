@@ -2,7 +2,7 @@
 import contentfulEntryHasContentType from "@europeana/sea-base-layer/utils/contentful/entryHasContentType.js";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
-const slug = "data";
+const slug = "collections";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 

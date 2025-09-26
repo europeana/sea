@@ -5,7 +5,7 @@ const links = [
   { url: "/", text: "nav.home" },
   { url: "/about-us", text: "nav.about" },
   { url: "/data-space", text: "nav.exploreDataspace" },
-  { url: "/data", text: "nav.exploreData" },
+  { url: "/collections", text: "nav.exploreData" },
 ];
 </script>
 <template>
