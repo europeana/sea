@@ -19,7 +19,9 @@
   "categories": {
     "label": "Explore by tag",
     "noOptions": "There are no more tags to select",
-    "search": "Explore by tag"
+    "search": "Explore by tag",
+    "moreTags": "More tags",
+    "featuredTags": "Featured tags"
   },
   "content": {
     "filter": {
