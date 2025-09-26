@@ -170,13 +170,15 @@ useHead({
                     class="mb-5 pb-4k-5"
                     :table-data="impactMetrics"
                   />
-                  <h2>
-                    {{ $t("projects.reports") }}
-                  </h2>
-                  <GenericInfoTable
-                    class="mb-5 pb-4k-5"
-                    :table-data="reports"
-                  />
+                  <template v-if="reports.length > 0">
+                    <h2>
+                      {{ $t("projects.reports") }}
+                    </h2>
+                    <GenericInfoTable
+                      class="mb-5 pb-4k-5"
+                      :table-data="reports"
+                    />
+                  </template>
                   <template v-if="page.project?.factSheet">
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.factSheet") }}
