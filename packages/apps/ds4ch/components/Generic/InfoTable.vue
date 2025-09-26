@@ -60,6 +60,7 @@ defineProps({
     overflow-wrap: anywhere;
   }
   td.value-cell {
+    line-height: 1.5em;
     border-top-width: 0;
     color: $darkgrey;
     padding-top: 0;
