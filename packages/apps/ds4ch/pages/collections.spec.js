@@ -11,7 +11,7 @@ mockNuxtImport("useI18n", () => {
   };
 });
 
-const title = "Explore the data";
+const title = "Explore the collections";
 const description = "DS4CH text description";
 const contentfulResponse = {
   data: {
