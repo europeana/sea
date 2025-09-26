@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
-import dataPage from "./data.vue";
+import dataPage from "./collections.vue";
 
 mockNuxtImport("useI18n", () => {
   return () => {
