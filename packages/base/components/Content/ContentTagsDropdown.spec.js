@@ -28,15 +28,14 @@ const categoriesContentfulResponse = {
   },
 };
 
-// const filteredTags = ['3d'];
-
-const factory = async (props) =>
+const factory = async (props, provide) =>
   await mountSuspended(ContentTagsDropdown, {
     global: {
       provide: {
         $contentful: {
           query: () => categoriesContentfulResponse,
         },
+        ...provide,
       },
     },
     props,
@@ -73,11 +72,13 @@ describe("components/content/contentTagsDropdown", () => {
         useRouteMock.mockImplementation(() => ({
           query: {},
         }));
-        const wrapper = await factory({
-          featuredTags: ["3d"],
-          filteredTags: ["3d", "cooking", "postcards"],
-          selectedTags: ["cooking"],
-        });
+        const wrapper = await factory(
+          {
+            filteredTags: ["3d", "cooking", "postcards"],
+            selectedTags: ["cooking"],
+          },
+          { featuredContentTags: ["3d"] },
+        );
         await wrapper.vm.handleFocusin(); // open dropdown
 
         const tagSectionHedings = wrapper.findAll("h2.related-heading");

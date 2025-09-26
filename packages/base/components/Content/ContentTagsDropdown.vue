@@ -1,18 +1,11 @@
 <script setup>
 import categoriesQuery from "@/graphql/queries/categories.graphql";
+import { inject } from "vue";
 const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
 const props = defineProps({
-  /**
-   * Tags to split intot the featured tags section.
-   * Do not set to omit featured section.
-   */
-  featuredTags: {
-    type: Array,
-    default: null,
-  },
   /**
    * All tags, before any keyword search.
    */
@@ -29,6 +22,7 @@ const props = defineProps({
   },
 });
 
+const featuredTags = inject("featuredContentTags", null);
 const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
@@ -70,23 +64,23 @@ const allDisplayTags = computed(() => {
 });
 
 const featuredDisplayTags = computed(() => {
-  if (!props.featuredTags) {
+  if (!featuredTags) {
     return [];
   }
   return (
     allDisplayTags.value?.filter((tag) =>
-      props.featuredTags.includes(tag.identifier),
+      featuredTags.includes(tag.identifier),
     ) || []
   );
 });
 
-const genericDisplayTags = computed(() => {
-  if (!props.featuredTags) {
+const unfeaturedDisplayTags = computed(() => {
+  if (!featuredTags) {
     return allDisplayTags.value;
   }
   return (
     allDisplayTags.value?.filter(
-      (tag) => !props.featuredTags.includes(tag.identifier),
+      (tag) => !featuredTags.includes(tag.identifier),
     ) || []
   );
 });
@@ -189,9 +183,9 @@ const clickOutsideConfig = ref({
           route-name="data-space"
         />
         <RelatedCategoryTags
-          v-if="genericDisplayTags.length > 0"
+          v-if="unfeaturedDisplayTags.length > 0"
           ref="relatedCategoryTags"
-          :tags="genericDisplayTags"
+          :tags="unfeaturedDisplayTags"
           :selected="selectedTags"
           :heading="featuredTags ? $t('categories.moreTags') : undefined"
           tabindex="-1"

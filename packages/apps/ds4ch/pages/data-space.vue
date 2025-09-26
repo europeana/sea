@@ -1,5 +1,6 @@
 <script setup>
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
+import { provide } from "vue";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
@@ -23,7 +24,7 @@ useHead({
   title: page.value.headline,
 });
 
-const featuredTags = [
+provide("featuredContentTags", [
   "3d",
   "artificial-intelligence",
   "copyright",
@@ -37,7 +38,7 @@ const featuredTags = [
   "digital-storytelling",
   "diversity-and-inclusion",
   "reuse",
-];
+]);
 
 const defaultCardThumbnail = {
   image: { url: useRuntimeConfig().public.defaultThumbnail },
@@ -57,7 +58,6 @@ const defaultCardThumbnail = {
       site="dataspace-culturalheritage.eu"
       :content-types="page.contentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
-      :featured-tags="featuredTags"
       :cta-banners="page.hasPartCollection?.items"
     />
   </div>
