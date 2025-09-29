@@ -18,7 +18,9 @@ export const extractFields = ({ contentType, html }) => {
     if ((field.items?.type || field.type) === "Symbol") {
       fieldMaxLength = 255;
     }
-    const fieldSizeValidation = field.validations.find((val) => val.size);
+    const fieldSizeValidation = (
+      field.items?.validations || field.validations
+    ).find((val) => val.size);
     if (fieldSizeValidation?.size?.max) {
       fieldMaxLength = fieldSizeValidation?.size?.max;
     }
