@@ -29,7 +29,7 @@ const partnerList = page.value.project?.partners;
 //   const formattedEntities  = page.value.partnerEntities.join('\n - ')
 //   return `${page.value.partners}\n- ${formattedEntities}`;
 
-const impactMetrics = page.value.project?.impactMetrics.map((metric) => {
+const impactMetrics = page.value.project?.impactMetrics?.map((metric) => {
   const parts = metric.split(":");
   return { label: parts[0], value: parts[1] };
 });
@@ -163,13 +163,15 @@ useHead({
                     class="mb-5 pb-4k-5"
                     :project="page.project"
                   />
-                  <h2>
-                    {{ $t("projects.impact") }}
-                  </h2>
-                  <GenericInfoTable
-                    class="mb-5 pb-4k-5"
-                    :table-data="impactMetrics"
-                  />
+                  <template v-if="impactMetrics">
+                    <h2>
+                      {{ $t("projects.impact") }}
+                    </h2>
+                    <GenericInfoTable
+                      class="mb-5 pb-4k-5"
+                      :table-data="impactMetrics"
+                    />
+                  </template>
                   <template v-if="reports.length > 0">
                     <h2>
                       {{ $t("projects.reports") }}
@@ -260,6 +262,7 @@ useHead({
   .project-logo :deep(img) {
     height: 1.5rem;
     max-width: 4.5rem;
+
     width: auto;
     object-fit: contain;
 
