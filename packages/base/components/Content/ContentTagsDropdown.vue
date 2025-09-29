@@ -206,7 +206,8 @@ const clickOutsideConfig = ref({
 .tag-search-dropdown {
   width: 100%;
   background-color: $white;
-  overflow: hidden;
+  max-height: 15rem;
+  overflow: auto;
   position: absolute;
   z-index: 20;
   box-shadow: $boxshadow;
@@ -221,16 +222,14 @@ const clickOutsideConfig = ref({
     border-width: 2px;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    max-height: calc(1.5 * 15rem);
   }
 }
 
 .badge-container {
-  max-height: 15rem;
-  overflow: auto;
   margin: 0;
 
   @media (min-width: $bp-4k) {
-    max-height: calc(1.5 * 15rem);
   }
 
   :deep(.col-12) {
