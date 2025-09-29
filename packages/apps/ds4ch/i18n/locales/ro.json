@@ -17,7 +17,9 @@
     "publishedDate": "Publicat {date}"
   },
   "categories": {
+    "featuredTags": "Etichete recomandate",
     "label": "Explorează după etichetă",
+    "moreTags": "Mai multe etichete",
     "noOptions": "Nu mai sunt etichete de selectat",
     "search": "Explorează după etichetă"
   },

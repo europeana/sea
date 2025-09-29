@@ -17,7 +17,9 @@
     "publishedDate": "Publié {date}"
   },
   "categories": {
+    "featuredTags": "Tags en vedette",
     "label": "Explorer par tag",
+    "moreTags": "Plus de tags",
     "noOptions": "Il n'y a plus de balises à sélectionner",
     "search": "Explorer par tag"
   },

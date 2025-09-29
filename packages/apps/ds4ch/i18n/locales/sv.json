@@ -17,7 +17,9 @@
     "publishedDate": "Publicerad {date}"
   },
   "categories": {
+    "featuredTags": "Utvalda taggar",
     "label": "Utforska efter tagg",
+    "moreTags": "Fler taggar",
     "noOptions": "Det finns inga fler taggar att välja",
     "search": "Utforska efter tagg"
   },

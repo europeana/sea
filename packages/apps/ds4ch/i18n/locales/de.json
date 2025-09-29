@@ -17,7 +17,9 @@
     "publishedDate": "Veröffentlicht {date}"
   },
   "categories": {
+    "featuredTags": "Ausgewählte Tags",
     "label": "Nach Tag erkunden",
+    "moreTags": "Weitere Tags",
     "noOptions": "Es gibt keine weiteren Tags zur Auswahl",
     "search": "Nach Tag erkunden"
   },
