@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
-import dataPage from "./collections.vue";
+import collectionsPage from "./collections.vue";
 
 mockNuxtImport("useI18n", () => {
   return () => {
@@ -37,7 +37,7 @@ const contentfulResponse = {
   },
 };
 const factory = async () =>
-  await mountSuspended(dataPage, {
+  await mountSuspended(collectionsPage, {
     global: {
       provide: {
         $contentful: {

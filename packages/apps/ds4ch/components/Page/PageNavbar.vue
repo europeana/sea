@@ -4,8 +4,8 @@ import logoSrc from "@europeana/style/img/DS4CH/logo.svg";
 const links = [
   { url: "/", text: "nav.home" },
   { url: "/about-us", text: "nav.about" },
-  { url: "/data-space", text: "nav.exploreDataspace" },
-  { url: "/collections", text: "nav.exploreData" },
+  { url: "/data-space", text: "nav.dataSpace" },
+  { url: "/collections", text: "nav.collections" },
 ];
 </script>
 <template>
