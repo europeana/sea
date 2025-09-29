@@ -15,7 +15,7 @@ export const extractFields = ({ contentType, html }) => {
     const field = contentType.fields.find((field) => field.id === fieldId);
 
     let fieldMaxLength = null;
-    if (field.type === "Symbol") {
+    if ((field.items?.type || field.type) === "Symbol") {
       fieldMaxLength = 255;
     }
     const fieldSizeValidation = field.validations.find((val) => val.size);
@@ -23,14 +23,25 @@ export const extractFields = ({ contentType, html }) => {
       fieldMaxLength = fieldSizeValidation?.size?.max;
     }
 
-    if (field.type === "Text") {
-      fields[fieldId] = turndownService.turndown(section.html());
+    let fieldValue;
+
+    if ((field.items?.type || field.type) === "Text") {
+      fieldValue = turndownService.turndown(section.html());
     } else {
-      fields[fieldId] = section.text();
+      fieldValue = section.text();
     }
 
-    if (fieldMaxLength && fields[fieldId].length > fieldMaxLength) {
-      fields[fieldId] = fields[fieldId].substring(0, fieldMaxLength - 1) + "…";
+    if (fieldMaxLength && fieldValue.length > fieldMaxLength) {
+      fieldValue = fieldValue.substring(0, fieldMaxLength - 1) + "…";
+    }
+
+    if (field.type === "Array") {
+      if (!fields[fieldId]) {
+        fields[fieldId] = [];
+      }
+      fields[fieldId].push(fieldValue);
+    } else {
+      fields[fieldId] = fieldValue;
     }
   }
 
