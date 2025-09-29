@@ -17,11 +17,11 @@
     "publishedDate": "Published {date}"
   },
   "categories": {
+    "featuredTags": "Featured tags",
     "label": "Explore by tag",
-    "noOptions": "There are no more tags to select",
-    "search": "Explore by tag",
     "moreTags": "More tags",
-    "featuredTags": "Featured tags"
+    "noOptions": "There are no more tags to select",
+    "search": "Explore by tag"
   },
   "content": {
     "filter": {
@@ -65,8 +65,8 @@
   "nav": {
     "about": "About",
     "close": "Close menu",
-    "exploreData": "Explore the data",
-    "exploreDataspace": "Explore the Data space",
+    "collections": "Explore the collections",
+    "dataSpace": "Explore the data space",
     "home": "Home",
     "toggle": "Show menu"
   },

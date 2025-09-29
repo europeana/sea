@@ -17,7 +17,9 @@
     "publishedDate": "Objavljeno {date}"
   },
   "categories": {
+    "featuredTags": "Istaknute oznake",
     "label": "Istraži po oznaci",
+    "moreTags": "Više oznaka",
     "noOptions": "Nema više oznaka za odabir",
     "search": "Istraži po oznaci"
   },

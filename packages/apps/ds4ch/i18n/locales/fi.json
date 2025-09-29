@@ -17,7 +17,9 @@
     "publishedDate": "Julkaistu {date}"
   },
   "categories": {
+    "featuredTags": "Esillä olevat tunnisteet",
     "label": "Tutki tunnisteen mukaan",
+    "moreTags": "Lisää tunnisteita",
     "noOptions": "Ei ole enää valittavia tunnisteita",
     "search": "Tutki tunnisteen mukaan"
   },

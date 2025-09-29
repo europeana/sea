@@ -17,7 +17,9 @@
     "publishedDate": "Közzétéve {date}"
   },
   "categories": {
+    "featuredTags": "Kiemelt címkék",
     "label": "Felfedezés címke szerint",
+    "moreTags": "További címkék",
     "noOptions": "Nincs több kiválasztható címke",
     "search": "Felfedezés címke szerint"
   },

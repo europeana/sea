@@ -17,7 +17,9 @@
     "publishedDate": "Foilsithe {date}"
   },
   "categories": {
+    "featuredTags": "Clibeanna faoi thrácht",
     "label": "Déan iniúchadh de réir clibe",
+    "moreTags": "Tuilleadh clibeanna",
     "noOptions": "Níl a thuilleadh clibeanna le roghnú",
     "search": "Déan iniúchadh de réir clibe"
   },

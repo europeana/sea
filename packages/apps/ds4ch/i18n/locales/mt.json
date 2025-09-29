@@ -17,7 +17,9 @@
     "publishedDate": "Ippubblikat {date}"
   },
   "categories": {
+    "featuredTags": "Tikketti dehru",
     "label": "Esplora skont it-tikketta",
+    "moreTags": "Aktar tikketti",
     "noOptions": "M'hemmx aktar tags biex tagħżel",
     "search": "Esplora skont it-tikketta"
   },

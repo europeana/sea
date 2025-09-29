@@ -17,7 +17,9 @@
     "publishedDate": "Paskelbta {date}"
   },
   "categories": {
+    "featuredTags": "Rekomenduojamos žymos",
     "label": "Naršyti pagal žymą",
+    "moreTags": "Daugiau žymų",
     "noOptions": "Daugiau pasirinktinų žymų nėra",
     "search": "Naršyti pagal žymą"
   },

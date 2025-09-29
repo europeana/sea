@@ -17,7 +17,9 @@
     "publishedDate": "Zverejnené {date}"
   },
   "categories": {
+    "featuredTags": "Odporúčané značky",
     "label": "Preskúmať podľa značky",
+    "moreTags": "Ďalšie značky",
     "noOptions": "Už nie sú žiadne tagy na výber",
     "search": "Preskúmať podľa značky"
   },

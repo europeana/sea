@@ -17,7 +17,9 @@
     "publishedDate": "Gepubliceerd {date}"
   },
   "categories": {
+    "featuredTags": "Uitgelichte tags",
     "label": "Verkennen op tag",
+    "moreTags": "Meer tags",
     "noOptions": "Er zijn geen tags meer om te selecteren",
     "search": "Verkennen op tag"
   },

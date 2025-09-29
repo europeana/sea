@@ -17,7 +17,9 @@
     "publishedDate": "Offentliggjort {date}"
   },
   "categories": {
+    "featuredTags": "Fremhævede tags",
     "label": "Udforsk efter tag",
+    "moreTags": "Flere tags",
     "noOptions": "Der er ikke flere tags at vælge",
     "search": "Udforsk efter tag"
   },
