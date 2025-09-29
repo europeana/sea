@@ -46,8 +46,8 @@ const tags =
 const projectLogoImage = page.value.project?.logo?.image;
 
 const PROJECT_LOGO_SRCSET_PRESETS = {
-  "4k": { w: 72, h: 24 },
-  "4k+": { w: 144, h: 48 },
+  "4k": { w: 250, h: 43 },
+  "4k+": { w: 300, h: 50 },
 };
 
 const projectLogoImageSizes = [
@@ -88,14 +88,13 @@ useHead({
     >
       <ImageOptimised
         v-if="projectLogoImage"
-        class="project-logo me-2 mb-2"
+        class="project-logo"
         :src="projectLogoImage?.url"
         :content-type="projectLogoImage?.contentType"
         :contentful-image-crop-presets="PROJECT_LOGO_SRCSET_PRESETS"
         :image-sizes="projectLogoImageSizes"
         :width="projectLogoImage?.width"
         :height="projectLogoImage?.height"
-        :max-width="144"
         :alt="projectLogoImage?.description || ''"
       />
     </AuthoredHead>
@@ -260,15 +259,12 @@ useHead({
   // When SVG img is not nested
   :deep(img.project-logo),
   .project-logo :deep(img) {
-    height: 1.5rem;
-    max-width: 4.5rem;
-
+    max-height: 2.688rem;
     width: auto;
     object-fit: contain;
 
     @media (min-width: $bp-4k) {
-      height: 3rem;
-      max-width: 9rem;
+      max-height: 3rem;
     }
   }
 }

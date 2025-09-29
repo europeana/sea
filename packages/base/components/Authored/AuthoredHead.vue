@@ -42,7 +42,6 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
           <div v-if="contextLabel" class="context-label">
             {{ contextLabel }}
           </div>
-          <slot />
           <h1 class="mb-2">
             {{ title }}
           </h1>
@@ -65,6 +64,7 @@ const heroImageAlt = computed(() => heroImage.value?.description || "");
     </div>
     <div class="row justify-content-center">
       <div class="col col-12 col-lg-8 mb-md-3">
+        <slot />
         <!-- eslint-disable vue/no-v-html -->
         <div
           v-if="description"
