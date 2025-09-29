@@ -65,8 +65,8 @@
   "nav": {
     "about": "Sobre nosotros",
     "close": "Cerrar menú",
-    "exploreData": "Explorar los datos",
-    "exploreDataspace": "Explorar el espacio de datos",
+    "collections": "Explora las colecciones",
+    "dataSpace": "Explora el espacio de datos",
     "home": "Inicio",
     "toggle": "Mostrar menú"
   },

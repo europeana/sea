@@ -65,8 +65,8 @@
   "nav": {
     "about": "Rólunk",
     "close": "Menü bezárása",
-    "exploreData": "Fedezze fel az adatokat",
-    "exploreDataspace": "Fedezze fel az adatok teret",
+    "collections": "Fedezze fel a gyűjteményeket",
+    "dataSpace": "Fedezze fel az adattért",
     "home": "Kezdőlap",
     "toggle": "Menü megjelenítése"
   },

@@ -63,10 +63,10 @@
     }
   },
   "nav": {
-    "about": "Tietoa meistä",
+    "about": "Tietoja",
     "close": "Sulje valikko",
-    "exploreData": "Tutki tietoja",
-    "exploreDataspace": "Tutustu data tilaan",
+    "collections": "Tutustu kokoelmiin",
+    "dataSpace": "Tutustu tietoavaruuteen",
     "home": "Etusivu",
     "toggle": "Näytä valikko"
   },
