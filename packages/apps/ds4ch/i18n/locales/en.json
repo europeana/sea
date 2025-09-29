@@ -17,11 +17,11 @@
     "publishedDate": "Published {date}"
   },
   "categories": {
+    "featuredTags": "Featured tags",
     "label": "Explore by tag",
-    "noOptions": "There are no more tags to select",
-    "search": "Explore by tag",
     "moreTags": "More tags",
-    "featuredTags": "Featured tags"
+    "noOptions": "There are no more tags to select",
+    "search": "Explore by tag"
   },
   "content": {
     "filter": {

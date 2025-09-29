@@ -17,7 +17,9 @@
     "publishedDate": "Publicado {date}"
   },
   "categories": {
+    "featuredTags": "Etiquetas destacadas",
     "label": "Explorar por etiqueta",
+    "moreTags": "Más etiquetas",
     "noOptions": "No hay más etiquetas para seleccionar",
     "search": "Explorar por etiqueta"
   },
