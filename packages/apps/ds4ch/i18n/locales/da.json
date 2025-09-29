@@ -65,8 +65,8 @@
   "nav": {
     "about": "Om os",
     "close": "Luk menu",
-    "exploreData": "Udforsk dataene",
-    "exploreDataspace": "Udforsk Data space",
+    "collections": "Udforsk samlingerne",
+    "dataSpace": "Udforsk datarummet",
     "home": "Hjem",
     "toggle": "Vis menu"
   },

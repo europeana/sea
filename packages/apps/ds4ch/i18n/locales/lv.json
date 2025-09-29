@@ -65,8 +65,8 @@
   "nav": {
     "about": "Par mums",
     "close": "Aizvērt izvēlni",
-    "exploreData": "Izpētiet datus",
-    "exploreDataspace": "Izpētiet datu telpu",
+    "collections": "Izpētiet kolekcijas",
+    "dataSpace": "Izpētiet datu telpu",
     "home": "Sākumlapa",
     "toggle": "Rādīt izvēlni"
   },

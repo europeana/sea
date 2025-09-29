@@ -65,8 +65,8 @@
   "nav": {
     "about": "Dwarna",
     "close": "Agħlaq il-menù",
-    "exploreData": "Esplora d-dejta",
-    "exploreDataspace": "Esplora l-Ispazju tad-Data",
+    "collections": "Esplora l-kollezzjonijiet",
+    "dataSpace": "Esplora l-ispazju tad-dejta",
     "home": "Paġna Ewlenija",
     "toggle": "Uri l-menù"
   },

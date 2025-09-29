@@ -65,8 +65,8 @@
   "nav": {
     "about": "Meist",
     "close": "Sule menüü",
-    "exploreData": "Uurige andmeid",
-    "exploreDataspace": "Avastage andme ruum",
+    "collections": "Avasta kollektsioone",
+    "dataSpace": "Avastage andme ruum",
     "home": "Avaleht",
     "toggle": "Kuva menüü"
   },

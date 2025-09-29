@@ -65,8 +65,8 @@
   "nav": {
     "about": "Over ons",
     "close": "Menu sluiten",
-    "exploreData": "Verken de gegevens",
-    "exploreDataspace": "Verken de Data space",
+    "collections": "Ontdek de collecties",
+    "dataSpace": "Verken de dataspace",
     "home": "Home",
     "toggle": "Menu weergeven"
   },

@@ -65,8 +65,8 @@
   "nav": {
     "about": "O nas",
     "close": "Zapri meni",
-    "exploreData": "Raziščite podatke",
-    "exploreDataspace": "Raziščite podatkovni prostor",
+    "collections": "Raziščite zbirke",
+    "dataSpace": "Raziščite podatkovni prostor",
     "home": "Domov",
     "toggle": "Pokaži meni"
   },

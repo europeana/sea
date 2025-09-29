@@ -65,8 +65,8 @@
   "nav": {
     "about": "Om oss",
     "close": "Stäng menyn",
-    "exploreData": "Utforska data",
-    "exploreDataspace": "Utforska data rummet",
+    "collections": "Utforska samlingarna",
+    "dataSpace": "Utforska datarymden",
     "home": "Hem",
     "toggle": "Visa meny"
   },

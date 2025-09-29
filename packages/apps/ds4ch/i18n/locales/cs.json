@@ -65,8 +65,8 @@
   "nav": {
     "about": "O nás",
     "close": "Zavřít nabídku",
-    "exploreData": "Prozkoumejte data",
-    "exploreDataspace": "Prozkoumejte datový prostor",
+    "collections": "Prozkoumejte sbírky",
+    "dataSpace": "Prozkoumejte datový prostor",
     "home": "Domů",
     "toggle": "Zobrazit nabídku"
   },
