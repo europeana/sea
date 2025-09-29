@@ -17,7 +17,9 @@
     "publishedDate": "Publikováno {date}"
   },
   "categories": {
+    "featuredTags": "Doporučené štítky",
     "label": "Procházet podle štítku",
+    "moreTags": "Další štítky",
     "noOptions": "Nejsou k dispozici žádné další tagy.",
     "search": "Procházet podle štítku"
   },

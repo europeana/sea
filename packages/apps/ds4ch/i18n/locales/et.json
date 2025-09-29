@@ -17,7 +17,9 @@
     "publishedDate": "Avaldatud {date}"
   },
   "categories": {
+    "featuredTags": "Esiletõstetud sildid",
     "label": "Uuri sildi järgi",
+    "moreTags": "Rohkem silte",
     "noOptions": "Rohkem silte pole valida",
     "search": "Uuri sildi järgi"
   },

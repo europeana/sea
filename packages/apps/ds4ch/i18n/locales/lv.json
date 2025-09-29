@@ -17,7 +17,9 @@
     "publishedDate": "Publicēts {date}"
   },
   "categories": {
+    "featuredTags": "Izvēlētās birkas",
     "label": "Izpētīt pēc birkas",
+    "moreTags": "Vairāk birku",
     "noOptions": "Nav vairs neviena atzīme, ko atlasīt",
     "search": "Izpētīt pēc birkas"
   },
