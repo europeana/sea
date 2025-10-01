@@ -226,6 +226,8 @@ async function fetchContentMetadata() {
   const contentIds = [];
   // Splits sthe request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
+  // TODO: when selectedType is already set, only retrieve those entries
+  // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
   if (props.contentTypes.includes("blog post")) {
     const blogPostingsResponse = await contentful.query(
       blogPostingsListingMinimalGraphql,
