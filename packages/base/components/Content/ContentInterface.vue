@@ -224,7 +224,7 @@ async function fetchContentMetadata() {
     site: props.site,
   };
   const contentIds = [];
-  // Splits sthe request into seperate graphql queries as otherwise
+  // Splits the request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
   // TODO: when selectedType is already set, only retrieve those entries
   // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
@@ -252,9 +252,11 @@ async function fetchContentMetadata() {
 
   // Simplify categories
   for (const contentEntry of contentIds) {
-    contentEntry.cats = (contentEntry.cats?.items || [])
-      .filter((cat) => !!cat)
-      .map((cat) => cat.id);
+    if (contentEntry.cats?.items) {
+      contentEntry.cats = contentEntry.cats.items
+        .filter((cat) => !!cat)
+        .map((cat) => cat.id);
+    }
   }
 
   // Order by date published
