@@ -1,4 +1,5 @@
 #import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
+#import "../fragments/imageWithAttributionFields.graphql"
 #import "../fragments/projectFields.graphql"
 
 query ProjectPage(
@@ -33,16 +34,5 @@ query ProjectPage(
         }
       }
     }
-  }
-}
-fragment imageWithAttributionFields on ImageWithAttribution {
-  name
-  nameEN: name(locale: "en-GB")
-  creator
-  provider
-  license
-  url
-  image {
-    ...imageFields
   }
 }
