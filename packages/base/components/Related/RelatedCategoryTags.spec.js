@@ -1,14 +1,40 @@
-import { describe, it, expect } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
+import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import { shallowMount } from "@vue/test-utils";
 
 import RelatedCategoryTags from "./RelatedCategoryTags.vue";
+
+const trackMock = vi.fn((args) => args);
+
+mockNuxtImport("useRoute", () => {
+  return () => {
+    return {
+      path: "/path",
+    };
+  };
+});
+
+mockNuxtImport("useNuxtApp", () => {
+  return () => {
+    return {
+      vueApp: {
+        config: {
+          globalProperties: {
+            $matomo: {
+              trackEvent: trackMock,
+            },
+          },
+        },
+      },
+    };
+  };
+});
 
 const factory = ({ props, mocks } = {}) =>
   shallowMount(RelatedCategoryTags, {
     props,
     global: {
       mocks: {
-        // $matomo: { trackEvent: sinon.spy() },
         ...mocks,
       },
     },
@@ -62,41 +88,41 @@ describe("components/related/RelatedCategoryTags", () => {
         expect(badges.length).toBe(tags.length);
       });
 
-      // describe("clicking the badge", () => {
-      //   it("tracks selecting tag", () => {
-      //     const wrapper = factory({ props: { routeName, tags } });
+      describe("clicking the badge", () => {
+        afterEach(() => {
+          trackMock.mockReset();
+        });
 
-      //     const badge = wrapper.find(".badge");
+        it("tracks selecting tag", async () => {
+          const wrapper = factory({ props: { routeName, tags } });
 
-      //     badge.trigger("click.native");
+          const badge = wrapper.find(".badge");
 
-      //     expect(
-      //       wrapper.vm.$matomo.trackEvent.calledWith(
-      //         "Tags",
-      //         "Select tag",
-      //         "red-tape",
-      //       ),
-      //     ).toBe(true);
-      //   });
+          await badge.trigger("click");
 
-      //   it("tracks deselecting tag", () => {
-      //     const wrapper = factory({
-      //       props: { routeName, tags, selected: [tags[0].identifier] },
-      //     });
+          expect(trackMock.mock.calls[0]).toEqual([
+            "Tags",
+            "Select tag",
+            "red-tape",
+          ]);
+        });
 
-      //     const badge = wrapper.find(".badge");
+        it("tracks deselecting tag", async () => {
+          const wrapper = factory({
+            props: { routeName, tags, selected: [tags[0].identifier] },
+          });
 
-      //     badge.trigger("click.native");
+          const badge = wrapper.find(".badge");
 
-      //     expect(
-      //       wrapper.vm.$matomo.trackEvent.calledWith(
-      //         "Tags",
-      //         "Deselect tag",
-      //         "red-tape",
-      //       ),
-      //     ).toBe(true);
-      //   });
-      // });
+          await badge.trigger("click");
+
+          expect(trackMock.mock.calls[0]).toEqual([
+            "Tags",
+            "Deselect tag",
+            "red-tape",
+          ]);
+        });
+      });
     });
 
     describe("methods", () => {

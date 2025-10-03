@@ -1,5 +1,6 @@
 <script setup>
 const route = useRoute();
+const nuxtApp = useNuxtApp();
 
 const props = defineProps({
   /**
@@ -66,14 +67,16 @@ const badgeLink = (tagId) => {
 const isActive = (tagId) => {
   return props.selected.includes(tagId);
 };
-// TODO: add matomo tracking on click for each NuxtLinkLocale
-// > @click="clickBadge(tag.identifier)"
-// const clickBadge = (tagId =>) {
-//   if ($matomo) {
-//     const action = isActive(tagId) ? "Deselect tag" : "Select tag";
-//     $matomo.trackEvent("Tags", action, tagId);
-//   }
-// }
+const clickBadge = (tagId) => {
+  if (nuxtApp.vueApp?.config?.globalProperties?.$matomo) {
+    const action = isActive(tagId) ? "Deselect tag" : "Select tag";
+    nuxtApp.vueApp.config.globalProperties.$matomo.trackEvent(
+      "Tags",
+      action,
+      tagId,
+    );
+  }
+};
 const handleLeft = (event) => {
   event.target.previousElementSibling?.focus();
 };
@@ -104,6 +107,7 @@ const handleRight = (event) => {
             :data-qa="`${tag.name} category tag`"
             @keydown.left="handleLeft"
             @keydown.right="handleRight"
+            @click="clickBadge(tag.identifier)"
           >
             <span>{{ tag.name }}</span>
             <span
