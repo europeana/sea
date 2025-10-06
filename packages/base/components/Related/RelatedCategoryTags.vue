@@ -1,6 +1,6 @@
 <script setup>
 const route = useRoute();
-const nuxtApp = useNuxtApp();
+const { matomo } = useMatomo();
 
 const props = defineProps({
   /**
@@ -68,14 +68,8 @@ const isActive = (tagId) => {
   return props.selected.includes(tagId);
 };
 const clickBadge = (tagId) => {
-  if (nuxtApp.vueApp?.config?.globalProperties?.$matomo) {
-    const action = isActive(tagId) ? "Deselect tag" : "Select tag";
-    nuxtApp.vueApp.config.globalProperties.$matomo.trackEvent(
-      "Tags",
-      action,
-      tagId,
-    );
-  }
+  const action = isActive(tagId) ? "Deselect tag" : "Select tag";
+  matomo.value?.trackEvent("Tags", action, tagId);
 };
 const handleLeft = (event) => {
   event.target.previousElementSibling?.focus();

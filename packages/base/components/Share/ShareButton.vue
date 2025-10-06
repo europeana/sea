@@ -1,6 +1,6 @@
 <script setup>
 const route = useRoute();
-const nuxtApp = useNuxtApp();
+const { matomo } = useMatomo();
 
 defineProps({
   variant: {
@@ -10,13 +10,11 @@ defineProps({
 });
 
 const logModalOpen = () => {
-  if (nuxtApp.vueApp?.config?.globalProperties?.$matomo) {
-    nuxtApp.vueApp.config.globalProperties.$matomo.trackEvent(
-      "Open modal",
-      "Social share modal opened",
-      `Opened share modal on ${route.path}`,
-    );
-  }
+  matomo.value?.trackEvent(
+    "Open modal",
+    "Social share modal opened",
+    `Opened share modal on ${route.path}`,
+  );
 };
 </script>
 

@@ -4,31 +4,12 @@ import { shallowMount } from "@vue/test-utils";
 
 import RelatedCategoryTags from "./RelatedCategoryTags.vue";
 
-const trackMock = vi.fn((args) => args);
+const trackEventMock = vi.fn((args) => args);
 
-mockNuxtImport("useRoute", () => {
-  return () => {
-    return {
-      path: "/path",
-    };
-  };
-});
-
-mockNuxtImport("useNuxtApp", () => {
-  return () => {
-    return {
-      vueApp: {
-        config: {
-          globalProperties: {
-            $matomo: {
-              trackEvent: trackMock,
-            },
-          },
-        },
-      },
-    };
-  };
-});
+mockNuxtImport("useMatomo", () => () => ({
+  matomo: { value: { trackEvent: trackEventMock } },
+}));
+mockNuxtImport("useRoute", () => () => ({ path: "/path" }));
 
 const factory = ({ props, mocks } = {}) =>
   shallowMount(RelatedCategoryTags, {
@@ -90,7 +71,7 @@ describe("components/related/RelatedCategoryTags", () => {
 
       describe("clicking the badge", () => {
         afterEach(() => {
-          trackMock.mockReset();
+          trackEventMock.mockReset();
         });
 
         it("tracks selecting tag", async () => {
@@ -100,7 +81,7 @@ describe("components/related/RelatedCategoryTags", () => {
 
           await badge.trigger("click");
 
-          expect(trackMock.mock.calls[0]).toEqual([
+          expect(trackEventMock.mock.calls[0]).toEqual([
             "Tags",
             "Select tag",
             "red-tape",
@@ -116,7 +97,7 @@ describe("components/related/RelatedCategoryTags", () => {
 
           await badge.trigger("click");
 
-          expect(trackMock.mock.calls[0]).toEqual([
+          expect(trackEventMock.mock.calls[0]).toEqual([
             "Tags",
             "Deselect tag",
             "red-tape",

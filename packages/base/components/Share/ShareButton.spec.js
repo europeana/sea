@@ -4,31 +4,12 @@ import { shallowMount } from "@vue/test-utils";
 
 import ShareButton from "./ShareButton.vue";
 
-const trackMock = vi.fn((args) => args);
+const trackEventMock = vi.fn((args) => args);
 
-mockNuxtImport("useRoute", () => {
-  return () => {
-    return {
-      path: "/path",
-    };
-  };
-});
-
-mockNuxtImport("useNuxtApp", () => {
-  return () => {
-    return {
-      vueApp: {
-        config: {
-          globalProperties: {
-            $matomo: {
-              trackEvent: trackMock,
-            },
-          },
-        },
-      },
-    };
-  };
-});
+mockNuxtImport("useMatomo", () => () => ({
+  matomo: { value: { trackEvent: trackEventMock } },
+}));
+mockNuxtImport("useRoute", () => () => ({ path: "/path" }));
 
 const testProps = {
   headline: "Headline text",
@@ -53,7 +34,7 @@ describe("components/landing/ShareButton", () => {
       const button = wrapper.find("button");
       await button.trigger("click");
 
-      expect(trackMock.mock.calls[0]).toEqual([
+      expect(trackEventMock.mock.calls[0]).toEqual([
         "Open modal",
         "Social share modal opened",
         "Opened share modal on /path",
