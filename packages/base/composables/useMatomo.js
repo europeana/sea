@@ -1,6 +1,6 @@
 import { computed } from "vue";
 
-const matomo = computed(() => window?.Piwik?.getAsyncTracker());
+const matomo = computed(() => window?.Matomo?.getAsyncTracker());
 
 export const useMatomo = () => {
   return {
