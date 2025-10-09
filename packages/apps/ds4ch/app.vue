@@ -1,7 +1,15 @@
 <script setup>
 import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl";
+// import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
 import favIconImage from "@europeana/style/img/DS4CH/favicon.ico";
 const { urlWithOnlyQuery, urlWithBothLocaleAndQuery } = useCanonicalUrl();
+// const {
+//   acceptAll,
+//   rejectAll,
+//   consentRequired,
+//   isServiceAccepted,
+//   acceptOnly,
+// } = useConsentManager();
 
 useHead({
   link: [
@@ -35,16 +43,12 @@ useHead({
     </main>
     <PageFooter />
     <!-- Uncomment to test consent manager
-    <ClientOnly>
-      <div class="my-5">
-      Consent required: {{ $consentManager.consentRequired }} Matomo accepted:
-      {{ $consentManager.isServiceAccepted("matomo") }}
-      <button @click="$consentManager.acceptAll()">Accept all</button>
-      <button @click="$consentManager.rejectAll()">Reject all</button>
-      <button @click="$consentManager.savePreferences(['matomo'])">
-        Accept only matomo
-      </button>
-      </div>
-    </ClientOnly> -->
+    <div class="my-5">
+      Consent required: {{ consentRequired }} Matomo accepted:
+      {{ isServiceAccepted("matomo") }}
+      <button @click="acceptAll()">Accept all</button>
+      <button @click="rejectAll()">Reject all</button>
+      <button @click="acceptOnly(['matomo'])">Accept only matomo</button>
+    </div> -->
   </div>
 </template>

@@ -1,4 +1,4 @@
-export default defineNuxtPlugin(() => {
+export default function useConsentManager() {
   const runtimeConfig = useRuntimeConfig();
   const COOKIE_CONSENT_KEY = "cookie-consent";
   const COOKIE_MAX_AGE = runtimeConfig.public.cookieConsent?.maxAge;
@@ -56,14 +56,10 @@ export default defineNuxtPlugin(() => {
   }
 
   return {
-    provide: {
-      consentManager: {
-        acceptAll,
-        consentRequired,
-        isServiceAccepted,
-        rejectAll,
-        acceptOnly,
-      },
-    },
+    acceptAll,
+    consentRequired,
+    isServiceAccepted,
+    rejectAll,
+    acceptOnly,
   };
-});
+}
