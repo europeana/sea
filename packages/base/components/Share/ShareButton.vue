@@ -1,5 +1,4 @@
 <script setup>
-const route = useRoute();
 const { matomo } = useMatomo();
 
 defineProps({
@@ -9,12 +8,8 @@ defineProps({
   },
 });
 
-const logModalOpen = () => {
-  matomo.value?.trackEvent(
-    "Open modal",
-    "Social share modal opened",
-    `Opened share modal on ${route.path}`,
-  );
+const logClickButton = () => {
+  matomo.value?.trackEvent("CTAs", "Click CTA", "Share");
 };
 </script>
 
@@ -24,7 +19,7 @@ const logModalOpen = () => {
     :class="variant"
     data-bs-toggle="modal"
     data-bs-target="#share-modal"
-    @click="logModalOpen"
+    @click="logClickButton"
   >
     <span class="icon-share d-inline-flex me-1 me-4k-3" />
     {{ $t("actions.share") }}
