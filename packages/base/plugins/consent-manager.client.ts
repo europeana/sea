@@ -17,18 +17,6 @@ export default defineNuxtPlugin(() => {
     cookie.value = value;
   };
 
-  const loadConsent = () => {
-    const cookieValue = getCookie(COOKIE_CONSENT_KEY);
-    if (!cookieValue) return null;
-
-    try {
-      const data = cookieValue;
-      return data;
-    } catch {
-      return null;
-    }
-  };
-
   const saveConsent = (accepted: string[]) => {
     const value = { accepted };
 
@@ -58,8 +46,8 @@ export default defineNuxtPlugin(() => {
   const acceptedServices = ref<string[]>([]);
   const consentRequired = ref<boolean>(true);
 
-  // Load and store consent on init
-  const consent = loadConsent();
+  // Get and store consent cookie on init
+  const consent = getCookie(COOKIE_CONSENT_KEY);
 
   if (consent?.accepted?.length) {
     acceptedServices.value = consent.accepted;
