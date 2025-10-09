@@ -19,6 +19,7 @@ export default defineNuxtPlugin(() => {
 
   const saveConsent = (accepted: string[]) => {
     const value = { accepted };
+    acceptedServices.value = accepted;
 
     setCookie(COOKIE_CONSENT_KEY, value, COOKIE_MAX_AGE);
   };
@@ -28,19 +29,15 @@ export default defineNuxtPlugin(() => {
   };
 
   const acceptAll = () => {
-    acceptedServices.value = [...allServices];
-    saveConsent(acceptedServices.value);
+    saveConsent([...allServices]);
   };
 
   const rejectAll = () => {
-    acceptedServices.value = [...necessaryServices];
-    saveConsent(acceptedServices.value);
+    saveConsent([...necessaryServices]);
   };
 
   const acceptOnly = (services: string[]) => {
-    const selectedServices = [...necessaryServices, ...services];
-    acceptedServices.value = selectedServices;
-    saveConsent(selectedServices);
+    saveConsent([...necessaryServices, ...services]);
   };
 
   const acceptedServices = ref<string[]>([]);
