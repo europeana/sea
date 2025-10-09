@@ -34,5 +34,17 @@ useHead({
       <NuxtPage />
     </main>
     <PageFooter />
+    <!-- Uncomment to test consent manager
+    <ClientOnly>
+      <div class="my-5">
+      Consent required: {{ $consentManager.consentRequired }} Matomo accepted:
+      {{ $consentManager.isServiceAccepted("matomo") }}
+      <button @click="$consentManager.acceptAll()">Accept all</button>
+      <button @click="$consentManager.rejectAll()">Reject all</button>
+      <button @click="$consentManager.savePreferences(['matomo'])">
+        Accept only matomo
+      </button>
+      </div>
+    </ClientOnly> -->
   </div>
 </template>
