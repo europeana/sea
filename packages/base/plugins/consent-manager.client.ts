@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
 
   // TODO define services
   const necessaryServices = ["auth"];
-  const services = [...necessaryServices, "matomo", "youtube"];
+  const allServices = [...necessaryServices, "matomo", "youtube"];
 
   const getCookie = (name: string) => {
     const cookie = useCookie(name);
@@ -28,7 +28,7 @@ export default defineNuxtPlugin(() => {
   };
 
   const acceptAll = () => {
-    acceptedServices.value = [...services];
+    acceptedServices.value = [...allServices];
     saveConsent(acceptedServices.value);
   };
 
@@ -37,7 +37,7 @@ export default defineNuxtPlugin(() => {
     saveConsent(acceptedServices.value);
   };
 
-  const savePreferences = (services: string[]) => {
+  const acceptOnly = (services: string[]) => {
     const selectedServices = [...necessaryServices, ...services];
     acceptedServices.value = selectedServices;
     saveConsent(selectedServices);
@@ -64,7 +64,7 @@ export default defineNuxtPlugin(() => {
         consentRequired,
         isServiceAccepted,
         rejectAll,
-        savePreferences,
+        acceptOnly,
       },
     },
   };
