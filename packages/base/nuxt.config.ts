@@ -3,6 +3,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      cookieConsent: { maxAge: null },
       matomo: {
         host: null,
         siteId: null,

@@ -1,6 +1,7 @@
 export default defineNuxtPlugin(() => {
+  const runtimeConfig = useRuntimeConfig();
   const COOKIE_CONSENT_KEY = "cookie-consent";
-  const COOKIE_MAX_AGE = 60 * 60 * 24 * 15; // 15 days in seconds
+  const COOKIE_MAX_AGE = runtimeConfig.public.cookieConsent?.maxAge;
 
   // TODO define services
   const necessaryServices = ["auth"];
