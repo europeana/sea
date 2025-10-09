@@ -1,11 +1,10 @@
-export default function useConsentManager() {
+export default function useConsentManager(
+  essentialServices: string[],
+  allServices: string[],
+) {
   const runtimeConfig = useRuntimeConfig();
   const COOKIE_CONSENT_KEY = "cookie-consent";
-  const COOKIE_MAX_AGE = runtimeConfig.public.cookieConsent?.maxAge;
-
-  // TODO define services
-  const necessaryServices = ["auth"];
-  const allServices = [...necessaryServices, "matomo", "youtube"];
+  const COOKIE_MAX_AGE = runtimeConfig.public.cookieConsent.maxAge;
 
   const getCookie = (name: string) => {
     const cookie = useCookie(name);
@@ -34,11 +33,11 @@ export default function useConsentManager() {
   };
 
   const rejectAll = () => {
-    saveConsent([...necessaryServices]);
+    saveConsent([...essentialServices]);
   };
 
   const acceptOnly = (services: string[]) => {
-    saveConsent([...necessaryServices, ...services]);
+    saveConsent([...essentialServices, ...services]);
   };
 
   const acceptedServices = ref<string[]>([]);

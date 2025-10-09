@@ -1,15 +1,20 @@
 <script setup>
 import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl";
 // import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
+// import services from "@/utils/services/services";
 import favIconImage from "@europeana/style/img/DS4CH/favicon.ico";
+
 const { urlWithOnlyQuery, urlWithBothLocaleAndQuery } = useCanonicalUrl();
+
+// const essentialServicesNames =services.filter(s => s.required).map(s => s.name)
+// const allServicesNames = services.map(s => s.name)
 // const {
 //   acceptAll,
 //   rejectAll,
 //   consentRequired,
 //   isServiceAccepted,
 //   acceptOnly,
-// } = useConsentManager();
+// } = useConsentManager(essentialServicesNames, allServicesNames);
 
 useHead({
   link: [

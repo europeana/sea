@@ -1,0 +1,50 @@
+// TODO review all provider schemes
+import twoD from "./definitions/2D.json";
+import threeD from "./definitions/3D.json";
+import audio from "./definitions/audio.json";
+import ds4ch from "./definitions/ds4ch.json";
+import socialMedia from "./definitions/socialMedia.json";
+import video from "./definitions/video.json";
+
+const definitions = {
+  "2D": twoD,
+  "3D": threeD,
+  audio,
+  ds4ch,
+  socialMedia,
+  video,
+};
+
+const parseDefinitions = (purpose) =>
+  definitions[purpose].map((service) => {
+    if (!service.purposes) {
+      service.purposes = [purpose];
+    }
+    if (service.cookies) {
+      service.cookies = []
+        .concat(service.cookies)
+        .map((cookie) => new RegExp(cookie));
+    }
+    return service;
+  });
+
+// const mediaViewingServices = [
+//   ...parseDefinitions("2D"),
+//   ...parseDefinitions("3D"),
+//   ...parseDefinitions("audio"),
+//   ...parseDefinitions("video"),
+// ].map((service) => ({
+//   ...service,
+//   purposes: ["mediaViewing", ...service.purposes],
+// }));
+
+// const thirdPartyServices = [
+//   ...parseDefinitions("socialMedia"),
+//   ...mediaViewingServices,
+// ].map((service) => ({
+//   ...service,
+//   purposes: ["thirdPartyContent", ...service.purposes],
+// }));
+
+// TODO add ...thirdPartyServices when embed gateway is in place
+export default [...parseDefinitions("ds4ch")];
