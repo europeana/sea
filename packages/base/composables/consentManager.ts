@@ -4,7 +4,8 @@ export default function useConsentManager(
 ) {
   const runtimeConfig = useRuntimeConfig();
   const COOKIE_CONSENT_KEY = "cookie-consent";
-  const COOKIE_MAX_AGE = runtimeConfig.public.cookieConsent.maxAge;
+  const COOKIE_MAX_AGE =
+    runtimeConfig.public.cookieConsent.maxAge || 60 * 60 * 24 * 15; // defaults to 15 days in seconds
 
   const getCookie = (name: string) => {
     const cookie = useCookie(name);
@@ -12,16 +13,15 @@ export default function useConsentManager(
     return cookie.value || null;
   };
 
-  const setCookie = (name: string, value: object, maxAge: number) => {
+  const setCookie = (name: string, value: string[], maxAge: number) => {
     const cookie = useCookie(name, { maxAge });
-    cookie.value = value;
+    cookie.value = value.join();
   };
 
   const saveConsent = (accepted: string[]) => {
-    const value = { accepted };
     acceptedServices.value = accepted;
 
-    setCookie(COOKIE_CONSENT_KEY, value, COOKIE_MAX_AGE);
+    setCookie(COOKIE_CONSENT_KEY, accepted, COOKIE_MAX_AGE);
   };
 
   const isServiceAccepted = (service: string) => {
@@ -46,8 +46,8 @@ export default function useConsentManager(
   // Get and store consent cookie on init
   const consent = getCookie(COOKIE_CONSENT_KEY);
 
-  if (consent?.accepted?.length) {
-    acceptedServices.value = consent.accepted;
+  if (consent?.split(",").length) {
+    acceptedServices.value = consent.split(",");
     consentRequired.value = false;
     // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
