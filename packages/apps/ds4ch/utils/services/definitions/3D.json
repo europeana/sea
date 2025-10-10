@@ -1,0 +1,23 @@
+[
+  {
+    "name": "eureka3D",
+    "oembed": "https://eureka3d.vm.fedcloud.eu/oembed",
+    "schemes": ["https://eureka3d.vm.fedcloud.eu/3d/*"],
+    "title": "EUreka3D"
+  },
+  {
+    "name": "sketchfab",
+    "oembed": "https://sketchfab.com/oembed",
+    "schemes": [
+      "https://sketchfab.com/3d-models/*",
+      "https://sketchfab.com/models/*",
+      "https://sketchfab.com/show/*"
+    ],
+    "title": "Sketchfab"
+  },
+  {
+    "name": "genially",
+    "schemes": [],
+    "title": "Genial.ly"
+  }
+]

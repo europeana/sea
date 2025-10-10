@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import json from "@eslint/json";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
@@ -18,6 +19,11 @@ export default withNuxt(
       files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],
       plugins: { js },
       extends: ["js/recommended"],
+    },
+    {
+      files: ["**/*.{json}"],
+      plugins: { json },
+      extends: ["json/recommended"],
     },
     {
       files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],

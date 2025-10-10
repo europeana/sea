@@ -1,0 +1,7 @@
+[
+  {
+    "name": "bandcamp",
+    "schemes": ["http://sounds.bl.uk/embed/*", "https://sounds.bl.uk/*"],
+    "title": "Bandcamp"
+  }
+]
