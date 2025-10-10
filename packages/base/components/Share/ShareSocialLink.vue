@@ -1,6 +1,8 @@
 <script setup>
 import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl";
+
 const { urlWithOnlyQuery } = useCanonicalUrl();
+const { matomo } = useMatomo();
 
 const props = defineProps({
   network: {
@@ -28,7 +30,14 @@ const allNetworks = {
 };
 
 const network = allNetworks[props.network];
-// TODO: add event tracking to matomo
+
+const trackClickLink = () => {
+  matomo.value?.trackEvent(
+    "Social media",
+    "Click social network",
+    network.name,
+  );
+};
 </script>
 
 <template>
@@ -37,6 +46,7 @@ const network = allNetworks[props.network];
     :to="network.url"
     target="_blank"
     :aria-label="$t('actions.shareOn', { social: network.name })"
+    @click="trackClickLink(network.name)"
   >
     <span :class="`icon-${network.identifier}`" />
     <span class="ms-2">{{ network.name }} </span>

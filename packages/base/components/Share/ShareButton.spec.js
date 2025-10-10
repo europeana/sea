@@ -9,7 +9,6 @@ const trackEventMock = vi.fn((args) => args);
 mockNuxtImport("useMatomo", () => () => ({
   matomo: { value: { trackEvent: trackEventMock } },
 }));
-mockNuxtImport("useRoute", () => () => ({ path: "/path" }));
 
 const testProps = {
   headline: "Headline text",
@@ -29,15 +28,15 @@ describe("components/landing/ShareButton", () => {
   });
 
   describe("when the button is clicked", () => {
-    it("logs to matomo", async () => {
+    it("logs to Matomo", async () => {
       const wrapper = shallowMount(ShareButton, { props: testProps });
       const button = wrapper.find("button");
       await button.trigger("click");
 
       expect(trackEventMock.mock.calls[0]).toEqual([
-        "Open modal",
-        "Social share modal opened",
-        "Opened share modal on /path",
+        "CTAs",
+        "Click CTA",
+        "Share",
       ]);
     });
   });
