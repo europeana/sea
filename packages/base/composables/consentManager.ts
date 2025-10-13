@@ -1,3 +1,7 @@
+// Globally shared state
+const acceptedServices = ref<string[]>([]);
+const consentRequired = ref<boolean>(true);
+
 export default function useConsentManager(
   essentialServices: string[],
   allServices: string[],
@@ -7,21 +11,23 @@ export default function useConsentManager(
   const COOKIE_MAX_AGE =
     runtimeConfig.public.cookieConsent.maxAge || 60 * 60 * 24 * 15; // defaults to 15 days in seconds
 
-  const getCookie = (name: string) => {
-    const cookie = useCookie(name);
+  // useCookie handles decoding and encoding of the cookie value
+  const consentCookie = useCookie<string[]>(COOKIE_CONSENT_KEY, {
+    maxAge: COOKIE_MAX_AGE,
+  });
 
-    return cookie.value || null;
+  const getCookie = () => {
+    return consentCookie.value;
   };
 
-  const setCookie = (name: string, value: string[], maxAge: number) => {
-    const cookie = useCookie(name, { maxAge });
-    cookie.value = value.join();
+  const setCookie = (value: string[] = []) => {
+    consentCookie.value = value;
   };
 
   const saveConsent = (accepted: string[]) => {
     acceptedServices.value = accepted;
 
-    setCookie(COOKIE_CONSENT_KEY, accepted, COOKIE_MAX_AGE);
+    setCookie(accepted);
   };
 
   const isServiceAccepted = (service: string) => {
@@ -40,14 +46,11 @@ export default function useConsentManager(
     saveConsent([...essentialServices, ...services]);
   };
 
-  const acceptedServices = ref<string[]>([]);
-  const consentRequired = ref<boolean>(true);
-
   // Get and store consent cookie on init
-  const consent = getCookie(COOKIE_CONSENT_KEY);
+  const consent = getCookie();
 
-  if (consent?.split(",").length) {
-    acceptedServices.value = consent.split(",");
+  if (consent?.length) {
+    acceptedServices.value = consent;
     consentRequired.value = false;
     // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
