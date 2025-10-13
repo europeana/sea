@@ -1,10 +1,11 @@
 <script setup>
 import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
-// import services from "@/utils/services/services";
-// TODO: wire up to actual services
+import services from "@/utils/services/services";
 
-const essentialServicesNames = ["i18n"];
-const allServicesNames = ["i18n", "matomo", "hotjar"];
+const essentialServicesNames = services
+  .filter((s) => s.required)
+  .map((s) => s.name);
+const allServicesNames = services.map((s) => s.name);
 
 const { acceptAll, rejectAll, consentRequired } = useConsentManager(
   essentialServicesNames,
