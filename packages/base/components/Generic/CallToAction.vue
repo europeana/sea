@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+const { matomo } = useMatomo();
+
+const props = defineProps({
   /**
    * Any custom classes to apply
    * to the cta.
@@ -25,6 +27,10 @@ defineProps({
     required: true,
   },
 });
+
+const logClickLink = () => {
+  matomo.value?.trackEvent("CTAs", "Click CTA", props.text);
+};
 </script>
 
 <template>
@@ -34,6 +40,7 @@ defineProps({
       class="btn"
       :class="classes"
       hide-external-icon
+      @click="logClickLink"
     >
       {{ text }}
     </GenericSmartLink>

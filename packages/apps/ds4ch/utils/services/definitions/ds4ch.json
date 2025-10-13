@@ -1,0 +1,31 @@
+[
+  {
+    "cookies": ["^_hj"],
+    "name": "hotjar",
+    "purposes": ["usage"],
+    "title": "Hotjar"
+  },
+  {
+    "cookies": ["^i18n_locale_code$"],
+    "name": "i18n",
+    "purposes": ["essential"],
+    "required": true,
+    "title": "Language code"
+  },
+  {
+    "cookies": ["^_pk_", "^mtm_cookie_consent$"],
+    "name": "matomo",
+    "purposes": ["usage"],
+    "title": "Matomo"
+  },
+  {
+    "name": "zoho",
+    "schemes": [
+      "https://forms.zohopublic.eu/*",
+      "https://fdti-zcmp.maillist-manage.eu/*"
+    ],
+    "purposes": [],
+    "required": true,
+    "title": "Zoho"
+  }
+]
