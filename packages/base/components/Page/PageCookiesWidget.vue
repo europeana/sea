@@ -1,11 +1,9 @@
 <script setup>
 import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
-import services from "@/utils/services/services";
-
-const essentialServicesNames = services
-  .filter((s) => s.required)
-  .map((s) => s.name);
-const allServicesNames = services.map((s) => s.name);
+import {
+  allServicesNames,
+  essentialServicesNames,
+} from "@/utils/services/services";
 
 const { acceptAll, rejectAll, consentRequired } = useConsentManager(
   essentialServicesNames,
@@ -18,6 +16,7 @@ let toastInstance;
 
 onMounted(async () => {
   if (consentRequired.value) {
+    // Initialise Bootstrap Toast
     const { Toast } = await import("bootstrap");
     toastInstance = new Toast(toastRef.value);
     toastInstance?.show();
@@ -35,7 +34,11 @@ const declineAndHide = () => {
 };
 
 const openCookieModal = () => {
-  // close toast when modal is open
+  toastInstance?.hide();
+};
+
+const showToast = () => {
+  toastInstance?.show();
 };
 </script>
 
@@ -73,6 +76,6 @@ const openCookieModal = () => {
         </div>
       </div>
     </div>
-    <PageCookiesModal />
+    <PageCookiesModal @show-toast="showToast" />
   </div>
 </template>

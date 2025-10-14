@@ -47,4 +47,12 @@ const parseDefinitions = (purpose) =>
 // }));
 
 // TODO add ...thirdPartyServices when embed gateway is in place
-export default [...parseDefinitions("ds4ch")];
+const services = [...parseDefinitions("ds4ch")];
+
+const essentialServicesNames = services
+  .filter((s) => s.required)
+  .map((s) => s.name);
+
+const allServicesNames = services.map((s) => s.name);
+
+export { services, essentialServicesNames, allServicesNames };
