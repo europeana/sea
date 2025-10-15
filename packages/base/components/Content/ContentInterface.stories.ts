@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
-import { graphql, HttpResponse } from "msw";
+import { mocked } from "storybook/test";
 
 import ContentInterface from "./ContentInterface.vue";
 import sampleData from "../../.storybook/sample-data.js";
+
+import VueContentfulGraphql from "@europeana/vue-contentful-graphql";
 
 const meta = {
   component: ContentInterface,
@@ -28,44 +30,17 @@ const ExampleDataMetadata = Array.from({ length: 24 }, (key, index) => ({
 }));
 
 export const Default: Story = {
+  render: () => {
+    mocked(VueContentfulGraphql)
+      .mockReturnValueOnce(ExampleDataMetadata)
+      .mockReturnValueOnce(ExampleDataPosts);
+    return {
+      template: "<story />",
+    };
+  },
   args: {
     catBanners: sampleData.ctaBanners,
     site: "www.europeana.eu",
     contentTypes: ["blog post", "project"],
-  },
-  params: {
-    msw: {
-      handlers: [
-        graphql.query("BlogPostingListingMinimal", () => {
-          return HttpResponse.json({
-            data: {
-              blogPostingCollection: {
-                ...ExampleDataPosts,
-              },
-            },
-          });
-        }),
-        graphql.query("Categories", () => {
-          return HttpResponse.json({
-            data: {
-              categoryCollection: {
-                ...ExampleDataMetadata,
-              },
-            },
-          });
-        }),
-      ],
-      //   handlers: [
-      //     http.post('https://graphql.contentful.com/content/v1/spaces//environments/master', ({ request }) => {
-      //       const url = new URL(request.url)
-      //       const query = url.searchParams.get('_query')
-      //       if (query === 'BlogPostingListingMinimal') {
-      //         return HttpResponse.json(ExampleDataPosts);
-      //       } else if (query === 'Categories') {
-      //         return HttpResponse.json(ExampleDataMetadata);
-      //       }
-      //     }),
-      //   ],
-    },
   },
 };
