@@ -4,6 +4,7 @@ import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl"
 // import services from "@/utils/services/services";
 import favIconImage from "@europeana/style/img/DS4CH/favicon.ico";
 
+//const { matomo } = useMatomo();
 const { urlWithOnlyQuery, urlWithBothLocaleAndQuery } = useCanonicalUrl();
 
 // const essentialServicesNames =services.filter(s => s.required).map(s => s.name)
@@ -37,6 +38,11 @@ useHead({
     },
   ],
 });
+
+// const handleConsent = () => {
+//   matomo.value?.rememberCookieConsentGiven();
+//   // to remove consent call "forgetCookieConsentGiven"
+// }
 </script>
 
 <template>
@@ -55,5 +61,8 @@ useHead({
       <button @click="rejectAll()">Reject all</button>
       <button @click="acceptOnly(['matomo'])">Accept only matomo</button>
     </div> -->
+    <!-- Uncomment to test matomo consent
+    <button @click="handleConsent">handleConsent</button>
+    -->
   </div>
 </template>
