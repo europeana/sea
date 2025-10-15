@@ -3,8 +3,16 @@ import "../assets/scss/main.scss";
 import type { Preview } from "@nuxtjs/storybook";
 import { watch } from "vue";
 import i18nLocales from "../i18n/locales";
+import { initialize, mswLoader } from "msw-storybook-addon";
 
 const defaultLocale = "en";
+
+/*
+ * Initializes MSW
+ * See https://github.com/mswjs/msw-storybook-addon#configuring-msw
+ * to learn how to customize it
+ */
+initialize();
 
 const preview: Preview = {
   globalTypes: {
@@ -51,6 +59,7 @@ const preview: Preview = {
     },
   },
   tags: ["autodocs"],
+  loaders: [mswLoader],
 };
 
 export default preview;
