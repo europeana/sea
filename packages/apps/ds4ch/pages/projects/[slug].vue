@@ -29,7 +29,7 @@ const partnerList = page.value.project?.partners;
 //   const formattedEntities  = page.value.partnerEntities.join('\n - ')
 //   return `${page.value.partners}\n- ${formattedEntities}`;
 
-const impactMetrics = page.value.project?.impactMetrics.map((metric) => {
+const impactMetrics = page.value.project?.impactMetrics?.map((metric) => {
   const parts = metric.split(":");
   return { label: parts[0], value: parts[1] };
 });
@@ -46,13 +46,15 @@ const tags =
 const projectLogoImage = page.value.project?.logo?.image;
 
 const PROJECT_LOGO_SRCSET_PRESETS = {
-  "4k": { w: 72, h: 24 },
-  "4k+": { w: 144, h: 48 },
+  large: { w: 112, h: 112 },
+  "4k": { w: 144, h: 144 },
+  "4k+": { w: 288, h: 288 },
 };
 
 const projectLogoImageSizes = [
-  "(max-width: 3019px) 24px", // bp-4k
-  "48px",
+  "(max-width: 991px) 112px", // bp-4k
+  "(max-width: 3019px) 144px", // bp-4k
+  "288px",
 ].join(",");
 
 useHead({
@@ -88,15 +90,16 @@ useHead({
     >
       <ImageOptimised
         v-if="projectLogoImage"
-        class="project-logo me-2 mb-2"
+        class="project-logo"
         :src="projectLogoImage?.url"
         :content-type="projectLogoImage?.contentType"
         :contentful-image-crop-presets="PROJECT_LOGO_SRCSET_PRESETS"
         :image-sizes="projectLogoImageSizes"
         :width="projectLogoImage?.width"
-        :height="projectLogoImage?.height"
         :max-width="144"
+        :height="projectLogoImage?.height"
         :alt="projectLogoImage?.description || ''"
+        :quality="100"
       />
     </AuthoredHead>
     <div class="container footer-margin pb-4k-5">
@@ -163,20 +166,24 @@ useHead({
                     class="mb-5 pb-4k-5"
                     :project="page.project"
                   />
-                  <h2>
-                    {{ $t("projects.impact") }}
-                  </h2>
-                  <GenericInfoTable
-                    class="mb-5 pb-4k-5"
-                    :table-data="impactMetrics"
-                  />
-                  <h2>
-                    {{ $t("projects.reports") }}
-                  </h2>
-                  <GenericInfoTable
-                    class="mb-5 pb-4k-5"
-                    :table-data="reports"
-                  />
+                  <template v-if="impactMetrics">
+                    <h2>
+                      {{ $t("projects.impact") }}
+                    </h2>
+                    <GenericInfoTable
+                      class="mb-5 pb-4k-5"
+                      :table-data="impactMetrics"
+                    />
+                  </template>
+                  <template v-if="reports.length > 0">
+                    <h2>
+                      {{ $t("projects.reports") }}
+                    </h2>
+                    <GenericInfoTable
+                      class="mb-5 pb-4k-5"
+                      :table-data="reports"
+                    />
+                  </template>
                   <template v-if="page.project?.factSheet">
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.factSheet") }}
@@ -204,6 +211,7 @@ useHead({
           <RelatedCategoryTags
             v-if="tags"
             :tags="tags"
+            :heading="$t('related.categoryTags.title')"
             class="related-container"
             route-name="data-space"
             badge-variant="badge-secondary"
@@ -252,17 +260,25 @@ useHead({
     }
   }
 
-  // When SVG img is not nested
+  // When image is an SVG, img element is not nested
   :deep(img.project-logo),
   .project-logo :deep(img) {
-    height: 1.5rem;
-    max-width: 4.5rem;
+    max-height: 7rem;
+    max-width: 7rem;
     width: auto;
     object-fit: contain;
+    margin-bottom: 1rem;
+
+    @media (min-width: $bp-large) {
+      max-height: 9rem;
+      max-width: 9rem;
+    }
 
     @media (min-width: $bp-4k) {
-      height: 3rem;
-      max-width: 9rem;
+      height: auto;
+      max-height: 18rem;
+      max-width: 18rem;
+      margin-bottom: 2rem;
     }
   }
 }

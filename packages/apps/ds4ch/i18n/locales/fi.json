@@ -17,7 +17,9 @@
     "publishedDate": "Julkaistu {date}"
   },
   "categories": {
+    "featuredTags": "Esillä olevat tunnisteet",
     "label": "Tutki tunnisteen mukaan",
+    "moreTags": "Lisää tunnisteita",
     "noOptions": "Ei ole enää valittavia tunnisteita",
     "search": "Tutki tunnisteen mukaan"
   },
@@ -61,10 +63,10 @@
     }
   },
   "nav": {
-    "about": "Tietoa meistä",
+    "about": "Tietoja",
     "close": "Sulje valikko",
-    "exploreData": "Tutki tietoja",
-    "exploreDataspace": "Tutustu data tilaan",
+    "collections": "Tutustu kokoelmiin",
+    "dataSpace": "Tutustu tietoavaruuteen",
     "home": "Etusivu",
     "toggle": "Näytä valikko"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Sivunumero",
     "previous": "Edellinen"
   },
+  "portal": "Portaali",
   "project": "Projekti",
   "projects": {
     "contract": "Sopimuksen numero",

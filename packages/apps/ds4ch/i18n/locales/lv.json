@@ -17,7 +17,9 @@
     "publishedDate": "Publicēts {date}"
   },
   "categories": {
+    "featuredTags": "Izvēlētās birkas",
     "label": "Izpētīt pēc birkas",
+    "moreTags": "Vairāk birku",
     "noOptions": "Nav vairs neviena atzīme, ko atlasīt",
     "search": "Izpētīt pēc birkas"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Par mums",
     "close": "Aizvērt izvēlni",
-    "exploreData": "Izpētiet datus",
-    "exploreDataspace": "Izpētiet datu telpu",
+    "collections": "Izpētiet kolekcijas",
+    "dataSpace": "Izpētiet datu telpu",
     "home": "Sākumlapa",
     "toggle": "Rādīt izvēlni"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Lapas numurs",
     "previous": "Iepriekšējais"
   },
+  "portal": "Portāls",
   "project": "Projekts",
   "projects": {
     "contract": "Līguma numurs",

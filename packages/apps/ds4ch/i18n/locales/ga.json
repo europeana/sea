@@ -17,7 +17,9 @@
     "publishedDate": "Foilsithe {date}"
   },
   "categories": {
+    "featuredTags": "Clibeanna faoi thrácht",
     "label": "Déan iniúchadh de réir clibe",
+    "moreTags": "Tuilleadh clibeanna",
     "noOptions": "Níl a thuilleadh clibeanna le roghnú",
     "search": "Déan iniúchadh de réir clibe"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Fúinn",
     "close": "Dún roghchlár",
-    "exploreData": "Déan iniúchadh ar na sonraí",
-    "exploreDataspace": "Déan iniúchadh ar an spás sonraí",
+    "collections": "Déan iniúchadh ar na bailiúcháin",
+    "dataSpace": "Déan iniúchadh ar an spás sonraí",
     "home": "Baile",
     "toggle": "Taispeáin roghchlár"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Uimhir an leathanaigh",
     "previous": "Roimhe Seo"
   },
+  "portal": "Tairseach",
   "project": "Tionscadal",
   "projects": {
     "contract": "Uimhir an chonartha",

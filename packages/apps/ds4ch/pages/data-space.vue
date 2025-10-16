@@ -1,5 +1,6 @@
 <script setup>
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
+import { provide } from "vue";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
@@ -22,6 +23,22 @@ const { data: page } = await useAsyncData(
 useHead({
   title: page.value.headline,
 });
+
+provide("featuredContentTags", [
+  "3d",
+  "artificial-intelligence",
+  "copyright",
+  "extended-reality",
+  "academic-research",
+  "education",
+  "tourism",
+  "funding",
+  "impact",
+  "multilinguality",
+  "digital-storytelling",
+  "diversity-and-inclusion",
+  "reuse",
+]);
 
 const defaultCardThumbnail = {
   image: { url: useRuntimeConfig().public.defaultThumbnail },

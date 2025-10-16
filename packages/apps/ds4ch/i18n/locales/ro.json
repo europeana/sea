@@ -17,7 +17,9 @@
     "publishedDate": "Publicat {date}"
   },
   "categories": {
+    "featuredTags": "Etichete recomandate",
     "label": "Explorează după etichetă",
+    "moreTags": "Mai multe etichete",
     "noOptions": "Nu mai sunt etichete de selectat",
     "search": "Explorează după etichetă"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Despre noi",
     "close": "Închide meniul",
-    "exploreData": "Explorează datele",
-    "exploreDataspace": "Explorați spațiul de date",
+    "collections": "Explorează colecțiile",
+    "dataSpace": "Explorați spațiul de date",
     "home": "Acasă",
     "toggle": "Afișează meniul"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Numărul paginii",
     "previous": "Anterior"
   },
+  "portal": "Portal",
   "project": "Proiect",
   "projects": {
     "contract": "Numărul contractului",

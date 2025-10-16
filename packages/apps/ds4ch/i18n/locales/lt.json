@@ -17,7 +17,9 @@
     "publishedDate": "Paskelbta {date}"
   },
   "categories": {
+    "featuredTags": "Rekomenduojamos žymos",
     "label": "Naršyti pagal žymą",
+    "moreTags": "Daugiau žymų",
     "noOptions": "Daugiau pasirinktinų žymų nėra",
     "search": "Naršyti pagal žymą"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Apie mus",
     "close": "Uždaryti meniu",
-    "exploreData": "Išnagrinėkite duomenis",
-    "exploreDataspace": "Naršykite duomenų erdvę",
+    "collections": "Naršykite kolekcijas",
+    "dataSpace": "Tyrinėkite duomenų erdvę",
     "home": "Pradžia",
     "toggle": "Rodyti meniu"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Puslapio numeris",
     "previous": "Ankstesnis"
   },
+  "portal": "Portalas",
   "project": "Projektas",
   "projects": {
     "contract": "Sutarties numeris",

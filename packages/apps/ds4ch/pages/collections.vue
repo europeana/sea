@@ -2,7 +2,7 @@
 import contentfulEntryHasContentType from "@europeana/sea-base-layer/utils/contentful/entryHasContentType.js";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
-const slug = "data";
+const slug = "collections";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
@@ -51,6 +51,7 @@ useHead({
                 :image-content-type="card.image?.contentType"
                 :image-width="card.image?.width"
                 :image-height="card.image?.height"
+                :contentful-image-crop-presets="{ small: { w: 520, h: 338 } }"
               />
             </transition>
           </div>
@@ -74,6 +75,7 @@ useHead({
   img {
     object-fit: contain;
     max-width: min(13rem, calc(100% - 4rem));
+    margin: auto;
 
     @media (min-width: $bp-4k) {
       max-width: min(26rem, calc(100% - 8rem));

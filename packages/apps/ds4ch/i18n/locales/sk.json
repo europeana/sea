@@ -17,7 +17,9 @@
     "publishedDate": "Zverejnené {date}"
   },
   "categories": {
+    "featuredTags": "Odporúčané značky",
     "label": "Preskúmať podľa značky",
+    "moreTags": "Ďalšie značky",
     "noOptions": "Už nie sú žiadne tagy na výber",
     "search": "Preskúmať podľa značky"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "O nás",
     "close": "Zatvoriť ponuku",
-    "exploreData": "Preskúmajte údaje",
-    "exploreDataspace": "Preskúmajte dátový priestor",
+    "collections": "Preskúmajte zbierky",
+    "dataSpace": "Preskúmajte dátový priestor",
     "home": "Domov",
     "toggle": "Zobraziť ponuku"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Číslo strany",
     "previous": "Predchádzajúce"
   },
+  "portal": "Portál",
   "project": "Projekt",
   "projects": {
     "contract": "Číslo zmluvy",

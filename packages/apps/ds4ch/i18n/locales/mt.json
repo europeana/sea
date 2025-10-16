@@ -17,7 +17,9 @@
     "publishedDate": "Ippubblikat {date}"
   },
   "categories": {
+    "featuredTags": "Tikketti dehru",
     "label": "Esplora skont it-tikketta",
+    "moreTags": "Aktar tikketti",
     "noOptions": "M'hemmx aktar tags biex tagħżel",
     "search": "Esplora skont it-tikketta"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Dwarna",
     "close": "Agħlaq il-menù",
-    "exploreData": "Esplora d-dejta",
-    "exploreDataspace": "Esplora l-Ispazju tad-Data",
+    "collections": "Esplora l-kollezzjonijiet",
+    "dataSpace": "Esplora l-ispazju tad-dejta",
     "home": "Paġna Ewlenija",
     "toggle": "Uri l-menù"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Numru tal-paġna",
     "previous": "Preċedenti"
   },
+  "portal": "Portal",
   "project": "Proġett",
   "projects": {
     "contract": "Numru tal-kuntratt",

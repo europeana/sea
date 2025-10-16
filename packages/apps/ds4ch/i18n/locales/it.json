@@ -17,7 +17,9 @@
     "publishedDate": "Pubblicato {date}"
   },
   "categories": {
+    "featuredTags": "Tag in evidenza",
     "label": "Esplora per tag",
+    "moreTags": "Altri tag",
     "noOptions": "Non ci sono più tag da selezionare",
     "search": "Esplora per tag"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Chi siamo",
     "close": "Chiudi menu",
-    "exploreData": "Esplora i dati",
-    "exploreDataspace": "Esplora lo spazio dati",
+    "collections": "Esplora le collezioni",
+    "dataSpace": "Esplora lo spazio dei dati",
     "home": "Home",
     "toggle": "Mostra menu"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Numero di pagina",
     "previous": "Precedente"
   },
+  "portal": "Portale",
   "project": "Progetto",
   "projects": {
     "contract": "Numero contratto",

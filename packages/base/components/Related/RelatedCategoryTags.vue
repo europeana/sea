@@ -1,5 +1,6 @@
 <script setup>
 const route = useRoute();
+const { matomo } = useMatomo();
 
 const props = defineProps({
   /**
@@ -17,11 +18,11 @@ const props = defineProps({
     default: () => [],
   },
   /**
-   * Toggle to show or hide the heading
+   * Text to use as a heading. If omitted no title will show.
    */
   heading: {
-    type: Boolean,
-    default: true,
+    type: String,
+    default: null,
   },
   /**
    * Name of the route which the tags link to
@@ -66,19 +67,15 @@ const badgeLink = (tagId) => {
 const isActive = (tagId) => {
   return props.selected.includes(tagId);
 };
-// TODO: add matomo tracking on click for each NuxtLinkLocale
-// > @click="clickBadge(tag.identifier)"
-// const clickBadge = (tagId =>) {
-//   if ($matomo) {
-//     const action = isActive(tagId) ? "Deselect tag" : "Select tag";
-//     $matomo.trackEvent("Tags", action, tagId);
-//   }
-// }
+const clickBadge = (tagId) => {
+  const action = isActive(tagId) ? "Deselect tag" : "Select tag";
+  matomo.value?.trackEvent("Tags", action, tagId);
+};
 const handleLeft = (event) => {
-  event.target.previousSibling?.focus();
+  event.target.previousElementSibling?.focus();
 };
 const handleRight = (event) => {
-  event.target.nextSibling?.focus();
+  event.target.nextElementSibling?.focus();
 };
 </script>
 <template>
@@ -89,7 +86,7 @@ const handleRight = (event) => {
       class="col col-12"
     >
       <h2 v-if="heading" class="related-heading text-uppercase">
-        {{ $t("related.categoryTags.title") }}
+        {{ heading }}
       </h2>
       <div class="d-flex">
         <span class="icon-ic-tag" />
@@ -104,6 +101,7 @@ const handleRight = (event) => {
             :data-qa="`${tag.name} category tag`"
             @keydown.left="handleLeft"
             @keydown.right="handleRight"
+            @click="clickBadge(tag.identifier)"
           >
             <span>{{ tag.name }}</span>
             <span
@@ -119,6 +117,7 @@ const handleRight = (event) => {
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
+@import "assets/scss/variables";
 
 .icon-ic-tag {
   color: $darkgrey;
@@ -150,6 +149,17 @@ const handleRight = (event) => {
     @media (min-width: $bp-4k) {
       margin: 0 0.5rem 0.75rem;
     }
+  }
+}
+
+h2.related-heading {
+  font-size: $font-size-14;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-28;
+    margin-bottom: 1.5rem;
   }
 }
 </style>

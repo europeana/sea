@@ -17,7 +17,9 @@
     "publishedDate": "Offentliggjort {date}"
   },
   "categories": {
+    "featuredTags": "Fremhævede tags",
     "label": "Udforsk efter tag",
+    "moreTags": "Flere tags",
     "noOptions": "Der er ikke flere tags at vælge",
     "search": "Udforsk efter tag"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Om os",
     "close": "Luk menu",
-    "exploreData": "Udforsk dataene",
-    "exploreDataspace": "Udforsk Data space",
+    "collections": "Udforsk samlingerne",
+    "dataSpace": "Udforsk datarummet",
     "home": "Hjem",
     "toggle": "Vis menu"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Side nummer",
     "previous": "Forrige"
   },
+  "portal": "Portal",
   "project": "Projekt",
   "projects": {
     "contract": "Kontraktnummer",

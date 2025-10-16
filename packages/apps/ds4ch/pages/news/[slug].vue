@@ -127,6 +127,7 @@ const truncatedAttachmentLabel = (attachment) => {
           <RelatedCategoryTags
             v-if="tags"
             :tags="tags"
+            :heading="$t('related.categoryTags.title')"
             class="related-container"
             route-name="data-space"
             badge-variant="badge-secondary"

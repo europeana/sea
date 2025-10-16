@@ -17,7 +17,9 @@
     "publishedDate": "Publikováno {date}"
   },
   "categories": {
+    "featuredTags": "Doporučené štítky",
     "label": "Procházet podle štítku",
+    "moreTags": "Další štítky",
     "noOptions": "Nejsou k dispozici žádné další tagy.",
     "search": "Procházet podle štítku"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "O nás",
     "close": "Zavřít nabídku",
-    "exploreData": "Prozkoumejte data",
-    "exploreDataspace": "Prozkoumejte datový prostor",
+    "collections": "Prozkoumejte sbírky",
+    "dataSpace": "Prozkoumejte datový prostor",
     "home": "Domů",
     "toggle": "Zobrazit nabídku"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Číslo stránky",
     "previous": "Předchozí"
   },
+  "portal": "Portál",
   "project": "Projekt",
   "projects": {
     "contract": "Číslo smlouvy",

@@ -17,7 +17,9 @@
     "publishedDate": "Objavljeno {date}"
   },
   "categories": {
+    "featuredTags": "Izpostavljene oznake",
     "label": "Razišči po oznaki",
+    "moreTags": "Več oznak",
     "noOptions": "Ni več oznak, ki bi jih lahko izbrali",
     "search": "Razišči po oznaki"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "O nas",
     "close": "Zapri meni",
-    "exploreData": "Raziščite podatke",
-    "exploreDataspace": "Raziščite podatkovni prostor",
+    "collections": "Raziščite zbirke",
+    "dataSpace": "Raziščite podatkovni prostor",
     "home": "Domov",
     "toggle": "Pokaži meni"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Številka strani",
     "previous": "Prejšnji"
   },
+  "portal": "Portal",
   "project": "Projekt",
   "projects": {
     "contract": "Številka pogodbe",

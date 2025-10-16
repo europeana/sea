@@ -17,7 +17,9 @@
     "publishedDate": "Gepubliceerd {date}"
   },
   "categories": {
+    "featuredTags": "Uitgelichte tags",
     "label": "Verkennen op tag",
+    "moreTags": "Meer tags",
     "noOptions": "Er zijn geen tags meer om te selecteren",
     "search": "Verkennen op tag"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Over ons",
     "close": "Menu sluiten",
-    "exploreData": "Verken de gegevens",
-    "exploreDataspace": "Verken de Data space",
+    "collections": "Ontdek de collecties",
+    "dataSpace": "Verken de dataspace",
     "home": "Home",
     "toggle": "Menu weergeven"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Paginanummer",
     "previous": "Vorige"
   },
+  "portal": "Portaal",
   "project": "Project",
   "projects": {
     "contract": "Contractnummer",

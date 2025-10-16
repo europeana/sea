@@ -17,7 +17,9 @@
     "publishedDate": "Veröffentlicht {date}"
   },
   "categories": {
+    "featuredTags": "Ausgewählte Tags",
     "label": "Nach Tag erkunden",
+    "moreTags": "Weitere Tags",
     "noOptions": "Es gibt keine weiteren Tags zur Auswahl",
     "search": "Nach Tag erkunden"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Über uns",
     "close": "Menü schließen",
-    "exploreData": "Erkunden Sie die Daten",
-    "exploreDataspace": "Erkunden Sie den Daten raum",
+    "collections": "Erkunden Sie die Sammlungen",
+    "dataSpace": "Erkunden Sie den Daten raum",
     "home": "Startseite",
     "toggle": "Menü anzeigen"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Seitennummer",
     "previous": "Vorherige"
   },
+  "portal": "Portal",
   "project": "Projekt",
   "projects": {
     "contract": "Vertragsnummer",

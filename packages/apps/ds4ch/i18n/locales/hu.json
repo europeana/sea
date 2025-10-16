@@ -17,7 +17,9 @@
     "publishedDate": "Közzétéve {date}"
   },
   "categories": {
+    "featuredTags": "Kiemelt címkék",
     "label": "Felfedezés címke szerint",
+    "moreTags": "További címkék",
     "noOptions": "Nincs több kiválasztható címke",
     "search": "Felfedezés címke szerint"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Rólunk",
     "close": "Menü bezárása",
-    "exploreData": "Fedezze fel az adatokat",
-    "exploreDataspace": "Fedezze fel az adatok teret",
+    "collections": "Fedezze fel a gyűjteményeket",
+    "dataSpace": "Fedezze fel az adattért",
     "home": "Kezdőlap",
     "toggle": "Menü megjelenítése"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Oldalszám",
     "previous": "Előző"
   },
+  "portal": "Portál",
   "project": "Projekt",
   "projects": {
     "contract": "Szerződés száma",

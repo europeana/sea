@@ -17,7 +17,9 @@
     "publishedDate": "Avaldatud {date}"
   },
   "categories": {
+    "featuredTags": "Esiletõstetud sildid",
     "label": "Uuri sildi järgi",
+    "moreTags": "Rohkem silte",
     "noOptions": "Rohkem silte pole valida",
     "search": "Uuri sildi järgi"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Meist",
     "close": "Sule menüü",
-    "exploreData": "Uurige andmeid",
-    "exploreDataspace": "Avastage andme ruum",
+    "collections": "Avasta kollektsioone",
+    "dataSpace": "Avastage andme ruum",
     "home": "Avaleht",
     "toggle": "Kuva menüü"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Lehekülje number",
     "previous": "Eelmine"
   },
+  "portal": "Portaal",
   "project": "Projekt",
   "projects": {
     "contract": "Lepingu number",

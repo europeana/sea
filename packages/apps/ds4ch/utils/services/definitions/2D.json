@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Adobe",
+    "schemes": [],
+    "title": "Adobe"
+  },
+  {
+    "name": "giphy",
+    "schemes": ["http://giphy.com/embed/*", "https://giphy.com/embed/*"],
+    "title": "Giphy"
+  },
+  {
+    "name": "googleDocs",
+    "schemes": ["https://docs.google.com/presentation/*"],
+    "title": "Google Docs"
+  },
+  {
+    "name": "googleDrive",
+    "schemes": ["https://drive.google.com/file/d/*"],
+    "title": "Google Drive"
+  }
+]

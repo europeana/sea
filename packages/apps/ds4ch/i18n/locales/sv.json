@@ -17,7 +17,9 @@
     "publishedDate": "Publicerad {date}"
   },
   "categories": {
+    "featuredTags": "Utvalda taggar",
     "label": "Utforska efter tagg",
+    "moreTags": "Fler taggar",
     "noOptions": "Det finns inga fler taggar att välja",
     "search": "Utforska efter tagg"
   },
@@ -63,8 +65,8 @@
   "nav": {
     "about": "Om oss",
     "close": "Stäng menyn",
-    "exploreData": "Utforska data",
-    "exploreDataspace": "Utforska data rummet",
+    "collections": "Utforska samlingarna",
+    "dataSpace": "Utforska datarymden",
     "home": "Hem",
     "toggle": "Visa meny"
   },
@@ -77,6 +79,7 @@
     "pageNumber": "Sidonummer",
     "previous": "Föregående"
   },
+  "portal": "Portal",
   "project": "Projekt",
   "projects": {
     "contract": "Kontraktets nummer",
