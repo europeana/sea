@@ -1,6 +1,9 @@
+import { uniq } from "lodash-es";
+
 // Globally shared state
 const acceptedServices = ref<string[]>([]);
 const consentRequired = ref<boolean>(true);
+const checkedServices = ref<string[]>([]);
 
 export default function useConsentManager(
   essentialServices: string[],
@@ -25,9 +28,10 @@ export default function useConsentManager(
   };
 
   const saveConsent = (accepted: string[]) => {
-    acceptedServices.value = accepted;
+    acceptedServices.value = uniq(accepted);
 
-    setCookie(accepted);
+    setCookie(uniq(accepted));
+    checkedServices.value = [...essentialServices];
   };
 
   const isServiceAccepted = (service: string) => {
@@ -50,15 +54,19 @@ export default function useConsentManager(
   const consent = getCookie();
 
   if (consent?.length) {
-    acceptedServices.value = consent;
+    acceptedServices.value = [...consent];
+    checkedServices.value = [...consent];
     consentRequired.value = false;
     // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
+    checkedServices.value = [...essentialServices];
     consentRequired.value = true;
   }
 
   return {
     acceptAll,
+    acceptedServices,
+    checkedServices,
     consentRequired,
     isServiceAccepted,
     rejectAll,

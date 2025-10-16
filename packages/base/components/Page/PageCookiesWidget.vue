@@ -65,7 +65,7 @@ const showToast = () => {
             {{ $t("cookies.consentNotice.learnMore") }}
           </button>
           <button
-            class="btn btn-outline-primary ms-auto me-2"
+            class="btn btn-outline-primary ms-auto me-2 me-4k-3"
             @click="declineAndHide"
           >
             {{ $t("cookies.decline") }}

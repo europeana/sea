@@ -3,12 +3,11 @@ import useConsentManager from "@europeana/sea-base-layer/composables/consentMana
 import {
   allServicesNames,
   essentialServicesNames,
+  services,
 } from "@/utils/services/services";
 
-const { acceptAll, acceptOnly, rejectAll, consentRequired } = useConsentManager(
-  essentialServicesNames,
-  allServicesNames,
-);
+const { acceptAll, acceptOnly, checkedServices, rejectAll, consentRequired } =
+  useConsentManager(essentialServicesNames, allServicesNames);
 
 const emit = defineEmits(["showToast"]);
 
@@ -34,12 +33,94 @@ onMounted(() => {
   modalRef.value?.addEventListener("hide.bs.modal", () => {
     if (consentRequired.value) {
       emit("showToast");
-      selectedServices.value = [];
     }
   });
 });
 
-const selectedServices = ref([]);
+const show = ref(["thirdPartyContent"]);
+
+const essentialServices = services?.filter((s) =>
+  s.purposes.includes("essential"),
+);
+
+const usageServices = services?.filter((s) => s.purposes.includes("usage"));
+
+const thirdPartyContentServices = services?.filter((s) =>
+  s.purposes.includes("thirdPartyContent"),
+);
+
+const groupedSections = [
+  // to create layout
+  essentialServices?.length && {
+    name: "essential",
+    required: true,
+    services: essentialServices,
+  },
+  usageServices?.length && {
+    name: "usage",
+    services: usageServices,
+  },
+  thirdPartyContentServices?.length && {
+    name: "thirdPartyContent",
+    services: [
+      thirdPartyContentServices.filter((service) =>
+        service.purposes?.includes("socialMedia"),
+      )?.length && {
+        name: "socialMedia",
+        services: thirdPartyContentServices.filter((service) =>
+          service.purposes?.includes("socialMedia"),
+        ),
+      },
+      thirdPartyContentServices.filter((service) =>
+        service.purposes?.includes("mediaViewing"),
+      )?.length && {
+        name: "mediaViewing",
+        services: [
+          {
+            name: "2D",
+            services: thirdPartyContentServices.filter((service) =>
+              service.purposes?.includes("2D"),
+            ),
+          },
+          {
+            name: "3D",
+            services: thirdPartyContentServices.filter((service) =>
+              service.purposes?.includes("3D"),
+            ),
+          },
+          {
+            name: "audio",
+            services: thirdPartyContentServices.filter((service) =>
+              service.purposes?.includes("audio"),
+            ),
+          },
+          thirdPartyContentServices.filter((service) =>
+            service.purposes?.includes("multimedia"),
+          )?.length && {
+            name: "multimedia",
+            services: thirdPartyContentServices.filter((service) =>
+              service.purposes?.includes("multimedia"),
+            ),
+          },
+          {
+            name: "video",
+            services: thirdPartyContentServices.filter((service) =>
+              service.purposes?.includes("video"),
+            ),
+          },
+        ].filter(Boolean),
+      },
+      thirdPartyContentServices.filter((service) =>
+        service.purposes?.includes("other"),
+      )?.length && {
+        name: "other",
+        services: thirdPartyContentServices.filter((service) =>
+          service.purposes?.includes("other"),
+        ),
+      },
+    ].filter(Boolean),
+  },
+].filter(Boolean);
 
 const accept = () => {
   acceptAll();
@@ -50,7 +131,15 @@ const decline = () => {
 };
 
 const save = () => {
-  acceptOnly(selectedServices.value);
+  acceptOnly(checkedServices.value);
+};
+
+const toggleDisplay = (name) => {
+  if (show.value.includes(name)) {
+    show.value = show.value.filter((purpose) => purpose !== name);
+  } else {
+    show.value.push(name);
+  }
 };
 </script>
 
@@ -69,6 +158,7 @@ const save = () => {
               :keypath="modalDescriptionPath"
               tag="p"
               scope="global"
+              class="mb-4k-4"
             >
               <template #privacyPolicy>
                 <GenericSmartLink
@@ -80,28 +170,25 @@ const save = () => {
                 </GenericSmartLink>
               </template>
             </i18n-t>
-            <!-- TODO move PageCookiesSection and buttons up as slots to access consent manager in PageCookiesWidget -->
-            <!-- <PageCookiesSection
-            v-for="(section, index) in groupedSections"
-            :key="index"
-            :checked-services="checkedServices"
-            :service-data="section"
-            :show="show"
-            @toggle="toggleDisplay"
-            @update="updateConsent"
-          /> -->
+            <PageCookiesSection
+              v-for="(section, index) in groupedSections"
+              :key="index"
+              :service-data="section"
+              :show="show"
+              @toggle="toggleDisplay"
+            />
             <div
               class="d-flex flex-wrap justify-content-between align-items-center"
             >
               <button
-                class="btn btn-outline-primary mt-2"
+                class="btn btn-outline-primary mt-2 me-2"
                 data-bs-dismiss="modal"
                 @click="decline"
               >
                 {{ $t("cookies.decline") }}
               </button>
               <button
-                class="btn btn-outline-primary mt-2 ms-auto me-2"
+                class="btn btn-outline-primary mt-2 ms-sm-auto me-2"
                 data-bs-dismiss="modal"
                 @click="save"
               >

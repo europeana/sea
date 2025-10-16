@@ -46,7 +46,61 @@
       "learnMore": "Let me choose"
     },
     "decline": "I decline",
-    "ok": "Okay"
+    "ok": "Okay",
+    "purposes": {
+      "2D": {
+        "title": "2D media"
+      },
+      "3D": {
+        "title": "3D media"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "These services are essential for the correct functioning of this website. They include search results view and language preferences, preserve the logged in state and keep your visit secure. You cannot disable them as the website would not work correctly otherwise.",
+        "title": "Essential services for security and customisation"
+      },
+      "mediaViewing": {
+        "description": "These services load image (2D) , 3D, audio, and video items for viewing.",
+        "title": "Media viewing services"
+      },
+      "socialMedia": {
+        "description": "These services load content from social media platforms.",
+        "title": "Social media embedding services"
+      },
+      "thirdPartyContent": {
+        "description": "These services load content hosted by third parties. Its use is subject to these third parties’ terms, conditions and privacy statement.",
+        "title": "Third-party content"
+      },
+      "usage": {
+        "description": "These services collect the information to help us better understand how the website gets used and where the pain points are, empowering us to make informed choices to improve your experience.",
+        "title": "Services to capture website usage and feedback"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Use this switch to enable or disable all optional services.",
+        "title": "Enable or disable all services"
+      }
+    },
+    "services": {
+      "hotjar": {
+        "description": "Collects usage data to help us analyse user interactions. Activates a survey widget giving you the option to respond to our visitor satisfaction surveys.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Remembers your preferred interface language for future access.",
+        "title": "Language code"
+      },
+      "matomo": {
+        "description": "Collects anonymous statistics on how visitors interact with the website.",
+        "title": "Matomo"
+      }
+    }
   },
   "footer": {
     "accessibility": "Accessibility",
