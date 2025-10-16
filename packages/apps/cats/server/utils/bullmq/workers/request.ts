@@ -42,6 +42,15 @@ export const requestQueueWorker = async (job: Job) => {
     flowProducer = new FlowProducer(useQueueOptions());
   }
 
+  const targetLanguages = targetLanguagesFromTags(
+    job.data.entry.metadata?.tags,
+  );
+
+  if (targetLanguages.length === 0) {
+    // nothing to translate to; goodbye!
+    return;
+  }
+
   if (!job.data.contentType) {
     const contentTypeId = job.data.entry.sys?.contentType?.sys?.id;
     const contentType =
@@ -52,15 +61,6 @@ export const requestQueueWorker = async (job: Job) => {
   if (!job.data.html) {
     const html = markupFields(job.data);
     await job.updateData({ ...job.data, html });
-  }
-
-  const targetLanguages = targetLanguagesFromTags(
-    job.data.entry.metadata?.tags,
-  );
-
-  if (targetLanguages.length === 0) {
-    // nothing to translate to; goodbye!
-    return;
   }
 
   await flowProducer.add({
