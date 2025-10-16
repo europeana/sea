@@ -1,0 +1,17 @@
+.toast {
+  @media (min-width: ($bp-4k)) {
+    --bs-toast-max-width: 700px;
+  }
+
+  .toast-body {
+    @media (min-width: ($bp-4k)) {
+      padding: 2rem;
+    }
+  }
+
+  p {
+    @media (min-width: ($bp-4k)) {
+      font-size: $font-size-32;
+    }
+  }
+}

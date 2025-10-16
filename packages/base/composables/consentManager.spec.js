@@ -39,7 +39,7 @@ describe("useConsentManager", () => {
   describe("when there is already a consent cookie set", () => {
     it("returns consentRequired to false and returns saved preferences as expected", () => {
       useCookieMock.mockImplementation(() => ({
-        value: `${essentialCookie},${mediaCookie}`,
+        value: [essentialCookie, mediaCookie],
       }));
       const { consentRequired, isServiceAccepted } = useConsentManager(
         essential,

@@ -24,3 +24,59 @@
     }
   }
 }
+
+.form-switch {
+  .form-check-input {
+    border: 2px solid $black;
+    height: 0.875rem;
+    width: 1.625rem;
+    background-size: 1.125rem;
+    background-position: -3px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff' stroke='%23000' stroke-width='1'/%3e%3c/svg%3e");
+    cursor: pointer;
+
+    @media (min-width: $bp-4k) {
+      border-width: 4px;
+      height: 1.75rem;
+      width: 3.25rem;
+      background-size: 2.25rem;
+      background-position: -5px;
+    }
+
+    &.secondary {
+      border-color: $darkgrey;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff' stroke='%234d4d4d' stroke-width='1'/%3e%3c/svg%3e");
+    }
+
+    &:checked {
+      background-position: calc(100% + 1px);
+      background-color: $blue;
+      border-color: $blue;
+      background-size: 0.875rem;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+
+      @media (min-width: $bp-4k) {
+        background-position: calc(100% + 2px);
+        background-size: 1.75rem;
+      }
+    }
+
+    &[type="checkbox"]:indeterminate {
+      background-color: $white;
+      background-position: center;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff' stroke='%230a72cc' stroke-width='1'/%3e%3c/svg%3e");
+      border-color: $blue;
+    }
+
+    &:disabled {
+      opacity: 1;
+      background-color: rgba($blue, 0.5);
+      pointer-events: auto;
+      cursor: not-allowed;
+
+      ~ .form-check-label {
+        opacity: 1;
+      }
+    }
+  }
+}

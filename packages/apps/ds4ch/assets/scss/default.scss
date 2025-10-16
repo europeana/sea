@@ -75,3 +75,30 @@ div.landing-sub-section {
   font-size: $font-size-base;
   line-height: 1.5;
 }
+
+// base component DS4CH specific overrides
+.consent-checkbox-section {
+  .legend {
+    font-size: $font-size-small;
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-28;
+    }
+  }
+
+  .btn.btn-link {
+    font-size: $font-size-base;
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-32;
+    }
+
+    .icon-chevron {
+      font-size: 0.425rem;
+
+      @media (min-width: $bp-4k) {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}

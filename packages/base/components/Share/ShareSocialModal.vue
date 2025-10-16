@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <div id="share-modal" class="modal" tabindex="-1">
+  <div id="share-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header d-block">

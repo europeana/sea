@@ -53,6 +53,33 @@
       }
     }
 
+    &.btn-outline-primary {
+      border: 1px solid $black;
+      border-radius: 0;
+      background-color: $white;
+      color: $black;
+      display: inline-flex;
+      align-items: center;
+      font-family: $font-family-montserrat;
+      font-size: $font-size-14;
+      padding: 0.4375rem 0.625rem;
+      transition: all 400ms ease-in-out;
+      text-transform: uppercase;
+
+      @media (min-width: ($bp-4k)) {
+        font-size: $font-size-28;
+        padding: 0.875rem 1.25rem;
+        border-radius: 0;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $black;
+        color: $white;
+      }
+    }
+
     &.btn-secondary:not(.button-icon-only) {
       border-radius: 0;
       background-color: $black;
@@ -122,6 +149,48 @@
       &:focus {
         color: $yellow;
         transition: $standard-transition;
+      }
+    }
+
+    &.btn-link {
+      color: $black;
+      font-size: $font-size-14;
+
+      @media (min-width: ($bp-4k)) {
+        font-size: $font-size-28;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+      }
+    }
+
+    &.btn-success {
+      border: none;
+      border-radius: 0;
+      background-color: $yellow;
+      color: $black;
+      display: inline-flex;
+      align-items: center;
+      font-family: $font-family-montserrat;
+      font-size: $font-size-14;
+      padding: 0.4375rem 0.625rem;
+      transition: all 400ms ease-in-out;
+      text-transform: uppercase;
+
+      @media (min-width: ($bp-4k)) {
+        font-size: $font-size-28;
+        padding: 0.875rem 1.25rem;
+        border-radius: 0;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $black;
+        color: $yellow;
       }
     }
   }
