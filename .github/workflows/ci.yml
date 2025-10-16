@@ -74,4 +74,5 @@ jobs:
     uses: ./.github/workflows/ci-app.yml
     with:
       app: ${{ matrix.app }}
+      storybook: ${{ contains(fromJSON('["ds4ch"]'), matrix.app) }}
     secrets: inherit
