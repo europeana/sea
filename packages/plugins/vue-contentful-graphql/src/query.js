@@ -5,7 +5,6 @@ import { print as printGraphql } from "graphql/language/printer.js";
 
 // TODO: ensure presence of required config
 export const query = async (ast, variables = {}, config = {}) => {
-  // console.log('ctf query')
   const origin = config.graphqlUrl || "https://graphql.contentful.com";
   const path = `/content/v1/spaces/${config.spaceId}/environments/${config.environmentId || "master"}`;
 
@@ -35,7 +34,6 @@ export const query = async (ast, variables = {}, config = {}) => {
   };
 
   const method = "post";
-  // console.log('url', url.toString())
   const response = await fetch(url.toString(), {
     body,
     headers,
