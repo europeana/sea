@@ -53,8 +53,8 @@ Example:
         <p>...Europeana's history</p>
       </section>
       <section data-ctf-field-id="hasPart">
-        <h2>History</h2>
-        <p>Europeana's history...</p>
+        <h2>Present</h2>
+        <p>Europeana's present...</p>
       </section>
       <section data-ctf-field-id="hasPart">
         <h2>Future</h2>
