@@ -1,8 +1,11 @@
 import "../assets/scss/main.scss";
 
+import { sb } from "storybook/test";
 import type { Preview } from "@nuxtjs/storybook";
 import { watch } from "vue";
 import i18nLocales from "../i18n/locales";
+
+sb.mock(import("@europeana/vue-contentful-graphql/query"));
 
 const defaultLocale = "en";
 
