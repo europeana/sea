@@ -4,6 +4,8 @@ import useScrollTo from "@/composables/scrollTo.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
+import trainingPagesListingMinimalGraphql from "@/graphql/queries/trainingPagesListingMinimal.graphql";
+import eventPagesListingMinimalGraphql from "@/graphql/queries/eventPagesListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
@@ -37,7 +39,7 @@ const props = defineProps({
   },
   /**
    * Content types to include in the interface.
-   * @values "blog post", "exhibition", "project", "story"
+   * @values "blog post", "exhibition", "project", "story", "training", "event"
    */
   contentTypes: {
     type: Array[String],
@@ -62,6 +64,8 @@ const typeLookup = {
   project: "ProjectPage",
   story: "Story",
   exhibition: "ExhibitionPage",
+  training: "TrainingPage",
+  event: "EventPage",
 };
 
 const selectedType = computed(() => {
@@ -156,6 +160,8 @@ async function fetchContent() {
     contentResponse.data.exhibitionPageCollection?.items,
     contentResponse.data.blogPostingCollection?.items,
     contentResponse.data.projectPageCollection?.items,
+    contentResponse.data.eventPageCollection?.items,
+    contentResponse.data.trainingPageCollection?.items,
   ].flat();
 
   const retrievedContentEntries = contentSysIds
@@ -165,6 +171,7 @@ async function fetchContent() {
       ),
     )
     .filter(Boolean);
+
   // This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
   const entriesWithCtaBanners = [];
   if (
@@ -190,13 +197,38 @@ function isCtaBanner(entry) {
   return typeof entry === "string" && entry.startsWith(ctaBanner);
 }
 
-// TODO: Only works for blogPostings/projects, make distinct normalisation functions per supported type,
+function trainingDateHelper(startDate, endDate) {
+  if (startDate) {
+    let formatedEndDate = t("training.ongoing");
+    if (endDate) {
+      formatedEndDate = d(endDate, "short");
+    }
+    return t("training.dateRange", {
+      startDate: d(startDate, "short"),
+      endDate: d(formatedEndDate, "short"),
+    });
+  }
+  return t("training.ongoing");
+}
+
+function eventDateHelper(startDate, endDate) {
+  if (endDate) {
+    return t("event.dateRange", {
+      startDate: d(startDate, "short"),
+      endDate: d(endDate, "short"),
+    });
+  }
+  return d(startDate, "short");
+}
+
+// TODO: Only works for blogPostings/projects/training/events, make distinct normalisation functions per supported type,
 // consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
     if (entry.__typename === "BlogPosting") {
       return {
         ...entry,
+        url: contentfulEntryUrl(entry),
         text: t("authored.createdDate", {
           date: d(entry.datePublished, "short"),
         }),
@@ -206,9 +238,30 @@ function normaliseCard(entry) {
     } else if (entry.__typename === "ProjectPage") {
       return {
         ...entry,
+        url: contentfulEntryUrl(entry),
         text: entry.headline,
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
+      };
+    } else if (entry.__typename === "EventPage") {
+      return {
+        ...entry,
+        url: entry.identifier,
+        subTitle: t("event.label"),
+        text: eventDateHelper(entry.startDate, entry.endDate),
+        primaryImageOfPage: {
+          image: entry.image || props.defaultCardThumbnail.image,
+        },
+      };
+    } else if (entry.__typename === "TrainingPage") {
+      return {
+        ...entry,
+        url: entry.identifier,
+        subTitle: t("training.label"),
+        text: trainingDateHelper(entry.startDate, entry.endDate),
+        primaryImageOfPage: {
+          image: entry.image || props.defaultCardThumbnail.image,
+        },
       };
     }
   }
@@ -228,6 +281,9 @@ async function fetchContentMetadata() {
   // the maximum allowed complexity for a query of 11000 is exeeded.
   // TODO: when selectedType is already set, only retrieve those entries
   // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
+  // TODO: normalise the GraphQL files so this can just be a for loop which
+  // interpolates the contentTypes into thte fileName
+
   if (props.contentTypes.includes("blog post")) {
     const blogPostingsResponse = await contentful.query(
       blogPostingsListingMinimalGraphql,
@@ -245,6 +301,23 @@ async function fetchContentMetadata() {
     const projectPages =
       projectPagesResponse.data.projectPageCollection?.items || [];
     contentIds.push(...projectPages);
+  }
+  if (props.contentTypes.includes("event")) {
+    const eventPagesResponse = await contentful.query(
+      eventPagesListingMinimalGraphql,
+      contentIdsVariables,
+    );
+    const eventPages = eventPagesResponse.data.eventPageCollection?.items || [];
+    contentIds.push(...eventPages);
+  }
+  if (props.contentTypes.includes("training")) {
+    const trainingPagesResponse = await contentful.query(
+      trainingPagesListingMinimalGraphql,
+      contentIdsVariables,
+    );
+    const trainingPages =
+      trainingPagesResponse.data.trainingPageCollection?.items || [];
+    contentIds.push(...trainingPages);
   }
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,
@@ -338,7 +411,8 @@ watch(page, () => {
             <div v-for="entry in section" :key="entry.sysId" class="col">
               <ContentCard
                 :title="entry.name"
-                :url="contentfulEntryUrl(entry)"
+                :sub-title="entry.subTitle"
+                :url="entry.url"
                 :text="entry.text"
                 :image-url="
                   entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
