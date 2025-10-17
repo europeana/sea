@@ -156,7 +156,9 @@ async function fetchContent() {
     contentResponse.data.exhibitionPageCollection?.items,
     contentResponse.data.blogPostingCollection?.items,
     contentResponse.data.projectPageCollection?.items,
-  ].flat();
+  ]
+    .flat()
+    .filter(Boolean);
 
   const retrievedContentEntries = contentSysIds
     .map((sysId) =>
@@ -165,6 +167,7 @@ async function fetchContent() {
       ),
     )
     .filter(Boolean);
+
   // This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
   const entriesWithCtaBanners = [];
   if (
@@ -263,6 +266,7 @@ async function fetchContentMetadata() {
   const ordered = contentIds.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
+
   return ordered;
 }
 
