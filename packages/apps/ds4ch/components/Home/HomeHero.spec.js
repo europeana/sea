@@ -28,7 +28,7 @@ describe("components/home/HomeHero", () => {
         heroImage: { image: { url: "https://www.europeana.eu/example.jpg" } },
       });
       const logoLink = wrapper.find("#europeana-logo a");
-      expect(logoLink.attributes("href")).toEqual("https:/www.europeana.eu");
+      expect(logoLink.attributes("href")).toEqual("https://www.europeana.eu");
     });
   });
 });
