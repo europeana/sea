@@ -1,0 +1,27 @@
+query EventPageListingMinimal(
+  $locale: String!
+  $preview: Boolean = false
+  $query: String = ""
+  $excludeSysId: String = ""
+) {
+  eventPageCollection(
+    preview: $preview
+    locale: $locale
+    order: datePublished_DESC
+    limit: 1500
+    where: { name_contains: $query, sys: { id_not: $excludeSysId } }
+  ) {
+    items {
+      __typename
+      date: datePublished
+      sys {
+        id
+      }
+      cats: categoriesCollection(limit: 5) {
+        items: items {
+          id: identifier
+        }
+      }
+    }
+  }
+}
