@@ -7,11 +7,7 @@ const config: StorybookConfig = {
     "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../../../base/components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
-  addons: [
-    "@storybook/addon-links",
-    "@chromatic-com/storybook",
-    "@storybook/addon-docs",
-  ],
+  addons: ["@storybook/addon-links", "@storybook/addon-docs"],
   framework: {
     name: "@storybook-vue/nuxt",
     options: {
