@@ -2,6 +2,7 @@ export default function useConsentManager(
   essentialServices: string[],
   allServices: string[],
 ) {
+  const { matomo } = useMatomo();
   const runtimeConfig = useRuntimeConfig();
   const COOKIE_CONSENT_KEY = "cookie-consent";
   const COOKIE_MAX_AGE =
@@ -49,10 +50,18 @@ export default function useConsentManager(
   if (consent?.split(",").length) {
     acceptedServices.value = consent.split(",");
     consentRequired.value = false;
-    // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
     consentRequired.value = true;
   }
+
+  watch(acceptedServices, (newVal) => {
+    if (newVal.includes("matomo")) {
+      matomo.value?.rememberCookieConsentGiven();
+    } else {
+      matomo.value?.forgetCookieConsentGiven();
+    }
+    // TODO: Remove any other not accepted cookie
+  });
 
   return {
     acceptAll,

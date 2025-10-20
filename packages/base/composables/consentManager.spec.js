@@ -2,6 +2,18 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import useConsentManager from "./consentManager";
 
+const rememberMatomoSpy = vi.fn();
+const forgetMatomoSpy = vi.fn();
+
+mockNuxtImport("useMatomo", () => {
+  return () => ({
+    matomo: ref({
+      rememberCookieConsentGiven: rememberMatomoSpy,
+      forgetCookieConsentGiven: forgetMatomoSpy,
+    }),
+  });
+});
+
 mockNuxtImport("useRuntimeConfig", () => {
   return () => ({
     public: {
@@ -78,5 +90,29 @@ describe("useConsentManager", () => {
     expect(isServiceAccepted(essentialCookie)).toBe(true);
     expect(isServiceAccepted(analyticsCookie)).toBe(true);
     expect(isServiceAccepted(mediaCookie)).toBe(false);
+  });
+
+  describe("when accepted services are updated", () => {
+    describe("and Matomo is accepted", () => {
+      it("calls matomo to set it's cookie", async () => {
+        const matomoCookie = ["matomo"];
+        const { acceptOnly } = useConsentManager(matomoCookie);
+
+        acceptOnly(matomoCookie);
+        await nextTick();
+
+        expect(rememberMatomoSpy).toHaveBeenCalled();
+      });
+    });
+    describe("and Matomo is NOT accepted", () => {
+      it("calls matomo to remove it's cookie", async () => {
+        const { rejectAll } = useConsentManager(essential, all);
+
+        rejectAll();
+        await nextTick();
+
+        expect(forgetMatomoSpy).toHaveBeenCalled();
+      });
+    });
   });
 });
