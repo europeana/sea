@@ -1,4 +1,43 @@
 export default {
+  ctas: [
+    {
+      name: "cta one",
+      nameEN: "cta One",
+      text: "First CTA of many",
+      relatedLink: {
+        url: "https://www.europeana.eu/",
+        text: "This is a link",
+      },
+      image: {
+        image: {
+          contentType: "image/svg+xml",
+          url: "https://images.ctfassets.net/i01duvb6kq77/563nWMAsbl2t3M7oe98OrH/3d956ec737a2f6ffa43d22a7e86f3879/DS4CH_Banner_Yellow.svg",
+          width: 890,
+          height: 724,
+        },
+      },
+    },
+    {
+      name: "cta two",
+      nameEN: "cta Two",
+      text: "Second CTA",
+      relatedLink: {
+        url: "https://www.europeana.eu/",
+        text: "This is another link",
+      },
+      image: {
+        image: {
+          contentType: "image/svg+xml",
+          url: "https://images.ctfassets.net/i01duvb6kq77/2XQEVsP8dRnHZB73Lyci5k/c2a740d9504620142568782683932886/Black_Banner_-_desktop.svg",
+          width: 890,
+          height: 724,
+        },
+        profile: {
+          background: "highlight",
+        },
+      },
+    },
+  ],
   imagesWithAttribution: [
     {
       name: "Winter Landscape with Ice Skaters",

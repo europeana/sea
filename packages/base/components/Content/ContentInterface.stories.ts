@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 import { mocked } from "storybook/test";
 import { query as queryContentful } from "@europeana/vue-contentful-graphql/query";
+import sampleData from "../../../apps/ds4ch/.storybook/sample-data.js";
 
 import ContentInterface from "./ContentInterface.vue";
 
@@ -49,5 +50,15 @@ export const Default: Story = {
   args: {
     site: "www.europeana.eu",
     contentTypes: ["blog post"],
+    defaultCardThumbnail: { image: { url: sampleData.thumbnails[0] } },
+  },
+};
+
+export const WithCallToActions: Story = {
+  args: {
+    site: "www.europeana.eu",
+    contentTypes: ["blog post"],
+    defaultCardThumbnail: { image: { url: sampleData.thumbnails[0] } },
+    ctaBanners: sampleData.ctas,
   },
 };
