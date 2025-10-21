@@ -15,6 +15,7 @@ const props = defineProps({
 });
 
 const internalDomain = useRuntimeConfig().public.internalLinkDomain;
+const route = useRoute();
 
 const isExternalLink = computed(() => {
   const path = props.destination;
@@ -32,10 +33,21 @@ const isExternalLink = computed(() => {
   const hostname = hostnamePattern.exec(path)[1];
   return !hostname.endsWith(internalDomain);
 });
+
+const path = computed(() => {
+  if (
+    typeof props.destination === "string" &&
+    props.destination.startsWith("#")
+  ) {
+    return { ...route, hash: props.destination };
+  }
+
+  return props.destination;
+});
 </script>
 <template>
   <NuxtLinkLocale
-    :to="props.disabled ? null : destination"
+    :to="props.disabled ? null : path"
     :target="isExternalLink ? '_blank' : null"
     :external="isExternalLink"
   >
