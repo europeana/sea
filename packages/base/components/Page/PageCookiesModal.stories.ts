@@ -16,7 +16,6 @@ const meta = {
   >Open modal</button>
   <PageCookiesModal v-bind='args' />`,
   }),
-  decorators: [() => ({ template: '<div id="teleports"></div><story/>' })],
 } satisfies Meta<typeof PageCookiesModal>;
 
 export default meta;

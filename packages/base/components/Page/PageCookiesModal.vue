@@ -155,7 +155,7 @@ const toggleDisplay = (name) => {
 
 <template>
   <!-- Teleport to prevent being rendered inside toaster (fixed element) -->
-  <Teleport to="#teleports">
+  <Teleport to="body">
     <div
       :id="modalId"
       ref="modal"
