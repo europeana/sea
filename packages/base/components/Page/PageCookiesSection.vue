@@ -1,14 +1,7 @@
 <script setup>
-import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
-import {
-  allServicesNames,
-  essentialServicesNames,
-} from "@/utils/services/services";
+import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 
-const { checkedServices } = useConsentManager(
-  essentialServicesNames,
-  allServicesNames,
-);
+const { checkedServices } = useConsentManager();
 
 const { t, te, fallbackLocale } = useI18n({ useScope: "global" });
 

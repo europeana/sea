@@ -4,11 +4,22 @@ import { uniq } from "lodash-es";
 const acceptedServices = ref<string[]>([]);
 const consentRequired = ref<boolean>(true);
 const checkedServices = ref<string[]>([]);
+const services = ref<object>({
+  essential: <string[]>[],
+  all: <string[]>[],
+});
 
-export default function useConsentManager(
-  essentialServices: string[],
-  allServices: string[],
+export function configureConsentManagerServices(
+  essential: string[],
+  all: string[],
 ) {
+  services.value = {
+    essential,
+    all,
+  };
+}
+
+export function useConsentManager() {
   const runtimeConfig = useRuntimeConfig();
   const COOKIE_CONSENT_KEY = "cookie-consent";
   const COOKIE_MAX_AGE =
@@ -41,15 +52,15 @@ export default function useConsentManager(
   };
 
   const acceptAll = () => {
-    saveConsent([...allServices]);
+    saveConsent([...services.value.all]);
   };
 
   const rejectAll = () => {
-    saveConsent([...essentialServices]);
+    saveConsent([...services.value.essential]);
   };
 
-  const acceptOnly = (services: string[]) => {
-    saveConsent([...essentialServices, ...services]);
+  const acceptOnly = (only: string[]) => {
+    saveConsent([...services.value.essential, ...only]);
   };
 
   // Get and store consent cookie on init
@@ -61,8 +72,8 @@ export default function useConsentManager(
     consentRequired.value = false;
     // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
-    acceptedServices.value = [...essentialServices];
-    checkedServices.value = [...essentialServices];
+    acceptedServices.value = [...services.value.essential];
+    checkedServices.value = [...services.value.essential];
     consentRequired.value = true;
   }
 

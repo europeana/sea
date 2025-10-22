@@ -1,14 +1,7 @@
 <script setup>
-import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
-import {
-  allServicesNames,
-  essentialServicesNames,
-} from "@/utils/services/services";
+import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 
-const { acceptAll, rejectAll, consentRequired } = useConsentManager(
-  essentialServicesNames,
-  allServicesNames,
-);
+const { acceptAll, rejectAll, consentRequired } = useConsentManager();
 
 const toastId = "cookie-notice-toast";
 const toastRef = useTemplateRef("toast");

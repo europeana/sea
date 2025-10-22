@@ -10,8 +10,6 @@ const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
 vi.mock("@/utils/services/services", () => ({
-  allServicesNames: ["translate", "analytics", "media"],
-  essentialServicesNames: ["translate"],
   services: [
     {
       name: "translate",
@@ -38,7 +36,7 @@ vi.mock("@/utils/services/services", () => ({
 }));
 
 vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
-  default: () => ({
+  useConsentManager: () => ({
     acceptAll,
     rejectAll,
     consentRequired,
