@@ -248,12 +248,6 @@ const renderServiceAsCheckbox = (
 
   .btn-link {
     margin-bottom: 1rem;
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
 
     .icon-chevron {
       display: inline-block;
