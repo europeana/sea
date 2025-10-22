@@ -246,7 +246,6 @@ const renderServiceAsCheckbox = (
   }
 
   .btn-link {
-    color: $blue;
     margin-bottom: 1rem;
     text-decoration: none;
 
