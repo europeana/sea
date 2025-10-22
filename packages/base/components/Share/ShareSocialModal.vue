@@ -12,11 +12,18 @@ defineProps({
 </script>
 
 <template>
-  <div id="share-modal" class="modal fade" tabindex="-1">
+  <div
+    id="share-modal"
+    class="modal fade"
+    tabindex="-1"
+    aria-labelledby="share-modal-title"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header d-block">
-          <h2 class="modal-title">{{ $t("actions.share") }}</h2>
+          <h2 id="share-modal-title" class="modal-title">
+            {{ $t("actions.share") }}
+          </h2>
         </div>
         <div class="modal-body">
           <p>{{ $t("shareWhere") }}</p>

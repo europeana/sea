@@ -146,11 +146,19 @@ const toggleDisplay = (name) => {
 <template>
   <!-- Teleport to prevent being rendered inside toaster (fixed element) -->
   <Teleport to="#teleports">
-    <div :id="modalId" ref="modal" class="modal fade" tabindex="-1">
+    <div
+      :id="modalId"
+      ref="modal"
+      class="modal fade"
+      tabindex="-1"
+      :aria-labelledby="`${modalId}-title`"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header d-block">
-            <h2 class="modal-title">{{ $t(modalTitlePath) }}</h2>
+            <h2 :id="`${modalId}-title`" class="modal-title">
+              {{ $t(modalTitlePath) }}
+            </h2>
           </div>
           <div class="modal-body">
             <i18n-t
