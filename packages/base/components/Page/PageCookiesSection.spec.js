@@ -3,15 +3,16 @@ import { mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import PageCookiesSection from "./PageCookiesSection.vue";
 
-mockNuxtImport("useI18n", () => {
-  return () => {
+const { useI18nMock } = vi.hoisted(() => ({
+  useI18nMock: vi.fn(() => {
     return {
       fallbackLocale: "en",
       t: (key) => key,
       te: () => true,
     };
-  };
-});
+  }),
+}));
+mockNuxtImport("useI18n", () => useI18nMock);
 
 let checkedServices = ref([]);
 
@@ -46,22 +47,67 @@ describe("components/Page/PageCookiesSection.vue", () => {
     vi.resetAllMocks();
     checkedServices.value = [];
   });
+  describe("label", () => {
+    describe("when section is a purpose", () => {
+      it("renders a checkbox for a service with correct label", () => {
+        const wrapper = mount(PageCookiesSection, {
+          global: {
+            mocks: {
+              $n: (num) => num,
+            },
+          },
+          props: {
+            serviceData: {
+              name: "usage",
+              services: [],
+            },
+          },
+        });
 
-  it("renders a checkbox for a service with correct label", () => {
-    const wrapper = mount(PageCookiesSection, {
-      props: {
-        serviceData: {
-          name: "analytics",
-          title: "matomo",
-          purposes: ["usage"],
-        },
-        show: [],
-      },
+        const label = wrapper.find("label");
+        expect(label.text()).toContain("cookies.purposes.usage.title");
+        expect(wrapper.find('input[type="checkbox"]').exists()).toBe(true);
+      });
     });
 
-    const label = wrapper.find("label");
-    expect(label.text()).toContain("cookies.services.analytics.title");
-    expect(wrapper.find('input[type="checkbox"]').exists()).toBe(true);
+    describe("when section is a service", () => {
+      it("renders a checkbox for a service with correct label", () => {
+        const wrapper = mount(PageCookiesSection, {
+          props: {
+            serviceData: {
+              name: "analytics",
+            },
+          },
+        });
+
+        const label = wrapper.find("label");
+        expect(label.text()).toContain("cookies.services.analytics.title");
+        expect(wrapper.find('input[type="checkbox"]').exists()).toBe(true);
+      });
+    });
+
+    describe("when section is a service with non translated label", () => {
+      it("uses the service title", () => {
+        useI18nMock.mockImplementation(() => ({
+          fallbackLocale: "en",
+          t: (key) => key,
+          te: () => false,
+        }));
+
+        const wrapper = mount(PageCookiesSection, {
+          props: {
+            serviceData: {
+              name: "analytics",
+              title: "matomo",
+            },
+          },
+        });
+
+        const label = wrapper.find("label");
+        expect(label.text()).toContain("matomo");
+        expect(wrapper.find('input[type="checkbox"]').exists()).toBe(true);
+      });
+    });
   });
 
   describe("when service is in checkedServices", () => {
