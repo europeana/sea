@@ -31,7 +31,9 @@ export default function useConsentManager(
     acceptedServices.value = uniq(accepted);
 
     setCookie(uniq(accepted));
-    checkedServices.value = [...essentialServices];
+
+    checkedServices.value = [...acceptedServices.value];
+    consentRequired.value = false;
   };
 
   const isServiceAccepted = (service: string) => {
@@ -59,6 +61,7 @@ export default function useConsentManager(
     consentRequired.value = false;
     // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
+    acceptedServices.value = [...essentialServices];
     checkedServices.value = [...essentialServices];
     consentRequired.value = true;
   }
