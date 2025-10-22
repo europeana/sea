@@ -17,8 +17,6 @@ mockNuxtImport("useI18n", () => useI18nMock);
 let checkedServices = ref([]);
 
 vi.mock("@/utils/services/services", () => ({
-  allServicesNames: ["translate", "tracking", "media"],
-  essentialServicesNames: ["translate"],
   services: [
     {
       name: "translate",
@@ -37,7 +35,7 @@ vi.mock("@/utils/services/services", () => ({
 }));
 
 vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
-  default: () => ({
+  useConsentManager: () => ({
     checkedServices,
   }),
 }));

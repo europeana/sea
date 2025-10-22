@@ -1,10 +1,6 @@
 <script setup>
-import useConsentManager from "@europeana/sea-base-layer/composables/consentManager";
-import {
-  allServicesNames,
-  essentialServicesNames,
-  services,
-} from "@/utils/services/services";
+import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
+import { services } from "@/utils/services/services";
 
 const {
   acceptAll,
@@ -13,7 +9,7 @@ const {
   checkedServices,
   rejectAll,
   consentRequired,
-} = useConsentManager(essentialServicesNames, allServicesNames);
+} = useConsentManager();
 
 const emit = defineEmits(["showToast"]);
 

@@ -7,7 +7,7 @@ const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
 vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
-  default: () => ({
+  useConsentManager: () => ({
     acceptAll,
     rejectAll,
     consentRequired,
