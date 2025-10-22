@@ -6,8 +6,14 @@ import {
   services,
 } from "@/utils/services/services";
 
-const { acceptAll, acceptOnly, checkedServices, rejectAll, consentRequired } =
-  useConsentManager(essentialServicesNames, allServicesNames);
+const {
+  acceptAll,
+  acceptOnly,
+  acceptedServices,
+  checkedServices,
+  rejectAll,
+  consentRequired,
+} = useConsentManager(essentialServicesNames, allServicesNames);
 
 const emit = defineEmits(["showToast"]);
 
@@ -29,7 +35,11 @@ defineProps({
 const modalRef = useTemplateRef("modal");
 
 onMounted(() => {
-  // Listen to modal hide event
+  modalRef.value?.addEventListener("show.bs.modal", () => {
+    // Reset checked services to saved services
+    checkedServices.value = [...acceptedServices.value];
+  });
+  // Show toast when modal closed and no consent preferences are saved (click on backdrop or escape)
   modalRef.value?.addEventListener("hide.bs.modal", () => {
     if (consentRequired.value) {
       emit("showToast");

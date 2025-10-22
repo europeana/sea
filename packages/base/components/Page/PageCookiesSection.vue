@@ -53,11 +53,11 @@ const description = computed(() => {
   return undefined;
 });
 const checked = computed(() => {
-  return (
-    props.serviceData.required ||
+  return props.serviceData.required ||
     allChildServicesChecked.value ||
     checkedServices.value.includes(props.serviceData.name)
-  );
+    ? true
+    : false;
 });
 const indeterminate = computed(() => {
   if (props.serviceData.services) {
@@ -154,6 +154,7 @@ const renderServiceAsCheckbox = (
     <div v-else class="form-check form-switch">
       <input
         :id="`consentcheckbox-${serviceData.name}`"
+        v-model="checked"
         :checked="checked"
         class="form-check-input"
         type="checkbox"
