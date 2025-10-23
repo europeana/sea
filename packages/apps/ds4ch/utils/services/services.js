@@ -5,6 +5,7 @@ import audio from "./definitions/audio.json";
 import ds4ch from "./definitions/ds4ch.json";
 import socialMedia from "./definitions/socialMedia.json";
 import video from "./definitions/video.json";
+import matomoCallback from "./callbacks/matomo.ts";
 
 const definitions = {
   "2D": twoD,
@@ -56,4 +57,8 @@ const essentialServicesNames = services
 
 const allServicesNames = services.map((s) => s.name);
 
-export { services, essentialServicesNames, allServicesNames };
+const handleCallbacks = (acceptedServices) => {
+  matomoCallback(acceptedServices.includes("matomo"));
+};
+
+export { services, essentialServicesNames, allServicesNames, handleCallbacks };

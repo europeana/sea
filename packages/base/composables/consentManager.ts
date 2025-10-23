@@ -4,7 +4,6 @@ import { uniq } from "lodash-es";
 import defu from "defu";
 
 export function createConsentManager(settings = {}) {
-  const { matomo } = useMatomo();
   const acceptedServices = ref<string[]>([]);
   const consentRequired = ref<boolean>(true);
   const checkedServices = ref<string[]>([]);
@@ -15,6 +14,7 @@ export function createConsentManager(settings = {}) {
     services: {
       all: string[];
       essential: string[];
+      handleCallbacks?: (parameter: string[]) => void;
     };
   }>({
     key: "cookie-consent",
@@ -79,11 +79,7 @@ export function createConsentManager(settings = {}) {
   }
 
   watch(acceptedServices, (newVal) => {
-    if (newVal.includes("matomo")) {
-      matomo.value?.rememberCookieConsentGiven();
-    } else {
-      matomo.value?.forgetCookieConsentGiven();
-    }
+    config.value.services.handleCallbacks?.(newVal);
     // TODO: Remove any other not accepted cookie
   });
 
