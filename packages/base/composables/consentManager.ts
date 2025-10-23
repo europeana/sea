@@ -4,9 +4,12 @@ import { uniq } from "lodash-es";
 const acceptedServices = ref<string[]>([]);
 const consentRequired = ref<boolean>(true);
 const checkedServices = ref<string[]>([]);
-const services = ref<object>({
-  essential: <string[]>[],
-  all: <string[]>[],
+const services = ref<{
+  essential: string[];
+  all: string[];
+}>({
+  essential: [],
+  all: [],
 });
 
 export function configureConsentManagerServices(
