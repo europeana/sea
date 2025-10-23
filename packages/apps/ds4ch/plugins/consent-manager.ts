@@ -1,9 +1,15 @@
-import { configureConsentManagerServices } from "@europeana/sea-base-layer/composables/consentManager";
+import { configureConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 import {
   allServicesNames,
   essentialServicesNames,
 } from "@/utils/services/services";
 
 export default defineNuxtPlugin(() => {
-  configureConsentManagerServices(essentialServicesNames, allServicesNames);
+  configureConsentManager({
+    maxAge: useRuntimeConfig()?.public?.cookieConsent?.maxAge,
+    services: {
+      all: allServicesNames,
+      essential: essentialServicesNames,
+    },
+  });
 });

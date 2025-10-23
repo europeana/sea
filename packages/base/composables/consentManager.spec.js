@@ -1,9 +1,6 @@
 import { beforeAll, describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
-import {
-  configureConsentManagerServices,
-  useConsentManager,
-} from "./consentManager";
+import { configureConsentManager, useConsentManager } from "./consentManager";
 
 mockNuxtImport("useRuntimeConfig", () => {
   return () => ({
@@ -28,7 +25,7 @@ describe("useConsentManager", () => {
   const all = [...essential, analyticsCookie, mediaCookie];
 
   beforeAll(() => {
-    configureConsentManagerServices(essential, all);
+    configureConsentManager({ services: { all, essential } });
   });
   afterEach(() => {
     useCookieMock.mockReset();

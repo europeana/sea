@@ -1,36 +1,35 @@
 import { uniq } from "lodash-es";
+import defu from "defu";
 
 // Globally shared state
 const acceptedServices = ref<string[]>([]);
 const consentRequired = ref<boolean>(true);
 const checkedServices = ref<string[]>([]);
-const services = ref<{
-  essential: string[];
-  all: string[];
+
+const config = ref<{
+  key: string;
+  maxAge: number;
+  services: {
+    all: string[];
+    essential: string[];
+  };
 }>({
-  essential: [],
-  all: [],
+  key: "cookie-consent",
+  maxAge: 60 * 60 * 24 * 15, // defaults to 15 days in seconds
+  services: {
+    all: [],
+    essential: [],
+  },
 });
 
-export function configureConsentManagerServices(
-  essential: string[],
-  all: string[],
-) {
-  services.value = {
-    essential,
-    all,
-  };
+export function configureConsentManager(settings = {}) {
+  config.value = defu(config.value, settings);
 }
 
 export function useConsentManager() {
-  const runtimeConfig = useRuntimeConfig();
-  const COOKIE_CONSENT_KEY = "cookie-consent";
-  const COOKIE_MAX_AGE =
-    runtimeConfig.public.cookieConsent.maxAge || 60 * 60 * 24 * 15; // defaults to 15 days in seconds
-
   // useCookie handles decoding and encoding of the cookie value
-  const consentCookie = useCookie<string[]>(COOKIE_CONSENT_KEY, {
-    maxAge: COOKIE_MAX_AGE,
+  const consentCookie = useCookie<string[]>(config.value.key, {
+    maxAge: config.value.maxAge,
   });
 
   const getCookie = () => {
@@ -55,15 +54,15 @@ export function useConsentManager() {
   };
 
   const acceptAll = () => {
-    saveConsent([...services.value.all]);
+    saveConsent([...config.value.services.all]);
   };
 
   const rejectAll = () => {
-    saveConsent([...services.value.essential]);
+    saveConsent([...config.value.services.essential]);
   };
 
   const acceptOnly = (only: string[]) => {
-    saveConsent([...services.value.essential, ...only]);
+    saveConsent([...config.value.services.essential, ...only]);
   };
 
   // Get and store consent cookie on init
@@ -75,8 +74,8 @@ export function useConsentManager() {
     consentRequired.value = false;
     // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
-    acceptedServices.value = [...services.value.essential];
-    checkedServices.value = [...services.value.essential];
+    acceptedServices.value = [...config.value.services.essential];
+    checkedServices.value = [...config.value.services.essential];
     consentRequired.value = true;
   }
 
