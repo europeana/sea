@@ -1,32 +1,31 @@
+// TODO: consider moving to its own plugin pkg, vue-consent-manager
+
 import { uniq } from "lodash-es";
 import defu from "defu";
 
-// Globally shared state
-const acceptedServices = ref<string[]>([]);
-const consentRequired = ref<boolean>(true);
-const checkedServices = ref<string[]>([]);
+export function createConsentManager(settings = {}) {
+  const acceptedServices = ref<string[]>([]);
+  const consentRequired = ref<boolean>(true);
+  const checkedServices = ref<string[]>([]);
 
-const config = ref<{
-  key: string;
-  maxAge: number;
-  services: {
-    all: string[];
-    essential: string[];
-  };
-}>({
-  key: "cookie-consent",
-  maxAge: 60 * 60 * 24 * 15, // defaults to 15 days in seconds
-  services: {
-    all: [],
-    essential: [],
-  },
-});
+  const config = ref<{
+    key: string;
+    maxAge: number;
+    services: {
+      all: string[];
+      essential: string[];
+    };
+  }>({
+    key: "cookie-consent",
+    maxAge: 60 * 60 * 24 * 15, // defaults to 15 days in seconds
+    services: {
+      all: [],
+      essential: [],
+    },
+  });
 
-export function configureConsentManager(settings = {}) {
   config.value = defu(config.value, settings);
-}
 
-export function useConsentManager() {
   // useCookie handles decoding and encoding of the cookie value
   const consentCookie = useCookie<string[]>(config.value.key, {
     maxAge: config.value.maxAge,
@@ -88,4 +87,14 @@ export function useConsentManager() {
     rejectAll,
     acceptOnly,
   };
+}
+
+export const consentManagerPlugin = {
+  install(app, config) {
+    app.provide("consentManager", createConsentManager(config));
+  },
+};
+
+export function useConsentManager() {
+  return inject("consentManager");
 }
