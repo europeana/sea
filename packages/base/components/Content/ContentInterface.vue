@@ -281,8 +281,6 @@ async function fetchContentMetadata() {
   // the maximum allowed complexity for a query of 11000 is exeeded.
   // TODO: when selectedType is already set, only retrieve those entries
   // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
-  // TODO: normalise the GraphQL files so this can just be a for loop which
-  // interpolates the contentTypes into thte fileName
 
   if (props.contentTypes.includes("blog post")) {
     const blogPostingsResponse = await contentful.query(
