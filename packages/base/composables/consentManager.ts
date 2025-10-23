@@ -1,28 +1,52 @@
-export default function useConsentManager(
-  essentialServices: string[],
-  allServices: string[],
-) {
+// TODO: consider moving to its own plugin pkg, vue-consent-manager
+
+import { uniq } from "lodash-es";
+import defu from "defu";
+
+export function createConsentManager(settings = {}) {
   const { matomo } = useMatomo();
-  const runtimeConfig = useRuntimeConfig();
-  const COOKIE_CONSENT_KEY = "cookie-consent";
-  const COOKIE_MAX_AGE =
-    runtimeConfig.public.cookieConsent.maxAge || 60 * 60 * 24 * 15; // defaults to 15 days in seconds
+  const acceptedServices = ref<string[]>([]);
+  const consentRequired = ref<boolean>(true);
+  const checkedServices = ref<string[]>([]);
 
-  const getCookie = (name: string) => {
-    const cookie = useCookie(name);
+  const config = ref<{
+    key: string;
+    maxAge: number;
+    services: {
+      all: string[];
+      essential: string[];
+    };
+  }>({
+    key: "cookie-consent",
+    maxAge: 60 * 60 * 24 * 15, // defaults to 15 days in seconds
+    services: {
+      all: [],
+      essential: [],
+    },
+  });
 
-    return cookie.value || null;
+  config.value = defu(config.value, settings);
+
+  // useCookie handles decoding and encoding of the cookie value
+  const consentCookie = useCookie<string[]>(config.value.key, {
+    maxAge: config.value.maxAge,
+  });
+
+  const getCookie = () => {
+    return consentCookie.value;
   };
 
-  const setCookie = (name: string, value: string[], maxAge: number) => {
-    const cookie = useCookie(name, { maxAge });
-    cookie.value = value.join();
+  const setCookie = (value: string[] = []) => {
+    consentCookie.value = value;
   };
 
   const saveConsent = (accepted: string[]) => {
-    acceptedServices.value = accepted;
+    acceptedServices.value = uniq(accepted);
 
-    setCookie(COOKIE_CONSENT_KEY, accepted, COOKIE_MAX_AGE);
+    setCookie(uniq(accepted));
+
+    checkedServices.value = [...acceptedServices.value];
+    consentRequired.value = false;
   };
 
   const isServiceAccepted = (service: string) => {
@@ -30,27 +54,27 @@ export default function useConsentManager(
   };
 
   const acceptAll = () => {
-    saveConsent([...allServices]);
+    saveConsent([...config.value.services.all]);
   };
 
   const rejectAll = () => {
-    saveConsent([...essentialServices]);
+    saveConsent([...config.value.services.essential]);
   };
 
-  const acceptOnly = (services: string[]) => {
-    saveConsent([...essentialServices, ...services]);
+  const acceptOnly = (only: string[]) => {
+    saveConsent([...config.value.services.essential, ...only]);
   };
-
-  const acceptedServices = ref<string[]>([]);
-  const consentRequired = ref<boolean>(true);
 
   // Get and store consent cookie on init
-  const consent = getCookie(COOKIE_CONSENT_KEY);
+  const consent = getCookie();
 
-  if (consent?.split(",").length) {
-    acceptedServices.value = consent.split(",");
+  if (consent?.length) {
+    acceptedServices.value = [...consent];
+    checkedServices.value = [...consent];
     consentRequired.value = false;
   } else {
+    acceptedServices.value = [...config.value.services.essential];
+    checkedServices.value = [...config.value.services.essential];
     consentRequired.value = true;
   }
 
@@ -65,9 +89,21 @@ export default function useConsentManager(
 
   return {
     acceptAll,
+    acceptedServices,
+    checkedServices,
     consentRequired,
     isServiceAccepted,
     rejectAll,
     acceptOnly,
   };
+}
+
+export const consentManagerPlugin = {
+  install(app, config) {
+    app.provide("consentManager", createConsentManager(config));
+  },
+};
+
+export function useConsentManager() {
+  return inject("consentManager");
 }

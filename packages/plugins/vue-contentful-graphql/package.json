@@ -5,7 +5,8 @@
   "license": "EUPL-1.2",
   "type": "module",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./query": "./src/query.js"
   },
   "dependencies": {
     "graphql": "^16.11.0",
