@@ -46,6 +46,22 @@ query ContentBySysId(
   ) {
     ...projectPageCollectionFields
   }
+  trainingPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: { AND: [{ sys: { id_in: $ids } }, { name_contains: $query }] }
+  ) {
+    ...trainingPageCollectionFields
+  }
+  eventPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: { AND: [{ sys: { id_in: $ids } }, { name_contains: $query }] }
+  ) {
+    ...eventPageCollectionFields
+  }
 }
 
 fragment exhibitionPageCollectionFields on ExhibitionPageCollection {
@@ -116,5 +132,37 @@ fragment projectPageCollectionFields on ProjectPageCollection {
       }
     }
     headline
+  }
+}
+
+fragment trainingPageCollectionFields on TrainingPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    image {
+      ...imageFields
+    }
+    startDate
+    endDate
+  }
+}
+
+fragment eventPageCollectionFields on EventPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    image {
+      ...imageFields
+    }
+    startDate
+    endDate
   }
 }

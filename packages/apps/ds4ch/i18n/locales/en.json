@@ -25,11 +25,17 @@
   },
   "content": {
     "filter": {
+      "events": "Events",
       "news": "News",
       "projects": "Projects",
+      "training": "Training",
       "viewAll": "View all"
     },
     "resultsHaveLoaded": "{0} results found"
+  },
+  "event": {
+    "dateRange": "{startDate} to {endDate}",
+    "label": "event"
   },
   "footer": {
     "accessibility": "Accessibility",
@@ -112,5 +118,10 @@
       "previousSlide": "Previous slide",
       "slideLabel": "Slide {slide} of {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "training",
+    "ongoing": "Ongoing"
   }
 }
