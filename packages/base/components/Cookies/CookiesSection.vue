@@ -203,7 +203,7 @@ const renderServiceAsCheckbox = (
         "
         :id="`consentcheckbox-subsection-${serviceData.name}`"
       >
-        <PageCookiesSection
+        <CookiesSection
           v-for="(subService, subServiceIndex) in serviceData.services"
           :key="subServiceIndex"
           class="nested-section"

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 
-import PageCookiesWidget from "./PageCookiesWidget.vue";
+import CookiesWidget from "./CookiesWidget.vue";
 
 const meta = {
-  component: PageCookiesWidget,
-} satisfies Meta<typeof PageCookiesWidget>;
+  component: CookiesWidget,
+} satisfies Meta<typeof CookiesWidget>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 
-import PageCookiesModal from "./PageCookiesModal.vue";
+import CookiesModal from "./CookiesModal.vue";
 
 const meta = {
-  component: PageCookiesModal,
+  component: CookiesModal,
   render: (args) => ({
-    components: { PageCookiesModal },
+    components: { CookiesModal },
     setup() {
       return { args };
     },
@@ -14,9 +14,9 @@ const meta = {
   data-bs-toggle="modal" 
   data-bs-target="#cookie-modal"
   >Open modal</button>
-  <PageCookiesModal v-bind='args' />`,
+  <CookiesModal v-bind='args' />`,
   }),
-} satisfies Meta<typeof PageCookiesModal>;
+} satisfies Meta<typeof CookiesModal>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

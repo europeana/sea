@@ -69,6 +69,6 @@ const showToast = () => {
         </div>
       </div>
     </div>
-    <PageCookiesModal @show-toast="showToast" />
+    <CookiesModal @show-toast="showToast" />
   </div>
 </template>

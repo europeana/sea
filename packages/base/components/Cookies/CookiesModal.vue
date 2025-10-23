@@ -184,7 +184,7 @@ const toggleDisplay = (name) => {
                 </GenericSmartLink>
               </template>
             </i18n-t>
-            <PageCookiesSection
+            <CookiesSection
               v-for="(section, index) in groupedSections"
               :key="index"
               :service-data="section"

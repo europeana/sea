@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
-import PageCookiesModal from "./PageCookiesModal.vue";
+import CookiesModal from "./CookiesModal.vue";
 
 let consentRequired = ref(true);
 let acceptedServices = ref([]);
@@ -55,7 +55,7 @@ mockNuxtImport("useI18n", () => {
   };
 });
 const factory = () =>
-  mount(PageCookiesModal, {
+  mount(CookiesModal, {
     global: {
       mocks: {
         $n: (num) => num,
@@ -67,7 +67,7 @@ const factory = () =>
     },
   });
 
-describe("components/Page/PageCookiesModal.vue", () => {
+describe("components/Page/CookiesModal.vue", () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
@@ -124,7 +124,7 @@ describe("components/Page/PageCookiesModal.vue", () => {
   it("renders a section per purpose group", () => {
     const wrapper = factory();
     const sections = wrapper.findAllComponents({
-      name: "PageCookiesSection",
+      name: "CookiesSection",
     });
 
     expect(sections.length).toBe(15);
@@ -133,7 +133,7 @@ describe("components/Page/PageCookiesModal.vue", () => {
   it("toggles display sections via toggleDisplay method", async () => {
     const wrapper = factory();
     const sectionInstance = wrapper.findComponent({
-      name: "PageCookiesSection",
+      name: "CookiesSection",
     }).vm;
 
     expect(wrapper.vm.show).toContain("thirdPartyContent");

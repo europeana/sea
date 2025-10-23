@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
-import PageCookiesSection from "./PageCookiesSection.vue";
+import CookiesSection from "./CookiesSection.vue";
 
 const { useI18nMock } = vi.hoisted(() => ({
   useI18nMock: vi.fn(() => {
@@ -40,7 +40,7 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
   }),
 }));
 
-describe("components/Page/PageCookiesSection.vue", () => {
+describe("components/Page/CookiesSection.vue", () => {
   beforeEach(() => {
     vi.resetAllMocks();
     checkedServices.value = [];
@@ -48,7 +48,7 @@ describe("components/Page/PageCookiesSection.vue", () => {
   describe("label", () => {
     describe("when section is a purpose", () => {
       it("renders a checkbox for a service with correct label", () => {
-        const wrapper = mount(PageCookiesSection, {
+        const wrapper = mount(CookiesSection, {
           global: {
             mocks: {
               $n: (num) => num,
@@ -70,7 +70,7 @@ describe("components/Page/PageCookiesSection.vue", () => {
 
     describe("when section is a service", () => {
       it("renders a checkbox for a service with correct label", () => {
-        const wrapper = mount(PageCookiesSection, {
+        const wrapper = mount(CookiesSection, {
           props: {
             serviceData: {
               name: "analytics",
@@ -92,7 +92,7 @@ describe("components/Page/PageCookiesSection.vue", () => {
           te: () => false,
         }));
 
-        const wrapper = mount(PageCookiesSection, {
+        const wrapper = mount(CookiesSection, {
           props: {
             serviceData: {
               name: "analytics",
@@ -111,7 +111,7 @@ describe("components/Page/PageCookiesSection.vue", () => {
   describe("when service is in checkedServices", () => {
     it("checkbox is checked ", () => {
       checkedServices.value = ["analytics"];
-      const wrapper = mount(PageCookiesSection, {
+      const wrapper = mount(CookiesSection, {
         props: {
           serviceData: {
             name: "analytics",
@@ -127,7 +127,7 @@ describe("components/Page/PageCookiesSection.vue", () => {
 
   describe("when toggling the checkbox input", () => {
     it("updates checkedServices", () => {
-      const wrapper = mount(PageCookiesSection, {
+      const wrapper = mount(CookiesSection, {
         props: {
           serviceData: {
             name: "analytics",
@@ -149,7 +149,7 @@ describe("components/Page/PageCookiesSection.vue", () => {
   it("applies indeterminate state for partially selected child services", async () => {
     checkedServices.value = ["video"];
 
-    const wrapper = mount(PageCookiesSection, {
+    const wrapper = mount(CookiesSection, {
       global: {
         mocks: {
           $n: (num) => num,

@@ -34,7 +34,7 @@ useHead({
       class="toast-container position-fixed bottom-0 ms-2 ms-sm-4 mb-2 mb-sm-4"
     >
       <!-- Keep at the top of page for easy keyboard a11y -->
-      <PageCookiesWidget />
+      <CookiesWidget />
     </div>
     <PageHeader />
     <main>

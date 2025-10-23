@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-import PageCookiesWidget from "./PageCookiesWidget.vue";
+import CookiesWidget from "./CookiesWidget.vue";
 
 let consentRequired = ref(true);
 const acceptAll = vi.fn();
@@ -14,27 +14,27 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
   }),
 }));
 
-describe("components/Page/PageCookiesWidget.vue", () => {
+describe("components/Page/CookiesWidget.vue", () => {
   beforeEach(() => {
     vi.resetAllMocks();
     consentRequired.value = true;
   });
 
   it("renders a toast", () => {
-    const wrapper = shallowMount(PageCookiesWidget);
+    const wrapper = shallowMount(CookiesWidget);
 
     expect(wrapper.find(".toast").exists()).toBe(true);
   });
 
   it("does not render a toast if consent is not required", () => {
     consentRequired.value = false;
-    const wrapper = shallowMount(PageCookiesWidget);
+    const wrapper = shallowMount(CookiesWidget);
 
     expect(wrapper.find(".toast").exists()).toBe(false);
   });
 
   it("calls acceptAll on Accept button click", () => {
-    const wrapper = shallowMount(PageCookiesWidget);
+    const wrapper = shallowMount(CookiesWidget);
 
     wrapper.find("button.btn-success").trigger("click");
 
@@ -42,7 +42,7 @@ describe("components/Page/PageCookiesWidget.vue", () => {
   });
 
   it("calls rejectAll on Decline button click", () => {
-    const wrapper = shallowMount(PageCookiesWidget);
+    const wrapper = shallowMount(CookiesWidget);
 
     wrapper.find("button.btn-outline-primary").trigger("click");
 
