@@ -2,6 +2,7 @@ import { consentManagerPlugin } from "@europeana/sea-base-layer/composables/cons
 import {
   allServicesNames,
   essentialServicesNames,
+  handleCallbacks,
 } from "@/utils/services/services";
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -10,6 +11,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     services: {
       all: allServicesNames,
       essential: essentialServicesNames,
+      handleCallbacks,
     },
   });
 });

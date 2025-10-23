@@ -92,28 +92,18 @@ describe("consent manager", () => {
   });
 
   describe("when accepted services are updated", () => {
-    describe("and Matomo is accepted", () => {
-      it("calls matomo to set it's cookie", async () => {
-        const matomoCookie = ["matomo"];
+    describe("and there is a handleCallbacks function in the config", () => {
+      it("calls handleCallbacks", async () => {
+        const handleCallbacks = vi.fn();
 
-        const { acceptOnly } = createConsentManager({
-          services: { essential, matomoCookie },
+        const { acceptAll } = createConsentManager({
+          services: { essential, all, handleCallbacks },
         });
 
-        acceptOnly(matomoCookie);
+        acceptAll();
         await nextTick();
 
-        expect(rememberMatomoSpy).toHaveBeenCalled();
-      });
-    });
-    describe("and Matomo is NOT accepted", () => {
-      it("calls matomo to remove it's cookie", async () => {
-        const { rejectAll } = createConsentManager(config);
-
-        rejectAll();
-        await nextTick();
-
-        expect(forgetMatomoSpy).toHaveBeenCalled();
+        expect(handleCallbacks).toHaveBeenCalled();
       });
     });
   });
