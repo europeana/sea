@@ -6,5 +6,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(VueMatomo, {
     ...config,
     router: useRouter(),
+    requireCookieConsent: true,
   });
 });
