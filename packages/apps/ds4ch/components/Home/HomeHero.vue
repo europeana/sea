@@ -80,7 +80,9 @@ const imageCSSVars = computed(() =>
       <div id="europeana-logo" class="mb-5 mb-lg-0">
         <p class="text-uppercase fw-semibold mb-0">
           {{ $t("home.broughtBy") }}
-          <img src="@europeana/style/img/logo.svg" alt="Europeana" />
+          <a href="https://www.europeana.eu" target="_blank">
+            <img src="@europeana/style/img/logo.svg" alt="Europeana" />
+          </a>
         </p>
       </div>
     </div>

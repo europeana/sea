@@ -5,6 +5,7 @@ import audio from "./definitions/audio.json";
 import ds4ch from "./definitions/ds4ch.json";
 import socialMedia from "./definitions/socialMedia.json";
 import video from "./definitions/video.json";
+import * as callbacks from "./callbacks/index.js";
 
 const definitions = {
   "2D": twoD,
@@ -28,23 +29,38 @@ const parseDefinitions = (purpose) =>
     return service;
   });
 
-// const mediaViewingServices = [
-//   ...parseDefinitions("2D"),
-//   ...parseDefinitions("3D"),
-//   ...parseDefinitions("audio"),
-//   ...parseDefinitions("video"),
-// ].map((service) => ({
-//   ...service,
-//   purposes: ["mediaViewing", ...service.purposes],
-// }));
+const mediaViewingServices = [
+  ...parseDefinitions("2D"),
+  ...parseDefinitions("3D"),
+  ...parseDefinitions("audio"),
+  ...parseDefinitions("video"),
+].map((service) => ({
+  ...service,
+  purposes: ["mediaViewing", ...service.purposes],
+}));
 
-// const thirdPartyServices = [
-//   ...parseDefinitions("socialMedia"),
-//   ...mediaViewingServices,
-// ].map((service) => ({
-//   ...service,
-//   purposes: ["thirdPartyContent", ...service.purposes],
-// }));
+const thirdPartyServices = [
+  ...parseDefinitions("socialMedia"),
+  ...mediaViewingServices,
+].map((service) => ({
+  ...service,
+  purposes: ["thirdPartyContent", ...service.purposes],
+}));
 
+// TODO comment out thirdPartyServices before merge
 // TODO add ...thirdPartyServices when embed gateway is in place
-export default [...parseDefinitions("ds4ch")];
+const services = [...parseDefinitions("ds4ch"), ...thirdPartyServices];
+
+const essentialServicesNames = services
+  .filter((s) => s.required)
+  .map((s) => s.name);
+
+const allServicesNames = services.map((s) => s.name);
+
+const handleCallbacks = (acceptedServices) => {
+  for (const service in callbacks) {
+    callbacks[service](acceptedServices.includes(service));
+  }
+};
+
+export { services, essentialServicesNames, allServicesNames, handleCallbacks };

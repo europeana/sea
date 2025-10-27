@@ -20,4 +20,15 @@ describe("components/home/HomeHero", () => {
       });
     });
   });
+
+  describe("europeana logo", () => {
+    it("exists and links to europeana.eu", () => {
+      const wrapper = factory({
+        headline: "hero title",
+        heroImage: { image: { url: "https://www.europeana.eu/example.jpg" } },
+      });
+      const logoLink = wrapper.find("#europeana-logo a");
+      expect(logoLink.attributes("href")).toEqual("https://www.europeana.eu");
+    });
+  });
 });

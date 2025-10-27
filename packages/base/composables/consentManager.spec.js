@@ -1,6 +1,18 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
-import useConsentManager from "./consentManager";
+import { createConsentManager } from "./consentManager";
+
+const rememberMatomoSpy = vi.fn();
+const forgetMatomoSpy = vi.fn();
+
+mockNuxtImport("useMatomo", () => {
+  return () => ({
+    matomo: ref({
+      rememberCookieConsentGiven: rememberMatomoSpy,
+      forgetCookieConsentGiven: forgetMatomoSpy,
+    }),
+  });
+});
 
 mockNuxtImport("useRuntimeConfig", () => {
   return () => ({
@@ -17,20 +29,21 @@ const { useCookieMock } = vi.hoisted(() => ({
 }));
 mockNuxtImport("useCookie", () => useCookieMock);
 
-describe("useConsentManager", () => {
-  afterEach(() => {
-    useCookieMock.mockReset();
-  });
-
+describe("consent manager", () => {
   const essentialCookie = "auth";
   const analyticsCookie = "analytics";
   const mediaCookie = "media";
   const essential = [essentialCookie];
   const all = [...essential, analyticsCookie, mediaCookie];
+  const config = { services: { essential, all } };
+
+  afterEach(() => {
+    useCookieMock.mockReset();
+  });
 
   describe("when there is no consent cookie set", () => {
     it("returns consentRequired is true", () => {
-      const { consentRequired } = useConsentManager(essential, all);
+      const { consentRequired } = createConsentManager(config);
 
       expect(consentRequired.value).toBe(true);
     });
@@ -39,12 +52,10 @@ describe("useConsentManager", () => {
   describe("when there is already a consent cookie set", () => {
     it("returns consentRequired to false and returns saved preferences as expected", () => {
       useCookieMock.mockImplementation(() => ({
-        value: `${essentialCookie},${mediaCookie}`,
+        value: [essentialCookie, mediaCookie],
       }));
-      const { consentRequired, isServiceAccepted } = useConsentManager(
-        essential,
-        all,
-      );
+      const { consentRequired, isServiceAccepted } =
+        createConsentManager(config);
 
       expect(consentRequired.value).toBe(false);
       expect(isServiceAccepted(mediaCookie)).toBe(true);
@@ -52,7 +63,7 @@ describe("useConsentManager", () => {
   });
 
   it("saves full consent on acceptAll", () => {
-    const { acceptAll, isServiceAccepted } = useConsentManager(essential, all);
+    const { acceptAll, isServiceAccepted } = createConsentManager(config);
 
     acceptAll();
 
@@ -62,7 +73,7 @@ describe("useConsentManager", () => {
   });
 
   it("saves only essential on rejectAll", () => {
-    const { rejectAll, isServiceAccepted } = useConsentManager(essential, all);
+    const { rejectAll, isServiceAccepted } = createConsentManager(config);
 
     rejectAll();
 
@@ -71,12 +82,29 @@ describe("useConsentManager", () => {
   });
 
   it("saves specific services (and essential) on acceptOnly", () => {
-    const { acceptOnly, isServiceAccepted } = useConsentManager(essential, all);
+    const { acceptOnly, isServiceAccepted } = createConsentManager(config);
 
     acceptOnly([analyticsCookie]);
 
     expect(isServiceAccepted(essentialCookie)).toBe(true);
     expect(isServiceAccepted(analyticsCookie)).toBe(true);
     expect(isServiceAccepted(mediaCookie)).toBe(false);
+  });
+
+  describe("when accepted services are updated", () => {
+    describe("and there is a handleCallbacks function in the config", () => {
+      it("calls handleCallbacks", async () => {
+        const handleCallbacks = vi.fn();
+
+        const { acceptAll } = createConsentManager({
+          services: { essential, all, handleCallbacks },
+        });
+
+        acceptAll();
+        await nextTick();
+
+        expect(handleCallbacks).toHaveBeenCalled();
+      });
+    });
   });
 });
