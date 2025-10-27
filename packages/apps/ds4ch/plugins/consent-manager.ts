@@ -7,6 +7,7 @@ import {
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(consentManagerPlugin, {
+    key: "ds4ch-cookie-consent",
     maxAge: useRuntimeConfig()?.public?.cookieConsent?.maxAge,
     services: {
       all: allServicesNames,
