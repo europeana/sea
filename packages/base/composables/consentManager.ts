@@ -24,7 +24,7 @@ export function createConsentManager(settings = {}) {
     },
   });
 
-  config.value = defu(config.value, settings);
+  config.value = defu(settings, config.value);
 
   // useCookie handles decoding and encoding of the cookie value
   const consentCookie = useCookie<string[]>(config.value.key, {
