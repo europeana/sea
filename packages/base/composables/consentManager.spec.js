@@ -2,6 +2,18 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import { createConsentManager } from "./consentManager";
 
+const rememberMatomoSpy = vi.fn();
+const forgetMatomoSpy = vi.fn();
+
+mockNuxtImport("useMatomo", () => {
+  return () => ({
+    matomo: ref({
+      rememberCookieConsentGiven: rememberMatomoSpy,
+      forgetCookieConsentGiven: forgetMatomoSpy,
+    }),
+  });
+});
+
 mockNuxtImport("useRuntimeConfig", () => {
   return () => ({
     public: {
@@ -77,5 +89,22 @@ describe("consent manager", () => {
     expect(isServiceAccepted(essentialCookie)).toBe(true);
     expect(isServiceAccepted(analyticsCookie)).toBe(true);
     expect(isServiceAccepted(mediaCookie)).toBe(false);
+  });
+
+  describe("when accepted services are updated", () => {
+    describe("and there is a handleCallbacks function in the config", () => {
+      it("calls handleCallbacks", async () => {
+        const handleCallbacks = vi.fn();
+
+        const { acceptAll } = createConsentManager({
+          services: { essential, all, handleCallbacks },
+        });
+
+        acceptAll();
+        await nextTick();
+
+        expect(handleCallbacks).toHaveBeenCalled();
+      });
+    });
   });
 });

@@ -14,6 +14,7 @@ export function createConsentManager(settings = {}) {
     services: {
       all: string[];
       essential: string[];
+      handleCallbacks?: (parameter: string[]) => void;
     };
   }>({
     key: "cookie-consent",
@@ -71,12 +72,16 @@ export function createConsentManager(settings = {}) {
     acceptedServices.value = [...consent];
     checkedServices.value = [...consent];
     consentRequired.value = false;
-    // TODO callbacks for services that need logic (matomo, hotjar)
   } else {
     acceptedServices.value = [...config.value.services.essential];
     checkedServices.value = [...config.value.services.essential];
     consentRequired.value = true;
   }
+
+  watch(acceptedServices, (newVal) => {
+    config.value.services.handleCallbacks?.(newVal);
+    // TODO: Remove any other not accepted cookie
+  });
 
   return {
     acceptAll,
