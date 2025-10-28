@@ -102,3 +102,12 @@ div.landing-sub-section {
     }
   }
 }
+
+// CSS variables for theme specific overrides base components
+// TODO: use this approach for other base component style overrides
+:root {
+  --bg-primary: #{$black};
+  --color-primary: #{$black};
+  --bp-4k-increment: 2;
+  --font-family-primary: #{$font-family-montserrat};
+}
