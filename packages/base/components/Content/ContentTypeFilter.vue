@@ -135,6 +135,10 @@ const routeForType = (type) => {
   }
 }
 
+.context-label {
+  color: $darkgrey-light;
+}
+
 .dropdown-menu {
   left: auto;
   right: 0;
