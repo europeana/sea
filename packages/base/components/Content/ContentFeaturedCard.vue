@@ -87,15 +87,12 @@ const imageSizes = [
 
 .featured-content-card {
   min-height: 10rem;
+  flex: 0 1 100%;
+  max-width: none;
+  margin-bottom: 3rem;
 
-  @at-root .xxl-page .card-deck-4-cols & {
-    flex: 0 1 100%;
-    max-width: none;
-    margin-bottom: 3rem;
-
-    @media (min-width: $bp-4k) {
-      margin-bottom: calc(var(--bp-4k-increment) * 3rem);
-    }
+  @media (min-width: $bp-4k) {
+    margin-bottom: calc(var(--bp-4k-increment) * 3rem);
   }
 
   :deep(.card-wrapper) {
