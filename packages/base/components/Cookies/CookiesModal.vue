@@ -174,11 +174,11 @@ const toggleDisplay = (name) => {
               scope="global"
               class="mb-4k-4"
             >
-              <template #privacyPolicy>
+              <template #privacyStatement>
                 <GenericSmartLink
                   destination="https://www.europeana.eu/rights/privacy-statement"
                 >
-                  {{ $t("cookies.consentModal.privacyPolicy")
+                  {{ $t("cookies.consentModal.privacyStatement")
                   }}<!-- This comment removes white space
               -->
                 </GenericSmartLink>
