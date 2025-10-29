@@ -6,6 +6,9 @@ on:
       app:
         required: true
         type: string
+      storybook:
+        default: false
+        type: boolean
 
 env:
   DOCKER_REPOSITORY: ${{ vars.DOCKER_HUB_ORGANIZATION }}/${{ inputs.app }}
@@ -108,7 +111,7 @@ jobs:
   docker-build-storybook:
     needs: [metadata]
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
+    if: inputs.storybook && ((github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true'))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
