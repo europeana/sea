@@ -1,11 +1,19 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
+const { t } = useI18n({ useScope: "global" });
 
-const { acceptAll, rejectAll, consentRequired } = useConsentManager();
+const { acceptAll, rejectAll, consentRequired, consentSaved } =
+  useConsentManager();
 
 const toastId = "cookie-notice-toast";
 const toastRef = useTemplateRef("toast");
 let toastInstance;
+
+const text = computed(() =>
+  consentSaved.value
+    ? t("cookies.consentNotice.textUpdated")
+    : t("cookies.consentNotice.text"),
+);
 
 onMounted(async () => {
   if (consentRequired.value) {
@@ -47,7 +55,7 @@ const showToast = () => {
       data-bs-autohide="false"
     >
       <div class="toast-body">
-        <p>{{ $t("cookies.consentNotice.description") }}</p>
+        <p>{{ text }}</p>
         <div class="d-flex justify-content-between align-items-center">
           <button
             class="btn btn-link p-0"
