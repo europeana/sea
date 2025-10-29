@@ -42,7 +42,8 @@
       "title": "Services we would like to use."
     },
     "consentNotice": {
-      "description": "Could we please enable services for security, analytics and third-party content?",
+      "text": "Could we please enable services for security, analytics and third-party content?",
+      "textUpdated": "There have been some changes in services since your last visit. Could we please enable additional services?",
       "learnMore": "Let me choose"
     },
     "decline": "I decline",

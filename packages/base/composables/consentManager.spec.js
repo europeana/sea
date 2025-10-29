@@ -50,15 +50,43 @@ describe("consent manager", () => {
   });
 
   describe("when there is already a consent cookie set", () => {
-    it("returns consentRequired to false and returns saved preferences as expected", () => {
-      useCookieMock.mockImplementation(() => ({
-        value: [essentialCookie, mediaCookie],
-      }));
-      const { consentRequired, isServiceAccepted } =
-        createConsentManager(config);
+    describe("and services are unchanged", () => {
+      it("returns consentRequired to false, consentSaved to true, and returns saved preferences as expected", () => {
+        useCookieMock.mockImplementation(() => ({
+          value: {
+            [essentialCookie]: true,
+            [mediaCookie]: true,
+            [analyticsCookie]: false,
+          },
+        }));
+        const { consentRequired, consentSaved, isServiceAccepted } =
+          createConsentManager(config);
 
-      expect(consentRequired.value).toBe(false);
-      expect(isServiceAccepted(mediaCookie)).toBe(true);
+        expect(consentRequired.value).toBe(false);
+        expect(consentSaved.value).toBe(true);
+        expect(isServiceAccepted(mediaCookie)).toBe(true);
+      });
+    });
+
+    describe("and new services were added", () => {
+      it("returns consentRequired to true", () => {
+        const configWithNewService = { ...config };
+        configWithNewService.services.all.push("other");
+
+        useCookieMock.mockImplementation(() => ({
+          value: {
+            [essentialCookie]: true,
+            [mediaCookie]: true,
+            [analyticsCookie]: false,
+          },
+        }));
+        const { consentRequired, consentSaved, isServiceAccepted } =
+          createConsentManager(configWithNewService);
+
+        expect(consentRequired.value).toBe(true);
+        expect(consentSaved.value).toBe(true);
+        expect(isServiceAccepted(mediaCookie)).toBe(true);
+      });
     });
   });
 

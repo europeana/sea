@@ -3,9 +3,12 @@
 import { uniq } from "lodash-es";
 import defu from "defu";
 
+type ConsentCookie = Record<string, boolean>;
+
 export function createConsentManager(settings = {}) {
   const acceptedServices = ref<string[]>([]);
   const consentRequired = ref<boolean>(true);
+  const consentSaved = ref<boolean>(false);
   const checkedServices = ref<string[]>([]);
 
   const config = ref<{
@@ -28,25 +31,35 @@ export function createConsentManager(settings = {}) {
   config.value = defu(settings, config.value);
 
   // useCookie handles decoding and encoding of the cookie value
-  const consentCookie = useCookie<string[]>(config.value.key, {
+  const consentCookie = useCookie<ConsentCookie>(config.value.key, {
     maxAge: config.value.maxAge,
   });
 
-  const getCookie = () => {
+  const getCookie = (): ConsentCookie => {
     return consentCookie.value;
   };
 
-  const setCookie = (value: string[] = []) => {
+  const setCookie = (value: ConsentCookie) => {
     consentCookie.value = value;
   };
 
   const saveConsent = (accepted: string[]) => {
     acceptedServices.value = uniq(accepted);
 
-    setCookie(uniq(accepted));
+    const cookieValue: ConsentCookie = config.value.services.all.reduce(
+      (memo, service) => {
+        memo[service] = acceptedServices.value.includes(service);
+
+        return memo;
+      },
+      {} as ConsentCookie,
+    );
+
+    setCookie(cookieValue);
 
     checkedServices.value = [...acceptedServices.value];
     consentRequired.value = false;
+    consentSaved.value = true;
   };
 
   const isServiceAccepted = (service: string) => {
@@ -68,11 +81,25 @@ export function createConsentManager(settings = {}) {
   // Get and store consent cookie on init
   const consent = getCookie();
 
-  if (consent?.length) {
-    acceptedServices.value = [...consent];
-    checkedServices.value = [...consent];
-    consentRequired.value = false;
+  if (consent) {
+    const servicesWithConsent = Object.keys(consent).filter(
+      (service) => !!consent[service],
+    );
+    acceptedServices.value = servicesWithConsent;
+    checkedServices.value = servicesWithConsent;
+    consentSaved.value = true;
+    // if there are no new services
+    if (
+      config.value.services.all.every((service: string) =>
+        Object.keys(consent).includes(service),
+      )
+    ) {
+      consentRequired.value = false;
+    } else {
+      consentRequired.value = true;
+    }
   } else {
+    consentSaved.value = false;
     acceptedServices.value = [...config.value.services.essential];
     checkedServices.value = [...config.value.services.essential];
     consentRequired.value = true;
@@ -88,6 +115,7 @@ export function createConsentManager(settings = {}) {
     acceptedServices,
     checkedServices,
     consentRequired,
+    consentSaved,
     isServiceAccepted,
     rejectAll,
     acceptOnly,
