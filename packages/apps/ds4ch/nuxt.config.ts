@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     },
     defaultLocale: "en",
     detectBrowserLanguage: {
-      useCookie: false,
+      useCookie: true,
     },
     strategy: "prefix",
     locales: i18nLocales.map((locale) => ({
