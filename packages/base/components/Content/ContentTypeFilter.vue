@@ -128,15 +128,12 @@ const routeForType = (type) => {
 
   &.active {
     color: $black;
+    text-decoration: underline !important;
 
     a {
       background-color: $white;
     }
   }
-}
-
-.context-label {
-  color: $darkgrey-light;
 }
 
 .dropdown-menu {
@@ -168,6 +165,7 @@ const routeForType = (type) => {
   &.active {
     background-color: $white;
     color: $black;
+    text-decoration: underline !important;
   }
 }
 </style>

@@ -368,7 +368,6 @@ watch(page, () => {
 @import "assets/scss/variables";
 
 .context-label {
-  color: $darkgrey-light;
   font-size: $font-size-small;
 
   @media (min-width: $bp-4k) {
