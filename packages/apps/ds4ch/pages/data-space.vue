@@ -59,6 +59,7 @@ const defaultCardThumbnail = {
       :content-types="page.contentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
       :cta-banners="page.hasPartCollection?.items"
+      :featured-entry="page.featuredContent"
     />
   </div>
 </template>
