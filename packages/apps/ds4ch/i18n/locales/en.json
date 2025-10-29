@@ -36,13 +36,13 @@
     "acceptSelected": "Accept selected",
     "consentModal": {
       "alwaysRequired": "(Always required)",
-      "text": "Here you can see and customise the services that we'd like to use on this website. To learn more please read our {privacyPolicy}.",
-      "privacyPolicy": "Privacy policy",
+      "text": "Here you can see and customise the services that we'd like to use on this website. To learn more please read our {privacyStatement}.",
+      "privacyStatement": "Privacy statement",
       "servicesCount": "{count} service | {count} services",
       "title": "Services we would like to use."
     },
     "consentNotice": {
-      "description": "Hi! Could we please enable some additional services for analytics and security? You can always change or withdraw your consent later.",
+      "description": "Could we please enable services for security, analytics and third-party content?",
       "learnMore": "Let me choose"
     },
     "decline": "I decline",
@@ -58,7 +58,7 @@
         "title": "Audio"
       },
       "essential": {
-        "description": "These services are essential for the correct functioning of this website. They include search results view and language preferences, preserve the logged in state and keep your visit secure. You cannot disable them as the website would not work correctly otherwise.",
+        "description": "These services are essential for the correct functioning of this website. They include language preferences and keep your visit secure. You cannot disable them as the website would not work correctly otherwise.",
         "title": "Essential services for security and customisation"
       },
       "mediaViewing": {
@@ -88,6 +88,10 @@
       }
     },
     "services": {
+      "cloudflare": {
+        "description": "Remembers that you are a human.",
+        "title": "Cloudflare"
+      },
       "hotjar": {
         "description": "Collects usage data to help us analyse user interactions. Activates a survey widget giving you the option to respond to our visitor satisfaction surveys.",
         "title": "Hotjar"
