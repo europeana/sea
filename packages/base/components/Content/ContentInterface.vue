@@ -4,8 +4,8 @@ import useScrollTo from "@/composables/scrollTo.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
-import trainingPagesListingMinimalGraphql from "@/graphql/queries/trainingPagesListingMinimal.graphql";
-import eventPagesListingMinimalGraphql from "@/graphql/queries/eventPagesListingMinimal.graphql";
+import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
+import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
@@ -60,12 +60,12 @@ const selectedTags = computed(() => {
 });
 
 const typeLookup = {
-  news: "BlogPosting",
-  project: "ProjectPage",
-  story: "Story",
-  exhibition: "ExhibitionPage",
-  training: "TrainingPage",
-  event: "EventPage",
+  news: { type: "BlogPosting" },
+  project: { type: "ProjectPage" },
+  story: { type: "Story" },
+  exhibition: { type: "ExhibitionPage" },
+  training: { type: "Event", taxonomy: "eventTypeTrainingCourse" },
+  event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
 
 const selectedType = computed(() => {
@@ -105,7 +105,14 @@ const relevantContentMetadata = computed(() => {
   if (selectedType.value) {
     // Filter by selected type
     relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
-      return contentEntry["__typename"] === selectedType.value;
+      return (
+        contentEntry["__typename"] === selectedType.value.type &&
+        (contentEntry.contentfulMetadata?.concepts.length > 0
+          ? contentEntry.contentfulMetadata.concepts.some((taxonomy) => {
+              return taxonomy.id === selectedType.value.taxonomy;
+            })
+          : true)
+      );
     });
   }
   if (selectedTags.value.length > 0) {
@@ -140,7 +147,7 @@ const showFeaturedEntry = computed(() => {
   return (
     props.featuredEntry &&
     (!selectedType.value ||
-      selectedType.value === props.featuredEntry.__typename) &&
+      selectedType.value.type === props.featuredEntry.__typename) &&
     featuredEntryMatchesSelectedTags &&
     page.value === 1
   );
@@ -180,8 +187,7 @@ async function fetchContent() {
     contentResponse.data.exhibitionPageCollection?.items,
     contentResponse.data.blogPostingCollection?.items,
     contentResponse.data.projectPageCollection?.items,
-    contentResponse.data.eventPageCollection?.items,
-    contentResponse.data.trainingPageCollection?.items,
+    contentResponse.data.eventCollection?.items,
   ].flat();
 
   const retrievedContentEntries = contentSysIds
@@ -225,7 +231,7 @@ function trainingDateHelper(startDate, endDate) {
     }
     return t("training.dateRange", {
       startDate: d(startDate, "short"),
-      endDate: d(formatedEndDate, "short"),
+      endDate: formatedEndDate,
     });
   }
   return t("training.ongoing");
@@ -263,22 +269,25 @@ function normaliseCard(entry) {
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
       };
-    } else if (entry.__typename === "EventPage") {
+    } else if (entry.__typename === "Event") {
+      if (
+        entry.contentfulMetadata.concepts[0].id === typeLookup.training.taxonomy
+      ) {
+        return {
+          ...entry,
+          url: entry.url,
+          subTitle: t("training.label"),
+          text: trainingDateHelper(entry.startDate, entry.endDate),
+          primaryImageOfPage: {
+            image: entry.image || props.defaultCardThumbnail.image,
+          },
+        };
+      }
       return {
         ...entry,
-        url: entry.identifier,
+        url: entry.url,
         subTitle: t("event.label"),
         text: eventDateHelper(entry.startDate, entry.endDate),
-        primaryImageOfPage: {
-          image: entry.image || props.defaultCardThumbnail.image,
-        },
-      };
-    } else if (entry.__typename === "TrainingPage") {
-      return {
-        ...entry,
-        url: entry.identifier,
-        subTitle: t("training.label"),
-        text: trainingDateHelper(entry.startDate, entry.endDate),
         primaryImageOfPage: {
           image: entry.image || props.defaultCardThumbnail.image,
         },
@@ -321,21 +330,20 @@ async function fetchContentMetadata() {
     contentIds.push(...projectPages);
   }
   if (props.contentTypes.includes("event")) {
-    const eventPagesResponse = await contentful.query(
-      eventPagesListingMinimalGraphql,
+    const eventsResponse = await contentful.query(
+      eventsListingMinimalGraphql,
       contentIdsVariables,
     );
-    const eventPages = eventPagesResponse.data.eventPageCollection?.items || [];
-    contentIds.push(...eventPages);
+    const events = eventsResponse.data.eventCollection?.items || [];
+    contentIds.push(...events);
   }
   if (props.contentTypes.includes("training")) {
-    const trainingPagesResponse = await contentful.query(
-      trainingPagesListingMinimalGraphql,
+    const trainingsResponse = await contentful.query(
+      trainingsListingMinimalGraphql,
       contentIdsVariables,
     );
-    const trainingPages =
-      trainingPagesResponse.data.trainingPageCollection?.items || [];
-    contentIds.push(...trainingPages);
+    const trainings = trainingsResponse.data.eventCollection?.items || [];
+    contentIds.push(...trainings);
   }
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,

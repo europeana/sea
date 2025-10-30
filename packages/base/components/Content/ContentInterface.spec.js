@@ -177,7 +177,21 @@ describe("components/content/contentInterface", () => {
       }));
       const wrapper = await factory();
 
-      expect(wrapper.vm.selectedType).toBe("ProjectPage");
+      expect(wrapper.vm.selectedType).toStrictEqual({ type: "ProjectPage" });
+    });
+
+    it("contains taxonomy info when the type in the URL requires it", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          type: "training",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedType).toStrictEqual({
+        type: "Event",
+        taxonomy: "eventTypeTrainingCourse",
+      });
     });
   });
   describe("filteredTags", () => {
