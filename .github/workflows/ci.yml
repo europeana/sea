@@ -65,13 +65,32 @@ jobs:
         run: pnpm install
       - name: Run eslint
         run: npx eslint .
+  test-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run unit tests
+        run: pnpm test
   ci-app:
     name: CI (app)
     strategy:
       fail-fast: false
       matrix:
-        app: [ds4ch]
+        app: [cats, ds4ch]
     uses: ./.github/workflows/ci-app.yml
     with:
       app: ${{ matrix.app }}
+      storybook: ${{ contains(fromJSON('["ds4ch"]'), matrix.app) }}
     secrets: inherit

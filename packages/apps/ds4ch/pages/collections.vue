@@ -4,7 +4,7 @@ import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const slug = "collections";
 const contentful = inject("$contentful");
-const { localeProperties } = useI18n();
+const { t, localeProperties } = useI18n({ useScope: "global" });
 
 const { data: page } = await useAsyncData(`landingPage:${slug}`, async () => {
   const variables = {
@@ -17,6 +17,7 @@ const { data: page } = await useAsyncData(`landingPage:${slug}`, async () => {
 });
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const featuredContent = page.value.featuredContent;
 
 useHead({
   title: page.value.headline,
@@ -30,11 +31,20 @@ useHead({
       :text="page.text"
       :hero-image="page.primaryImageOfPage"
     />
+    <div v-if="featuredContent" class="container my-5 py-4k-5">
+      <ContentFeaturedCard
+        :sub-title="t('featured')"
+        :title="featuredContent.name"
+        :text="featuredContent.description"
+        :image="featuredContent.image"
+        :url="featuredContent.url"
+      />
+    </div>
     <template v-for="(section, index) in sections">
       <div
         v-if="contentfulEntryHasContentType(section, 'IllustrationGroup')"
         :key="index"
-        class="container my-5 py-4k-5"
+        class="illustration-group container my-5 py-4k-5"
       >
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 g-4k-5">
           <div
@@ -64,7 +74,7 @@ useHead({
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 
-:deep(.content-card .card-img) {
+:deep(.content-card:not(.featured-content-card) .card-img) {
   justify-content: center;
   height: 13rem;
 

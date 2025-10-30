@@ -1,0 +1,18 @@
+import { consentManagerPlugin } from "@europeana/sea-base-layer/composables/consentManager";
+import {
+  allServicesNames,
+  essentialServicesNames,
+  handleCallbacks,
+} from "@/utils/services/services";
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(consentManagerPlugin, {
+    key: "ds4ch-cookie-consent",
+    maxAge: useRuntimeConfig()?.public?.cookieConsent?.maxAge,
+    services: {
+      all: allServicesNames,
+      essential: essentialServicesNames,
+      handleCallbacks,
+    },
+  });
+});

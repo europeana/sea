@@ -62,7 +62,7 @@ const routeForType = (type) => {
             class="nav-item"
           >
             <GenericSmartLink
-              class="nav-link context-label text-decoration-none ps-3 ps-4k-4 pe-0"
+              class="nav-link context-label text-decoration-none p-0 ms-3 ms-4k-4 me-0"
               :class="isTypeActive(type) ? 'active' : ''"
               :aria-current="isTypeActive(type) ? 'page' : ''"
               :destination="routeForType(type)"
@@ -99,7 +99,9 @@ const routeForType = (type) => {
               :aria-current="isTypeActive(type) ? 'page' : ''"
               :destination="routeForType(type)"
             >
-              {{ type.name }}
+              <span>
+                {{ type.name }}
+              </span>
             </GenericSmartLink>
           </li>
         </ul>
@@ -129,7 +131,13 @@ const routeForType = (type) => {
   }
 
   &.active {
-    color: $black;
+    font-weight: 700;
+    border-bottom: 2px solid $darkgrey;
+    color: $darkgrey;
+
+    @media (min-width: $bp-4k) {
+      border-bottom-width: 4px;
+    }
 
     a {
       background-color: $white;
@@ -165,7 +173,12 @@ const routeForType = (type) => {
   &:active,
   &.active {
     background-color: $white;
-    color: $black;
+
+    span {
+      font-weight: 700;
+      border-bottom: 2px solid $darkgrey;
+      color: $darkgrey;
+    }
   }
 }
 </style>

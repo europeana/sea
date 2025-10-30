@@ -238,7 +238,7 @@ describe("components/content/contentInterface", () => {
       it("only selects content which has the selected type", async () => {
         useRouteMock.mockImplementation(() => ({
           query: {
-            type: "blog post",
+            type: "news",
           },
         }));
         const wrapper = await factory();
@@ -376,6 +376,7 @@ describe("components/content/contentInterface", () => {
       expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
     });
   });
+
   describe("isCtaBanner", () => {
     it("detects CTA banner strings correctly", async () => {
       const wrapper = await factory();
@@ -400,5 +401,141 @@ describe("components/content/contentInterface", () => {
     expect(result.length).toBe(6);
     expect(result[0].length).toBe(8);
     expect(result[1]).toBe("cta-banner-0");
+  });
+
+  describe("featured entry", () => {
+    describe("when there is a featured entry", () => {
+      describe("and no type filter nor tags are selected and on page 1", () => {
+        it("displays a featured content card", async () => {
+          const wrapper = await factory({
+            featuredEntry: { name: "featured content" },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a type filter matching the featured entry type is selected", () => {
+        it("displays a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              type: "news",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "BlogPosting",
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a type filter not matching the featured entry type is selected", () => {
+        it("does not display a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              type: "project",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "BlogPosting",
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(false);
+        });
+      });
+      describe("and a tag matching one of the featured entry tags is selected", () => {
+        it("displays a featured content card", async () => {
+          const tag = "network";
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              tags: tag,
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              categoriesCollection: { items: [{ identifier: tag }] },
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a tag not matching any of the featured entry tags is selected", () => {
+        it("does not display a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              tags: "history",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              categoriesCollection: { items: [{ identifier: "network" }] },
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(false);
+        });
+      });
+      describe("and page is not 1", () => {
+        it("does not display a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              page: 2,
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(false);
+        });
+      });
+    });
+    describe("when there is a datePublished field", () => {
+      it("uses the date as text on the featured content card", async () => {
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            datePublished: new Date("29-10-2025"),
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual("authored.createdDate");
+      });
+    });
+    describe("when there is no datePublished field", () => {
+      it("uses the headline as text on the featured content card", async () => {
+        const headline = "This is a headline";
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            headline,
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual(headline);
+      });
+    });
   });
 });

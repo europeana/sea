@@ -1,5 +1,12 @@
 [
   {
+    "cookies": ["^cf_clearance$"],
+    "name": "cloudflare",
+    "purposes": ["essential"],
+    "required": true,
+    "title": "Cloudflare"
+  },
+  {
     "cookies": ["^_hj"],
     "name": "hotjar",
     "purposes": ["usage"],

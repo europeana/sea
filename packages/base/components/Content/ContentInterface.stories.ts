@@ -62,3 +62,18 @@ export const WithCallToActions: Story = {
     ctaBanners: sampleData.ctas,
   },
 };
+
+export const WithFeaturedNews: Story = {
+  args: {
+    site: "www.europeana.eu",
+    contentTypes: ["blog post"],
+    defaultCardThumbnail: { image: { url: sampleData.thumbnails[0] } },
+    featuredEntry: {
+      __typename: "BlogPosting",
+      sys: { id: "id30" },
+      datePublished: Date.now() + 30 * 3_600,
+      name: "Entry 30",
+      primaryImageOfPage: { image: { url: sampleData.thumbnails[0] } },
+    },
+  },
+};
