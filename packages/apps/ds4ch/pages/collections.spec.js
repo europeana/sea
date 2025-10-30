@@ -7,6 +7,7 @@ mockNuxtImport("useI18n", () => {
     return {
       locale: "en",
       localeProperties: { value: { language: "en-GB" } },
+      t: (key) => key,
     };
   };
 });
@@ -21,6 +22,9 @@ const contentfulResponse = {
           headline: title,
           text: description,
           primaryImageOfPage: { image: "stubed Image" },
+          featuredContent: {
+            name: "Featured content",
+          },
           hasPartCollection: {
             items: [
               {
@@ -57,10 +61,20 @@ describe("DataPage", () => {
     expect(landingHero.text()).toContain(description);
   });
 
+  it("renders featured content card for featured content", async () => {
+    const wrapper = await factory();
+
+    const featuredCard = wrapper.findComponent({ name: "ContentFeaturedCard" });
+
+    expect(featuredCard.exists()).toBe(true);
+  });
+
   it("renders content cards for an illustration group", async () => {
     const wrapper = await factory();
 
-    const cards = wrapper.findAllComponents({ name: "ContentCard" });
+    const cards = wrapper.findAllComponents(
+      ".illustration-group .content-card",
+    );
 
     expect(cards.length).toBe(2);
   });

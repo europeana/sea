@@ -32,6 +32,45 @@ query ContentHubPage(
           ...imageFields
         }
       }
+      featuredContent {
+        __typename
+        ... on BlogPosting {
+          sys {
+            id
+          }
+          name
+          datePublished
+          primaryImageOfPage {
+            image {
+              ...imageFields
+            }
+          }
+          identifier
+          categoriesCollection {
+            items {
+              identifier
+            }
+          }
+        }
+        ... on ProjectPage {
+          sys {
+            id
+          }
+          name
+          headline
+          primaryImageOfPage {
+            image {
+              ...imageFields
+            }
+          }
+          identifier
+          categoriesCollection {
+            items {
+              identifier
+            }
+          }
+        }
+      }
       hasPartCollection(limit: 20) {
         items {
           __typename

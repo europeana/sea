@@ -121,16 +121,36 @@ const page = computed(() => {
   return Number(route.query.page || 1);
 });
 
-// TODO: uncomment when featuredEntryCard component exists
-// const showFeaturedEntry = computed(() => {
-//   let featuredEntryMatchesSelectedTags = true;
-//   const featuredEntryTags = props.featuredEntry?.categoriesCollection?.items?.map((cat) => cat.identifier) || [];
-//   if (selectedTags.value.length > 0) {
-//     featuredEntryMatchesSelectedTags = selectedTags.value.every((tag) => featuredEntryTags.includes(tag));
-//   }
+const showFeaturedEntry = computed(() => {
+  let featuredEntryMatchesSelectedTags = true;
+  const featuredEntryTags =
+    props.featuredEntry?.categoriesCollection?.items?.map(
+      (cat) => cat.identifier,
+    ) || [];
+  if (selectedTags.value.length > 0) {
+    featuredEntryMatchesSelectedTags = selectedTags.value.every((tag) =>
+      featuredEntryTags.includes(tag),
+    );
+  }
 
-//   return props.featuredEntry && selectedType.value !== 'exhibition' && featuredEntryMatchesSelectedTags && (page.value === 1);
-// })
+  return (
+    props.featuredEntry &&
+    (!selectedType.value ||
+      selectedType.value === props.featuredEntry.__typename) &&
+    featuredEntryMatchesSelectedTags &&
+    page.value === 1
+  );
+});
+
+const featuredEntryText = computed(() => {
+  if (props.featuredEntry.datePublished) {
+    return t("authored.createdDate", {
+      date: d(props.featuredEntry.datePublished, "short"),
+    });
+  } else {
+    return props.featuredEntry.headline;
+  }
+});
 
 async function fetchContent() {
   const contentSysIds = fetchableSysIds.value;
@@ -308,11 +328,14 @@ watch(page, () => {
       class="container position-absolute flex-md-row py-4 text-center"
     /-->
     </div>
-
-    <!--featuredEntryCard
-        v-if="showFeaturedEntry"
-        :featured-entry="featuredEntry"
-      /-->
+    <div v-if="showFeaturedEntry" class="container mb-4 mb-lg-5 pb-4k-5">
+      <ContentFeaturedCard
+        :title="props.featuredEntry?.name"
+        :text="featuredEntryText"
+        :image="props.featuredEntry?.primaryImageOfPage?.image"
+        :url="contentfulEntryUrl(props.featuredEntry)"
+      />
+    </div>
     <template v-for="(section, index) in contentEntries">
       <!-- eslint-disable vue/valid-v-for -->
       <transition appear name="fade">
