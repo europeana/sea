@@ -103,7 +103,8 @@
       "matomo": {
         "description": "Collects anonymous statistics on how visitors interact with the website.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Unknown provider"
     }
   },
   "featured": "Featured",

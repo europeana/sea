@@ -25,19 +25,17 @@ const attributionFields = (fields) => {
     :text="section.text"
     class="mb-4 mb-md-5 pb-4k-5"
   />
-  <!-- TODO: add EmbedGateway -->
-  <!-- <EmbedGateway
+  <EmbedGateway
     v-else-if="contentfulEntryHasContentType(section, 'Embed')"
     class="media-viewer-content mb-5"
     :embed-code="section.embed"
-  > -->
-  <EmbedHTML
-    v-else-if="contentfulEntryHasContentType(section, 'Embed')"
-    :html="section.embed"
-    :title="section.title"
-    class="mb-4 mb-md-5 pb-4k-5"
-  />
-  <!-- </EmbedGateway> -->
+  >
+    <EmbedHTML
+      :html="section.embed"
+      :title="section.title"
+      class="mb-4 mb-md-5 pb-4k-5"
+    />
+  </EmbedGateway>
   <ImageWithAttributionContainer
     v-else-if="contentfulEntryHasContentType(section, 'ImageWithAttribution')"
     class="mb-4 mb-md-5 pb-4k-5"
