@@ -247,8 +247,9 @@ function eventDateHelper(startDate, endDate) {
   return d(startDate, "short");
 }
 
-// TODO: Only works for blogPostings/projects/training/events, make distinct normalisation functions per supported type,
-// consider passing a normalisation function in per type as a prop.
+// TODO: Only works for blogPostings/projects/training/events:
+//       make distinct normalisation functions per supported type;
+//       consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
     if (entry.__typename === "BlogPosting") {
@@ -305,46 +306,28 @@ async function fetchContentMetadata() {
     preview: route.query.mode === "preview",
     site: props.site,
   };
-  const contentIds = [];
   // Splits the request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
   // TODO: when selectedType is already set, only retrieve those entries
   // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
 
-  if (props.contentTypes.includes("blog post")) {
-    const blogPostingsResponse = await contentful.query(
-      blogPostingsListingMinimalGraphql,
-      contentIdsVariables,
-    );
-    const blogPostings =
-      blogPostingsResponse.data.blogPostingCollection?.items || [];
-    contentIds.push(...blogPostings);
-  }
-  if (props.contentTypes.includes("project")) {
-    const projectPagesResponse = await contentful.query(
-      projectPagesListingMinimalGraphql,
-      contentIdsVariables,
-    );
-    const projectPages =
-      projectPagesResponse.data.projectPageCollection?.items || [];
-    contentIds.push(...projectPages);
-  }
-  if (props.contentTypes.includes("event")) {
-    const eventsResponse = await contentful.query(
-      eventsListingMinimalGraphql,
-      contentIdsVariables,
-    );
-    const events = eventsResponse.data.eventCollection?.items || [];
-    contentIds.push(...events);
-  }
-  if (props.contentTypes.includes("training")) {
-    const trainingsResponse = await contentful.query(
-      trainingsListingMinimalGraphql,
-      contentIdsVariables,
-    );
-    const trainings = trainingsResponse.data.eventCollection?.items || [];
-    contentIds.push(...trainings);
-  }
+  const contentTypeGraphql = {
+    "blog post": blogPostingsListingMinimalGraphql,
+    project: projectPagesListingMinimalGraphql,
+    event: eventsListingMinimalGraphql,
+    training: trainingsListingMinimalGraphql,
+  };
+
+  const contentIds = (
+    await Promise.all(
+      props.contentTypes.map((ctype) =>
+        contentful.query(contentTypeGraphql[ctype], contentIdsVariables),
+      ),
+    )
+  )
+    .map((response) => response.data[Object.keys(response.data)[0]].items || [])
+    .flat();
+
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,
   // exhibitionsResponse.data.exhibitionPageCollection?.items,
