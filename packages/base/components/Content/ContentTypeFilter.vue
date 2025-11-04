@@ -55,7 +55,7 @@ const routeForType = (type) => {
   <div>
     <nav class="navbar navbar-expand-sm navbar-light">
       <div id="content-filter-navbar" class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-flex">
+        <ul class="navbar-nav me-auto d-none d-sm-flex">
           <li
             v-for="(type, index) in availableContentTypes"
             :key="index"
