@@ -177,7 +177,21 @@ describe("components/content/contentInterface", () => {
       }));
       const wrapper = await factory();
 
-      expect(wrapper.vm.selectedType).toBe("ProjectPage");
+      expect(wrapper.vm.selectedType).toStrictEqual({ type: "ProjectPage" });
+    });
+
+    it("contains taxonomy info when the type in the URL requires it", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          type: "training",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedType).toStrictEqual({
+        type: "Event",
+        taxonomy: "eventTypeTrainingCourse",
+      });
     });
   });
   describe("filteredTags", () => {
@@ -210,7 +224,7 @@ describe("components/content/contentInterface", () => {
         const wrapper = await factory();
 
         const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
-        const allContentMetaData = wrapper.vm.allContentMetadata.value;
+        const allContentMetaData = wrapper.vm.minimalEntries.value;
 
         expect(relevantContentMetadata).toEqual(allContentMetaData);
       });
@@ -227,7 +241,7 @@ describe("components/content/contentInterface", () => {
 
         const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
 
-        const expectedContentData = wrapper.vm.allContentMetadata.value.filter(
+        const expectedContentData = wrapper.vm.minimalEntries.value.filter(
           (entry) => entry.cats.includes(categories[0]),
         );
         expect(relevantContentMetadata).toEqual(expectedContentData);
@@ -245,7 +259,7 @@ describe("components/content/contentInterface", () => {
 
         const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
 
-        const expectedContentData = wrapper.vm.allContentMetadata.value.filter(
+        const expectedContentData = wrapper.vm.minimalEntries.value.filter(
           (entry) => entry.__typename === "BlogPosting",
         );
         expect(relevantContentMetadata).toEqual(expectedContentData);
@@ -319,7 +333,7 @@ describe("components/content/contentInterface", () => {
   it("normalises blog content correctly", async () => {
     const wrapper = await factory();
 
-    const firstEntry = wrapper.vm.contentEntries.value[0][0];
+    const firstEntry = wrapper.vm.fullEntries.value[0][0];
 
     expect(firstEntry.text).toBe("authored.createdDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
@@ -355,7 +369,7 @@ describe("components/content/contentInterface", () => {
     );
 
     const wrapper = await factory();
-    const firstEntry = wrapper.vm.contentEntries.value[0][0];
+    const firstEntry = wrapper.vm.fullEntries.value[0][0];
 
     expect(firstEntry.text).toBe("headline");
     expect(firstEntry.primaryImageOfPage).toBe(null);
@@ -370,7 +384,7 @@ describe("components/content/contentInterface", () => {
       };
       const wrapper = await factory({ defaultCardThumbnail });
 
-      const result = await wrapper.vm.fetchContent();
+      const result = await wrapper.vm.fetchFullEntries();
       const firstEntry = result[0][0];
 
       expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
@@ -395,7 +409,7 @@ describe("components/content/contentInterface", () => {
 
     const wrapper = await factory({ ctaBanners });
 
-    const result = await wrapper.vm.fetchContent();
+    const result = await wrapper.vm.fetchFullEntries();
 
     // Should return an array with 6 elements: [8 entries, 'cta-banner-0', 8 entries, 'cta-banner-1', 8 entries, 'cta-banner-2']
     expect(result.length).toBe(6);

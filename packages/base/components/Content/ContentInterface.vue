@@ -4,6 +4,8 @@ import useScrollTo from "@/composables/scrollTo.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
+import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
+import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
@@ -37,7 +39,7 @@ const props = defineProps({
   },
   /**
    * Content types to include in the interface.
-   * @values "blog post", "exhibition", "project", "story"
+   * @values "blog post", "exhibition", "project", "story", "training", "event"
    */
   contentTypes: {
     type: Array[String],
@@ -58,10 +60,12 @@ const selectedTags = computed(() => {
 });
 
 const typeLookup = {
-  news: "BlogPosting",
-  project: "ProjectPage",
-  story: "Story",
-  exhibition: "ExhibitionPage",
+  news: { type: "BlogPosting" },
+  project: { type: "ProjectPage" },
+  story: { type: "Story" },
+  exhibition: { type: "ExhibitionPage" },
+  training: { type: "Event", taxonomy: "eventTypeTrainingCourse" },
+  event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
 
 const selectedType = computed(() => {
@@ -97,11 +101,18 @@ const fetchableSysIdsString = computed(() => {
 });
 
 const relevantContentMetadata = computed(() => {
-  let relevantContentMetadata = allContentMetadata.value || [];
+  let relevantContentMetadata = minimalEntries.value || [];
   if (selectedType.value) {
     // Filter by selected type
     relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
-      return contentEntry["__typename"] === selectedType.value;
+      return (
+        contentEntry["__typename"] === selectedType.value.type &&
+        (contentEntry.contentfulMetadata?.concepts.length > 0
+          ? contentEntry.contentfulMetadata.concepts.some((taxonomy) => {
+              return taxonomy.id === selectedType.value.taxonomy;
+            })
+          : true)
+      );
     });
   }
   if (selectedTags.value.length > 0) {
@@ -136,7 +147,7 @@ const showFeaturedEntry = computed(() => {
   return (
     props.featuredEntry &&
     (!selectedType.value ||
-      selectedType.value === props.featuredEntry.__typename) &&
+      selectedType.value.type === props.featuredEntry.__typename) &&
     featuredEntryMatchesSelectedTags &&
     page.value === 1
   );
@@ -152,7 +163,7 @@ const featuredEntryText = computed(() => {
   }
 });
 
-async function fetchContent() {
+async function fetchFullEntries() {
   const contentSysIds = fetchableSysIds.value;
   if (contentSysIds.length === 0) {
     return [];
@@ -171,12 +182,9 @@ async function fetchContent() {
     contentVariables,
   );
 
-  const fullContent = [
-    contentResponse.data.storyCollection?.items,
-    contentResponse.data.exhibitionPageCollection?.items,
-    contentResponse.data.blogPostingCollection?.items,
-    contentResponse.data.projectPageCollection?.items,
-  ].flat();
+  const fullContent = Object.values(contentResponse.data)
+    .map((collection) => collection.items || [])
+    .flat();
 
   const retrievedContentEntries = contentSysIds
     .map((sysId) =>
@@ -185,6 +193,7 @@ async function fetchContent() {
       ),
     )
     .filter(Boolean);
+
   // This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
   const entriesWithCtaBanners = [];
   if (
@@ -210,13 +219,39 @@ function isCtaBanner(entry) {
   return typeof entry === "string" && entry.startsWith(ctaBanner);
 }
 
-// TODO: Only works for blogPostings/projects, make distinct normalisation functions per supported type,
-// consider passing a normalisation function in per type as a prop.
+function trainingDateHelper(startDate, endDate) {
+  if (startDate) {
+    let formatedEndDate = t("training.ongoing");
+    if (endDate) {
+      formatedEndDate = d(endDate, "short");
+    }
+    return t("training.dateRange", {
+      startDate: d(startDate, "short"),
+      endDate: formatedEndDate,
+    });
+  }
+  return t("training.ongoing");
+}
+
+function eventDateHelper(startDate, endDate) {
+  if (endDate) {
+    return t("event.dateRange", {
+      startDate: d(startDate, "short"),
+      endDate: d(endDate, "short"),
+    });
+  }
+  return d(startDate, "short");
+}
+
+// TODO: Only works for blogPostings/projects/training/events:
+//       make distinct normalisation functions per supported type;
+//       consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
     if (entry.__typename === "BlogPosting") {
       return {
         ...entry,
+        url: contentfulEntryUrl(entry),
         text: t("authored.createdDate", {
           date: d(entry.datePublished, "short"),
         }),
@@ -226,46 +261,69 @@ function normaliseCard(entry) {
     } else if (entry.__typename === "ProjectPage") {
       return {
         ...entry,
+        url: contentfulEntryUrl(entry),
         text: entry.headline,
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
+      };
+    } else if (entry.__typename === "Event") {
+      if (
+        entry.contentfulMetadata.concepts[0].id === typeLookup.training.taxonomy
+      ) {
+        return {
+          ...entry,
+          url: entry.url,
+          subTitle: t("training.label"),
+          text: trainingDateHelper(entry.startDate, entry.endDate),
+          primaryImageOfPage: {
+            image: entry.image || props.defaultCardThumbnail.image,
+          },
+        };
+      }
+      return {
+        ...entry,
+        url: entry.url,
+        subTitle: t("event.label"),
+        text: eventDateHelper(entry.startDate, entry.endDate),
+        primaryImageOfPage: {
+          image: entry.image || props.defaultCardThumbnail.image,
+        },
       };
     }
   }
 }
 
-async function fetchContentMetadata() {
-  // Fetch minimal data for all entries to support ordering by datePublished
-  // and filtering by categories.
+// Fetch minimal data for all entries to support ordering by datePublished
+// and filtering by categories.
+async function fetchMinimalEntries() {
   const contentIdsVariables = {
     excludeSysId: props.featuredEntry?.sys?.id || "",
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
     site: props.site,
   };
-  const contentIds = [];
   // Splits the request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
   // TODO: when selectedType is already set, only retrieve those entries
-  // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
-  if (props.contentTypes.includes("blog post")) {
-    const blogPostingsResponse = await contentful.query(
-      blogPostingsListingMinimalGraphql,
-      contentIdsVariables,
-    );
-    const blogPostings =
-      blogPostingsResponse.data.blogPostingCollection?.items || [];
-    contentIds.push(...blogPostings);
-  }
-  if (props.contentTypes.includes("project")) {
-    const projectPagesResponse = await contentful.query(
-      projectPagesListingMinimalGraphql,
-      contentIdsVariables,
-    );
-    const projectPages =
-      projectPagesResponse.data.projectPageCollection?.items || [];
-    contentIds.push(...projectPages);
-  }
+  // needs to be accounted for in: { data: minimalEntries } = useAsyncData(...)
+
+  const contentTypeGraphql = {
+    "blog post": blogPostingsListingMinimalGraphql,
+    project: projectPagesListingMinimalGraphql,
+    event: eventsListingMinimalGraphql,
+    training: trainingsListingMinimalGraphql,
+  };
+
+  const contentIds = (
+    await Promise.all(
+      props.contentTypes.map((ctype) =>
+        contentful.query(contentTypeGraphql[ctype], contentIdsVariables),
+      ),
+    )
+  )
+    .map((response) => response.data[Object.keys(response.data)[0]].items || [])
+    .flat();
+
   // TODO: Re-implement retrieval for:
   // storiesResponse.data.storyCollection?.items,
   // exhibitionsResponse.data.exhibitionPageCollection?.items,
@@ -286,13 +344,13 @@ async function fetchContentMetadata() {
   return ordered;
 }
 
-const { data: allContentMetadata } = useAsyncData(
-  "allContentMetadata",
-  fetchContentMetadata,
+const { data: minimalEntries } = useAsyncData(
+  "minimalEntries",
+  fetchMinimalEntries,
 );
-const { data: contentEntries } = useAsyncData(
+const { data: fullEntries } = useAsyncData(
   fetchableSysIdsString,
-  fetchContent,
+  fetchFullEntries,
   {
     watch: [fetchableSysIdsString],
   },
@@ -336,7 +394,7 @@ watch(page, () => {
         :url="contentfulEntryUrl(props.featuredEntry)"
       />
     </div>
-    <template v-for="(section, index) in contentEntries">
+    <template v-for="(section, index) in fullEntries">
       <!-- eslint-disable vue/valid-v-for -->
       <transition appear name="fade">
         <!-- eslint-enable vue/valid-v-for -->
@@ -361,7 +419,8 @@ watch(page, () => {
             <div v-for="entry in section" :key="entry.sysId" class="col">
               <ContentCard
                 :title="entry.name"
-                :url="contentfulEntryUrl(entry)"
+                :sub-title="entry.subTitle"
+                :url="entry.url"
                 :text="entry.text"
                 :image-url="
                   entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
