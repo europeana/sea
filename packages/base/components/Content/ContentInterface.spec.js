@@ -95,7 +95,7 @@ const factory = (props = {}) =>
           query: { page: 1 },
         },
       },
-      stubs: ["ContentTagsDropdown"],
+      stubs: ["ContentFeaturedCard", "ContentTagsDropdown"],
     },
     props: {
       contentTypes: ["blog post", "project"],
