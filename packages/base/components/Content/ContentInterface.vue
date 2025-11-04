@@ -234,8 +234,9 @@ const contentSections = computed(() => {
   }
 
   // add any remaining e.g. if few CTAs
-  if (normalisedEntries.value.slice(entryStartIndex).length > 0)
+  if (normalisedEntries.value.slice(entryStartIndex).length > 0) {
     sections.push(normalisedEntries.value.slice(entryStartIndex));
+  }
 
   return sections;
 });
