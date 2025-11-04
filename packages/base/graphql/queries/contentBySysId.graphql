@@ -46,6 +46,14 @@ query ContentBySysId(
   ) {
     ...projectPageCollectionFields
   }
+  eventCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: { AND: [{ sys: { id_in: $ids } }, { name_contains: $query }] }
+  ) {
+    ...eventCollectionFields
+  }
 }
 
 fragment exhibitionPageCollectionFields on ExhibitionPageCollection {
@@ -116,5 +124,26 @@ fragment projectPageCollectionFields on ProjectPageCollection {
       }
     }
     headline
+  }
+}
+
+fragment eventCollectionFields on EventCollection {
+  items {
+    __typename
+    contentfulMetadata {
+      concepts {
+        id
+      }
+    }
+    sys {
+      id
+    }
+    url
+    name
+    image {
+      ...imageFields
+    }
+    startDate
+    endDate
   }
 }
