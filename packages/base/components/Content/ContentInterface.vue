@@ -101,7 +101,7 @@ const fetchableSysIdsString = computed(() => {
 });
 
 const filteredMinimalEntries = computed(() => {
-  let filteredMinimalEntries = minimalEntries.value || [];
+  let filteredMinimalEntries = minimalEntries.value;
 
   if (selectedType.value) {
     // Filter by selected type
@@ -193,7 +193,7 @@ const normalisedEntries = computed(() => {
   return fetchableSysIds.value
     .map((sysId) =>
       normaliseCard(
-        (fullEntries.value || []).find(
+        fullEntries.value.find(
           (contentEntry) => contentEntry?.sys?.id === sysId,
         ),
       ),
@@ -370,14 +370,16 @@ async function fetchMinimalEntries() {
   return ordered;
 }
 
-const { data: minimalEntries } = useAsyncData(
+const { data: minimalEntries } = await useAsyncData(
   "minimalEntries",
   fetchMinimalEntries,
+  { default: () => [] },
 );
-const { data: fullEntries } = useAsyncData(
+const { data: fullEntries } = await useAsyncData(
   fetchableSysIdsString,
   fetchFullEntries,
   {
+    default: () => [],
     watch: [fetchableSysIdsString],
   },
 );
