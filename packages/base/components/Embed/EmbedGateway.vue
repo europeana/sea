@@ -15,26 +15,17 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  media: {
-    type: Object,
-    default: null,
-  },
-  url: {
-    type: String,
-    default: null,
-  },
 });
 
 const cookieModalId = "embed-cookie-modal";
-// const hidePurposes = ["essential", "usage"];
 const iframe = ref({});
 const opened = ref(false);
-const renderCookieModal = ref(false);
 const script = ref({});
 
-const linkToContent = computed(() => props.url || iframe.value?.src);
+const linkToContent = computed(() => iframe.value?.src);
+const providerUrl = computed(() => iframe.value.src || script.value.src);
 const provider = computed(() =>
-  providerUrl.value ? serviceForUrl(providerUrl) : null,
+  providerUrl.value ? serviceForUrl(providerUrl.value) : null,
 );
 const providerName = computed(() => {
   if (provider.value) {
@@ -48,21 +39,15 @@ const providerName = computed(() => {
   }
 });
 
-const providerUrl = computed(
-  () => iframe.value.src || script.value.src || props.url,
-);
-
-watch(consentRequired.value, (newVal) => {
+watch(consentRequired, (newVal) => {
   if (!newVal) {
     checkConsentAndOpenEmbed();
   }
 });
-// klaroManager is not available in mounted so watch it to be ready instead
-// watch(klaroManager, (newVal) => {
-//   if (newVal) {
-//     checkConsentAndOpenEmbed();
-//   }
-// });
+// Watch when accepted from the embed-cookie-modal
+watch(acceptedServices, () => {
+  checkConsentAndOpenEmbed();
+});
 
 onBeforeMount(() => parseEmbedCode());
 
@@ -93,19 +78,12 @@ const parseEmbedCode = () => {
 };
 
 const openCookieModal = () => {
-  // open modal through data props
-  if (consentRequired.value) {
-    openMainCookieModalAndScrollToThirdPartyContent();
-  } else {
-    renderCookieModal.value = true;
-    // TODO replace
-    // $bvModal.show(cookieModalId);
-  }
+  // TODO: scroll to third party services cookie-modal
 };
 
 const checkConsentAndOpenEmbed = () => {
   const consents = acceptedServices.value;
-  const providerHasConsent = !!consents?.[provider.value?.name];
+  const providerHasConsent = !!consents?.includes(provider.value?.name);
 
   if (providerHasConsent) {
     opened.value = true;
@@ -116,41 +94,39 @@ const consentAllEmbeddedContent = () => {
   if (consentRequired.value) {
     checkedServices.value = services.map((service) => service.name);
   } else {
-    const allThirdPartyContentServices = services.filter((s) =>
-      s.purposes.includes("thirdPartyContent"),
-    );
-    checkedServices.value = [
-      ...checkedServices.value,
+    const allThirdPartyContentServices = services
+      .filter((s) => s.purposes.includes("thirdPartyContent"))
+      .flat()
+      .map((service) => service.name);
+    checkedServices.value = [...checkedServices.value].concat(
       allThirdPartyContentServices,
-    ];
-  }
+    );
 
-  openModalOrSaveConsents();
+    saveConsents();
+  }
 };
 
 const consentThisProvider = () => {
   checkedServices.value = [...checkedServices.value, provider.value.name];
 
-  openModalOrSaveConsents();
-};
-
-const openModalOrSaveConsents = () => {
-  if (consentRequired) {
-    openMainCookieModalAndScrollToThirdPartyContent();
-  } else {
-    acceptOnly([...checkedServices.value]);
-    checkConsentAndOpenEmbed();
+  if (!consentRequired.value) {
+    saveConsents();
   }
 };
 
-const openMainCookieModalAndScrollToThirdPartyContent = () => {
-  // TODO handle scroll in modal component?
-  // Listen to modal shown event and then to modal transitionend before attempting to scroll
-  // $root.$once("bv::modal::shown", (event, modalId) =>
-  //   listenToModalTransitionendAndScrollToSection(event, modalId),
-  // );
-  // $bvModal.show("cookie-modal");
+const saveConsents = () => {
+  acceptOnly([...checkedServices.value]);
+  checkConsentAndOpenEmbed();
 };
+
+// const openMainCookieModalAndScrollToThirdPartyContent = () => {
+// TODO handle scroll in modal component?
+// Listen to modal shown event and then to modal transitionend before attempting to scroll
+// $root.$once("bv::modal::shown", (event, modalId) =>
+//   listenToModalTransitionendAndScrollToSection(event, modalId),
+// );
+// $bvModal.show("cookie-modal");
+// };
 
 // const listenToModalTransitionendAndScrollToSection = (event, modalId) => {
 //   if (modalId === "cookie-modal") {
@@ -176,80 +152,81 @@ const openMainCookieModalAndScrollToThirdPartyContent = () => {
 </script>
 
 <template>
-  <div class="h-100">
-    <slot v-if="opened" class="embed-gateway-opened" />
-    <div
-      v-else-if="provider"
-      class="container notification-overlay"
-      :class="{ 'h-100': url, 'mw-100': embedCode }"
-    >
-      <div class="row position-relative" :class="{ 'h-100': url }">
-        <div
-          class="col thumbnail-background mx-auto h-100 position-absolute"
-          :class="{ 'col-lg-10': url }"
-        >
-          <!-- Add MediaCard for when used for items -->
+  <client-only>
+    <div class="h-100">
+      <slot v-if="opened" class="embed-gateway-opened" />
+      <div
+        v-else-if="provider"
+        class="container notification-overlay"
+        :class="{ 'mw-100': embedCode }"
+      >
+        <div class="row position-relative">
+          <div class="col thumbnail-background mx-auto h-100 position-absolute">
+            <!-- Add MediaCard when used for items -->
+            <div
+              class="icon-multimedia h-100 d-flex align-items-center justify-content-center"
+            />
+          </div>
           <div
-            class="icon-multimedia h-100 d-flex align-items-center justify-content-center"
-          />
+            class="col notification-content mx-auto position-relative"
+            :style="{
+              'min-height': !!iframe.height && iframe.height,
+              width: !!iframe.width && iframe.width,
+            }"
+          >
+            <p class="message">
+              {{ $t("embedNotification.message", { provider: providerName }) }}
+            </p>
+            <button
+              class="btn btn-light mb-2"
+              :data-bs-toggle="consentRequired && 'modal'"
+              :data-bs-target="`#${cookieModalId}`"
+              @click="consentAllEmbeddedContent"
+            >
+              {{ $t("embedNotification.loadAllEmbeddedContent") }}
+            </button>
+            <i18n-t
+              keypath="embedNotification.ofThirdPartyServices"
+              tag="p"
+              scope="global"
+            >
+              <button
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                :data-bs-target="`#${cookieModalId}`"
+                @click="openCookieModal"
+              >
+                {{ $t("embedNotification.viewFullList") }}
+              </button>
+            </i18n-t>
+            <CookiesModal :modal-id="cookieModalId" />
+            <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">
+              <button
+                class="btn btn-link"
+                :data-bs-toggle="consentRequired && 'modal'"
+                :data-bs-target="`#${cookieModalId}`"
+                @click="consentThisProvider"
+              >
+                {{ $t("embedNotification.loadOnlyThis") }}
+              </button>
+            </i18n-t>
+          </div>
         </div>
-        <div
-          class="col notification-content mx-auto position-relative"
-          :class="{ 'col-lg-10': url }"
-          :style="{
-            'min-height': !!iframe.height && iframe.height,
-            width: !!iframe.width && iframe.width,
-          }"
-        >
-          <p class="message">
-            {{ $t("embedNotification.message", { provider: providerName }) }}
-          </p>
-          <button class="btn btn-light mb-2" @click="consentAllEmbeddedContent">
-            {{ $t("embedNotification.loadAllEmbeddedContent") }}
-          </button>
-          <i-18n path="embedNotification.ofThirdPartyServices" tag="p">
-            <button class="btn btn-link" @click="openCookieModal">
-              {{ $t("embedNotification.viewFullList") }}
-            </button>
-          </i-18n>
-          <!-- <PageCookiesWidget
-            v-if="renderCookieModal"
-            :render-toast="false"
-            :modal-id="cookieModalId"
-            modal-title-path="klaro.main.purposes.thirdPartyContent.title"
-            :modal-description-path="null"
-            :hide-purposes="hidePurposes"
-            :only-show-if-consent-required="false"
-            :show-modal="true"
-          /> -->
-          <PageCookiesModal
-            v-if="renderCookieModal"
-            :modal-id="cookieModalId"
-          />
-          <i-18n path="embedNotification.ifNotAll" tag="p">
-            <button class="btn btn-link" @click="consentThisProvider">
-              {{ $t("embedNotification.loadOnlyThis") }}
-            </button>
-          </i-18n>
+      </div>
+      <div v-else class="container">
+        <div class="row">
+          <div class="col unsupported-content-notification mx-auto">
+            <p class="mb-0">
+              {{ $t("embedNotification.messageUnkownService") }}
+            </p>
+            <GenericSmartLink v-if="linkToContent" :destination="linkToContent">
+              {{ $t("embedNotification.viewThisExternalLink") }}
+            </GenericSmartLink>
+          </div>
         </div>
       </div>
     </div>
-    <div v-else class="container">
-      <div class="row">
-        <div
-          class="col unsupported-content-notification mx-auto"
-          :class="{ 'col-lg-10': url }"
-        >
-          <p class="mb-0">
-            {{ $t("embedNotification.messageUnkownService") }}
-          </p>
-          <GenericSmartLink v-if="linkToContent" :destination="linkToContent">
-            {{ $t("embedNotification.viewThisExternalLink") }}
-          </GenericSmartLink>
-        </div>
-      </div>
-    </div>
-  </div>
+  </client-only>
 </template>
 
 <style lang="scss" scoped>
@@ -281,7 +258,7 @@ const openMainCookieModalAndScrollToThirdPartyContent = () => {
     color: $darkgrey;
   }
 
-  .btn-link {
+  @at-root .landing-page.xxl-page & .btn-link {
     color: $white;
     display: inline;
     font-size: $font-size-extrasmall;
@@ -307,12 +284,12 @@ const openMainCookieModalAndScrollToThirdPartyContent = () => {
   bottom: 0;
   left: 0;
 
-  ::v-deep img {
+  :deep(img) {
     height: 100%;
     object-fit: cover;
   }
 
-  ::v-deep .default-thumbnail {
+  :deep(.default-thumbnail) {
     background-color: $white !important;
     height: 100%;
     width: 100%;
@@ -364,7 +341,7 @@ const openMainCookieModalAndScrollToThirdPartyContent = () => {
   a {
     color: $white;
 
-    ::v-deep .icon-external-link {
+    :deep(.icon-external-link) {
       vertical-align: baseline;
     }
   }
