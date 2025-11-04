@@ -51,10 +51,10 @@ const { scrollToSelector } = useScrollTo();
 const { localeProperties } = useI18n();
 const route = useRoute();
 const contentful = inject("$contentful");
-const CTA_BANNER = "cta-banner";
 
-const ctaBanner = CTA_BANNER;
-const perPage = 24;
+const ENTRIES_PER_PAGE = 24;
+const ENTRIES_PER_SECTION = 8;
+
 const selectedTags = computed(() => {
   return route.query.tags?.split(",") || [];
 });
@@ -73,7 +73,7 @@ const selectedType = computed(() => {
 });
 
 const filteredTags = computed(() => {
-  const relevantTags = relevantContentMetadata.value
+  const relevantTags = filteredMinimalEntries.value
     .map((contentEntry) => contentEntry.cats)
     .flat();
   const tagsSortedByMostUsed = relevantTags
@@ -88,9 +88,9 @@ const filteredTags = computed(() => {
 
 const fetchableSysIds = computed(() => {
   // Paginate
-  const sliceFrom = (page.value - 1) * perPage;
-  const sliceTo = sliceFrom + perPage;
-  const ret = relevantContentMetadata.value
+  const sliceFrom = (page.value - 1) * ENTRIES_PER_PAGE;
+  const sliceTo = sliceFrom + ENTRIES_PER_PAGE;
+  const ret = filteredMinimalEntries.value
     .slice(sliceFrom, sliceTo)
     .map((contentEntry) => contentEntry.sys.id);
   return ret;
@@ -100,11 +100,12 @@ const fetchableSysIdsString = computed(() => {
   return fetchableSysIds.value.join("-");
 });
 
-const relevantContentMetadata = computed(() => {
-  let relevantContentMetadata = minimalEntries.value || [];
+const filteredMinimalEntries = computed(() => {
+  let filteredMinimalEntries = minimalEntries.value || [];
+
   if (selectedType.value) {
     // Filter by selected type
-    relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
+    filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
       return (
         contentEntry["__typename"] === selectedType.value.type &&
         (contentEntry.contentfulMetadata?.concepts.length > 0
@@ -115,17 +116,19 @@ const relevantContentMetadata = computed(() => {
       );
     });
   }
+
   if (selectedTags.value.length > 0) {
     // Filter by selected categories
-    relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
+    filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
       return selectedTags.value.every((tag) => contentEntry.cats.includes(tag));
     });
   }
-  return relevantContentMetadata;
+
+  return filteredMinimalEntries;
 });
 
 const total = computed(() => {
-  return relevantContentMetadata.value?.length || 0;
+  return filteredMinimalEntries.value?.length || 0;
 });
 
 const page = computed(() => {
@@ -164,16 +167,15 @@ const featuredEntryText = computed(() => {
 });
 
 async function fetchFullEntries() {
-  const contentSysIds = fetchableSysIds.value;
-  if (contentSysIds.length === 0) {
+  if (fetchableSysIds.value.length === 0) {
     return [];
   }
   // Fetch full data for display of page of content entries
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: perPage,
-    ids: contentSysIds,
+    limit: ENTRIES_PER_PAGE,
+    ids: fetchableSysIds.value,
     site: props.site,
   };
 
@@ -182,41 +184,61 @@ async function fetchFullEntries() {
     contentVariables,
   );
 
-  const fullContent = Object.values(contentResponse.data)
+  return Object.values(contentResponse.data)
     .map((collection) => collection.items || [])
     .flat();
+}
 
-  const retrievedContentEntries = contentSysIds
+const normalisedEntries = computed(() => {
+  return fetchableSysIds.value
     .map((sysId) =>
       normaliseCard(
-        fullContent.find((contentEntry) => contentEntry?.sys?.id === sysId),
+        (fullEntries.value || []).find(
+          (contentEntry) => contentEntry?.sys?.id === sysId,
+        ),
       ),
     )
     .filter(Boolean);
+});
 
-  // This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
-  const entriesWithCtaBanners = [];
-  if (
-    props.ctaBanners.length &&
-    page.value === 1 &&
-    selectedTags.value.length === 0 &&
-    !selectedType.value
-  ) {
-    for (let i = 0; i < props.ctaBanners.length; i = i + 1) {
-      entriesWithCtaBanners.push(
-        retrievedContentEntries.slice(i * 8, (i + 1) * 8),
-        `${ctaBanner}-${i}`,
-      );
-    }
-  } else {
-    entriesWithCtaBanners.push(retrievedContentEntries);
+const isFilteredByTag = computed(() => selectedTags.value.length > 0);
+const isFilteredByType = computed(() => !!selectedType.value);
+const isFirstPage = computed(() => page.value === 1);
+const hasCtaBanners = computed(() => props.ctaBanners.length > 0);
+const displayCtaBanners = computed(
+  () =>
+    hasCtaBanners.value &&
+    isFirstPage.value &&
+    !isFilteredByTag.value &&
+    !isFilteredByType.value,
+);
+
+// This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
+const contentSections = computed(() => {
+  if (!displayCtaBanners.value) {
+    return [normalisedEntries.value];
   }
 
-  return entriesWithCtaBanners;
-}
+  const sections = [];
+  let entryStartIndex = 0;
+
+  // FIXME: what if there is only 1 cta banner? won't many of the entries be missing?
+  for (const ctaBanner of props.ctaBanners) {
+    sections.push(
+      normalisedEntries.value.slice(
+        entryStartIndex,
+        entryStartIndex + ENTRIES_PER_SECTION,
+      ),
+      ctaBanner,
+    );
+    entryStartIndex = entryStartIndex + ENTRIES_PER_SECTION;
+  }
+
+  return sections;
+});
 
 function isCtaBanner(entry) {
-  return typeof entry === "string" && entry.startsWith(ctaBanner);
+  return entry["__typename"] === "PrimaryCallToAction";
 }
 
 function trainingDateHelper(startDate, endDate) {
@@ -394,27 +416,27 @@ watch(page, () => {
         :url="contentfulEntryUrl(props.featuredEntry)"
       />
     </div>
-    <template v-for="(section, index) in fullEntries">
+    <template v-for="(section, index) in contentSections">
       <!-- eslint-disable vue/valid-v-for -->
       <transition appear name="fade">
         <!-- eslint-enable vue/valid-v-for -->
         <div
           v-if="isCtaBanner(section)"
-          :key="section"
+          :key="`cta-banner-${index}`"
           class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
         >
           <GenericCallToActionBanner
             v-if="ctaBanners.length"
-            :name="ctaBanners[section.slice(-1)].name"
-            :name-english="ctaBanners[section.slice(-1)].nameEN"
-            :title="ctaBanners[section.slice(-1)].name"
-            :text="ctaBanners[section.slice(-1)].text"
-            :link="ctaBanners[section.slice(-1)].relatedLink"
-            :illustration="ctaBanners[section.slice(-1)].image"
-            :background-image="ctaBanners[section.slice(-1)].image"
+            :name="section.name"
+            :name-english="section.nameEN"
+            :title="section.name"
+            :text="section.text"
+            :link="section.relatedLink"
+            :illustration="section.image"
+            :background-image="section.image"
           />
         </div>
-        <div v-else :key="index" class="container">
+        <div v-else :key="`entry-${index}`" class="container">
           <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div v-for="entry in section" :key="entry.sysId" class="col">
               <ContentCard
@@ -436,8 +458,8 @@ watch(page, () => {
       </transition>
     </template>
     <PaginationNavInput
-      v-if="total > perPage"
-      :per-page="perPage"
+      v-if="total > ENTRIES_PER_PAGE"
+      :per-page="ENTRIES_PER_PAGE"
       :total-items="total"
       class="mt-4 mt-lg-5 pt-4k-5"
     />

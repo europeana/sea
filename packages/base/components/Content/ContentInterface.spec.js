@@ -104,7 +104,7 @@ const factory = (props = {}) =>
     },
   });
 
-describe("components/content/contentInterface", () => {
+describe("components/Content/ContentInterface", () => {
   beforeEach(() => {
     mockQuery.mockImplementation((query) =>
       contentfulResponse(
@@ -218,15 +218,15 @@ describe("components/content/contentInterface", () => {
       });
     });
   });
-  describe("relevantContentMetadata", () => {
+  describe("filteredMinimalEntries", () => {
     describe("when no tags are selected", () => {
       it("defaults to all content", async () => {
         const wrapper = await factory();
 
-        const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
+        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
         const allContentMetaData = wrapper.vm.minimalEntries.value;
 
-        expect(relevantContentMetadata).toEqual(allContentMetaData);
+        expect(filteredMinimalEntries).toEqual(allContentMetaData);
       });
     });
 
@@ -239,12 +239,12 @@ describe("components/content/contentInterface", () => {
         }));
         const wrapper = await factory();
 
-        const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
+        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
 
         const expectedContentData = wrapper.vm.minimalEntries.value.filter(
           (entry) => entry.cats.includes(categories[0]),
         );
-        expect(relevantContentMetadata).toEqual(expectedContentData);
+        expect(filteredMinimalEntries).toEqual(expectedContentData);
       });
     });
 
@@ -257,12 +257,12 @@ describe("components/content/contentInterface", () => {
         }));
         const wrapper = await factory();
 
-        const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
+        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
 
         const expectedContentData = wrapper.vm.minimalEntries.value.filter(
           (entry) => entry.__typename === "BlogPosting",
         );
-        expect(relevantContentMetadata).toEqual(expectedContentData);
+        expect(filteredMinimalEntries).toEqual(expectedContentData);
       });
     });
   });
@@ -278,7 +278,7 @@ describe("components/content/contentInterface", () => {
       expect(total).toEqual(0);
     });
 
-    it("is based of the relevantContentMetadata length", async () => {
+    it("is based of the filteredMinimalEntries length", async () => {
       const wrapper = await factory();
 
       const total = wrapper.vm.total;
@@ -333,11 +333,12 @@ describe("components/content/contentInterface", () => {
   it("normalises blog content correctly", async () => {
     const wrapper = await factory();
 
-    const firstEntry = wrapper.vm.fullEntries.value[0][0];
+    const firstEntry = wrapper.vm.contentSections[0][0];
 
     expect(firstEntry.text).toBe("authored.createdDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
+
   it("normalises project content correctly", async () => {
     mockQuery.mockImplementation((query) =>
       contentfulResponse(
@@ -369,11 +370,13 @@ describe("components/content/contentInterface", () => {
     );
 
     const wrapper = await factory();
-    const firstEntry = wrapper.vm.fullEntries.value[0][0];
+
+    const firstEntry = wrapper.vm.contentSections[0][0];
 
     expect(firstEntry.text).toBe("headline");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
+
   describe("when there is a default card thumbnail", () => {
     it("is used for when there is no primary image of page", async () => {
       const defaultCardThumbnail = {
@@ -384,37 +387,36 @@ describe("components/content/contentInterface", () => {
       };
       const wrapper = await factory({ defaultCardThumbnail });
 
-      const result = await wrapper.vm.fetchFullEntries();
-      const firstEntry = result[0][0];
+      const firstEntry = wrapper.vm.contentSections[0][0];
 
       expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
     });
   });
 
   describe("isCtaBanner", () => {
-    it("detects CTA banner strings correctly", async () => {
+    it("detects CTA banners correctly", async () => {
       const wrapper = await factory();
 
-      expect(wrapper.vm.isCtaBanner("cta-banner-0")).toBe(true);
-      expect(wrapper.vm.isCtaBanner("something-else")).toBe(false);
+      expect(
+        wrapper.vm.isCtaBanner({ __typename: "PrimaryCallToAction" }),
+      ).toBe(true);
+      expect(wrapper.vm.isCtaBanner([{ __typename: "event" }])).toBe(false);
     });
   });
 
   it("inserts CTA banners in between content entries", async () => {
     const ctaBanners = [
-      { name: "CTA Banner 1" },
-      { name: "CTA Banner 2" },
-      { name: "CTA Banner 3" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 1" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 2" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 3" },
     ];
 
     const wrapper = await factory({ ctaBanners });
 
-    const result = await wrapper.vm.fetchFullEntries();
-
     // Should return an array with 6 elements: [8 entries, 'cta-banner-0', 8 entries, 'cta-banner-1', 8 entries, 'cta-banner-2']
-    expect(result.length).toBe(6);
-    expect(result[0].length).toBe(8);
-    expect(result[1]).toBe("cta-banner-0");
+    expect(wrapper.vm.contentSections.length).toBe(6);
+    expect(wrapper.vm.contentSections[0].length).toBe(8);
+    expect(wrapper.vm.contentSections[1]).toBe(ctaBanners[0]);
   });
 
   describe("featured entry", () => {
