@@ -73,17 +73,15 @@ const routeForType = (type) => {
         </ul>
       </div>
       <div class="nav-item dropdown filter-dropdown d-sm-none ms-auto">
-        <a
+        <button
           id="content-filter-navbar-dropdown"
           class="nav-link dropdown-toggle btn-light"
-          href="#"
-          role="button"
           data-bs-toggle="dropdown"
           data-bs-target=".filter-dropdown"
           aria-expanded="false"
         >
           {{ activeType.name }}
-        </a>
+        </button>
         <ul
           class="dropdown-menu"
           aria-labelledby="content-filter-navbar-dropdown"

@@ -1,6 +1,6 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
-
+const { $bs } = useNuxtApp();
 const { acceptAll, rejectAll, consentRequired } = useConsentManager();
 
 const toastId = "cookie-notice-toast";
@@ -10,8 +10,7 @@ let toastInstance;
 onMounted(async () => {
   if (consentRequired.value) {
     // Initialise Bootstrap Toast
-    const { Toast } = await import("bootstrap");
-    toastInstance = new Toast(toastRef.value);
+    toastInstance = new $bs.Toast(toastRef.value);
     toastInstance?.show();
   }
 });
