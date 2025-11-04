@@ -182,13 +182,9 @@ async function fetchContent() {
     contentVariables,
   );
 
-  const fullContent = [
-    contentResponse.data.storyCollection?.items,
-    contentResponse.data.exhibitionPageCollection?.items,
-    contentResponse.data.blogPostingCollection?.items,
-    contentResponse.data.projectPageCollection?.items,
-    contentResponse.data.eventCollection?.items,
-  ].flat();
+  const fullContent = Object.values(contentResponse.data)
+    .map((collection) => collection.items || [])
+    .flat();
 
   const retrievedContentEntries = contentSysIds
     .map((sysId) =>
