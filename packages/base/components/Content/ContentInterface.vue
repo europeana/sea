@@ -222,7 +222,6 @@ const contentSections = computed(() => {
   const sections = [];
   let entryStartIndex = 0;
 
-  // FIXME: what if there is only 1 cta banner? won't many of the entries be missing?
   for (const ctaBanner of props.ctaBanners) {
     sections.push(
       normalisedEntries.value.slice(
@@ -233,6 +232,10 @@ const contentSections = computed(() => {
     );
     entryStartIndex = entryStartIndex + ENTRIES_PER_SECTION;
   }
+
+  // add any remaining e.g. if few CTAs
+  if (normalisedEntries.value.slice(entryStartIndex).length > 0)
+    sections.push(normalisedEntries.value.slice(entryStartIndex));
 
   return sections;
 });
