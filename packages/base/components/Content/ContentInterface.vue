@@ -101,7 +101,7 @@ const fetchableSysIdsString = computed(() => {
 });
 
 const relevantContentMetadata = computed(() => {
-  let relevantContentMetadata = allContentMetadata.value || [];
+  let relevantContentMetadata = minimalEntries.value || [];
   if (selectedType.value) {
     // Filter by selected type
     relevantContentMetadata = relevantContentMetadata.filter((contentEntry) => {
@@ -163,7 +163,7 @@ const featuredEntryText = computed(() => {
   }
 });
 
-async function fetchContent() {
+async function fetchFullEntries() {
   const contentSysIds = fetchableSysIds.value;
   if (contentSysIds.length === 0) {
     return [];
@@ -293,9 +293,9 @@ function normaliseCard(entry) {
   }
 }
 
-async function fetchContentMetadata() {
-  // Fetch minimal data for all entries to support ordering by datePublished
-  // and filtering by categories.
+// Fetch minimal data for all entries to support ordering by datePublished
+// and filtering by categories.
+async function fetchMinimalEntries() {
   const contentIdsVariables = {
     excludeSysId: props.featuredEntry?.sys?.id || "",
     locale: localeProperties.value.language,
@@ -305,7 +305,7 @@ async function fetchContentMetadata() {
   // Splits the request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
   // TODO: when selectedType is already set, only retrieve those entries
-  // needs to be accounted for in: { data: allContentMetadata } = useAsyncData(...)
+  // needs to be accounted for in: { data: minimalEntries } = useAsyncData(...)
 
   const contentTypeGraphql = {
     "blog post": blogPostingsListingMinimalGraphql,
@@ -344,13 +344,13 @@ async function fetchContentMetadata() {
   return ordered;
 }
 
-const { data: allContentMetadata } = useAsyncData(
-  "allContentMetadata",
-  fetchContentMetadata,
+const { data: minimalEntries } = useAsyncData(
+  "minimalEntries",
+  fetchMinimalEntries,
 );
-const { data: contentEntries } = useAsyncData(
+const { data: fullEntries } = useAsyncData(
   fetchableSysIdsString,
-  fetchContent,
+  fetchFullEntries,
   {
     watch: [fetchableSysIdsString],
   },
@@ -394,7 +394,7 @@ watch(page, () => {
         :url="contentfulEntryUrl(props.featuredEntry)"
       />
     </div>
-    <template v-for="(section, index) in contentEntries">
+    <template v-for="(section, index) in fullEntries">
       <!-- eslint-disable vue/valid-v-for -->
       <transition appear name="fade">
         <!-- eslint-enable vue/valid-v-for -->
