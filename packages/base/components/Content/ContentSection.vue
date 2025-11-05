@@ -1,5 +1,5 @@
 <script setup>
-import contentfulEntryHasContentType from "@/utils/contentful/entryHasContentType.js";
+import { entryHasContentType } from "@/utils/contentful/index.js";
 
 defineProps({
   section: {
@@ -21,25 +21,25 @@ const attributionFields = (fields) => {
 
 <template>
   <ContentRichText
-    v-if="contentfulEntryHasContentType(section, 'ContentTypeRichText')"
+    v-if="entryHasContentType(section, 'ContentTypeRichText')"
     :text="section.text"
     class="mb-4 mb-md-5 pb-4k-5"
   />
   <!-- TODO: add EmbedGateway -->
   <!-- <EmbedGateway
-    v-else-if="contentfulEntryHasContentType(section, 'Embed')"
+    v-else-if="entryHasContentType(section, 'Embed')"
     class="media-viewer-content mb-5"
     :embed-code="section.embed"
   > -->
   <EmbedHTML
-    v-else-if="contentfulEntryHasContentType(section, 'Embed')"
+    v-else-if="entryHasContentType(section, 'Embed')"
     :html="section.embed"
     :title="section.title"
     class="mb-4 mb-md-5 pb-4k-5"
   />
   <!-- </EmbedGateway> -->
   <ImageWithAttributionContainer
-    v-else-if="contentfulEntryHasContentType(section, 'ImageWithAttribution')"
+    v-else-if="entryHasContentType(section, 'ImageWithAttribution')"
     class="mb-4 mb-md-5 pb-4k-5"
   >
     <ImageWithAttribution
@@ -52,7 +52,7 @@ const attributionFields = (fields) => {
     />
   </ImageWithAttributionContainer>
   <GenericCallToAction
-    v-else-if="contentfulEntryHasContentType(section, 'Link')"
+    v-else-if="entryHasContentType(section, 'Link')"
     :text="section.text"
     :url="section.url"
     class="mb-4 mb-md-5 pb-4k-5"

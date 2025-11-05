@@ -1,7 +1,8 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
-const { t } = useI18n({ useScope: "global" });
 
+const { t } = useI18n({ useScope: "global" });
+const { $bs } = useNuxtApp();
 const { acceptAll, rejectAll, consentRequired, consentSaved } =
   useConsentManager();
 
@@ -18,8 +19,7 @@ const text = computed(() =>
 onMounted(async () => {
   if (consentRequired.value) {
     // Initialise Bootstrap Toast
-    const { Toast } = await import("bootstrap");
-    toastInstance = new Toast(toastRef.value);
+    toastInstance = new $bs.Toast(toastRef.value);
     toastInstance?.show();
   }
 });

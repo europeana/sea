@@ -27,6 +27,14 @@ query LandingPage(
         url
         text
       }
+      featuredContent {
+        name
+        description
+        image {
+          ...imageFields
+        }
+        url
+      }
       hasPartCollection(limit: 20) {
         items {
           ... on IllustrationGroup {

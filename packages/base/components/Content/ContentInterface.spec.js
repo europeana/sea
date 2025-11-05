@@ -95,7 +95,14 @@ const factory = (props = {}) =>
           query: { page: 1 },
         },
       },
-      stubs: ["ContentTagsDropdown"],
+      stubs: [
+        "ContentCard",
+        "ContentFeaturedCard",
+        "ContentTagsDropdown",
+        "ContentTypeFilter",
+        "GenericCallToActionBanner",
+        "PaginationNavInput",
+      ],
     },
     props: {
       contentTypes: ["blog post", "project"],
@@ -104,7 +111,7 @@ const factory = (props = {}) =>
     },
   });
 
-describe("components/content/contentInterface", () => {
+describe("components/Content/ContentInterface", () => {
   beforeEach(() => {
     mockQuery.mockImplementation((query) =>
       contentfulResponse(
@@ -177,7 +184,21 @@ describe("components/content/contentInterface", () => {
       }));
       const wrapper = await factory();
 
-      expect(wrapper.vm.selectedType).toBe("ProjectPage");
+      expect(wrapper.vm.selectedType).toStrictEqual({ type: "ProjectPage" });
+    });
+
+    it("contains taxonomy info when the type in the URL requires it", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          type: "training",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedType).toStrictEqual({
+        type: "Event",
+        taxonomy: "eventTypeTrainingCourse",
+      });
     });
   });
   describe("filteredTags", () => {
@@ -204,15 +225,15 @@ describe("components/content/contentInterface", () => {
       });
     });
   });
-  describe("relevantContentMetadata", () => {
+  describe("filteredMinimalEntries", () => {
     describe("when no tags are selected", () => {
       it("defaults to all content", async () => {
         const wrapper = await factory();
 
-        const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
-        const allContentMetaData = wrapper.vm.allContentMetadata.value;
+        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
+        const allContentMetaData = wrapper.vm.minimalEntries.value;
 
-        expect(relevantContentMetadata).toEqual(allContentMetaData);
+        expect(filteredMinimalEntries).toEqual(allContentMetaData);
       });
     });
 
@@ -225,12 +246,12 @@ describe("components/content/contentInterface", () => {
         }));
         const wrapper = await factory();
 
-        const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
+        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
 
-        const expectedContentData = wrapper.vm.allContentMetadata.value.filter(
+        const expectedContentData = wrapper.vm.minimalEntries.value.filter(
           (entry) => entry.cats.includes(categories[0]),
         );
-        expect(relevantContentMetadata).toEqual(expectedContentData);
+        expect(filteredMinimalEntries).toEqual(expectedContentData);
       });
     });
 
@@ -238,17 +259,17 @@ describe("components/content/contentInterface", () => {
       it("only selects content which has the selected type", async () => {
         useRouteMock.mockImplementation(() => ({
           query: {
-            type: "blog post",
+            type: "news",
           },
         }));
         const wrapper = await factory();
 
-        const relevantContentMetadata = wrapper.vm.relevantContentMetadata;
+        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
 
-        const expectedContentData = wrapper.vm.allContentMetadata.value.filter(
+        const expectedContentData = wrapper.vm.minimalEntries.value.filter(
           (entry) => entry.__typename === "BlogPosting",
         );
-        expect(relevantContentMetadata).toEqual(expectedContentData);
+        expect(filteredMinimalEntries).toEqual(expectedContentData);
       });
     });
   });
@@ -264,7 +285,7 @@ describe("components/content/contentInterface", () => {
       expect(total).toEqual(0);
     });
 
-    it("is based of the relevantContentMetadata length", async () => {
+    it("is based of the filteredMinimalEntries length", async () => {
       const wrapper = await factory();
 
       const total = wrapper.vm.total;
@@ -319,11 +340,12 @@ describe("components/content/contentInterface", () => {
   it("normalises blog content correctly", async () => {
     const wrapper = await factory();
 
-    const firstEntry = wrapper.vm.contentEntries.value[0][0];
+    const firstEntry = wrapper.vm.contentSections[0][0];
 
     expect(firstEntry.text).toBe("authored.createdDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
+
   it("normalises project content correctly", async () => {
     mockQuery.mockImplementation((query) =>
       contentfulResponse(
@@ -355,11 +377,13 @@ describe("components/content/contentInterface", () => {
     );
 
     const wrapper = await factory();
-    const firstEntry = wrapper.vm.contentEntries.value[0][0];
+
+    const firstEntry = wrapper.vm.contentSections[0][0];
 
     expect(firstEntry.text).toBe("headline");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
+
   describe("when there is a default card thumbnail", () => {
     it("is used for when there is no primary image of page", async () => {
       const defaultCardThumbnail = {
@@ -370,35 +394,228 @@ describe("components/content/contentInterface", () => {
       };
       const wrapper = await factory({ defaultCardThumbnail });
 
-      const result = await wrapper.vm.fetchContent();
-      const firstEntry = result[0][0];
+      const firstEntry = wrapper.vm.contentSections[0][0];
 
       expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
-    });
-  });
-  describe("isCtaBanner", () => {
-    it("detects CTA banner strings correctly", async () => {
-      const wrapper = await factory();
-
-      expect(wrapper.vm.isCtaBanner("cta-banner-0")).toBe(true);
-      expect(wrapper.vm.isCtaBanner("something-else")).toBe(false);
     });
   });
 
   it("inserts CTA banners in between content entries", async () => {
     const ctaBanners = [
-      { name: "CTA Banner 1" },
-      { name: "CTA Banner 2" },
-      { name: "CTA Banner 3" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 1" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 2" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 3" },
     ];
 
     const wrapper = await factory({ ctaBanners });
 
-    const result = await wrapper.vm.fetchContent();
-
     // Should return an array with 6 elements: [8 entries, 'cta-banner-0', 8 entries, 'cta-banner-1', 8 entries, 'cta-banner-2']
-    expect(result.length).toBe(6);
-    expect(result[0].length).toBe(8);
-    expect(result[1]).toBe("cta-banner-0");
+    expect(wrapper.vm.contentSections.length).toBe(6);
+    expect(wrapper.vm.contentSections[0].length).toBe(8);
+    expect(wrapper.vm.contentSections[1]).toBe(ctaBanners[0]);
+  });
+
+  describe("featured entry", () => {
+    describe("when there is a featured entry", () => {
+      describe("and no type filter nor tags are selected and on page 1", () => {
+        it("displays a featured content card", async () => {
+          const wrapper = await factory({
+            featuredEntry: { name: "featured content" },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a type filter matching the featured entry type is selected", () => {
+        it("displays a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              type: "news",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "BlogPosting",
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a type filter matching the featured entry type as well as the featured taxonomy is selected", () => {
+        it("displays a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              type: "event",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "Event",
+              contentfulMetadata: {
+                concepts: [
+                  {
+                    id: "eventTypeEvent",
+                  },
+                ],
+              },
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a type filter not matching the featured entry type is selected", () => {
+        it("does not display a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              type: "project",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "BlogPosting",
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(false);
+        });
+      });
+      describe("and a tag matching one of the featured entry tags is selected", () => {
+        it("displays a featured content card", async () => {
+          const tag = "network";
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              tags: tag,
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              categoriesCollection: { items: [{ identifier: tag }] },
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a tag not matching any of the featured entry tags is selected", () => {
+        it("does not display a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              tags: "history",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              categoriesCollection: { items: [{ identifier: "network" }] },
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(false);
+        });
+      });
+      describe("and page is not 1", () => {
+        it("does not display a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              page: 2,
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(false);
+        });
+      });
+    });
+    describe("when there is a datePublished field", () => {
+      it("uses the date as text on the featured content card", async () => {
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            datePublished: new Date("29-10-2025"),
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual("authored.createdDate");
+      });
+    });
+    describe("when there is no datePublished field", () => {
+      it("uses the headline as text on the featured content card", async () => {
+        const headline = "This is a headline";
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            headline,
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual(headline);
+      });
+    });
+    describe("when it is for a training course", () => {
+      it("uses the formatted training dates as a text on the featured card", async () => {
+        const startDate = "2025-10-16T00:00:00.000+01:00";
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            contentfulMetadata: {
+              concepts: [
+                {
+                  id: "eventTypeTrainingCourse",
+                },
+              ],
+            },
+            startDate,
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual("training.dateRange");
+      });
+    });
+    describe("when it is for an event", () => {
+      it("uses the formatted event dates as a text on the featured card", async () => {
+        const startDate = "2025-10-16T00:00:00.000+01:00";
+        const endDate = "2025-15-16T00:00:00.000+01:00";
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            contentfulMetadata: {
+              concepts: [
+                {
+                  id: "eventTypeEvent",
+                },
+              ],
+            },
+            startDate,
+            endDate,
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual("event.dateRange");
+      });
+    });
   });
 });

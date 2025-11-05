@@ -1,6 +1,6 @@
 <script setup>
-import contentfulEntryHasContentType from "../../utils/contentful/entryHasContentType.js";
-import parseMarkdown from "../../utils/markdown/parse.js";
+import { entryHasContentType } from "@/utils/contentful/index.js";
+import parseMarkdown from "@/utils/markdown/parse.js";
 
 defineProps({
   /**
@@ -51,13 +51,13 @@ defineProps({
       </div>
       <div v-for="(section, index) in sections" :key="index">
         <LandingImageCard
-          v-if="contentfulEntryHasContentType(section, 'ImageCard')"
+          v-if="entryHasContentType(section, 'ImageCard')"
           :card="section"
           title-tag="h3"
           :cta-classes="imageCardCtaClasses"
         />
         <LandingAutomatedCardGroup
-          v-if="contentfulEntryHasContentType(section, 'AutomatedCardGroup')"
+          v-if="entryHasContentType(section, 'AutomatedCardGroup')"
           :genre="section.genre"
         />
       </div>

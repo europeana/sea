@@ -78,7 +78,7 @@ const imageSizes = [
     :image-sizes="imageSizes"
     :contentful-image-crop-presets="imageCropPresets"
     :lazy="false"
-    class="featured-content-card"
+    class="featured-content-card mw-100"
   />
 </template>
 
@@ -87,15 +87,11 @@ const imageSizes = [
 
 .featured-content-card {
   min-height: 10rem;
+  flex: 0 1 100%;
+  margin-bottom: 3rem;
 
-  @at-root .xxl-page .card-deck-4-cols & {
-    flex: 0 1 100%;
-    max-width: none;
-    margin-bottom: 3rem;
-
-    @media (min-width: $bp-4k) {
-      margin-bottom: calc(var(--bp-4k-increment) * 3rem);
-    }
+  @media (min-width: $bp-4k) {
+    margin-bottom: calc(var(--bp-4k-increment) * 3rem);
   }
 
   :deep(.card-wrapper) {
