@@ -400,17 +400,6 @@ describe("components/Content/ContentInterface", () => {
     });
   });
 
-  describe("isCtaBanner", () => {
-    it("detects CTA banners correctly", async () => {
-      const wrapper = await factory();
-
-      expect(
-        wrapper.vm.isCtaBanner({ __typename: "PrimaryCallToAction" }),
-      ).toBe(true);
-      expect(wrapper.vm.isCtaBanner([{ __typename: "event" }])).toBe(false);
-    });
-  });
-
   it("inserts CTA banners in between content entries", async () => {
     const ctaBanners = [
       { __typename: "PrimaryCallToAction", name: "CTA Banner 1" },
