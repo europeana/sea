@@ -127,7 +127,9 @@ const filteredMinimalEntries = computed(() => {
 });
 
 const total = computed(() => {
-  return filteredMinimalEntries.value?.length || 0;
+  return (
+    (filteredMinimalEntries.value?.length || 0) + (props.featuredEntry ? 1 : 0)
+  );
 });
 
 const page = computed(() => {
