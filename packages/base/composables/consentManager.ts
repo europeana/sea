@@ -30,6 +30,8 @@ export function createConsentManager(settings = {}) {
 
   config.value = defu(settings, config.value);
 
+  // TODO: consider simpler custom string encoding to remove multiple 'true'/'false' values.
+  // "true=cloudflare,i18n;false=matomo,zoho"
   // useCookie handles decoding and encoding of the cookie value
   const consentCookie = useCookie<ConsentCookie>(config.value.key, {
     maxAge: config.value.maxAge,
