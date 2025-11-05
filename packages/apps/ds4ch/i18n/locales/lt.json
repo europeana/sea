@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Renginiai",
       "news": "Naujienos",
       "projects": "Projektai",
+      "training": "Mokymai",
       "viewAll": "Peržiūrėti visus"
     },
     "resultsHaveLoaded": "{0} rasti rezultatai"
   },
+  "cookies": {
+    "acceptAll": "Priimti visus",
+    "acceptSelected": "Priimti pasirinktą",
+    "consentModal": {
+      "alwaysRequired": "(Visada būtina)",
+      "privacyStatement": "Privatumo pareiškimas",
+      "servicesCount": "{count} paslauga | {count} paslaugos",
+      "text": "Čia galite matyti ir suasmeninti paslaugas, kurias norėtume naudoti šiame tinklalapyje. Norėdami sužinoti daugiau, perskaitykite mūsų {privacyStatement}.",
+      "title": "Paslaugos, kuriomis norėtume naudotis."
+    },
+    "consentNotice": {
+      "learnMore": "Leisk man pasirinkti",
+      "text": "Ar galėtume įjungti saugos, analizės ir trečiųjų šalių turinio paslaugas?",
+      "textUpdated": "Nuo jūsų paskutinio apsilankymo kai kurios paslaugos pasikeitė. Ar galėtume įjungti papildomas paslaugas?"
+    },
+    "decline": "Aš atsisakau",
+    "ok": "Gerai",
+    "purposes": {
+      "2D": {
+        "title": "2D medija"
+      },
+      "3D": {
+        "title": "3D medija"
+      },
+      "audio": {
+        "title": "Garso"
+      },
+      "essential": {
+        "description": "Šios paslaugos yra būtinos tinkamam šios svetainės veikimui. Jos apima kalbos nuostatas ir užtikrina jūsų apsilankymo saugumą. Jų išjungti negalite, nes priešingu atveju svetainė neveiktų tinkamai.",
+        "title": "Esminės saugos ir tinkinimo paslaugos"
+      },
+      "mediaViewing": {
+        "description": "Šios paslaugos įkelia vaizdus (2D) , 3D, garso ir vaizdo elementus, kad juos būtų galima peržiūrėti.",
+        "title": "Žiniasklaidos peržiūros paslaugos"
+      },
+      "socialMedia": {
+        "description": "Šios paslaugos įkelia turinį iš socialinės žiniasklaidos platformų.",
+        "title": "Socialinės žiniasklaidos įterpimo paslaugos"
+      },
+      "thirdPartyContent": {
+        "description": "Šios paslaugos įkelia trečiųjų šalių priglobtą turinį. Jos naudojimui taikomos šių trečiųjų šalių sąlygos ir privatumo pareiškimas.",
+        "title": "Trečiųjų šalių turinys"
+      },
+      "usage": {
+        "description": "Šios tarnybos renka informaciją, kad galėtume geriau suprasti, kaip svetainė naudojama ir kur yra skausmo taškai, suteikdami mums galimybę rinktis pagrįstai, kad pagerintume jūsų patirtį.",
+        "title": "Paslaugos, skirtos svetainės naudojimui ir atsiliepimams fiksuoti"
+      },
+      "video": {
+        "title": "Vaizdo įrašas"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Šiuo jungikliu galite įjungti arba išjungti visas pasirenkamąsias paslaugas.",
+        "title": "Įgalinti arba išjungti visas paslaugas"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Prisimink, kad esi žmogus.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Renka naudojimo duomenis, kad galėtume analizuoti naudotojų sąveiką. Įjungia apklausos valdiklį, suteikiantį jums galimybę atsakyti į mūsų lankytojų pasitenkinimo apklausas.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Atsimena jūsų pageidaujamą sąsajos kalbą būsimam naudojimui.",
+        "title": "Kalbos kodas"
+      },
+      "matomo": {
+        "description": "Renka anoniminę statistiką apie tai, kaip lankytojai sąveikauja su svetaine.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} į {endDate}",
+    "label": "įvykis"
+  },
+  "featured": "Rekomenduojami",
   "footer": {
     "accessibility": "Prieinamumas",
     "cookies": "Slapukai",
@@ -112,5 +195,10 @@
       "previousSlide": "Ankstesnė skaidrė",
       "slideLabel": "Skaidrė {slide} iš {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "mokymas",
+    "ongoing": "Vyksta"
   }
 }

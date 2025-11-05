@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Avvenimenti",
       "news": "Aħbarijiet",
       "projects": "Proġetti",
+      "training": "Taħriġ",
       "viewAll": "Ara kollha"
     },
     "resultsHaveLoaded": "{0} riżultati misjuba"
   },
+  "cookies": {
+    "acceptAll": "Aċċetta kollox",
+    "acceptSelected": "Aċċetta magħżula",
+    "consentModal": {
+      "alwaysRequired": "(Dejjem meħtieġ)",
+      "privacyStatement": "Dikjarazzjoni tal-privatezza",
+      "servicesCount": "{count} servizz | {count} servizzi",
+      "text": "Hawnhekk tista’ tara u tippersonalizza s-servizzi li nixtiequ nużaw fuq dan il-websajt. Biex titgħallem aktar aqra l-{privacyStatement}.",
+      "title": "Servizzi li nixtiequ nużaw."
+    },
+    "consentNotice": {
+      "learnMore": "Ħallini nagħżel",
+      "text": "Nistgħu jekk jogħġbok inħaddmu s-servizzi għas-sigurtà, l-analitiċi u l-kontenut ta’ partijiet terzi?",
+      "textUpdated": "Kien hemm xi bidliet fis-servizzi mill-aħħar żjara tiegħek. Nistgħu jekk jogħġbok nattivaw servizzi addizzjonali?"
+    },
+    "decline": "Nirrifjuta",
+    "ok": "Okay",
+    "purposes": {
+      "2D": {
+        "title": "Midja 2D"
+      },
+      "3D": {
+        "title": "Midja 3D"
+      },
+      "audio": {
+        "title": "Awdjo"
+      },
+      "essential": {
+        "description": "Dawn is-servizzi huma essenzjali għall-funzjonament korrett ta’ dan il-websajt. Dawn jinkludu l-preferenzi tal-lingwa u jżommu ż-żjara tiegħek sigura. Ma tistax tiddiżattivahom għax mod ieħor il-websajt ma taħdimx kif suppost.",
+        "title": "Servizzi essenzjali għas-sigurtà u l-personalizzazzjoni"
+      },
+      "mediaViewing": {
+        "description": "Dawn is-servizzi jgħabbu immaġni (2D), 3D, awdjo, u oġġetti tal-vidjow għall-wiri.",
+        "title": "Servizzi ta' wiri tal-midja"
+      },
+      "socialMedia": {
+        "description": "Dawn is-servizzi jgħabbu kontenut minn pjattaformi tal-midja soċjali.",
+        "title": "Servizzi ta' inkorporazzjoni tal-midja soċjali"
+      },
+      "thirdPartyContent": {
+        "description": "Dawn is-servizzi jgħabbu kontenut ospitat minn partijiet terzi. L-użu tiegħu huwa suġġett għat-termini, il-kundizzjonijiet u d-dikjarazzjoni tal-privatezza ta’ dawn il-partijiet terzi.",
+        "title": "Kontenut ta' parti terza"
+      },
+      "usage": {
+        "description": "Dawn is-servizzi jiġbru l-informazzjoni biex jgħinuna nifhmu aħjar kif tintuża l-websajt u fejn huma l-punti tal-uġigħ, u jagħtuna s-setgħa li nagħmlu għażliet infurmati biex intejbu l-esperjenza tiegħek.",
+        "title": "Servizzi biex taqbad l-użu u l-feedback tal-websajt"
+      },
+      "video": {
+        "title": "Vidjo"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Uża dan is-swiċċ biex tippermetti jew tiddiżattiva s-servizzi fakultattivi kollha.",
+        "title": "Jippermetti jew itfi s-servizzi kollha"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Jiftakar li inti bniedem.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Jikkolletta data dwar l-użu biex jgħinna nanalizzaw l-interazzjonijiet tal-utenti. Jattiva widget ta' stħarriġ li jagħtik l-għażla li twieġeb għall-istħarriġiet ta' sodisfazzjon tal-viżitaturi tagħna.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Tiftakar il-lingwa tal-interface preferuta tiegħek għal aċċess futur.",
+        "title": "Kodiċi tal-lingwa"
+      },
+      "matomo": {
+        "description": "Jġemma’ statistika anonima dwar kif il-viżitaturi jinteraġixxu mal-websajt.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} sa {endDate}",
+    "label": "avveniment"
+  },
+  "featured": "Dehru",
   "footer": {
     "accessibility": "Aċċessibilità",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Slide preċedenti",
       "slideLabel": "Slide {slide} Ta {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "taħriġ",
+    "ongoing": "Għaddej"
   }
 }

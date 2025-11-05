@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Események",
       "news": "Hírek",
       "projects": "Projektek",
+      "training": "Képzés",
       "viewAll": "Összes megtekintése"
     },
     "resultsHaveLoaded": "{0} találat"
   },
+  "cookies": {
+    "acceptAll": "Összes elfogadása",
+    "acceptSelected": "Kiválasztottak elfogadása",
+    "consentModal": {
+      "alwaysRequired": "(Mindig kötelező)",
+      "privacyStatement": "Adatvédelmi nyilatkozat",
+      "servicesCount": "{count} szolgáltatás | {count} szolgáltatás",
+      "text": "Itt láthatja és testreszabhatja azokat a szolgáltatásokat, amelyeket ezen a webhelyen szeretnénk használni. További információért olvassa el a {privacyStatement}.",
+      "title": "Szolgáltatások, amelyeket szeretnénk igénybe venni."
+    },
+    "consentNotice": {
+      "learnMore": "Hadd válasszak",
+      "text": "Engedélyezhetjük a biztonsági, analitikai és harmadik féltől származó tartalmakhoz kapcsolódó szolgáltatásokat?",
+      "textUpdated": "A legutóbbi látogatása óta néhány szolgáltatás megváltozott. Engedélyezhetnénk további szolgáltatásokat?"
+    },
+    "decline": "Elutasítom",
+    "ok": "Rendben",
+    "purposes": {
+      "2D": {
+        "title": "2D média"
+      },
+      "3D": {
+        "title": "3D média"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Ezek a szolgáltatások elengedhetetlenek a webhely megfelelő működéséhez. Ide tartoznak a nyelvi beállítások, és gondoskodnak látogatásod biztonságáról. Nem lehet őket letiltani, mert enélkül a webhely nem működne megfelelően.",
+        "title": "Alapvető szolgáltatások a biztonság és a testreszabás érdekében"
+      },
+      "mediaViewing": {
+        "description": "Ezek a szolgáltatások (2D) képeket, 3D, hang és videó elemeket töltenek be megtekintésre.",
+        "title": "Médianézési szolgáltatások"
+      },
+      "socialMedia": {
+        "description": "Ezek a szolgáltatások közösségimédia-platformokról töltenek be tartalmakat.",
+        "title": "Közösségi média beágyazási szolgáltatások"
+      },
+      "thirdPartyContent": {
+        "description": "Ezek a szolgáltatások harmadik felek által üzemeltetett tartalmakat töltenek be. Használatukra e harmadik felek feltételei és adatvédelmi nyilatkozatai vonatkoznak.",
+        "title": "Harmadik féltől származó tartalom"
+      },
+      "usage": {
+        "description": "Ezek a szolgáltatások információt gyűjtenek azzal kapcsolatban, hogy jobban megértsük, hogyan használják a weboldalt, és hol vannak a problémás pontok, így lehetővé téve számunkra, hogy megalapozott döntéseket hozzunk a felhasználói élmény javítása érdekében.",
+        "title": "Szolgáltatások a weboldal használatának és a visszajelzések rögzítésére"
+      },
+      "video": {
+        "title": "Videó"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Ezzel a kapcsolóval engedélyezheti vagy letilthatja az összes opcionális szolgáltatást.",
+        "title": "Minden szolgáltatás engedélyezése vagy letiltása"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Emlékszik arra, hogy ember vagy.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Használati adatokat gyűjt, hogy segítsen nekünk elemezni a felhasználói interakciókat. Aktivál egy felmérési widgetet, amely lehetőséget ad arra, hogy válaszoljon a látogatói elégedettségi felméréseinkre.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Emlékszik az Ön által preferált felület nyelvére a későbbi hozzáférés érdekében.",
+        "title": "Nyelvi kód"
+      },
+      "matomo": {
+        "description": "Névtelen statisztikákat gyűjt arról, hogy a látogatók hogyan lépnek kapcsolatba a weboldallal.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} – {endDate}",
+    "label": "esemény"
+  },
+  "featured": "Kiemelt",
   "footer": {
     "accessibility": "Akadálymentesség",
     "cookies": "Sütik",
@@ -112,5 +195,10 @@
       "previousSlide": "Előző dia",
       "slideLabel": "{slide} dia a {totalSlides} diából"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "képzés",
+    "ongoing": "Folyamatban"
   }
 }

@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Événements",
       "news": "Actualités",
       "projects": "Projets",
+      "training": "Formation",
       "viewAll": "Voir tout"
     },
     "resultsHaveLoaded": "{0} résultats trouvés"
   },
+  "cookies": {
+    "acceptAll": "Accepter tout",
+    "acceptSelected": "Accepter la sélection",
+    "consentModal": {
+      "alwaysRequired": "(Toujours requis)",
+      "privacyStatement": "Déclaration de confidentialité",
+      "servicesCount": "{count} service | {count} services",
+      "text": "Ici, vous pouvez voir et personnaliser les services que nous souhaitons utiliser sur ce site web. Pour en savoir plus, veuillez lire notre {privacyStatement}.",
+      "title": "Services que nous aimerions utiliser."
+    },
+    "consentNotice": {
+      "learnMore": "Laisse-moi choisir",
+      "text": "Pourrions-nous activer les services de sécurité, d'analyse et de contenu tiers ?",
+      "textUpdated": "Des changements ont été apportés à nos services depuis votre dernière visite. Pourrions-nous activer des services supplémentaires, s’il vous plaît ?"
+    },
+    "decline": "Je décline",
+    "ok": "D'accord",
+    "purposes": {
+      "2D": {
+        "title": "Médias 2D"
+      },
+      "3D": {
+        "title": "Médias 3D"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Ces services sont essentiels au bon fonctionnement de ce site web. Ils incluent les préférences linguistiques et assurent la sécurité de votre visite. Vous ne pouvez pas les désactiver, car le site ne fonctionnerait pas correctement autrement.",
+        "title": "Services essentiels pour la sécurité et la personnalisation"
+      },
+      "mediaViewing": {
+        "description": "Ces services chargent des éléments d'image (2D), 3D, audio et vidéo en vue de leur visualisation.",
+        "title": "Services de visionnage de médias"
+      },
+      "socialMedia": {
+        "description": "Ces services chargent le contenu des plateformes de médias sociaux.",
+        "title": "Services d'intégration des médias sociaux"
+      },
+      "thirdPartyContent": {
+        "description": "Ces services chargent du contenu hébergé par des tiers. Son utilisation est soumise aux conditions générales et à la déclaration de confidentialité de ces tiers.",
+        "title": "Contenu de tiers"
+      },
+      "usage": {
+        "description": "Ces services collectent les informations pour nous aider à mieux comprendre comment le site Web est utilisé et où se trouvent les points faibles, nous permettant de faire des choix éclairés pour améliorer votre expérience.",
+        "title": "Services pour capturer l'utilisation du site Web et les commentaires"
+      },
+      "video": {
+        "title": "Vidéo"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Utilisez ce commutateur pour activer ou désactiver tous les services facultatifs.",
+        "title": "Activer ou désactiver tous les services"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Se souvient que vous êtes un être humain.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Collecte des données d'utilisation pour nous aider à analyser les interactions avec les utilisateurs. Active un widget d'enquête vous donnant la possibilité de répondre à nos enquêtes de satisfaction des visiteurs.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Se souvient de votre langue d'interface préférée pour un accès futur.",
+        "title": "Code de la langue"
+      },
+      "matomo": {
+        "description": "Collecte des statistiques anonymes sur la façon dont les visiteurs interagissent avec le site web.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} à {endDate}",
+    "label": "événement"
+  },
+  "featured": "En vedette",
   "footer": {
     "accessibility": "Accessibilité",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Diapositive précédente",
       "slideLabel": "Diapositive {slide} sur {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "formation",
+    "ongoing": "En cours"
   }
 }

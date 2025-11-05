@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Eventi",
       "news": "Notizie",
       "projects": "Progetti",
+      "training": "Formazione",
       "viewAll": "Visualizza tutto"
     },
     "resultsHaveLoaded": "{0} risultati trovati"
   },
+  "cookies": {
+    "acceptAll": "Accettare tutti",
+    "acceptSelected": "Accetta selezionato",
+    "consentModal": {
+      "alwaysRequired": "(Sempre obbligatorio)",
+      "privacyStatement": "Informativa sulla privacy",
+      "servicesCount": "{count} servizio | {count} servizi",
+      "text": "Qui puoi vedere e personalizzare i servizi che vorremmo utilizzare su questo sito web. Per saperne di più, leggi la nostra {privacyStatement}.",
+      "title": "Servizi che vorremmo utilizzare."
+    },
+    "consentNotice": {
+      "learnMore": "Fammi scegliere",
+      "text": "Possiamo per favore abilitare i servizi per sicurezza, analisi e contenuti di terze parti?",
+      "textUpdated": "Ci sono state alcune modifiche ai servizi dalla tua ultima visita. Possiamo abilitare servizi aggiuntivi?"
+    },
+    "decline": "Rifiuto",
+    "ok": "Ok",
+    "purposes": {
+      "2D": {
+        "title": "Media 2D"
+      },
+      "3D": {
+        "title": "Media 3D"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Questi servizi sono essenziali per il corretto funzionamento di questo sito web. Includono le preferenze di lingua e mantengono sicura la tua visita. Non puoi disattivarli, altrimenti il sito web non funzionerebbe correttamente.",
+        "title": "Servizi essenziali per la sicurezza e la personalizzazione"
+      },
+      "mediaViewing": {
+        "description": "Questi servizi caricano immagini (2D), 3D, audio e video per la visualizzazione.",
+        "title": "Servizi di visualizzazione dei media"
+      },
+      "socialMedia": {
+        "description": "Questi servizi caricano i contenuti dalle piattaforme dei social media.",
+        "title": "Servizi di integrazione dei social media"
+      },
+      "thirdPartyContent": {
+        "description": "Questi servizi caricano contenuti ospitati da terze parti. Il loro utilizzo è soggetto ai termini, alle condizioni e all'informativa sulla privacy di queste terze parti.",
+        "title": "Contenuti di terze parti"
+      },
+      "usage": {
+        "description": "Questi servizi raccolgono le informazioni per aiutarci a capire meglio come viene utilizzato il sito Web e dove sono i punti deboli, consentendoci di fare scelte informate per migliorare la tua esperienza.",
+        "title": "Servizi per acquisire l'utilizzo del sito web e il feedback"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Utilizzare questo interruttore per abilitare o disabilitare tutti i servizi facoltativi.",
+        "title": "Abilitare o disabilitare tutti i servizi"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Ricorda che sei un essere umano.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Raccoglie dati sull'utilizzo per aiutarci ad analizzare le interazioni degli utenti. Attiva un widget di sondaggio che ti offre la possibilità di rispondere ai nostri sondaggi sulla soddisfazione dei visitatori.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Ricorda la lingua dell'interfaccia preferita per l'accesso futuro.",
+        "title": "Codice lingua"
+      },
+      "matomo": {
+        "description": "Raccoglie statistiche anonime su come i visitatori interagiscono con il sito web.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} a {endDate}",
+    "label": "evento"
+  },
+  "featured": "In primo piano",
   "footer": {
     "accessibility": "Accessibilità",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Diapositiva precedente",
       "slideLabel": "Diapositiva {slide} di {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "formazione",
+    "ongoing": "In corso"
   }
 }

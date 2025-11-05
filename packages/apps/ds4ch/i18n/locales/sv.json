@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Händelser",
       "news": "Nyheter",
       "projects": "Projekt",
+      "training": "Utbildning",
       "viewAll": "Visa alla"
     },
     "resultsHaveLoaded": "{0} resultat hittades"
   },
+  "cookies": {
+    "acceptAll": "Acceptera alla",
+    "acceptSelected": "Acceptera valt",
+    "consentModal": {
+      "alwaysRequired": "(Krävs alltid)",
+      "privacyStatement": "Integritetspolicy",
+      "servicesCount": "{count} tjänst | {count} tjänster",
+      "text": "Här kan du se och anpassa de tjänster som vi vill använda på denna webbplats. För att få veta mer, läs vår {privacyStatement}.",
+      "title": "Tjänster som vi skulle vilja använda."
+    },
+    "consentNotice": {
+      "learnMore": "Låt mig välja",
+      "text": "Kan vi aktivera tjänster för säkerhet, analys och tredjepartsinnehåll?",
+      "textUpdated": "Det har skett vissa förändringar i tjänsterna sedan ditt senaste besök. Kan vi aktivera ytterligare tjänster?"
+    },
+    "decline": "Jag avböjer",
+    "ok": "Okej",
+    "purposes": {
+      "2D": {
+        "title": "2D-media"
+      },
+      "3D": {
+        "title": "3D-media"
+      },
+      "audio": {
+        "title": "Ljud"
+      },
+      "essential": {
+        "description": "Dessa tjänster är nödvändiga för att den här webbplatsen ska fungera korrekt. De omfattar språkinställningar och håller ditt besök säkert. Du kan inte inaktivera dem eftersom webbplatsen annars inte skulle fungera korrekt.",
+        "title": "Viktiga tjänster för säkerhet och anpassning"
+      },
+      "mediaViewing": {
+        "description": "Dessa tjänster laddar bild- (2D), 3D-, ljud- och videoobjekt för visning.",
+        "title": "Tjänster för visning av media"
+      },
+      "socialMedia": {
+        "description": "Dessa tjänster laddar innehåll från sociala medieplattformar.",
+        "title": "Tjänster för inbäddning i sociala medier"
+      },
+      "thirdPartyContent": {
+        "description": "Dessa tjänster laddar innehåll som tillhandahålls av tredje part. Dess användning är föremål för dessa tredje parts villkor och sekretesspolicy.",
+        "title": "Innehåll från tredje part"
+      },
+      "usage": {
+        "description": "Dessa tjänster samlar in informationen för att bättre förstå hur webbplatsen används och var smärtpunkterna är, vilket ger oss möjlighet att göra välgrundade val för att förbättra din upplevelse.",
+        "title": "Tjänster för att fånga in webbplatsanvändning och feedback"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Använd den här omkopplaren för att aktivera eller inaktivera alla valfria tjänster.",
+        "title": "Aktivera eller inaktivera alla tjänster"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Kommer ihåg att du är en människa.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Samlar in användningsdata för att hjälpa oss att analysera användarinteraktioner. Aktiverar en undersökningswidget som ger dig möjlighet att svara på våra besökarnöjdhetsundersökningar.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Kommer ihåg ditt föredragna gränssnittsspråk för framtida åtkomst.",
+        "title": "Språkkod"
+      },
+      "matomo": {
+        "description": "Samlar in anonym statistik om hur besökare interagerar med webbplatsen.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} till {endDate}",
+    "label": "händelse"
+  },
+  "featured": "Utvalt",
   "footer": {
     "accessibility": "Tillgänglighet",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Föregående bild",
       "slideLabel": "Bild {slide} av {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "utbildning",
+    "ongoing": "Pågående"
   }
 }
