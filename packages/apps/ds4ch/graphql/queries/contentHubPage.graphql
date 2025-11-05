@@ -70,6 +70,28 @@ query ContentHubPage(
             }
           }
         }
+        ... on Event {
+          sys {
+            id
+          }
+          contentfulMetadata {
+            concepts {
+              id
+            }
+          }
+          url
+          name
+          startDate
+          endDate
+          image {
+            ...imageFields
+          }
+          categoriesCollection {
+            items {
+              identifier
+            }
+          }
+        }
       }
       hasPartCollection(limit: 20) {
         items {

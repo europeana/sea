@@ -400,17 +400,6 @@ describe("components/Content/ContentInterface", () => {
     });
   });
 
-  describe("isCtaBanner", () => {
-    it("detects CTA banners correctly", async () => {
-      const wrapper = await factory();
-
-      expect(
-        wrapper.vm.isCtaBanner({ __typename: "PrimaryCallToAction" }),
-      ).toBe(true);
-      expect(wrapper.vm.isCtaBanner([{ __typename: "event" }])).toBe(false);
-    });
-  });
-
   it("inserts CTA banners in between content entries", async () => {
     const ctaBanners = [
       { __typename: "PrimaryCallToAction", name: "CTA Banner 1" },
@@ -449,6 +438,32 @@ describe("components/Content/ContentInterface", () => {
           const wrapper = await factory({
             featuredEntry: {
               __typename: "BlogPosting",
+              name: "featured content",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+      describe("and a type filter matching the featured entry type as well as the featured taxonomy is selected", () => {
+        it("displays a featured content card", async () => {
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              type: "event",
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "Event",
+              contentfulMetadata: {
+                concepts: [
+                  {
+                    id: "eventTypeEvent",
+                  },
+                ],
+              },
               name: "featured content",
             },
           });
@@ -558,6 +573,48 @@ describe("components/Content/ContentInterface", () => {
         });
 
         expect(wrapper.vm.featuredEntryText).toEqual(headline);
+      });
+    });
+    describe("when it is for a training course", () => {
+      it("uses the formatted training dates as a text on the featured card", async () => {
+        const startDate = "2025-10-16T00:00:00.000+01:00";
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            contentfulMetadata: {
+              concepts: [
+                {
+                  id: "eventTypeTrainingCourse",
+                },
+              ],
+            },
+            startDate,
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual("training.dateRange");
+      });
+    });
+    describe("when it is for an event", () => {
+      it("uses the formatted event dates as a text on the featured card", async () => {
+        const startDate = "2025-10-16T00:00:00.000+01:00";
+        const endDate = "2025-15-16T00:00:00.000+01:00";
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            contentfulMetadata: {
+              concepts: [
+                {
+                  id: "eventTypeEvent",
+                },
+              ],
+            },
+            startDate,
+            endDate,
+          },
+        });
+
+        expect(wrapper.vm.featuredEntryText).toEqual("event.dateRange");
       });
     });
   });

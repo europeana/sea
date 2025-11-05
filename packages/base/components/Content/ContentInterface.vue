@@ -72,6 +72,7 @@ const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
 });
 
+// FIXME: this needs to include any tags from the featured entry too
 const filteredTags = computed(() => {
   const relevantTags = filteredMinimalEntries.value
     .map((contentEntry) => contentEntry.cats)
@@ -103,22 +104,21 @@ const fetchableSysIdsString = computed(() => {
 const filteredMinimalEntries = computed(() => {
   let filteredMinimalEntries = minimalEntries.value;
 
+  // Filter by selected type
   if (selectedType.value) {
-    // Filter by selected type
     filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
-      return (
-        contentEntry["__typename"] === selectedType.value.type &&
-        (contentEntry.contentfulMetadata?.concepts.length > 0
-          ? contentEntry.contentfulMetadata.concepts.some((taxonomy) => {
-              return taxonomy.id === selectedType.value.taxonomy;
-            })
-          : true)
-      );
+      if (!entryHasType(contentEntry, selectedType.value.type)) {
+        return false;
+      }
+      if (!selectedType.value.taxonomy) {
+        return true;
+      }
+      return entryHasTaxonomyTerm(contentEntry, selectedType.value.taxonomy);
     });
   }
 
+  // Filter by selected categories
   if (selectedTags.value.length > 0) {
-    // Filter by selected categories
     filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
       return selectedTags.value.every((tag) => contentEntry.cats.includes(tag));
     });
@@ -128,32 +128,69 @@ const filteredMinimalEntries = computed(() => {
 });
 
 const total = computed(() => {
-  return filteredMinimalEntries.value?.length || 0;
+  return (
+    (filteredMinimalEntries.value?.length || 0) +
+    (showFeaturedEntry.value ? 1 : 0)
+  );
 });
 
 const page = computed(() => {
   return Number(route.query.page || 1);
 });
 
-const showFeaturedEntry = computed(() => {
-  let featuredEntryMatchesSelectedTags = true;
-  const featuredEntryTags =
+const featuredEntryTags = computed(() => {
+  return (
     props.featuredEntry?.categoriesCollection?.items?.map(
       (cat) => cat.identifier,
-    ) || [];
-  if (selectedTags.value.length > 0) {
-    featuredEntryMatchesSelectedTags = selectedTags.value.every((tag) =>
-      featuredEntryTags.includes(tag),
-    );
-  }
-
-  return (
-    props.featuredEntry &&
-    (!selectedType.value ||
-      selectedType.value.type === props.featuredEntry.__typename) &&
-    featuredEntryMatchesSelectedTags &&
-    page.value === 1
+    ) || []
   );
+});
+
+const featuredEntryMatchesSelectedTags = computed(() => {
+  return (
+    selectedTags.value.length === 0 ||
+    selectedTags.value.every((tag) => featuredEntryTags.value.includes(tag))
+  );
+});
+
+const entryHasTaxonomyTerm = (entry, termId) => {
+  return (entry.contentfulMetadata?.concepts || []).some(
+    (concept) => concept.id === termId,
+  );
+};
+
+const entryHasType = (entry, typeName) => {
+  return entry.__typename === typeName;
+};
+
+const showFeaturedEntry = computed(() => {
+  // no featured entry; nothing to show
+  if (!props.featuredEntry) {
+    return false;
+  }
+  // not on 1st page; don't show
+  if (!isFirstPage.value) {
+    return false;
+  }
+  // tags are selected but featured entry does not have them all; don't show
+  if (!featuredEntryMatchesSelectedTags.value) {
+    return false;
+  }
+  // no content type is selected; show
+  if (!selectedType.value) {
+    return true;
+  }
+  // content type is selected, but featured entry is of a different type; don't show
+  if (!entryHasType(props.featuredEntry, selectedType.value.type)) {
+    return false;
+  }
+  // content type is selected, and has no taxonomy; show
+  if (!selectedType.value.taxonomy) {
+    return true;
+  }
+  // show if featured entry has the selected type taxonomy term, else not
+  // FIXME: this needs to check for the eventType taxonomy only
+  return entryHasTaxonomyTerm(props.featuredEntry, selectedType.value.taxonomy);
 });
 
 const featuredEntryText = computed(() => {
@@ -161,9 +198,49 @@ const featuredEntryText = computed(() => {
     return t("authored.createdDate", {
       date: d(props.featuredEntry.datePublished, "short"),
     });
-  } else {
+  } else if (props.featuredEntry.headline) {
     return props.featuredEntry.headline;
+  } else if (
+    entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
+  ) {
+    return trainingDateHelper(
+      props.featuredEntry.startDate,
+      props.featuredEntry.endDate,
+    );
+  } else if (
+    entryHasTaxonomyTerm(props.featuredEntry, typeLookup.event.taxonomy)
+  ) {
+    return eventDateHelper(
+      props.featuredEntry.startDate,
+      props.featuredEntry.endDate,
+    );
   }
+  return undefined;
+});
+
+const featuredEntryImage = computed(() => {
+  if (props.featuredEntry?.primaryImageOfPage?.image) {
+    return props.featuredEntry?.primaryImageOfPage?.image;
+  } else if (props.featuredEntry?.image) {
+    return props.featuredEntry?.image;
+  }
+  return undefined;
+});
+
+const featuredEntryUrl = computed(() => {
+  if (props.featuredEntry.url) {
+    return props.featuredEntry.url;
+  }
+  return contentfulEntryUrl(props.featuredEntry);
+});
+
+const featuredEntrySubTitle = computed(() => {
+  if (!entryHasType(props.featuredEntry, "Event")) {
+    return undefined;
+  }
+  return entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
+    ? t("training.label")
+    : t("event.label");
 });
 
 async function fetchFullEntries() {
@@ -241,10 +318,6 @@ const contentSections = computed(() => {
   return sections;
 });
 
-function isCtaBanner(entry) {
-  return entry["__typename"] === "PrimaryCallToAction";
-}
-
 function trainingDateHelper(startDate, endDate) {
   if (startDate) {
     let formatedEndDate = t("training.ongoing");
@@ -274,7 +347,7 @@ function eventDateHelper(startDate, endDate) {
 //       consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
-    if (entry.__typename === "BlogPosting") {
+    if (entryHasType(entry, "BlogPosting")) {
       return {
         ...entry,
         url: contentfulEntryUrl(entry),
@@ -284,7 +357,7 @@ function normaliseCard(entry) {
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
       };
-    } else if (entry.__typename === "ProjectPage") {
+    } else if (entryHasType(entry, "ProjectPage")) {
       return {
         ...entry,
         url: contentfulEntryUrl(entry),
@@ -292,10 +365,8 @@ function normaliseCard(entry) {
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
       };
-    } else if (entry.__typename === "Event") {
-      if (
-        entry.contentfulMetadata.concepts[0].id === typeLookup.training.taxonomy
-      ) {
+    } else if (entryHasType(entry, "Event")) {
+      if (entryHasTaxonomyTerm(entry, typeLookup.training.taxonomy)) {
         return {
           ...entry,
           url: entry.url,
@@ -418,8 +489,9 @@ watch(page, () => {
       <ContentFeaturedCard
         :title="props.featuredEntry?.name"
         :text="featuredEntryText"
-        :image="props.featuredEntry?.primaryImageOfPage?.image"
-        :url="contentfulEntryUrl(props.featuredEntry)"
+        :image="featuredEntryImage"
+        :sub-title="featuredEntrySubTitle"
+        :url="featuredEntryUrl"
       />
     </div>
     <template v-for="(section, index) in contentSections">
@@ -427,7 +499,7 @@ watch(page, () => {
       <transition appear name="fade">
         <!-- eslint-enable vue/valid-v-for -->
         <div
-          v-if="isCtaBanner(section)"
+          v-if="entryHasType(section, 'PrimaryCallToAction')"
           :key="`cta-banner-${index}`"
           class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
         >
