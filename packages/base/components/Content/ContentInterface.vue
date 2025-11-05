@@ -128,7 +128,8 @@ const filteredMinimalEntries = computed(() => {
 
 const total = computed(() => {
   return (
-    (filteredMinimalEntries.value?.length || 0) + (props.featuredEntry ? 1 : 0)
+    (filteredMinimalEntries.value?.length || 0) +
+    (showFeaturedEntry.value ? 1 : 0)
   );
 });
 
