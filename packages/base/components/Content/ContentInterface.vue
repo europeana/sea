@@ -72,6 +72,7 @@ const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
 });
 
+// FIXME: this needs to include any tags from the featured entry too
 const filteredTags = computed(() => {
   const relevantTags = filteredMinimalEntries.value
     .map((contentEntry) => contentEntry.cats)
