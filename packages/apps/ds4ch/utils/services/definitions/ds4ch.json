@@ -7,12 +7,6 @@
     "title": "Cloudflare"
   },
   {
-    "cookies": ["^_hj"],
-    "name": "hotjar",
-    "purposes": ["usage"],
-    "title": "Hotjar"
-  },
-  {
     "cookies": ["^i18n_locale_code$"],
     "name": "i18n",
     "purposes": ["essential"],
