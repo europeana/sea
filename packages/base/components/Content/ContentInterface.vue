@@ -150,7 +150,10 @@ const showFeaturedEntry = computed(() => {
   return (
     props.featuredEntry &&
     (!selectedType.value ||
-      selectedType.value.type === props.featuredEntry.__typename) &&
+      (selectedType.value.type === props.featuredEntry.__typename &&
+        (!props.featuredEntry.contentfulMetadata?.concepts[0].id ||
+          selectedType.value.taxonomy ===
+            props.featuredEntry.contentfulMetadata?.concepts[0].id))) &&
     featuredEntryMatchesSelectedTags &&
     page.value === 1
   );
@@ -161,9 +164,52 @@ const featuredEntryText = computed(() => {
     return t("authored.createdDate", {
       date: d(props.featuredEntry.datePublished, "short"),
     });
-  } else {
+  } else if (props.featuredEntry.headline) {
     return props.featuredEntry.headline;
+  } else if (
+    props.featuredEntry.contentfulMetadata?.concepts[0].id ===
+    typeLookup.training.taxonomy
+  ) {
+    return trainingDateHelper(
+      props.featuredEntry.startDate,
+      props.featuredEntry.endDate,
+    );
+  } else if (
+    props.featuredEntry.contentfulMetadata?.concepts[0].id ===
+    typeLookup.event.taxonomy
+  ) {
+    return eventDateHelper(
+      props.featuredEntry.startDate,
+      props.featuredEntry.endDate,
+    );
   }
+  return undefined;
+});
+
+const featuredEntryImage = computed(() => {
+  if (props.featuredEntry?.primaryImageOfPage?.image) {
+    return props.featuredEntry?.primaryImageOfPage?.image;
+  } else if (props.featuredEntry?.image) {
+    return props.featuredEntry?.image;
+  }
+  return undefined;
+});
+
+const featuredEntryUrl = computed(() => {
+  if (props.featuredEntry.url) {
+    return props.featuredEntry.url;
+  }
+  return contentfulEntryUrl(props.featuredEntry);
+});
+
+const featuredEntrySubTitle = computed(() => {
+  if (props.featuredEntry.__typename === "Event") {
+    return props.featuredEntry.contentfulMetadata.concepts[0].id ===
+      typeLookup.training.taxonomy
+      ? t("training.label")
+      : t("event.label");
+  }
+  return undefined;
 });
 
 async function fetchFullEntries() {
@@ -418,8 +464,9 @@ watch(page, () => {
       <ContentFeaturedCard
         :title="props.featuredEntry?.name"
         :text="featuredEntryText"
-        :image="props.featuredEntry?.primaryImageOfPage?.image"
-        :url="contentfulEntryUrl(props.featuredEntry)"
+        :image="featuredEntryImage"
+        :sub-title="featuredEntrySubTitle"
+        :url="featuredEntryUrl"
       />
     </div>
     <template v-for="(section, index) in contentSections">
