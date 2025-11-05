@@ -1,6 +1,6 @@
 <script setup>
 import { kebabCase } from "lodash-es";
-import contentfulEntryHasContentType from "@europeana/sea-base-layer/utils/contentful/entryHasContentType.js";
+import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
 
 defineProps({
   sections: {
@@ -17,7 +17,7 @@ const getClasses = (section) => {
   if (section.profile?.background) {
     classes.push(`bg-color-${section.profile.background}`);
   }
-  if (contentfulEntryHasContentType(section, "ImageCard")) {
+  if (entryHasContentType(section, "ImageCard")) {
     classes.push("image-card-container-wrapper");
   }
   return classes;
@@ -33,13 +33,13 @@ const getClasses = (section) => {
     :class="getClasses(section)"
   >
     <div
-      v-if="contentfulEntryHasContentType(section, 'ImageCard')"
+      v-if="entryHasContentType(section, 'ImageCard')"
       class="container image-card-container"
     >
       <ImageTextCard :card="section" />
     </div>
     <LandingIllustrationGroupContainer
-      v-else-if="contentfulEntryHasContentType(section, 'IllustrationGroup')"
+      v-else-if="entryHasContentType(section, 'IllustrationGroup')"
     >
       <LandingIllustrationGroup
         :title="section.name"
@@ -50,7 +50,7 @@ const getClasses = (section) => {
       />
     </LandingIllustrationGroupContainer>
     <div
-      v-else-if="contentfulEntryHasContentType(section, 'TestimonialCardGroup')"
+      v-else-if="entryHasContentType(section, 'TestimonialCardGroup')"
       class="container testimonial-card-container"
     >
       <CardGroup
@@ -61,14 +61,14 @@ const getClasses = (section) => {
       />
     </div>
     <GenericCallToActionBanner
-      v-else-if="contentfulEntryHasContentType(section, 'PrimaryCallToAction')"
+      v-else-if="entryHasContentType(section, 'PrimaryCallToAction')"
       :title="section.name"
       :text="section.text"
       :link="section.relatedLink"
       :background-image="section.image"
     />
     <LandingSubSection
-      v-else-if="contentfulEntryHasContentType(section, 'LandingSubSection')"
+      v-else-if="entryHasContentType(section, 'LandingSubSection')"
       :title="section.name"
       :text="section.text"
       :sections="section.hasPartCollection && section.hasPartCollection.items"

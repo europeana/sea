@@ -1,5 +1,5 @@
 <script setup>
-import contentfulEntryHasContentType from "@europeana/sea-base-layer/utils/contentful/entryHasContentType.js";
+import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const slug = "collections";
@@ -42,7 +42,7 @@ useHead({
     </div>
     <template v-for="(section, index) in sections">
       <div
-        v-if="contentfulEntryHasContentType(section, 'IllustrationGroup')"
+        v-if="entryHasContentType(section, 'IllustrationGroup')"
         :key="index"
         class="illustration-group container my-5 py-4k-5"
       >
