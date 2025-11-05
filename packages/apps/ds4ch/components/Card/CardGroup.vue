@@ -1,4 +1,5 @@
 <script setup>
+import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
 import parseMarkdown from "@europeana/sea-base-layer/utils/markdown/parse.js";
 
 const props = defineProps({
@@ -56,7 +57,7 @@ const props = defineProps({
     >
       <transition appear name="fade">
         <ContentCard
-          v-if="card['__typename'] === 'ContentCard'"
+          v-if="entryHasContentType(card, 'ContentCard')"
           :title="card.name"
           :text="card.text"
           :url="card.url"
@@ -66,7 +67,7 @@ const props = defineProps({
           :image-height="card.primaryImageOfPage?.image?.height"
         />
         <CardTestimonialCard
-          v-else-if="card['__typename'] === 'TestimonialCard'"
+          v-else-if="entryHasContentType(card, 'TestimonialCard')"
           :testimonial-text="card.text"
           :attribution="card.attribution"
         />

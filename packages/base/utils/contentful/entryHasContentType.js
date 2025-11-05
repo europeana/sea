@@ -1,3 +1,3 @@
-export default (entry, contentType) => {
-  return entry && entry["__typename"] === contentType;
+export const entryHasContentType = (entry, contentType) => {
+  return entry?.__typename === contentType;
 };

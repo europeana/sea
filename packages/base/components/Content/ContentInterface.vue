@@ -8,7 +8,11 @@ import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMi
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
-import { contentfulEntryUrl } from "../../utils/contentful/entry-url.js";
+import {
+  entryHasContentType,
+  entryHasTaxonomyTerm,
+  entryUrl,
+} from "@/utils/contentful/index.js";
 const { d, t } = useI18n({ useScope: "global" });
 
 const props = defineProps({
@@ -107,7 +111,7 @@ const filteredMinimalEntries = computed(() => {
   // Filter by selected type
   if (selectedType.value) {
     filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
-      if (!entryHasType(contentEntry, selectedType.value.type)) {
+      if (!entryHasContentType(contentEntry, selectedType.value.type)) {
         return false;
       }
       if (!selectedType.value.taxonomy) {
@@ -153,16 +157,6 @@ const featuredEntryMatchesSelectedTags = computed(() => {
   );
 });
 
-const entryHasTaxonomyTerm = (entry, termId) => {
-  return (entry.contentfulMetadata?.concepts || []).some(
-    (concept) => concept.id === termId,
-  );
-};
-
-const entryHasType = (entry, typeName) => {
-  return entry.__typename === typeName;
-};
-
 const showFeaturedEntry = computed(() => {
   // no featured entry; nothing to show
   if (!props.featuredEntry) {
@@ -181,7 +175,7 @@ const showFeaturedEntry = computed(() => {
     return true;
   }
   // content type is selected, but featured entry is of a different type; don't show
-  if (!entryHasType(props.featuredEntry, selectedType.value.type)) {
+  if (!entryHasContentType(props.featuredEntry, selectedType.value.type)) {
     return false;
   }
   // content type is selected, and has no taxonomy; show
@@ -231,11 +225,11 @@ const featuredEntryUrl = computed(() => {
   if (props.featuredEntry.url) {
     return props.featuredEntry.url;
   }
-  return contentfulEntryUrl(props.featuredEntry);
+  return entryUrl(props.featuredEntry);
 });
 
 const featuredEntrySubTitle = computed(() => {
-  if (!entryHasType(props.featuredEntry, "Event")) {
+  if (!entryHasContentType(props.featuredEntry, "Event")) {
     return undefined;
   }
   return entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
@@ -347,25 +341,25 @@ function eventDateHelper(startDate, endDate) {
 //       consider passing a normalisation function in per type as a prop.
 function normaliseCard(entry) {
   if (entry) {
-    if (entryHasType(entry, "BlogPosting")) {
+    if (entryHasContentType(entry, "BlogPosting")) {
       return {
         ...entry,
-        url: contentfulEntryUrl(entry),
+        url: entryUrl(entry),
         text: t("authored.createdDate", {
           date: d(entry.datePublished, "short"),
         }),
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
       };
-    } else if (entryHasType(entry, "ProjectPage")) {
+    } else if (entryHasContentType(entry, "ProjectPage")) {
       return {
         ...entry,
-        url: contentfulEntryUrl(entry),
+        url: entryUrl(entry),
         text: entry.headline,
         primaryImageOfPage:
           entry.primaryImageOfPage || props.defaultCardThumbnail,
       };
-    } else if (entryHasType(entry, "Event")) {
+    } else if (entryHasContentType(entry, "Event")) {
       if (entryHasTaxonomyTerm(entry, typeLookup.training.taxonomy)) {
         return {
           ...entry,
@@ -499,7 +493,7 @@ watch(page, () => {
       <transition appear name="fade">
         <!-- eslint-enable vue/valid-v-for -->
         <div
-          v-if="entryHasType(section, 'PrimaryCallToAction')"
+          v-if="entryHasContentType(section, 'PrimaryCallToAction')"
           :key="`cta-banner-${index}`"
           class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
         >
