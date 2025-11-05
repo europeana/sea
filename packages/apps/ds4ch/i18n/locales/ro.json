@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Evenimente",
       "news": "Știri",
       "projects": "Proiecte",
+      "training": "Instruire",
       "viewAll": "Vizualizează tot"
     },
     "resultsHaveLoaded": "{0} rezultate găsite"
   },
+  "cookies": {
+    "acceptAll": "Accepta toate",
+    "acceptSelected": "Acceptați selectat",
+    "consentModal": {
+      "alwaysRequired": "(Întotdeauna necesar)",
+      "privacyStatement": "Declarație de confidențialitate",
+      "servicesCount": "{count} serviciu | {count} servicii",
+      "text": "Aici poți vedea și personaliza serviciile pe care am dori să le folosim pe acest site. Pentru a afla mai multe, citește te rog {privacyStatement}.",
+      "title": "Servicii pe care am dori să le folosim."
+    },
+    "consentNotice": {
+      "learnMore": "Lasa-ma sa aleg",
+      "text": "Putem, vă rugăm, să activăm serviciile pentru securitate, analiză și conținut de la terți?",
+      "textUpdated": "Au avut loc câteva schimbări în servicii de la ultima dvs. vizită. Putem activa, vă rugăm, servicii suplimentare?"
+    },
+    "decline": "Refuz",
+    "ok": "Bine",
+    "purposes": {
+      "2D": {
+        "title": "Media 2D"
+      },
+      "3D": {
+        "title": "Media 3D"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Aceste servicii sunt esențiale pentru funcționarea corectă a acestui site web. Ele includ preferințele de limbă și mențin vizita dvs. în siguranță. Nu le puteți dezactiva, deoarece site-ul web nu ar funcționa corect în caz contrar.",
+        "title": "Servicii esențiale pentru securitate și personalizare"
+      },
+      "mediaViewing": {
+        "description": "Aceste servicii încarcă imagini (2D), elemente 3D, audio și video pentru vizualizare.",
+        "title": "Servicii de vizionare media"
+      },
+      "socialMedia": {
+        "description": "Aceste servicii încarcă conținut de pe platformele social media.",
+        "title": "Servicii de integrare în social media"
+      },
+      "thirdPartyContent": {
+        "description": "Aceste servicii încarcă conținut găzduit de terți. Utilizarea acestuia este supusă termenilor, condițiilor și declarației de confidențialitate ale acestor terți.",
+        "title": "Conținut de la terțe părți"
+      },
+      "usage": {
+        "description": "Aceste servicii colectează informații pentru a ne ajuta să înțelegem mai bine modul în care site-ul web este folosit și unde sunt punctele de durere, permițându-ne să facem alegeri în cunoștință de cauză pentru a vă îmbunătăți experiența.",
+        "title": "Servicii pentru a capta utilizarea site-ului web și feedback-ul"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Utilizați acest comutator pentru a activa sau dezactiva toate serviciile opționale.",
+        "title": "Activați sau dezactivați toate serviciile"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Își amintește că ești om.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Colectează date de utilizare pentru a ne ajuta să analizăm interacțiunile utilizatorilor. Activează un widget de sondaj care vă oferă opțiunea de a răspunde la sondajele noastre privind satisfacția vizitatorilor.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Reține limba de interfață preferată pentru acces viitor.",
+        "title": "Codul limbii"
+      },
+      "matomo": {
+        "description": "Colectează statistici anonime cu privire la modul în care vizitatorii interacționează cu site-ul web.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} la {endDate}",
+    "label": "eveniment"
+  },
+  "featured": "Recomandate",
   "footer": {
     "accessibility": "Accesibilitate",
     "cookies": "Cookie-uri",
@@ -112,5 +195,10 @@
       "previousSlide": "Diapozitivul anterior",
       "slideLabel": "Diapozitiv {slide} de {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "instruire",
+    "ongoing": "În desfășurare"
   }
 }

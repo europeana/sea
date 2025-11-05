@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Tapahtumat",
       "news": "Uutiset",
       "projects": "Projektit",
+      "training": "Koulutus",
       "viewAll": "Näytä kaikki"
     },
     "resultsHaveLoaded": "{0} tuloksia löytyi"
   },
+  "cookies": {
+    "acceptAll": "Hyväksy kaikki",
+    "acceptSelected": "Hyväksy valittu",
+    "consentModal": {
+      "alwaysRequired": "(Pakollinen aina)",
+      "privacyStatement": "Tietosuojaseloste",
+      "servicesCount": "{count} palvelu | {count} palvelua",
+      "text": "Täällä voit nähdä ja mukauttaa palvelut, joita haluaisimme käyttää tällä verkkosivustolla. Lisätietoja saat lukemalla {privacyStatement}.",
+      "title": "Palvelut, joita haluaisimme käyttää."
+    },
+    "consentNotice": {
+      "learnMore": "Anna minun valita",
+      "text": "Voisimmeko ottaa käyttöön palvelut turvallisuutta, analytiikkaa ja kolmannen osapuolen sisältöä varten?",
+      "textUpdated": "Palveluissa on tapahtunut muutoksia edellisen käyntisi jälkeen. Voimmeko ottaa käyttöön lisäpalveluja?"
+    },
+    "decline": "Kieltäydyn",
+    "ok": "Okei",
+    "purposes": {
+      "2D": {
+        "title": "2D-media"
+      },
+      "3D": {
+        "title": "3D media"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Nämä palvelut ovat välttämättömiä tämän verkkosivuston moitteettoman toiminnan kannalta. Ne sisältävät kieliasetukset ja pitävät vierailusi turvallisena. Et voi poistaa niitä käytöstä, sillä muuten verkkosivusto ei toimisi oikein.",
+        "title": "Olennaiset turvallisuus- ja mukautuspalvelut"
+      },
+      "mediaViewing": {
+        "description": "Nämä palvelut lataavat kuvia (2D) , 3D-, ääni- ja videokohteita katselua varten.",
+        "title": "Median katselupalvelut"
+      },
+      "socialMedia": {
+        "description": "Nämä palvelut lataavat sisältöä sosiaalisen median alustoilta.",
+        "title": "Sosiaalisen median upotuspalvelut"
+      },
+      "thirdPartyContent": {
+        "description": "Nämä palvelut lataavat kolmansien osapuolten isännöimää sisältöä. Sen käyttöä koskevat näiden kolmansien osapuolten ehdot ja tietosuojalausunto.",
+        "title": "Kolmannen osapuolen sisältö"
+      },
+      "usage": {
+        "description": "Nämä palvelut keräävät tietoja, jotka auttavat meitä ymmärtämään paremmin, miten verkkosivustoa käytetään ja missä kipupisteet ovat, mikä antaa meille mahdollisuuden tehdä tietoon perustuvia valintoja kokemuksesi parantamiseksi.",
+        "title": "Palvelut verkkosivuston käytön ja palautteen keräämiseen"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Käytä tätä kytkintä ottaaksesi käyttöön tai poistaaksesi käytöstä kaikki valinnaiset palvelut.",
+        "title": "Ota kaikki palvelut käyttöön tai poista ne käytöstä"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Muistaa, että olet ihminen.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Kerää käyttäjätietoja, jotta voimme analysoida käyttäjien vuorovaikutusta. Aktivoi kyselywidgetin, jonka avulla voit vastata kävijöiden tyytyväisyyskyselyihimme.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Muistaa valitsemasi käyttöliittymäkielen tulevaa käyttöä varten.",
+        "title": "Kielikoodi"
+      },
+      "matomo": {
+        "description": "Kerää anonyymejä tilastoja siitä, miten kävijät ovat vuorovaikutuksessa verkkosivuston kanssa.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} – {endDate}",
+    "label": "tapahtuma"
+  },
+  "featured": "Esittelyssä",
   "footer": {
     "accessibility": "Saavutettavuus",
     "cookies": "Evästeet",
@@ -112,5 +195,10 @@
       "previousSlide": "Edellinen dia",
       "slideLabel": "Dia {slide} \/ {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "koulutus",
+    "ongoing": "Käynnissä"
   }
 }

@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Notikumi",
       "news": "Ziņas",
       "projects": "Projekti",
+      "training": "Apmācība",
       "viewAll": "Skatīt visu"
     },
     "resultsHaveLoaded": "{0} atrastie rezultāti"
   },
+  "cookies": {
+    "acceptAll": "Pieņemt visus",
+    "acceptSelected": "Pieņemt atlasītos",
+    "consentModal": {
+      "alwaysRequired": "(Vienmēr nepieciešams)",
+      "privacyStatement": "Konfidencialitātes paziņojums",
+      "servicesCount": "{count} pakalpojums | {count} pakalpojumi",
+      "text": "Šeit varat apskatīt un pielāgot pakalpojumus, kurus mēs vēlamies izmantot šajā vietnē. Lai uzzinātu vairāk, lūdzu, izlasiet mūsu {privacyStatement}.",
+      "title": "Pakalpojumi, kurus mēs vēlētos izmantot."
+    },
+    "consentNotice": {
+      "learnMore": "Ļaujiet man izvēlēties",
+      "text": "Vai varam, lūdzu, aktivizēt drošības, analītikas un trešās puses satura pakalpojumus?",
+      "textUpdated": "Kopš jūsu pēdējās vizītes pakalpojumos ir veiktas dažas izmaiņas. Vai mēs varētu, lūdzu, iespējot papildu pakalpojumus?"
+    },
+    "decline": "Es atsakos",
+    "ok": "Labi",
+    "purposes": {
+      "2D": {
+        "title": "2D multivides"
+      },
+      "3D": {
+        "title": "3D multivides"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Šie pakalpojumi ir būtiski pareizai šīs vietnes darbībai. Tie ietver valodas preferences un nodrošina jūsu apmeklējuma drošību. Jūs nevarat tos atspējot, jo pretējā gadījumā vietne nedarbosies pareizi.",
+        "title": "Būtiski pakalpojumi drošībai un pielāgošanai"
+      },
+      "mediaViewing": {
+        "description": "Šie pakalpojumi ielādē attēlus (2D), 3D, audio un video vienumus skatīšanai.",
+        "title": "Multivides skatīšanās pakalpojumi"
+      },
+      "socialMedia": {
+        "description": "Šie pakalpojumi ielādē saturu no sociālo mediju platformām.",
+        "title": "Sociālo plašsaziņas līdzekļu iestrādes pakalpojumi"
+      },
+      "thirdPartyContent": {
+        "description": "Šie pakalpojumi ielādē saturu, ko mitina trešās puses. Uz tās izmantošanu attiecas šie trešo pušu noteikumi, nosacījumi un paziņojums par konfidencialitāti.",
+        "title": "Trešo pušu saturs"
+      },
+      "usage": {
+        "description": "Šie pakalpojumi apkopo informāciju, lai palīdzētu mums labāk saprast, kā vietne tiek izmantota un kur atrodas sāpju punkti, dodot mums iespēju izdarīt apzinātu izvēli, lai uzlabotu jūsu pieredzi.",
+        "title": "Pakalpojumi vietņu izmantošanas un atsauksmju iegūšanai"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Izmantojiet šo slēdzi, lai iespējotu vai atspējotu visus izvēles pakalpojumus.",
+        "title": "Iespējot vai atspējot visus pakalpojumus"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Atceras, ka esat cilvēks.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Apkopo lietošanas datus, lai palīdzētu mums analizēt lietotāju mijiedarbību. Aktivizē aptaujas logrīku, kas sniedz jums iespēju atbildēt uz mūsu apmeklētāju apmierinātības aptaujām.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Atceras jūsu vēlamo saskarnes valodu, lai nodrošinātu piekļuvi nākotnē.",
+        "title": "Valodas kods"
+      },
+      "matomo": {
+        "description": "Apkopo anonīmu statistiku par to, kā apmeklētāji mijiedarbojas ar vietni.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} līdz {endDate}",
+    "label": "notikums"
+  },
+  "featured": "Piedāvātie",
   "footer": {
     "accessibility": "Pieejamība",
     "cookies": "Sīkdatnes",
@@ -112,5 +195,10 @@
       "previousSlide": "Iepriekšējais slaids",
       "slideLabel": "Slaids {slide} no {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "apmācība",
+    "ongoing": "Notiek"
   }
 }

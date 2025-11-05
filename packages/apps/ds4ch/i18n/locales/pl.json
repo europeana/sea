@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Wydarzenia",
       "news": "Aktualności",
       "projects": "Projekty",
+      "training": "Szkolenie",
       "viewAll": "Zobacz wszystkie"
     },
     "resultsHaveLoaded": "{0} znalezionych wyników"
   },
+  "cookies": {
+    "acceptAll": "Akceptuj wszystkie",
+    "acceptSelected": "Zaakceptuj wybrane",
+    "consentModal": {
+      "alwaysRequired": "(Zawsze wymagane)",
+      "privacyStatement": "Polityka prywatności",
+      "servicesCount": "{count} usługa | {count} usług",
+      "text": "Tutaj możesz zobaczyć i dostosować usługi, które chcielibyśmy wykorzystywać na tej stronie internetowej. Aby dowiedzieć się więcej, przeczytaj naszą {privacyStatement}.",
+      "title": "Usługi, z których chcielibyśmy skorzystać."
+    },
+    "consentNotice": {
+      "learnMore": "Pozwól mi wybrać",
+      "text": "Czy moglibyśmy włączyć usługi dotyczące bezpieczeństwa, analityki i treści stron trzecich?",
+      "textUpdated": "Od Twojej ostatniej wizyty zaszły pewne zmiany w usługach. Czy możemy włączyć dodatkowe usługi?"
+    },
+    "decline": "Odmawiam",
+    "ok": "Dobra",
+    "purposes": {
+      "2D": {
+        "title": "Media 2D"
+      },
+      "3D": {
+        "title": "Media 3D"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Usługi te są niezbędne do prawidłowego działania tej strony. Obejmują preferencje językowe i zapewniają bezpieczeństwo Twojej wizyty. Nie możesz ich wyłączyć, ponieważ w przeciwnym razie strona nie działałaby poprawnie.",
+        "title": "Niezbędne usługi w zakresie bezpieczeństwa i dostosowywania"
+      },
+      "mediaViewing": {
+        "description": "Usługi te ładują obrazy (2D), elementy 3D, audio i wideo do przeglądania.",
+        "title": "Usługi przeglądania multimediów"
+      },
+      "socialMedia": {
+        "description": "Usługi te ładują treści z platform mediów społecznościowych.",
+        "title": "Usługi osadzania w mediach społecznościowych"
+      },
+      "thirdPartyContent": {
+        "description": "Usługi te ładują treści hostowane przez strony trzecie. Korzystanie z nich podlega zasadom, warunkom i oświadczeniom o ochronie prywatności tych stron trzecich.",
+        "title": "Zawartość stron trzecich"
+      },
+      "usage": {
+        "description": "Usługi te zbierają informacje, aby pomóc nam lepiej zrozumieć, w jaki sposób strona internetowa jest używana i gdzie są punkty bólu, umożliwiając nam dokonywanie świadomych wyborów w celu poprawy doświadczenia użytkownika.",
+        "title": "Usługi do przechwytywania wykorzystania witryny i informacji zwrotnych"
+      },
+      "video": {
+        "title": "Wideo"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Użyj tego przełącznika, aby włączyć lub wyłączyć wszystkie usługi opcjonalne.",
+        "title": "Włącz lub wyłącz wszystkie usługi"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Pamięta, że jesteś człowiekiem.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Zbiera dane dotyczące użytkowania, aby pomóc nam analizować interakcje użytkowników. Aktywuje widżet ankiety, który daje możliwość odpowiedzi na nasze ankiety dotyczące satysfakcji odwiedzających.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Zapamiętuje preferowany język interfejsu do przyszłego dostępu.",
+        "title": "Kod języka"
+      },
+      "matomo": {
+        "description": "Gromadzi anonimowe statystyki dotyczące interakcji odwiedzających z witryną.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} do {endDate}",
+    "label": "wydarzenie"
+  },
+  "featured": "Polecane",
   "footer": {
     "accessibility": "Dostępność",
     "cookies": "Pliki cookie",
@@ -112,5 +195,10 @@
       "previousSlide": "Poprzedni slajd",
       "slideLabel": "Slajd {slide} z {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "szkolenie",
+    "ongoing": "Trwa"
   }
 }

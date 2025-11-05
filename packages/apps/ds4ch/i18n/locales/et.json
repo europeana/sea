@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Sündmused",
       "news": "Uudised",
       "projects": "Projektid",
+      "training": "Koolitus",
       "viewAll": "Vaata kõiki"
     },
     "resultsHaveLoaded": "{0} tulemusi leitud"
   },
+  "cookies": {
+    "acceptAll": "Võtke kõik vastu",
+    "acceptSelected": "Aktsepteeri valitud",
+    "consentModal": {
+      "alwaysRequired": "(Alati nõutav)",
+      "privacyStatement": "Privaatsusavaldus",
+      "servicesCount": "{count} teenus | {count} teenust",
+      "text": "Siin saate vaadata ja kohandada teenuseid, mida soovime sellel veebisaidil kasutada. Lisateabe saamiseks lugege meie {privacyStatement}.",
+      "title": "Teenused, mida sooviksime kasutada."
+    },
+    "consentNotice": {
+      "learnMore": "Las ma valin",
+      "text": "Kas me saaksime palun lubada teenused turvalisuse, analüütika ja kolmanda osapoole sisu jaoks?",
+      "textUpdated": "Teenustes on teie viimase külastuse järel toimunud mõningaid muudatusi. Kas me võiksime palun lubada täiendavaid teenuseid?"
+    },
+    "decline": "Ma keeldun",
+    "ok": "Okei",
+    "purposes": {
+      "2D": {
+        "title": "2D meedia"
+      },
+      "3D": {
+        "title": "3D meedia"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Need teenused on selle veebisaidi õigeks toimimiseks hädavajalikud. Need hõlmavad keeleeelistusi ja hoiavad teie külastuse turvalisena. Te ei saa neid keelata, kuna vastasel juhul veebisait ei töötaks korralikult.",
+        "title": "Olulised teenused turvalisuse ja kohandamise jaoks"
+      },
+      "mediaViewing": {
+        "description": "Need teenused laadivad vaatamiseks pilte (2D) , 3D-, heli- ja videoelemente.",
+        "title": "Meedia vaatamise teenused"
+      },
+      "socialMedia": {
+        "description": "Need teenused laadivad sisu sotsiaalmeedia platvormidelt.",
+        "title": "Sotsiaalmeedia sisseehitamise teenused"
+      },
+      "thirdPartyContent": {
+        "description": "Need teenused laadivad sisu, mida hostivad kolmandad osapooled. Selle kasutamisele kehtivad nende kolmandate osapoolte tingimused ja privaatsusavaldus.",
+        "title": "Kolmanda osapoole sisu"
+      },
+      "usage": {
+        "description": "Need teenused koguvad teavet, mis aitab meil paremini mõista, kuidas veebilehte kasutatakse ja kus on valupunktid, mis võimaldab meil teha teadlikke valikuid, et parandada teie kasutuskogemust.",
+        "title": "Teenused veebisaidi kasutamise ja tagasiside kogumiseks"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Selle lüliti abil saate lubada või keelata kõik valikulised teenused.",
+        "title": "Luba või keela kõik teenused"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Pea meeles, et sa oled inimene.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Kogub kasutusandmeid, et aidata meil analüüsida kasutajate interaktsioone. Aktiveerib küsitluse vidina, mis annab teile võimaluse vastata meie külastajate rahulolu küsitlustele.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Jätab teie eelistatud liidese keele edaspidiseks kasutamiseks meelde.",
+        "title": "Keelekood"
+      },
+      "matomo": {
+        "description": "Kogub anonüümset statistikat selle kohta, kuidas külastajad veebisaidiga suhtlevad.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} kuni {endDate}",
+    "label": "sündmus"
+  },
+  "featured": "Esile tõstetud",
   "footer": {
     "accessibility": "Juurdepääsetavus",
     "cookies": "Küpsised",
@@ -112,5 +195,10 @@
       "previousSlide": "Eelmine slaid",
       "slideLabel": "Slaid {slide} \/ {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "koolitus",
+    "ongoing": "Pooleli"
   }
 }
