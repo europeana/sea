@@ -23,7 +23,8 @@
     "name": "zoho",
     "schemes": [
       "https://forms.zohopublic.eu/*",
-      "https://fdti-zcmp.maillist-manage.eu/*"
+      "https://fdti-zcmp.maillist-manage.eu/*",
+      "https://survey.zohopublic.com/*"
     ],
     "purposes": [],
     "required": true,
