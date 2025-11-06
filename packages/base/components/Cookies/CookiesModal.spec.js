@@ -54,8 +54,9 @@ mockNuxtImport("useI18n", () => {
     };
   };
 });
-const factory = () =>
+const factory = (props) =>
   mount(CookiesModal, {
+    props,
     global: {
       mocks: {
         $n: (num) => num,
@@ -128,6 +129,19 @@ describe("components/Page/CookiesModal.vue", () => {
     });
 
     expect(sections.length).toBe(15);
+  });
+
+  describe("when only certain purpose groups should display", () => {
+    it("renders only the purposes listed in displayPurposes", () => {
+      const wrapper = factory({ displayPurposes: ["usage"] });
+
+      const sections = wrapper.findAllComponents({
+        name: "CookiesSection",
+      });
+      expect(wrapper.vm.groupedSections.length).toBe(1);
+      expect(wrapper.vm.groupedSections[0].name).toBe("usage");
+      expect(sections.length).toBe(2);
+    });
   });
 
   it("toggles display sections via toggleDisplay method", async () => {

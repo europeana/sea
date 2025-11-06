@@ -38,6 +38,9 @@ const providerName = computed(() => {
     return t("cookies.services.unknownProvider");
   }
 });
+const displayPurposes = computed(() =>
+  consentRequired.value ? undefined : ["thirdPartyContent"],
+);
 
 // TODO: is this still needed if already watching acceptedServices
 watch(consentRequired, (newVal) => {
@@ -203,7 +206,10 @@ const saveConsents = () => {
                 {{ $t("embedNotification.viewFullList") }}
               </button>
             </i18n-t>
-            <CookiesModal :modal-id="cookieModalId" />
+            <CookiesModal
+              :modal-id="cookieModalId"
+              :display-purposes="displayPurposes"
+            />
             <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">
               <button
                 class="accept-only-button btn btn-link"

@@ -13,7 +13,7 @@ const {
 
 const emit = defineEmits(["showToast"]);
 
-defineProps({
+const props = defineProps({
   modalId: {
     type: String,
     default: "cookie-modal",
@@ -25,6 +25,10 @@ defineProps({
   modalDescriptionPath: {
     type: String,
     default: "cookies.consentModal.text",
+  },
+  displayPurposes: {
+    type: Array,
+    default: () => ["essential", "usage", "thirdPartyContent"],
   },
 });
 
@@ -55,78 +59,82 @@ const thirdPartyContentServices = services?.filter((s) =>
   s.purposes.includes("thirdPartyContent"),
 );
 
-const groupedSections = [
-  // to create layout
-  essentialServices?.length && {
-    name: "essential",
-    required: true,
-    services: essentialServices,
-  },
-  usageServices?.length && {
-    name: "usage",
-    services: usageServices,
-  },
-  thirdPartyContentServices?.length && {
-    name: "thirdPartyContent",
-    services: [
-      thirdPartyContentServices.filter((service) =>
-        service.purposes?.includes("socialMedia"),
-      )?.length && {
-        name: "socialMedia",
-        services: thirdPartyContentServices.filter((service) =>
+const groupedSections = computed(() =>
+  [
+    // to create layout
+    essentialServices?.length && {
+      name: "essential",
+      required: true,
+      services: essentialServices,
+    },
+    usageServices?.length && {
+      name: "usage",
+      services: usageServices,
+    },
+    thirdPartyContentServices?.length && {
+      name: "thirdPartyContent",
+      services: [
+        thirdPartyContentServices.filter((service) =>
           service.purposes?.includes("socialMedia"),
-        ),
-      },
-      thirdPartyContentServices.filter((service) =>
-        service.purposes?.includes("mediaViewing"),
-      )?.length && {
-        name: "mediaViewing",
-        services: [
-          {
-            name: "2D",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("2D"),
-            ),
-          },
-          {
-            name: "3D",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("3D"),
-            ),
-          },
-          {
-            name: "audio",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("audio"),
-            ),
-          },
-          thirdPartyContentServices.filter((service) =>
-            service.purposes?.includes("multimedia"),
-          )?.length && {
-            name: "multimedia",
-            services: thirdPartyContentServices.filter((service) =>
+        )?.length && {
+          name: "socialMedia",
+          services: thirdPartyContentServices.filter((service) =>
+            service.purposes?.includes("socialMedia"),
+          ),
+        },
+        thirdPartyContentServices.filter((service) =>
+          service.purposes?.includes("mediaViewing"),
+        )?.length && {
+          name: "mediaViewing",
+          services: [
+            {
+              name: "2D",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("2D"),
+              ),
+            },
+            {
+              name: "3D",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("3D"),
+              ),
+            },
+            {
+              name: "audio",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("audio"),
+              ),
+            },
+            thirdPartyContentServices.filter((service) =>
               service.purposes?.includes("multimedia"),
-            ),
-          },
-          {
-            name: "video",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("video"),
-            ),
-          },
-        ].filter(Boolean),
-      },
-      thirdPartyContentServices.filter((service) =>
-        service.purposes?.includes("other"),
-      )?.length && {
-        name: "other",
-        services: thirdPartyContentServices.filter((service) =>
+            )?.length && {
+              name: "multimedia",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("multimedia"),
+              ),
+            },
+            {
+              name: "video",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("video"),
+              ),
+            },
+          ].filter(Boolean),
+        },
+        thirdPartyContentServices.filter((service) =>
           service.purposes?.includes("other"),
-        ),
-      },
-    ].filter(Boolean),
-  },
-].filter(Boolean);
+        )?.length && {
+          name: "other",
+          services: thirdPartyContentServices.filter((service) =>
+            service.purposes?.includes("other"),
+          ),
+        },
+      ].filter(Boolean),
+    },
+  ]
+    .filter(Boolean)
+    .filter((purpose) => props.displayPurposes.includes(purpose.name)),
+);
 
 const accept = () => {
   acceptAll();
