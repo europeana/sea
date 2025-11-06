@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Udalosti",
       "news": "Novinky",
       "projects": "Projekty",
+      "training": "Školenie",
       "viewAll": "Zobraziť všetko"
     },
     "resultsHaveLoaded": "{0} nájdených výsledkov"
   },
+  "cookies": {
+    "acceptAll": "Prijať všetko",
+    "acceptSelected": "Prijať vybrané",
+    "consentModal": {
+      "alwaysRequired": "(Vždy povinné)",
+      "privacyStatement": "Vyhlásenie o ochrane osobných údajov",
+      "servicesCount": "{count} služba | {count} služieb",
+      "text": "Tu môžete vidieť a prispôsobiť služby, ktoré by sme chceli používať na tejto webovej stránke. Ak sa chcete dozvedieť viac, prečítajte si naše {privacyStatement}.",
+      "title": "Služby, ktoré by sme chceli využiť."
+    },
+    "consentNotice": {
+      "learnMore": "Nechaj ma vybrať si",
+      "text": "Môžeme, prosím, povoliť služby pre zabezpečenie, analytiku a obsah tretích strán?",
+      "textUpdated": "Od vašej poslednej návštevy došlo k niektorým zmenám v službách. Mohli by sme prosím povoliť ďalšie služby?"
+    },
+    "decline": "Odmietam",
+    "ok": "Dobre",
+    "purposes": {
+      "2D": {
+        "title": "2D médiá"
+      },
+      "3D": {
+        "title": "3D médiá"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Tieto služby sú nevyhnutné pre správne fungovanie tejto webovej stránky. Zahŕňajú jazykové preferencie a zabezpečujú bezpečnosť vašej návštevy. Nemôžete ich zakázať, pretože inak by webová stránka nefungovala správne.",
+        "title": "Základné služby pre bezpečnosť a prispôsobenie"
+      },
+      "mediaViewing": {
+        "description": "Tieto služby načítavajú obrazové (2D), 3D, zvukové a video položky na zobrazenie.",
+        "title": "Služby sledovania médií"
+      },
+      "socialMedia": {
+        "description": "Tieto služby načítavajú obsah z platforiem sociálnych médií.",
+        "title": "Služby vkladania sociálnych médií"
+      },
+      "thirdPartyContent": {
+        "description": "Tieto služby načítavajú obsah, ktorého hostiteľmi sú tretie strany. Jeho používanie podlieha podmienkam týchto tretích strán a ich vyhláseniu o ochrane osobných údajov.",
+        "title": "Obsah tretích strán"
+      },
+      "usage": {
+        "description": "Tieto služby zhromažďujú informácie, ktoré nám pomáhajú lepšie pochopiť, ako sa webová stránka používa a kde sú body bolesti, čo nám umožňuje robiť informované rozhodnutia na zlepšenie vašich skúseností.",
+        "title": "Služby na zaznamenávanie používania webových stránok a spätnej väzby"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Pomocou tohto prepínača môžete povoliť alebo zakázať všetky voliteľné služby.",
+        "title": "Povoliť alebo zakázať všetky služby"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Pamätá si, že ste človek.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Zhromažďuje údaje o používaní, ktoré nám pomáhajú analyzovať interakcie používateľov. Aktivuje widget prieskumu, ktorý vám dáva možnosť odpovedať na naše prieskumy spokojnosti návštevníkov.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Zapamätá si preferovaný jazyk rozhrania pre budúci prístup.",
+        "title": "Kód jazyka"
+      },
+      "matomo": {
+        "description": "Zhromažďuje anonymné štatistiky o tom, ako návštevníci interagujú s webovou stránkou.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} na {endDate}",
+    "label": "udalosť"
+  },
+  "featured": "Odporúčané",
   "footer": {
     "accessibility": "Prístupnosť",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Predchádzajúca snímka",
       "slideLabel": "Snímka {slide} z {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "školenie",
+    "ongoing": "Prebieha"
   }
 }

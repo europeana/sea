@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Veranstaltungen",
       "news": "Nachrichten",
       "projects": "Projekte",
+      "training": "Ausbildung",
       "viewAll": "Alle anzeigen"
     },
     "resultsHaveLoaded": "{0} Ergebnisse gefunden"
   },
+  "cookies": {
+    "acceptAll": "Alle akzeptieren",
+    "acceptSelected": "Ausgewählte akzeptieren",
+    "consentModal": {
+      "alwaysRequired": "(Immer erforderlich)",
+      "privacyStatement": "Datenschutzerklärung",
+      "servicesCount": "{count} Dienst | {count} Dienste",
+      "text": "Hier können Sie die Dienste sehen und anpassen, die wir auf dieser Website verwenden möchten. Weitere Informationen finden Sie in unseren {privacyStatement}.",
+      "title": "Dienste, die wir gerne nutzen würden."
+    },
+    "consentNotice": {
+      "learnMore": "Lass mich wählen",
+      "text": "Können wir bitte Dienste für Sicherheit, Analysen und Inhalte von Drittanbietern aktivieren?",
+      "textUpdated": "Seit Ihrem letzten Besuch gab es einige Änderungen bei den Diensten. Können wir bitte zusätzliche Dienste aktivieren?"
+    },
+    "decline": "Ich lehne ab",
+    "ok": "Okay",
+    "purposes": {
+      "2D": {
+        "title": "2D-Medien"
+      },
+      "3D": {
+        "title": "3D-Medien"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Diese Dienste sind für das ordnungsgemäße Funktionieren dieser Website unerlässlich. Sie beinhalten Spracheinstellungen und gewährleisten die Sicherheit Ihres Besuchs. Sie können sie nicht deaktivieren, da die Website sonst nicht richtig funktionieren würde.",
+        "title": "Grundlegende Dienste für Sicherheit und Anpassung"
+      },
+      "mediaViewing": {
+        "description": "Diese Dienste laden Bild- (2D), 3D-, Audio- und Videoelemente zur Ansicht.",
+        "title": "Medienbetrachtungsdienste"
+      },
+      "socialMedia": {
+        "description": "Diese Dienste laden Inhalte von Social-Media-Plattformen.",
+        "title": "Dienste zur Einbettung in soziale Medien"
+      },
+      "thirdPartyContent": {
+        "description": "Diese Dienste laden Inhalte, die von Dritten gehostet werden. Ihre Nutzung unterliegt den Geschäftsbedingungen und Datenschutzbestimmungen dieser Dritten.",
+        "title": "Inhalte von Dritten"
+      },
+      "usage": {
+        "description": "Diese Dienste sammeln die Informationen, um uns zu helfen, besser zu verstehen, wie die Website verwendet wird und wo die Schwachstellen sind, und befähigen uns, fundierte Entscheidungen zu treffen, um Ihre Erfahrung zu verbessern.",
+        "title": "Dienste zur Erfassung von Website-Nutzung und Feedback"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Verwenden Sie diesen Schalter, um alle optionalen Dienste zu aktivieren oder zu deaktivieren.",
+        "title": "Alle Dienste aktivieren oder deaktivieren"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Erinnert sich daran, dass Sie ein Mensch sind.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Sammelt Nutzungsdaten, die uns helfen, die Interaktionen der Nutzer zu analysieren. Aktiviert ein Umfrage-Widget, das Ihnen die Möglichkeit gibt, an unseren Umfragen zur Besucherzufriedenheit teilzunehmen.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Merkt sich Ihre bevorzugte Oberflächensprache für den zukünftigen Zugriff.",
+        "title": "Sprachcode"
+      },
+      "matomo": {
+        "description": "Sammelt anonyme Statistiken darüber, wie Besucher mit der Website interagieren.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} bis {endDate}",
+    "label": "Ereignis"
+  },
+  "featured": "Ausgewählt",
   "footer": {
     "accessibility": "Barrierefreiheit",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Vorherige Folie",
       "slideLabel": "Folie {slide} von {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "Ausbildung",
+    "ongoing": "Laufend"
   }
 }

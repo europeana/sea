@@ -17,9 +17,13 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(landingPageQuery, variables);
-    return response.data?.landingPageCollection?.items?.[0] || {};
+    return response.data?.landingPageCollection?.items?.[0];
   },
 );
+
+if (!page.value) {
+  showError({ statusCode: 404, statusMessage: "Not Found" });
+}
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 

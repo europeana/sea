@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Begivenheder",
       "news": "Nyheder",
       "projects": "Projekter",
+      "training": "Træning",
       "viewAll": "Se alle"
     },
     "resultsHaveLoaded": "{0} resultater fundet"
   },
+  "cookies": {
+    "acceptAll": "Accepter alle",
+    "acceptSelected": "Accepter valgt",
+    "consentModal": {
+      "alwaysRequired": "(Altid påkrævet)",
+      "privacyStatement": "Privatlivspolitik",
+      "servicesCount": "{count} tjeneste | {count} tjenester",
+      "text": "Her kan du se og tilpasse de tjenester, vi gerne vil bruge på dette website. Læs venligst vores {privacyStatement} for at få mere at vide.",
+      "title": "Tjenester, vi gerne vil bruge."
+    },
+    "consentNotice": {
+      "learnMore": "Lad mig vælge",
+      "text": "Kan vi venligst aktivere tjenester til sikkerhed, analyse og tredjepartsindhold?",
+      "textUpdated": "Der har været nogle ændringer i tjenesterne siden dit sidste besøg. Må vi venligst aktivere yderligere tjenester?"
+    },
+    "decline": "Jeg afviser",
+    "ok": "Okay",
+    "purposes": {
+      "2D": {
+        "title": "2D-medier"
+      },
+      "3D": {
+        "title": "3D-medier"
+      },
+      "audio": {
+        "title": "Lyd"
+      },
+      "essential": {
+        "description": "Disse tjenester er afgørende for, at dette websted fungerer korrekt. De omfatter sprogindstillinger og holder dit besøg sikkert. Du kan ikke deaktivere dem, da hjemmesiden ellers ikke ville fungere korrekt.",
+        "title": "Essentielle tjenester til sikkerhed og tilpasning"
+      },
+      "mediaViewing": {
+        "description": "Disse tjenester indlæser billed- (2D), 3D-, lyd- og videoelementer til visning.",
+        "title": "Tjenester til visning af medier"
+      },
+      "socialMedia": {
+        "description": "Disse tjenester indlæser indhold fra sociale medieplatforme.",
+        "title": "Tjenester til indlejring i sociale medier"
+      },
+      "thirdPartyContent": {
+        "description": "Disse tjenester indlæser indhold, der hostes af tredjeparter. Brugen af dem er underlagt disse tredjeparters vilkår, betingelser og erklæring om beskyttelse af personlige oplysninger.",
+        "title": "Tredjepartsindhold"
+      },
+      "usage": {
+        "description": "Disse tjenester indsamler oplysningerne for at hjælpe os med bedre at forstå, hvordan hjemmesiden bliver brugt, og hvor smertepunkterne er, hvilket giver os mulighed for at træffe informerede valg for at forbedre din oplevelse.",
+        "title": "Tjenester til at registrere brug og feedback på websitet"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Brug denne switch til at aktivere eller deaktivere alle valgfrie tjenester.",
+        "title": "Aktivere eller deaktivere alle tjenester"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Husker at du er et menneske.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Indsamler brugsdata for at hjælpe os med at analysere brugerinteraktioner. Aktiverer en undersøgelses-widget, der giver dig mulighed for at svare på vores undersøgelser af besøgendes tilfredshed.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Husker dit foretrukne grænsefladesprog for fremtidig adgang.",
+        "title": "Sprogkode"
+      },
+      "matomo": {
+        "description": "Indsamler anonyme statistikker over, hvordan besøgende interagerer med hjemmesiden.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} til {endDate}",
+    "label": "begivenhed"
+  },
+  "featured": "Udvalgt",
   "footer": {
     "accessibility": "Tilgængelighed",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Forrige slide",
       "slideLabel": "Slide {slide} af {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "træning",
+    "ongoing": "I gang"
   }
 }

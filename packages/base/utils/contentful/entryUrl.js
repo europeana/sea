@@ -1,4 +1,4 @@
-export const contentfulEntryUrl = (entry) => {
+export const entryUrl = (entry) => {
   let urlPrefix;
 
   switch (entry["__typename"]) {

@@ -1,4 +1,4 @@
-import entryHasContentType from "./entryHasContentType.js";
+import { entryHasContentType } from "./index.js";
 
 export const deepFindEntriesOfType = (items = [], type) =>
   items

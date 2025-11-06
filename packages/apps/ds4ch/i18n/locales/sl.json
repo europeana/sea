@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Dogodki",
       "news": "Novice",
       "projects": "Projekti",
+      "training": "Usposabljanje",
       "viewAll": "Poglej vse"
     },
     "resultsHaveLoaded": "{0} najdenih rezultatov"
   },
+  "cookies": {
+    "acceptAll": "Sprejmi vse",
+    "acceptSelected": "Sprejmi izbrano",
+    "consentModal": {
+      "alwaysRequired": "(Vedno obvezno)",
+      "privacyStatement": "Izjava o zasebnosti",
+      "servicesCount": "{count} storitev | {count} storitev",
+      "text": "Tukaj lahko vidite in prilagodite storitve, ki bi jih radi uporabljali na tem spletnem mestu. Za več informacij preberite naš {privacyStatement}.",
+      "title": "Storitve, ki jih želimo uporabljati."
+    },
+    "consentNotice": {
+      "learnMore": "Naj izberem",
+      "text": "Ali lahko omogočimo storitve za varnost, analitiko in vsebino tretjih oseb?",
+      "textUpdated": "Od vašega zadnjega obiska so se storitve spremenile. Ali lahko omogočimo dodatne storitve?"
+    },
+    "decline": "Zavračam",
+    "ok": "V redu",
+    "purposes": {
+      "2D": {
+        "title": "2D mediji"
+      },
+      "3D": {
+        "title": "3D mediji"
+      },
+      "audio": {
+        "title": "Zvok"
+      },
+      "essential": {
+        "description": "Te storitve so ključne za pravilno delovanje tega spletnega mesta. Vključujejo jezikovne nastavitve in skrbijo za varnost vašega obiska. Onemogočiti jih ni mogoče, saj spletno mesto sicer ne bi delovalo pravilno.",
+        "title": "Bistvene storitve za varnost in prilagajanje"
+      },
+      "mediaViewing": {
+        "description": "Te storitve nalagajo slike (2D), 3D, zvočne in video elemente za ogled.",
+        "title": "Storitve gledanja medijev"
+      },
+      "socialMedia": {
+        "description": "Te storitve nalagajo vsebino s platform družabnih medijev.",
+        "title": "Storitve vgrajevanja v družbene medije"
+      },
+      "thirdPartyContent": {
+        "description": "Te storitve nalagajo vsebino, ki jo gostijo tretje osebe. Za njegovo uporabo veljajo pogoji, določila in izjava o zasebnosti teh tretjih oseb.",
+        "title": "Vsebina tretjih oseb"
+      },
+      "usage": {
+        "description": "Te storitve zbirajo informacije, ki nam pomagajo bolje razumeti, kako se spletna stran uporablja in kje so bolečine točke, ki nas opolnomoči za sprejemanje obveščenih odločitev za izboljšanje vaše izkušnje.",
+        "title": "Storitve za zajemanje uporabe spletnega mesta in povratnih informacij"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "S tem stikalom omogočite ali onemogočite vse izbirne storitve.",
+        "title": "Omogočite ali onemogočite vse storitve"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Se spomni, da si človek.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Zbira podatke o uporabi, da nam pomaga analizirati interakcije uporabnikov. Aktivira pripomoček za anketo, ki vam omogoča odgovoriti na naše ankete o zadovoljstvu obiskovalcev.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Zapomni si želeni jezik vmesnika za prihodnji dostop.",
+        "title": "Jezikovna koda"
+      },
+      "matomo": {
+        "description": "Zbira anonimne statistične podatke o tem, kako obiskovalci komunicirajo s spletnim mestom.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} do {endDate}",
+    "label": "dogodek"
+  },
+  "featured": "Predstavljeno",
   "footer": {
     "accessibility": "Dostopnost",
     "cookies": "Piškotki",
@@ -112,5 +195,10 @@
       "previousSlide": "Prejšnji diapozitiv",
       "slideLabel": "Diapozitiv {slide} od {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "usposabljanje",
+    "ongoing": "V teku"
   }
 }

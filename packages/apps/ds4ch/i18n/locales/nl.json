@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Evenementen",
       "news": "Nieuws",
       "projects": "Projecten",
+      "training": "Opleiding",
       "viewAll": "Bekijk alles"
     },
     "resultsHaveLoaded": "{0} resultaten gevonden"
   },
+  "cookies": {
+    "acceptAll": "Accepteer alles",
+    "acceptSelected": "Geselecteerde accepteren",
+    "consentModal": {
+      "alwaysRequired": "(Altijd verplicht)",
+      "privacyStatement": "Privacyverklaring",
+      "servicesCount": "{count} dienst | {count} diensten",
+      "text": "Hier kunt u de services zien en aanpassen die we graag op deze website willen gebruiken. Lees voor meer informatie ons {privacyStatement}.",
+      "title": "Diensten waar we graag gebruik van willen maken."
+    },
+    "consentNotice": {
+      "learnMore": "Laat me kiezen",
+      "text": "Kunnen we alstublieft services inschakelen voor beveiliging, analyse en inhoud van derden?",
+      "textUpdated": "Er zijn enkele wijzigingen in de diensten geweest sinds uw laatste bezoek. Kunnen we alstublieft aanvullende diensten inschakelen?"
+    },
+    "decline": "Ik weiger",
+    "ok": "Oké",
+    "purposes": {
+      "2D": {
+        "title": "2D media"
+      },
+      "3D": {
+        "title": "3D media"
+      },
+      "audio": {
+        "title": "Geluid"
+      },
+      "essential": {
+        "description": "Deze diensten zijn essentieel voor de correcte werking van deze website. Ze omvatten taalvoorkeuren en zorgen voor een veilig bezoek. U kunt ze niet uitschakelen, omdat de website anders niet goed functioneert.",
+        "title": "Essentiële services voor beveiliging en maatwerk"
+      },
+      "mediaViewing": {
+        "description": "Deze services laden afbeeldingen (2D), 3D, audio en video om te bekijken.",
+        "title": "Diensten voor het bekijken van media"
+      },
+      "socialMedia": {
+        "description": "Deze services laden inhoud van sociale mediaplatforms.",
+        "title": "Inbeddingsdiensten voor sociale media"
+      },
+      "thirdPartyContent": {
+        "description": "Deze services laden content die door derden wordt gehost. Het gebruik ervan is onderworpen aan de algemene voorwaarden en privacyverklaring van deze derden.",
+        "title": "Inhoud van derden"
+      },
+      "usage": {
+        "description": "Deze diensten verzamelen de informatie om ons te helpen beter te begrijpen hoe de website wordt gebruikt en waar de pijnpunten zijn, waardoor we weloverwogen keuzes kunnen maken om uw ervaring te verbeteren.",
+        "title": "Diensten om websitegebruik en feedback vast te leggen"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Gebruik deze schakelaar om alle optionele services in of uit te schakelen.",
+        "title": "Alle services in- of uitschakelen"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Onthoudt dat u een mens bent.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Verzamelt gebruiksgegevens om ons te helpen gebruikersinteracties te analyseren. Activeert een enquêtewidget waarmee u kunt deelnemen aan onze tevredenheidsenquêtes voor bezoekers.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Onthoudt de interfacetaal van uw voorkeur voor toekomstige toegang.",
+        "title": "Taalcode"
+      },
+      "matomo": {
+        "description": "Verzamelt anonieme statistieken over hoe bezoekers omgaan met de website.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} tot {endDate}",
+    "label": "evenement"
+  },
+  "featured": "Aanbevolen",
   "footer": {
     "accessibility": "Toegankelijkheid",
     "cookies": "Cookies",
@@ -112,5 +195,10 @@
       "previousSlide": "Vorige slide",
       "slideLabel": "Slide {slide} van {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "opleiding",
+    "ongoing": "Lopend"
   }
 }

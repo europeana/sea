@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Događaji",
       "news": "Vijesti",
       "projects": "Projekti",
+      "training": "Trening",
       "viewAll": "Pogledaj sve"
     },
     "resultsHaveLoaded": "{0} pronađenih rezultata"
   },
+  "cookies": {
+    "acceptAll": "Prihvatiti sve",
+    "acceptSelected": "Prihvati odabrano",
+    "consentModal": {
+      "alwaysRequired": "(Uvijek obavezno)",
+      "privacyStatement": "Izjava o privatnosti",
+      "servicesCount": "{count} usluga | {count} usluga",
+      "text": "Ovdje možete vidjeti i prilagoditi usluge koje bismo željeli koristiti na ovoj web stranici. Za više informacija pročitajte naše {privacyStatement}.",
+      "title": "Usluge koje bismo željeli koristiti."
+    },
+    "consentNotice": {
+      "learnMore": "Pusti me da izaberem",
+      "text": "Možemo li omogućiti usluge za sigurnost, analitiku i sadržaj treće strane?",
+      "textUpdated": "Od vašeg posljednjeg posjeta došlo je do nekih promjena u uslugama. Možemo li omogućiti dodatne usluge?"
+    },
+    "decline": "Odbijam",
+    "ok": "U redu",
+    "purposes": {
+      "2D": {
+        "title": "2D mediji"
+      },
+      "3D": {
+        "title": "3D mediji"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Ove su usluge neophodne za ispravno funkcioniranje ove web stranice. One uključuju jezične postavke i čuvaju vašu posjetu sigurnom. Ne možete ih onemogućiti jer web stranica inače ne bi radila ispravno.",
+        "title": "Osnovne usluge za sigurnost i prilagodbu"
+      },
+      "mediaViewing": {
+        "description": "Ove usluge učitavaju slike (2D), 3D, audio i video stavke za gledanje.",
+        "title": "Usluge pregledavanja medija"
+      },
+      "socialMedia": {
+        "description": "Ove usluge učitavaju sadržaj s platformi društvenih medija.",
+        "title": "Usluge ugrađivanja društvenih medija"
+      },
+      "thirdPartyContent": {
+        "description": "Ove usluge učitavaju sadržaj koji hostiraju treće strane. Njegova uporaba podliježe uvjetima, odredbama i izjavi o privatnosti trećih strana.",
+        "title": "Sadržaj treće strane"
+      },
+      "usage": {
+        "description": "Ove usluge prikupljaju informacije kako bi nam pomogle bolje razumjeti kako se web‑stranica koristi i gdje su točke poteškoća, omogućujući nam donošenje informiranih odluka za poboljšanje vašeg iskustva.",
+        "title": "Usluge za bilježenje upotrebe web mjesta i povratnih informacija"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Pomoću ove sklopke omogućite ili onemogućite sve opcijske usluge.",
+        "title": "Omogućite ili onemogućite sve usluge"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Sjeća se da si čovjek.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Prikuplja podatke o korištenju kako bi nam pomogao analizirati interakcije korisnika. Aktivira widget za anketu koji vam omogućuje sudjelovanje u našim anketama o zadovoljstvu posjetitelja.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Pamti vaš preferirani jezik sučelja za budući pristup.",
+        "title": "Kod jezika"
+      },
+      "matomo": {
+        "description": "Prikuplja anonimne statistike o tome kako posjetitelji komuniciraju s web mjestom.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} do {endDate}",
+    "label": "događaj"
+  },
+  "featured": "Istaknuto",
   "footer": {
     "accessibility": "Pristupačnost",
     "cookies": "Kolačići",
@@ -112,5 +195,10 @@
       "previousSlide": "Prethodni slajd",
       "slideLabel": "Slajd {slide} od {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "trening",
+    "ongoing": "U tijeku"
   }
 }

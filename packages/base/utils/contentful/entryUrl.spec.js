@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { contentfulEntryUrl } from "@/utils/contentful/entry-url.js";
+import { entryUrl } from "./entryUrl.js";
 
 const blogEntry = {
   __typename: "BlogPosting",
@@ -15,17 +15,17 @@ const storyEntry = {
 };
 
 describe("@/utils/contentful/entry-url.js", () => {
-  describe("contentfulEntryUrl", () => {
+  describe("entryUrl", () => {
     it("returns /news/[identifer] for blog posts", () => {
-      expect(contentfulEntryUrl(blogEntry)).toBe("/news/blogIdentifier");
+      expect(entryUrl(blogEntry)).toBe("/news/blogIdentifier");
     });
     it("returns /exhibitions/[identifer] for exhibition pages", () => {
-      expect(contentfulEntryUrl(exhibitionEntry)).toBe(
+      expect(entryUrl(exhibitionEntry)).toBe(
         "/exhibitions/exhibitionIdentifier",
       );
     });
     it("returns /stories/[identifer] for stories", () => {
-      expect(contentfulEntryUrl(storyEntry)).toBe("/stories/storyIdentifier");
+      expect(entryUrl(storyEntry)).toBe("/stories/storyIdentifier");
     });
   });
 });

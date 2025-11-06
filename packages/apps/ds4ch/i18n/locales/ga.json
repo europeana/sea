@@ -25,12 +25,95 @@
   },
   "content": {
     "filter": {
+      "events": "Imeachtaí",
       "news": "Nuacht",
       "projects": "Tionscadail",
+      "training": "Oiliúint",
       "viewAll": "Féach ar fad"
     },
     "resultsHaveLoaded": "{0} torthaí aimsithe"
   },
+  "cookies": {
+    "acceptAll": "Glac le gach",
+    "acceptSelected": "Glac leis roghnaithe",
+    "consentModal": {
+      "alwaysRequired": "(riachtanach i gcónaí)",
+      "privacyStatement": "Ráiteas príobháideachta",
+      "servicesCount": "Seirbhís {count} | {count} seirbhís",
+      "text": "Anseo is féidir leat na seirbhísí a bheadh muid ag iarraidh a úsáid ar an suíomh gréasáin seo a fheiceáil agus a shaincheapadh. Chun tuilleadh eolais a fháil léigh ár {privacyStatement} le do thoil.",
+      "title": "Seirbhísí ba mhaith linn a úsáid."
+    },
+    "consentNotice": {
+      "learnMore": "Lig dom a roghnú",
+      "text": "An bhféadfaimis seirbhísí a chumasú le haghaidh slándála, anailísíochta agus ábhair tríú páirtí, le do thoil?",
+      "textUpdated": "Tá roinnt athruithe tagtha ar sheirbhísí ó d'fhiosrúchán deireanach. An bhféadfaimis seirbhísí breise a chumasú le do thoil?"
+    },
+    "decline": "Diúltaím",
+    "ok": "Ceart go leor",
+    "purposes": {
+      "2D": {
+        "title": "Meáin 2D"
+      },
+      "3D": {
+        "title": "Meáin 3D"
+      },
+      "audio": {
+        "title": "Fuaim"
+      },
+      "essential": {
+        "description": "Tá na seirbhísí seo riachtanach chun go n-oibreoidh an suíomh gréasáin seo mar is ceart. Cuimsíonn siad sainroghanna teanga agus coimeádann siad do chuairt slán. Ní féidir leat iad a dhíchumasú, mar ní oibreodh an suíomh gréasáin i gceart murach sin.",
+        "title": "Seirbhísí riachtanacha maidir le slándáil agus saincheaptha"
+      },
+      "mediaViewing": {
+        "description": "Luchtaíonn na seirbhísí seo míreanna íomhá (2D), 3D, fuaime agus físe le breathnú orthu.",
+        "title": "Seirbhísí féachana meáin"
+      },
+      "socialMedia": {
+        "description": "Luchtaíonn na seirbhísí seo ábhar ó ardáin na meán sóisialta.",
+        "title": "Seirbhísí um neadú na meán sóisialta"
+      },
+      "thirdPartyContent": {
+        "description": "Lódálann na seirbhísí seo inneachar arna óstáil ag tríú páirtithe. Tá a úsáid faoi réir théarmaí, choinníollacha agus ráitis phríobháideachais na dtríú páirtithe seo.",
+        "title": "Ábhar tríú páirtí"
+      },
+      "usage": {
+        "description": "Bailíonn na seirbhísí seo an fhaisnéis chun cabhrú linn tuiscint níos fearr a fháil ar an gcaoi a n-úsáidtear an suíomh Gréasáin agus cá bhfuil na pointí pian, ag cur ar ár gcumas roghanna eolasacha a dhéanamh chun d’eispéireas a fheabhsú.",
+        "title": "Seirbhísí chun úsáid agus aiseolas láithreán gréasáin a ghabháil"
+      },
+      "video": {
+        "title": "Físeán"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Úsáid an lasc seo chun gach seirbhís roghnach a chumasú nó a dhíchumasú.",
+        "title": "Gach seirbhís a chumasú nó a dhíchumasú"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Cuimhníonn sé go bhfuil tú i do dhuine.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Bailíonn sé sonraí úsáide chun cabhrú linn idirghníomhaíochtaí úsáideoirí a anailísiú. Gníomhaíonn sé giuirléid suirbhé a thugann na rogha duit freagra a thabhairt ar ár suirbhéanna sástachta cuairteoirí.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Cuimhníonn sé ar do theanga chomhéadain roghnaithe le haghaidh rochtana amach anseo.",
+        "title": "Cód teanga"
+      },
+      "matomo": {
+        "description": "Bailíonn sé staitisticí gan ainm ar an gcaoi a n-idirghníomhaíonn cuairteoirí leis an suíomh gréasáin.",
+        "title": "Matomo"
+      }
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} go {endDate}",
+    "label": "imeacht"
+  },
+  "featured": "Ard-Roghnaithe",
   "footer": {
     "accessibility": "Inrochtaineacht",
     "cookies": "Fianáin",
@@ -112,5 +195,10 @@
       "previousSlide": "Sleamhnán roimhe seo",
       "slideLabel": "Sleamhnán {slide} de {totalSlides}"
     }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "label": "oiliúint",
+    "ongoing": "Ar siúl"
   }
 }

@@ -38,14 +38,15 @@
     "acceptSelected": "Accept selected",
     "consentModal": {
       "alwaysRequired": "(Always required)",
-      "text": "Here you can see and customise the services that we'd like to use on this website. To learn more please read our {privacyStatement}.",
       "privacyStatement": "Privacy statement",
       "servicesCount": "{count} service | {count} services",
+      "text": "Here you can see and customise the services that we'd like to use on this website. To learn more please read our {privacyStatement}.",
       "title": "Services we would like to use."
     },
     "consentNotice": {
-      "description": "Could we please enable services for security, analytics and third-party content?",
-      "learnMore": "Let me choose"
+      "learnMore": "Let me choose",
+      "text": "Could we please enable services for security, analytics and third-party content?",
+      "textUpdated": "There have been some changes in services since your last visit. Could we please enable additional services?"
     },
     "decline": "I decline",
     "ok": "Okay",
