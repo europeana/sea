@@ -39,6 +39,7 @@ const providerName = computed(() => {
   }
 });
 
+// TODO: is this still needed if already watching acceptedServices
 watch(consentRequired, (newVal) => {
   if (!newVal) {
     checkConsentAndOpenEmbed();
@@ -49,7 +50,10 @@ watch(acceptedServices, () => {
   checkConsentAndOpenEmbed();
 });
 
-onBeforeMount(() => parseEmbedCode());
+onBeforeMount(() => {
+  parseEmbedCode();
+  checkConsentAndOpenEmbed();
+});
 
 const parseEmbedCode = () => {
   if (!props.embedCode) {
@@ -178,7 +182,7 @@ const saveConsents = () => {
               {{ $t("embedNotification.message", { provider: providerName }) }}
             </p>
             <button
-              class="btn btn-light mb-2"
+              class="accept-all-button btn btn-light mb-2"
               :data-bs-toggle="consentRequired && 'modal'"
               :data-bs-target="`#${cookieModalId}`"
               @click="consentAllEmbeddedContent"
@@ -202,7 +206,7 @@ const saveConsents = () => {
             <CookiesModal :modal-id="cookieModalId" />
             <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">
               <button
-                class="btn btn-link"
+                class="accept-only-button btn btn-link"
                 :data-bs-toggle="consentRequired && 'modal'"
                 :data-bs-target="`#${cookieModalId}`"
                 @click="consentThisProvider"
