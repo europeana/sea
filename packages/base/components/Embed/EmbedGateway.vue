@@ -2,12 +2,10 @@
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 import { services } from "@/utils/services/services";
 import serviceForUrl from "@/utils/services/index.js";
-// import useScrollTo from "@/composables/scrollTo.js";
-import { computed } from "vue";
 
 const { acceptedServices, acceptOnly, checkedServices, consentRequired } =
   useConsentManager();
-// const { scrollToSelector } = useScrollTo();
+
 const { t, te } = useI18n({ useScope: "global" });
 
 const props = defineProps({
@@ -41,8 +39,13 @@ const providerName = computed(() => {
 const displayPurposes = computed(() =>
   consentRequired.value ? undefined : ["thirdPartyContent"],
 );
+const scrollToSectionId = computed(() =>
+  consentRequired.value
+    ? `#${cookieModalId}-consentcheckbox-thirdPartyContent`
+    : undefined,
+);
 
-// TODO: is this still needed if already watching acceptedServices
+// TODO: is this still needed if already watching acceptedServices?
 watch(consentRequired, (newVal) => {
   if (!newVal) {
     checkConsentAndOpenEmbed();
@@ -84,10 +87,6 @@ const parseEmbedCode = () => {
   opened.value = !iframe.value.src && !script.value.src;
 };
 
-const openCookieModal = () => {
-  // TODO: scroll to third party services cookie-modal
-};
-
 const checkConsentAndOpenEmbed = () => {
   const consents = acceptedServices.value;
   const providerHasConsent = !!consents?.includes(provider.value?.name);
@@ -125,37 +124,6 @@ const saveConsents = () => {
   acceptOnly([...checkedServices.value]);
   checkConsentAndOpenEmbed();
 };
-
-// const openMainCookieModalAndScrollToThirdPartyContent = () => {
-// TODO handle scroll in modal component?
-// Listen to modal shown event and then to modal transitionend before attempting to scroll
-// $root.$once("bv::modal::shown", (event, modalId) =>
-//   listenToModalTransitionendAndScrollToSection(event, modalId),
-// );
-// $bvModal.show("cookie-modal");
-// };
-
-// const listenToModalTransitionendAndScrollToSection = (event, modalId) => {
-//   if (modalId === "cookie-modal") {
-//     const modalContainer = event.target;
-//     const sectionId = "#consentcheckbox-section-thirdPartyContent";
-
-//     // This overrides the BV modal component setting focus which might happen asynchronously and mess with the scroll effect
-//     modalContainer.focus();
-//     modalContainer.addEventListener(
-//       "transitionend",
-//       () => scrollToSection(modalContainer, sectionId),
-//       { once: true },
-//     );
-//   }
-// };
-
-// const scrollToSection = (modalContainer, sectionId) => {
-//   scrollToSelector(sectionId, {
-//     behavior: "smooth",
-//     container: modalContainer,
-//   });
-// };
 </script>
 
 <template>
@@ -201,14 +169,15 @@ const saveConsents = () => {
                 class="btn btn-link"
                 data-bs-toggle="modal"
                 :data-bs-target="`#${cookieModalId}`"
-                @click="openCookieModal"
               >
                 {{ $t("embedNotification.viewFullList") }}
               </button>
             </i18n-t>
+            <!-- TODO: lazy load CookiesModal -->
             <CookiesModal
               :modal-id="cookieModalId"
               :display-purposes="displayPurposes"
+              :scroll-to="scrollToSectionId"
             />
             <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">
               <button

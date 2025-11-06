@@ -54,6 +54,14 @@ mockNuxtImport("useI18n", () => {
     };
   };
 });
+
+const scrollToSelector = vi.fn();
+vi.mock("@/composables/scrollTo.js", () => ({
+  default: () => ({
+    scrollToSelector,
+  }),
+}));
+
 const factory = (props) =>
   mount(CookiesModal, {
     props,
@@ -157,5 +165,28 @@ describe("components/Page/CookiesModal.vue", () => {
 
     sectionInstance.$emit("toggle", "usage");
     expect(wrapper.vm.show).toContain("usage");
+  });
+
+  describe("the scrollTo prop is passed", () => {
+    it("scrolls to the third party content section", () => {
+      const sectionId = "#cookie-modal-consentcheckbox-thirdPartyContent";
+      const wrapper = factory({ scrollTo: sectionId });
+      const modalEl = wrapper.vm.$refs.modal;
+      modalEl.focus = vi.fn();
+
+      const modal = wrapper.find(".modal");
+      const showEvent = new Event("show.bs.modal");
+      modal.element.dispatchEvent(showEvent);
+
+      const transitionEndEvent = new Event("transitionend");
+
+      modalEl.dispatchEvent(transitionEndEvent);
+
+      expect(modalEl.focus).toHaveBeenCalled();
+      expect(scrollToSelector).toHaveBeenCalledWith(sectionId, {
+        behavior: "smooth",
+        container: modalEl,
+      });
+    });
   });
 });

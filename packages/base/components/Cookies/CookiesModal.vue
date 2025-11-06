@@ -1,6 +1,7 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 import { services } from "@/utils/services/services";
+import useScrollTo from "@/composables/scrollTo.js";
 
 const {
   acceptAll,
@@ -10,6 +11,8 @@ const {
   rejectAll,
   consentRequired,
 } = useConsentManager();
+
+const { scrollToSelector } = useScrollTo();
 
 const emit = defineEmits(["showToast"]);
 
@@ -30,15 +33,24 @@ const props = defineProps({
     type: Array,
     default: () => ["essential", "usage", "thirdPartyContent"],
   },
+  scrollTo: {
+    type: String,
+    default: null,
+  },
 });
 
 const modalRef = useTemplateRef("modal");
 
 onMounted(() => {
   modalRef.value?.addEventListener("show.bs.modal", () => {
+    if (props.scrollTo) {
+      listenToModalTransitionendAndScrollToSection();
+    }
+
     // Reset checked services to saved services
     checkedServices.value = [...acceptedServices.value];
   });
+
   // Show toast when modal closed and no consent preferences are saved (click on backdrop or escape)
   modalRef.value?.addEventListener("hide.bs.modal", () => {
     if (consentRequired.value) {
@@ -155,6 +167,28 @@ const toggleDisplay = (name) => {
     show.value.push(name);
   }
 };
+
+const listenToModalTransitionendAndScrollToSection = () => {
+  const modalContainer = modalRef.value;
+  const sectionId = props.scrollTo;
+
+  // This overrides the BV modal component setting focus which might happen asynchronously and mess with the scroll effect
+  modalContainer.focus();
+  modalContainer.addEventListener(
+    "transitionend",
+    () => {
+      scrollToSection(modalContainer, sectionId);
+    },
+    { once: true },
+  );
+};
+
+const scrollToSection = (modalContainer, sectionId) => {
+  scrollToSelector(sectionId, {
+    behavior: "smooth",
+    container: modalContainer,
+  });
+};
 </script>
 
 <template>
@@ -195,6 +229,7 @@ const toggleDisplay = (name) => {
             <CookiesSection
               v-for="(section, index) in groupedSections"
               :key="index"
+              :modal-id="modalId"
               :service-data="section"
               :show="show"
               @toggle="toggleDisplay"

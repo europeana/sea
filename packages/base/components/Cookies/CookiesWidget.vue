@@ -77,6 +77,7 @@ const showToast = () => {
         </div>
       </div>
     </div>
+    <!-- TODO: lazy load CookiesModal -->
     <CookiesModal @show-toast="showToast" />
   </div>
 </template>

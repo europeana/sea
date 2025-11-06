@@ -12,6 +12,10 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  modalId: {
+    type: String,
+    default: null,
+  },
   serviceData: {
     type: Object,
     default: () => {},
@@ -146,7 +150,7 @@ const renderServiceAsCheckbox = (
     </legend>
     <div v-else class="form-check form-switch">
       <input
-        :id="`consentcheckbox-${serviceData.name}`"
+        :id="`${modalId}-consentcheckbox-${serviceData.name}`"
         v-model="checked"
         :checked="checked"
         class="form-check-input"
@@ -158,7 +162,8 @@ const renderServiceAsCheckbox = (
         :indeterminate="indeterminate"
         :class="{ secondary: !serviceData.services, active: indeterminate }"
         :aria-describedby="
-          description && `consentcheckbox-description-${serviceData.name}`
+          description &&
+          `${modalId}-consentcheckbox-description-${serviceData.name}`
         "
         :aria-checked="indeterminate && 'mixed'"
         @change="(event) => updateConsent(serviceData, event.target.checked)"
@@ -166,7 +171,7 @@ const renderServiceAsCheckbox = (
       <label
         class="form-check-label"
         :class="{ secondary: !serviceData.services }"
-        :for="`consentcheckbox-${serviceData.name}`"
+        :for="`${modalId}-consentcheckbox-${serviceData.name}`"
       >
         {{ label }}
         <span v-if="serviceData.required"
@@ -176,7 +181,7 @@ const renderServiceAsCheckbox = (
     </div>
     <p
       v-if="description"
-      :id="`consentcheckbox-description-${serviceData.name}`"
+      :id="`${modalId}-consentcheckbox-description-${serviceData.name}`"
       class="description mb-0"
     >
       {{ description }}
@@ -186,7 +191,7 @@ const renderServiceAsCheckbox = (
         v-if="depth <= COLLAPSIBLE_DEPTH_LIMIT"
         class="btn btn-link"
         :class="{ show: showNestedServices }"
-        :aria-controls="`consentcheckbox-subsection-${serviceData.name}`"
+        :aria-controls="`${modalId}-consentcheckbox-subsection-${serviceData.name}`"
         :aria-expanded="showNestedServices ? 'true' : 'false'"
         @click="toggleDisplay(serviceData.name)"
       >
@@ -201,7 +206,7 @@ const renderServiceAsCheckbox = (
         v-show="
           depth > COLLAPSIBLE_DEPTH_LIMIT || show.includes(serviceData.name)
         "
-        :id="`consentcheckbox-subsection-${serviceData.name}`"
+        :id="`${modalId}-consentcheckbox-subsection-${serviceData.name}`"
       >
         <CookiesSection
           v-for="(subService, subServiceIndex) in serviceData.services"
