@@ -36,14 +36,19 @@ const providerName = computed(() => {
     return t("cookies.services.unknownProvider");
   }
 });
-const displayPurposes = computed(() =>
-  consentRequired.value ? undefined : ["thirdPartyContent"],
-);
-const scrollToSectionId = computed(() =>
-  consentRequired.value
-    ? `#${cookieModalId}-consentcheckbox-thirdPartyContent`
-    : undefined,
-);
+const modalProps = computed(() => {
+  if (consentRequired.value) {
+    return {
+      scrollTo: `#${cookieModalId}-consentcheckbox-thirdPartyContent`,
+    };
+  } else {
+    return {
+      displayPurposes: ["thirdPartyContent"],
+      modalTitlePath: "cookies.purposes.thirdPartyContent.title",
+      modalDescriptionPath: null,
+    };
+  }
+});
 
 // TODO: is this still needed if already watching acceptedServices?
 watch(consentRequired, (newVal) => {
@@ -174,11 +179,7 @@ const saveConsents = () => {
               </button>
             </i18n-t>
             <!-- TODO: lazy load CookiesModal -->
-            <CookiesModal
-              :modal-id="cookieModalId"
-              :display-purposes="displayPurposes"
-              :scroll-to="scrollToSectionId"
-            />
+            <CookiesModal :modal-id="cookieModalId" v-bind="modalProps" />
             <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">
               <button
                 class="accept-only-button btn btn-link"
