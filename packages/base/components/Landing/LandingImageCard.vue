@@ -168,6 +168,15 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   &.bg-color-alternate,
   .image-card-container-wrapper &.bg-color-alternate {
     background-color: $lightgrey;
+    .text-wrapper {
+      background-color: $lightgrey;
+    }
+  }
+
+  &.bg-color-alternate,
+  &.bg-color-highlight,
+  .image-card-container-wrapper &.bg-color-alternate,
+  .image-card-container-wrapper &.bg-color-highlight {
     margin-top: 0;
     margin-bottom: 0;
 
@@ -182,10 +191,6 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
     @media (min-width: $bp-4k) {
       padding-top: 15rem;
       padding-bottom: 15rem;
-    }
-
-    .text-wrapper {
-      background-color: $lightgrey;
     }
   }
 

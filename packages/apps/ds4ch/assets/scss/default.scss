@@ -1,8 +1,55 @@
 .home-page {
   // base component DS4CH specific overrides
-  div.landing-sub-section {
+  div.image-card-container-wrapper:has(
+      > .image-card-container .bg-color-highlight
+    ) {
     background-color: $black;
     color: $white;
+    .image-card,
+    .text-wrapper,
+    .text {
+      background-color: $black;
+      color: $white;
+    }
+
+    // override the default secondary button with the primary styles
+    .btn-secondary {
+      border: none;
+      border-radius: 0;
+      background-color: $yellow;
+      background-image: linear-gradient(to right, $black 50%, $yellow 50%);
+      background-size: 201% 100%; // Extra percent to prevent yellow line on hover effect
+      background-position: right;
+      color: $black;
+      display: inline-flex;
+      align-items: center;
+      font-family: $font-family-montserrat;
+      font-size: $font-size-14;
+      padding: 0.4375rem 0.625rem;
+      transition: all 400ms ease-in-out;
+      text-transform: uppercase;
+
+      @media (min-width: ($bp-4k)) {
+        font-size: $font-size-28;
+        padding: 0.875rem 1.25rem;
+        border-radius: 0;
+      }
+
+      &.icon-chevron::before {
+        color: $black;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-position: left;
+        color: $yellow;
+        box-shadow: none;
+        &.icon-chevron::before {
+          color: $yellow;
+        }
+      }
+    }
   }
 }
 
