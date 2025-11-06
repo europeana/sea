@@ -238,13 +238,20 @@ const saveConsents = () => {
     color: $darkgrey;
   }
 
-  @at-root .landing-page.xxl-page & .btn-link {
+  @at-root .landing-page.xxl-page & .btn-link,
+    .btn-link {
     color: $white;
     display: inline;
     font-size: $font-size-extrasmall;
     padding: 0;
     text-decoration-line: underline;
     vertical-align: baseline;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white;
+    }
   }
 }
 
