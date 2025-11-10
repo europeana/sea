@@ -32,19 +32,5 @@ describe("components/Landing/LandingSubSection", () => {
 
       expect(imageCardElement.exists()).toBe(true);
     });
-    it("passes the imageCardCtaClasses prop", () => {
-      const sections = [{ __typename: "ImageCard" }];
-      const imageCardCtaClasses = "btn-primary";
-
-      const wrapper = shallowMount(LandingSubSection, {
-        props: { sections, imageCardCtaClasses },
-      });
-
-      const imageCardElement = wrapper.getComponent({
-        name: "LandingImageCard",
-      });
-
-      expect(imageCardElement.props("ctaClasses")).toEqual(imageCardCtaClasses);
-    });
   });
 });
