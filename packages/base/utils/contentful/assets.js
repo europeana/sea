@@ -17,7 +17,7 @@ export function imageDisplayProfileResponsiveSizes(sizes, profile) {
   const deleteHeight = profile?.fit === "pad" && !profile?.crop;
 
   return Object.keys(sizes).reduce((memo, size) => {
-    if (!profile || profile.sizes.includes(size)) {
+    if (!profile?.sizes || profile.sizes.includes(size)) {
       memo[size] = { ...sizes[size] };
 
       if (deleteHeight) {

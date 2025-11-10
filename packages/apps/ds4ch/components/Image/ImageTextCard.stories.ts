@@ -21,24 +21,40 @@ export const Default: Story = {
   },
 };
 
-export const PrimaryCta: Story = {
-  args: {
-    card: {
-      name: "Card title",
-      text: "This text contains info. It can be __marked__ and accompanied by an image. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      image: sampleData.imagesWithAttribution[0],
-      link: { text: "read more", url: "/" },
-    },
-    ctaClasses: "btn-primary icon-chevron",
-  },
-};
-
 export const NoCta: Story = {
   args: {
     card: {
       name: "Card title",
       text: "This text contains info. It can be __marked__ and accompanied by an image. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: sampleData.imagesWithAttribution[0],
+    },
+  },
+};
+
+export const AlternateBackground: Story = {
+  args: {
+    card: {
+      name: "Card title",
+      text: "This text contains info. It can be __marked__ and accompanied by an image. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      image: sampleData.imagesWithAttribution[0],
+      link: { text: "read more", url: "/" },
+      profile: {
+        background: "alternate",
+      },
+    },
+  },
+};
+
+export const HighlightBackground: Story = {
+  args: {
+    card: {
+      name: "Card title",
+      text: "This text contains info. It can be __marked__ and accompanied by an image. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      image: sampleData.imagesWithAttribution[0],
+      link: { text: "read more", url: "/" },
+      profile: {
+        background: "highlight",
+      },
     },
   },
 };
