@@ -80,37 +80,46 @@ export function createConsentManager(settings = {}) {
     saveConsent([...config.value.services.essential, ...only]);
   };
 
-  // Get and store consent cookie on init
-  const consent = getCookie();
+  const getAndStoreConsent = () => {
+    const consent = getCookie();
 
-  if (consent) {
-    const servicesWithConsent = Object.keys(consent).filter(
-      (service) => !!consent[service],
-    );
-    acceptedServices.value = servicesWithConsent;
-    checkedServices.value = servicesWithConsent;
-    consentSaved.value = true;
-    // if there are no new services
-    if (
-      config.value.services.all.every((service: string) =>
-        Object.keys(consent).includes(service),
-      )
-    ) {
-      consentRequired.value = false;
+    if (consent) {
+      const servicesWithConsent = Object.keys(consent).filter(
+        (service) => !!consent[service],
+      );
+      acceptedServices.value = servicesWithConsent;
+      checkedServices.value = servicesWithConsent;
+      consentSaved.value = true;
+      // if there are no new services
+      if (
+        config.value.services.all.every((service: string) =>
+          Object.keys(consent).includes(service),
+        )
+      ) {
+        consentRequired.value = false;
+      } else {
+        consentRequired.value = true;
+      }
     } else {
+      consentSaved.value = false;
+      acceptedServices.value = [...config.value.services.essential];
+      checkedServices.value = [...config.value.services.essential];
       consentRequired.value = true;
     }
-  } else {
-    consentSaved.value = false;
-    acceptedServices.value = [...config.value.services.essential];
-    checkedServices.value = [...config.value.services.essential];
-    consentRequired.value = true;
-  }
+  };
+
+  // Get and store consent cookie on init
+  getAndStoreConsent();
 
   watch(acceptedServices, (newVal) => {
     config.value.services.handleCallbacks?.(newVal);
     // TODO: Remove any other not accepted cookie
   });
+
+  watch(
+    () => consentCookie.value,
+    () => getAndStoreConsent(),
+  );
 
   return {
     acceptAll,
