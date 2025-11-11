@@ -72,7 +72,6 @@ const getClasses = (section) => {
       :title="section.name"
       :text="section.text"
       :sections="section.hasPartCollection && section.hasPartCollection.items"
-      image-card-cta-classes="btn-primary icon-chevron"
     />
   </div>
 </template>

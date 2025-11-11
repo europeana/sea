@@ -24,14 +24,6 @@ defineProps({
     type: Array,
     default: () => [],
   },
-  /**
-   * ImageCard CTA style
-   * @values primary-outline, secondary icon-chevron
-   */
-  imageCardCtaClasses: {
-    type: String,
-    default: "btn-outline-primary",
-  },
 });
 </script>
 <template>
@@ -54,7 +46,6 @@ defineProps({
           v-if="entryHasContentType(section, 'ImageCard')"
           :card="section"
           title-tag="h3"
-          :cta-classes="imageCardCtaClasses"
         />
         <LandingAutomatedCardGroup
           v-if="entryHasContentType(section, 'AutomatedCardGroup')"

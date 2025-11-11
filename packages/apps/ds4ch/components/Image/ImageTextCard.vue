@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   /**
    * Image card
    */
@@ -13,13 +13,6 @@ defineProps({
   titleTag: {
     type: String,
     default: "h2",
-  },
-  /**
-   * Classes to set on CTA link button
-   */
-  ctaClasses: {
-    type: String,
-    default: "btn-secondary icon-chevron",
   },
   /**
    * Image sizes for responsive images
@@ -52,6 +45,12 @@ defineProps({
     }),
   },
 });
+
+const ctaClasses = computed(() =>
+  props.card?.profile?.background === "highlight"
+    ? "btn-primary icon-chevron"
+    : "btn-secondary icon-chevron",
+);
 </script>
 <template>
   <LandingImageCard
@@ -65,6 +64,16 @@ defineProps({
 <style lang="scss">
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
+
+.image-card-container-wrapper.bg-color-highlight,
+.image-card.bg-color-highlight {
+  background-color: $black;
+  color: $white;
+
+  .text-wrapper .text {
+    color: $white;
+  }
+}
 
 .image-card {
   max-width: 100%;
