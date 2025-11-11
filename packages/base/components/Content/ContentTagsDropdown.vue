@@ -146,8 +146,8 @@ const clickOutsideConfig = ref({
       v-if="featuredTags && featuredDisplayTags.length > 0"
       :tags="featuredDisplayTags"
       :selected="selectedTags"
-      :heading="$t('categories.featuredTags')"
-      class="badge-container mb-4"
+      :heading="$t('categories.featuredTopics')"
+      class="featured-tags badge-container mb-4"
       route-name="data-space"
     />
     <RelatedCategoryTags
@@ -177,7 +177,7 @@ const clickOutsideConfig = ref({
           class="form-control"
           autocomplete="off"
           type="search"
-          :placeholder="$t('categories.search')"
+          :placeholder="$t('categories.label')"
           data-qa="tags dropdown search input"
           role="searchbox"
           aria-autocomplete="list"
@@ -198,12 +198,11 @@ const clickOutsideConfig = ref({
           ref="relatedCategoryTags"
           :tags="unfeaturedDisplayTags"
           :selected="selectedTags"
-          :heading="featuredTags ? $t('categories.moreTags') : undefined"
           tabindex="-1"
           class="badge-container mb-2"
           route-name="data-space"
         />
-        <p v-if="allDisplayTags.length === 0">
+        <p v-else>
           {{ $t("categories.noOptions") }}
         </p>
       </div>
