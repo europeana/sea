@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { entryUrl } from "./entryUrl.js";
+import { entryUrl } from "./entryUrl.ts";
 
 const blogEntry = {
   __typename: "BlogPosting",
