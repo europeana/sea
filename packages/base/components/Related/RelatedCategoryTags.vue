@@ -38,6 +38,13 @@ const props = defineProps({
     type: String,
     default: "badge-outline-light",
   },
+  /**
+   * Tag icon to include or not
+   */
+  tagIcon: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const badgeLink = (tagId) => {
@@ -89,8 +96,8 @@ const handleRight = (event) => {
         {{ heading }}
       </h2>
       <div class="d-flex">
-        <span class="icon-ic-tag" />
-        <div>
+        <span v-if="tagIcon" class="icon-ic-tag" />
+        <div :class="{ 'ms-n2': !tagIcon }">
           <NuxtLinkLocale
             v-for="(tag, index) in tags.filter((tag) => !!tag)"
             :key="index"

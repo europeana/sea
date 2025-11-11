@@ -149,6 +149,7 @@ const clickOutsideConfig = ref({
       :heading="$t('categories.featuredTopics')"
       class="featured-tags badge-container mb-4"
       route-name="data-space"
+      :tag-icon="false"
     />
     <RelatedCategoryTags
       v-if="displaySelectedTags.length > 0"
@@ -156,6 +157,7 @@ const clickOutsideConfig = ref({
       :selected="selectedTags"
       class="mb-2"
       route-name="data-space"
+      :tag-icon="false"
     />
     <div
       ref="tagsdropdown"
