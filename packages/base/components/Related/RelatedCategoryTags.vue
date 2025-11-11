@@ -101,7 +101,7 @@ const handleRight = (event) => {
           <NuxtLinkLocale
             v-for="(tag, index) in tags.filter((tag) => !!tag)"
             :key="index"
-            class="badge ms-2 ms-4k-3 mb-2 mb-4k-3"
+            class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
             :class="{
               [badgeVariant]: true,
               selected: isActive(tag.identifier),
