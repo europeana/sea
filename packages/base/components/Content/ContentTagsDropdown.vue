@@ -67,11 +67,22 @@ const featuredDisplayTags = computed(() => {
   if (!featuredTags) {
     return [];
   }
-  return (
-    allDisplayTags.value?.filter((tag) =>
-      featuredTags.includes(tag.identifier),
-    ) || []
+  const featuredTagsObjects = tags.value?.filter((tag) =>
+    featuredTags.includes(tag.identifier),
   );
+
+  const selected = [];
+  const unselected = [];
+
+  for (const tag of featuredTagsObjects) {
+    if (props.selectedTags.includes(tag.identifier)) {
+      selected.push(tag);
+    } else {
+      unselected.push(tag);
+    }
+  }
+
+  return [...selected, ...unselected];
 });
 
 const unfeaturedDisplayTags = computed(() => {
@@ -86,8 +97,10 @@ const unfeaturedDisplayTags = computed(() => {
 });
 
 const displaySelectedTags = computed(() => {
-  return tags.value.filter((tag) =>
-    props.selectedTags.includes(tag.identifier),
+  return tags.value.filter(
+    (tag) =>
+      !featuredTags?.includes(tag.identifier) &&
+      props.selectedTags.includes(tag.identifier),
   );
 });
 const trimmedKeyword = computed(() => {
@@ -129,6 +142,14 @@ const clickOutsideConfig = ref({
 
 <template>
   <div>
+    <RelatedCategoryTags
+      v-if="featuredTags && featuredDisplayTags.length > 0"
+      :tags="featuredDisplayTags"
+      :selected="selectedTags"
+      :heading="$t('categories.featuredTags')"
+      class="badge-container mb-4"
+      route-name="data-space"
+    />
     <RelatedCategoryTags
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
@@ -172,16 +193,6 @@ const clickOutsideConfig = ref({
         class="tag-search-dropdown"
         data-qa="tags search dropdown"
       >
-        <RelatedCategoryTags
-          v-if="featuredTags && featuredDisplayTags.length > 0"
-          ref="relatedCategoryTags"
-          :tags="featuredDisplayTags"
-          :selected="selectedTags"
-          :heading="$t('categories.featuredTags')"
-          tabindex="-1"
-          class="badge-container mb-2"
-          route-name="data-space"
-        />
         <RelatedCategoryTags
           v-if="unfeaturedDisplayTags.length > 0"
           ref="relatedCategoryTags"
