@@ -102,7 +102,10 @@ const handleRight = (event) => {
             v-for="(tag, index) in tags.filter((tag) => !!tag)"
             :key="index"
             class="badge ms-2 ms-4k-3 mb-2 mb-4k-3"
-            :class="badgeVariant"
+            :class="{
+              [badgeVariant]: true,
+              selected: isActive(tag.identifier),
+            }"
             :active="isActive(tag.identifier)"
             :to="badgeLink(tag.identifier)"
             :data-qa="`${tag.name} category tag`"
@@ -111,10 +114,7 @@ const handleRight = (event) => {
             @click="clickBadge(tag.identifier)"
           >
             <span>{{ tag.name }}</span>
-            <span
-              v-if="isActive(tag.identifier)"
-              class="icon icon-clear clear-indicator"
-            />
+            <span v-if="isActive(tag.identifier)" class="icon icon-clear" />
           </NuxtLinkLocale>
         </div>
       </div>
