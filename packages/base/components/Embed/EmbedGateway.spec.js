@@ -150,18 +150,12 @@ describe("components/Embed/EmbedGateway", () => {
 
   describe("when clicking the load all embedded content button", () => {
     describe("consent preferences for all website services is required", () => {
-      it("checks all services to display as checked in the cookie modal", () => {
+      it("checks all third party services to display as checked in the cookie modal", () => {
         const wrapper = factory();
 
         wrapper.find(".accept-all-button").trigger("click");
 
-        expect(checkedServices.value).toEqual([
-          "translate",
-          "analytics",
-          "bsky",
-          "vimeo",
-          "other",
-        ]);
+        expect(checkedServices.value).toEqual(["bsky", "vimeo", "other"]);
       });
     });
     describe("consent preferences for all website services has been previously saved", () => {

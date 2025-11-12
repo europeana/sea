@@ -112,17 +112,15 @@ const checkConsentAndOpenEmbed = () => {
 };
 
 const consentAllEmbeddedContent = () => {
-  if (consentRequired.value) {
-    checkedServices.value = services.map((service) => service.name);
-  } else {
-    const allThirdPartyContentServices = services
-      .filter((s) => s.purposes.includes("thirdPartyContent"))
-      .flat()
-      .map((service) => service.name);
-    checkedServices.value = [...checkedServices.value].concat(
-      allThirdPartyContentServices,
-    );
+  const allThirdPartyContentServices = services
+    .filter((s) => s.purposes.includes("thirdPartyContent"))
+    .flat()
+    .map((service) => service.name);
+  checkedServices.value = [...checkedServices.value].concat(
+    allThirdPartyContentServices,
+  );
 
+  if (!consentRequired.value) {
     saveConsents();
   }
 };
