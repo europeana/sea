@@ -78,10 +78,17 @@ const parseEmbedCode = () => {
   const scriptEl = doc.querySelector("script");
 
   if (iframeEl) {
+    // set iframe width/height from style attribute; or when width/height is numeric value, add px suffix, or set width/height as is (e.g. 'auto')
     const width =
-      iframeEl.style.width || (iframeEl.width && `${iframeEl.width}px`);
+      iframeEl.style.width ||
+      (iframeEl.width && isNaN(iframeEl.width)
+        ? iframeEl.width
+        : `${iframeEl.width}px`);
     const height =
-      iframeEl.style.height || (iframeEl.height && `${iframeEl.height}px`);
+      iframeEl.style.height ||
+      (iframeEl.height && isNaN(iframeEl.height)
+        ? iframeEl.height
+        : `${iframeEl.height}px`);
 
     iframe.value = {
       height,
