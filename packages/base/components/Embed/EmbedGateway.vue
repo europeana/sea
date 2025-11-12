@@ -98,17 +98,15 @@ const parseEmbedCode = () => {
   } else if (scriptEl) {
     script.value = { src: scriptEl.src };
   }
-
-  // open the gate when there is no iframe/script embed, but other code
-  // rendered such as audio, video or plain HTML
-  opened.value = !iframe.value.src && !script.value.src;
 };
 
 const checkConsentAndOpenEmbed = () => {
   const consents = acceptedServices.value;
   const providerHasConsent = !!consents?.includes(provider.value?.name);
 
-  if (providerHasConsent) {
+  // open the gate when  provider has consent or there is no iframe/script embed, but other code
+  // rendered such as audio, video or plain HTML
+  if (providerHasConsent || (!iframe.value.src && !script.value.src)) {
     opened.value = true;
   }
 };
