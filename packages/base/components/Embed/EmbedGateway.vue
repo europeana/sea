@@ -78,9 +78,14 @@ const parseEmbedCode = () => {
   const scriptEl = doc.querySelector("script");
 
   if (iframeEl) {
+    const width =
+      iframeEl.style.width || (iframeEl.width && `${iframeEl.width}px`);
+    const height =
+      iframeEl.style.height || (iframeEl.height && `${iframeEl.height}px`);
+
     iframe.value = {
-      height: isNaN(iframeEl.height) ? iframeEl.height : `${iframeEl.height}px`,
-      width: isNaN(iframeEl.width) ? iframeEl.width : `${iframeEl.width}px`,
+      height,
+      width,
       src: iframeEl.src,
     };
   } else if (scriptEl) {
