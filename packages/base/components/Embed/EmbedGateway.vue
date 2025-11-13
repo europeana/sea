@@ -16,6 +16,7 @@ const props = defineProps({
 });
 
 const cookieModalId = "embed-cookie-modal";
+const renderModal = ref(false);
 const iframe = ref({});
 const opened = ref(false);
 const script = ref({});
@@ -66,6 +67,10 @@ onBeforeMount(() => {
   checkConsentAndOpenEmbed();
 });
 
+const openModal = () => {
+  renderModal.value = true;
+};
+
 const parseEmbedCode = () => {
   if (!props.embedCode) {
     return;
@@ -111,7 +116,13 @@ const checkConsentAndOpenEmbed = () => {
   }
 };
 
-const consentAllEmbeddedContent = () => {
+const consentAllEmbeddedContent = async () => {
+  if (consentRequired.value) {
+    openModal();
+    // wait for modal to be shown and checkedServices reset before adding all third party services to checkedServices
+    await nextTick();
+  }
+
   const allThirdPartyContentServices = services
     .filter((s) => s.purposes.includes("thirdPartyContent"))
     .flat()
@@ -125,7 +136,13 @@ const consentAllEmbeddedContent = () => {
   }
 };
 
-const consentThisProvider = () => {
+const consentThisProvider = async () => {
+  if (consentRequired.value) {
+    openModal();
+    // wait for modal to be shown and checkedServices reset before adding current provider to checkedServices
+    await nextTick();
+  }
+
   checkedServices.value = [...checkedServices.value, provider.value.name];
 
   if (!consentRequired.value) {
@@ -136,6 +153,10 @@ const consentThisProvider = () => {
 const saveConsents = () => {
   acceptOnly([...checkedServices.value]);
   checkConsentAndOpenEmbed();
+};
+
+const closeModal = () => {
+  renderModal.value = false;
 };
 </script>
 
@@ -167,7 +188,6 @@ const saveConsents = () => {
             </p>
             <button
               class="accept-all-button btn btn-light mb-2"
-              :data-bs-toggle="consentRequired && 'modal'"
               :data-bs-target="`#${cookieModalId}`"
               @click="consentAllEmbeddedContent"
             >
@@ -180,18 +200,21 @@ const saveConsents = () => {
             >
               <button
                 class="btn btn-link"
-                data-bs-toggle="modal"
                 :data-bs-target="`#${cookieModalId}`"
+                @click="openModal"
               >
                 {{ $t("embedNotification.viewFullList") }}
               </button>
             </i18n-t>
-            <!-- TODO: lazy load CookiesModal -->
-            <CookiesModal :modal-id="cookieModalId" v-bind="modalProps" />
+            <LazyCookiesModal
+              v-if="renderModal"
+              :modal-id="cookieModalId"
+              v-bind="modalProps"
+              @close-modal="closeModal"
+            />
             <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">
               <button
                 class="accept-only-button btn btn-link"
-                :data-bs-toggle="consentRequired && 'modal'"
                 :data-bs-target="`#${cookieModalId}`"
                 @click="consentThisProvider"
               >

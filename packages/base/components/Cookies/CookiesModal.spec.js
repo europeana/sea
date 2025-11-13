@@ -119,14 +119,14 @@ describe("components/Page/CookiesModal.vue", () => {
   });
 
   describe("when modal hide event is triggered", () => {
-    it('emits "showToast"', async () => {
+    it('emits "closeModal"', async () => {
       const wrapper = factory();
 
       const modal = wrapper.find(".modal");
       const event = new Event("hide.bs.modal");
       modal.element.dispatchEvent(event);
 
-      expect(wrapper.emitted("showToast")).toBeTruthy();
+      expect(wrapper.emitted("closeModal")).toBeTruthy();
     });
   });
 

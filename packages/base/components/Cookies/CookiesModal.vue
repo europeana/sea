@@ -3,18 +3,14 @@ import { useConsentManager } from "@europeana/sea-base-layer/composables/consent
 import { services } from "@/utils/services/services";
 import useScrollTo from "@/composables/scrollTo.js";
 
-const {
-  acceptAll,
-  acceptOnly,
-  acceptedServices,
-  checkedServices,
-  rejectAll,
-  consentRequired,
-} = useConsentManager();
+const { $bs } = useNuxtApp();
+
+const { acceptAll, acceptOnly, acceptedServices, checkedServices, rejectAll } =
+  useConsentManager();
 
 const { scrollToSelector } = useScrollTo();
 
-const emit = defineEmits(["showToast"]);
+const emit = defineEmits(["closeModal"]);
 
 const props = defineProps({
   modalId: {
@@ -40,6 +36,7 @@ const props = defineProps({
 });
 
 const modalRef = useTemplateRef("modal");
+let modalInstance;
 
 onMounted(() => {
   modalRef.value?.addEventListener("show.bs.modal", () => {
@@ -51,12 +48,12 @@ onMounted(() => {
     checkedServices.value = [...acceptedServices.value];
   });
 
-  // Show toast when modal closed and no consent preferences are saved (click on backdrop or escape)
   modalRef.value?.addEventListener("hide.bs.modal", () => {
-    if (consentRequired.value) {
-      emit("showToast");
-    }
+    emit("closeModal");
   });
+
+  modalInstance = new $bs.Modal(modalRef.value);
+  modalInstance?.show();
 });
 
 const show = ref(["thirdPartyContent"]);

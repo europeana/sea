@@ -9,6 +9,7 @@ const { acceptAll, rejectAll, consentRequired, consentSaved } =
 const toastId = "cookie-notice-toast";
 const toastRef = useTemplateRef("toast");
 let toastInstance;
+const renderModal = ref(false);
 
 const text = computed(() =>
   consentSaved.value
@@ -35,11 +36,17 @@ const declineAndHide = () => {
 };
 
 const openCookieModal = () => {
+  renderModal.value = true;
   toastInstance?.hide();
 };
 
-const showToast = () => {
-  toastInstance?.show();
+const closeModalAndShowToast = () => {
+  renderModal.value = false;
+
+  // Show toast when modal closed and no consent preferences are saved (click on backdrop or escape)
+  if (consentRequired.value) {
+    toastInstance?.show();
+  }
 };
 </script>
 
@@ -59,7 +66,6 @@ const showToast = () => {
         <div class="d-flex justify-content-between align-items-center">
           <button
             class="btn btn-link p-0"
-            data-bs-toggle="modal"
             data-bs-target="#cookie-modal"
             @click="openCookieModal"
           >
@@ -77,7 +83,9 @@ const showToast = () => {
         </div>
       </div>
     </div>
-    <!-- TODO: lazy load CookiesModal -->
-    <CookiesModal @show-toast="showToast" />
+    <LazyCookiesModal
+      v-if="renderModal"
+      @close-modal="closeModalAndShowToast"
+    />
   </div>
 </template>

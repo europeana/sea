@@ -150,12 +150,14 @@ describe("components/Embed/EmbedGateway", () => {
 
   describe("when clicking the load all embedded content button", () => {
     describe("consent preferences for all website services is required", () => {
-      it("checks all third party services to display as checked in the cookie modal", () => {
+      it("checks all third party services to display as checked in the cookie modal and opens modal", async () => {
         const wrapper = factory();
 
         wrapper.find(".accept-all-button").trigger("click");
+        await nextTick();
 
         expect(checkedServices.value).toEqual(["bsky", "vimeo", "other"]);
+        expect(wrapper.vm.renderModal).toBe(true);
       });
     });
     describe("consent preferences for all website services has been previously saved", () => {
@@ -172,12 +174,14 @@ describe("components/Embed/EmbedGateway", () => {
 
   describe("when clicking the accept only this provider button", () => {
     describe("consent preferences for all website services is required", () => {
-      it("checks current provider to display as checked in the cookie modal", () => {
+      it("checks current provider to display as checked in the cookie modal and opens modal", async () => {
         const wrapper = factory();
 
         wrapper.find(".accept-only-button").trigger("click");
+        await nextTick();
 
         expect(checkedServices.value).toEqual(["vimeo"]);
+        expect(wrapper.vm.renderModal).toBe(true);
       });
     });
     describe("consent preferences for all website services has been previously saved", () => {
@@ -202,6 +206,19 @@ describe("components/Embed/EmbedGateway", () => {
 
       expect(notification.isVisible()).toBe(true);
       expect(wrapper.vm.opened).toBe(false);
+    });
+  });
+
+  describe("closeModal", () => {
+    it("unmounts the embed modal", async () => {
+      const wrapper = factory();
+      wrapper.vm.renderModal = true;
+
+      expect(wrapper.vm.renderModal).toBe(true);
+
+      wrapper.vm.closeModal();
+
+      expect(wrapper.vm.renderModal).toBe(false);
     });
   });
 });
