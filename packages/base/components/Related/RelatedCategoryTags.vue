@@ -95,7 +95,11 @@ const handleRight = (event) => {
       <h2 v-if="heading" class="related-heading text-uppercase">
         {{ heading }}
       </h2>
-      <div class="d-flex">
+      <div
+        ref="tagswrapper"
+        class="tags-wrapper"
+        :class="{ 'd-flex': tagIcon }"
+      >
         <span v-if="tagIcon" class="icon-ic-tag" />
         <div :class="{ 'ms-n2': !tagIcon }">
           <NuxtLinkLocale
