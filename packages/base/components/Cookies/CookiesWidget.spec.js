@@ -61,6 +61,18 @@ describe("components/Cookies/CookiesWidget.vue", () => {
     expect(rejectAll).toHaveBeenCalled();
   });
 
+  describe("when clicking the learn more button", () => {
+    it("renders the modal and hides the toast", () => {
+      const wrapper = shallowMount(CookiesWidget);
+      wrapper.vm.toastInstance.hide = vi.fn();
+
+      wrapper.find("button.btn-link").trigger("click");
+
+      expect(wrapper.vm.renderModal).toBe(true);
+      expect(wrapper.vm.toastInstance.hide).toHaveBeenCalled();
+    });
+  });
+
   describe("when consent is required and not yet saved", () => {
     it("renders text", () => {
       const wrapper = shallowMount(CookiesWidget);
@@ -75,6 +87,36 @@ describe("components/Cookies/CookiesWidget.vue", () => {
       const wrapper = shallowMount(CookiesWidget);
 
       expect(wrapper.vm.text).toEqual("cookies.consentNotice.textUpdated");
+    });
+  });
+
+  describe("closeModalAndShowToast", () => {
+    describe("when consent still required", () => {
+      it("unmounts the modal and shows toast ", () => {
+        const wrapper = shallowMount(CookiesWidget);
+        wrapper.vm.toastInstance.show = vi.fn();
+        wrapper.vm.renderModal = true;
+
+        expect(wrapper.vm.renderModal).toBe(true);
+
+        wrapper.vm.closeModalAndShowToast();
+
+        expect(wrapper.vm.renderModal).toBe(false);
+        expect(wrapper.vm.toastInstance.show).toHaveBeenCalled();
+      });
+    });
+
+    describe("when consent no longer required", () => {
+      it("unmounts the modal and does not show toast ", () => {
+        const wrapper = shallowMount(CookiesWidget);
+        wrapper.vm.toastInstance.show = vi.fn();
+        consentRequired.value = false;
+
+        wrapper.vm.closeModalAndShowToast();
+
+        expect(wrapper.vm.renderModal).toBe(false);
+        expect(wrapper.vm.toastInstance.show).not.toHaveBeenCalled();
+      });
     });
   });
 });

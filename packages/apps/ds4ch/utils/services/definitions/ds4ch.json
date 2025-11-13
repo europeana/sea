@@ -18,15 +18,5 @@
     "name": "matomo",
     "purposes": ["usage"],
     "title": "Matomo"
-  },
-  {
-    "name": "zoho",
-    "schemes": [
-      "https://forms.zohopublic.eu/*",
-      "https://fdti-zcmp.maillist-manage.eu/*"
-    ],
-    "purposes": [],
-    "required": true,
-    "title": "Zoho"
   }
 ]

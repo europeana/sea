@@ -20,14 +20,14 @@ describe("components/Content/ContentSection", () => {
     });
   });
   describe("when the section is of type embed", () => {
-    it("renders the section as an embed HTML", () => {
+    it("renders the section as an embed Gateway", () => {
       const wrapper = shallowMount(ContentSection, {
         props: { section: embed },
       });
 
-      const embedHTML = wrapper.find("embed-H-T-M-L-stub");
+      const embedGateway = wrapper.find("embed-gateway-stub");
 
-      expect(embedHTML.exists()).toBe(true);
+      expect(embedGateway.exists()).toBe(true);
     });
   });
   describe("when the section is of image with attribution", () => {
