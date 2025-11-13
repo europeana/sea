@@ -71,6 +71,21 @@ const openModal = () => {
   renderModal.value = true;
 };
 
+const elementStyleDimension = (element, dimension) => {
+  if (element.style[dimension]) {
+    return element.style[dimension];
+  }
+  if (element[dimension] && !isNaN(element[dimension])) {
+    return `${element[dimension]}px`;
+  }
+  return element[dimension];
+};
+
+const elementStyleDimensions = (element) => ({
+  width: elementStyleDimension(element, "width"),
+  height: elementStyleDimension(element, "height"),
+});
+
 const parseEmbedCode = () => {
   if (!props.embedCode) {
     return;
@@ -83,21 +98,8 @@ const parseEmbedCode = () => {
   const scriptEl = doc.querySelector("script");
 
   if (iframeEl) {
-    // set iframe width/height from style attribute; or when width/height is numeric value, add px suffix, or set width/height as is (e.g. 'auto')
-    const width =
-      iframeEl.style.width ||
-      (iframeEl.width && isNaN(iframeEl.width)
-        ? iframeEl.width
-        : `${iframeEl.width}px`);
-    const height =
-      iframeEl.style.height ||
-      (iframeEl.height && isNaN(iframeEl.height)
-        ? iframeEl.height
-        : `${iframeEl.height}px`);
-
     iframe.value = {
-      height,
-      width,
+      ...elementStyleDimensions(iframeEl),
       src: iframeEl.src,
     };
   } else if (scriptEl) {
