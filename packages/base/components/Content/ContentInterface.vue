@@ -455,7 +455,8 @@ watch(page, () => {
 </script>
 
 <template>
-  <div id="content-interface">
+  <!-- prevent overflow featured tags with horizontal scroll -->
+  <div id="content-interface" class="overflow-x-hidden">
     <div class="container">
       <client-only>
         <ContentTagsDropdown

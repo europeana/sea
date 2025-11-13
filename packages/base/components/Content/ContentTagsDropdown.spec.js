@@ -3,7 +3,7 @@ import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import ContentTagsDropdown from "./ContentTagsDropdown.vue";
 
 const { useRouteMock } = vi.hoisted(() => ({
-  useRouteMock: vi.fn(() => {}),
+  useRouteMock: vi.fn(() => ({ query: {} })),
 }));
 mockNuxtImport("useRoute", () => useRouteMock);
 
@@ -47,18 +47,12 @@ describe("components/content/contentTagsDropdown", () => {
   });
 
   it("fetches categories from Contentful", async () => {
-    useRouteMock.mockImplementation(() => ({
-      query: {},
-    }));
     const wrapper = await factory();
     expect(wrapper.vm.tags.value.length).toBe(3);
   });
 
   describe("on focusin event", () => {
     it("makes the click outside handler active, opens the dropdown", async () => {
-      useRouteMock.mockImplementation(() => ({
-        query: {},
-      }));
       const wrapper = await factory();
       await wrapper.vm.handleFocusin();
       expect(wrapper.vm.clickOutsideConfig.value.isActive).toBe(true);
@@ -68,10 +62,7 @@ describe("components/content/contentTagsDropdown", () => {
 
   describe("featured tags", () => {
     describe("when featured tags are supplied as props", () => {
-      it("splits the tags into featured and non-featured sections", async () => {
-        useRouteMock.mockImplementation(() => ({
-          query: {},
-        }));
+      it("splits the tags into featured section", async () => {
         const wrapper = await factory(
           {
             filteredTags: ["3d", "cooking", "postcards"],
@@ -79,27 +70,25 @@ describe("components/content/contentTagsDropdown", () => {
           },
           { featuredContentTags: ["3d"] },
         );
-        await wrapper.vm.handleFocusin(); // open dropdown
 
-        const tagSectionHedings = wrapper.findAll("h2.related-heading");
-
-        expect(tagSectionHedings[0].text()).toMatch("categories.featuredTags");
-        expect(tagSectionHedings[1].text()).toMatch("categories.moreTags");
+        expect(wrapper.vm.featuredDisplayTags).toEqual([
+          {
+            identifier: "3d",
+            name: "3D",
+          },
+        ]);
+        expect(wrapper.find(".featured-tags").exists()).toBe(true);
       });
     });
     describe("when no featured tags are supplied", () => {
-      it("does not create seperate sections or add section headers", async () => {
-        useRouteMock.mockImplementation(() => ({
-          query: {},
-        }));
+      it("does not create seperate section", async () => {
         const wrapper = await factory({
           filteredTags: ["3d", "cooking", "postcards"],
           selectedTags: ["cooking"],
         });
-        await wrapper.vm.handleFocusin(); // open dropdown
 
-        const tagSectionHedings = wrapper.find("h2.related-heading");
-        expect(tagSectionHedings.exists()).toBe(false);
+        expect(wrapper.vm.featuredDisplayTags).toEqual([]);
+        expect(wrapper.find(".featured-tags").exists()).toBe(false);
       });
     });
   });

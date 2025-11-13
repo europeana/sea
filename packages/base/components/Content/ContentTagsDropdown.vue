@@ -26,6 +26,7 @@ const featuredTags = inject("featuredContentTags", null);
 const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
+const featuredTagsRef = useTemplateRef("featuredtags");
 
 const { data: tags } = await useAsyncData("allCategories", async () => {
   const categoriesVariables = {
@@ -67,11 +68,22 @@ const featuredDisplayTags = computed(() => {
   if (!featuredTags) {
     return [];
   }
-  return (
-    allDisplayTags.value?.filter((tag) =>
-      featuredTags.includes(tag.identifier),
-    ) || []
+  const featuredTagsObjects = tags.value?.filter((tag) =>
+    featuredTags.includes(tag.identifier),
   );
+
+  const selected = [];
+  const unselected = [];
+
+  for (const tag of featuredTagsObjects) {
+    if (props.selectedTags.includes(tag.identifier)) {
+      selected.push(tag);
+    } else {
+      unselected.push(tag);
+    }
+  }
+
+  return [...selected, ...unselected];
 });
 
 const unfeaturedDisplayTags = computed(() => {
@@ -86,8 +98,10 @@ const unfeaturedDisplayTags = computed(() => {
 });
 
 const displaySelectedTags = computed(() => {
-  return tags.value.filter((tag) =>
-    props.selectedTags.includes(tag.identifier),
+  return tags.value.filter(
+    (tag) =>
+      !featuredTags?.includes(tag.identifier) &&
+      props.selectedTags.includes(tag.identifier),
   );
 });
 const trimmedKeyword = computed(() => {
@@ -130,11 +144,23 @@ const clickOutsideConfig = ref({
 <template>
   <div>
     <RelatedCategoryTags
+      v-if="featuredTags && featuredDisplayTags.length > 0"
+      ref="featuredtags"
+      :tags="featuredDisplayTags"
+      :selected="selectedTags"
+      :heading="$t('categories.featuredTopics')"
+      class="featured-tags badge-container mb-4"
+      route-name="data-space"
+      :tag-icon="false"
+      :style="`--width: ${featuredTagsRef?.$refs.tagswrapper?.scrollWidth}`"
+    />
+    <RelatedCategoryTags
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
       :selected="selectedTags"
       class="mb-2"
       route-name="data-space"
+      :tag-icon="false"
     />
     <div
       ref="tagsdropdown"
@@ -156,7 +182,7 @@ const clickOutsideConfig = ref({
           class="form-control"
           autocomplete="off"
           type="search"
-          :placeholder="$t('categories.search')"
+          :placeholder="$t('categories.label')"
           data-qa="tags dropdown search input"
           role="searchbox"
           aria-autocomplete="list"
@@ -173,26 +199,15 @@ const clickOutsideConfig = ref({
         data-qa="tags search dropdown"
       >
         <RelatedCategoryTags
-          v-if="featuredTags && featuredDisplayTags.length > 0"
-          ref="relatedCategoryTags"
-          :tags="featuredDisplayTags"
-          :selected="selectedTags"
-          :heading="$t('categories.featuredTags')"
-          tabindex="-1"
-          class="badge-container mb-2"
-          route-name="data-space"
-        />
-        <RelatedCategoryTags
           v-if="unfeaturedDisplayTags.length > 0"
           ref="relatedCategoryTags"
           :tags="unfeaturedDisplayTags"
           :selected="selectedTags"
-          :heading="featuredTags ? $t('categories.moreTags') : undefined"
           tabindex="-1"
           class="badge-container mb-2"
           route-name="data-space"
         />
-        <p v-if="allDisplayTags.length === 0">
+        <p v-else>
           {{ $t("categories.noOptions") }}
         </p>
       </div>
@@ -229,9 +244,6 @@ const clickOutsideConfig = ref({
 .badge-container {
   margin: 0;
 
-  @media (min-width: $bp-4k) {
-  }
-
   :deep(.col-12) {
     padding: 0;
   }
@@ -240,5 +252,24 @@ const clickOutsideConfig = ref({
 .search-form.show {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.featured-tags {
+  :deep(.tags-wrapper) {
+    @media (max-width: $bp-extralarge) {
+      overflow-x: scroll;
+      margin-left: calc(-1 * (50vw - 50%));
+      margin-right: calc(-1 * (50vw - 50%));
+      padding-left: calc(50vw - 50%);
+      padding-right: calc(50vw - 50%);
+      scrollbar-width: none;
+
+      > div {
+        // Set max width to a bit over half of the full (max-content) tags list width to wrap over two lines
+        width: max-content;
+        max-width: calc(var(--width) * 0.55px);
+      }
+    }
+  }
 }
 </style>
