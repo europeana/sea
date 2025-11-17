@@ -16,39 +16,25 @@ mockNuxtImport("useI18n", () => {
   };
 });
 
-const categoriesContentfulResponse = {
-  data: {
-    categoryCollection: {
-      items: [
-        { identifier: "3d", name: "3D" },
-        { identifier: "cooking", name: "cooking" },
-        { identifier: "postcards", name: "postcards" },
-      ],
-    },
-  },
-};
+const tagsProp = [
+  { identifier: "3d", name: "3D" },
+  { identifier: "cooking", name: "cooking" },
+  { identifier: "postcards", name: "postcards" },
+];
 
 const factory = async (props, provide) =>
   await mountSuspended(ContentTagsDropdown, {
     global: {
       provide: {
-        $contentful: {
-          query: () => categoriesContentfulResponse,
-        },
         ...provide,
       },
     },
-    props,
+    props: { tags: tagsProp, ...props },
   });
 
 describe("components/content/contentTagsDropdown", () => {
   afterEach(() => {
     useRouteMock.mockReset();
-  });
-
-  it("fetches categories from Contentful", async () => {
-    const wrapper = await factory();
-    expect(wrapper.vm.tags.value.length).toBe(3);
   });
 
   describe("on focusin event", () => {
@@ -62,7 +48,7 @@ describe("components/content/contentTagsDropdown", () => {
 
   describe("featured tags", () => {
     describe("when featured tags are supplied as props", () => {
-      it("splits the tags into featured section", async () => {
+      it("filters them out from display", async () => {
         const wrapper = await factory(
           {
             filteredTags: ["3d", "cooking", "postcards"],
@@ -71,24 +57,21 @@ describe("components/content/contentTagsDropdown", () => {
           { featuredContentTags: ["3d"] },
         );
 
-        expect(wrapper.vm.featuredDisplayTags).toEqual([
-          {
-            identifier: "3d",
-            name: "3D",
-          },
-        ]);
-        expect(wrapper.find(".featured-tags").exists()).toBe(true);
+        expect(wrapper.vm.unfeaturedDisplayTags).not.toEqual(
+          wrapper.vm.allDisplayTags,
+        );
       });
     });
     describe("when no featured tags are supplied", () => {
-      it("does not create seperate section", async () => {
+      it("displays all tags", async () => {
         const wrapper = await factory({
           filteredTags: ["3d", "cooking", "postcards"],
           selectedTags: ["cooking"],
         });
 
-        expect(wrapper.vm.featuredDisplayTags).toEqual([]);
-        expect(wrapper.find(".featured-tags").exists()).toBe(false);
+        expect(wrapper.vm.unfeaturedDisplayTags).toEqual(
+          wrapper.vm.allDisplayTags,
+        );
       });
     });
   });

@@ -8,6 +8,7 @@ import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMi
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
+import categoriesGraphql from "@/graphql/queries/categories.graphql";
 import {
   entryHasContentType,
   entryHasTaxonomyTerm,
@@ -449,17 +450,33 @@ const { data: fullEntries } = await useAsyncData(
   },
 );
 
+const { data: tags } = await useAsyncData("allCategories", async () => {
+  const categoriesVariables = {
+    locale: localeProperties.value.language,
+  };
+  const categoriesResponse = await contentful.query(
+    categoriesGraphql,
+    categoriesVariables,
+  );
+  return (categoriesResponse.data.categoryCollection.items || []).sort((a, b) =>
+    a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase()),
+  );
+});
+
 watch(page, () => {
   scrollToSelector("#header");
 });
 </script>
 
 <template>
-  <!-- prevent overflow featured tags with horizontal scroll -->
-  <div id="content-interface" class="overflow-x-hidden">
+  <div id="content-interface">
+    <client-only>
+      <ContentTagsFeatured :tags="tags" :selected-tags="selectedTags" />
+    </client-only>
     <div class="container">
       <client-only>
         <ContentTagsDropdown
+          :tags="tags"
           :filtered-tags="filteredTags"
           :selected-tags="selectedTags"
         />
@@ -509,7 +526,11 @@ watch(page, () => {
             :background-image="section.image"
           />
         </div>
-        <div v-else :key="`entry-${index}`" class="container">
+        <div
+          v-else-if="section.length"
+          :key="`entry-${index}`"
+          class="container"
+        >
           <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div v-for="entry in section" :key="entry.sysId" class="col">
               <ContentCard

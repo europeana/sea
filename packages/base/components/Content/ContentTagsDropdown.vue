@@ -1,13 +1,16 @@
 <script setup>
-import categoriesQuery from "@/graphql/queries/categories.graphql";
-import { inject } from "vue";
 const route = useRoute();
-const contentful = inject("$contentful");
-const { localeProperties } = useI18n();
 
 const props = defineProps({
   /**
-   * All tags, before any keyword search.
+   * All tags data
+   */
+  tags: {
+    type: Array,
+    default: () => [],
+  },
+  /**
+   * Filtered tags, by relevance and sorted on most used
    */
   filteredTags: {
     type: Array,
@@ -26,20 +29,6 @@ const featuredTags = inject("featuredContentTags", null);
 const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
-const featuredTagsRef = useTemplateRef("featuredtags");
-
-const { data: tags } = await useAsyncData("allCategories", async () => {
-  const categoriesVariables = {
-    locale: localeProperties.value.language,
-  };
-  const categoriesResponse = await contentful.query(
-    categoriesQuery,
-    categoriesVariables,
-  );
-  return (categoriesResponse.data.categoryCollection.items || []).sort((a, b) =>
-    a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase()),
-  );
-});
 
 const allDisplayTags = computed(() => {
   let displayTags;
@@ -49,9 +38,9 @@ const allDisplayTags = computed(() => {
     // use filteredTags as those are sorted by most used
     displayTags = props.filteredTags
       .filter((tag) => !props.selectedTags.includes(tag))
-      .map((tag) => tags.value.filter((t) => t.identifier === tag)[0]);
+      .map((tag) => props.tags.filter((t) => t.identifier === tag)[0]);
   } else {
-    displayTags = tags.value;
+    displayTags = props.tags;
   }
 
   if (keyword) {
@@ -62,28 +51,6 @@ const allDisplayTags = computed(() => {
     });
   }
   return displayTags;
-});
-
-const featuredDisplayTags = computed(() => {
-  if (!featuredTags) {
-    return [];
-  }
-  const featuredTagsObjects = tags.value?.filter((tag) =>
-    featuredTags.includes(tag.identifier),
-  );
-
-  const selected = [];
-  const unselected = [];
-
-  for (const tag of featuredTagsObjects) {
-    if (props.selectedTags.includes(tag.identifier)) {
-      selected.push(tag);
-    } else {
-      unselected.push(tag);
-    }
-  }
-
-  return [...selected, ...unselected];
 });
 
 const unfeaturedDisplayTags = computed(() => {
@@ -98,7 +65,7 @@ const unfeaturedDisplayTags = computed(() => {
 });
 
 const displaySelectedTags = computed(() => {
-  return tags.value.filter(
+  return props.tags.filter(
     (tag) =>
       !featuredTags?.includes(tag.identifier) &&
       props.selectedTags.includes(tag.identifier),
@@ -143,17 +110,6 @@ const clickOutsideConfig = ref({
 
 <template>
   <div>
-    <RelatedCategoryTags
-      v-if="featuredTags && featuredDisplayTags.length > 0"
-      ref="featuredtags"
-      :tags="featuredDisplayTags"
-      :selected="selectedTags"
-      :heading="$t('categories.featuredTopics')"
-      class="featured-tags badge-container mb-4"
-      route-name="data-space"
-      :tag-icon="false"
-      :style="`--width: ${featuredTagsRef?.$refs.tagswrapper?.scrollWidth}`"
-    />
     <RelatedCategoryTags
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
@@ -252,24 +208,5 @@ const clickOutsideConfig = ref({
 .search-form.show {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-}
-
-.featured-tags {
-  :deep(.tags-wrapper) {
-    @media (max-width: $bp-extralarge) {
-      overflow-x: scroll;
-      margin-left: calc(-1 * (50vw - 50%));
-      margin-right: calc(-1 * (50vw - 50%));
-      padding-left: calc(50vw - 50%);
-      padding-right: calc(50vw - 50%);
-      scrollbar-width: none;
-
-      > div {
-        // Set max width to a bit over half of the full (max-content) tags list width to wrap over two lines
-        width: max-content;
-        max-width: calc(var(--width) * 0.55px);
-      }
-    }
-  }
 }
 </style>
