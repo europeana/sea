@@ -6,22 +6,32 @@ const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
-  `contentHubPage:${slug}`,
-  async () => {
+const { data: contentfulResponse, error: contentfulErrors } =
+  await useAsyncData(`contentHubPage:${slug}`, async () => {
     const variables = {
       identifier: slug,
       locale: localeProperties.value.language,
     };
 
-    const response = await contentful.query(contentHubPageQuery, variables);
+    return contentful.query(contentHubPageQuery, variables);
+  });
 
-    return response.data?.contentHubPageCollection?.items?.[0] || {};
-  },
-);
+const page = computed(() => {
+  return contentfulResponse.value?.data?.contentHubPageCollection?.items?.[0];
+});
+
+const error = computed(() => {
+  if (
+    !contentfulErrors.value &&
+    !contentfulResponse.value?.data?.contentHubPageCollection?.items?.[0]
+  ) {
+    showError({ statusCode: 404, statusMessage: "Not Found" });
+  }
+  return contentfulErrors.value;
+});
 
 useHead({
-  title: page.value.headline,
+  title: page?.value?.headline,
 });
 
 provide("featuredContentTags", [
@@ -48,12 +58,15 @@ const defaultCardThumbnail = {
 <template>
   <div class="mb-5">
     <LandingHero
-      :headline="page.name"
-      :text="page.headline"
-      :hero-image="page.primaryImageOfPage"
+      :headline="page?.name"
+      :text="page?.headline"
+      :hero-image="page?.primaryImageOfPage"
       variant="alternate"
     />
+    <!-- TODO: replace generic alert message with fully illustrated ErrorMessage -->
+    <GenericAlertMessage v-if="error" :error="error" />
     <ContentInterface
+      v-else
       class="mt-5 mb-5"
       site="dataspace-culturalheritage.eu"
       :content-types="page.contentTypes"
