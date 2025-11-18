@@ -5,7 +5,6 @@ import CookiesModal from "./CookiesModal.vue";
 
 let consentRequired = ref(true);
 let acceptedServices = ref([]);
-let checkedServices = ref([]);
 const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
@@ -41,7 +40,6 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
     rejectAll,
     consentRequired,
     acceptedServices,
-    checkedServices,
   }),
 }));
 
@@ -101,21 +99,6 @@ describe("components/Page/CookiesModal.vue", () => {
     wrapper.find("button.btn-outline-primary").trigger("click");
 
     expect(rejectAll).toHaveBeenCalled();
-  });
-
-  describe("when modal show event is triggered", () => {
-    it('resets checked services to accepted services"', async () => {
-      acceptedServices.value = ["translate"];
-      checkedServices.value = ["translate", "analytics"];
-
-      const wrapper = factory();
-
-      const modal = wrapper.find(".modal");
-      const event = new Event("show.bs.modal");
-      modal.element.dispatchEvent(event);
-
-      expect(checkedServices.value).toEqual(acceptedServices.value);
-    });
   });
 
   describe("when modal hide event is triggered", () => {

@@ -1,7 +1,16 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 
-const { checkedServices } = useConsentManager();
+const { acceptedServices } = useConsentManager();
+
+const checkedServices = defineModel({
+  type: Array,
+  default: null,
+});
+
+if (!checkedServices.value) {
+  checkedServices.value = [...acceptedServices.value];
+}
 
 const { t, te, fallbackLocale } = useI18n({ useScope: "global" });
 
@@ -211,6 +220,7 @@ const renderServiceAsCheckbox = (
         <CookiesSection
           v-for="(subService, subServiceIndex) in serviceData.services"
           :key="subServiceIndex"
+          v-model="checkedServices"
           class="nested-section"
           :class="{ 'ps-0': depth > COLLAPSIBLE_DEPTH_LIMIT }"
           :depth="depth + 1"

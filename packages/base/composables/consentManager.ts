@@ -9,7 +9,6 @@ export function createConsentManager(settings = {}) {
   const acceptedServices = ref<string[]>([]);
   const consentRequired = ref<boolean>(true);
   const consentSaved = ref<boolean>(false);
-  const checkedServices = ref<string[]>([]);
 
   const config = ref<{
     key: string;
@@ -59,7 +58,6 @@ export function createConsentManager(settings = {}) {
 
     setCookie(cookieValue);
 
-    checkedServices.value = [...acceptedServices.value];
     consentRequired.value = false;
     consentSaved.value = true;
   };
@@ -88,7 +86,6 @@ export function createConsentManager(settings = {}) {
         (service) => !!consent[service],
       );
       acceptedServices.value = servicesWithConsent;
-      checkedServices.value = servicesWithConsent;
       consentSaved.value = true;
       // if there are no new services
       if (
@@ -103,7 +100,6 @@ export function createConsentManager(settings = {}) {
     } else {
       consentSaved.value = false;
       acceptedServices.value = [...config.value.services.essential];
-      checkedServices.value = [...config.value.services.essential];
       consentRequired.value = true;
     }
   };
@@ -124,7 +120,6 @@ export function createConsentManager(settings = {}) {
   return {
     acceptAll,
     acceptedServices,
-    checkedServices,
     consentRequired,
     consentSaved,
     isServiceAccepted,

@@ -3,8 +3,7 @@ import { useConsentManager } from "@europeana/sea-base-layer/composables/consent
 import { services } from "@/utils/services/services";
 import serviceForUrl from "@/utils/services/index.js";
 
-const { acceptedServices, acceptOnly, checkedServices, consentRequired } =
-  useConsentManager();
+const { acceptedServices, acceptOnly, consentRequired } = useConsentManager();
 
 const { t, te } = useI18n({ useScope: "global" });
 
@@ -50,6 +49,8 @@ const modalProps = computed(() => {
     };
   }
 });
+
+const modalModel = ref([...acceptedServices.value]);
 
 // TODO: is this still needed if already watching acceptedServices?
 watch(consentRequired, (newVal) => {
@@ -118,42 +119,35 @@ const checkConsentAndOpenEmbed = () => {
   }
 };
 
-const consentAllEmbeddedContent = async () => {
-  if (consentRequired.value) {
-    openModal();
-    // wait for modal to be shown and checkedServices reset before adding all third party services to checkedServices
-    await nextTick();
-  }
-
+const consentAllEmbeddedContent = () => {
   const allThirdPartyContentServices = services
     .filter((s) => s.purposes.includes("thirdPartyContent"))
     .flat()
     .map((service) => service.name);
-  checkedServices.value = [...checkedServices.value].concat(
+
+  modalModel.value = [...acceptedServices.value].concat(
     allThirdPartyContentServices,
   );
 
-  if (!consentRequired.value) {
+  if (consentRequired.value) {
+    openModal();
+  } else {
     saveConsents();
   }
 };
 
 const consentThisProvider = async () => {
+  modalModel.value = [...acceptedServices.value, provider.value.name];
+
   if (consentRequired.value) {
     openModal();
-    // wait for modal to be shown and checkedServices reset before adding current provider to checkedServices
-    await nextTick();
-  }
-
-  checkedServices.value = [...checkedServices.value, provider.value.name];
-
-  if (!consentRequired.value) {
+  } else {
     saveConsents();
   }
 };
 
 const saveConsents = () => {
-  acceptOnly([...checkedServices.value]);
+  acceptOnly([...modalModel.value]);
   checkConsentAndOpenEmbed();
 };
 
@@ -210,8 +204,9 @@ const closeModal = () => {
             </i18n-t>
             <LazyCookiesModal
               v-if="renderModal"
-              :modal-id="cookieModalId"
+              v-model="modalModel"
               v-bind="modalProps"
+              :modal-id="cookieModalId"
               @close-modal="closeModal"
             />
             <i18n-t keypath="embedNotification.ifNotAll" tag="p" scope="global">

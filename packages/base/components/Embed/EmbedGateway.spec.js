@@ -16,7 +16,6 @@ mockNuxtImport("useI18n", () => useI18nMock);
 
 let consentRequired = ref(true);
 let acceptedServices = ref([]);
-let checkedServices = ref([]);
 const acceptOnly = vi.fn();
 
 vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
@@ -24,7 +23,6 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
     acceptOnly,
     consentRequired,
     acceptedServices,
-    checkedServices,
   }),
 }));
 
@@ -78,7 +76,6 @@ const factory = (
 describe("components/Embed/EmbedGateway", () => {
   beforeEach(() => {
     acceptedServices.value = [];
-    checkedServices.value = [];
     consentRequired.value = true;
   });
 
@@ -156,7 +153,7 @@ describe("components/Embed/EmbedGateway", () => {
         wrapper.find(".accept-all-button").trigger("click");
         await nextTick();
 
-        expect(checkedServices.value).toEqual(["bsky", "vimeo", "other"]);
+        expect(wrapper.vm.modalModel).toEqual(["bsky", "vimeo", "other"]);
         expect(wrapper.vm.renderModal).toBe(true);
       });
     });
@@ -180,7 +177,7 @@ describe("components/Embed/EmbedGateway", () => {
         wrapper.find(".accept-only-button").trigger("click");
         await nextTick();
 
-        expect(checkedServices.value).toEqual(["vimeo"]);
+        expect(wrapper.vm.modalModel).toEqual(["vimeo"]);
         expect(wrapper.vm.renderModal).toBe(true);
       });
     });

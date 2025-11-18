@@ -5,10 +5,19 @@ import useScrollTo from "@/composables/scrollTo.js";
 
 const { $bs } = useNuxtApp();
 
-const { acceptAll, acceptOnly, acceptedServices, checkedServices, rejectAll } =
+const { acceptAll, acceptOnly, acceptedServices, rejectAll } =
   useConsentManager();
 
 const { scrollToSelector } = useScrollTo();
+
+const checkedServices = defineModel({
+  type: Array,
+  default: null,
+});
+
+if (!checkedServices.value) {
+  checkedServices.value = [...acceptedServices.value];
+}
 
 const emit = defineEmits(["closeModal"]);
 
@@ -43,9 +52,6 @@ onMounted(() => {
     if (props.scrollTo) {
       listenToModalTransitionendAndScrollToSection();
     }
-
-    // Reset checked services to saved services
-    checkedServices.value = [...acceptedServices.value];
   });
 
   modalRef.value?.addEventListener("hide.bs.modal", () => {
@@ -226,6 +232,7 @@ const scrollToSection = (modalContainer, sectionId) => {
             <CookiesSection
               v-for="(section, index) in groupedSections"
               :key="index"
+              v-model="checkedServices"
               :modal-id="modalId"
               :service-data="section"
               :show="show"

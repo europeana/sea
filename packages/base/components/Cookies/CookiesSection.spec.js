@@ -14,7 +14,7 @@ const { useI18nMock } = vi.hoisted(() => ({
 }));
 mockNuxtImport("useI18n", () => useI18nMock);
 
-let checkedServices = ref([]);
+let acceptedServices = ref([]);
 
 vi.mock("@/utils/services/services", () => ({
   services: [
@@ -36,14 +36,14 @@ vi.mock("@/utils/services/services", () => ({
 
 vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
   useConsentManager: () => ({
-    checkedServices,
+    acceptedServices,
   }),
 }));
 
 describe("components/Page/CookiesSection.vue", () => {
   beforeEach(() => {
     vi.resetAllMocks();
-    checkedServices.value = [];
+    acceptedServices.value = [];
   });
   describe("label", () => {
     describe("when section is a purpose", () => {
@@ -108,9 +108,9 @@ describe("components/Page/CookiesSection.vue", () => {
     });
   });
 
-  describe("when service is in checkedServices", () => {
+  describe("when service is in acceptedServices", () => {
     it("checkbox is checked ", () => {
-      checkedServices.value = ["analytics"];
+      acceptedServices.value = ["analytics"];
       const wrapper = mount(CookiesSection, {
         props: {
           serviceData: {
@@ -139,15 +139,15 @@ describe("components/Page/CookiesSection.vue", () => {
       const input = wrapper.find('input[type="checkbox"]');
       input.setValue(true);
 
-      expect(checkedServices.value).toContain("analytics");
+      expect(wrapper.vm.checkedServices).toContain("analytics");
 
       input.setValue(false);
-      expect(checkedServices.value).not.toContain("analytics");
+      expect(wrapper.vm.checkedServices).not.toContain("analytics");
     });
   });
 
   it("applies indeterminate state for partially selected child services", async () => {
-    checkedServices.value = ["video"];
+    acceptedServices.value = ["video"];
 
     const wrapper = mount(CookiesSection, {
       global: {
