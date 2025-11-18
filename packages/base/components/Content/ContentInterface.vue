@@ -398,6 +398,10 @@ async function fetchMinimalEntries() {
   // TODO: when selectedType is already set, only retrieve those entries
   // needs to be accounted for in: { data: minimalEntries } = useAsyncData(...)
 
+  // TODO: Re-implement retrieval for:
+  // storiesResponse.data.storyCollection?.items,
+  // exhibitionsResponse.data.exhibitionPageCollection?.items,
+
   const contentTypeGraphql = {
     "blog post": blogPostingsListingMinimalGraphql,
     project: projectPagesListingMinimalGraphql,
@@ -415,10 +419,6 @@ async function fetchMinimalEntries() {
     .map((response) => response.data[Object.keys(response.data)[0]].items || [])
     .flat();
 
-  // TODO: Re-implement retrieval for:
-  // storiesResponse.data.storyCollection?.items,
-  // exhibitionsResponse.data.exhibitionPageCollection?.items,
-
   // Simplify categories
   for (const contentEntry of contentIds) {
     if (contentEntry.cats?.items) {
@@ -435,19 +435,19 @@ async function fetchMinimalEntries() {
   return ordered;
 }
 
-const { data: minimalEntries } = await useAsyncData(
-  "minimalEntries",
-  fetchMinimalEntries,
-  { default: () => [] },
-);
-const { data: fullEntries } = await useAsyncData(
-  fetchableSysIdsString,
-  fetchFullEntries,
-  {
+const { data: minimalEntries, error: contentfulMinimalEntryErrors } =
+  await useAsyncData("minimalEntries", fetchMinimalEntries, {
+    default: () => [],
+  });
+const { data: fullEntries, error: contentfulFullEntryErrors } =
+  await useAsyncData(fetchableSysIdsString, fetchFullEntries, {
     default: () => [],
     watch: [fetchableSysIdsString],
-  },
-);
+  });
+
+const error = computed(() => {
+  return contentfulMinimalEntryErrors.value || contentfulFullEntryErrors.value;
+});
 
 watch(page, () => {
   scrollToSelector("#header");
@@ -474,60 +474,62 @@ watch(page, () => {
           {{ $t("content.resultsHaveLoaded", [total]) }}
         </output>
       </div>
-      <!--LoadingSpinner
-      v-if="$fetchState.pending"
-      class="container position-absolute flex-md-row py-4 text-center"
-    /-->
     </div>
-    <div v-if="showFeaturedEntry" class="container mb-4 mb-lg-5 pb-4k-5">
-      <ContentFeaturedCard
-        :title="props.featuredEntry?.name"
-        :text="featuredEntryText"
-        :image="featuredEntryImage"
-        :sub-title="featuredEntrySubTitle"
-        :url="featuredEntryUrl"
-      />
+    <div v-if="error" class="container">
+      <GenericAlertMessage :error="error" />
     </div>
-    <template v-for="(section, index) in contentSections">
-      <!-- eslint-disable vue/valid-v-for -->
-      <transition appear name="fade">
-        <!-- eslint-enable vue/valid-v-for -->
-        <div
-          v-if="entryHasContentType(section, 'PrimaryCallToAction')"
-          :key="`cta-banner-${index}`"
-          class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
-        >
-          <GenericCallToActionBanner
-            v-if="ctaBanners.length"
-            :name="section.name"
-            :name-english="section.nameEN"
-            :title="section.name"
-            :text="section.text"
-            :link="section.relatedLink"
-            :illustration="section.image"
-            :background-image="section.image"
-          />
-        </div>
-        <div v-else :key="`entry-${index}`" class="container">
-          <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <div v-for="entry in section" :key="entry.sysId" class="col">
-              <ContentCard
-                :title="entry.name"
-                :sub-title="entry.subTitle"
-                :url="entry.url"
-                :text="entry.text"
-                :image-url="
-                  entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
-                "
-                :image-content-type="
-                  entry.primaryImageOfPage &&
-                  entry.primaryImageOfPage.image.contentType
-                "
-              />
+    <template v-else>
+      <div v-if="showFeaturedEntry" class="container mb-4 mb-lg-5 pb-4k-5">
+        <ContentFeaturedCard
+          :title="props.featuredEntry?.name"
+          :text="featuredEntryText"
+          :image="featuredEntryImage"
+          :sub-title="featuredEntrySubTitle"
+          :url="featuredEntryUrl"
+        />
+      </div>
+      <template v-for="(section, index) in contentSections">
+        <!-- eslint-disable vue/valid-v-for -->
+        <transition appear name="fade">
+          <!-- eslint-enable vue/valid-v-for -->
+          <div
+            v-if="entryHasContentType(section, 'PrimaryCallToAction')"
+            :key="`cta-banner-${index}`"
+            class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
+          >
+            <GenericCallToActionBanner
+              v-if="ctaBanners.length"
+              :name="section.name"
+              :name-english="section.nameEN"
+              :title="section.name"
+              :text="section.text"
+              :link="section.relatedLink"
+              :illustration="section.image"
+              :background-image="section.image"
+            />
+          </div>
+          <div v-else :key="`entry-${index}`" class="container">
+            <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
+              <div v-for="entry in section" :key="entry.sysId" class="col">
+                <ContentCard
+                  :title="entry.name"
+                  :sub-title="entry.subTitle"
+                  :url="entry.url"
+                  :text="entry.text"
+                  :image-url="
+                    entry.primaryImageOfPage &&
+                    entry.primaryImageOfPage.image.url
+                  "
+                  :image-content-type="
+                    entry.primaryImageOfPage &&
+                    entry.primaryImageOfPage.image.contentType
+                  "
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </transition>
+        </transition>
+      </template>
     </template>
     <PaginationNavInput
       v-if="total > ENTRIES_PER_PAGE"

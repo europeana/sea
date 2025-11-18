@@ -8,39 +8,52 @@ const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
-  `landingPage:${route.params.slug}`,
-  async () => {
+const { data: contentfulResponse, error: contentfulErrors } =
+  await useAsyncData(`landingPage:${route.params.slug}`, () => {
     const variables = {
       identifier: route.params.slug,
       locale: localeProperties.value.language,
     };
 
-    const response = await contentful.query(landingPageQuery, variables);
-    return response.data?.landingPageCollection?.items?.[0];
-  },
-);
+    return contentful.query(landingPageQuery, variables);
+  });
 
-if (!page.value) {
-  showError({ statusCode: 404, statusMessage: "Not Found" });
-}
+const page = computed(() => {
+  return contentfulResponse.value?.data?.landingPageCollection?.items?.[0];
+});
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const error = computed(() => {
+  if (
+    !contentfulErrors.value &&
+    !contentfulResponse.value?.data?.landingPageCollection?.items?.[0]
+  ) {
+    showError({ statusCode: 404, statusMessage: "Not Found" });
+  }
+  return contentfulErrors.value;
+});
 
-annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
+const sections = computed(() => {
+  let availableSections = page?.value?.hasPartCollection?.items.filter(
+    (item) => !!item,
+  );
+  annotateParity(deepFindEntriesOfType(availableSections, "ImageCard"));
+  return availableSections;
+});
 
 useHead({
-  title: page.value.headline,
+  title: page?.value?.headline,
 });
 </script>
 
 <template>
   <div>
     <LandingHero
-      :headline="page.headline || route.fullPath"
-      :text="page.text"
-      :hero-image="page.primaryImageOfPage"
+      :headline="page?.headline"
+      :text="page?.text"
+      :hero-image="page?.primaryImageOfPage"
     />
-    <PageSections :sections="sections" />
+    <!-- TODO: replace generic alert message with fully illustrated ErrorMessage -->
+    <GenericAlertMessage v-if="error" :error="error" class="container" />
+    <PageSections v-else :sections="sections" />
   </div>
 </template>

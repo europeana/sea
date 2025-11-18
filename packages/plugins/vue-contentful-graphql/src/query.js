@@ -3,6 +3,17 @@
 import fetch from "node-fetch-native";
 import { print as printGraphql } from "graphql/language/printer.js";
 
+const responseHasItems = (response) => {
+  let hasItems = false;
+  for (const collection in response.data) {
+    if (response.data[collection]?.items?.length > 0) {
+      hasItems = true;
+      break;
+    }
+  }
+  return hasItems;
+};
+
 // TODO: ensure presence of required config
 export const query = async (ast, variables = {}, config = {}) => {
   const origin = config.graphqlUrl || "https://graphql.contentful.com";
@@ -42,5 +53,10 @@ export const query = async (ast, variables = {}, config = {}) => {
 
   const json = await response.json();
 
-  return json;
+  return new Promise((resolve, reject) => {
+    if (json.errors && !responseHasItems(json)) {
+      reject(json.errors[0]);
+    }
+    resolve(json || {});
+  });
 };

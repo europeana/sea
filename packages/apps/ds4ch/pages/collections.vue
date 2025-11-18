@@ -6,67 +6,90 @@ const slug = "collections";
 const contentful = inject("$contentful");
 const { t, localeProperties } = useI18n({ useScope: "global" });
 
-const { data: page } = await useAsyncData(`landingPage:${slug}`, async () => {
-  const variables = {
-    identifier: slug,
-    locale: localeProperties.value.language,
-  };
+const { data: contentfulResponse, error: contentfulErrors } =
+  await useAsyncData(`landingPage:${slug}`, async () => {
+    const variables = {
+      identifier: slug,
+      locale: localeProperties.value.language,
+    };
 
-  const response = await contentful.query(landingPageQuery, variables);
-  return response.data?.landingPageCollection?.items?.[0] || {};
+    return contentful.query(landingPageQuery, variables);
+  });
+
+const page = computed(() => {
+  return contentfulResponse.value?.data?.landingPageCollection?.items?.[0];
 });
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
-const featuredContent = page.value.featuredContent;
+const error = computed(() => {
+  if (
+    !contentfulErrors.value &&
+    !contentfulResponse.value?.data?.landingPageCollection?.items?.[0]
+  ) {
+    showError({ statusCode: 404, statusMessage: "Not Found" });
+  }
+  return contentfulErrors.value;
+});
+
+const sections = computed(() => {
+  return page?.value?.hasPartCollection?.items.filter((item) => !!item);
+});
+
+const featuredContent = computed(() => {
+  return page.value.featuredContent;
+});
 
 useHead({
-  title: page.value.headline,
+  title: page.value?.headline,
 });
 </script>
 
 <template>
   <div>
     <LandingHero
-      :headline="page.headline"
-      :text="page.text"
-      :hero-image="page.primaryImageOfPage"
+      :headline="page?.headline"
+      :text="page?.text"
+      :hero-image="page?.primaryImageOfPage"
     />
-    <div v-if="featuredContent" class="container my-5 py-4k-5">
-      <ContentFeaturedCard
-        :sub-title="t('featured')"
-        :title="featuredContent.name"
-        :text="featuredContent.description"
-        :image="featuredContent.image"
-        :url="featuredContent.url"
-      />
-    </div>
-    <template v-for="(section, index) in sections">
-      <div
-        v-if="entryHasContentType(section, 'IllustrationGroup')"
-        :key="index"
-        class="illustration-group container my-5 py-4k-5"
-      >
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 g-4k-5">
-          <div
-            v-for="(card, cardIndex) in section.hasPartCollection?.items"
-            :key="card.url || cardIndex"
-            class="col"
-          >
-            <transition appear name="fade">
-              <ContentCard
-                :title="card.name"
-                :sub-title="$t('portal')"
-                :url="card.url"
-                :image-url="card.image?.url"
-                :image-content-type="card.image?.contentType"
-                :image-width="card.image?.width"
-                :image-height="card.image?.height"
-                :contentful-image-crop-presets="{ small: { w: 520, h: 338 } }"
-              />
-            </transition>
+    <!-- TODO: replace generic alert message with fully illustrated ErrorMessage -->
+    <GenericAlertMessage v-if="error" :error="error" class="container" />
+    <template v-else>
+      <div v-if="featuredContent" class="container my-5 py-4k-5">
+        <ContentFeaturedCard
+          :sub-title="t('featured')"
+          :title="featuredContent.name"
+          :text="featuredContent.description"
+          :image="featuredContent.image"
+          :url="featuredContent.url"
+        />
+      </div>
+      <template v-for="(section, index) in sections">
+        <div
+          v-if="entryHasContentType(section, 'IllustrationGroup')"
+          :key="index"
+          class="illustration-group container my-5 py-4k-5"
+        >
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 g-4k-5">
+            <div
+              v-for="(card, cardIndex) in section.hasPartCollection?.items"
+              :key="card.url || cardIndex"
+              class="col"
+            >
+              <transition appear name="fade">
+                <ContentCard
+                  :title="card.name"
+                  :sub-title="$t('portal')"
+                  :url="card.url"
+                  :image-url="card.image?.url"
+                  :image-content-type="card.image?.contentType"
+                  :image-width="card.image?.width"
+                  :image-height="card.image?.height"
+                  :contentful-image-crop-presets="{ small: { w: 520, h: 338 } }"
+                />
+              </transition>
+            </div>
           </div>
         </div>
-      </div>
+      </template>
     </template>
   </div>
 </template>
