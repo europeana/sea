@@ -104,31 +104,18 @@ const showNestedServices = computed(() => {
   return props.show.includes(props.serviceData.name);
 });
 
-const updateServiceConsent = (serviceOrName, value) => {
-  const serviceName = serviceOrName.name || serviceOrName;
+const updateConsent = (value) => {
   if (value) {
-    // Do not add purposes and do not add already checked services
-    if (
-      !serviceOrName.services &&
-      !checkedServices.value.includes(serviceName)
-    ) {
-      checkedServices.value.push(serviceName);
-    }
+    checkedServices.value = checkedServices.value.concat(
+      flattenedServiceNames.value.filter(
+        (service) => !checkedServices.value.includes(service),
+      ),
+    );
   } else {
     checkedServices.value = checkedServices.value.filter(
-      (name) => name !== serviceName,
+      (name) => !flattenedServiceNames.value.includes(name),
     );
   }
-};
-
-const updateConsent = (serviceData, value) => {
-  if (serviceData.services) {
-    serviceData.services.forEach((service) => {
-      updateConsent(service, value);
-    });
-  }
-
-  updateServiceConsent(serviceData, value);
 };
 
 const toggleDisplay = (name) => {
@@ -160,7 +147,6 @@ const renderServiceAsCheckbox = (
     <div v-else class="form-check form-switch">
       <input
         :id="`${modalId}-consentcheckbox-${serviceData.name}`"
-        v-model="checked"
         :checked="checked"
         class="form-check-input"
         type="checkbox"
@@ -175,7 +161,7 @@ const renderServiceAsCheckbox = (
           `${modalId}-consentcheckbox-description-${serviceData.name}`
         "
         :aria-checked="indeterminate && 'mixed'"
-        @change="(event) => updateConsent(serviceData, event.target.checked)"
+        @change="(event) => updateConsent(event.target.checked)"
       />
       <label
         class="form-check-label"
