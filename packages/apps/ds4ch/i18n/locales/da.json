@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Fejl",
   "event": {
     "dateRange": "{startDate} til {endDate}",
     "label": "begivenhed"
