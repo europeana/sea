@@ -55,7 +55,7 @@ const routeForType = (type) => {
   <div>
     <nav class="navbar navbar-expand-sm navbar-light">
       <div id="content-filter-navbar" class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto d-none d-sm-flex">
+        <ul class="navbar-nav me-auto d-none d-lg-flex">
           <li
             v-for="(type, index) in availableContentTypes"
             :key="index"
@@ -72,7 +72,7 @@ const routeForType = (type) => {
           </li>
         </ul>
       </div>
-      <div class="nav-item dropdown filter-dropdown d-sm-none ms-auto">
+      <div class="nav-item dropdown filter-dropdown d-lg-none ms-auto">
         <button
           id="content-filter-navbar-dropdown"
           class="nav-link dropdown-toggle btn-light"
@@ -89,7 +89,7 @@ const routeForType = (type) => {
           <li
             v-for="(type, index) in availableContentTypes"
             :key="index"
-            class="nav-item d-sm-none"
+            class="nav-item"
           >
             <GenericSmartLink
               class="dropdown-item context-label text-decoration-none"

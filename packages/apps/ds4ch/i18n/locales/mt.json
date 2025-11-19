@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Żball",
   "event": {
     "dateRange": "{startDate} sa {endDate}",
     "label": "avveniment"

@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Klaida",
   "event": {
     "dateRange": "{startDate} į {endDate}",
     "label": "įvykis"

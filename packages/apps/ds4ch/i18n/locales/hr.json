@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Greška",
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "događaj"

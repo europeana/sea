@@ -123,6 +123,7 @@
     "viewFullList": "View the full list",
     "viewThisExternalLink": "View this content via an external link"
   },
+  "error": "Error",
   "event": {
     "dateRange": "{startDate} to {endDate}",
     "label": "event"

@@ -22,7 +22,11 @@ const { data: page } = await useAsyncData(
 );
 
 if (!page.value) {
-  showError({ statusCode: 404, statusMessage: "Not Found" });
+  throw createError({
+    fatal: true,
+    statusCode: 404,
+    statusMessage: "Not Found",
+  });
 }
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);

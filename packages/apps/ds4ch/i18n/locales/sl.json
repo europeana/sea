@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Napaka",
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "dogodek"

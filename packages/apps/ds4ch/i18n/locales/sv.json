@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Fel",
   "event": {
     "dateRange": "{startDate} till {endDate}",
     "label": "händelse"
