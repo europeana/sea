@@ -1,10 +1,5 @@
 [
   {
-    "name": "bandcamp",
-    "schemes": ["bandcamp.com/*"],
-    "title": "Bandcamp"
-  },
-  {
     "name": "google",
     "schemes": ["https://www.google.com/*"],
     "title": "Google"
