@@ -136,6 +136,13 @@ const consentAllEmbeddedContent = () => {
   }
 };
 
+const resetConsentAndOpenModal = () => {
+  // Reset modalModel in case it was overriden consentAllEmbeddedContent or consentThisProvider
+  modalModel.value = [...acceptedServices.value];
+
+  openModal();
+};
+
 const consentThisProvider = async () => {
   modalModel.value = [...acceptedServices.value, provider.value.name];
 
@@ -197,7 +204,7 @@ const closeModal = () => {
               <button
                 class="btn btn-link"
                 :data-bs-target="`#${cookieModalId}`"
-                @click="openModal"
+                @click="resetConsentAndOpenModal"
               >
                 {{ $t("embedNotification.viewFullList") }}
               </button>
