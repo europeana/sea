@@ -58,13 +58,6 @@ const description = computed(() => {
   }
   return undefined;
 });
-const checked = computed(() => {
-  return props.serviceData.required ||
-    allChildServicesChecked.value ||
-    checkedServices.value.includes(props.serviceData.name)
-    ? true
-    : false;
-});
 const indeterminate = computed(() => {
   if (props.serviceData.services) {
     return !allChildServicesChecked.value && !noChildServicesChecked.value;
@@ -128,6 +121,16 @@ const renderServiceAsCheckbox = (
 ) => {
   return service.services ? depth <= COLLAPSIBLE_DEPTH_LIMIT : true;
 };
+
+const checked = ref(false);
+watchEffect(() => {
+  checked.value =
+    props.serviceData.required ||
+    allChildServicesChecked.value ||
+    checkedServices.value.includes(props.serviceData.name)
+      ? true
+      : false;
+});
 </script>
 
 <template>
@@ -147,7 +150,7 @@ const renderServiceAsCheckbox = (
     <div v-else class="form-check form-switch">
       <input
         :id="`${modalId}-consentcheckbox-${serviceData.name}`"
-        :checked="checked"
+        v-model="checked"
         class="form-check-input"
         type="checkbox"
         role="switch"
