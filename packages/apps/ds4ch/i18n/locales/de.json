@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Fehler",
   "event": {
     "dateRange": "{startDate} bis {endDate}",
     "label": "Ereignis"

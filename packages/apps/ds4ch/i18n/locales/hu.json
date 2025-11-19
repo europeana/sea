@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Hiba",
   "event": {
     "dateRange": "{startDate} – {endDate}",
     "label": "esemény"

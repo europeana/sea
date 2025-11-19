@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Σφάλμα",
   "event": {
     "dateRange": "{startDate} έως {endDate}",
     "label": "εκδήλωση"

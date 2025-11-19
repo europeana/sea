@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Earráid",
   "event": {
     "dateRange": "{startDate} go {endDate}",
     "label": "imeacht"

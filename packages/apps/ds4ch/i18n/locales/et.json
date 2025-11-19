@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Viga",
   "event": {
     "dateRange": "{startDate} kuni {endDate}",
     "label": "sündmus"

@@ -109,6 +109,7 @@
       }
     }
   },
+  "error": "Chyba",
   "event": {
     "dateRange": "{startDate} až {endDate}",
     "label": "událost"
