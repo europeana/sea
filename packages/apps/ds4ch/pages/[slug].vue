@@ -6,9 +6,9 @@ import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const route = useRoute();
 const contentful = inject("$contentful");
-const { localeProperties } = useI18n();
+const { localeProperties, t } = useI18n();
 
-const { data: page } = await useAsyncData(
+const { data } = await useAsyncData(
   `landingPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -17,29 +17,31 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(landingPageQuery, variables);
-    return response.data?.landingPageCollection?.items?.[0];
+    return { page: response.data?.landingPageCollection?.items?.[0] };
   },
 );
 
-if (!page.value) {
+const page = data.value.page;
+
+if (!page) {
   throw createError({
     fatal: true,
     statusCode: 404,
-    statusMessage: "Not Found",
+    statusMessage: t("errors.http.404"),
   });
 }
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.hasPartCollection?.items.filter((item) => !!item);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
 useHead({
-  title: page.value.headline,
+  title: page.headline,
 });
 </script>
 
 <template>
-  <div>
+  <div v-if="page">
     <LandingHero
       :headline="page.headline || route.fullPath"
       :text="page.text"

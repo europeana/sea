@@ -110,6 +110,11 @@
     }
   },
   "error": "Error",
+  "errors": {
+    "http": {
+      "404": "Not Found"
+    }
+  },
   "event": {
     "dateRange": "{startDate} to {endDate}",
     "label": "event"
