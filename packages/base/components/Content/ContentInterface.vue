@@ -532,11 +532,7 @@ watch(page, () => {
             :background-image="section.image"
           />
         </div>
-        <div
-          v-else-if="section.length"
-          :key="`entry-${index}`"
-          class="container"
-        >
+        <div v-else :key="`entry-${index}`" class="container">
           <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div v-for="entry in section" :key="entry.sysId" class="col">
               <ContentCard
