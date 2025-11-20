@@ -124,6 +124,11 @@
     "viewThisExternalLink": "View this content via an external link"
   },
   "error": "Error",
+  "errors": {
+    "http": {
+      "404": "Not Found"
+    }
+  },
   "event": {
     "dateRange": "{startDate} to {endDate}",
     "label": "event"
