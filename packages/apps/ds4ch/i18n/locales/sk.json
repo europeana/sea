@@ -68,6 +68,9 @@
         "description": "Tieto služby načítavajú obrazové (2D), 3D, zvukové a video položky na zobrazenie.",
         "title": "Služby sledovania médií"
       },
+      "other": {
+        "title": "Ďalšie služby v oblasti vkladania"
+      },
       "socialMedia": {
         "description": "Tieto služby načítavajú obsah z platforiem sociálnych médií.",
         "title": "Služby vkladania sociálnych médií"
@@ -106,8 +109,19 @@
       "matomo": {
         "description": "Zhromažďuje anonymné štatistiky o tom, ako návštevníci interagujú s webovou stránkou.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Neznámy poskytovateľ"
     }
+  },
+  "embedNotification": {
+    "ifNotAll": "Ak nechcete načítať všetky vložené médiá, môžete {0}.",
+    "loadAllEmbeddedContent": "Načítanie všetkého vloženého obsahu",
+    "loadOnlyThis": "načítať médiá len od tohto poskytovateľa",
+    "message": "Upozorňujeme, že táto stránka obsahuje mediálny obsah vložený zo stránky {provider}. Prezeranie týchto médií podlieha ich podmienkam a vyhláseniam o ochrane osobných údajov. Ďalšie informácie o tom, ako sa vaše údaje používajú, nájdete v ich vyhláseniach o ochrane osobných údajov.",
+    "messageUnkownService": "Bohužiaľ tento obsah nemožno zobraziť.",
+    "ofThirdPartyServices": "{0} obsahových služieb tretích strán.",
+    "viewFullList": "Zobraziť celý zoznam",
+    "viewThisExternalLink": "Zobraziť tento obsah prostredníctvom externého odkazu"
   },
   "error": "Chyba",
   "event": {

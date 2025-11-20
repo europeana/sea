@@ -38,7 +38,7 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div v-if="page">
     <LandingHero
       :headline="page.headline || route.fullPath"
       :text="page.text"
