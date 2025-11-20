@@ -68,6 +68,9 @@
         "description": "Tyto služby načítají obrazové (2D) , 3D, zvukové a video položky k prohlížení.",
         "title": "Služby sledování médií"
       },
+      "other": {
+        "title": "Další služby vkládání"
+      },
       "socialMedia": {
         "description": "Tyto služby načítají obsah z platforem sociálních médií.",
         "title": "Služby vkládání sociálních médií"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Shromažďuje anonymní statistiky o tom, jak návštěvníci pracují s webovými stránkami.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Neznámý poskytovatel"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Pokud nechcete načíst všechna vložená média, můžete {0}.",
+    "loadAllEmbeddedContent": "Načíst veškerý vložený obsah",
+    "loadOnlyThis": "načítat média pouze od tohoto poskytovatele",
+    "message": "Upozorňujeme, že tato stránka obsahuje mediální obsah vložený z webu {provider}. Na prohlížení těchto médií se vztahují jejich podmínky a prohlášení o ochraně osobních údajů. Další informace o tom, jak jsou vaše údaje používány, naleznete v jejich prohlášeních o ochraně osobních údajů.",
+    "messageUnkownService": "Bohužel tento obsah nelze zobrazit.",
+    "ofThirdPartyServices": "{0} obsahových služeb třetích stran.",
+    "viewFullList": "Zobrazit celý seznam",
+    "viewThisExternalLink": "Zobrazit tento obsah prostřednictvím externího odkazu"
+  },
+  "error": "Chyba",
   "event": {
     "dateRange": "{startDate} až {endDate}",
     "label": "událost"

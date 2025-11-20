@@ -68,6 +68,9 @@
         "description": "Nämä palvelut lataavat kuvia (2D) , 3D-, ääni- ja videokohteita katselua varten.",
         "title": "Median katselupalvelut"
       },
+      "other": {
+        "title": "Muut sulauttamispalvelut"
+      },
       "socialMedia": {
         "description": "Nämä palvelut lataavat sisältöä sosiaalisen median alustoilta.",
         "title": "Sosiaalisen median upotuspalvelut"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Kerää anonyymejä tilastoja siitä, miten kävijät ovat vuorovaikutuksessa verkkosivuston kanssa.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Tuntematon palveluntarjoaja"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Jos et halua ladata kaikkea upotettua mediaa, voit {0}.",
+    "loadAllEmbeddedContent": "Lataa kaikki upotettu sisältö",
+    "loadOnlyThis": "lataa mediaa vain tältä palveluntarjoajalta",
+    "message": "Huomaa, että tämä sivu sisältää mediasisältöä, joka on upotettu osoitteesta {provider}. Tämän median katsominen on niiden ehtojen ja tietosuojaselosteiden alaista. Lisätietoja tietojesi käytöstä saat heidän tietosuojaselosteistaan.",
+    "messageUnkownService": "Valitettavasti tätä sisältöä ei voida näyttää.",
+    "ofThirdPartyServices": "{0} kolmansien osapuolten sisältöpalvelut.",
+    "viewFullList": "Näytä koko luettelo",
+    "viewThisExternalLink": "Katso tämä sisältö ulkoisen linkin kautta"
+  },
+  "error": "Virhe",
   "event": {
     "dateRange": "{startDate} – {endDate}",
     "label": "tapahtuma"

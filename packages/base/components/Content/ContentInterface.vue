@@ -52,6 +52,12 @@ const props = defineProps({
   },
 });
 
+const supportedContentTypes = computed(() => {
+  return props.contentTypes.filter((ct) =>
+    ["blog post", "project", "training", "event"].includes(ct),
+  );
+});
+
 const { scrollToSelector } = useScrollTo();
 const { localeProperties } = useI18n();
 const route = useRoute();
@@ -408,7 +414,7 @@ async function fetchMinimalEntries() {
 
   const contentIds = (
     await Promise.all(
-      props.contentTypes.map((ctype) =>
+      supportedContentTypes.value.map((ctype) =>
         contentful.query(contentTypeGraphql[ctype], contentIdsVariables),
       ),
     )
@@ -487,7 +493,7 @@ watch(page, () => {
         <span class="context-label">
           {{ $t("results", total, { count: total }) }}
         </span>
-        <ContentTypeFilter :content-types="contentTypes" />
+        <ContentTypeFilter :content-types="supportedContentTypes" />
         <output form="tags-search-form" class="visually-hidden">
           {{ $t("content.resultsHaveLoaded", [total]) }}
         </output>

@@ -68,6 +68,9 @@
         "description": "Dessa tjänster laddar bild- (2D), 3D-, ljud- och videoobjekt för visning.",
         "title": "Tjänster för visning av media"
       },
+      "other": {
+        "title": "Andra tjänster för inbäddning"
+      },
       "socialMedia": {
         "description": "Dessa tjänster laddar innehåll från sociala medieplattformar.",
         "title": "Tjänster för inbäddning i sociala medier"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Samlar in anonym statistik om hur besökare interagerar med webbplatsen.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Okänd leverantör"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Om du inte vill ladda all inbäddad media kan du {0}.",
+    "loadAllEmbeddedContent": "Ladda allt inbäddat innehåll",
+    "loadOnlyThis": "ladda media endast från denna leverantör",
+    "message": "Observera att denna sida innehåller medieinnehåll inbäddat från {provider}. Visning av dessa medier är föremål för deras villkor och sekretesspolicyer. Se deras sekretesspolicyer för mer information om hur dina uppgifter används.",
+    "messageUnkownService": "Tyvärr kan detta innehåll inte visas.",
+    "ofThirdPartyServices": "{0} av innehållstjänster från tredje part.",
+    "viewFullList": "Se hela listan",
+    "viewThisExternalLink": "Se detta innehåll via en extern länk"
+  },
+  "error": "Fel",
   "event": {
     "dateRange": "{startDate} till {endDate}",
     "label": "händelse"

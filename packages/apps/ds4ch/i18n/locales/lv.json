@@ -68,6 +68,9 @@
         "description": "Šie pakalpojumi ielādē attēlus (2D), 3D, audio un video vienumus skatīšanai.",
         "title": "Multivides skatīšanās pakalpojumi"
       },
+      "other": {
+        "title": "Citi iestrādes pakalpojumi"
+      },
       "socialMedia": {
         "description": "Šie pakalpojumi ielādē saturu no sociālo mediju platformām.",
         "title": "Sociālo plašsaziņas līdzekļu iestrādes pakalpojumi"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Apkopo anonīmu statistiku par to, kā apmeklētāji mijiedarbojas ar vietni.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Nezināms nodrošinātājs"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Ja nevēlaties ielādēt visus iegultos multivides failus, varat {0}.",
+    "loadAllEmbeddedContent": "Ielādēt visu iegulto saturu",
+    "loadOnlyThis": "ielādēt multivides tikai no šī pakalpojumu sniedzēja",
+    "message": "Lūdzu, ņemiet vērā, ka šajā lapā ir ievietots multivides saturs no {provider}. Uz šo multivides materiālu skatīšanos attiecas to noteikumi un paziņojumi par konfidencialitāti. Lai iegūtu vairāk informācijas par to, kā tiek izmantoti jūsu dati, lūdzu, skatiet šo uzņēmumu privātuma paziņojumus.",
+    "messageUnkownService": "Diemžēl šo saturu nevar parādīt.",
+    "ofThirdPartyServices": "{0} trešo pušu satura pakalpojumiem.",
+    "viewFullList": "Skatīt pilnu sarakstu",
+    "viewThisExternalLink": "Skatiet šo saturu, izmantojot ārējo saiti"
+  },
+  "error": "Kļūda",
   "event": {
     "dateRange": "{startDate} līdz {endDate}",
     "label": "notikums"

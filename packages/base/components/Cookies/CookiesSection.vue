@@ -1,7 +1,16 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 
-const { checkedServices } = useConsentManager();
+const { acceptedServices } = useConsentManager();
+
+const checkedServices = defineModel({
+  type: Array,
+  default: null,
+});
+
+if (!checkedServices.value) {
+  checkedServices.value = [...acceptedServices.value];
+}
 
 const { t, te, fallbackLocale } = useI18n({ useScope: "global" });
 
@@ -11,6 +20,10 @@ const props = defineProps({
   depth: {
     type: Number,
     default: 1,
+  },
+  modalId: {
+    type: String,
+    default: null,
   },
   serviceData: {
     type: Object,
@@ -44,13 +57,6 @@ const description = computed(() => {
     return t(key);
   }
   return undefined;
-});
-const checked = computed(() => {
-  return props.serviceData.required ||
-    allChildServicesChecked.value ||
-    checkedServices.value.includes(props.serviceData.name)
-    ? true
-    : false;
 });
 const indeterminate = computed(() => {
   if (props.serviceData.services) {
@@ -91,31 +97,18 @@ const showNestedServices = computed(() => {
   return props.show.includes(props.serviceData.name);
 });
 
-const updateServiceConsent = (serviceOrName, value) => {
-  const serviceName = serviceOrName.name || serviceOrName;
+const updateConsent = (value) => {
   if (value) {
-    // Do not add purposes and do not add already checked services
-    if (
-      !serviceOrName.services &&
-      !checkedServices.value.includes(serviceName)
-    ) {
-      checkedServices.value.push(serviceName);
-    }
+    checkedServices.value = checkedServices.value.concat(
+      flattenedServiceNames.value.filter(
+        (service) => !checkedServices.value.includes(service),
+      ),
+    );
   } else {
     checkedServices.value = checkedServices.value.filter(
-      (name) => name !== serviceName,
+      (name) => !flattenedServiceNames.value.includes(name),
     );
   }
-};
-
-const updateConsent = (serviceData, value) => {
-  if (serviceData.services) {
-    serviceData.services.forEach((service) => {
-      updateConsent(service, value);
-    });
-  }
-
-  updateServiceConsent(serviceData, value);
 };
 
 const toggleDisplay = (name) => {
@@ -128,6 +121,16 @@ const renderServiceAsCheckbox = (
 ) => {
   return service.services ? depth <= COLLAPSIBLE_DEPTH_LIMIT : true;
 };
+
+const checked = ref(false);
+watchEffect(() => {
+  checked.value =
+    props.serviceData.required ||
+    allChildServicesChecked.value ||
+    checkedServices.value.includes(props.serviceData.name)
+      ? true
+      : false;
+});
 </script>
 
 <template>
@@ -146,9 +149,8 @@ const renderServiceAsCheckbox = (
     </legend>
     <div v-else class="form-check form-switch">
       <input
-        :id="`consentcheckbox-${serviceData.name}`"
+        :id="`${modalId}-consentcheckbox-${serviceData.name}`"
         v-model="checked"
-        :checked="checked"
         class="form-check-input"
         type="checkbox"
         role="switch"
@@ -158,15 +160,16 @@ const renderServiceAsCheckbox = (
         :indeterminate="indeterminate"
         :class="{ secondary: !serviceData.services, active: indeterminate }"
         :aria-describedby="
-          description && `consentcheckbox-description-${serviceData.name}`
+          description &&
+          `${modalId}-consentcheckbox-description-${serviceData.name}`
         "
         :aria-checked="indeterminate && 'mixed'"
-        @change="(event) => updateConsent(serviceData, event.target.checked)"
+        @change="(event) => updateConsent(event.target.checked)"
       />
       <label
         class="form-check-label"
         :class="{ secondary: !serviceData.services }"
-        :for="`consentcheckbox-${serviceData.name}`"
+        :for="`${modalId}-consentcheckbox-${serviceData.name}`"
       >
         {{ label }}
         <span v-if="serviceData.required"
@@ -176,7 +179,7 @@ const renderServiceAsCheckbox = (
     </div>
     <p
       v-if="description"
-      :id="`consentcheckbox-description-${serviceData.name}`"
+      :id="`${modalId}-consentcheckbox-description-${serviceData.name}`"
       class="description mb-0"
     >
       {{ description }}
@@ -186,7 +189,7 @@ const renderServiceAsCheckbox = (
         v-if="depth <= COLLAPSIBLE_DEPTH_LIMIT"
         class="btn btn-link"
         :class="{ show: showNestedServices }"
-        :aria-controls="`consentcheckbox-subsection-${serviceData.name}`"
+        :aria-controls="`${modalId}-consentcheckbox-subsection-${serviceData.name}`"
         :aria-expanded="showNestedServices ? 'true' : 'false'"
         @click="toggleDisplay(serviceData.name)"
       >
@@ -201,11 +204,12 @@ const renderServiceAsCheckbox = (
         v-show="
           depth > COLLAPSIBLE_DEPTH_LIMIT || show.includes(serviceData.name)
         "
-        :id="`consentcheckbox-subsection-${serviceData.name}`"
+        :id="`${modalId}-consentcheckbox-subsection-${serviceData.name}`"
       >
         <CookiesSection
           v-for="(subService, subServiceIndex) in serviceData.services"
           :key="subServiceIndex"
+          v-model="checkedServices"
           class="nested-section"
           :class="{ 'ps-0': depth > COLLAPSIBLE_DEPTH_LIMIT }"
           :depth="depth + 1"

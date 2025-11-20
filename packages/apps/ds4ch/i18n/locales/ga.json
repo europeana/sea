@@ -68,6 +68,9 @@
         "description": "Luchtaíonn na seirbhísí seo míreanna íomhá (2D), 3D, fuaime agus físe le breathnú orthu.",
         "title": "Seirbhísí féachana meáin"
       },
+      "other": {
+        "title": "Seirbhísí neadaithe eile"
+      },
       "socialMedia": {
         "description": "Luchtaíonn na seirbhísí seo ábhar ó ardáin na meán sóisialta.",
         "title": "Seirbhísí um neadú na meán sóisialta"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Bailíonn sé staitisticí gan ainm ar an gcaoi a n-idirghníomhaíonn cuairteoirí leis an suíomh gréasáin.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Soláthraí anaithnid"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Mura bhfuil tú ag iarraidh gach meán leabaithe a luchtú, is féidir leat {0}.",
+    "loadAllEmbeddedContent": "Luchtaigh gach ábhar leabaithe",
+    "loadOnlyThis": "luchtú meáin ón soláthraí seo amháin",
+    "message": "Bí ar an eolas go bhfuil ábhar meán leabaithe ó {provider}. Tá breathnú ar na meáin seo faoi réir a (dtéarmaí) agus a ráitis phríobháideachais. Féach ar a ráitis phríobháideachais le haghaidh tuilleadh eolais ar an gcaoi a (n-úsáidtear) do shonraí.",
+    "messageUnkownService": "Ar an drochuair ní féidir an t-ábhar seo a thaispeáint.",
+    "ofThirdPartyServices": "{0} de sheirbhísí ábhair thríú páirtí.",
+    "viewFullList": "Féach ar an liosta iomlán.",
+    "viewThisExternalLink": "Féach ar an ábhar seo trí nasc seachtrach"
+  },
+  "error": "Earráid",
   "event": {
     "dateRange": "{startDate} go {endDate}",
     "label": "imeacht"

@@ -68,6 +68,9 @@
         "description": "Ove usluge učitavaju slike (2D), 3D, audio i video stavke za gledanje.",
         "title": "Usluge pregledavanja medija"
       },
+      "other": {
+        "title": "Ostale usluge ugradnje"
+      },
       "socialMedia": {
         "description": "Ove usluge učitavaju sadržaj s platformi društvenih medija.",
         "title": "Usluge ugrađivanja društvenih medija"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Prikuplja anonimne statistike o tome kako posjetitelji komuniciraju s web mjestom.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Nepoznati pružatelj"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Ako ne želite učitati sve ugrađene medije, možete {0}.",
+    "loadAllEmbeddedContent": "Učitaj sav ugrađeni sadržaj",
+    "loadOnlyThis": "učitaj medije samo od ovog pružatelja usluga",
+    "message": "Imajte na umu da ova stranica sadrži medijski sadržaj ugrađen od {provider}. Gledanje ovog medija podliježe njihovim uvjetima i izjavama o privatnosti. Više informacija o tome kako se vaši podaci koriste potražite u njihovim izjavama o privatnosti.",
+    "messageUnkownService": "Nažalost, ovaj sadržaj nije moguće prikazati.",
+    "ofThirdPartyServices": "{0} usluga sadržaja trećih strana.",
+    "viewFullList": "Pogledajte cijeli popis",
+    "viewThisExternalLink": "Pogledajte ovaj sadržaj putem vanjske poveznice"
+  },
+  "error": "Greška",
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "događaj"

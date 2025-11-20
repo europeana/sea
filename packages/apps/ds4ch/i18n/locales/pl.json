@@ -68,6 +68,9 @@
         "description": "Usługi te ładują obrazy (2D), elementy 3D, audio i wideo do przeglądania.",
         "title": "Usługi przeglądania multimediów"
       },
+      "other": {
+        "title": "Inne usługi osadzania"
+      },
       "socialMedia": {
         "description": "Usługi te ładują treści z platform mediów społecznościowych.",
         "title": "Usługi osadzania w mediach społecznościowych"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Gromadzi anonimowe statystyki dotyczące interakcji odwiedzających z witryną.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Nieznany dostawca"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Jeśli nie chcesz ładować wszystkich osadzonych multimediów, możesz {0}.",
+    "loadAllEmbeddedContent": "Załaduj całą osadzoną zawartość",
+    "loadOnlyThis": "załaduj media tylko od tego dostawcy",
+    "message": "Należy pamiętać, że ta strona zawiera treści multimedialne osadzone na stronie {provider}. Przeglądanie tych mediów podlega ich warunkom i oświadczeniom o ochronie prywatności. Więcej informacji na temat sposobu wykorzystywania danych użytkownika można znaleźć w ich oświadczeniach o ochronie prywatności.",
+    "messageUnkownService": "Niestety, tej treści nie można wyświetlić.",
+    "ofThirdPartyServices": "{0} usług treści stron trzecich.",
+    "viewFullList": "Zobacz pełną listę",
+    "viewThisExternalLink": "Wyświetl tę zawartość za pośrednictwem łącza zewnętrznego"
+  },
+  "error": "Błąd",
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "wydarzenie"

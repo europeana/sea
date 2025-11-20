@@ -68,6 +68,9 @@
         "description": "Estos servicios cargan elementos de imagen (2D), 3D, audio y vídeo para su visualización.",
         "title": "Servicios de visualización multimedia"
       },
+      "other": {
+        "title": "Otros servicios de integración"
+      },
       "socialMedia": {
         "description": "Estos servicios cargan contenidos de plataformas de medios sociales.",
         "title": "Servicios de integración en redes sociales"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Recopila estadísticas anónimas sobre cómo los visitantes interactúan con el sitio web.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Proveedor desconocido"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Si no desea cargar todos los medios incrustados, puede {0}.",
+    "loadAllEmbeddedContent": "Cargar todo el contenido incrustado",
+    "loadOnlyThis": "cargar medios solo de este proveedor",
+    "message": "Tenga en cuenta que esta página contiene contenido multimedia de {provider}. La visualización de estos medios está sujeta a sus condiciones y declaraciones de privacidad. Consulte sus declaraciones de privacidad para obtener más información sobre cómo se utilizan sus datos.",
+    "messageUnkownService": "Lamentablemente este contenido no se puede mostrar.",
+    "ofThirdPartyServices": "{0} de servicios de contenidos de terceros.",
+    "viewFullList": "Ver la lista completa",
+    "viewThisExternalLink": "Ver este contenido a través de un enlace externo"
+  },
+  "error": "Error",
   "event": {
     "dateRange": "{startDate} a {endDate}",
     "label": "evento"

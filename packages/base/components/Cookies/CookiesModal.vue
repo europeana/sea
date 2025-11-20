@@ -1,19 +1,27 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
 import { services } from "@/utils/services/services";
+import useScrollTo from "@/composables/scrollTo.js";
 
-const {
-  acceptAll,
-  acceptOnly,
-  acceptedServices,
-  checkedServices,
-  rejectAll,
-  consentRequired,
-} = useConsentManager();
+const { $bs } = useNuxtApp();
 
-const emit = defineEmits(["showToast"]);
+const { acceptAll, acceptOnly, acceptedServices, rejectAll } =
+  useConsentManager();
 
-defineProps({
+const { scrollToSelector } = useScrollTo();
+
+const checkedServices = defineModel({
+  type: Array,
+  default: null,
+});
+
+if (!checkedServices.value) {
+  checkedServices.value = [...acceptedServices.value];
+}
+
+const emit = defineEmits(["closeModal"]);
+
+const props = defineProps({
   modalId: {
     type: String,
     default: "cookie-modal",
@@ -26,21 +34,32 @@ defineProps({
     type: String,
     default: "cookies.consentModal.text",
   },
+  displayPurposes: {
+    type: Array,
+    default: () => ["essential", "usage", "thirdPartyContent"],
+  },
+  scrollTo: {
+    type: String,
+    default: null,
+  },
 });
 
 const modalRef = useTemplateRef("modal");
+let modalInstance;
 
 onMounted(() => {
   modalRef.value?.addEventListener("show.bs.modal", () => {
-    // Reset checked services to saved services
-    checkedServices.value = [...acceptedServices.value];
-  });
-  // Show toast when modal closed and no consent preferences are saved (click on backdrop or escape)
-  modalRef.value?.addEventListener("hide.bs.modal", () => {
-    if (consentRequired.value) {
-      emit("showToast");
+    if (props.scrollTo) {
+      listenToModalTransitionendAndScrollToSection();
     }
   });
+
+  modalRef.value?.addEventListener("hide.bs.modal", () => {
+    emit("closeModal");
+  });
+
+  modalInstance = new $bs.Modal(modalRef.value);
+  modalInstance?.show();
 });
 
 const show = ref(["thirdPartyContent"]);
@@ -55,78 +74,82 @@ const thirdPartyContentServices = services?.filter((s) =>
   s.purposes.includes("thirdPartyContent"),
 );
 
-const groupedSections = [
-  // to create layout
-  essentialServices?.length && {
-    name: "essential",
-    required: true,
-    services: essentialServices,
-  },
-  usageServices?.length && {
-    name: "usage",
-    services: usageServices,
-  },
-  thirdPartyContentServices?.length && {
-    name: "thirdPartyContent",
-    services: [
-      thirdPartyContentServices.filter((service) =>
-        service.purposes?.includes("socialMedia"),
-      )?.length && {
-        name: "socialMedia",
-        services: thirdPartyContentServices.filter((service) =>
+const groupedSections = computed(() =>
+  [
+    // to create layout
+    essentialServices?.length && {
+      name: "essential",
+      required: true,
+      services: essentialServices,
+    },
+    usageServices?.length && {
+      name: "usage",
+      services: usageServices,
+    },
+    thirdPartyContentServices?.length && {
+      name: "thirdPartyContent",
+      services: [
+        thirdPartyContentServices.filter((service) =>
           service.purposes?.includes("socialMedia"),
-        ),
-      },
-      thirdPartyContentServices.filter((service) =>
-        service.purposes?.includes("mediaViewing"),
-      )?.length && {
-        name: "mediaViewing",
-        services: [
-          {
-            name: "2D",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("2D"),
-            ),
-          },
-          {
-            name: "3D",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("3D"),
-            ),
-          },
-          {
-            name: "audio",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("audio"),
-            ),
-          },
-          thirdPartyContentServices.filter((service) =>
-            service.purposes?.includes("multimedia"),
-          )?.length && {
-            name: "multimedia",
-            services: thirdPartyContentServices.filter((service) =>
+        )?.length && {
+          name: "socialMedia",
+          services: thirdPartyContentServices.filter((service) =>
+            service.purposes?.includes("socialMedia"),
+          ),
+        },
+        thirdPartyContentServices.filter((service) =>
+          service.purposes?.includes("mediaViewing"),
+        )?.length && {
+          name: "mediaViewing",
+          services: [
+            {
+              name: "2D",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("2D"),
+              ),
+            },
+            {
+              name: "3D",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("3D"),
+              ),
+            },
+            {
+              name: "audio",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("audio"),
+              ),
+            },
+            thirdPartyContentServices.filter((service) =>
               service.purposes?.includes("multimedia"),
-            ),
-          },
-          {
-            name: "video",
-            services: thirdPartyContentServices.filter((service) =>
-              service.purposes?.includes("video"),
-            ),
-          },
-        ].filter(Boolean),
-      },
-      thirdPartyContentServices.filter((service) =>
-        service.purposes?.includes("other"),
-      )?.length && {
-        name: "other",
-        services: thirdPartyContentServices.filter((service) =>
+            )?.length && {
+              name: "multimedia",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("multimedia"),
+              ),
+            },
+            {
+              name: "video",
+              services: thirdPartyContentServices.filter((service) =>
+                service.purposes?.includes("video"),
+              ),
+            },
+          ].filter(Boolean),
+        },
+        thirdPartyContentServices.filter((service) =>
           service.purposes?.includes("other"),
-        ),
-      },
-    ].filter(Boolean),
-  },
-].filter(Boolean);
+        )?.length && {
+          name: "other",
+          services: thirdPartyContentServices.filter((service) =>
+            service.purposes?.includes("other"),
+          ),
+        },
+      ].filter(Boolean),
+    },
+  ]
+    .filter(Boolean)
+    .filter((purpose) => props.displayPurposes.includes(purpose.name)),
+);
 
 const accept = () => {
   acceptAll();
@@ -146,6 +169,28 @@ const toggleDisplay = (name) => {
   } else {
     show.value.push(name);
   }
+};
+
+const listenToModalTransitionendAndScrollToSection = () => {
+  const modalContainer = modalRef.value;
+  const sectionId = props.scrollTo;
+
+  // This overrides the BV modal component setting focus which might happen asynchronously and mess with the scroll effect
+  modalContainer.focus();
+  modalContainer.addEventListener(
+    "transitionend",
+    () => {
+      scrollToSection(modalContainer, sectionId);
+    },
+    { once: true },
+  );
+};
+
+const scrollToSection = (modalContainer, sectionId) => {
+  scrollToSelector(sectionId, {
+    behavior: "smooth",
+    container: modalContainer,
+  });
 };
 </script>
 
@@ -187,6 +232,8 @@ const toggleDisplay = (name) => {
             <CookiesSection
               v-for="(section, index) in groupedSections"
               :key="index"
+              v-model="checkedServices"
+              :modal-id="modalId"
               :service-data="section"
               :show="show"
               @toggle="toggleDisplay"

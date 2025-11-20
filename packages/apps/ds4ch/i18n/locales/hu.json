@@ -68,6 +68,9 @@
         "description": "Ezek a szolgáltatások (2D) képeket, 3D, hang és videó elemeket töltenek be megtekintésre.",
         "title": "Médianézési szolgáltatások"
       },
+      "other": {
+        "title": "Egyéb beágyazási szolgáltatások"
+      },
       "socialMedia": {
         "description": "Ezek a szolgáltatások közösségimédia-platformokról töltenek be tartalmakat.",
         "title": "Közösségi média beágyazási szolgáltatások"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Névtelen statisztikákat gyűjt arról, hogy a látogatók hogyan lépnek kapcsolatba a weboldallal.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Ismeretlen szolgáltató"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Ha nem szeretné betölteni az összes beágyazott médiát, akkor {0}.",
+    "loadAllEmbeddedContent": "Minden beágyazott tartalom betöltése",
+    "loadOnlyThis": "csak ettől a szolgáltatótól töltsön be médiát",
+    "message": "Szeretnénk felhívni a figyelmet arra, hogy ez az oldal a {provider} oldalról beágyazott médiatartalmat jelenít meg. A média megtekintése az ottani feltételek és adatvédelmi nyilatkozatok hatálya alá tartozik. Kérjük, olvasd el a szolgáltató adatvédelmi nyilatkozatát az adatok felhasználásáról szóló további információkkal kapcsolatban.",
+    "messageUnkownService": "Sajnos ez a tartalom nem jeleníthető meg.",
+    "ofThirdPartyServices": "{0} harmadik féltől származó tartalomszolgáltatások.",
+    "viewFullList": "A teljes lista megtekintése:",
+    "viewThisExternalLink": "Tekintse meg ezt a tartalmat külső linken keresztül"
+  },
+  "error": "Hiba",
   "event": {
     "dateRange": "{startDate} – {endDate}",
     "label": "esemény"

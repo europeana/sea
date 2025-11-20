@@ -68,6 +68,9 @@
         "description": "Need teenused laadivad vaatamiseks pilte (2D) , 3D-, heli- ja videoelemente.",
         "title": "Meedia vaatamise teenused"
       },
+      "other": {
+        "title": "Muud sisseehitamise teenused"
+      },
       "socialMedia": {
         "description": "Need teenused laadivad sisu sotsiaalmeedia platvormidelt.",
         "title": "Sotsiaalmeedia sisseehitamise teenused"
@@ -106,9 +109,21 @@
       "matomo": {
         "description": "Kogub anonüümset statistikat selle kohta, kuidas külastajad veebisaidiga suhtlevad.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Tundmatu pakkuja"
     }
   },
+  "embedNotification": {
+    "ifNotAll": "Kui te ei soovi kõiki manustatud meediume laadida, saate {0}.",
+    "loadAllEmbeddedContent": "Laadi kõik manustatud sisu",
+    "loadOnlyThis": "laadige meedia ainult sellelt teenusepakkujalt",
+    "message": "Pange tähele, et see lehekülg sisaldab meediasisu, mis on sisseehitatud aadressilt {provider}. Selle meedia vaatamise suhtes kehtivad nende tingimused ja privaatsusavaldused. Lisateavet teie andmete kasutamise kohta leiate nende privaatsusavaldustest.",
+    "messageUnkownService": "Kahjuks ei saa seda sisu näidata.",
+    "ofThirdPartyServices": "{0} kolmanda osapoole sisuteenused.",
+    "viewFullList": "Vaata täielikku nimekirja",
+    "viewThisExternalLink": "Vaadake seda sisu välise lingi kaudu"
+  },
+  "error": "Viga",
   "event": {
     "dateRange": "{startDate} kuni {endDate}",
     "label": "sündmus"
