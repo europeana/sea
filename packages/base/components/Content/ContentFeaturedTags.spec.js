@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-import ContentTagsFeatured from "./ContentTagsFeatured.vue";
+import ContentFeaturedTags from "./ContentFeaturedTags.vue";
 
 const tagsProp = [
   { identifier: "3d", name: "3D" },
@@ -9,7 +9,7 @@ const tagsProp = [
 ];
 
 const factory = (props, provide) =>
-  shallowMount(ContentTagsFeatured, {
+  shallowMount(ContentFeaturedTags, {
     global: {
       provide: {
         ...provide,
@@ -18,7 +18,7 @@ const factory = (props, provide) =>
     props: { tags: tagsProp, ...props },
   });
 
-describe("components/Content/ContentTagsFeatured", () => {
+describe("components/Content/ContentFeaturedTags", () => {
   describe("featured tags", () => {
     describe("when featured tags are supplied as props", () => {
       it("splits the tags into featured section", () => {

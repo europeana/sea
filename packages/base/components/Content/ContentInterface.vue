@@ -477,7 +477,7 @@ watch(page, () => {
 <template>
   <div id="content-interface">
     <client-only>
-      <ContentTagsFeatured :tags="tags" :selected-tags="selectedTags" />
+      <ContentFeaturedTags :tags="tags" :selected-tags="selectedTags" />
     </client-only>
     <div class="container">
       <client-only>
