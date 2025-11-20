@@ -1,4 +1,5 @@
 <script setup>
+import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import projectPageQuery from "@/graphql/queries/projectPage.graphql";
 
 const route = useRoute();
@@ -6,7 +7,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
+const { data } = await useAsyncData(
   `projectPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -15,35 +16,41 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(projectPageQuery, variables);
-    return response.data?.projectPageCollection?.items?.[0] || {};
+    return { page: response.data?.projectPageCollection?.items?.[0] };
   },
 );
 
-const partnerList = page.value.project?.partners;
+const page = data.value.page;
+
+if (!page) {
+  throw createHttp404Error();
+}
+
+const partnerList = page.project?.partners;
 // TODO: It was intened to allow editors to add Europeana organisation entities
 // as partnerEntities via contentful. These would need to be retrieved via the
 // Europeana entity API to have their prefLabels added as list items here.
-//   if (!page.value.project.partnerEntities) {
-//     return page.value.partners;
+//   if (!page.project.partnerEntities) {
+//     return page.partners;
 //   }
-//   const formattedEntities  = page.value.partnerEntities.join('\n - ')
-//   return `${page.value.partners}\n- ${formattedEntities}`;
+//   const formattedEntities  = page.partnerEntities.join('\n - ')
+//   return `${page.partners}\n- ${formattedEntities}`;
 
-const impactMetrics = page.value.project?.impactMetrics?.map((metric) => {
+const impactMetrics = page.project?.impactMetrics?.map((metric) => {
   const parts = metric.split(":");
   return { label: parts[0], value: parts[1] };
 });
 
-const reports = page.value.project?.reportsCollection?.items.map((report) => {
+const reports = page.project?.reportsCollection?.items.map((report) => {
   return { label: report.title, icon: "ic-download", url: report.url };
 });
 
 const tags =
-  page.value.categoriesCollection?.items.length > 0
-    ? page.value.categoriesCollection.items
+  page.categoriesCollection?.items.length > 0
+    ? page.categoriesCollection.items
     : null;
 
-const projectLogoImage = page.value.project?.logo?.image;
+const projectLogoImage = page.project?.logo?.image;
 
 const PROJECT_LOGO_SRCSET_PRESETS = {
   large: { w: 112, h: 112 },
@@ -58,7 +65,7 @@ const projectLogoImageSizes = [
 ].join(",");
 
 useHead({
-  title: page.value.name,
+  title: page.name,
   meta: [
     {
       hid: "og:type",
@@ -68,12 +75,12 @@ useHead({
     {
       hid: "og:image",
       property: "og:image",
-      content: page.value.image?.url,
+      content: page.image?.url,
     },
     {
       hid: "og:description",
       property: "og:description",
-      content: page.value.headline,
+      content: page.headline,
     },
   ],
 });

@@ -1,27 +1,31 @@
 <script setup>
-import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 import { provide } from "vue";
+import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
-  `contentHubPage:${slug}`,
-  async () => {
-    const variables = {
-      identifier: slug,
-      locale: localeProperties.value.language,
-    };
+const { data } = await useAsyncData(`contentHubPage:${slug}`, async () => {
+  const variables = {
+    identifier: slug,
+    locale: localeProperties.value.language,
+  };
 
-    const response = await contentful.query(contentHubPageQuery, variables);
+  const response = await contentful.query(contentHubPageQuery, variables);
 
-    return response.data?.contentHubPageCollection?.items?.[0] || {};
-  },
-);
+  return { page: response.data?.contentHubPageCollection?.items?.[0] };
+});
+
+const page = data.value.page;
+
+if (!page) {
+  throw createHttp404Error();
+}
 
 useHead({
-  title: page.value.headline,
+  title: page.headline,
 });
 
 provide("featuredContentTags", [

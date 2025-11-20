@@ -2,28 +2,35 @@
 import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
+import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData("homePage", async () => {
+const { data } = await useAsyncData("homePage", async () => {
   const variables = {
     identifier: "/",
     locale: localeProperties.value.language,
   };
 
   const response = await contentful.query(landingPageQuery, variables);
-  return response.data?.landingPageCollection?.items?.[0] || {};
+  return { page: response.data?.landingPageCollection?.items?.[0] };
 });
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const page = data.value.page;
+
+if (!page) {
+  throw createHttp404Error();
+}
+
+const sections = page.hasPartCollection?.items.filter((item) => !!item);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
 useHead({
-  title: stripMarkdown(page.value.headline),
+  title: stripMarkdown(page.headline),
 });
 </script>
 
