@@ -68,6 +68,9 @@
         "description": "Dawn is-servizzi jgħabbu immaġni (2D), 3D, awdjo, u oġġetti tal-vidjow għall-wiri.",
         "title": "Servizzi ta' wiri tal-midja"
       },
+      "other": {
+        "title": "Servizzi oħra ta' inkorporazzjoni"
+      },
       "socialMedia": {
         "description": "Dawn is-servizzi jgħabbu kontenut minn pjattaformi tal-midja soċjali.",
         "title": "Servizzi ta' inkorporazzjoni tal-midja soċjali"
@@ -106,8 +109,19 @@
       "matomo": {
         "description": "Jġemma’ statistika anonima dwar kif il-viżitaturi jinteraġixxu mal-websajt.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Fornitur mhux magħruf"
     }
+  },
+  "embedNotification": {
+    "ifNotAll": "Jekk ma tridx tagħbija l-midja inkorporata kollha, tista' {0}.",
+    "loadAllEmbeddedContent": "Tagħbija l-kontenut kollu inkorporat",
+    "loadOnlyThis": "tgħabbi l-midja minn dan il-fornitur biss",
+    "message": "Jekk jogħġbok kun konxju li din il-paġna fiha kontenut tal-midja inkorporat minn {provider}. Li tara din il-midja hija soġġetta għat-termini u d-dikjarazzjonijiet tal-privatezza tagħhom. Jekk jogħġbok irreferi għad-dikjarazzjonijiet tal-privatezza tagħhom għal aktar informazzjoni dwar kif tintuża d-dejta tiegħek.",
+    "messageUnkownService": "Sfortunatament dan il-kontenut ma jistax jintwera.",
+    "ofThirdPartyServices": "{0} ta' servizzi ta' kontenut ta' partijiet terzi.",
+    "viewFullList": "Ara l-lista sħiħa",
+    "viewThisExternalLink": "Ara dan il-kontenut permezz ta' link estern"
   },
   "error": "Żball",
   "event": {

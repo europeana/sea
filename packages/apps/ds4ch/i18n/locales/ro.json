@@ -68,6 +68,9 @@
         "description": "Aceste servicii încarcă imagini (2D), elemente 3D, audio și video pentru vizualizare.",
         "title": "Servicii de vizionare media"
       },
+      "other": {
+        "title": "Alte servicii de încorporare"
+      },
       "socialMedia": {
         "description": "Aceste servicii încarcă conținut de pe platformele social media.",
         "title": "Servicii de integrare în social media"
@@ -106,8 +109,19 @@
       "matomo": {
         "description": "Colectează statistici anonime cu privire la modul în care vizitatorii interacționează cu site-ul web.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Furnizor necunoscut"
     }
+  },
+  "embedNotification": {
+    "ifNotAll": "Dacă nu doriți să încărcați tot conținutul încorporat, puteți {0}.",
+    "loadAllEmbeddedContent": "Încărcați tot conținutul încorporat",
+    "loadOnlyThis": "încărcați media numai de la acest furnizor",
+    "message": "Vă rugăm să rețineți că această pagină conține conținut media încorporat de la {provider}. Vizualizarea acestui conținut media este supusă termenilor și declarațiilor de confidențialitate ale acestora. Vă rugăm să consultați declarațiile lor de confidențialitate pentru mai multe informații despre modul în care sunt utilizate datele dumneavoastră.",
+    "messageUnkownService": "Din păcate, acest conținut nu poate fi afișat.",
+    "ofThirdPartyServices": "{0} de servicii de conținut terțe.",
+    "viewFullList": "Vezi lista completă",
+    "viewThisExternalLink": "Vizualizați acest conținut printr-un link extern"
   },
   "error": "Eroare",
   "event": {

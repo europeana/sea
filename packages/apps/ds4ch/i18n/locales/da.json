@@ -68,6 +68,9 @@
         "description": "Disse tjenester indlæser billed- (2D), 3D-, lyd- og videoelementer til visning.",
         "title": "Tjenester til visning af medier"
       },
+      "other": {
+        "title": "Andre indlejringstjenester"
+      },
       "socialMedia": {
         "description": "Disse tjenester indlæser indhold fra sociale medieplatforme.",
         "title": "Tjenester til indlejring i sociale medier"
@@ -106,8 +109,19 @@
       "matomo": {
         "description": "Indsamler anonyme statistikker over, hvordan besøgende interagerer med hjemmesiden.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Ukendt udbyder"
     }
+  },
+  "embedNotification": {
+    "ifNotAll": "Hvis du ikke ønsker at indlæse alle indlejrede medier, kan du {0}.",
+    "loadAllEmbeddedContent": "Indlæs alt indlejret indhold",
+    "loadOnlyThis": "indlæs kun medier fra denne udbyder",
+    "message": "Vær opmærksom på, at denne side indeholder medieindhold indlejret fra {provider}. Visning af dette medie er underlagt deres vilkår og erklæringer om beskyttelse af personlige oplysninger. Se deres erklæringer om beskyttelse af personlige oplysninger for at få flere oplysninger om, hvordan dine data bruges.",
+    "messageUnkownService": "Desværre kan dette indhold ikke vises.",
+    "ofThirdPartyServices": "{0} af tredjeparts indholdstjenester.",
+    "viewFullList": "Se hele listen",
+    "viewThisExternalLink": "Se dette indhold via et eksternt link"
   },
   "error": "Fejl",
   "event": {
