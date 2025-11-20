@@ -8,6 +8,7 @@ import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMi
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
+
 import {
   entryHasContentType,
   entryHasTaxonomyTerm,
@@ -462,13 +463,13 @@ watch(page, () => {
 
 <template>
   <div id="content-interface">
+    <client-only>
+      <ContentTagsDropdown
+        :filtered-tags="filteredTags"
+        :selected-tags="selectedTags"
+      />
+    </client-only>
     <div class="container">
-      <client-only>
-        <ContentTagsDropdown
-          :filtered-tags="filteredTags"
-          :selected-tags="selectedTags"
-        />
-      </client-only>
       <div
         class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
       >

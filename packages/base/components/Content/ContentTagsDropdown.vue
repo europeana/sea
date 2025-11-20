@@ -1,13 +1,12 @@
 <script setup>
-import categoriesQuery from "@/graphql/queries/categories.graphql";
-import { inject } from "vue";
+import categoriesGraphql from "@/graphql/queries/categories.graphql";
 const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
 const props = defineProps({
   /**
-   * All tags, before any keyword search.
+   * Filtered tags, by relevance and sorted on most used
    */
   filteredTags: {
     type: Array,
@@ -32,7 +31,7 @@ const { data: tags } = await useAsyncData("allCategories", async () => {
     locale: localeProperties.value.language,
   };
   const categoriesResponse = await contentful.query(
-    categoriesQuery,
+    categoriesGraphql,
     categoriesVariables,
   );
   return (categoriesResponse.data.categoryCollection.items || []).sort((a, b) =>
@@ -63,17 +62,6 @@ const allDisplayTags = computed(() => {
   return displayTags;
 });
 
-const featuredDisplayTags = computed(() => {
-  if (!featuredTags) {
-    return [];
-  }
-  return (
-    allDisplayTags.value?.filter((tag) =>
-      featuredTags.includes(tag.identifier),
-    ) || []
-  );
-});
-
 const unfeaturedDisplayTags = computed(() => {
   if (!featuredTags) {
     return allDisplayTags.value;
@@ -86,8 +74,10 @@ const unfeaturedDisplayTags = computed(() => {
 });
 
 const displaySelectedTags = computed(() => {
-  return tags.value.filter((tag) =>
-    props.selectedTags.includes(tag.identifier),
+  return tags.value.filter(
+    (tag) =>
+      !featuredTags?.includes(tag.identifier) &&
+      props.selectedTags.includes(tag.identifier),
   );
 });
 const trimmedKeyword = computed(() => {
@@ -128,13 +118,15 @@ const clickOutsideConfig = ref({
 </script>
 
 <template>
-  <div>
+  <ContentFeaturedTags :tags="tags" :selected-tags="selectedTags" />
+  <div class="container">
     <RelatedCategoryTags
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
       :selected="selectedTags"
       class="mb-2"
       route-name="data-space"
+      :tag-icon="false"
     />
     <div
       ref="tagsdropdown"
@@ -156,7 +148,7 @@ const clickOutsideConfig = ref({
           class="form-control"
           autocomplete="off"
           type="search"
-          :placeholder="$t('categories.search')"
+          :placeholder="$t('categories.label')"
           data-qa="tags dropdown search input"
           role="searchbox"
           aria-autocomplete="list"
@@ -173,26 +165,15 @@ const clickOutsideConfig = ref({
         data-qa="tags search dropdown"
       >
         <RelatedCategoryTags
-          v-if="featuredTags && featuredDisplayTags.length > 0"
-          ref="relatedCategoryTags"
-          :tags="featuredDisplayTags"
-          :selected="selectedTags"
-          :heading="$t('categories.featuredTags')"
-          tabindex="-1"
-          class="badge-container mb-2"
-          route-name="data-space"
-        />
-        <RelatedCategoryTags
           v-if="unfeaturedDisplayTags.length > 0"
           ref="relatedCategoryTags"
           :tags="unfeaturedDisplayTags"
           :selected="selectedTags"
-          :heading="featuredTags ? $t('categories.moreTags') : undefined"
           tabindex="-1"
           class="badge-container mb-2"
           route-name="data-space"
         />
-        <p v-if="allDisplayTags.length === 0">
+        <p v-else>
           {{ $t("categories.noOptions") }}
         </p>
       </div>
@@ -228,9 +209,6 @@ const clickOutsideConfig = ref({
 
 .badge-container {
   margin: 0;
-
-  @media (min-width: $bp-4k) {
-  }
 
   :deep(.col-12) {
     padding: 0;

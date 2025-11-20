@@ -38,6 +38,13 @@ const props = defineProps({
     type: String,
     default: "badge-outline-light",
   },
+  /**
+   * Tag icon to include or not
+   */
+  tagIcon: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const badgeLink = (tagId) => {
@@ -88,14 +95,21 @@ const handleRight = (event) => {
       <h2 v-if="heading" class="related-heading text-uppercase">
         {{ heading }}
       </h2>
-      <div class="d-flex">
-        <span class="icon-ic-tag" />
-        <div>
+      <div
+        ref="tagswrapper"
+        class="tags-wrapper"
+        :class="{ 'd-flex': tagIcon }"
+      >
+        <span v-if="tagIcon" class="icon-ic-tag" />
+        <div :class="{ 'ms-n2': !tagIcon }">
           <NuxtLinkLocale
             v-for="(tag, index) in tags.filter((tag) => !!tag)"
             :key="index"
-            class="badge ms-2 ms-4k-3 mb-2 mb-4k-3"
-            :class="badgeVariant"
+            class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
+            :class="{
+              [badgeVariant]: true,
+              selected: isActive(tag.identifier),
+            }"
             :active="isActive(tag.identifier)"
             :to="badgeLink(tag.identifier)"
             :data-qa="`${tag.name} category tag`"
@@ -104,10 +118,7 @@ const handleRight = (event) => {
             @click="clickBadge(tag.identifier)"
           >
             <span>{{ tag.name }}</span>
-            <span
-              v-if="isActive(tag.identifier)"
-              class="icon icon-clear clear-indicator"
-            />
+            <span v-if="isActive(tag.identifier)" class="icon icon-clear" />
           </NuxtLinkLocale>
         </div>
       </div>
