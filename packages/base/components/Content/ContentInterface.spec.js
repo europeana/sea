@@ -58,18 +58,6 @@ const mockBlogEntries = Array.from({ length: 24 }, (key, index) => ({
   name: `Entry ${index}`,
 }));
 
-const categoriesContentfulResponse = {
-  data: {
-    categoryCollection: {
-      items: [
-        { identifier: "3d", name: "3D" },
-        { identifier: "cooking", name: "cooking" },
-        { identifier: "postcards", name: "postcards" },
-      ],
-    },
-  },
-};
-
 const mockQuery = vi.fn();
 
 // Use this function to create custom mock responses for different test cases
@@ -93,9 +81,6 @@ const contentfulResponse = (query, entries, metadata) => {
     return Promise.resolve({
       data: { projectPageCollection: { items: metadata.projects } },
     });
-  }
-  if (query.definitions?.[0]?.name?.value === "Categories") {
-    return Promise.resolve(categoriesContentfulResponse);
   }
 };
 
@@ -152,15 +137,9 @@ describe("components/Content/ContentInterface", () => {
 
     await wrapper.vm.$nextTick();
 
-    expect(mockQuery.mock.calls.length).toEqual(4);
+    expect(mockQuery.mock.calls.length).toEqual(3);
     expect(wrapper.findAllComponents({ name: "ContentCard" }).length).toBe(24);
   });
-
-  it("fetches categories from Contentful", async () => {
-    const wrapper = await factory();
-    expect(wrapper.vm.tags.value.length).toBe(3);
-  });
-
   describe("selectedTags", () => {
     it("defaults to an empty array", async () => {
       const wrapper = await factory();

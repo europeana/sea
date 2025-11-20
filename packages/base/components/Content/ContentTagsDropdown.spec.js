@@ -16,25 +16,42 @@ mockNuxtImport("useI18n", () => {
   };
 });
 
-const tagsProp = [
-  { identifier: "3d", name: "3D" },
-  { identifier: "cooking", name: "cooking" },
-  { identifier: "postcards", name: "postcards" },
-];
+const categoriesContentfulResponse = {
+  data: {
+    categoryCollection: {
+      items: [
+        { identifier: "3d", name: "3D" },
+        { identifier: "cooking", name: "cooking" },
+        { identifier: "postcards", name: "postcards" },
+      ],
+    },
+  },
+};
 
 const factory = async (props, provide) =>
   await mountSuspended(ContentTagsDropdown, {
     global: {
       provide: {
+        $contentful: {
+          query: () => categoriesContentfulResponse,
+        },
         ...provide,
       },
     },
-    props: { tags: tagsProp, ...props },
+    props,
   });
 
 describe("components/content/contentTagsDropdown", () => {
   afterEach(() => {
     useRouteMock.mockReset();
+  });
+
+  it("fetches categories from Contentful", async () => {
+    useRouteMock.mockImplementation(() => ({
+      query: {},
+    }));
+    const wrapper = await factory();
+    expect(wrapper.vm.tags.value.length).toBe(3);
   });
 
   describe("on focusin event", () => {

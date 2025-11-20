@@ -1,14 +1,10 @@
 <script setup>
+import categoriesGraphql from "@/graphql/queries/categories.graphql";
 const route = useRoute();
+const contentful = inject("$contentful");
+const { localeProperties } = useI18n();
 
 const props = defineProps({
-  /**
-   * All tags data
-   */
-  tags: {
-    type: Array,
-    default: () => [],
-  },
   /**
    * Filtered tags, by relevance and sorted on most used
    */
@@ -30,6 +26,19 @@ const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
 
+const { data: tags } = await useAsyncData("allCategories", async () => {
+  const categoriesVariables = {
+    locale: localeProperties.value.language,
+  };
+  const categoriesResponse = await contentful.query(
+    categoriesGraphql,
+    categoriesVariables,
+  );
+  return (categoriesResponse.data.categoryCollection.items || []).sort((a, b) =>
+    a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase()),
+  );
+});
+
 const allDisplayTags = computed(() => {
   let displayTags;
   const keyword = trimmedKeyword.value;
@@ -38,9 +47,9 @@ const allDisplayTags = computed(() => {
     // use filteredTags as those are sorted by most used
     displayTags = props.filteredTags
       .filter((tag) => !props.selectedTags.includes(tag))
-      .map((tag) => props.tags.filter((t) => t.identifier === tag)[0]);
+      .map((tag) => tags.value.filter((t) => t.identifier === tag)[0]);
   } else {
-    displayTags = props.tags;
+    displayTags = tags.value;
   }
 
   if (keyword) {
@@ -65,7 +74,7 @@ const unfeaturedDisplayTags = computed(() => {
 });
 
 const displaySelectedTags = computed(() => {
-  return props.tags.filter(
+  return tags.value.filter(
     (tag) =>
       !featuredTags?.includes(tag.identifier) &&
       props.selectedTags.includes(tag.identifier),
@@ -109,7 +118,8 @@ const clickOutsideConfig = ref({
 </script>
 
 <template>
-  <div>
+  <ContentFeaturedTags :tags="tags" :selected-tags="selectedTags" />
+  <div class="container">
     <RelatedCategoryTags
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"

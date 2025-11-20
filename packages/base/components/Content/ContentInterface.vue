@@ -8,7 +8,7 @@ import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMi
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
-import categoriesGraphql from "@/graphql/queries/categories.graphql";
+
 import {
   entryHasContentType,
   entryHasTaxonomyTerm,
@@ -456,19 +456,6 @@ const { data: fullEntries } = await useAsyncData(
   },
 );
 
-const { data: tags } = await useAsyncData("allCategories", async () => {
-  const categoriesVariables = {
-    locale: localeProperties.value.language,
-  };
-  const categoriesResponse = await contentful.query(
-    categoriesGraphql,
-    categoriesVariables,
-  );
-  return (categoriesResponse.data.categoryCollection.items || []).sort((a, b) =>
-    a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase()),
-  );
-});
-
 watch(page, () => {
   scrollToSelector("#header");
 });
@@ -477,16 +464,12 @@ watch(page, () => {
 <template>
   <div id="content-interface">
     <client-only>
-      <ContentFeaturedTags :tags="tags" :selected-tags="selectedTags" />
+      <ContentTagsDropdown
+        :filtered-tags="filteredTags"
+        :selected-tags="selectedTags"
+      />
     </client-only>
     <div class="container">
-      <client-only>
-        <ContentTagsDropdown
-          :tags="tags"
-          :filtered-tags="filteredTags"
-          :selected-tags="selectedTags"
-        />
-      </client-only>
       <div
         class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
       >
