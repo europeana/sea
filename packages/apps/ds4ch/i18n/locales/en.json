@@ -124,6 +124,10 @@
     "viewThisExternalLink": "View this content via an external link"
   },
   "error": "Error",
+  "errorMessage": {
+    "404": "Sorry! The page you’re looking for doesn’t exist.",
+    "unknown": "An error occurred."
+  },
   "errors": {
     "http": {
       "404": "Not Found"

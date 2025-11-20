@@ -32,11 +32,11 @@ useHead({
     </div>
     <PageHeader />
     <main>
-      <div class="page text-page">
+      <div class="page">
         <div class="container footer-margin pb-5">
           <div class="row justify-content-center">
-            <div class="col col-12 col-lg-8">
-              <GenericAlertMessage :error="props.error" />
+            <div class="col col-12">
+              <ErrorMessage :error="props.error" />
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ useHead({
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
 
-.text-page {
+.page {
   margin-top: $page-header-height; // leave space for the fixed positioned header
 
   @media (min-width: $bp-4k) {
