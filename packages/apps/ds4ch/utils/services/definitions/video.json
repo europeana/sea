@@ -1,5 +1,10 @@
 [
   {
+    "name": "avTib",
+    "schemes": ["//av.tib.eu/*"],
+    "title": "TIB AV-Portal"
+  },
+  {
     "name": "vimeo",
     "oembed": "https://vimeo.com/api/oembed.json",
     "schemes": [
@@ -29,7 +34,8 @@
       "https://www.youtube.com/v/*",
       "https://www.youtube.com/embed/*",
       "https://youtube.com/embed/*",
-      "https://youtu.be/*"
+      "https://youtu.be/*",
+      "https://www.youtube-nocookie.com/*"
     ],
     "title": "YouTube"
   }

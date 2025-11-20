@@ -5,7 +5,6 @@ import CookiesModal from "./CookiesModal.vue";
 
 let consentRequired = ref(true);
 let acceptedServices = ref([]);
-let checkedServices = ref([]);
 const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
@@ -41,7 +40,6 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
     rejectAll,
     consentRequired,
     acceptedServices,
-    checkedServices,
   }),
 }));
 
@@ -54,8 +52,17 @@ mockNuxtImport("useI18n", () => {
     };
   };
 });
-const factory = () =>
+
+const scrollToSelector = vi.fn();
+vi.mock("@/composables/scrollTo.js", () => ({
+  default: () => ({
+    scrollToSelector,
+  }),
+}));
+
+const factory = (props) =>
   mount(CookiesModal, {
+    props,
     global: {
       mocks: {
         $n: (num) => num,
@@ -94,30 +101,15 @@ describe("components/Page/CookiesModal.vue", () => {
     expect(rejectAll).toHaveBeenCalled();
   });
 
-  describe("when modal show event is triggered", () => {
-    it('resets checked services to accepted services"', async () => {
-      acceptedServices.value = ["translate"];
-      checkedServices.value = ["translate", "analytics"];
-
-      const wrapper = factory();
-
-      const modal = wrapper.find(".modal");
-      const event = new Event("show.bs.modal");
-      modal.element.dispatchEvent(event);
-
-      expect(checkedServices.value).toEqual(acceptedServices.value);
-    });
-  });
-
   describe("when modal hide event is triggered", () => {
-    it('emits "showToast"', async () => {
+    it('emits "closeModal"', async () => {
       const wrapper = factory();
 
       const modal = wrapper.find(".modal");
       const event = new Event("hide.bs.modal");
       modal.element.dispatchEvent(event);
 
-      expect(wrapper.emitted("showToast")).toBeTruthy();
+      expect(wrapper.emitted("closeModal")).toBeTruthy();
     });
   });
 
@@ -128,6 +120,19 @@ describe("components/Page/CookiesModal.vue", () => {
     });
 
     expect(sections.length).toBe(15);
+  });
+
+  describe("when only certain purpose groups should display", () => {
+    it("renders only the purposes listed in displayPurposes", () => {
+      const wrapper = factory({ displayPurposes: ["usage"] });
+
+      const sections = wrapper.findAllComponents({
+        name: "CookiesSection",
+      });
+      expect(wrapper.vm.groupedSections.length).toBe(1);
+      expect(wrapper.vm.groupedSections[0].name).toBe("usage");
+      expect(sections.length).toBe(2);
+    });
   });
 
   it("toggles display sections via toggleDisplay method", async () => {
@@ -143,5 +148,28 @@ describe("components/Page/CookiesModal.vue", () => {
 
     sectionInstance.$emit("toggle", "usage");
     expect(wrapper.vm.show).toContain("usage");
+  });
+
+  describe("the scrollTo prop is passed", () => {
+    it("scrolls to the third party content section", () => {
+      const sectionId = "#cookie-modal-consentcheckbox-thirdPartyContent";
+      const wrapper = factory({ scrollTo: sectionId });
+      const modalEl = wrapper.vm.$refs.modal;
+      modalEl.focus = vi.fn();
+
+      const modal = wrapper.find(".modal");
+      const showEvent = new Event("show.bs.modal");
+      modal.element.dispatchEvent(showEvent);
+
+      const transitionEndEvent = new Event("transitionend");
+
+      modalEl.dispatchEvent(transitionEndEvent);
+
+      expect(modalEl.focus).toHaveBeenCalled();
+      expect(scrollToSelector).toHaveBeenCalledWith(sectionId, {
+        behavior: "smooth",
+        container: modalEl,
+      });
+    });
   });
 });

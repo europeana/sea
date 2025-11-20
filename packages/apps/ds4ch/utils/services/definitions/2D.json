@@ -1,7 +1,7 @@
 [
   {
     "name": "adobe",
-    "schemes": [],
+    "schemes": ["https://indd.adobe.com/*"],
     "title": "Adobe"
   },
   {

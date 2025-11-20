@@ -70,7 +70,9 @@ describe("consent manager", () => {
 
     describe("and new services were added", () => {
       it("returns consentRequired to true", () => {
-        const configWithNewService = { ...config };
+        const configWithNewService = {
+          services: { essential: [...essential], all: [...all] },
+        };
         configWithNewService.services.all.push("other");
 
         useCookieMock.mockImplementation(() => ({
@@ -133,6 +135,34 @@ describe("consent manager", () => {
 
         expect(handleCallbacks).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe("when consent cookie value changes", () => {
+    it("gets and stores the consent preferences as saved in the updated cookie value", async () => {
+      const cookieValue = ref({
+        [essentialCookie]: true,
+        [mediaCookie]: false,
+        [analyticsCookie]: false,
+      });
+
+      useCookieMock.mockImplementation(() => cookieValue);
+
+      const { isServiceAccepted } = createConsentManager(config);
+
+      expect(isServiceAccepted(analyticsCookie)).toBe(false);
+      expect(isServiceAccepted(mediaCookie)).toBe(false);
+
+      cookieValue.value = {
+        [essentialCookie]: true,
+        [mediaCookie]: true,
+        [analyticsCookie]: true,
+      };
+
+      await nextTick();
+
+      expect(isServiceAccepted(analyticsCookie)).toBe(true);
+      expect(isServiceAccepted(mediaCookie)).toBe(true);
     });
   });
 });
