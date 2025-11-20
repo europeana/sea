@@ -23,8 +23,8 @@ useHead({
     </div>
     <PageHeader />
     <main>
-      <div class="page text-page mb-5 mt-5">
-        <div class="container footer-margin pb-4k-5">
+      <div class="page text-page">
+        <div class="container footer-margin pb-5">
           <div class="row justify-content-center">
             <div class="col col-12 col-lg-8">
               <GenericAlertMessage :error="props.error" />
@@ -36,3 +36,16 @@ useHead({
     <PageFooter />
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "@europeana/style/scss/variables";
+@import "assets/scss/variables";
+
+.text-page {
+  margin-top: $page-header-height; // leave space for the fixed positioned header
+
+  @media (min-width: $bp-4k) {
+    margin-top: $page-header-height-4k;
+  }
+}
+</style>

@@ -1,3 +1,29 @@
+main {
+  @media (min-width: $bp-large) {
+    min-height: calc(100vh - 38.3125rem);
+  }
+
+  @media (min-width: $bp-extralarge) {
+    min-height: calc(100vh - 36.8125rem);
+  }
+
+  @media (min-width: $bp-xxl) {
+    min-height: calc(100vh - 35.8625rem);
+  }
+
+  @media (min-width: $bp-xxxl) {
+    min-height: calc(100vh - 35.8125rem);
+  }
+
+  @media (min-width: $bp-wqhd) {
+    min-height: calc(100vh - 33.8125rem);
+  }
+
+  @media (min-width: $bp-4k) {
+    min-height: calc(100vh - 52.625rem);
+  }
+}
+
 // base component DS4CH specific overrides
 div.landing-sub-section {
   background-color: $lightgrey;
