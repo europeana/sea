@@ -1,26 +1,33 @@
 <script setup>
 import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
+import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const slug = "collections";
 const contentful = inject("$contentful");
 const { t, localeProperties } = useI18n({ useScope: "global" });
 
-const { data: page } = await useAsyncData(`landingPage:${slug}`, async () => {
+const { data } = await useAsyncData(`landingPage:${slug}`, async () => {
   const variables = {
     identifier: slug,
     locale: localeProperties.value.language,
   };
 
   const response = await contentful.query(landingPageQuery, variables);
-  return response.data?.landingPageCollection?.items?.[0] || {};
+  return { page: response.data?.landingPageCollection?.items?.[0] };
 });
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
-const featuredContent = page.value.featuredContent;
+const page = data.value.page;
+
+if (!page) {
+  throw createHttp404Error();
+}
+
+const sections = page.hasPartCollection?.items.filter((item) => !!item);
+const featuredContent = page.featuredContent;
 
 useHead({
-  title: page.value.headline,
+  title: page.headline,
 });
 </script>
 
