@@ -1,4 +1,6 @@
 <script setup>
+import favIconImage from "@europeana/style/img/DS4CH/favicon.ico";
+
 const props = defineProps({
   error: {
     type: Object,
@@ -7,6 +9,13 @@ const props = defineProps({
 });
 
 useHead({
+  link: [
+    {
+      rel: "icon",
+      href: favIconImage,
+      type: "image/x-icon",
+    },
+  ],
   title: props.error.message,
 });
 </script>
