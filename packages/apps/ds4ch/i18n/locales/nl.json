@@ -68,6 +68,9 @@
         "description": "Deze services laden afbeeldingen (2D), 3D, audio en video om te bekijken.",
         "title": "Diensten voor het bekijken van media"
       },
+      "other": {
+        "title": "Andere inbeddingsdiensten"
+      },
       "socialMedia": {
         "description": "Deze services laden inhoud van sociale mediaplatforms.",
         "title": "Inbeddingsdiensten voor sociale media"
@@ -106,8 +109,19 @@
       "matomo": {
         "description": "Verzamelt anonieme statistieken over hoe bezoekers omgaan met de website.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Onbekende provider"
     }
+  },
+  "embedNotification": {
+    "ifNotAll": "Als u niet alle ingesloten media wilt laden, kunt u {0}.",
+    "loadAllEmbeddedContent": "Laad alle ingesloten inhoud",
+    "loadOnlyThis": "laad alleen media van deze provider",
+    "message": "Houd er rekening mee dat deze pagina media-inhoud bevat die is ingesloten door {provider}. Het bekijken van deze media is onderworpen aan hun voorwaarden en privacyverklaringen. Raadpleeg hun privacyverklaringen voor meer informatie over hoe uw gegevens worden gebruikt.",
+    "messageUnkownService": "Helaas kan deze inhoud niet worden weergegeven.",
+    "ofThirdPartyServices": "{0} van diensten en inhoud van derden",
+    "viewFullList": "Bekijk de volledige lijst",
+    "viewThisExternalLink": "Bekijk deze content via een externe link"
   },
   "error": "Fout",
   "event": {

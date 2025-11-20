@@ -68,6 +68,9 @@
         "description": "Šios paslaugos įkelia vaizdus (2D) , 3D, garso ir vaizdo elementus, kad juos būtų galima peržiūrėti.",
         "title": "Žiniasklaidos peržiūros paslaugos"
       },
+      "other": {
+        "title": "Kitos įterpimo paslaugos"
+      },
       "socialMedia": {
         "description": "Šios paslaugos įkelia turinį iš socialinės žiniasklaidos platformų.",
         "title": "Socialinės žiniasklaidos įterpimo paslaugos"
@@ -106,8 +109,19 @@
       "matomo": {
         "description": "Renka anoniminę statistiką apie tai, kaip lankytojai sąveikauja su svetaine.",
         "title": "Matomo"
-      }
+      },
+      "unknownProvider": "Nežinomas tiekėjas"
     }
+  },
+  "embedNotification": {
+    "ifNotAll": "Jei nenorite įkelti visos įterptosios medijos, galite {0}.",
+    "loadAllEmbeddedContent": "Įkelti visą įterptąjį turinį",
+    "loadOnlyThis": "įkelti mediją tik iš šio teikėjo",
+    "message": "Atkreipkite dėmesį, kad šiame puslapyje yra žiniasklaidos turinio, įterpto iš {provider}. Šios medijos peržiūrai taikomos jų sąlygos ir privatumo pareiškimai. Daugiau informacijos apie tai, kaip naudojami jūsų duomenys, rasite jų privatumo pareiškimuose.",
+    "messageUnkownService": "Deja, šio turinio rodyti negalima.",
+    "ofThirdPartyServices": "{0} trečiųjų šalių turinio paslaugas.",
+    "viewFullList": "Peržiūrėti visą sąrašą",
+    "viewThisExternalLink": "Peržiūrėti šį turinį per išorinę nuorodą"
   },
   "error": "Klaida",
   "event": {
