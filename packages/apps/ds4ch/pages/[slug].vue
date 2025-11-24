@@ -1,12 +1,13 @@
 <script setup>
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
+import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const route = useRoute();
 const contentful = inject("$contentful");
-const { localeProperties, t } = useI18n();
+const { localeProperties } = useI18n();
 
 const { data } = await useAsyncData(
   `landingPage:${route.params.slug}`,
@@ -24,11 +25,7 @@ const { data } = await useAsyncData(
 const page = data.value.page;
 
 if (!page) {
-  throw createError({
-    fatal: true,
-    statusCode: 404,
-    statusMessage: t("errors.http.404"),
-  });
+  throw createHttp404Error();
 }
 
 const sections = page.hasPartCollection?.items.filter((item) => !!item);
