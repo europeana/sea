@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Se dette indhold via et eksternt link"
   },
   "error": "Fejl",
+  "errorMessage": {
+    "404": "Beklager! Den side, du leder efter, findes ikke.",
+    "unknown": "Der opstod en fejl."
+  },
+  "errors": {
+    "http": {
+      "404": "Ikke fundet"
+    }
+  },
   "event": {
     "dateRange": "{startDate} til {endDate}",
     "label": "begivenhed"

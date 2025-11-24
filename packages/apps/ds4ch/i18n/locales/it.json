@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Visualizza questo contenuto tramite un link esterno"
   },
   "error": "Errore",
+  "errorMessage": {
+    "404": "Spiacenti! La pagina che stai cercando non esiste.",
+    "unknown": "Si è verificato un errore."
+  },
+  "errors": {
+    "http": {
+      "404": "Non trovati"
+    }
+  },
   "event": {
     "dateRange": "{startDate} a {endDate}",
     "label": "evento"

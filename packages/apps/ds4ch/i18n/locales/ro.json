@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Vizualizați acest conținut printr-un link extern"
   },
   "error": "Eroare",
+  "errorMessage": {
+    "404": "Ne pare rău! Pagina pe care o cauți nu există.",
+    "unknown": "A apărut o eroare."
+  },
+  "errors": {
+    "http": {
+      "404": "Nu a fost găsit"
+    }
+  },
   "event": {
     "dateRange": "{startDate} la {endDate}",
     "label": "eveniment"

@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Ver este contenido a través de un enlace externo"
   },
   "error": "Error",
+  "errorMessage": {
+    "404": "¡Lo sentimos! La página que buscas no existe.",
+    "unknown": "Se ha producido un error."
+  },
+  "errors": {
+    "http": {
+      "404": "No se ha encontrado"
+    }
+  },
   "event": {
     "dateRange": "{startDate} a {endDate}",
     "label": "evento"

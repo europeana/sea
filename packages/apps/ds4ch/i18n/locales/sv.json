@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Se detta innehåll via en extern länk"
   },
   "error": "Fel",
+  "errorMessage": {
+    "404": "Tyvärr! Sidan du letar efter finns inte.",
+    "unknown": "Ett fel inträffade."
+  },
+  "errors": {
+    "http": {
+      "404": "Hittades inte"
+    }
+  },
   "event": {
     "dateRange": "{startDate} till {endDate}",
     "label": "händelse"

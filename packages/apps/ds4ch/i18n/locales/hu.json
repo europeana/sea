@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Tekintse meg ezt a tartalmat külső linken keresztül"
   },
   "error": "Hiba",
+  "errorMessage": {
+    "404": "Sajnáljuk! A keresett oldal nem létezik.",
+    "unknown": "Hiba történt."
+  },
+  "errors": {
+    "http": {
+      "404": "Nem található"
+    }
+  },
   "event": {
     "dateRange": "{startDate} – {endDate}",
     "label": "esemény"

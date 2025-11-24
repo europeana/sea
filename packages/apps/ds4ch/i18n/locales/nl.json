@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Bekijk deze content via een externe link"
   },
   "error": "Fout",
+  "errorMessage": {
+    "404": "Sorry! De pagina die u zoekt, bestaat niet.",
+    "unknown": "Er is een fout opgetreden."
+  },
+  "errors": {
+    "http": {
+      "404": "Niet gevonden"
+    }
+  },
   "event": {
     "dateRange": "{startDate} tot {endDate}",
     "label": "evenement"

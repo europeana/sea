@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Zobrazit tento obsah prostřednictvím externího odkazu"
   },
   "error": "Chyba",
+  "errorMessage": {
+    "404": "Omlouváme se! Stránka, kterou hledáte, neexistuje.",
+    "unknown": "Došlo k chybě."
+  },
+  "errors": {
+    "http": {
+      "404": "Nenalezeno"
+    }
+  },
   "event": {
     "dateRange": "{startDate} až {endDate}",
     "label": "událost"
