@@ -1,6 +1,7 @@
 // QUESTION: use @vue/apollo-composable instead?
 
 import fetch from "node-fetch-native";
+import createHttpError from "http-errors";
 import { print as printGraphql } from "graphql/language/printer.js";
 
 // TODO: ensure presence of required config
@@ -39,6 +40,10 @@ export const query = async (ast, variables = {}, config = {}) => {
     headers,
     method,
   });
+
+  if (!response.ok) {
+    throw createHttpError(response.status);
+  }
 
   const json = await response.json();
 

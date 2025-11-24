@@ -1,12 +1,13 @@
-const createHttpError = (statusCode, error = {}) => {
-  const { t } = useI18n();
+export const createHttpError = (statusCode, error = {}) => {
+  const { $i18n } = useNuxtApp();
+  const { t, te } = $i18n;
 
   return createError({
     fatal: true,
     statusCode,
-    statusMessage: t(`errors.http.${statusCode}`),
+    statusMessage: te(`errors.http.${statusCode}`)
+      ? t(`errors.http.${statusCode}`)
+      : error.statusMessage,
     ...error,
   });
 };
-
-export const createHttp404Error = (error = {}) => createHttpError(404, error);
