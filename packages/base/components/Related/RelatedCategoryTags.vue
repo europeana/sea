@@ -45,6 +45,32 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  /**
+   * If true, selected tags will be shown first
+   */
+  bubbleUp: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const orderedTags = computed(() => {
+  if (!props.bubbleUp) {
+    return props.tags;
+  }
+
+  const selected = [];
+  const unselected = [];
+
+  for (const tag of props.tags) {
+    if (props.selected.includes(tag.identifier)) {
+      selected.push(tag);
+    } else {
+      unselected.push(tag);
+    }
+  }
+
+  return [...selected, ...unselected];
 });
 
 const badgeLink = (tagId) => {
@@ -103,8 +129,8 @@ const handleRight = (event) => {
         <span v-if="tagIcon" class="icon-ic-tag" />
         <div :class="{ 'ms-n2': !tagIcon }">
           <NuxtLinkLocale
-            v-for="(tag, index) in tags.filter((tag) => !!tag)"
-            :key="index"
+            v-for="tag in orderedTags.filter(Boolean)"
+            :key="tag.identifier"
             class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
             :class="{
               [badgeVariant]: true,
