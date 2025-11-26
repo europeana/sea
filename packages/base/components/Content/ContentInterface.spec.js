@@ -98,7 +98,7 @@ const factory = (props = {}) =>
       stubs: [
         "ContentCard",
         "ContentFeaturedCard",
-        "ContentTagsDropdown",
+        "ContentTagsFilter",
         "ContentTypeFilter",
         "GenericCallToActionBanner",
         "PaginationNavInput",

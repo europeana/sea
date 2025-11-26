@@ -464,7 +464,7 @@ watch(page, () => {
 <template>
   <div id="content-interface">
     <client-only>
-      <ContentTagsDropdown
+      <ContentTagsFilter
         :filtered-tags="filteredTags"
         :selected-tags="selectedTags"
       />
