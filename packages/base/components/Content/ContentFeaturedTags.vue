@@ -1,7 +1,4 @@
 <script setup>
-import useScrollTo from "@/composables/scrollTo.js";
-const { scrollToSelector } = useScrollTo();
-
 const props = defineProps({
   /**
    * All tags data
@@ -23,25 +20,9 @@ const featuredTagsRef = useTemplateRef("featuredtags");
 const scrollWidth = ref(featuredTagsRef.value?.$refs.tagswrapper?.scrollWidth);
 
 const featuredDisplayTags = computed(() => {
-  if (!featuredTags) {
-    return [];
-  }
-  const featuredTagsObjects = props.tags?.filter((tag) =>
-    featuredTags.includes(tag.identifier),
+  return props.tags?.filter((tag) =>
+    (featuredTags || []).includes(tag.identifier),
   );
-
-  const selected = [];
-  const unselected = [];
-
-  for (const tag of featuredTagsObjects) {
-    if (props.selectedTags.includes(tag.identifier)) {
-      selected.push(tag);
-    } else {
-      unselected.push(tag);
-    }
-  }
-
-  return [...selected, ...unselected];
 });
 
 const setScrollWidth = async () => {
@@ -63,16 +44,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", setScrollWidth);
 });
-
-// Scroll to the start when tags are (de)selected in horizontal scroll container
-watch(featuredDisplayTags, () => {
-  if (featuredTagsRef.value?.$refs.tagswrapper) {
-    scrollToSelector("div", {
-      container: featuredTagsRef.value.$refs.tagswrapper,
-      behavior: "smooth",
-    });
-  }
-});
 </script>
 <template>
   <div class="overflow-x-hidden">
@@ -87,6 +58,7 @@ watch(featuredDisplayTags, () => {
         route-name="data-space"
         :tag-icon="false"
         :style="scrollWidth && `--width: ${scrollWidth}`"
+        :bubble-up="true"
       />
     </div>
   </div>

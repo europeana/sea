@@ -1,6 +1,9 @@
 <script setup>
+import useScrollTo from "@/composables/scrollTo.js";
+
 const route = useRoute();
 const { matomo } = useMatomo();
+const { scrollToSelector } = useScrollTo();
 
 const props = defineProps({
   /**
@@ -45,6 +48,34 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  /**
+   * If true, selected tags will be shown first
+   */
+  bubbleUp: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const tagsWrapperRef = useTemplateRef("tagswrapper");
+
+const orderedTags = computed(() => {
+  if (!props.bubbleUp) {
+    return props.tags;
+  }
+
+  const selected = [];
+  const unselected = [];
+
+  for (const tag of props.tags) {
+    if (props.selected.includes(tag.identifier)) {
+      selected.push(tag);
+    } else {
+      unselected.push(tag);
+    }
+  }
+
+  return [...selected, ...unselected];
 });
 
 const badgeLink = (tagId) => {
@@ -84,6 +115,16 @@ const handleLeft = (event) => {
 const handleRight = (event) => {
   event.target.nextElementSibling?.focus();
 };
+
+// Scroll to the start when tags are (de)selected in horizontal scroll container
+watch(orderedTags, () => {
+  if (tagsWrapperRef.value) {
+    scrollToSelector("div", {
+      container: tagsWrapperRef.value,
+      behavior: "smooth",
+    });
+  }
+});
 </script>
 <template>
   <div class="row flex-md-row related-category-tags">
@@ -103,8 +144,8 @@ const handleRight = (event) => {
         <span v-if="tagIcon" class="icon-ic-tag" />
         <div :class="{ 'ms-n2': !tagIcon }">
           <NuxtLinkLocale
-            v-for="(tag, index) in tags.filter((tag) => !!tag)"
-            :key="index"
+            v-for="tag in orderedTags.filter(Boolean)"
+            :key="tag.identifier"
             class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
             :class="{
               [badgeVariant]: true,
