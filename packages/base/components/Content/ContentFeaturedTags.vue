@@ -83,7 +83,7 @@ onUnmounted(() => {
       padding-left: calc(50vw - 50%);
       scrollbar-width: none;
 
-      > div {
+      > ul {
         width: max-content;
         max-width: calc(var(--width) * 0.55px);
       }

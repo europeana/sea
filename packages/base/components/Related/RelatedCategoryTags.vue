@@ -142,26 +142,26 @@ watch(orderedTags, () => {
         :class="{ 'd-flex': tagIcon }"
       >
         <span v-if="tagIcon" class="icon-ic-tag" />
-        <div :class="{ 'ms-n2': !tagIcon }">
-          <NuxtLinkLocale
-            v-for="tag in orderedTags.filter(Boolean)"
-            :key="tag.identifier"
-            class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
-            :class="{
-              [badgeVariant]: true,
-              selected: isActive(tag.identifier),
-            }"
-            :active="isActive(tag.identifier)"
-            :to="badgeLink(tag.identifier)"
-            :data-qa="`${tag.name} category tag`"
-            @keydown.left="handleLeft"
-            @keydown.right="handleRight"
-            @click="clickBadge(tag.identifier)"
-          >
-            <span>{{ tag.name }}</span>
-            <span v-if="isActive(tag.identifier)" class="icon icon-clear" />
-          </NuxtLinkLocale>
-        </div>
+        <ul class="nav" :class="{ 'ms-n2': !tagIcon }">
+          <li v-for="tag in orderedTags.filter(Boolean)" :key="tag.identifier">
+            <NuxtLinkLocale
+              class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
+              :class="{
+                [badgeVariant]: true,
+                selected: isActive(tag.identifier),
+              }"
+              :active="isActive(tag.identifier)"
+              :to="badgeLink(tag.identifier)"
+              :data-qa="`${tag.name} category tag`"
+              @keydown.left="handleLeft"
+              @keydown.right="handleRight"
+              @click="clickBadge(tag.identifier)"
+            >
+              <span>{{ tag.name }}</span>
+              <span v-if="isActive(tag.identifier)" class="icon icon-clear" />
+            </NuxtLinkLocale>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
