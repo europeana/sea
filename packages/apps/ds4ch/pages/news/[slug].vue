@@ -124,10 +124,10 @@ const truncatedAttachmentLabel = (attachment) => {
               </NuxtLink>
             </div>
           </article>
-          <RelatedCategoryTags
+          <ContentTagsList
             v-if="tags"
             :tags="tags"
-            :heading="$t('related.categoryTags.title')"
+            :heading="$t('content.discoverRelated')"
             class="related-container"
             route-name="data-space"
             badge-variant="badge-secondary"

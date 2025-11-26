@@ -127,12 +127,8 @@ watch(orderedTags, () => {
 });
 </script>
 <template>
-  <div class="row flex-md-row related-category-tags">
-    <div
-      v-if="tags.length > 0"
-      data-qa="related category tags"
-      class="col col-12"
-    >
+  <div class="row flex-md-row related-tags">
+    <div v-if="tags.length > 0" data-qa="related tags" class="col col-12">
       <h2 v-if="heading" class="related-heading text-uppercase">
         {{ heading }}
       </h2>
@@ -152,7 +148,7 @@ watch(orderedTags, () => {
               }"
               :active="isActive(tag.identifier)"
               :to="badgeLink(tag.identifier)"
-              :data-qa="`${tag.name} category tag`"
+              :data-qa="`${tag.name} tag`"
               @keydown.left="handleLeft"
               @keydown.right="handleRight"
               @click="clickBadge(tag.identifier)"

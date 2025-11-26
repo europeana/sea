@@ -120,7 +120,7 @@ const clickOutsideConfig = ref({
 <template>
   <ContentFeaturedTags :tags="tags" :selected-tags="selectedTags" />
   <div class="container">
-    <RelatedCategoryTags
+    <ContentTagsList
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
       :selected="selectedTags"
@@ -148,13 +148,13 @@ const clickOutsideConfig = ref({
           class="form-control"
           autocomplete="off"
           type="search"
-          :placeholder="$t('categories.label')"
+          :placeholder="$t('content.topics.label')"
           data-qa="tags dropdown search input"
           role="searchbox"
           aria-autocomplete="list"
           :aria-owns="showDropdown ? 'tags-options' : null"
           :aria-controls="showDropdown ? 'tags-options' : null"
-          :aria-label="$t('categories.label')"
+          :aria-label="$t('content.topics.label')"
           @focusin="handleFocusin"
         />
       </form>
@@ -164,9 +164,8 @@ const clickOutsideConfig = ref({
         class="tag-search-dropdown"
         data-qa="tags search dropdown"
       >
-        <RelatedCategoryTags
+        <ContentTagsList
           v-if="unfeaturedDisplayTags.length > 0"
-          ref="relatedCategoryTags"
           :tags="unfeaturedDisplayTags"
           :selected="selectedTags"
           tabindex="-1"
@@ -174,7 +173,7 @@ const clickOutsideConfig = ref({
           route-name="data-space"
         />
         <p v-else>
-          {{ $t("categories.noOptions") }}
+          {{ $t("content.topics.noOptions") }}
         </p>
       </div>
     </div>

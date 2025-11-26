@@ -48,12 +48,12 @@ onUnmounted(() => {
 <template>
   <div class="overflow-x-hidden">
     <div class="container">
-      <RelatedCategoryTags
+      <ContentTagsList
         v-if="featuredDisplayTags.length > 0"
         ref="featuredtags"
         :tags="featuredDisplayTags"
         :selected="selectedTags"
-        :heading="$t('categories.featuredTopics')"
+        :heading="$t('content.topics.featuredTopics')"
         class="featured-tags badge-container mb-4"
         route-name="data-space"
         :tag-icon="false"

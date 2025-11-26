@@ -2,7 +2,7 @@ import { afterEach, describe, it, expect, vi } from "vitest";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import { shallowMount } from "@vue/test-utils";
 
-import RelatedCategoryTags from "./RelatedCategoryTags.vue";
+import ContentTagsList from "./ContentTagsList.vue";
 import { nextTick } from "vue";
 
 const trackEventMock = vi.fn((args) => args);
@@ -20,7 +20,7 @@ vi.mock("@/composables/scrollTo.js", () => ({
 }));
 
 const factory = ({ props, mocks } = {}) =>
-  shallowMount(RelatedCategoryTags, {
+  shallowMount(ContentTagsList, {
     props,
     global: {
       mocks: {
@@ -29,7 +29,7 @@ const factory = ({ props, mocks } = {}) =>
     },
   });
 
-describe("components/related/RelatedCategoryTags", () => {
+describe("components/Content/ContentTagsList", () => {
   const routeName = "news";
 
   describe("template", () => {
