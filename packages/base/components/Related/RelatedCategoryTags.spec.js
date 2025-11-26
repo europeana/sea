@@ -3,6 +3,7 @@ import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import { shallowMount } from "@vue/test-utils";
 
 import RelatedCategoryTags from "./RelatedCategoryTags.vue";
+import { nextTick } from "vue";
 
 const trackEventMock = vi.fn((args) => args);
 
@@ -10,6 +11,13 @@ mockNuxtImport("useMatomo", () => () => ({
   matomo: { value: { trackEvent: trackEventMock } },
 }));
 mockNuxtImport("useRoute", () => () => ({ path: "/path" }));
+
+const scrollToSelector = vi.fn();
+vi.mock("@/composables/scrollTo.js", () => ({
+  default: () => ({
+    scrollToSelector,
+  }),
+}));
 
 const factory = ({ props, mocks } = {}) =>
   shallowMount(RelatedCategoryTags, {
@@ -102,6 +110,46 @@ describe("components/related/RelatedCategoryTags", () => {
             "Deselect tag",
             "red-tape",
           ]);
+        });
+      });
+
+      describe("when bubble up is enabled", () => {
+        it("orders by selected state", () => {
+          const wrapper = factory({
+            props: {
+              bubbleUp: true,
+              routeName,
+              tags,
+              selected: ["white-wash"],
+            },
+          });
+
+          expect(wrapper.vm.orderedTags[0].name).toBe(tags[1].name);
+        });
+      });
+
+      describe("order of tags changes", () => {
+        it("scrolls to the container start", async () => {
+          const wrapper = factory({
+            props: {
+              bubbleUp: true,
+              routeName,
+              tags,
+            },
+          });
+
+          const tagswrapperEl = wrapper.vm.$refs.tagswrapper;
+
+          expect(scrollToSelector).not.toHaveBeenCalled();
+
+          wrapper.setProps({ selected: ["white-wash"] });
+
+          await nextTick();
+
+          expect(scrollToSelector).toHaveBeenCalledWith("div", {
+            behavior: "smooth",
+            container: tagswrapperEl,
+          });
         });
       });
     });

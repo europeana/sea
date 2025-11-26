@@ -1,6 +1,9 @@
 <script setup>
+import useScrollTo from "@/composables/scrollTo.js";
+
 const route = useRoute();
 const { matomo } = useMatomo();
+const { scrollToSelector } = useScrollTo();
 
 const props = defineProps({
   /**
@@ -53,6 +56,8 @@ const props = defineProps({
     default: false,
   },
 });
+
+const tagsWrapperRef = useTemplateRef("tagswrapper");
 
 const orderedTags = computed(() => {
   if (!props.bubbleUp) {
@@ -110,6 +115,16 @@ const handleLeft = (event) => {
 const handleRight = (event) => {
   event.target.nextElementSibling?.focus();
 };
+
+// Scroll to the start when tags are (de)selected in horizontal scroll container
+watch(orderedTags, () => {
+  if (tagsWrapperRef.value) {
+    scrollToSelector("div", {
+      container: tagsWrapperRef.value,
+      behavior: "smooth",
+    });
+  }
+});
 </script>
 <template>
   <div class="row flex-md-row related-category-tags">

@@ -1,7 +1,4 @@
 <script setup>
-import useScrollTo from "@/composables/scrollTo.js";
-const { scrollToSelector } = useScrollTo();
-
 const props = defineProps({
   /**
    * All tags data
@@ -46,17 +43,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener("resize", setScrollWidth);
-});
-
-// Scroll to the start when tags are (de)selected in horizontal scroll container
-// TODO: is this still working/relevant with the introduction of bubbleUp on RelatedCategoryTags?
-watch(featuredDisplayTags, () => {
-  if (featuredTagsRef.value?.$refs.tagswrapper) {
-    scrollToSelector("div", {
-      container: featuredTagsRef.value.$refs.tagswrapper,
-      behavior: "smooth",
-    });
-  }
 });
 </script>
 <template>
