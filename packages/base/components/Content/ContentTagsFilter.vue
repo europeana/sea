@@ -40,9 +40,11 @@ const { data: tags } = await useAsyncData("allCategories", async () => {
     :tags="tags"
     :selected-tags="selectedTags"
   />
-  <ContentTagsDropdown
-    :tags="tags"
-    :filtered-tags="filteredTags"
-    :selected-tags="selectedTags"
-  />
+  <ClientOnly>
+    <ContentTagsDropdown
+      :tags="tags"
+      :filtered-tags="filteredTags"
+      :selected-tags="selectedTags"
+    />
+  </ClientOnly>
 </template>

@@ -463,12 +463,10 @@ watch(page, () => {
 
 <template>
   <div id="content-interface">
-    <client-only>
-      <ContentTagsFilter
-        :filtered-tags="filteredTags"
-        :selected-tags="selectedTags"
-      />
-    </client-only>
+    <ContentTagsFilter
+      :filtered-tags="filteredTags"
+      :selected-tags="selectedTags"
+    />
     <div class="container">
       <div
         class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
