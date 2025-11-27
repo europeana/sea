@@ -29,10 +29,11 @@ const props = defineProps({
   },
   /**
    * Name of the route which the tags link to
+   * If falsy, the current route name is used
    */
-  routeName: {
+  routeNameOverride: {
     type: String,
-    required: true,
+    default: null,
   },
   /**
    * Variant of the badges
@@ -78,8 +79,10 @@ const orderedTags = computed(() => {
   return [...selected, ...unselected];
 });
 
+const routeName = computed(() => props.routeNameOverride || route.name);
+
 const badgeLink = (tagId) => {
-  const newRoute = { name: props.routeName };
+  const newRoute = { name: routeName.value };
 
   if (props.selected.includes(tagId)) {
     const tagsWithoutCurrent = props.selected.filter((item) => item !== tagId);

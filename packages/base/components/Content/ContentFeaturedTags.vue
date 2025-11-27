@@ -55,7 +55,6 @@ onUnmounted(() => {
         :selected="selectedTags"
         :heading="$t('content.topics.featuredTopics')"
         class="featured-tags badge-container mb-4"
-        route-name="data-space"
         :tag-icon="false"
         :style="scrollWidth && `--width: ${scrollWidth}`"
         :bubble-up="true"

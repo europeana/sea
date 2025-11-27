@@ -114,7 +114,6 @@ const clickOutsideConfig = ref({
       :tags="displaySelectedTags"
       :selected="selectedTags"
       class="mb-2"
-      route-name="data-space"
       :tag-icon="false"
     />
     <div
@@ -159,7 +158,6 @@ const clickOutsideConfig = ref({
           :selected="selectedTags"
           tabindex="-1"
           class="badge-container mb-2"
-          route-name="data-space"
         />
         <p v-else>
           {{ $t("content.topics.noOptions") }}

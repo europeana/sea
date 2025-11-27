@@ -213,7 +213,7 @@ useHead({
             :tags="tags"
             :heading="$t('content.discoverRelated')"
             class="related-container"
-            route-name="data-space"
+            route-name-override="data-space"
             badge-variant="badge-secondary"
           />
         </div>

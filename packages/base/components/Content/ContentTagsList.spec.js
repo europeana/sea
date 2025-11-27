@@ -10,7 +10,7 @@ const trackEventMock = vi.fn((args) => args);
 mockNuxtImport("useMatomo", () => () => ({
   matomo: { value: { trackEvent: trackEventMock } },
 }));
-mockNuxtImport("useRoute", () => () => ({ path: "/path" }));
+mockNuxtImport("useRoute", () => () => ({ name: "news", path: "/path" }));
 
 const scrollToSelector = vi.fn();
 vi.mock("@/composables/scrollTo.js", () => ({
@@ -30,14 +30,12 @@ const factory = ({ props, mocks } = {}) =>
   });
 
 describe("components/Content/ContentTagsList", () => {
-  const routeName = "news";
-
   describe("template", () => {
     describe("when there are no tags", () => {
       const tags = [];
 
       it("does not display the tag icon", () => {
-        const wrapper = factory({ props: { routeName, tags } });
+        const wrapper = factory({ props: { tags } });
 
         const tagIcon = wrapper.find(".icon-ic-tag");
 
@@ -52,7 +50,7 @@ describe("components/Content/ContentTagsList", () => {
       ];
 
       it("displays the tag icon", () => {
-        const wrapper = factory({ props: { routeName, tags } });
+        const wrapper = factory({ props: { tags } });
 
         const tagIcon = wrapper.find(".icon-ic-tag");
 
@@ -60,7 +58,7 @@ describe("components/Content/ContentTagsList", () => {
       });
 
       it("displays a badge for each tag", () => {
-        const wrapper = factory({ props: { routeName, tags } });
+        const wrapper = factory({ props: { tags } });
 
         const badges = wrapper.findAll(".badge");
 
@@ -69,7 +67,7 @@ describe("components/Content/ContentTagsList", () => {
 
       it("excludes null tags", () => {
         const wrapper = factory({
-          props: { routeName, tags: tags.concat([null]) },
+          props: { tags: tags.concat([null]) },
         });
 
         const badges = wrapper.findAll(".badge");
@@ -83,7 +81,7 @@ describe("components/Content/ContentTagsList", () => {
         });
 
         it("tracks selecting tag", async () => {
-          const wrapper = factory({ props: { routeName, tags } });
+          const wrapper = factory({ props: { tags } });
 
           const badge = wrapper.find(".badge");
 
@@ -98,7 +96,7 @@ describe("components/Content/ContentTagsList", () => {
 
         it("tracks deselecting tag", async () => {
           const wrapper = factory({
-            props: { routeName, tags, selected: [tags[0].identifier] },
+            props: { tags, selected: [tags[0].identifier] },
           });
 
           const badge = wrapper.find(".badge");
@@ -118,7 +116,6 @@ describe("components/Content/ContentTagsList", () => {
           const wrapper = factory({
             props: {
               bubbleUp: true,
-              routeName,
               tags,
               selected: ["white-wash"],
             },
@@ -133,7 +130,6 @@ describe("components/Content/ContentTagsList", () => {
           const wrapper = factory({
             props: {
               bubbleUp: true,
-              routeName,
               tags,
             },
           });
@@ -159,27 +155,42 @@ describe("components/Content/ContentTagsList", () => {
       const selected = ["red tape"];
 
       describe("badgeLink", () => {
+        it("links to the current route name", () => {
+          const wrapper = factory({ props: { tags } });
+          const link = wrapper.vm.badgeLink("red tape");
+          expect(link.name).toBe("news");
+        });
+
+        it("links to the route name override when there is one", () => {
+          const routeNameOverride = "overview";
+          const wrapper = factory({
+            props: { tags, routeNameOverride },
+          });
+          const link = wrapper.vm.badgeLink("red tape");
+          expect(link.name).toBe(routeNameOverride);
+        });
+
         it("adds the tag to the url", () => {
-          const wrapper = factory({ props: { routeName, tags } });
+          const wrapper = factory({ props: { tags } });
           const link = wrapper.vm.badgeLink("red tape");
           expect(link.query.tags).toBe("red tape");
         });
 
         it("adds another tag to the url", () => {
-          const wrapper = factory({ props: { routeName, tags, selected } });
+          const wrapper = factory({ props: { tags, selected } });
           const link = wrapper.vm.badgeLink("blue tape");
           expect(link.query.tags).toBe("red tape,blue tape");
         });
 
         it("removes the only tag from the url", () => {
-          const wrapper = factory({ props: { routeName, tags, selected } });
+          const wrapper = factory({ props: { tags, selected } });
           const link = wrapper.vm.badgeLink("red tape");
           expect(link.query.tags).toBe(undefined);
         });
 
         it("removes a tag from the url", () => {
           const wrapper = factory({
-            props: { routeName, tags, selected: ["red tape", "blue tape"] },
+            props: { tags, selected: ["red tape", "blue tape"] },
           });
           const link = wrapper.vm.badgeLink("blue tape");
           expect(link.query.tags).toBe("red tape");
@@ -188,7 +199,7 @@ describe("components/Content/ContentTagsList", () => {
         describe("when on page beyond the first page", () => {
           it("resets the page query", () => {
             const wrapper = factory({
-              props: { routeName, tags },
+              props: { tags },
               mocks: { $route: { query: { page: 2 } } },
             });
 
@@ -200,13 +211,13 @@ describe("components/Content/ContentTagsList", () => {
 
       describe("isActive", () => {
         it("returns true when there is an active tag", () => {
-          const wrapper = factory({ props: { routeName, tags, selected } });
+          const wrapper = factory({ props: { tags, selected } });
           const active = wrapper.vm.isActive("red tape");
 
           expect(active).toBe(true);
         });
         it("returns false when there is not an active tag", () => {
-          const wrapper = factory({ props: { routeName, tags } });
+          const wrapper = factory({ props: { tags } });
           const active = wrapper.vm.isActive("red tape");
 
           expect(active).toBe(false);
