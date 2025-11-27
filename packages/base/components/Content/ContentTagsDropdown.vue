@@ -1,4 +1,6 @@
 <script setup>
+import useClickOutside from "@europeana/sea-base-layer/composables/clickOutside";
+
 const route = useRoute();
 const props = defineProps({
   /**
@@ -28,6 +30,7 @@ const featuredTags = inject("featuredContentTags", null);
 const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
+const tagsDropdown = useTemplateRef("tagsdropdown");
 
 const allDisplayTags = computed(() => {
   let displayTags;
@@ -81,16 +84,15 @@ watch(
   },
 );
 
-const setClickOutsideConfigIsActive = (isActive) => {
-  clickOutsideConfig.value.isActive = isActive;
-};
+const clickOutsideActive = ref(false);
+
 const handleFocusin = () => {
-  setClickOutsideConfigIsActive(true);
+  clickOutsideActive.value = true;
   showDropdown.value = true;
 };
 
 const handleClickOutside = () => {
-  setClickOutsideConfigIsActive(false);
+  clickOutsideActive.value = false;
   showDropdown.value = false;
 };
 
@@ -99,12 +101,7 @@ const handleEsc = () => {
   handleClickOutside();
 };
 
-const clickOutsideConfig = ref({
-  capture: true,
-  events: ["click", "dblclick", "focusin", "touchstart"],
-  handler: handleClickOutside,
-  isActive: false,
-});
+useClickOutside(tagsDropdown, clickOutsideActive, handleClickOutside);
 </script>
 
 <template>
@@ -118,7 +115,6 @@ const clickOutsideConfig = ref({
     />
     <div
       ref="tagsdropdown"
-      v-click-outside="handleClickOutside"
       class="position-relative mb-4 mb-4k-5"
       data-qa="tags dropdown"
       @keydown.esc="handleEsc"
