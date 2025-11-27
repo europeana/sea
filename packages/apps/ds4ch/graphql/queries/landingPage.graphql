@@ -20,6 +20,9 @@ query LandingPage(
       name
       headline
       text
+      image {
+        ...imageFields
+      }
       primaryImageOfPage {
         ...landingPageImageWithAttributionFields
       }

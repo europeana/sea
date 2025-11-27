@@ -7,7 +7,7 @@ import { createHttp404Error } from "@europeana/sea-base-layer/composables/error"
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
 const contentful = inject("$contentful");
-const { localeProperties } = useI18n();
+const { t, localeProperties } = useI18n();
 
 const { data } = await useAsyncData("homePage", async () => {
   const variables = {
@@ -29,8 +29,11 @@ const sections = page.hasPartCollection?.items.filter((item) => !!item);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
-useHead({
-  title: stripMarkdown(page.headline),
+useSeoMeta({
+  title: t("home.title"),
+  description: stripMarkdown(page.headline),
+  ogDescription: stripMarkdown(page.headline),
+  ogImage: page.image?.url, // use helper util for image sizing?
 });
 </script>
 

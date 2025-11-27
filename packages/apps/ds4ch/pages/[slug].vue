@@ -1,4 +1,5 @@
 <script setup>
+import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
@@ -32,8 +33,11 @@ const sections = page.hasPartCollection?.items.filter((item) => !!item);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
-useHead({
-  title: page.headline,
+useSeoMeta({
+  title: stripMarkdown(page.headline),
+  description: stripMarkdown(page.text),
+  ogDescription: stripMarkdown(page.text),
+  ogImage: page.image?.url, // use helper util for image sizing?
 });
 </script>
 

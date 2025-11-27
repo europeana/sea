@@ -64,25 +64,12 @@ const projectLogoImageSizes = [
   "288px",
 ].join(",");
 
-useHead({
+useSeoMeta({
   title: page.name,
-  meta: [
-    {
-      hid: "og:type",
-      property: "og:type",
-      content: "article",
-    },
-    {
-      hid: "og:image",
-      property: "og:image",
-      content: page.image?.url,
-    },
-    {
-      hid: "og:description",
-      property: "og:description",
-      content: page.headline,
-    },
-  ],
+  description: page.headline,
+  ogDescription: page.headline,
+  ogType: "article",
+  ogImage: page.image?.url, // use helper util for image sizing?
 });
 </script>
 

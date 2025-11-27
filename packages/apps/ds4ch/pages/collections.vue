@@ -1,4 +1,5 @@
 <script setup>
+import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
@@ -26,8 +27,11 @@ if (!page) {
 const sections = page.hasPartCollection?.items.filter((item) => !!item);
 const featuredContent = page.featuredContent;
 
-useHead({
-  title: page.headline,
+useSeoMeta({
+  title: stripMarkdown(page.headline),
+  description: stripMarkdown(page.text),
+  ogDescription: stripMarkdown(page.text),
+  ogImage: page.image?.url, // use helper util for image sizing?
 });
 </script>
 

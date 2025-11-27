@@ -1,4 +1,5 @@
 <script setup>
+import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { provide } from "vue";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
@@ -24,8 +25,11 @@ if (!page) {
   throw createHttp404Error();
 }
 
-useHead({
-  title: page.headline,
+useSeoMeta({
+  title: stripMarkdown(page.name),
+  description: stripMarkdown(page.headline),
+  ogDescription: stripMarkdown(page.headline),
+  ogImage: page.image?.url, // use helper util for image sizing?
 });
 
 provide("featuredContentTags", [

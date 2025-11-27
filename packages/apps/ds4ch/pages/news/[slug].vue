@@ -37,8 +37,12 @@ const tags =
     ? page.categoriesCollection.items
     : null;
 
-useHead({
+useSeoMeta({
   title: page.name,
+  description: page.headline,
+  ogDescription: page.headline,
+  ogType: "article",
+  ogImage: page.primaryImageOfPage?.image?.url, // use helper util for image sizing?
 });
 
 const truncatedAttachmentLabel = (attachment) => {
