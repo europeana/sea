@@ -169,6 +169,9 @@
       "networkMembers": "Network members"
     }
   },
+  "layout": {
+    "skipToMain": "Skip to page contents"
+  },
   "nav": {
     "about": "About",
     "close": "Close menu",

@@ -23,6 +23,9 @@ useHead({
 <template>
   <div class="landing-page xxl-page">
     <NuxtRouteAnnouncer />
+    <a class="skip-main" href="#main">
+      {{ $t("layout.skipToMain") }}
+    </a>
     <div
       id="toaster-bottom-left"
       class="toast-container position-fixed bottom-0 ms-2 ms-sm-4 mb-2 mb-sm-4"
@@ -31,7 +34,7 @@ useHead({
       <CookiesWidget />
     </div>
     <PageHeader />
-    <main>
+    <main id="main" role="main">
       <div class="page">
         <div class="container footer-margin pb-5">
           <div class="row justify-content-center">
