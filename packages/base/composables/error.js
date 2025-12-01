@@ -1,13 +1,10 @@
-export const createHttpError = (statusCode, error = {}) => {
-  const { $i18n } = useNuxtApp();
-  const { t, te } = $i18n;
+import httpError from "http-errors";
 
+export const createHttpError = (statusCode, error = {}) => {
   return createError({
     fatal: true,
     statusCode,
-    statusMessage: te(`errors.http.${statusCode}`)
-      ? t(`errors.http.${statusCode}`)
-      : error.statusMessage,
     ...error,
+    statusMessage: error.statusMessage || httpError(statusCode).message,
   });
 };

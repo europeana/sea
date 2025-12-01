@@ -9,13 +9,17 @@ const props = defineProps({
   },
 });
 
-const title = computed(() => {
-  return te(`errorMessage.${props.error.statusCode}`)
-    ? t(`errorMessage.${props.error.statusCode}`)
-    : t(`errorMessage.unknown`);
+const heading = computed(() => {
+  if (te(`errorMessage.${props.error.statusCode}`)) {
+    return t(`errorMessage.${props.error.statusCode}`);
+  } else {
+    return t(`errorMessage.unknown`);
+  }
 });
 
-const showAlertMessage = computed(() => props.error.statusCode !== 404);
+const showAlertMessage = computed(
+  () => props.error.statusCode !== 404 && heading.value !== props.error.message,
+);
 
 const attributionFields = (fields) => {
   return {
@@ -39,10 +43,11 @@ const attributionFields = (fields) => {
       :height="errorImage.image?.height || 'auto'"
       :alt="errorImage.image?.description || ''"
       :attribution="attributionFields(errorImage)"
+      :lazy="false"
     />
     <section class="my-auto">
-      <h1 class="title mb-4">
-        {{ title }}
+      <h1 class="mb-4">
+        {{ heading }}
       </h1>
     </section>
   </div>
@@ -90,7 +95,7 @@ section {
     }
   }
 
-  .title {
+  h1 {
     @extend %title-2;
     color: $darkgrey;
   }

@@ -6,7 +6,7 @@ export const useAsyncPageData = async (key, handler, options) => {
 
   if (error.value) {
     if (error.value.statusCode) {
-      throw createHttpError(error.value.statusCode);
+      throw createHttpError(error.value.statusCode, error.value);
     }
     throw error.value;
   }
