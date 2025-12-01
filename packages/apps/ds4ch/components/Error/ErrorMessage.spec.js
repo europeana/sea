@@ -22,7 +22,7 @@ describe("components/Error/ErrorMessage", () => {
   describe("when passed a 404 error", () => {
     it("renders the right title and no alert message", () => {
       const wrapper = factory({ error: { statusCode: 404 } });
-      expect(wrapper.find(".title").text()).toEqual("errorMessage.404");
+      expect(wrapper.find("h1").text()).toEqual("errorMessage.404");
       expect(wrapper.findComponent({ name: "AlertMessage" }).exists()).toBe(
         false,
       );
@@ -36,7 +36,7 @@ describe("components/Error/ErrorMessage", () => {
       }));
 
       const wrapper = factory({ error: { statusCode: 520 } });
-      expect(wrapper.find(".title").text()).toEqual("errorMessage.unknown");
+      expect(wrapper.find("h1").text()).toEqual("errorMessage.unknown");
       expect(wrapper.findComponent({ name: "AlertMessage" }).exists()).toBe(
         true,
       );

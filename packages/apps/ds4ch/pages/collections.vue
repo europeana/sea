@@ -1,7 +1,7 @@
 <script setup>
 import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
-import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
@@ -9,7 +9,7 @@ const slug = "collections";
 const contentful = inject("$contentful");
 const { t, localeProperties } = useI18n({ useScope: "global" });
 
-const { data } = await useAsyncData(`landingPage:${slug}`, async () => {
+const { page } = await useAsyncPageData(`landingPage:${slug}`, async () => {
   const variables = {
     identifier: slug,
     locale: localeProperties.value.language,
@@ -19,19 +19,13 @@ const { data } = await useAsyncData(`landingPage:${slug}`, async () => {
   return { page: response.data?.landingPageCollection?.items?.[0] };
 });
 
-const page = data.value.page;
-
-if (!page) {
-  throw createHttp404Error();
-}
-
-const sections = page.hasPartCollection?.items.filter((item) => !!item);
-const featuredContent = page.featuredContent;
+const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const featuredContent = page.value.featuredContent;
 
 usePageMeta({
-  title: stripMarkdown(page.headline),
-  description: page.description,
-  image: page.image,
+  title: stripMarkdown(page.value.headline),
+  description: page.value.description,
+  image: page.value.image,
 });
 </script>
 

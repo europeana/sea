@@ -1,12 +1,10 @@
-const createHttpError = (statusCode, error = {}) => {
-  const { t } = useI18n();
+import httpError from "http-errors";
 
+export const createHttpError = (statusCode, error = {}) => {
   return createError({
     fatal: true,
     statusCode,
-    statusMessage: t(`errors.http.${statusCode}`),
     ...error,
+    statusMessage: error.statusMessage || httpError(statusCode).message,
   });
 };
-
-export const createHttp404Error = (error = {}) => createHttpError(404, error);

@@ -1,7 +1,7 @@
 <script setup>
 import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { provide } from "vue";
-import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
@@ -9,7 +9,7 @@ const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data } = await useAsyncData(`contentHubPage:${slug}`, async () => {
+const { page } = await useAsyncPageData(`contentHubPage:${slug}`, async () => {
   const variables = {
     identifier: slug,
     locale: localeProperties.value.language,
@@ -20,16 +20,10 @@ const { data } = await useAsyncData(`contentHubPage:${slug}`, async () => {
   return { page: response.data?.contentHubPageCollection?.items?.[0] };
 });
 
-const page = data.value.page;
-
-if (!page) {
-  throw createHttp404Error();
-}
-
 usePageMeta({
-  title: stripMarkdown(page.name),
-  description: page.description,
-  image: page.image,
+  title: stripMarkdown(page.value.name),
+  description: page.value.description,
+  image: page.value.image,
 });
 
 provide("featuredContentTags", [

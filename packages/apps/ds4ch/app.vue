@@ -36,8 +36,11 @@ useHead({
       <!-- Keep at the top of page for easy keyboard a11y -->
       <CookiesWidget />
     </div>
+    <a class="skip-main" href="#main">
+      {{ $t("skipToMainContent") }}
+    </a>
     <PageHeader />
-    <main>
+    <main id="main" role="main">
       <NuxtPage />
     </main>
     <PageFooter />

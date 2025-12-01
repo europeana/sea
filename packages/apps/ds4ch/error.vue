@@ -8,6 +8,8 @@ const props = defineProps({
   },
 });
 
+const { t } = useI18n();
+
 useHead({
   link: [
     {
@@ -16,7 +18,8 @@ useHead({
       type: "image/x-icon",
     },
   ],
-  title: props.error.message,
+  // TODO: lookup in i18n
+  title: t("error"),
 });
 </script>
 
@@ -30,8 +33,11 @@ useHead({
       <!-- Keep at the top of page for easy keyboard a11y -->
       <CookiesWidget />
     </div>
+    <a class="skip-main" href="#main">
+      {{ $t("skipToMainContent") }}
+    </a>
     <PageHeader />
-    <main>
+    <main id="main" role="main">
       <div class="page">
         <div class="container footer-margin pb-5">
           <div class="row justify-content-center">

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "graphql": "^16.11.0",
+    "http-errors": "^2.0.1",
     "node-fetch-native": "^1.6.6"
   },
   "devDependencies": {

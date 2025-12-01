@@ -1,5 +1,5 @@
 <script setup>
-import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import projectPageQuery from "@/graphql/queries/projectPage.graphql";
 import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
@@ -8,7 +8,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data } = await useAsyncData(
+const { page } = await useAsyncPageData(
   `projectPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -21,37 +21,31 @@ const { data } = await useAsyncData(
   },
 );
 
-const page = data.value.page;
-
-if (!page) {
-  throw createHttp404Error();
-}
-
-const partnerList = page.project?.partners;
+const partnerList = page.value.project?.partners;
 // TODO: It was intened to allow editors to add Europeana organisation entities
 // as partnerEntities via contentful. These would need to be retrieved via the
 // Europeana entity API to have their prefLabels added as list items here.
-//   if (!page.project.partnerEntities) {
-//     return page.partners;
+//   if (!page.value.project.partnerEntities) {
+//     return page.value.partners;
 //   }
-//   const formattedEntities  = page.partnerEntities.join('\n - ')
-//   return `${page.partners}\n- ${formattedEntities}`;
+//   const formattedEntities  = page.value.partnerEntities.join('\n - ')
+//   return `${page.value.partners}\n- ${formattedEntities}`;
 
-const impactMetrics = page.project?.impactMetrics?.map((metric) => {
+const impactMetrics = page.value.project?.impactMetrics?.map((metric) => {
   const parts = metric.split(":");
   return { label: parts[0], value: parts[1] };
 });
 
-const reports = page.project?.reportsCollection?.items.map((report) => {
+const reports = page.value.project?.reportsCollection?.items.map((report) => {
   return { label: report.title, icon: "ic-download", url: report.url };
 });
 
 const tags =
-  page.categoriesCollection?.items.length > 0
-    ? page.categoriesCollection.items
+  page.value.categoriesCollection?.items.length > 0
+    ? page.value.categoriesCollection.items
     : null;
 
-const projectLogoImage = page.project?.logo?.image;
+const projectLogoImage = page.value.project?.logo?.image;
 
 const PROJECT_LOGO_SRCSET_PRESETS = {
   large: { w: 112, h: 112 },
@@ -66,9 +60,9 @@ const projectLogoImageSizes = [
 ].join(",");
 
 usePageMeta({
-  title: page.name,
-  description: page.headline,
-  image: page.image,
+  title: page.value.name,
+  description: page.value.headline,
+  image: page.value.image,
   ogType: "article",
 });
 </script>

@@ -25,9 +25,10 @@ describe("query", () => {
   beforeAll(() => {
     vi.mock("node-fetch-native", () => {
       return {
-        default: vi
-          .fn()
-          .mockResolvedValue({ json: () => Promise.resolve({ data: {} }) }),
+        default: vi.fn().mockResolvedValue({
+          ok: true,
+          json: () => Promise.resolve({ data: {} }),
+        }),
       };
     });
   });
