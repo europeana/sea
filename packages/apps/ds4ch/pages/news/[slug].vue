@@ -2,6 +2,7 @@
 import blogPostPageQuery from "@/graphql/queries/blogPostPage.graphql";
 import truncate from "@europeana/sea-base-layer/utils/text/truncate.js";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const route = useRoute();
 
@@ -37,12 +38,11 @@ const tags =
     ? page.categoriesCollection.items
     : null;
 
-useSeoMeta({
+usePageMeta({
   title: page.name,
-  description: page.headline,
-  ogDescription: page.headline,
+  description: page.description,
+  image: page.primaryImageOfPage?.image,
   ogType: "article",
-  ogImage: page.primaryImageOfPage?.image?.url, // use helper util for image sizing?
 });
 
 const truncatedAttachmentLabel = (attachment) => {

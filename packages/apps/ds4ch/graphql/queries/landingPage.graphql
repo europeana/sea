@@ -19,6 +19,7 @@ query LandingPage(
       identifier
       name
       headline
+      description
       text
       image {
         ...imageFields

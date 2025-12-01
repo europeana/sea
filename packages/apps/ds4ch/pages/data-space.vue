@@ -3,6 +3,7 @@ import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { provide } from "vue";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
@@ -25,11 +26,10 @@ if (!page) {
   throw createHttp404Error();
 }
 
-useSeoMeta({
+usePageMeta({
   title: stripMarkdown(page.name),
-  description: stripMarkdown(page.headline),
-  ogDescription: stripMarkdown(page.headline),
-  ogImage: page.image?.url, // use helper util for image sizing?
+  description: page.description,
+  image: page.image,
 });
 
 provide("featuredContentTags", [

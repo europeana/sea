@@ -3,6 +3,7 @@ import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
@@ -33,11 +34,10 @@ const sections = page.hasPartCollection?.items.filter((item) => !!item);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
-useSeoMeta({
+usePageMeta({
   title: stripMarkdown(page.headline),
-  description: stripMarkdown(page.text),
-  ogDescription: stripMarkdown(page.text),
-  ogImage: page.image?.url, // use helper util for image sizing?
+  description: page.description,
+  image: page.image,
 });
 </script>
 

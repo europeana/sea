@@ -1,6 +1,7 @@
 <script setup>
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import projectPageQuery from "@/graphql/queries/projectPage.graphql";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const route = useRoute();
 
@@ -64,12 +65,11 @@ const projectLogoImageSizes = [
   "288px",
 ].join(",");
 
-useSeoMeta({
+usePageMeta({
   title: page.name,
   description: page.headline,
-  ogDescription: page.headline,
+  image: page.image,
   ogType: "article",
-  ogImage: page.image?.url, // use helper util for image sizing?
 });
 </script>
 

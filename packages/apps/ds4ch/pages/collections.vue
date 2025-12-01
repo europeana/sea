@@ -3,6 +3,7 @@ import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
 import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const slug = "collections";
 const contentful = inject("$contentful");
@@ -27,11 +28,10 @@ if (!page) {
 const sections = page.hasPartCollection?.items.filter((item) => !!item);
 const featuredContent = page.featuredContent;
 
-useSeoMeta({
+usePageMeta({
   title: stripMarkdown(page.headline),
-  description: stripMarkdown(page.text),
-  ogDescription: stripMarkdown(page.text),
-  ogImage: page.image?.url, // use helper util for image sizing?
+  description: page.description,
+  image: page.image,
 });
 </script>
 
