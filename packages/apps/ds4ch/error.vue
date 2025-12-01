@@ -8,6 +8,8 @@ const props = defineProps({
   },
 });
 
+const { t } = useI18n();
+
 useHead({
   link: [
     {
@@ -16,7 +18,8 @@ useHead({
       type: "image/x-icon",
     },
   ],
-  title: props.error.message,
+  // TODO: lookup in i18n
+  title: t("error"),
 });
 </script>
 

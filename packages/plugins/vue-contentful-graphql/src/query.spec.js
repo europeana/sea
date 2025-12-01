@@ -27,7 +27,10 @@ describe("query", () => {
       return {
         default: vi
           .fn()
-          .mockResolvedValue({ json: () => Promise.resolve({ data: {} }) }),
+          .mockResolvedValue({
+            ok: true,
+            json: () => Promise.resolve({ data: {} }),
+          }),
       };
     });
   });

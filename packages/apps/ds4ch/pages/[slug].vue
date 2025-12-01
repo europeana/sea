@@ -1,7 +1,7 @@
 <script setup>
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
-import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
@@ -9,7 +9,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data } = await useAsyncData(
+const { page } = await useAsyncPageData(
   `landingPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -22,18 +22,12 @@ const { data } = await useAsyncData(
   },
 );
 
-const page = data.value.page;
-
-if (!page) {
-  throw createHttp404Error();
-}
-
-const sections = page.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
 useHead({
-  title: page.headline,
+  title: page.value.headline,
 });
 </script>
 

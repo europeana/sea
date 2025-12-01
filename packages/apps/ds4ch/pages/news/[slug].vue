@@ -1,14 +1,14 @@
 <script setup>
 import blogPostPageQuery from "@/graphql/queries/blogPostPage.graphql";
 import truncate from "@europeana/sea-base-layer/utils/text/truncate.js";
-import { createHttp404Error } from "@europeana/sea-base-layer/composables/error";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 
 const route = useRoute();
 
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data } = await useAsyncData(
+const { page } = await useAsyncPageData(
   `blogPostPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -21,24 +21,20 @@ const { data } = await useAsyncData(
   },
 );
 
-const page = data.value.page;
-
-if (!page) {
-  throw createHttp404Error();
-}
-
-const sections = page.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 
 const authors =
-  page.authorCollection?.items.length > 0 ? page.authorCollection.items : null;
+  page.value.authorCollection?.items.length > 0
+    ? page.value.authorCollection.items
+    : null;
 
 const tags =
-  page.categoriesCollection?.items.length > 0
-    ? page.categoriesCollection.items
+  page.value.categoriesCollection?.items.length > 0
+    ? page.value.categoriesCollection.items
     : null;
 
 useHead({
-  title: page.name,
+  title: page.value.name,
 });
 
 const truncatedAttachmentLabel = (attachment) => {
