@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Peržiūrėti šį turinį per išorinę nuorodą"
   },
   "error": "Klaida",
+  "errorMessage": {
+    "404": "Atsiprašome! Puslapis, kurio ieškote, neegzistuoja.",
+    "unknown": "Įvyko klaida."
+  },
+  "errors": {
+    "http": {
+      "404": "Nerasta"
+    }
+  },
   "event": {
     "dateRange": "{startDate} į {endDate}",
     "label": "įvykis"

@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Katso tämä sisältö ulkoisen linkin kautta"
   },
   "error": "Virhe",
+  "errorMessage": {
+    "404": "Anteeksi! Etsimääsi sivua ei ole olemassa.",
+    "unknown": "Tapahtui virhe."
+  },
+  "errors": {
+    "http": {
+      "404": "Ei löytynyt"
+    }
+  },
   "event": {
     "dateRange": "{startDate} – {endDate}",
     "label": "tapahtuma"

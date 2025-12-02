@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Ara dan il-kontenut permezz ta' link estern"
   },
   "error": "Żball",
+  "errorMessage": {
+    "404": "Skużana! Il-paġna li qed tfittex ma teżistix.",
+    "unknown": "Seħħ żball."
+  },
+  "errors": {
+    "http": {
+      "404": "Ma Nstabx"
+    }
+  },
   "event": {
     "dateRange": "{startDate} sa {endDate}",
     "label": "avveniment"

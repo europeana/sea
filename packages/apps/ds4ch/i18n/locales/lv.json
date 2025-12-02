@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Skatiet šo saturu, izmantojot ārējo saiti"
   },
   "error": "Kļūda",
+  "errorMessage": {
+    "404": "Atvainojiet! Lapa, kuru meklējat, neeksistē.",
+    "unknown": "Radās kļūda."
+  },
+  "errors": {
+    "http": {
+      "404": "Nav atrasts"
+    }
+  },
   "event": {
     "dateRange": "{startDate} līdz {endDate}",
     "label": "notikums"
