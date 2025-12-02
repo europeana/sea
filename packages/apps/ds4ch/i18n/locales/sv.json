@@ -209,6 +209,7 @@
   },
   "results": "{count} resultat | {count} resultat",
   "shareWhere": "Var skulle du vilja dela detta?",
+  "skipToMainContent": "Hoppa till huvudinnehåll",
   "swiper": {
     "a11y": {
       "firstSlide": "Detta är den första bilden",

@@ -209,6 +209,7 @@
   },
   "results": "{count} tulemus | {count} tulemused",
   "shareWhere": "Kus soovite seda jagada?",
+  "skipToMainContent": "Jätka põhisisu juurde",
   "swiper": {
     "a11y": {
       "firstSlide": "See on esimene slaid",

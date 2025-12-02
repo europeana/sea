@@ -209,6 +209,7 @@
   },
   "results": "{count} rezultatas | {count} rezultatai",
   "shareWhere": "Kur norėtumėte tuo pasidalinti?",
+  "skipToMainContent": "Pereiti prie pagrindinio turinio",
   "swiper": {
     "a11y": {
       "firstSlide": "Tai pirmoji skaidrė",

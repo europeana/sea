@@ -209,6 +209,7 @@
   },
   "results": "{count} resultat | {count} resultater",
   "shareWhere": "Hvor vil du gerne dele dette?",
+  "skipToMainContent": "Spring til hovedindhold",
   "swiper": {
     "a11y": {
       "firstSlide": "Dette er den første slide",

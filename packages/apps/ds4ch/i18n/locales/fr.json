@@ -209,6 +209,7 @@
   },
   "results": "{count} résultat | {count} résultats",
   "shareWhere": "Où aimeriez-vous partager cela?",
+  "skipToMainContent": "Passer au contenu principal",
   "swiper": {
     "a11y": {
       "firstSlide": "Ceci est la première diapositive",

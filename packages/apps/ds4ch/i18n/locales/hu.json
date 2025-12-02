@@ -209,6 +209,7 @@
   },
   "results": "{count} eredmény | {count} eredmények",
   "shareWhere": "Hol szeretnéd megosztani?",
+  "skipToMainContent": "Ugrás a fő tartalomra",
   "swiper": {
     "a11y": {
       "firstSlide": "Ez az első dia",
