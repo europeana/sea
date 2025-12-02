@@ -1,8 +1,6 @@
-export default function useClickOutside(
-  element: ref<HTMLElement | null>,
-  isActive: ref<boolean>,
-  onOutsideClick: () => void,
-) {
+export default function useClickOutside(element: ref<HTMLElement | null>) {
+  const clickedOutside = ref<boolean>(false);
+
   const clickOutsideEvents: string[] = [
     "click",
     "dblclick",
@@ -18,9 +16,7 @@ export default function useClickOutside(
       ? path.indexOf(element.value) < 0
       : !element.value.contains(event.target);
 
-    if (isClickOutside) {
-      onOutsideClick();
-    }
+    clickedOutside.value = isClickOutside;
   };
 
   const removeEventListeners = () => {
@@ -31,19 +27,17 @@ export default function useClickOutside(
     );
   };
 
-  watch(isActive, (newVal: boolean) => {
-    if (newVal) {
-      clickOutsideEvents.forEach((eventName) =>
-        window.addEventListener(eventName, checkAndHandleClickOutside, {
-          capture: true,
-        }),
-      );
-    } else {
-      removeEventListeners();
-    }
-  });
+  const addEventListeners = () => {
+    clickOutsideEvents.forEach((eventName) =>
+      window.addEventListener(eventName, checkAndHandleClickOutside, {
+        capture: true,
+      }),
+    );
+  };
 
-  onUnmounted(() => {
-    removeEventListeners();
-  });
+  return {
+    clickedOutside: readonly(clickedOutside),
+    enableClickOutsideListeners: addEventListeners,
+    disableClickOutsideListeners: removeEventListeners,
+  };
 }

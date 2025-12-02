@@ -84,24 +84,34 @@ watch(
   },
 );
 
-const clickOutsideActive = ref(false);
+const {
+  clickedOutside,
+  enableClickOutsideListeners,
+  disableClickOutsideListeners,
+} = useClickOutside(tagsDropdown);
 
-const handleFocusin = () => {
-  clickOutsideActive.value = true;
-  showDropdown.value = true;
-};
+watch(clickedOutside, (newVal) => {
+  showDropdown.value = !newVal;
 
-const handleClickOutside = () => {
-  clickOutsideActive.value = false;
-  showDropdown.value = false;
-};
+  if (newVal) {
+    disableClickOutsideListeners();
+  }
+});
 
 const handleEsc = () => {
   tagsInput.value.blur();
-  handleClickOutside();
+  showDropdown.value = false;
+  disableClickOutsideListeners();
 };
 
-useClickOutside(tagsDropdown, clickOutsideActive, handleClickOutside);
+const handleFocusin = () => {
+  showDropdown.value = true;
+  enableClickOutsideListeners();
+};
+
+onUnmounted(() => {
+  disableClickOutsideListeners();
+});
 </script>
 
 <template>

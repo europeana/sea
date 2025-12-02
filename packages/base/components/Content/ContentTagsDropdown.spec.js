@@ -9,6 +9,18 @@ const { useRouteMock } = vi.hoisted(() => ({
 }));
 mockNuxtImport("useRoute", () => useRouteMock);
 
+const clickedOutside = ref(false);
+const enableClickOutsideListeners = vi.fn();
+const disableClickOutsideListeners = vi.fn();
+
+vi.mock("@europeana/sea-base-layer/composables/clickOutside", () => ({
+  default: () => ({
+    clickedOutside,
+    enableClickOutsideListeners,
+    disableClickOutsideListeners,
+  }),
+}));
+
 const tags = [
   { identifier: "3d", name: "3D" },
   { identifier: "cooking", name: "cooking" },
@@ -35,7 +47,7 @@ describe("components/Content/ContentTagsDropdown", () => {
     it("makes the click outside handler active, opens the dropdown", async () => {
       const wrapper = factory();
       await wrapper.vm.handleFocusin();
-      expect(wrapper.vm.clickOutsideActive).toBe(true);
+      expect(enableClickOutsideListeners).toHaveBeenCalled();
       expect(wrapper.vm.showDropdown).toBe(true);
     });
   });
@@ -98,19 +110,20 @@ describe("components/Content/ContentTagsDropdown", () => {
   });
 
   describe("when user clicks outside the search form dropdown", () => {
-    it("hides the search options", async () => {
+    it("hides the search options and disables click outside listeners", async () => {
       const wrapper = factory();
 
       wrapper.vm.showDropdown = true;
+      clickedOutside.value = true;
       await nextTick();
-      wrapper.vm.handleClickOutside();
 
       expect(wrapper.vm.showDropdown).toBe(false);
+      expect(disableClickOutsideListeners).toHaveBeenCalled();
     });
   });
 
   describe("when user uses escape key", () => {
-    it("hides the search options", async () => {
+    it("hides the search options and disables click outside listeners", async () => {
       const wrapper = factory();
 
       wrapper.vm.showDropdown = true;
@@ -119,6 +132,7 @@ describe("components/Content/ContentTagsDropdown", () => {
       dropdown.trigger("keydown.esc");
 
       expect(wrapper.vm.showDropdown).toBe(false);
+      expect(disableClickOutsideListeners).toHaveBeenCalled();
     });
   });
 });
