@@ -546,13 +546,4 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
-@import "assets/scss/variables";
-
-.context-label {
-  font-size: $font-size-small;
-
-  @media (min-width: $bp-4k) {
-    font-size: $font-size-small-4k;
-  }
-}
 </style>

@@ -132,7 +132,7 @@ watch(orderedTags, () => {
 <template>
   <div class="row flex-md-row related-tags">
     <div v-if="tags.length > 0" data-qa="related tags" class="col col-12">
-      <h2 v-if="heading" class="related-heading text-uppercase">
+      <h2 v-if="heading" class="context-label fw-semibold">
         {{ heading }}
       </h2>
       <div
@@ -168,7 +168,6 @@ watch(orderedTags, () => {
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
-@import "assets/scss/variables";
 
 .icon-ic-tag {
   color: $darkgrey;
@@ -200,17 +199,6 @@ watch(orderedTags, () => {
     @media (min-width: $bp-4k) {
       margin: 0 0.5rem 0.75rem;
     }
-  }
-}
-
-h2.related-heading {
-  font-size: $font-size-14;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-
-  @media (min-width: $bp-4k) {
-    font-size: $font-size-28;
-    margin-bottom: 1.5rem;
   }
 }
 </style>
