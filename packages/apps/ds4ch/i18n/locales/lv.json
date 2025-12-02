@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Skatiet šo saturu, izmantojot ārējo saiti"
   },
   "error": "Kļūda",
+  "errorMessage": {
+    "404": "Atvainojiet! Lapa, kuru meklējat, neeksistē.",
+    "unknown": "Radās kļūda."
+  },
+  "errors": {
+    "http": {
+      "404": "Nav atrasts"
+    }
+  },
   "event": {
     "dateRange": "{startDate} līdz {endDate}",
     "label": "notikums"
@@ -200,6 +209,7 @@
   },
   "results": "{count} rezultāts | {count} rezultāti",
   "shareWhere": "Kur jūs vēlētos dalīties ar šo?",
+  "skipToMainContent": "Pāriet uz galveno saturu",
   "swiper": {
     "a11y": {
       "firstSlide": "Šis ir pirmais slaids",

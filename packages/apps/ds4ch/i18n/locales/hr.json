@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Pogledajte ovaj sadržaj putem vanjske poveznice"
   },
   "error": "Greška",
+  "errorMessage": {
+    "404": "Žao nam je! Stranica koju tražite ne postoji.",
+    "unknown": "Došlo je do pogreške."
+  },
+  "errors": {
+    "http": {
+      "404": "Nije pronađeno"
+    }
+  },
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "događaj"
@@ -200,6 +209,7 @@
   },
   "results": "{count} rezultat | {count} rezultata",
   "shareWhere": "Gdje biste to htjeli podijeliti?",
+  "skipToMainContent": "Prijeđi na glavni sadržaj",
   "swiper": {
     "a11y": {
       "firstSlide": "Ovo je prvi slajd",

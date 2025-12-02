@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Katso tämä sisältö ulkoisen linkin kautta"
   },
   "error": "Virhe",
+  "errorMessage": {
+    "404": "Anteeksi! Etsimääsi sivua ei ole olemassa.",
+    "unknown": "Tapahtui virhe."
+  },
+  "errors": {
+    "http": {
+      "404": "Ei löytynyt"
+    }
+  },
   "event": {
     "dateRange": "{startDate} – {endDate}",
     "label": "tapahtuma"
@@ -200,6 +209,7 @@
   },
   "results": "{count} tulos | {count} tulokset",
   "shareWhere": "Missä haluaisit jakaa tämän?",
+  "skipToMainContent": "Siirry pääsisältöön",
   "swiper": {
     "a11y": {
       "firstSlide": "Tämä on ensimmäinen dia",

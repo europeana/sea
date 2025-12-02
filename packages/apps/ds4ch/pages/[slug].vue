@@ -1,6 +1,7 @@
 <script setup>
 import { annotateParity } from "@europeana/sea-base-layer/utils/annotateParity.js";
 import { deepFindEntriesOfType } from "@europeana/sea-base-layer/utils/contentful/deepFindEntriesOfType.js";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 
@@ -8,7 +9,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
+const { page } = await useAsyncPageData(
   `landingPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -17,17 +18,9 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(landingPageQuery, variables);
-    return response.data?.landingPageCollection?.items?.[0];
+    return { page: response.data?.landingPageCollection?.items?.[0] };
   },
 );
-
-if (!page.value) {
-  throw createError({
-    fatal: true,
-    statusCode: 404,
-    statusMessage: "Not Found",
-  });
-}
 
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 
@@ -39,7 +32,7 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div v-if="page">
     <LandingHero
       :headline="page.headline || route.fullPath"
       :text="page.text"

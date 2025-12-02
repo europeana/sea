@@ -1,4 +1,5 @@
 <script setup>
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import projectPageQuery from "@/graphql/queries/projectPage.graphql";
 
 const route = useRoute();
@@ -6,7 +7,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
+const { page } = await useAsyncPageData(
   `projectPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -15,7 +16,7 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(projectPageQuery, variables);
-    return response.data?.projectPageCollection?.items?.[0] || {};
+    return { page: response.data?.projectPageCollection?.items?.[0] };
   },
 );
 

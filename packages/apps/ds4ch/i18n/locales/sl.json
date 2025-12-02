@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Oglejte si to vsebino prek zunanje povezave"
   },
   "error": "Napaka",
+  "errorMessage": {
+    "404": "Žal mi je! Stran, ki jo iščete, ne obstaja.",
+    "unknown": "Prišlo je do napake."
+  },
+  "errors": {
+    "http": {
+      "404": "Ni najdeno"
+    }
+  },
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "dogodek"
@@ -200,6 +209,7 @@
   },
   "results": "{count} rezultat | {count} rezultatov",
   "shareWhere": "Kje želite to deliti?",
+  "skipToMainContent": "Preskoči na glavno vsebino",
   "swiper": {
     "a11y": {
       "firstSlide": "To je prvi diapozitiv",

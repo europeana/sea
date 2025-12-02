@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Féach ar an ábhar seo trí nasc seachtrach"
   },
   "error": "Earráid",
+  "errorMessage": {
+    "404": "Tá brón orm! Níl an leathanach atá á lorg agat ann.",
+    "unknown": "Tharla earráid."
+  },
+  "errors": {
+    "http": {
+      "404": "Níorbh aimsíodh"
+    }
+  },
   "event": {
     "dateRange": "{startDate} go {endDate}",
     "label": "imeacht"
@@ -200,6 +209,7 @@
   },
   "results": "{count} toradh | {count} torthaí",
   "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?",
+  "skipToMainContent": "Léim go príomh-ábhar",
   "swiper": {
     "a11y": {
       "firstSlide": "Is é seo an chéad sleamhnán",

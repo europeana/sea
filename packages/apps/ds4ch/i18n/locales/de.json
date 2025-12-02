@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Diesen Inhalt über einen externen Link anzeigen"
   },
   "error": "Fehler",
+  "errorMessage": {
+    "404": "Entschuldigung! Die Seite, die Sie suchen, existiert nicht.",
+    "unknown": "Es ist ein Fehler aufgetreten."
+  },
+  "errors": {
+    "http": {
+      "404": "Nicht gefunden"
+    }
+  },
   "event": {
     "dateRange": "{startDate} bis {endDate}",
     "label": "Ereignis"
@@ -200,6 +209,7 @@
   },
   "results": "{count} Ergebnis | {count} Ergebnisse",
   "shareWhere": "Wo möchtest du das teilen?",
+  "skipToMainContent": "Zum Hauptinhalt springen",
   "swiper": {
     "a11y": {
       "firstSlide": "Dies ist die erste Folie",

@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Wyświetl tę zawartość za pośrednictwem łącza zewnętrznego"
   },
   "error": "Błąd",
+  "errorMessage": {
+    "404": "Przepraszamy! Strona, której szukasz, nie istnieje.",
+    "unknown": "Wystąpił błąd."
+  },
+  "errors": {
+    "http": {
+      "404": "Nie znaleziono"
+    }
+  },
   "event": {
     "dateRange": "{startDate} do {endDate}",
     "label": "wydarzenie"
@@ -200,6 +209,7 @@
   },
   "results": "{count} wynik | {count} wyniki",
   "shareWhere": "Gdzie chcesz się tym podzielić?",
+  "skipToMainContent": "Przejdź do głównej treści",
   "swiper": {
     "a11y": {
       "firstSlide": "To jest pierwszy slajd",

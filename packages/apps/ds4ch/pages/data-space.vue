@@ -1,24 +1,22 @@
 <script setup>
-import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 import { provide } from "vue";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
+import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
-  `contentHubPage:${slug}`,
-  async () => {
-    const variables = {
-      identifier: slug,
-      locale: localeProperties.value.language,
-    };
+const { page } = await useAsyncPageData(`contentHubPage:${slug}`, async () => {
+  const variables = {
+    identifier: slug,
+    locale: localeProperties.value.language,
+  };
 
-    const response = await contentful.query(contentHubPageQuery, variables);
+  const response = await contentful.query(contentHubPageQuery, variables);
 
-    return response.data?.contentHubPageCollection?.items?.[0] || {};
-  },
-);
+  return { page: response.data?.contentHubPageCollection?.items?.[0] };
+});
 
 useHead({
   title: page.value.headline,

@@ -123,6 +123,15 @@
     "viewThisExternalLink": "View this content via an external link"
   },
   "error": "Error",
+  "errorMessage": {
+    "404": "Sorry! The page you’re looking for doesn’t exist.",
+    "unknown": "An error occurred."
+  },
+  "errors": {
+    "http": {
+      "404": "Not Found"
+    }
+  },
   "event": {
     "dateRange": "{startDate} to {endDate}",
     "label": "event"
@@ -194,6 +203,7 @@
   },
   "results": "{count} result | {count} results",
   "shareWhere": "Where would you like to share this?",
+  "skipToMainContent": "Skip to main content",
   "swiper": {
     "a11y": {
       "firstSlide": "This is the first slide",

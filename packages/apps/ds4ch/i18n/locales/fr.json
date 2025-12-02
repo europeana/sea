@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Voir ce contenu via un lien externe"
   },
   "error": "Erreur",
+  "errorMessage": {
+    "404": "Désolé ! La page que vous recherchez n'existe pas.",
+    "unknown": "Une erreur s’est produite."
+  },
+  "errors": {
+    "http": {
+      "404": "Introuvable"
+    }
+  },
   "event": {
     "dateRange": "{startDate} à {endDate}",
     "label": "événement"
@@ -200,6 +209,7 @@
   },
   "results": "{count} résultat | {count} résultats",
   "shareWhere": "Où aimeriez-vous partager cela?",
+  "skipToMainContent": "Passer au contenu principal",
   "swiper": {
     "a11y": {
       "firstSlide": "Ceci est la première diapositive",

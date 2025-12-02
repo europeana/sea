@@ -124,6 +124,15 @@
     "viewThisExternalLink": "Vaadake seda sisu välise lingi kaudu"
   },
   "error": "Viga",
+  "errorMessage": {
+    "404": "Vabandust! Otsitavat lehte ei eksisteeri.",
+    "unknown": "Ilmnes viga."
+  },
+  "errors": {
+    "http": {
+      "404": "Ei leitud"
+    }
+  },
   "event": {
     "dateRange": "{startDate} kuni {endDate}",
     "label": "sündmus"
@@ -200,6 +209,7 @@
   },
   "results": "{count} tulemus | {count} tulemused",
   "shareWhere": "Kus soovite seda jagada?",
+  "skipToMainContent": "Jätka põhisisu juurde",
   "swiper": {
     "a11y": {
       "firstSlide": "See on esimene slaid",

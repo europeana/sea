@@ -1,13 +1,14 @@
 <script setup>
 import blogPostPageQuery from "@/graphql/queries/blogPostPage.graphql";
 import truncate from "@europeana/sea-base-layer/utils/text/truncate.js";
+import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 
 const route = useRoute();
 
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 
-const { data: page } = await useAsyncData(
+const { page } = await useAsyncPageData(
   `blogPostPage:${route.params.slug}`,
   async () => {
     const variables = {
@@ -16,7 +17,7 @@ const { data: page } = await useAsyncData(
     };
 
     const response = await contentful.query(blogPostPageQuery, variables);
-    return response.data?.blogPostingCollection?.items?.[0] || {};
+    return { page: response.data?.blogPostingCollection?.items?.[0] };
   },
 );
 
