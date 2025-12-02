@@ -209,6 +209,7 @@
   },
   "results": "{count} Ergebnis | {count} Ergebnisse",
   "shareWhere": "Wo möchtest du das teilen?",
+  "skipToMainContent": "Zum Hauptinhalt springen",
   "swiper": {
     "a11y": {
       "firstSlide": "Dies ist die erste Folie",

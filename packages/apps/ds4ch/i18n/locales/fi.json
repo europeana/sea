@@ -209,6 +209,7 @@
   },
   "results": "{count} tulos | {count} tulokset",
   "shareWhere": "Missä haluaisit jakaa tämän?",
+  "skipToMainContent": "Siirry pääsisältöön",
   "swiper": {
     "a11y": {
       "firstSlide": "Tämä on ensimmäinen dia",

@@ -209,6 +209,7 @@
   },
   "results": "{count} toradh | {count} torthaí",
   "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?",
+  "skipToMainContent": "Léim go príomh-ábhar",
   "swiper": {
     "a11y": {
       "firstSlide": "Is é seo an chéad sleamhnán",
