@@ -1,7 +1,9 @@
 <script setup>
+import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { provide } from "vue";
 import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
@@ -18,8 +20,10 @@ const { page } = await useAsyncPageData(`contentHubPage:${slug}`, async () => {
   return { page: response.data?.contentHubPageCollection?.items?.[0] };
 });
 
-useHead({
-  title: page.value.headline,
+usePageMeta({
+  title: stripMarkdown(page.value.name),
+  description: page.value.description,
+  image: page.value.image,
 });
 
 provide("featuredContentTags", [
