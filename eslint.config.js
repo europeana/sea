@@ -42,7 +42,11 @@ export default withNuxt(
       extends: ["css/recommended"],
     },
     {
-      files: ["packages/apps/*/pages/**/*.vue", "packages/apps/*/error.vue"],
+      files: [
+        "packages/apps/*/pages/**/*.vue",
+        "packages/apps/*/error.vue",
+        "packages/apps/*/layouts/default.vue",
+      ],
       rules: { "vue/multi-word-component-names": "off" },
     },
     prettier,
