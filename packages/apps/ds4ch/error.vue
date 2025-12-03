@@ -18,7 +18,6 @@ useHead({
       type: "image/x-icon",
     },
   ],
-  // TODO: lookup in i18n
   title: t("error"),
 });
 </script>

@@ -27,7 +27,7 @@ const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
 
-const { data: tags } = await useAsyncData("allCategories", async () => {
+const { data: tags, error } = await useAsyncData("allCategories", async () => {
   const categoriesVariables = {
     locale: localeProperties.value.language,
   };
@@ -39,6 +39,10 @@ const { data: tags } = await useAsyncData("allCategories", async () => {
     a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase()),
   );
 });
+
+if (error.value) {
+  throw createError(error.value);
+}
 
 const allDisplayTags = computed(() => {
   let displayTags;
