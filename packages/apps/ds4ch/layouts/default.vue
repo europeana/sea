@@ -20,18 +20,18 @@ useHead({
   <div>
     <Html :lang="i18nHead.htmlAttrs.lang" :dir="i18nHead.htmlAttrs.dir">
       <Head>
-        <Title>{{ title }}</Title>
-        <template v-for="link in i18nHead.link" :key="link.key">
+        <!-- TODO: Replace hid with key on @nuxtjs/i18n v10 upgrade -->
+        <template v-for="link in i18nHead.link" :key="link.hid">
           <Link
-            :id="link.key"
+            :id="link.hid"
             :rel="link.rel"
             :href="link.href"
             :hreflang="link.hreflang"
           />
         </template>
-        <template v-for="meta in i18nHead.meta" :key="meta.key">
+        <template v-for="meta in i18nHead.meta" :key="meta.hid">
           <Meta
-            :id="meta.key"
+            :id="meta.hid"
             :property="meta.property"
             :content="meta.content"
           />
