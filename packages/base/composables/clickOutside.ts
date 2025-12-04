@@ -37,7 +37,7 @@ export default function useClickOutside(element: ref<HTMLElement | null>) {
 
   return {
     clickedOutside: readonly(clickedOutside),
-    enableClickOutsideListeners: addEventListeners,
-    disableClickOutsideListeners: removeEventListeners,
+    enable: addEventListeners,
+    disable: removeEventListeners,
   };
 }

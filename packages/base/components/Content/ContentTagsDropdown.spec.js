@@ -16,8 +16,8 @@ const disableClickOutsideListeners = vi.fn();
 vi.mock("@europeana/sea-base-layer/composables/clickOutside", () => ({
   default: () => ({
     clickedOutside,
-    enableClickOutsideListeners,
-    disableClickOutsideListeners,
+    enable: enableClickOutsideListeners,
+    disable: disableClickOutsideListeners,
   }),
 }));
 

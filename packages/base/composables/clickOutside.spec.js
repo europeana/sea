@@ -11,15 +11,13 @@ describe("useClickOutside", () => {
     vi.resetAllMocks();
   });
 
-  describe("enableClickOutsideListeners", () => {
+  describe("enable", () => {
     it("adds event listeners", () => {
       const wrapper = shallowMount(component);
-      const { enableClickOutsideListeners } = useClickOutside(
-        ref(wrapper.vm.$refs.dropdown),
-      );
+      const { enable } = useClickOutside(ref(wrapper.vm.$refs.dropdown));
 
       vi.spyOn(window, "addEventListener");
-      enableClickOutsideListeners();
+      enable();
 
       expect(window.addEventListener).toHaveBeenCalledWith(
         "click",
@@ -52,15 +50,13 @@ describe("useClickOutside", () => {
     });
   });
 
-  describe("disableClickOutsideListeners", () => {
+  describe("disable", () => {
     it("removes event listeners", () => {
       const wrapper = shallowMount(component);
-      const { disableClickOutsideListeners } = useClickOutside(
-        ref(wrapper.vm.$refs.dropdown),
-      );
+      const { disable } = useClickOutside(ref(wrapper.vm.$refs.dropdown));
       vi.spyOn(window, "removeEventListener");
 
-      disableClickOutsideListeners();
+      disable();
 
       expect(window.removeEventListener).toHaveBeenCalledWith(
         "click",
@@ -96,11 +92,11 @@ describe("useClickOutside", () => {
   describe("when clicking outside", () => {
     it("sets clickedOutside to true", async () => {
       const wrapper = shallowMount(component, { attachTo: document.body });
-      const { clickedOutside, enableClickOutsideListeners } = useClickOutside(
+      const { clickedOutside, enable } = useClickOutside(
         ref(wrapper.vm.$refs.dropdown),
       );
 
-      enableClickOutsideListeners();
+      enable();
       await nextTick();
 
       wrapper.find(".outside").trigger("click");
@@ -112,11 +108,11 @@ describe("useClickOutside", () => {
   describe("when clicking inside", () => {
     it("sets clickedOutside to false", async () => {
       const wrapper = shallowMount(component, { attachTo: document.body });
-      const { clickedOutside, enableClickOutsideListeners } = useClickOutside(
+      const { clickedOutside, enable } = useClickOutside(
         ref(wrapper.vm.$refs.dropdown),
       );
 
-      enableClickOutsideListeners();
+      enable();
       await nextTick();
 
       wrapper.find(".inside").trigger("click");

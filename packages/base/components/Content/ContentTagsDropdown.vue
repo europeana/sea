@@ -86,8 +86,8 @@ watch(
 
 const {
   clickedOutside,
-  enableClickOutsideListeners,
-  disableClickOutsideListeners,
+  enable: enableClickOutsideListeners,
+  disable: disableClickOutsideListeners,
 } = useClickOutside(tagsDropdown);
 
 watch(clickedOutside, (newVal) => {
