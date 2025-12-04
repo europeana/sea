@@ -10,14 +10,17 @@ mockNuxtImport("useSeoMeta", () => useSeoMetaMock);
 const fixtures = {
   title: "page title",
   description: "page seo description",
-  image: { url: "https://example.org/image.jpg", description: "Preview image" },
+  image: {
+    url: "https://images.ctfassets.net/image.jpg",
+    description: "Preview image",
+  },
 };
 const defaultExpectations = {
   title: fixtures.title,
   description: fixtures.description,
   ogTitle: fixtures.title,
   ogDescription: fixtures.description,
-  ogImage: fixtures.image.url,
+  ogImage: fixtures.image.url + "?w=1200&h=630&fit=fill&f=face&fm=webp&q=40",
   ogImageAlt: fixtures.image.description,
   ogType: undefined,
 };
@@ -40,7 +43,7 @@ describe("usePageMeta", () => {
 
       expect(useSeoMetaMock).toHaveBeenCalledWith({
         ...defaultExpectations,
-        ogImage: undefined,
+        ogImage: null,
         ogImageAlt: undefined,
       });
     });
