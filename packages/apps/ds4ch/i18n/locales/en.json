@@ -157,7 +157,8 @@
     "translationService": "eTranslation Service"
   },
   "home": {
-    "broughtBy": "Brought to you by"
+    "broughtBy": "Brought to you by",
+    "title": "The common European data space for cultural heritage"
   },
   "landing": {
     "counts": {

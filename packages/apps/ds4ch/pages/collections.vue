@@ -1,7 +1,9 @@
 <script setup>
+import stripMarkdown from "@europeana/sea-base-layer/utils/markdown/strip.js";
 import { entryHasContentType } from "@europeana/sea-base-layer/utils/contentful/index.js";
 import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const slug = "collections";
 const contentful = inject("$contentful");
@@ -20,8 +22,10 @@ const { page } = await useAsyncPageData(`landingPage:${slug}`, async () => {
 const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
 const featuredContent = page.value.featuredContent;
 
-useHead({
-  title: page.value.headline,
+usePageMeta({
+  title: stripMarkdown(page.value.headline),
+  description: page.value.description,
+  image: page.value.image,
 });
 </script>
 

@@ -1,6 +1,7 @@
 <script setup>
 import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import projectPageQuery from "@/graphql/queries/projectPage.graphql";
+import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
 const route = useRoute();
 
@@ -58,25 +59,11 @@ const projectLogoImageSizes = [
   "288px",
 ].join(",");
 
-useHead({
+usePageMeta({
   title: page.value.name,
-  meta: [
-    {
-      hid: "og:type",
-      property: "og:type",
-      content: "article",
-    },
-    {
-      hid: "og:image",
-      property: "og:image",
-      content: page.value.image?.url,
-    },
-    {
-      hid: "og:description",
-      property: "og:description",
-      content: page.value.headline,
-    },
-  ],
+  description: page.value.headline,
+  image: page.value.image,
+  ogType: "article",
 });
 </script>
 

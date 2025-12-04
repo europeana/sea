@@ -1,6 +1,7 @@
 <script setup>
 import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
+import { createHttpError } from "@/composables/error.js";
 import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
@@ -102,14 +103,13 @@ const fetchableSysIds = computed(() => {
   // Paginate
   const sliceFrom = (page.value - 1) * ENTRIES_PER_PAGE;
   const sliceTo = sliceFrom + ENTRIES_PER_PAGE;
-  const ret = filteredMinimalEntries.value
-    .slice(sliceFrom, sliceTo)
-    .map((contentEntry) => contentEntry.sys.id);
-  return ret;
+  return filteredMinimalEntries.value
+    ?.slice(sliceFrom, sliceTo)
+    ?.map((contentEntry) => contentEntry.sys.id);
 });
 
 const fetchableSysIdsString = computed(() => {
-  return fetchableSysIds.value.join("-");
+  return fetchableSysIds.value?.join("-");
 });
 
 const filteredMinimalEntries = computed(() => {
@@ -442,12 +442,19 @@ async function fetchMinimalEntries() {
   return ordered;
 }
 
-const { data: minimalEntries } = await useAsyncData(
+const { data: minimalEntries, error: minimalEntriesError } = await useAsyncData(
   "minimalEntries",
   fetchMinimalEntries,
   { default: () => [] },
 );
-const { data: fullEntries } = await useAsyncData(
+if (minimalEntriesError.value) {
+  throw createHttpError(
+    minimalEntriesError.value.statusCode,
+    minimalEntriesError.value,
+  );
+}
+
+const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
   fetchableSysIdsString,
   fetchFullEntries,
   {
@@ -455,6 +462,12 @@ const { data: fullEntries } = await useAsyncData(
     watch: [fetchableSysIdsString],
   },
 );
+if (fullEntriesError.value) {
+  throw createHttpError(
+    fullEntriesError.value.statusCode,
+    fullEntriesError.value,
+  );
+}
 
 watch(page, () => {
   scrollToSelector("#header");
@@ -463,11 +476,16 @@ watch(page, () => {
 
 <template>
   <div id="content-interface">
-    <ContentTagsFilter
-      :filtered-tags="filteredTags"
-      :selected-tags="selectedTags"
-    />
     <div class="container">
+      <NuxtErrorBoundary>
+        <ContentTagsFilter
+          :filtered-tags="filteredTags"
+          :selected-tags="selectedTags"
+        />
+        <template #error="{ error }">
+          <GenericAlertMessage :error="error" />
+        </template>
+      </NuxtErrorBoundary>
       <div
         class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
       >
