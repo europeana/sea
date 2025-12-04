@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 
-import RelatedCategoryTags from "./RelatedCategoryTags.vue";
+import ContentTagsList from "./ContentTagsList.vue";
 
 const meta = {
-  component: RelatedCategoryTags,
-} satisfies Meta<typeof RelatedCategoryTags>;
+  component: ContentTagsList,
+} satisfies Meta<typeof ContentTagsList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

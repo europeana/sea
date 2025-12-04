@@ -1,13 +1,17 @@
 <script setup>
-import categoriesQuery from "@/graphql/queries/categories.graphql";
-import { inject } from "vue";
-const route = useRoute();
-const contentful = inject("$contentful");
-const { localeProperties } = useI18n();
+import useClickOutside from "@europeana/sea-base-layer/composables/clickOutside";
 
+const route = useRoute();
 const props = defineProps({
   /**
-   * All tags, before any keyword search.
+   * All tags data
+   */
+  tags: {
+    type: Array,
+    default: null,
+  },
+  /**
+   * Filtered tags, by relevance and sorted on most used
    */
   filteredTags: {
     type: Array,
@@ -26,23 +30,7 @@ const featuredTags = inject("featuredContentTags", null);
 const showDropdown = ref(false);
 const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
-
-const { data: tags, error } = await useAsyncData("allCategories", async () => {
-  const categoriesVariables = {
-    locale: localeProperties.value.language,
-  };
-  const categoriesResponse = await contentful.query(
-    categoriesQuery,
-    categoriesVariables,
-  );
-  return (categoriesResponse.data.categoryCollection.items || []).sort((a, b) =>
-    a.name.trim().toLowerCase().localeCompare(b.name.trim().toLowerCase()),
-  );
-});
-
-if (error.value) {
-  throw createError(error.value);
-}
+const tagsDropdown = useTemplateRef("tagsdropdown");
 
 const allDisplayTags = computed(() => {
   let displayTags;
@@ -52,9 +40,9 @@ const allDisplayTags = computed(() => {
     // use filteredTags as those are sorted by most used
     displayTags = props.filteredTags
       .filter((tag) => !props.selectedTags.includes(tag))
-      .map((tag) => tags.value.filter((t) => t.identifier === tag)[0]);
+      .map((tag) => props.tags.filter((t) => t.identifier === tag)[0]);
   } else {
-    displayTags = tags.value;
+    displayTags = props.tags;
   }
 
   if (keyword) {
@@ -65,17 +53,6 @@ const allDisplayTags = computed(() => {
     });
   }
   return displayTags;
-});
-
-const featuredDisplayTags = computed(() => {
-  if (!featuredTags) {
-    return [];
-  }
-  return (
-    allDisplayTags.value?.filter((tag) =>
-      featuredTags.includes(tag.identifier),
-    ) || []
-  );
 });
 
 const unfeaturedDisplayTags = computed(() => {
@@ -90,8 +67,10 @@ const unfeaturedDisplayTags = computed(() => {
 });
 
 const displaySelectedTags = computed(() => {
-  return tags.value.filter((tag) =>
-    props.selectedTags.includes(tag.identifier),
+  return props.tags.filter(
+    (tag) =>
+      !featuredTags?.includes(tag.identifier) &&
+      props.selectedTags.includes(tag.identifier),
   );
 });
 const trimmedKeyword = computed(() => {
@@ -105,44 +84,47 @@ watch(
   },
 );
 
-const setClickOutsideConfigIsActive = (isActive) => {
-  clickOutsideConfig.value.isActive = isActive;
-};
-const handleFocusin = () => {
-  setClickOutsideConfigIsActive(true);
-  showDropdown.value = true;
-};
+const {
+  clickedOutside,
+  enable: enableClickOutsideListeners,
+  disable: disableClickOutsideListeners,
+} = useClickOutside(tagsDropdown);
 
-const handleClickOutside = () => {
-  setClickOutsideConfigIsActive(false);
-  showDropdown.value = false;
-};
+watch(clickedOutside, (newVal) => {
+  showDropdown.value = !newVal;
+
+  if (newVal) {
+    disableClickOutsideListeners();
+  }
+});
 
 const handleEsc = () => {
   tagsInput.value.blur();
-  handleClickOutside();
+  showDropdown.value = false;
+  disableClickOutsideListeners();
 };
 
-const clickOutsideConfig = ref({
-  capture: true,
-  events: ["click", "dblclick", "focusin", "touchstart"],
-  handler: handleClickOutside,
-  isActive: false,
+const handleFocusin = () => {
+  showDropdown.value = true;
+  enableClickOutsideListeners();
+};
+
+onUnmounted(() => {
+  disableClickOutsideListeners();
 });
 </script>
 
 <template>
-  <div>
-    <RelatedCategoryTags
+  <div class="container">
+    <ContentTagsList
       v-if="displaySelectedTags.length > 0"
       :tags="displaySelectedTags"
       :selected="selectedTags"
       class="mb-2"
-      route-name="data-space"
+      :tag-icon="false"
     />
     <div
       ref="tagsdropdown"
-      v-click-outside="handleClickOutside"
       class="position-relative mb-4 mb-4k-5"
       data-qa="tags dropdown"
       @keydown.esc="handleEsc"
@@ -160,13 +142,13 @@ const clickOutsideConfig = ref({
           class="form-control"
           autocomplete="off"
           type="search"
-          :placeholder="$t('categories.search')"
+          :placeholder="$t('content.topics.label')"
           data-qa="tags dropdown search input"
           role="searchbox"
           aria-autocomplete="list"
           :aria-owns="showDropdown ? 'tags-options' : null"
           :aria-controls="showDropdown ? 'tags-options' : null"
-          :aria-label="$t('categories.label')"
+          :aria-label="$t('content.topics.label')"
           @focusin="handleFocusin"
         />
       </form>
@@ -176,28 +158,15 @@ const clickOutsideConfig = ref({
         class="tag-search-dropdown"
         data-qa="tags search dropdown"
       >
-        <RelatedCategoryTags
-          v-if="featuredTags && featuredDisplayTags.length > 0"
-          ref="relatedCategoryTags"
-          :tags="featuredDisplayTags"
-          :selected="selectedTags"
-          :heading="$t('categories.featuredTags')"
-          tabindex="-1"
-          class="badge-container mb-2"
-          route-name="data-space"
-        />
-        <RelatedCategoryTags
+        <ContentTagsList
           v-if="unfeaturedDisplayTags.length > 0"
-          ref="relatedCategoryTags"
           :tags="unfeaturedDisplayTags"
           :selected="selectedTags"
-          :heading="featuredTags ? $t('categories.moreTags') : undefined"
           tabindex="-1"
           class="badge-container mb-2"
-          route-name="data-space"
         />
-        <p v-if="allDisplayTags.length === 0">
-          {{ $t("categories.noOptions") }}
+        <p v-else>
+          {{ $t("content.topics.noOptions") }}
         </p>
       </div>
     </div>
@@ -232,9 +201,6 @@ const clickOutsideConfig = ref({
 
 .badge-container {
   margin: 0;
-
-  @media (min-width: $bp-4k) {
-  }
 
   :deep(.col-12) {
     padding: 0;

@@ -43,6 +43,14 @@ div.landing-sub-section {
 }
 
 .landing-page.xxl-page {
+  .context-label {
+    font-size: $font-size-14;
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-28;
+    }
+  }
+
   .landing-sub-section {
     h2 {
       @extend %title-1;

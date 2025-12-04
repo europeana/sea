@@ -1,6 +1,9 @@
 <script setup>
+import useScrollTo from "@/composables/scrollTo.js";
+
 const route = useRoute();
 const { matomo } = useMatomo();
+const { scrollToSelector } = useScrollTo();
 
 const props = defineProps({
   /**
@@ -26,10 +29,11 @@ const props = defineProps({
   },
   /**
    * Name of the route which the tags link to
+   * If falsy, the current route name is used
    */
-  routeName: {
+  routeNameOverride: {
     type: String,
-    required: true,
+    default: null,
   },
   /**
    * Variant of the badges
@@ -38,10 +42,47 @@ const props = defineProps({
     type: String,
     default: "badge-outline-light",
   },
+  /**
+   * Tag icon to include or not
+   */
+  tagIcon: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * If true, selected tags will be shown first
+   */
+  bubbleUp: {
+    type: Boolean,
+    default: false,
+  },
 });
 
+const tagsWrapperRef = useTemplateRef("tagswrapper");
+
+const orderedTags = computed(() => {
+  if (!props.bubbleUp) {
+    return props.tags;
+  }
+
+  const selected = [];
+  const unselected = [];
+
+  for (const tag of props.tags) {
+    if (props.selected.includes(tag.identifier)) {
+      selected.push(tag);
+    } else {
+      unselected.push(tag);
+    }
+  }
+
+  return [...selected, ...unselected];
+});
+
+const routeName = computed(() => props.routeNameOverride || route.name);
+
 const badgeLink = (tagId) => {
-  const newRoute = { name: props.routeName };
+  const newRoute = { name: routeName.value };
 
   if (props.selected.includes(tagId)) {
     const tagsWithoutCurrent = props.selected.filter((item) => item !== tagId);
@@ -77,39 +118,49 @@ const handleLeft = (event) => {
 const handleRight = (event) => {
   event.target.nextElementSibling?.focus();
 };
+
+// Scroll to the start when tags are (de)selected in horizontal scroll container
+watch(orderedTags, () => {
+  if (tagsWrapperRef.value) {
+    scrollToSelector("div", {
+      container: tagsWrapperRef.value,
+      behavior: "smooth",
+    });
+  }
+});
 </script>
 <template>
-  <div class="row flex-md-row related-category-tags">
-    <div
-      v-if="tags.length > 0"
-      data-qa="related category tags"
-      class="col col-12"
-    >
-      <h2 v-if="heading" class="related-heading text-uppercase">
+  <div class="row flex-md-row related-tags">
+    <div v-if="tags.length > 0" data-qa="related tags" class="col col-12">
+      <h2 v-if="heading" class="context-label fw-semibold">
         {{ heading }}
       </h2>
-      <div class="d-flex">
-        <span class="icon-ic-tag" />
-        <div>
-          <NuxtLinkLocale
-            v-for="(tag, index) in tags.filter((tag) => !!tag)"
-            :key="index"
-            class="badge ms-2 ms-4k-3 mb-2 mb-4k-3"
-            :class="badgeVariant"
-            :active="isActive(tag.identifier)"
-            :to="badgeLink(tag.identifier)"
-            :data-qa="`${tag.name} category tag`"
-            @keydown.left="handleLeft"
-            @keydown.right="handleRight"
-            @click="clickBadge(tag.identifier)"
-          >
-            <span>{{ tag.name }}</span>
-            <span
-              v-if="isActive(tag.identifier)"
-              class="icon icon-clear clear-indicator"
-            />
-          </NuxtLinkLocale>
-        </div>
+      <div
+        ref="tagswrapper"
+        class="tags-wrapper"
+        :class="{ 'd-flex': tagIcon }"
+      >
+        <span v-if="tagIcon" class="icon-ic-tag" />
+        <ul class="nav" :class="{ 'ms-n2': !tagIcon }">
+          <li v-for="tag in orderedTags.filter(Boolean)" :key="tag.identifier">
+            <NuxtLinkLocale
+              class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
+              :class="{
+                [badgeVariant]: true,
+                selected: isActive(tag.identifier),
+              }"
+              :active="isActive(tag.identifier)"
+              :to="badgeLink(tag.identifier)"
+              :data-qa="`${tag.name} tag`"
+              @keydown.left="handleLeft"
+              @keydown.right="handleRight"
+              @click="clickBadge(tag.identifier)"
+            >
+              <span>{{ tag.name }}</span>
+              <span v-if="isActive(tag.identifier)" class="icon icon-clear" />
+            </NuxtLinkLocale>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -117,7 +168,6 @@ const handleRight = (event) => {
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
-@import "assets/scss/variables";
 
 .icon-ic-tag {
   color: $darkgrey;
@@ -149,17 +199,6 @@ const handleRight = (event) => {
     @media (min-width: $bp-4k) {
       margin: 0 0.5rem 0.75rem;
     }
-  }
-}
-
-h2.related-heading {
-  font-size: $font-size-14;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-
-  @media (min-width: $bp-4k) {
-    font-size: $font-size-28;
-    margin-bottom: 1.5rem;
   }
 }
 </style>

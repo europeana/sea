@@ -16,14 +16,8 @@
     "createdDate": "Created {date}",
     "publishedDate": "Published {date}"
   },
-  "categories": {
-    "featuredTags": "Featured tags",
-    "label": "Explore by tag",
-    "moreTags": "More tags",
-    "noOptions": "There are no more tags to select",
-    "search": "Explore by tag"
-  },
   "content": {
+    "discoverRelated": "Discover related content",
     "filter": {
       "events": "Events",
       "news": "News",
@@ -31,7 +25,12 @@
       "training": "Training",
       "viewAll": "View all"
     },
-    "resultsHaveLoaded": "{0} results found"
+    "resultsHaveLoaded": "{0} results found",
+    "topics": {
+      "featuredTopics": "Featured topics",
+      "label": "Explore more topics",
+      "noOptions": "There are no more topics to select"
+    }
   },
   "cookies": {
     "acceptAll": "Accept all",
@@ -202,11 +201,6 @@
     "partners": "Project partners",
     "reports": "Project reports",
     "viewFactSheet": "View fact sheet"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Discover related content"
-    }
   },
   "results": "{count} result | {count} results",
   "shareWhere": "Where would you like to share this?",

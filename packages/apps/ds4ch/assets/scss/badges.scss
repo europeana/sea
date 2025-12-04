@@ -27,6 +27,17 @@
   }
 
   .badge-outline-light {
+    &.selected,
+    &:hover.selected {
+      background-color: $black !important;
+      border-color: $black;
+      color: $white;
+
+      .icon-clear {
+        color: $white;
+      }
+    }
+
     @media (min-width: $bp-4k) {
       height: calc(2 * (2rem - 1px));
     }

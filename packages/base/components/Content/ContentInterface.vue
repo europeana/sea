@@ -9,6 +9,7 @@ import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMi
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 // import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
 // import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
+
 import {
   entryHasContentType,
   entryHasTaxonomyTerm,
@@ -476,17 +477,15 @@ watch(page, () => {
 <template>
   <div id="content-interface">
     <div class="container">
-      <client-only>
-        <NuxtErrorBoundary>
-          <ContentTagsDropdown
-            :filtered-tags="filteredTags"
-            :selected-tags="selectedTags"
-          />
-          <template #error="{ error }">
-            <GenericAlertMessage :error="error" />
-          </template>
-        </NuxtErrorBoundary>
-      </client-only>
+      <NuxtErrorBoundary>
+        <ContentTagsFilter
+          :filtered-tags="filteredTags"
+          :selected-tags="selectedTags"
+        />
+        <template #error="{ error }">
+          <GenericAlertMessage :error="error" />
+        </template>
+      </NuxtErrorBoundary>
       <div
         class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
       >
@@ -565,13 +564,4 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
-@import "assets/scss/variables";
-
-.context-label {
-  font-size: $font-size-small;
-
-  @media (min-width: $bp-4k) {
-    font-size: $font-size-small-4k;
-  }
-}
 </style>

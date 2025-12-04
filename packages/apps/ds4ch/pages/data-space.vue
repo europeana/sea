@@ -69,12 +69,4 @@ const defaultCardThumbnail = {
 <style lang="scss">
 @import "assets/scss/variables";
 @import "assets/scss/pagination";
-
-.xxl-page .context-label {
-  font-size: $font-size-14;
-
-  @media (min-width: $bp-4k) {
-    font-size: $font-size-28;
-  }
-}
 </style>
