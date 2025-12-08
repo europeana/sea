@@ -16,14 +16,8 @@
     "createdDate": "Létrehozva {date}",
     "publishedDate": "Közzétéve {date}"
   },
-  "categories": {
-    "featuredTags": "Kiemelt címkék",
-    "label": "Felfedezés címke szerint",
-    "moreTags": "További címkék",
-    "noOptions": "Nincs több kiválasztható címke",
-    "search": "Felfedezés címke szerint"
-  },
   "content": {
+    "discoverRelated": "Fedezze fel a kapcsolódó tartalmakat",
     "filter": {
       "events": "Események",
       "news": "Hírek",
@@ -31,7 +25,12 @@
       "training": "Képzés",
       "viewAll": "Összes megtekintése"
     },
-    "resultsHaveLoaded": "{0} találat"
+    "resultsHaveLoaded": "{0} találat",
+    "topics": {
+      "featuredTopics": "Kiemelt témák",
+      "label": "Fedezzen fel további témákat",
+      "noOptions": "Nincs több kiválasztható téma"
+    }
   },
   "cookies": {
     "acceptAll": "Összes elfogadása",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation szolgáltatás"
   },
   "home": {
-    "broughtBy": "Készítő:"
+    "broughtBy": "Készítő:",
+    "title": "A kulturális örökség közös európai adattere"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektpartnerek",
     "reports": "Projektjelentések",
     "viewFactSheet": "Tekintse meg a tájékoztatót"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Fedezze fel a kapcsolódó tartalmakat"
-    }
   },
   "results": "{count} eredmény | {count} eredmények",
   "shareWhere": "Hol szeretnéd megosztani?",

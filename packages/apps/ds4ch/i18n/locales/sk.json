@@ -16,14 +16,8 @@
     "createdDate": "Vytvorené {date}",
     "publishedDate": "Zverejnené {date}"
   },
-  "categories": {
-    "featuredTags": "Odporúčané značky",
-    "label": "Preskúmať podľa značky",
-    "moreTags": "Ďalšie značky",
-    "noOptions": "Už nie sú žiadne tagy na výber",
-    "search": "Preskúmať podľa značky"
-  },
   "content": {
+    "discoverRelated": "Objavte súvisiaci obsah",
     "filter": {
       "events": "Udalosti",
       "news": "Novinky",
@@ -31,7 +25,12 @@
       "training": "Školenie",
       "viewAll": "Zobraziť všetko"
     },
-    "resultsHaveLoaded": "{0} nájdených výsledkov"
+    "resultsHaveLoaded": "{0} nájdených výsledkov",
+    "topics": {
+      "featuredTopics": "Odporúčané témy",
+      "label": "Preskúmajte ďalšie témy",
+      "noOptions": "Nie sú k dispozícii žiadne ďalšie témy na výber"
+    }
   },
   "cookies": {
     "acceptAll": "Prijať všetko",
@@ -158,7 +157,8 @@
     "translationService": "Služba eTranslation"
   },
   "home": {
-    "broughtBy": "Prináša vám"
+    "broughtBy": "Prináša vám",
+    "title": "Spoločný európsky dátový priestor pre kultúrne dedičstvo"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektoví partneri",
     "reports": "Správy o projektoch",
     "viewFactSheet": "Zobraziť informačný list"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Objavte súvisiaci obsah"
-    }
   },
   "results": "{count} výsledok | {count} výsledkov",
   "shareWhere": "Kde by ste to chceli zdieľať?",

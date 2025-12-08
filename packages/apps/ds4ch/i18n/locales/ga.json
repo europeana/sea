@@ -16,14 +16,8 @@
     "createdDate": "Cruthaithe {date}",
     "publishedDate": "Foilsithe {date}"
   },
-  "categories": {
-    "featuredTags": "Clibeanna faoi thrácht",
-    "label": "Déan iniúchadh de réir clibe",
-    "moreTags": "Tuilleadh clibeanna",
-    "noOptions": "Níl a thuilleadh clibeanna le roghnú",
-    "search": "Déan iniúchadh de réir clibe"
-  },
   "content": {
+    "discoverRelated": "Faigh amach ábhar gaolmhar",
     "filter": {
       "events": "Imeachtaí",
       "news": "Nuacht",
@@ -31,7 +25,12 @@
       "training": "Oiliúint",
       "viewAll": "Féach ar fad"
     },
-    "resultsHaveLoaded": "{0} torthaí aimsithe"
+    "resultsHaveLoaded": "{0} torthaí aimsithe",
+    "topics": {
+      "featuredTopics": "Topaicí faoi thrácht",
+      "label": "Iniúchadh a dhéanamh ar níos mó topaicí",
+      "noOptions": "Níl aon ábhair eile le roghnú"
+    }
   },
   "cookies": {
     "acceptAll": "Glac le gach",
@@ -158,7 +157,8 @@
     "translationService": "Seirbhís eAistriúcháin"
   },
   "home": {
-    "broughtBy": "Curtha ar fáil ag"
+    "broughtBy": "Curtha ar fáil ag",
+    "title": "An spás comhchoiteann Eorpach sonraí d'oidhreacht chultúrtha"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Comhpháirtithe tionscadail",
     "reports": "Tuarascálacha tionscadail",
     "viewFactSheet": "Féach ar bhileog eolais"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Faigh amach ábhar gaolmhar"
-    }
   },
   "results": "{count} toradh | {count} torthaí",
   "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?",

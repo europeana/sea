@@ -16,14 +16,8 @@
     "createdDate": "Utworzono {date}",
     "publishedDate": "Opublikowano {date}"
   },
-  "categories": {
-    "featuredTags": "Polecane tagi",
-    "label": "Przeglądaj według tagu",
-    "moreTags": "Więcej tagów",
-    "noOptions": "Nie ma więcej tagów do wybrania",
-    "search": "Przeglądaj według tagu"
-  },
   "content": {
+    "discoverRelated": "Odkryj powiązane treści",
     "filter": {
       "events": "Wydarzenia",
       "news": "Aktualności",
@@ -31,7 +25,12 @@
       "training": "Szkolenie",
       "viewAll": "Zobacz wszystkie"
     },
-    "resultsHaveLoaded": "{0} znalezionych wyników"
+    "resultsHaveLoaded": "{0} znalezionych wyników",
+    "topics": {
+      "featuredTopics": "Polecane tematy",
+      "label": "Poznaj więcej tematów",
+      "noOptions": "Nie ma już więcej tematów do wyboru"
+    }
   },
   "cookies": {
     "acceptAll": "Akceptuj wszystkie",
@@ -158,7 +157,8 @@
     "translationService": "Usługa eTranslation"
   },
   "home": {
-    "broughtBy": "Dostarczone przez"
+    "broughtBy": "Dostarczone przez",
+    "title": "Wspólna europejska przestrzeń danych dla dziedzictwa kulturowego"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Partnerzy projektu",
     "reports": "Raporty projektowe",
     "viewFactSheet": "Zobacz arkusz informacyjny"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Odkryj powiązane treści"
-    }
   },
   "results": "{count} wynik | {count} wyniki",
   "shareWhere": "Gdzie chcesz się tym podzielić?",

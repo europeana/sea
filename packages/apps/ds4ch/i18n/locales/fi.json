@@ -16,14 +16,8 @@
     "createdDate": "Luotu {date}",
     "publishedDate": "Julkaistu {date}"
   },
-  "categories": {
-    "featuredTags": "Esillä olevat tunnisteet",
-    "label": "Tutki tunnisteen mukaan",
-    "moreTags": "Lisää tunnisteita",
-    "noOptions": "Ei ole enää valittavia tunnisteita",
-    "search": "Tutki tunnisteen mukaan"
-  },
   "content": {
+    "discoverRelated": "Tutustu aiheeseen liittyvään sisältöön",
     "filter": {
       "events": "Tapahtumat",
       "news": "Uutiset",
@@ -31,7 +25,12 @@
       "training": "Koulutus",
       "viewAll": "Näytä kaikki"
     },
-    "resultsHaveLoaded": "{0} tuloksia löytyi"
+    "resultsHaveLoaded": "{0} tuloksia löytyi",
+    "topics": {
+      "featuredTopics": "Esittelyssä olevat aiheet",
+      "label": "Tutustu lisää aiheisiin",
+      "noOptions": "Ei ole enempää aiheita valittavaksi"
+    }
   },
   "cookies": {
     "acceptAll": "Hyväksy kaikki",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation-palvelu"
   },
   "home": {
-    "broughtBy": "Tuotu sinulle"
+    "broughtBy": "Tuotu sinulle",
+    "title": "Yhteinen eurooppalainen kulttuuriperintöä koskeva dataavaruus"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Hankekumppanit",
     "reports": "Projektiraportit",
     "viewFactSheet": "Näytä tietoesite"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Tutustu aiheeseen liittyvään sisältöön"
-    }
   },
   "results": "{count} tulos | {count} tulokset",
   "shareWhere": "Missä haluaisit jakaa tämän?",

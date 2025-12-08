@@ -16,14 +16,8 @@
     "createdDate": "Ustvarjeno {date}",
     "publishedDate": "Objavljeno {date}"
   },
-  "categories": {
-    "featuredTags": "Izpostavljene oznake",
-    "label": "Razišči po oznaki",
-    "moreTags": "Več oznak",
-    "noOptions": "Ni več oznak, ki bi jih lahko izbrali",
-    "search": "Razišči po oznaki"
-  },
   "content": {
+    "discoverRelated": "Odkrijte povezano vsebino",
     "filter": {
       "events": "Dogodki",
       "news": "Novice",
@@ -31,7 +25,12 @@
       "training": "Usposabljanje",
       "viewAll": "Poglej vse"
     },
-    "resultsHaveLoaded": "{0} najdenih rezultatov"
+    "resultsHaveLoaded": "{0} najdenih rezultatov",
+    "topics": {
+      "featuredTopics": "Priporočene teme",
+      "label": "Raziščite več tem",
+      "noOptions": "Ni več tem za izbiro"
+    }
   },
   "cookies": {
     "acceptAll": "Sprejmi vse",
@@ -158,7 +157,8 @@
     "translationService": "Storitev eTranslation"
   },
   "home": {
-    "broughtBy": "Prinesel vam"
+    "broughtBy": "Prinesel vam",
+    "title": "Skupni evropski podatkovni prostor za kulturno dediščino"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektni partnerji",
     "reports": "Poročila o projektih",
     "viewFactSheet": "Oglejte si informativni list"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Odkrijte povezano vsebino"
-    }
   },
   "results": "{count} rezultat | {count} rezultatov",
   "shareWhere": "Kje želite to deliti?",

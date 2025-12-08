@@ -16,14 +16,8 @@
     "createdDate": "Създаден {date}",
     "publishedDate": "Публикувано на {date}"
   },
-  "categories": {
-    "featuredTags": "Препоръчани тагове",
-    "label": "Разгледайте по етикет",
-    "moreTags": "Още тагове",
-    "noOptions": "Няма повече тагове за избор",
-    "search": "Разгледайте по етикет"
-  },
   "content": {
+    "discoverRelated": "Открийте свързано съдържание",
     "filter": {
       "events": "Събития",
       "news": "Новини",
@@ -31,7 +25,12 @@
       "training": "Обучение",
       "viewAll": "Преглед на всички"
     },
-    "resultsHaveLoaded": "{0} намерени резултати"
+    "resultsHaveLoaded": "{0} намерени резултати",
+    "topics": {
+      "featuredTopics": "Препоръчани теми",
+      "label": "Разгледайте още теми",
+      "noOptions": "Няма повече теми за избор"
+    }
   },
   "cookies": {
     "acceptAll": "Приемане на всички",
@@ -158,7 +157,8 @@
     "translationService": "Услуга eTranslation"
   },
   "home": {
-    "broughtBy": "Донесено ви от"
+    "broughtBy": "Донесено ви от",
+    "title": "Общо европейско пространство за данни за културното наследство"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Партньори по проекта",
     "reports": "Проектни отчети",
     "viewFactSheet": "Преглед на информационния лист"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Открийте свързано съдържание"
-    }
   },
   "results": "{count} резултат | {count} резултата",
   "shareWhere": "Къде бихте искали да споделите това?",

@@ -16,14 +16,8 @@
     "createdDate": "Skapad {date}",
     "publishedDate": "Publicerad {date}"
   },
-  "categories": {
-    "featuredTags": "Utvalda taggar",
-    "label": "Utforska efter tagg",
-    "moreTags": "Fler taggar",
-    "noOptions": "Det finns inga fler taggar att välja",
-    "search": "Utforska efter tagg"
-  },
   "content": {
+    "discoverRelated": "Upptäck relaterat innehåll",
     "filter": {
       "events": "Händelser",
       "news": "Nyheter",
@@ -31,7 +25,12 @@
       "training": "Utbildning",
       "viewAll": "Visa alla"
     },
-    "resultsHaveLoaded": "{0} resultat hittades"
+    "resultsHaveLoaded": "{0} resultat hittades",
+    "topics": {
+      "featuredTopics": "Utvalda ämnen",
+      "label": "Utforska fler ämnen",
+      "noOptions": "Det finns inga fler ämnen att välja"
+    }
   },
   "cookies": {
     "acceptAll": "Acceptera alla",
@@ -158,7 +157,8 @@
     "translationService": "tjänsten eTranslation"
   },
   "home": {
-    "broughtBy": "Tillhandahålls av"
+    "broughtBy": "Tillhandahålls av",
+    "title": "Det gemensamma europeiska dataområdet för kulturarv"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektpartners",
     "reports": "Projektrapporter",
     "viewFactSheet": "Visa faktablad"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Upptäck relaterat innehåll"
-    }
   },
   "results": "{count} resultat | {count} resultat",
   "shareWhere": "Var skulle du vilja dela detta?",

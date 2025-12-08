@@ -16,14 +16,8 @@
     "createdDate": "Sukurta {date}",
     "publishedDate": "Paskelbta {date}"
   },
-  "categories": {
-    "featuredTags": "Rekomenduojamos žymos",
-    "label": "Naršyti pagal žymą",
-    "moreTags": "Daugiau žymų",
-    "noOptions": "Daugiau pasirinktinų žymų nėra",
-    "search": "Naršyti pagal žymą"
-  },
   "content": {
+    "discoverRelated": "Atraskite susijusį turinį",
     "filter": {
       "events": "Renginiai",
       "news": "Naujienos",
@@ -31,7 +25,12 @@
       "training": "Mokymai",
       "viewAll": "Peržiūrėti visus"
     },
-    "resultsHaveLoaded": "{0} rasti rezultatai"
+    "resultsHaveLoaded": "{0} rasti rezultatai",
+    "topics": {
+      "featuredTopics": "Rekomenduojamos temos",
+      "label": "Naršyti daugiau temų",
+      "noOptions": "Daugiau temų pasirinkti negalima"
+    }
   },
   "cookies": {
     "acceptAll": "Priimti visus",
@@ -158,7 +157,8 @@
     "translationService": "eVertimo paslauga"
   },
   "home": {
-    "broughtBy": "Jums pristato"
+    "broughtBy": "Jums pristato",
+    "title": "Bendra Europos kultūros paveldo duomenų erdvė"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projekto partneriai",
     "reports": "Projekto ataskaitos",
     "viewFactSheet": "Peržiūrėti informacinį lapą"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Atraskite susijusį turinį"
-    }
   },
   "results": "{count} rezultatas | {count} rezultatai",
   "shareWhere": "Kur norėtumėte tuo pasidalinti?",
