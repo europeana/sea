@@ -1,5 +1,6 @@
 {
-  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "extends": ["config:best-practices", ":automergeMinor"],
   "prConcurrentLimit": 5,
   "lockFileMaintenance": { "enabled": true }
 }
