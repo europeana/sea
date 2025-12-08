@@ -16,14 +16,8 @@
     "createdDate": "Oprettet {date}",
     "publishedDate": "Offentliggjort {date}"
   },
-  "categories": {
-    "featuredTags": "Fremhævede tags",
-    "label": "Udforsk efter tag",
-    "moreTags": "Flere tags",
-    "noOptions": "Der er ikke flere tags at vælge",
-    "search": "Udforsk efter tag"
-  },
   "content": {
+    "discoverRelated": "Opdag relateret indhold",
     "filter": {
       "events": "Begivenheder",
       "news": "Nyheder",
@@ -31,7 +25,12 @@
       "training": "Træning",
       "viewAll": "Se alle"
     },
-    "resultsHaveLoaded": "{0} resultater fundet"
+    "resultsHaveLoaded": "{0} resultater fundet",
+    "topics": {
+      "featuredTopics": "Fremhævede emner",
+      "label": "Udforsk flere emner",
+      "noOptions": "Der er ikke flere emner at vælge"
+    }
   },
   "cookies": {
     "acceptAll": "Accepter alle",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation tjeneste"
   },
   "home": {
-    "broughtBy": "Bragt til dig af"
+    "broughtBy": "Bragt til dig af",
+    "title": "Det fælles europæiske datarum for kulturarv"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektpartnere",
     "reports": "Projektrapporter",
     "viewFactSheet": "Se faktaark"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Opdag relateret indhold"
-    }
   },
   "results": "{count} resultat | {count} resultater",
   "shareWhere": "Hvor vil du gerne dele dette?",

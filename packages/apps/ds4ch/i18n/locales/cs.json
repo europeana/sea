@@ -16,14 +16,8 @@
     "createdDate": "Vytvořeno {date}",
     "publishedDate": "Publikováno {date}"
   },
-  "categories": {
-    "featuredTags": "Doporučené štítky",
-    "label": "Procházet podle štítku",
-    "moreTags": "Další štítky",
-    "noOptions": "Nejsou k dispozici žádné další tagy.",
-    "search": "Procházet podle štítku"
-  },
   "content": {
+    "discoverRelated": "Objevte související obsah",
     "filter": {
       "events": "Události",
       "news": "Zprávy",
@@ -31,7 +25,12 @@
       "training": "Školení",
       "viewAll": "Zobrazit vše"
     },
-    "resultsHaveLoaded": "{0} nalezených výsledků"
+    "resultsHaveLoaded": "{0} nalezených výsledků",
+    "topics": {
+      "featuredTopics": "Doporučená témata",
+      "label": "Prozkoumejte další témata",
+      "noOptions": "Nejsou k dispozici žádná další témata k výběru"
+    }
   },
   "cookies": {
     "acceptAll": "Přijmout vše",
@@ -158,7 +157,8 @@
     "translationService": "Služba eTranslation"
   },
   "home": {
-    "broughtBy": "Vám přináší"
+    "broughtBy": "Vám přináší",
+    "title": "Společný evropský datový prostor pro kulturní dědictví"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektoví partneři",
     "reports": "Projektové zprávy",
     "viewFactSheet": "Zobrazit informační list"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Objevte související obsah"
-    }
   },
   "results": "{count} výsledek | {count} výsledky",
   "shareWhere": "Kam byste to chtěli sdílet?",

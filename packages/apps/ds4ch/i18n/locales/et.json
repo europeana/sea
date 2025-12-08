@@ -16,14 +16,8 @@
     "createdDate": "Loodud {date}",
     "publishedDate": "Avaldatud {date}"
   },
-  "categories": {
-    "featuredTags": "Esiletõstetud sildid",
-    "label": "Uuri sildi järgi",
-    "moreTags": "Rohkem silte",
-    "noOptions": "Rohkem silte pole valida",
-    "search": "Uuri sildi järgi"
-  },
   "content": {
+    "discoverRelated": "Avasta seotud sisu",
     "filter": {
       "events": "Sündmused",
       "news": "Uudised",
@@ -31,7 +25,12 @@
       "training": "Koolitus",
       "viewAll": "Vaata kõiki"
     },
-    "resultsHaveLoaded": "{0} tulemusi leitud"
+    "resultsHaveLoaded": "{0} tulemusi leitud",
+    "topics": {
+      "featuredTopics": "Esiletõstetud teemad",
+      "label": "Avasta rohkem teemasid",
+      "noOptions": "Rohkem teemasid valimiseks pole"
+    }
   },
   "cookies": {
     "acceptAll": "Võtke kõik vastu",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation teenus"
   },
   "home": {
-    "broughtBy": "Teieni toodud"
+    "broughtBy": "Teieni toodud",
+    "title": "Ühine Euroopa andmeruum kultuuripärandi jaoks"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projekti partnerid",
     "reports": "Projekti aruanded",
     "viewFactSheet": "Vaata faktilehte"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Avasta seotud sisu"
-    }
   },
   "results": "{count} tulemus | {count} tulemused",
   "shareWhere": "Kus soovite seda jagada?",

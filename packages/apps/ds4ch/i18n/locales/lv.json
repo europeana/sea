@@ -16,14 +16,8 @@
     "createdDate": "Izveidots {date}",
     "publishedDate": "Publicēts {date}"
   },
-  "categories": {
-    "featuredTags": "Izvēlētās birkas",
-    "label": "Izpētīt pēc birkas",
-    "moreTags": "Vairāk birku",
-    "noOptions": "Nav vairs neviena atzīme, ko atlasīt",
-    "search": "Izpētīt pēc birkas"
-  },
   "content": {
+    "discoverRelated": "Atklājiet saistītu saturu",
     "filter": {
       "events": "Notikumi",
       "news": "Ziņas",
@@ -31,7 +25,12 @@
       "training": "Apmācība",
       "viewAll": "Skatīt visu"
     },
-    "resultsHaveLoaded": "{0} atrastie rezultāti"
+    "resultsHaveLoaded": "{0} atrastie rezultāti",
+    "topics": {
+      "featuredTopics": "Piedāvātās tēmas",
+      "label": "Izpētiet citas tēmas",
+      "noOptions": "Nav vairāk tēmu, ko izvēlēties"
+    }
   },
   "cookies": {
     "acceptAll": "Pieņemt visus",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation pakalpojums"
   },
   "home": {
-    "broughtBy": "Jums piedāvā"
+    "broughtBy": "Jums piedāvā",
+    "title": "Kopējā Eiropas datu telpa kultūras mantojumam"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projekta partneri",
     "reports": "Projektu ziņojumi",
     "viewFactSheet": "Skatīt faktu lapu"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Atklājiet saistītu saturu"
-    }
   },
   "results": "{count} rezultāts | {count} rezultāti",
   "shareWhere": "Kur jūs vēlētos dalīties ar šo?",

@@ -16,14 +16,8 @@
     "createdDate": "Erstellt {date}",
     "publishedDate": "Veröffentlicht {date}"
   },
-  "categories": {
-    "featuredTags": "Ausgewählte Tags",
-    "label": "Nach Tag erkunden",
-    "moreTags": "Weitere Tags",
-    "noOptions": "Es gibt keine weiteren Tags zur Auswahl",
-    "search": "Nach Tag erkunden"
-  },
   "content": {
+    "discoverRelated": "Entdecken Sie verwandte Inhalte",
     "filter": {
       "events": "Veranstaltungen",
       "news": "Nachrichten",
@@ -31,7 +25,12 @@
       "training": "Ausbildung",
       "viewAll": "Alle anzeigen"
     },
-    "resultsHaveLoaded": "{0} Ergebnisse gefunden"
+    "resultsHaveLoaded": "{0} Ergebnisse gefunden",
+    "topics": {
+      "featuredTopics": "Ausgewählte Themen",
+      "label": "Weitere Themen erforschen",
+      "noOptions": "Es gibt keine weiteren Themen zum Auswählen"
+    }
   },
   "cookies": {
     "acceptAll": "Alle akzeptieren",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation-Dienst"
   },
   "home": {
-    "broughtBy": "Präsentiert von"
+    "broughtBy": "Präsentiert von",
+    "title": "Der gemeinsame europäische Datenraum für das kulturelle Erbe"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektpartner",
     "reports": "Projektberichte",
     "viewFactSheet": "Informationsblatt anzeigen"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Entdecken Sie verwandte Inhalte"
-    }
   },
   "results": "{count} Ergebnis | {count} Ergebnisse",
   "shareWhere": "Wo möchtest du das teilen?",

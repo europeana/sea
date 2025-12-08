@@ -16,14 +16,8 @@
     "createdDate": "Créé le {date}",
     "publishedDate": "Publié {date}"
   },
-  "categories": {
-    "featuredTags": "Tags en vedette",
-    "label": "Explorer par tag",
-    "moreTags": "Plus de tags",
-    "noOptions": "Il n'y a plus de balises à sélectionner",
-    "search": "Explorer par tag"
-  },
   "content": {
+    "discoverRelated": "Découvrir du contenu connexe",
     "filter": {
       "events": "Événements",
       "news": "Actualités",
@@ -31,7 +25,12 @@
       "training": "Formation",
       "viewAll": "Voir tout"
     },
-    "resultsHaveLoaded": "{0} résultats trouvés"
+    "resultsHaveLoaded": "{0} résultats trouvés",
+    "topics": {
+      "featuredTopics": "Sujets d'actualité",
+      "label": "Explorer d’autres sujets",
+      "noOptions": "Il n'y a plus de sujets à sélectionner"
+    }
   },
   "cookies": {
     "acceptAll": "Accepter tout",
@@ -158,7 +157,8 @@
     "translationService": "Service eTranslation"
   },
   "home": {
-    "broughtBy": "Présenté par"
+    "broughtBy": "Présenté par",
+    "title": "L’espace européen commun des données pour le patrimoine culturel"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Partenaires du projet",
     "reports": "Rapports de projet",
     "viewFactSheet": "Voir la fiche d’information"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Découvrir du contenu connexe"
-    }
   },
   "results": "{count} résultat | {count} résultats",
   "shareWhere": "Où aimeriez-vous partager cela?",

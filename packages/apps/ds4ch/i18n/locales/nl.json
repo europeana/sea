@@ -16,14 +16,8 @@
     "createdDate": "Gemaakt {date}",
     "publishedDate": "Gepubliceerd {date}"
   },
-  "categories": {
-    "featuredTags": "Uitgelichte tags",
-    "label": "Verkennen op tag",
-    "moreTags": "Meer tags",
-    "noOptions": "Er zijn geen tags meer om te selecteren",
-    "search": "Verkennen op tag"
-  },
   "content": {
+    "discoverRelated": "Ontdek gerelateerde content",
     "filter": {
       "events": "Evenementen",
       "news": "Nieuws",
@@ -31,7 +25,12 @@
       "training": "Opleiding",
       "viewAll": "Bekijk alles"
     },
-    "resultsHaveLoaded": "{0} resultaten gevonden"
+    "resultsHaveLoaded": "{0} resultaten gevonden",
+    "topics": {
+      "featuredTopics": "Aanbevolen onderwerpen",
+      "label": "Ontdek meer onderwerpen",
+      "noOptions": "Er zijn geen onderwerpen meer om te selecteren"
+    }
   },
   "cookies": {
     "acceptAll": "Accepteer alles",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation Service"
   },
   "home": {
-    "broughtBy": "Aangeboden door"
+    "broughtBy": "Aangeboden door",
+    "title": "De gemeenschappelijke Europese dataruimte voor cultureel erfgoed"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projectpartners",
     "reports": "Projectrapporten",
     "viewFactSheet": "Bekijk factsheet"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Ontdek gerelateerde content"
-    }
   },
   "results": "{count} resultaat | {count} resultaten",
   "shareWhere": "Waar wilt u dit delen?",

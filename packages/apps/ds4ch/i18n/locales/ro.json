@@ -16,14 +16,8 @@
     "createdDate": "Creat {date}",
     "publishedDate": "Publicat {date}"
   },
-  "categories": {
-    "featuredTags": "Etichete recomandate",
-    "label": "Explorează după etichetă",
-    "moreTags": "Mai multe etichete",
-    "noOptions": "Nu mai sunt etichete de selectat",
-    "search": "Explorează după etichetă"
-  },
   "content": {
+    "discoverRelated": "Descoperiți conținuturi conexe",
     "filter": {
       "events": "Evenimente",
       "news": "Știri",
@@ -31,7 +25,12 @@
       "training": "Instruire",
       "viewAll": "Vizualizează tot"
     },
-    "resultsHaveLoaded": "{0} rezultate găsite"
+    "resultsHaveLoaded": "{0} rezultate găsite",
+    "topics": {
+      "featuredTopics": "Subiecte recomandate",
+      "label": "Explorează mai multe subiecte",
+      "noOptions": "Nu mai există subiecte de selectat"
+    }
   },
   "cookies": {
     "acceptAll": "Accepta toate",
@@ -158,7 +157,8 @@
     "translationService": "Serviciul eTranslation"
   },
   "home": {
-    "broughtBy": "Adus vouă de"
+    "broughtBy": "Adus vouă de",
+    "title": "Spațiul comun european de date pentru patrimoniul cultural"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Parteneri de proiect",
     "reports": "Rapoarte de proiect",
     "viewFactSheet": "Vizualizează fișa informativă"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Descoperiți conținuturi conexe"
-    }
   },
   "results": "{count} rezultat | {count} rezultate",
   "shareWhere": "Unde ai vrea să împărtășești asta?",

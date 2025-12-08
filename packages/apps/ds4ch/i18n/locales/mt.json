@@ -16,14 +16,8 @@
     "createdDate": "Maħluq {date}",
     "publishedDate": "Ippubblikat {date}"
   },
-  "categories": {
-    "featuredTags": "Tikketti dehru",
-    "label": "Esplora skont it-tikketta",
-    "moreTags": "Aktar tikketti",
-    "noOptions": "M'hemmx aktar tags biex tagħżel",
-    "search": "Esplora skont it-tikketta"
-  },
   "content": {
+    "discoverRelated": "Skopri kontenut relatat",
     "filter": {
       "events": "Avvenimenti",
       "news": "Aħbarijiet",
@@ -31,7 +25,12 @@
       "training": "Taħriġ",
       "viewAll": "Ara kollha"
     },
-    "resultsHaveLoaded": "{0} riżultati misjuba"
+    "resultsHaveLoaded": "{0} riżultati misjuba",
+    "topics": {
+      "featuredTopics": "Suġġetti dehru",
+      "label": "Esplora aktar suġġetti",
+      "noOptions": "M'hemmx aktar suġġetti biex tagħżel"
+    }
   },
   "cookies": {
     "acceptAll": "Aċċetta kollox",
@@ -158,7 +157,8 @@
     "translationService": "Servizz ta' Traduzzjoni Elettronika"
   },
   "home": {
-    "broughtBy": "Miġjuba lilek minn"
+    "broughtBy": "Miġjuba lilek minn",
+    "title": "L-ispazju komuni Ewropew tad-dejta għall-wirt kulturali"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Imsieħba tal-proġett",
     "reports": "Rapporti tal-proġett",
     "viewFactSheet": "Ara l-folja ta’ informazzjoni"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Skopri kontenut relatat"
-    }
   },
   "results": "{count} riżultat | {count} riżultati",
   "shareWhere": "Fejn tixtieq taqsam dan?",

@@ -16,14 +16,8 @@
     "createdDate": "Kreirano {date}",
     "publishedDate": "Objavljeno {date}"
   },
-  "categories": {
-    "featuredTags": "Istaknute oznake",
-    "label": "Istraži po oznaci",
-    "moreTags": "Više oznaka",
-    "noOptions": "Nema više oznaka za odabir",
-    "search": "Istraži po oznaci"
-  },
   "content": {
+    "discoverRelated": "Otkrijte povezani sadržaj",
     "filter": {
       "events": "Događaji",
       "news": "Vijesti",
@@ -31,7 +25,12 @@
       "training": "Trening",
       "viewAll": "Pogledaj sve"
     },
-    "resultsHaveLoaded": "{0} pronađenih rezultata"
+    "resultsHaveLoaded": "{0} pronađenih rezultata",
+    "topics": {
+      "featuredTopics": "Istaknute teme",
+      "label": "Istražite više tema",
+      "noOptions": "Nema više tema za odabir"
+    }
   },
   "cookies": {
     "acceptAll": "Prihvatiti sve",
@@ -158,7 +157,8 @@
     "translationService": "eTranslation usluga"
   },
   "home": {
-    "broughtBy": "Predstavljeno vam od"
+    "broughtBy": "Predstavljeno vam od",
+    "title": "Zajednički europski podatkovni prostor za kulturnu baštinu"
   },
   "landing": {
     "counts": {
@@ -201,11 +201,6 @@
     "partners": "Projektni partneri",
     "reports": "Projektna izvješća",
     "viewFactSheet": "Pogledaj informativni list"
-  },
-  "related": {
-    "categoryTags": {
-      "title": "Otkrijte povezani sadržaj"
-    }
   },
   "results": "{count} rezultat | {count} rezultata",
   "shareWhere": "Gdje biste to htjeli podijeliti?",
