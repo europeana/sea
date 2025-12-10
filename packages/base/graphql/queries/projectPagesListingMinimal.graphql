@@ -22,6 +22,9 @@ query ProjectPageListingMinimal(
           id: identifier
         }
       }
+      project {
+        startDate
+      }
     }
   }
 }

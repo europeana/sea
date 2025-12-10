@@ -26,6 +26,7 @@ query EventsListingMinimal(
         }
       }
       date: datePublished
+      startDate
       sys {
         id
       }
