@@ -394,8 +394,6 @@ function normaliseCard(entry) {
 function sortByDate(entry) {
   if (entry.__typename === "ProjectPage") {
     return entry.project.startDate;
-  } else if (entry.__typename === "Event") {
-    return entry.startDate || entry.date;
   } else {
     return entry.date;
   }

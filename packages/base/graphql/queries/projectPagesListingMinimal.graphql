@@ -13,7 +13,6 @@ query ProjectPageListingMinimal(
   ) {
     items {
       __typename
-      date: datePublished
       sys {
         id
       }

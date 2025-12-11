@@ -33,7 +33,6 @@ const mockBlogMetadata = Array.from({ length: 8 }, (key, index) => ({
 const mockProjectMetadata = Array.from({ length: 8 }, (key, index) => ({
   __typename: "ProjectPage",
   sys: { id: `project-id${index}` },
-  date: `2023-01-${10 - index}`,
   cats: {
     items: [],
   },
@@ -43,8 +42,7 @@ const mockProjectMetadata = Array.from({ length: 8 }, (key, index) => ({
 const mockEventMetadata = Array.from({ length: 8 }, (key, index) => ({
   __typename: "Event",
   sys: { id: `event-id${index}` },
-  date: `2023-01-${10 - index}`,
-  startDate: `2026-01-${index + 1}`,
+  date: `2026-01-${index + 1}`,
   cats: {
     items: [],
   },
@@ -63,6 +61,7 @@ const mockProjectEntries = Array.from({ length: 8 }, (key, index) => ({
 
 const mockEventEntries = Array.from({ length: 8 }, (key, index) => ({
   ...mockEventMetadata[index],
+  startDate: `2026-01-${index + 1}`,
   name: `Event entry ${index}`,
 }));
 
