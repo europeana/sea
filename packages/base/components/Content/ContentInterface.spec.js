@@ -21,42 +21,70 @@ mockNuxtImport("useI18n", () => {
 
 const categories = ["network", "postcards"];
 
-const mockBlogMetadata = Array.from({ length: 24 }, (key, index) => ({
+const mockBlogMetadata = Array.from({ length: 8 }, (key, index) => ({
   __typename: "BlogPosting",
-  sys: { id: `id${index}` },
+  sys: { id: `blog-id${index}` },
   date: `2023-01-${index + 1}`,
   cats: {
-    items: [{ id: categories[0] }, { id: categories[1] }],
+    items: [],
   },
+}));
+
+const mockProjectMetadata = Array.from({ length: 8 }, (key, index) => ({
+  __typename: "ProjectPage",
+  sys: { id: `project-id${index}` },
+  cats: {
+    items: [],
+  },
+  project: { startDate: `2025-01-${index + 1}` },
+}));
+
+const mockEventMetadata = Array.from({ length: 8 }, (key, index) => ({
+  __typename: "Event",
+  sys: { id: `event-id${index}` },
+  date: `2026-01-${index + 1}`,
+  cats: {
+    items: [],
+  },
+}));
+
+const mockBlogEntries = Array.from({ length: 8 }, (key, index) => ({
+  ...mockBlogMetadata[index],
+  name: `Blog post entry ${index}`,
+}));
+
+const mockProjectEntries = Array.from({ length: 8 }, (key, index) => ({
+  ...mockProjectMetadata[index],
+  name: `Project page entry ${index}`,
+  headline: `Project headline ${index}`,
+}));
+
+const mockEventEntries = Array.from({ length: 8 }, (key, index) => ({
+  ...mockEventMetadata[index],
+  startDate: `2026-01-${index + 1}`,
+  name: `Event entry ${index}`,
 }));
 
 const mockBlogMetadataWithCategories = [
   {
     __typename: "BlogPosting",
-    sys: { id: "id1" },
+    sys: { id: "blog-id1" },
     date: "2023-01-01",
     cats: { items: [{ id: "network" }] },
   },
   {
     __typename: "BlogPosting",
-    sys: { id: "id2" },
+    sys: { id: "blog-id2" },
     date: "2023-01-02",
     cats: { items: [{ id: "postcards" }] },
   },
   {
     __typename: "BlogPosting",
-    sys: { id: "id3" },
+    sys: { id: "blog-id3" },
     date: "2023-01-03",
     cats: { items: [{ id: "unknown" }] },
   },
 ];
-
-const mockBlogEntries = Array.from({ length: 24 }, (key, index) => ({
-  __typename: "BlogPosting",
-  sys: { id: `id${index}` },
-  datePublished: `2023-01-${index + 1}`,
-  name: `Entry ${index}`,
-}));
 
 const mockQuery = vi.fn();
 
@@ -67,6 +95,7 @@ const contentfulResponse = (query, entries, metadata) => {
       data: {
         blogPostingCollection: { items: entries.blogs },
         projectPageCollection: { items: entries.projects },
+        eventCollection: { items: entries.events },
         storyCollection: { items: [] },
         exhibitionPageCollection: { items: [] },
       },
@@ -80,6 +109,11 @@ const contentfulResponse = (query, entries, metadata) => {
   if (query.definitions?.[0]?.name?.value === "ProjectPageListingMinimal") {
     return Promise.resolve({
       data: { projectPageCollection: { items: metadata.projects } },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "EventsListingMinimal") {
+    return Promise.resolve({
+      data: { eventCollection: { items: metadata.events } },
     });
   }
 };
@@ -105,7 +139,7 @@ const factory = (props = {}) =>
       ],
     },
     props: {
-      contentTypes: ["blog post", "project"],
+      contentTypes: ["blog post", "project", "event"],
       site: "dataspace-culturalheritage.eu",
       ...props,
     },
@@ -118,11 +152,13 @@ describe("components/Content/ContentInterface", () => {
         query,
         {
           blogs: mockBlogEntries,
-          projects: [],
+          projects: mockProjectEntries,
+          events: mockEventEntries,
         },
         {
           blogs: mockBlogMetadata,
-          projects: [],
+          projects: mockProjectMetadata,
+          events: mockEventMetadata,
         },
       ),
     );
@@ -137,7 +173,7 @@ describe("components/Content/ContentInterface", () => {
 
     await wrapper.vm.$nextTick();
 
-    expect(mockQuery.mock.calls.length).toEqual(3);
+    expect(mockQuery.mock.calls.length).toEqual(4);
     expect(wrapper.findAllComponents({ name: "ContentCard" }).length).toBe(24);
   });
   describe("selectedTags", () => {
@@ -201,6 +237,7 @@ describe("components/Content/ContentInterface", () => {
       });
     });
   });
+
   describe("filteredTags", () => {
     describe("when content is filtered to a tag", () => {
       it("selects and sorts categories that are shared with the active filter", async () => {
@@ -225,6 +262,7 @@ describe("components/Content/ContentInterface", () => {
       });
     });
   });
+
   describe("filteredMinimalEntries", () => {
     describe("when no tags are selected", () => {
       it("defaults to all content", async () => {
@@ -340,48 +378,77 @@ describe("components/Content/ContentInterface", () => {
   it("normalises blog content correctly", async () => {
     const wrapper = await factory();
 
-    const firstEntry = wrapper.vm.contentSections[0][0];
+    const firstEntry = wrapper.vm.contentSections[0].filter(
+      (entry) => entry.__typename === "BlogPosting",
+    )[0];
 
     expect(firstEntry.text).toBe("authored.createdDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
 
   it("normalises project content correctly", async () => {
-    mockQuery.mockImplementation((query) =>
-      contentfulResponse(
-        query,
-        {
-          blogs: mockBlogEntries,
-          projects: [
-            {
-              __typename: "ProjectPage",
-              sys: { id: "id2000" },
-              datePublished: "2024-01-01",
-              name: "Entry PROJECT",
-              headline: "headline",
-            },
-          ],
-        },
-        {
-          blogs: mockBlogMetadata,
-          projects: [
-            {
-              __typename: "ProjectPage",
-              sys: { id: "id2000" },
-              date: "2024-01-01",
-              cats: { items: [{ id: "network" }] },
-            },
-          ],
-        },
-      ),
-    );
-
     const wrapper = await factory();
 
-    const firstEntry = wrapper.vm.contentSections[0][0];
+    const firstEntry = wrapper.vm.contentSections[0].filter(
+      (entry) => entry.__typename === "ProjectPage",
+    )[0];
 
-    expect(firstEntry.text).toBe("headline");
+    expect(firstEntry.text).toBe("Project headline 7");
     expect(firstEntry.primaryImageOfPage).toBe(null);
+  });
+
+  it("normalises event content correctly", async () => {
+    const wrapper = await factory();
+
+    const firstEntry = wrapper.vm.contentSections[0].filter(
+      (entry) => entry.__typename === "Event",
+    )[0];
+
+    expect(firstEntry.text).toBe("2026-01-8");
+    expect(firstEntry.primaryImageOfPage.image).toBe(undefined);
+  });
+
+  it("normalises blog content correctly", async () => {
+    const wrapper = await factory();
+
+    const firstEntry = wrapper.vm.contentSections[0].filter(
+      (entry) => entry.__typename === "BlogPosting",
+    )[0];
+
+    expect(firstEntry.text).toBe("authored.createdDate");
+    expect(firstEntry.primaryImageOfPage).toBe(null);
+  });
+
+  it("orders project content by project start date", async () => {
+    const wrapper = await factory();
+
+    const projectEntries = wrapper.vm.contentSections[0].filter(
+      (entry) => entry.__typename === "ProjectPage",
+    );
+
+    expect(projectEntries[0].project.startDate).toBe("2025-01-8");
+    expect(projectEntries[7].project.startDate).toBe("2025-01-1");
+  });
+
+  it("orders event content by start date", async () => {
+    const wrapper = await factory();
+
+    const eventEntries = wrapper.vm.contentSections[0].filter(
+      (entry) => entry.__typename === "Event",
+    );
+
+    expect(eventEntries[0].startDate).toBe("2026-01-8");
+    expect(eventEntries[7].startDate).toBe("2026-01-1");
+  });
+
+  it("orders content by start or publication date", async () => {
+    const wrapper = await factory();
+
+    const entries = wrapper.vm.contentSections[0];
+
+    expect(entries[0].startDate).toBe("2026-01-8");
+    expect(entries[8].project.startDate).toBe("2025-01-8");
+    expect(entries[16].date).toBe("2023-01-8");
   });
 
   describe("when there is a default card thumbnail", () => {

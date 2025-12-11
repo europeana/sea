@@ -374,7 +374,7 @@ function normaliseCard(entry) {
           subTitle: t("training.label"),
           text: trainingDateHelper(entry.startDate, entry.endDate),
           primaryImageOfPage: {
-            image: entry.image || props.defaultCardThumbnail.image,
+            image: entry.image || props.defaultCardThumbnail?.image,
           },
         };
       }
@@ -384,10 +384,18 @@ function normaliseCard(entry) {
         subTitle: t("event.label"),
         text: eventDateHelper(entry.startDate, entry.endDate),
         primaryImageOfPage: {
-          image: entry.image || props.defaultCardThumbnail.image,
+          image: entry.image || props.defaultCardThumbnail?.image,
         },
       };
     }
+  }
+}
+
+function sortByDate(entry) {
+  if (entry.__typename === "ProjectPage") {
+    return entry.project.startDate;
+  } else {
+    return entry.date;
   }
 }
 
@@ -435,10 +443,12 @@ async function fetchMinimalEntries() {
     }
   }
 
-  // Order by date published
-  const ordered = contentIds.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+  // Order by date (startDate or published date)
+  const ordered = contentIds.sort((a, b) => {
+    const sortDateA = sortByDate(a);
+    const sortDateB = sortByDate(b);
+    return new Date(sortDateB).getTime() - new Date(sortDateA).getTime();
+  });
   return ordered;
 }
 
@@ -542,10 +552,11 @@ watch(page, () => {
                 :url="entry.url"
                 :text="entry.text"
                 :image-url="
-                  entry.primaryImageOfPage && entry.primaryImageOfPage.image.url
+                  entry.primaryImageOfPage?.image &&
+                  entry.primaryImageOfPage.image.url
                 "
                 :image-content-type="
-                  entry.primaryImageOfPage &&
+                  entry.primaryImageOfPage?.image &&
                   entry.primaryImageOfPage.image.contentType
                 "
               />
