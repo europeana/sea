@@ -104,7 +104,7 @@ importers:
         version: link:../../base
       '@europeana/style':
         specifier: ^2.13.0
-        version: 2.13.0
+        version: 2.17.1
       '@europeana/vue-contentful-graphql':
         specifier: workspace:*
         version: link:../../plugins/vue-contentful-graphql
@@ -174,7 +174,7 @@ importers:
     devDependencies:
       '@europeana/style':
         specifier: ^2.13.0
-        version: 2.13.0
+        version: 2.17.1
       '@nuxt/test-utils':
         specifier: ^3.19.1
         version: 3.19.1(@types/node@24.10.1)(@vue/test-utils@2.4.6)(happy-dom@17.6.3)(jiti@2.6.1)(magicast@0.3.5)(sass-embedded@1.89.1)(terser@5.44.0)(typescript@5.8.3)(vitest@3.2.4(@types/node@24.10.1)(happy-dom@17.6.3)(jiti@2.6.1)(sass-embedded@1.89.1)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1)
@@ -867,8 +867,8 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@europeana/style@2.13.0':
-    resolution: {integrity: sha512-jjdkRDXhtPr93oZCaOj/RJd9pfAvDk42GrQw9JB8v2FVeF5qgYF4BV4tdz8UzVMzzqFcVKlQACjk5S6PKGrMUw==}
+  '@europeana/style@2.17.1':
+    resolution: {integrity: sha512-6PxVa7i6BEXl691PGf8Nk9gW97foZRuvXOTj9nXrHME1by4IS9rA9RdGbA1FMd6IjC//1FDrD+LOvG+etdAYRA==}
 
   '@fastify/busboy@3.2.0':
     resolution: {integrity: sha512-m9FVDXU3GT2ITSe0UaMA5rU3QkfC/UXtCU8y0gSN/GugTqtVldOBWIB5V6V3sbmenVZUIpU6f+mPEO2+m5iTaA==}
@@ -7109,7 +7109,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@europeana/style@2.13.0': {}
+  '@europeana/style@2.17.1': {}
 
   '@fastify/busboy@3.2.0':
     optional: true
