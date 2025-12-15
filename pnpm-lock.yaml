@@ -79,7 +79,7 @@ importers:
         version: 5.8.2
       marked:
         specifier: ^16.0.0
-        version: 16.0.0
+        version: 16.4.2
       morgan:
         specifier: ^1.10.1
         version: 1.10.1
@@ -183,7 +183,7 @@ importers:
         version: 9.5.6(@vue/compiler-dom@3.5.25)(eslint@9.34.0(jiti@2.6.1))(magicast@0.3.5)(rollup@4.52.5)(vue@3.5.25(typescript@5.8.3))
       marked:
         specifier: ^16.0.0
-        version: 16.0.0
+        version: 16.4.2
       nuxt:
         specifier: ^3.19.0
         version: 3.19.0(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.10.1)(@vue/compiler-sfc@3.5.25)(db0@0.3.4)(eslint@9.34.0(jiti@2.6.1))(ioredis@5.8.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.52.5)(sass-embedded@1.89.1)(terser@5.44.0)(typescript@5.8.3)(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.89.1)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1)
@@ -4419,8 +4419,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  marked@16.0.0:
-    resolution: {integrity: sha512-MUKMXDjsD/eptB7GPzxo4xcnLS6oo7/RHimUMHEDRhUooPwmN9BEpMl7AEOJv3bmso169wHI2wUF9VQgL7zfmA==}
+  marked@16.4.2:
+    resolution: {integrity: sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -11200,7 +11200,7 @@ snapshots:
     dependencies:
       semver: 7.7.3
 
-  marked@16.0.0: {}
+  marked@16.4.2: {}
 
   math-intrinsics@1.1.0: {}
 
