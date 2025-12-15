@@ -67,7 +67,7 @@ importers:
     dependencies:
       bullmq:
         specifier: ^5.58.5
-        version: 5.61.2
+        version: 5.66.0
       cheerio:
         specifier: ^1.1.2
         version: 1.1.2
@@ -2791,8 +2791,8 @@ packages:
     resolution: {integrity: sha512-bkXY9WsVpY7CvMhKSR6pZilZu9Ln5WDrKVBUXf2S443etkmEO4V58heTecXcUIsNsi4Rx8JUO4NfX1IcQl4deg==}
     engines: {node: '>=18.20'}
 
-  bullmq@5.61.2:
-    resolution: {integrity: sha512-b39hbiq/xXpOTT/OfmKpQYD+4VE4+XUlvdZ6GjbGl9asmRk8cSvUaQWD18jVCn1I0SzIfbrgOf+RAkqjXDUhJg==}
+  bullmq@5.66.0:
+    resolution: {integrity: sha512-LSe8yEiVTllOOq97Q0C/EhczKS5Yd0AUJleGJCIh0cyJE5nWUqEpGC/uZQuuAYniBSoMT8LqwrxE7N5MZVrLoQ==}
 
   bundle-name@4.1.0:
     resolution: {integrity: sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==}
@@ -9475,7 +9475,7 @@ snapshots:
 
   builtin-modules@5.0.0: {}
 
-  bullmq@5.61.2:
+  bullmq@5.66.0:
     dependencies:
       cron-parser: 4.9.0
       ioredis: 5.8.2
