@@ -73,7 +73,7 @@ importers:
         version: 1.1.2
       contentful-management:
         specifier: ^11.57.4
-        version: 11.65.0
+        version: 11.66.0
       ioredis:
         specifier: ^5.7.0
         version: 5.8.2
@@ -1944,8 +1944,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@rollup/rollup-linux-x64-gnu@4.53.3':
-    resolution: {integrity: sha512-3EhFi1FU6YL8HTUJZ51imGJWEX//ajQPfqWLI3BQq4TlvHy4X0MOr5q3D2Zof/ka0d5FNdPwZXm3Yyib/UEd+w==}
+  '@rollup/rollup-linux-x64-gnu@4.53.4':
+    resolution: {integrity: sha512-jjEMkzvASQBbzzlzf4os7nzSBd/cvPrpqXCUOqoeCh1dQ4BP3RZCJk8XBeik4MUln3m+8LeTJcY54C/u8wb3DQ==}
     cpu: [x64]
     os: [linux]
 
@@ -3005,8 +3005,8 @@ packages:
   constantinople@4.0.1:
     resolution: {integrity: sha512-vCrqcSIq4//Gx74TXXCGnHpulY1dskqLTFGDmhrGxzeXL8lF8kvXv6mpNWlJj1uD4DW23D4ljAqbY4RRaaUZIw==}
 
-  contentful-management@11.65.0:
-    resolution: {integrity: sha512-ATBszdWOkNqRlcRWDRXF1LpYtct9usmhJ7TIJkimsQf/Wf+6guWD1bQq6fo7GMgNUvWcc/0ZEneMl7uEoicBmQ==}
+  contentful-management@11.66.0:
+    resolution: {integrity: sha512-rMI8LnNljyOBnREIT9V5MDLtxlPctO7dYwIszNZuHdBvd5C10CM8apglCrm87nFTuRGpbJ0q+y7cv/c8IQyfZw==}
     engines: {node: '>=18'}
 
   contentful-sdk-core@9.2.1:
@@ -8461,7 +8461,7 @@ snapshots:
   '@rollup/rollup-linux-x64-gnu@4.52.5':
     optional: true
 
-  '@rollup/rollup-linux-x64-gnu@4.53.3':
+  '@rollup/rollup-linux-x64-gnu@4.53.4':
     optional: true
 
   '@rollup/rollup-linux-x64-musl@4.52.5':
@@ -9741,7 +9741,7 @@ snapshots:
       '@babel/parser': 7.28.5
       '@babel/types': 7.28.2
 
-  contentful-management@11.65.0:
+  contentful-management@11.66.0:
     dependencies:
       '@contentful/rich-text-types': 16.8.5
       axios: 1.13.2
@@ -9759,7 +9759,7 @@ snapshots:
       process: 0.11.10
       qs: 6.14.0
     optionalDependencies:
-      '@rollup/rollup-linux-x64-gnu': 4.53.3
+      '@rollup/rollup-linux-x64-gnu': 4.53.4
 
   conventional-changelog-angular@7.0.0:
     dependencies:
