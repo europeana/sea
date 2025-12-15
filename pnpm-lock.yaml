@@ -24,8 +24,8 @@ importers:
         specifier: ^9.34.0
         version: 9.34.0
       '@eslint/json':
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.14.0
+        version: 0.14.0
       '@nuxt/eslint':
         specifier: ^1.9.0
         version: 1.9.0(@typescript-eslint/utils@8.41.0(eslint@9.34.0(jiti@2.6.1))(typescript@5.8.3))(@vue/compiler-sfc@3.5.25)(eslint@9.34.0(jiti@2.6.1))(magicast@0.3.5)(typescript@5.8.3)(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.89.1)(terser@5.44.0)(yaml@2.8.1))
@@ -851,8 +851,8 @@ packages:
     resolution: {integrity: sha512-EoyvqQnBNsV1CWaEJ559rxXL4c8V92gxirbawSmVUOWXlsRxxQXl6LmCpdUblgxgSkDIqKnhzba2SjRTI/A5Rw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/json@0.13.2':
-    resolution: {integrity: sha512-yWLyRE18rHgHXhWigRpiyv1LDPkvWtC6oa7QHXW7YdP6gosJoq7BiLZW2yCs9U7zN7X4U3ZeOJjepA10XAOIMw==}
+  '@eslint/json@0.14.0':
+    resolution: {integrity: sha512-rvR/EZtvUG3p9uqrSmcDJPYSH7atmWr0RnFWN6m917MAPx82+zQgPUmDu0whPFG6XTyM0vB/hR6c1Q63OaYtCQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -885,8 +885,8 @@ packages:
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
     engines: {node: '>=12.22'}
 
-  '@humanwhocodes/momoa@3.3.9':
-    resolution: {integrity: sha512-LHw6Op4bJb3/3KZgOgwflJx5zY9XOy0NU1NuyUFKGdTwHYmP+PbnQGCYQJ8NVNlulLfQish34b0VuUlLYP3AXA==}
+  '@humanwhocodes/momoa@3.3.10':
+    resolution: {integrity: sha512-KWiFQpSAqEIyrTXko3hFNLeQvSK8zXlJQzhhxsyVn58WFRYXST99b3Nqnu+ttOtjds2Pl2grUHGpe2NzhPynuQ==}
     engines: {node: '>=18'}
 
   '@humanwhocodes/retry@0.3.1':
@@ -7090,11 +7090,11 @@ snapshots:
 
   '@eslint/js@9.34.0': {}
 
-  '@eslint/json@0.13.2':
+  '@eslint/json@0.14.0':
     dependencies:
-      '@eslint/core': 0.15.2
-      '@eslint/plugin-kit': 0.3.5
-      '@humanwhocodes/momoa': 3.3.9
+      '@eslint/core': 0.17.0
+      '@eslint/plugin-kit': 0.4.1
+      '@humanwhocodes/momoa': 3.3.10
       natural-compare: 1.4.0
 
   '@eslint/object-schema@2.1.6': {}
@@ -7123,7 +7123,7 @@ snapshots:
 
   '@humanwhocodes/module-importer@1.0.1': {}
 
-  '@humanwhocodes/momoa@3.3.9': {}
+  '@humanwhocodes/momoa@3.3.10': {}
 
   '@humanwhocodes/retry@0.3.1': {}
 
