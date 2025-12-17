@@ -112,8 +112,8 @@ importers:
         specifier: workspace:*
         version: link:../../directives/vue-visible-on-scroll
       '@lottiefiles/dotlottie-vue':
-        specifier: ^0.9.0
-        version: 0.9.0(vue@3.5.25(typescript@5.8.3))
+        specifier: ^0.10.0
+        version: 0.10.10(vue@3.5.25(typescript@5.8.3))
       '@nuxtjs/i18n':
         specifier: ^9.5.6
         version: 9.5.6(@vue/compiler-dom@3.5.25)(eslint@9.34.0(jiti@2.6.1))(magicast@0.5.1)(rollup@4.53.4)(vue@3.5.25(typescript@5.8.3))
@@ -1393,13 +1393,13 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@lottiefiles/dotlottie-vue@0.9.0':
-    resolution: {integrity: sha512-Bi0cUgh1BxZLi/8a75qMZiX6u1Q3MUKM0927uUtrTwiQA+H98hLoSiG4C81XNS/0iucx40FtM5GELa9zZ5bpCA==}
+  '@lottiefiles/dotlottie-vue@0.10.10':
+    resolution: {integrity: sha512-zj0VTJigCcr9CdeUr2fCSz+1h5GEKHGiLZlpBISerTUUvn7qBFC27NeomiXw9ExNcUnTNgiyLbJbl8vbrLaxEA==}
     peerDependencies:
       vue: ^3.3.4
 
-  '@lottiefiles/dotlottie-web@0.50.0':
-    resolution: {integrity: sha512-l8mEWe+SZ76RKj2R8BiqU5Pc/q4aj6YTunXuXW/JLMjKVJEpefRE+E7d6CnZxSnpf36bvd1zGdopATzjJEHlgA==}
+  '@lottiefiles/dotlottie-web@0.58.1':
+    resolution: {integrity: sha512-YC4pmScrV0R3rd11gU5xHrjeNczlCic69zlnMH/buDIzYxIbpR88oPUhGtKgu5ln7EJchoLpeRJbA3uLCzSeTA==}
 
   '@mapbox/node-pre-gyp@2.0.0':
     resolution: {integrity: sha512-llMXd39jtP0HpQLVI37Bf1m2ADlEb35GYSh1SDSLsBhR+5iCxiNGlT31yqbNtVHygHAtMy6dWFERpU2JgufhPg==}
@@ -8413,12 +8413,12 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lottiefiles/dotlottie-vue@0.9.0(vue@3.5.25(typescript@5.8.3))':
+  '@lottiefiles/dotlottie-vue@0.10.10(vue@3.5.25(typescript@5.8.3))':
     dependencies:
-      '@lottiefiles/dotlottie-web': 0.50.0
+      '@lottiefiles/dotlottie-web': 0.58.1
       vue: 3.5.25(typescript@5.8.3)
 
-  '@lottiefiles/dotlottie-web@0.50.0': {}
+  '@lottiefiles/dotlottie-web@0.58.1': {}
 
   '@mapbox/node-pre-gyp@2.0.0':
     dependencies:
