@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Push files to Lokalise
-        uses: lokalise/lokalise-push-action@v3.6.0
+        uses: lokalise/lokalise-push-action@33d64d3fa572d2041185e4a10745b3e1ae9a0af2 # v3.8.1
         with:
           api_token: ${{ secrets.LOKALISE_API_TOKEN_RW }}
           project_id: ${{ secrets.LOKALISE_PROJECT_ID }}
