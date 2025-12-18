@@ -14,6 +14,6 @@
     "node-fetch-native": "^1.6.6"
   },
   "devDependencies": {
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "2.12.6"
   }
 }
