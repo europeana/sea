@@ -158,7 +158,7 @@ importers:
         specifier: ^20.0.2
         version: 20.0.2
       sass-embedded:
-        specifier: ^1.96.0
+        specifier: ^1.97.0
         version: 1.97.0
       storybook:
         specifier: 9.1.17
