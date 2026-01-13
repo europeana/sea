@@ -132,11 +132,7 @@ const filteredMinimalEntries = computed(() => {
 });
 
 const total = computed(() => {
-  // TODO: use query total instead of filteredMinimalEntries
-  return (
-    (filteredMinimalEntries.value?.length || 0) +
-    (showFeaturedEntry.value ? 1 : 0)
-  );
+  return (fullEntries.value.total || 0) + (showFeaturedEntry.value ? 1 : 0);
 });
 
 const page = computed(() => {
@@ -269,9 +265,7 @@ async function fetchFullEntries() {
       contentVariables,
     );
 
-    return Object.values(contentResponse.data)
-      .map((collection) => collection.items || [])
-      .flat();
+    return Object.values(contentResponse.data)[0];
   } else {
     const supportedTypes = supportedContentTypes.value.map(
       (type) => typeLookup[type].taxonomy || typeLookup[type].type,
@@ -287,18 +281,26 @@ async function fetchFullEntries() {
     );
 
     // TODO: assign array per type
-    return contentResponse
-      .map((res) =>
-        Object.values(res.data)
-          .map((collection) => collection.items || [])
-          .flat(),
-      )
-      .flat();
+    const entries = contentResponse
+      .map((res) => Object.values(res.data))
+      .flat()
+      .reduce(
+        (memo, collection) => {
+          memo.items = [...memo.items, collection.items].flat();
+          memo.total = memo.total + collection.total;
+          return memo;
+        },
+        { items: [], total: 0 },
+      );
+
+    return entries;
   }
 }
 
 const normalisedEntries = computed(() => {
-  return fullEntries.value.map((entry) => normaliseCard(entry)).filter(Boolean);
+  return fullEntries.value.items
+    .map((entry) => normaliseCard(entry))
+    .filter(Boolean);
 });
 
 const isFilteredByTag = computed(() => selectedTags.value.length > 0);

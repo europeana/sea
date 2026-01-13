@@ -29,6 +29,7 @@ query EventsListing(
       ]
     }
   ) {
+    total
     ...eventCollectionFields
   }
 }
