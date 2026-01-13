@@ -13,7 +13,12 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           // Silence deprecation warnings until Bootstrap 5 updates Sass: https://github.com/twbs/bootstrap/issues/40962
-          silenceDeprecations: ["global-builtin", "import", "color-functions"],
+          silenceDeprecations: [
+            "global-builtin",
+            "import",
+            "color-functions",
+            "if-function",
+          ],
         },
       },
     },
