@@ -242,14 +242,13 @@ async function fetchFullEntries() {
   const selectedTaxonomyOrType =
     selectedType.value?.taxonomy || selectedType.value?.type;
 
-  // TODO: exclude feat content
-  // TODO: handle pagination
   const contentVariables = {
-    excludeSysId: props.featuredEntry?.sys?.id || "",
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
     limit: ENTRIES_PER_SECTION,
+    skip: (page.value - 1) * ENTRIES_PER_PAGE,
     categories: selectedTags.value.length ? selectedTags.value : null,
+    excludeSysId: props.featuredEntry?.sys?.id || "",
     site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };
 
@@ -477,7 +476,7 @@ const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
   fetchFullEntries,
   {
     default: () => [],
-    watch: [selectedTags, selectedType],
+    watch: [selectedTags, selectedType, page],
   },
 );
 if (fullEntriesError.value) {
