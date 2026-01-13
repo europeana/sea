@@ -12,6 +12,7 @@ query BlogPostingsListing(
   blogPostingCollection(
     preview: $preview
     locale: $locale
+    order: datePublished_DESC
     limit: $limit
     where: {
       AND: [

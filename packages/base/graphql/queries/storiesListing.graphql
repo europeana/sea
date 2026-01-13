@@ -11,6 +11,7 @@ query StoriesListing(
   storyCollection(
     preview: $preview
     locale: $locale
+    order: datePublished_DESC
     limit: $limit
     where: {
       AND: [

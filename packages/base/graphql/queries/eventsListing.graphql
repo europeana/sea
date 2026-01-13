@@ -11,6 +11,7 @@ query EventsListing(
   eventCollection(
     preview: $preview
     locale: $locale
+    order: [startDate_DESC, datePublished_DESC]
     limit: $limit
     where: {
       AND: [

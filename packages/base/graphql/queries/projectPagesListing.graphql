@@ -11,6 +11,8 @@ query ProjectPagesListing(
   projectPageCollection(
     preview: $preview
     locale: $locale
+    # TODO: order by project startDate, but impossible as it's nested in the project
+    order: datePublished_DESC
     limit: $limit
     where: {
       AND: [

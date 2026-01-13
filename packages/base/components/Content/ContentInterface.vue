@@ -414,16 +414,7 @@ function normaliseCard(entry) {
   }
 }
 
-function sortByDate(entry) {
-  if (entry.__typename === "ProjectPage") {
-    return entry.project.startDate;
-  } else {
-    return entry.date;
-  }
-}
-
-// Fetch minimal data for all entries to support ordering by datePublished
-// and filtering by categories.
+// Fetch minimal data for all entries to support filtering by categories.
 async function fetchMinimalEntries() {
   const contentIdsVariables = {
     excludeSysId: props.featuredEntry?.sys?.id || "",
@@ -466,13 +457,7 @@ async function fetchMinimalEntries() {
     }
   }
 
-  // Order by date (startDate or published date)
-  const ordered = contentIds.sort((a, b) => {
-    const sortDateA = sortByDate(a);
-    const sortDateB = sortByDate(b);
-    return new Date(sortDateB).getTime() - new Date(sortDateA).getTime();
-  });
-  return ordered;
+  return contentIds;
 }
 
 const { data: minimalEntries, error: minimalEntriesError } = await useAsyncData(
