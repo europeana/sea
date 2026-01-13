@@ -4,6 +4,7 @@ query BlogPostingsListing(
   $locale: String!
   $preview: Boolean = false
   $limit: Int!
+  $excludeSysId: String = ""
   $categories: [String]
   $site: String = ""
   $query: String = ""
@@ -14,6 +15,7 @@ query BlogPostingsListing(
     limit: $limit
     where: {
       AND: [
+        { sys: { id_not: $excludeSysId } }
         { categories: { identifier_in: $categories } }
         { name_contains: $query }
         { site: $site }

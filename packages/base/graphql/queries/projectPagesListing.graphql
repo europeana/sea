@@ -4,6 +4,7 @@ query ProjectPagesListing(
   $locale: String!
   $preview: Boolean = false
   $limit: Int!
+  $excludeSysId: String = ""
   $categories: [String]
   $query: String = ""
 ) {
@@ -13,6 +14,7 @@ query ProjectPagesListing(
     limit: $limit
     where: {
       AND: [
+        { sys: { id_not: $excludeSysId } }
         { categories: { identifier_in: $categories } }
         { name_contains: $query }
       ]

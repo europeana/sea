@@ -245,7 +245,7 @@ async function fetchFullEntries() {
   // TODO: exclude feat content
   // TODO: handle pagination
   const contentVariables = {
-    // excludeSysId: props.featuredEntry?.sys?.id || "",
+    excludeSysId: props.featuredEntry?.sys?.id || "",
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
     limit: ENTRIES_PER_SECTION,
