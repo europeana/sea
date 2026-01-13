@@ -1,0 +1,39 @@
+#import "../fragments/imageFields.graphql"
+
+query ExhibitionsListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $categories: [String]
+  $query: String = ""
+) {
+  exhibitionPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: {
+      AND: [
+        { categories: { identifier_in: $categories } }
+        { name_contains: $query }
+      ]
+    }
+  ) {
+    ...exhibitionPageCollectionFields
+  }
+}
+
+fragment exhibitionPageCollectionFields on ExhibitionPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+#import "../fragments/imageFields.graphql"
+
+query ProjectPagesListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $categories: [String]
+  $query: String = ""
+) {
+  projectPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: {
+      AND: [
+        { categories: { identifier_in: $categories } }
+        { name_contains: $query }
+      ]
+    }
+  ) {
+    ...projectPageCollectionFields
+  }
+}
+
+fragment projectPageCollectionFields on ProjectPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+    headline
+  }
+}

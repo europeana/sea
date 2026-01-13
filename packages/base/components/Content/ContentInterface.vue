@@ -2,7 +2,12 @@
 import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
-import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
+import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
+import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
+import exhibitionsListingGraphql from "@/graphql/queries/exhibitionsListing.graphql";
+import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
+import storiesListingGraphql from "@/graphql/queries/storiesListing.graphql";
+import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
 import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
@@ -65,7 +70,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 
 const ENTRIES_PER_PAGE = 24;
-const ENTRIES_PER_SECTION = 8;
+const ENTRIES_PER_SECTION = 4;
 
 const selectedTags = computed(() => {
   return route.query.tags?.split(",") || [];
@@ -73,6 +78,7 @@ const selectedTags = computed(() => {
 
 const typeLookup = {
   news: { type: "BlogPosting" },
+  "blog post": { type: "BlogPosting" },
   project: { type: "ProjectPage" },
   story: { type: "Story" },
   exhibition: { type: "ExhibitionPage" },
@@ -97,19 +103,6 @@ const filteredTags = computed(() => {
     .map((tag) => tag.tag);
 
   return uniq(tagsSortedByMostUsed);
-});
-
-const fetchableSysIds = computed(() => {
-  // Paginate
-  const sliceFrom = (page.value - 1) * ENTRIES_PER_PAGE;
-  const sliceTo = sliceFrom + ENTRIES_PER_PAGE;
-  return filteredMinimalEntries.value
-    ?.slice(sliceFrom, sliceTo)
-    ?.map((contentEntry) => contentEntry.sys.id);
-});
-
-const fetchableSysIdsString = computed(() => {
-  return fetchableSysIds.value?.join("-");
 });
 
 const filteredMinimalEntries = computed(() => {
@@ -139,6 +132,7 @@ const filteredMinimalEntries = computed(() => {
 });
 
 const total = computed(() => {
+  // TODO: use query total instead of filteredMinimalEntries
   return (
     (filteredMinimalEntries.value?.length || 0) +
     (showFeaturedEntry.value ? 1 : 0)
@@ -245,38 +239,67 @@ const featuredEntrySubTitle = computed(() => {
 });
 
 async function fetchFullEntries() {
-  if (fetchableSysIds.value.length === 0) {
-    return [];
-  }
-  // Fetch full data for display of page of content entries
+  const selectedTaxonomyOrType =
+    selectedType.value?.taxonomy || selectedType.value?.type;
+
+  // TODO: exclude feat content
+  // TODO: handle pagination
   const contentVariables = {
+    // excludeSysId: props.featuredEntry?.sys?.id || "",
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: ENTRIES_PER_PAGE,
-    ids: fetchableSysIds.value,
-    site: props.site,
+    limit: ENTRIES_PER_SECTION,
+    categories: selectedTags.value.length ? selectedTags.value : null,
+    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };
 
-  const contentResponse = await contentful.query(
-    contentBySysIdGraphql,
-    contentVariables,
-  );
+  const contentTypeGraphql = {
+    BlogPosting: blogPostingsListingGraphql,
+    ProjectPage: projectPagesListingGraphql,
+    eventTypeEvent: eventsListingGraphql,
+    eventTypeTrainingCourse: trainingsListingGraphql,
+    ExhibitionPage: exhibitionsListingGraphql,
+    Story: storiesListingGraphql,
+  };
 
-  return Object.values(contentResponse.data)
-    .map((collection) => collection.items || [])
-    .flat();
+  if (selectedTaxonomyOrType) {
+    contentVariables.limit = ENTRIES_PER_PAGE;
+
+    const contentResponse = await contentful.query(
+      contentTypeGraphql[selectedTaxonomyOrType],
+      contentVariables,
+    );
+
+    return Object.values(contentResponse.data)
+      .map((collection) => collection.items || [])
+      .flat();
+  } else {
+    const supportedTypes = supportedContentTypes.value.map(
+      (type) => typeLookup[type].taxonomy || typeLookup[type].type,
+    );
+    const contentResponse = await Promise.all(
+      supportedTypes.map(
+        async (taxonomyOrType) =>
+          await contentful.query(
+            contentTypeGraphql[taxonomyOrType],
+            contentVariables,
+          ),
+      ),
+    );
+
+    // TODO: assign array per type
+    return contentResponse
+      .map((res) =>
+        Object.values(res.data)
+          .map((collection) => collection.items || [])
+          .flat(),
+      )
+      .flat();
+  }
 }
 
 const normalisedEntries = computed(() => {
-  return fetchableSysIds.value
-    .map((sysId) =>
-      normaliseCard(
-        fullEntries.value.find(
-          (contentEntry) => contentEntry?.sys?.id === sysId,
-        ),
-      ),
-    )
-    .filter(Boolean);
+  return fullEntries.value.map((entry) => normaliseCard(entry)).filter(Boolean);
 });
 
 const isFilteredByTag = computed(() => selectedTags.value.length > 0);
@@ -465,11 +488,11 @@ if (minimalEntriesError.value) {
 }
 
 const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
-  fetchableSysIdsString,
+  "fullEntries",
   fetchFullEntries,
   {
     default: () => [],
-    watch: [fetchableSysIdsString],
+    watch: [selectedTags, selectedType],
   },
 );
 if (fullEntriesError.value) {

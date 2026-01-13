@@ -61,7 +61,7 @@ const blogPostingListingMinimalContentfulResponse = {
   },
 };
 
-const contentBySysIdContentfulResponse = {
+const blogPostingsListingContentfulResponse = {
   data: {
     blogPostingCollection: {
       items: [
@@ -125,8 +125,8 @@ const categoriesContentfulResponse = {
 };
 
 const handleContentfulQuery = (graphQL) => {
-  if (graphQL.definitions?.[0]?.name?.value === "ContentBySysId") {
-    return contentBySysIdContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListing") {
+    return blogPostingsListingContentfulResponse;
   }
   if (graphQL.definitions?.[0]?.name?.value === "BlogPostingListingMinimal") {
     return blogPostingListingMinimalContentfulResponse;
@@ -174,10 +174,10 @@ describe("dataSpacePage", () => {
     const contentCardLinks = wrapper.findAll(".card-link");
 
     expect(contentCardLinks[0].attributes("href")).toBe(
-      "/en/news/blog-no-image",
+      "/en/news/blog-identifier",
     );
     expect(contentCardLinks[1].attributes("href")).toBe(
-      "/en/news/blog-identifier",
+      "/en/news/blog-no-image",
     );
   });
 
@@ -187,10 +187,10 @@ describe("dataSpacePage", () => {
     const contentCardImages = wrapper.findAll(".card-img img");
 
     expect(contentCardImages[0].attributes("src")).toBe(
-      "https://www.example.org/image.jpg",
+      "https://images.ctfassets.net/i01duvb6kq77/7Jnq4yka0vfYdWKo7IV7Dc/5778788f0359b1a6a81ef1f57a260982/feature_1920Olympics.jpg?q=80&fm=webp",
     );
     expect(contentCardImages[1].attributes("src")).toBe(
-      "https://images.ctfassets.net/i01duvb6kq77/7Jnq4yka0vfYdWKo7IV7Dc/5778788f0359b1a6a81ef1f57a260982/feature_1920Olympics.jpg?q=80&fm=webp",
+      "https://www.example.org/image.jpg",
     );
   });
 });

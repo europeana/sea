@@ -90,14 +90,24 @@ const mockQuery = vi.fn();
 
 // Use this function to create custom mock responses for different test cases
 const contentfulResponse = (query, entries, metadata) => {
-  if (query.definitions?.[0]?.name?.value === "ContentBySysId") {
+  if (query.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return Promise.resolve({
       data: {
         blogPostingCollection: { items: entries.blogs },
+      },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "ProjectPagesListing") {
+    return Promise.resolve({
+      data: {
         projectPageCollection: { items: entries.projects },
+      },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "EventsListing") {
+    return Promise.resolve({
+      data: {
         eventCollection: { items: entries.events },
-        storyCollection: { items: [] },
-        exhibitionPageCollection: { items: [] },
       },
     });
   }

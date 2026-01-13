@@ -1,0 +1,39 @@
+#import "../fragments/imageFields.graphql"
+
+query StoriesListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $categories: [String]
+  $query: String = ""
+) {
+  storyCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: {
+      AND: [
+        { categories: { identifier_in: $categories } }
+        { name_contains: $query }
+      ]
+    }
+  ) {
+    ...storyCollectionFields
+  }
+}
+
+fragment storyCollectionFields on StoryCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+  }
+}

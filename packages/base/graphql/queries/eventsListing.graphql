@@ -1,0 +1,50 @@
+#import "../fragments/imageFields.graphql"
+
+query EventsListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $categories: [String]
+  $query: String = ""
+) {
+  eventCollection(
+    preview: $preview
+    locale: $locale
+    limit: $limit
+    where: {
+      AND: [
+        { categories: { identifier_in: $categories } }
+        { name_contains: $query }
+        {
+          contentfulMetadata: {
+            concepts_exists: true
+            concepts: { id_contains_some: ["eventTypeEvent"] }
+          }
+        }
+      ]
+    }
+  ) {
+    ...eventCollectionFields
+  }
+}
+
+fragment eventCollectionFields on EventCollection {
+  items {
+    __typename
+    contentfulMetadata {
+      concepts {
+        id
+      }
+    }
+    sys {
+      id
+    }
+    url
+    name
+    image {
+      ...imageFields
+    }
+    startDate
+    endDate
+  }
+}
