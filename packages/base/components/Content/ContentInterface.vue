@@ -243,10 +243,16 @@ async function fetchFullEntries() {
     preview: route.query.mode === "preview",
     limit: ENTRIES_PER_SECTION,
     skip: (page.value - 1) * ENTRIES_PER_PAGE,
-    categories: selectedTags.value.length ? selectedTags.value : null,
+    categoriesFilter: null,
     excludeSysId: props.featuredEntry?.sys?.id || "",
     site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };
+
+  if (selectedTags.value.length) {
+    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
+      categories: { identifier: cat },
+    }));
+  }
 
   const contentTypeGraphql = {
     BlogPosting: blogPostingsListingGraphql,

@@ -6,7 +6,7 @@ query ProjectPagesListing(
   $limit: Int!
   $skip: Int = 0
   $excludeSysId: String = ""
-  $categories: [String]
+  $categoriesFilter: [ProjectPageFilter]
   $query: String = ""
 ) {
   projectPageCollection(
@@ -19,8 +19,8 @@ query ProjectPagesListing(
     where: {
       AND: [
         { sys: { id_not: $excludeSysId } }
-        { categories: { identifier_in: $categories } }
         { name_contains: $query }
+        { AND: $categoriesFilter }
       ]
     }
   ) {

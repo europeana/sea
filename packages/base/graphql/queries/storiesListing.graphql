@@ -6,7 +6,7 @@ query StoriesListing(
   $limit: Int!
   $skip: Int = 0
   $excludeSysId: String = ""
-  $categories: [String]
+  $categoriesFilter: [StoryFilter]
   $query: String = ""
 ) {
   storyCollection(
@@ -18,8 +18,8 @@ query StoriesListing(
     where: {
       AND: [
         { sys: { id_not: $excludeSysId } }
-        { categories: { identifier_in: $categories } }
         { name_contains: $query }
+        { AND: $categoriesFilter }
       ]
     }
   ) {

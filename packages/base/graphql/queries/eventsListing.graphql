@@ -6,7 +6,7 @@ query EventsListing(
   $limit: Int!
   $skip: Int = 0
   $excludeSysId: String = ""
-  $categories: [String]
+  $categoriesFilter: [EventFilter]
   $query: String = ""
 ) {
   eventCollection(
@@ -18,7 +18,6 @@ query EventsListing(
     where: {
       AND: [
         { sys: { id_not: $excludeSysId } }
-        { categories: { identifier_in: $categories } }
         { name_contains: $query }
         {
           contentfulMetadata: {
@@ -26,6 +25,7 @@ query EventsListing(
             concepts: { id_contains_some: ["eventTypeEvent"] }
           }
         }
+        { AND: $categoriesFilter }
       ]
     }
   ) {
