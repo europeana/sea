@@ -1,7 +1,10 @@
-export const entryUrl = (entry) => {
+export const entryUrl = (entry: {
+  __typename: string;
+  identifier: string;
+}): string => {
   let urlPrefix;
 
-  switch (entry["__typename"]) {
+  switch (entry.__typename) {
     case "BlogPosting":
       urlPrefix = "/news";
       break;
