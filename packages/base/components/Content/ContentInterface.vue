@@ -567,10 +567,8 @@ watch(page, () => {
       </template>
     </NuxtErrorBoundary>
     <div class="container">
-      <div
-        class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
-      >
-        <span class="context-label">
+      <div class="d-flex justify-content-end align-items-center mb-4 mb-4k-5">
+        <span v-if="selectedType" class="context-label ms-0 me-auto">
           {{ $t("results", total, { count: total }) }}
         </span>
         <ContentTypeFilter :content-types="supportedContentTypes" />
