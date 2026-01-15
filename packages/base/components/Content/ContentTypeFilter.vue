@@ -19,11 +19,11 @@ const props = defineProps({
 const availableContentTypes = [{ name: t("content.filter.viewAll") }].concat(
   [
     { name: t("content.filter.news"), query: "news", type: "blog post" },
-    { name: t("content.filter.projects"), query: "project" },
     { name: t("content.filter.stories"), query: "story" },
     { name: t("content.filter.exhibitions"), query: "exhibition" },
     { name: t("content.filter.events"), query: "event" },
     { name: t("content.filter.training"), query: "training" },
+    { name: t("content.filter.projects"), query: "project" },
   ].filter((type) => props.contentTypes.includes(type.type || type.query)),
 );
 
