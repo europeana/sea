@@ -392,7 +392,7 @@ describe("components/Content/ContentInterface", () => {
       (entry) => entry.__typename === "BlogPosting",
     )[0];
 
-    expect(firstEntry.text).toBe("authored.createdDate");
+    expect(firstEntry.text).toBe("authored.publishedDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
 
@@ -425,7 +425,7 @@ describe("components/Content/ContentInterface", () => {
       (entry) => entry.__typename === "BlogPosting",
     )[0];
 
-    expect(firstEntry.text).toBe("authored.createdDate");
+    expect(firstEntry.text).toBe("authored.publishedDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
 
@@ -636,7 +636,7 @@ describe("components/Content/ContentInterface", () => {
           },
         });
 
-        expect(wrapper.vm.featuredEntryText).toEqual("authored.createdDate");
+        expect(wrapper.vm.featuredEntryText).toEqual("authored.publishedDate");
       });
     });
     describe("when there is no datePublished field", () => {

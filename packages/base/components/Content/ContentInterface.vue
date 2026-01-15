@@ -235,7 +235,7 @@ function displayFeaturedEntry(sectionType) {
 
 const featuredEntryText = computed(() => {
   if (props.featuredEntry.datePublished) {
-    return t("authored.createdDate", {
+    return t("authored.publishedDate", {
       date: d(props.featuredEntry.datePublished, "short"),
     });
   } else if (props.featuredEntry.headline) {
@@ -443,7 +443,7 @@ function normaliseCard(entry) {
       return {
         ...entry,
         url: entryUrl(entry),
-        text: t("authored.createdDate", {
+        text: t("authored.publishedDate", {
           date: d(entry.datePublished, "short"),
         }),
         primaryImageOfPage:
