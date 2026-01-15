@@ -554,7 +554,7 @@ watch(page, () => {
 </script>
 
 <template>
-  <div id="content-interface">
+  <div id="content-interface" :class="{ 'mb-5 pb-4k-5': selectedType }">
     <NuxtErrorBoundary>
       <ContentTagsFilter
         :filtered-tags="filteredTags"
@@ -642,7 +642,7 @@ watch(page, () => {
       </transition>
     </template>
     <PaginationNavInput
-      v-if="total > ENTRIES_PER_PAGE"
+      v-if="selectedType && total > ENTRIES_PER_PAGE"
       :per-page="ENTRIES_PER_PAGE"
       :total-items="total"
       class="mt-4 mt-lg-5 pt-4k-5"
@@ -673,5 +673,10 @@ h2.section-title {
       margin-bottom: calc(var(--bp-4k-increment) * 1.5rem);
     }
   }
+}
+
+.cta-banner-wrapper:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 </style>

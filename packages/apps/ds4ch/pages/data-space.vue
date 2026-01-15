@@ -48,7 +48,7 @@ const defaultCardThumbnail = {
 </script>
 
 <template>
-  <div class="mb-5">
+  <div>
     <LandingHero
       :headline="page.name"
       :text="page.headline"
@@ -56,7 +56,7 @@ const defaultCardThumbnail = {
       variant="alternate"
     />
     <ContentInterface
-      class="mt-5 mb-5"
+      class="mt-5"
       site="dataspace-culturalheritage.eu"
       :content-types="page.contentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
