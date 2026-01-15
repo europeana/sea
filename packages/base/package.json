@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "devDependencies": {
+    "@elastic/apm-rum-vue": "^2.1.10",
     "@europeana/style": "^2.13.0",
     "@nuxt/test-utils": "^3.22.0",
     "@nuxtjs/i18n": "^9.5.6",
