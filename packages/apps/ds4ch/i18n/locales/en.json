@@ -134,7 +134,8 @@
   },
   "event": {
     "dateRange": "{startDate} to {endDate}",
-    "label": "event"
+    "label": "event",
+    "events": "Events"
   },
   "featured": "Featured",
   "footer": {
@@ -199,6 +200,7 @@
     "goals": "Project goals",
     "impact": "Key project impact",
     "partners": "Project partners",
+    "projects": "Projects",
     "reports": "Project reports",
     "viewFactSheet": "View fact sheet"
   },
@@ -219,6 +221,7 @@
   "training": {
     "dateRange": "{startDate} - {endDate}",
     "label": "training",
-    "ongoing": "Ongoing"
+    "ongoing": "Ongoing",
+    "training": "Training"
   }
 }

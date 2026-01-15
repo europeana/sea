@@ -59,8 +59,8 @@ const props = defineProps({
 });
 
 const supportedContentTypes = computed(() => {
-  return props.contentTypes.filter((ct) =>
-    ["blog post", "project", "training", "event"].includes(ct),
+  return ["blog post", "event", "training", "project"].filter((ct) =>
+    props.contentTypes.includes(ct),
   );
 });
 
@@ -86,8 +86,23 @@ const typeLookup = {
   event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
 
+const typeTitleLookup = {
+  BlogPosting: t("news"),
+  ProjectPage: t("projects.projects"),
+  // Story: t(""),
+  // ExhibitionPage: t(""),
+  eventTypeTrainingCourse: t("training.training"),
+  eventTypeEvent: t("event.events"),
+};
+
 const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
+});
+
+const supportedTaxonomiesAndTypes = computed(() => {
+  return supportedContentTypes.value.map(
+    (type) => typeLookup[type].taxonomy || typeLookup[type].type,
+  );
 });
 
 // FIXME: this needs to include any tags from the featured entry too
@@ -263,6 +278,7 @@ async function fetchFullEntries() {
     Story: storiesListingGraphql,
   };
 
+  // TODO check if type is supported? ATTOW user can query story and exhibitions types via URL query.
   if (selectedTaxonomyOrType) {
     contentVariables.limit = ENTRIES_PER_PAGE;
 
@@ -273,11 +289,8 @@ async function fetchFullEntries() {
 
     return Object.values(contentResponse.data)[0];
   } else {
-    const supportedTypes = supportedContentTypes.value.map(
-      (type) => typeLookup[type].taxonomy || typeLookup[type].type,
-    );
     const contentResponse = await Promise.all(
-      supportedTypes.map(
+      supportedTaxonomiesAndTypes.value.map(
         async (taxonomyOrType) =>
           await contentful.query(
             contentTypeGraphql[taxonomyOrType],
@@ -321,29 +334,64 @@ const displayCtaBanners = computed(
     !isFilteredByType.value,
 );
 
-// This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
+function getNormalisedEntriesByType(type) {
+  return normalisedEntries.value.filter((entry) => {
+    return (
+      entryHasTaxonomyTerm(entry, type) || entryHasContentType(entry, type)
+    );
+  });
+}
+
+// This creates an array of card arrays per type and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
 const contentSections = computed(() => {
-  if (!displayCtaBanners.value) {
-    return [normalisedEntries.value];
+  if (isFilteredByType.value) {
+    return [{ entries: normalisedEntries.value }];
   }
 
   const sections = [];
-  let entryStartIndex = 0;
+  let typeSectionStartIndex = 0;
 
-  for (const ctaBanner of props.ctaBanners) {
-    sections.push(
-      normalisedEntries.value.slice(
-        entryStartIndex,
-        entryStartIndex + ENTRIES_PER_SECTION,
-      ),
-      ctaBanner,
-    );
-    entryStartIndex = entryStartIndex + ENTRIES_PER_SECTION;
+  if (displayCtaBanners.value) {
+    for (const ctaBanner of props.ctaBanners) {
+      sections.push(
+        {
+          title:
+            typeTitleLookup[
+              supportedTaxonomiesAndTypes.value[typeSectionStartIndex]
+            ],
+
+          entries: getNormalisedEntriesByType(
+            supportedTaxonomiesAndTypes.value[typeSectionStartIndex],
+          ),
+        },
+        {
+          title:
+            typeTitleLookup[
+              supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1]
+            ],
+
+          entries: getNormalisedEntriesByType(
+            supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1],
+          ),
+        },
+        ctaBanner,
+      );
+      typeSectionStartIndex = typeSectionStartIndex + 2;
+    }
   }
 
-  // add any remaining e.g. if few CTAs
-  if (normalisedEntries.value.slice(entryStartIndex).length > 0) {
-    sections.push(normalisedEntries.value.slice(entryStartIndex));
+  // add any remaining e.g. if no or few CTAs
+  if (
+    supportedTaxonomiesAndTypes.value.slice(typeSectionStartIndex).length > 0
+  ) {
+    supportedTaxonomiesAndTypes.value
+      .slice(typeSectionStartIndex)
+      .forEach((type) => {
+        sections.push({
+          title: typeTitleLookup[type],
+          entries: getNormalisedEntriesByType(type),
+        });
+      });
   }
 
   return sections;
@@ -559,8 +607,17 @@ watch(page, () => {
           />
         </div>
         <div v-else :key="`entry-${index}`" class="container">
-          <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <div v-for="entry in section" :key="entry.sysId" class="col">
+          <h2 v-if="section.title" class="section-title">
+            {{ section.title }}
+          </h2>
+          <div
+            class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4 mb-5"
+          >
+            <div
+              v-for="entry in section.entries"
+              :key="entry.sysId"
+              class="col"
+            >
               <ContentCard
                 :title="entry.name"
                 :sub-title="entry.subTitle"
@@ -592,4 +649,16 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
+
+h2.section-title {
+  color: $darkgrey;
+  margin-bottom: 2rem;
+
+  &::after {
+    content: "";
+    display: block;
+    border: 1px solid $lightgrey;
+    margin-top: 1.5rem;
+  }
+}
 </style>
