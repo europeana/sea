@@ -1,6 +1,8 @@
 import i18nLocales from "./i18n/locales";
 import rollupPluginGraphql from "@rollup/plugin-graphql";
 
+import { name as packageName, version as packageVersion } from "./package.json";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
@@ -35,6 +37,12 @@ export default defineNuxtConfig({
         environmentId: null,
         graphqlUrl: null,
         spaceId: null,
+      },
+      elastic: {
+        apm: {
+          serviceName: packageName.replace(/^.*\//, ""),
+          serviceVersion: packageVersion,
+        },
       },
       defaultThumbnail: "",
       internalLinkDomain: "",
