@@ -147,7 +147,9 @@ const filteredMinimalEntries = computed(() => {
 });
 
 const total = computed(() => {
-  return (fullEntries.value.total || 0) + (showFeaturedEntry.value ? 1 : 0);
+  return (
+    (fullEntries.value.total || 0) + (featuredEntryInResults.value ? 1 : 0)
+  );
 });
 
 const page = computed(() => {
@@ -169,35 +171,48 @@ const featuredEntryMatchesSelectedTags = computed(() => {
   );
 });
 
-const showFeaturedEntry = computed(() => {
-  // no featured entry; nothing to show
+const featuredEntryInResults = computed(() => {
+  // no featured entry; not present
   if (!props.featuredEntry) {
     return false;
   }
-  // not on 1st page; don't show
-  if (!isFirstPage.value) {
-    return false;
-  }
-  // tags are selected but featured entry does not have them all; don't show
+  // tags are selected but featured entry does not have them all; not present
   if (!featuredEntryMatchesSelectedTags.value) {
     return false;
   }
-  // no content type is selected; show
+  // selected type or taxonomy matches featured entry type or taxonomy; present
+  if (
+    selectedType.value &&
+    (entryHasTaxonomyTerm(props.featuredEntry, selectedType.value.taxonomy) ||
+      entryHasContentType(props.featuredEntry, selectedType.value.type))
+  ) {
+    return true;
+  }
+  // no selected type; present
   if (!selectedType.value) {
     return true;
   }
-  // content type is selected, but featured entry is of a different type; don't show
-  if (!entryHasContentType(props.featuredEntry, selectedType.value.type)) {
-    return false;
-  }
-  // content type is selected, and has no taxonomy; show
-  if (!selectedType.value.taxonomy) {
-    return true;
-  }
-  // show if featured entry has the selected type taxonomy term, else not
-  // FIXME: this needs to check for the eventType taxonomy only
-  return entryHasTaxonomyTerm(props.featuredEntry, selectedType.value.taxonomy);
+  return false;
 });
+
+function displayFeaturedEntry(sectionType) {
+  // featured entry in results and on first page
+  if (featuredEntryInResults.value && isFirstPage.value) {
+    // and type is selected; show
+    if (selectedType.value) {
+      return true;
+    }
+    // and section type matches featured entry type; show
+    if (
+      sectionType &&
+      (entryHasTaxonomyTerm(props.featuredEntry, sectionType) ||
+        entryHasContentType(props.featuredEntry, sectionType))
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
 
 const featuredEntryText = computed(() => {
   if (props.featuredEntry.datePublished) {
@@ -299,7 +314,6 @@ async function fetchFullEntries() {
       ),
     );
 
-    // TODO: assign array per type
     const entries = contentResponse
       .map((res) => Object.values(res.data))
       .flat()
@@ -355,21 +369,13 @@ const contentSections = computed(() => {
     for (const ctaBanner of props.ctaBanners) {
       sections.push(
         {
-          title:
-            typeTitleLookup[
-              supportedTaxonomiesAndTypes.value[typeSectionStartIndex]
-            ],
-
+          type: supportedTaxonomiesAndTypes.value[typeSectionStartIndex],
           entries: getNormalisedEntriesByType(
             supportedTaxonomiesAndTypes.value[typeSectionStartIndex],
           ),
         },
         {
-          title:
-            typeTitleLookup[
-              supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1]
-            ],
-
+          type: supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1],
           entries: getNormalisedEntriesByType(
             supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1],
           ),
@@ -388,7 +394,7 @@ const contentSections = computed(() => {
       .slice(typeSectionStartIndex)
       .forEach((type) => {
         sections.push({
-          title: typeTitleLookup[type],
+          type,
           entries: getNormalisedEntriesByType(type),
         });
       });
@@ -577,15 +583,6 @@ watch(page, () => {
       class="container position-absolute flex-md-row py-4 text-center"
     /-->
     </div>
-    <div v-if="showFeaturedEntry" class="container mb-4 mb-lg-5 pb-4k-5">
-      <ContentFeaturedCard
-        :title="props.featuredEntry?.name"
-        :text="featuredEntryText"
-        :image="featuredEntryImage"
-        :sub-title="featuredEntrySubTitle"
-        :url="featuredEntryUrl"
-      />
-    </div>
     <template v-for="(section, index) in contentSections">
       <!-- eslint-disable vue/valid-v-for -->
       <transition appear name="fade">
@@ -607,11 +604,20 @@ watch(page, () => {
           />
         </div>
         <div v-else :key="`entry-${index}`" class="container">
-          <h2 v-if="section.title" class="section-title">
-            {{ section.title }}
+          <h2 v-if="section.type" class="section-ttype">
+            {{ typeTitleLookup[section.type] }}
           </h2>
+          <ContentFeaturedCard
+            v-if="displayFeaturedEntry(section.type)"
+            class="mb-4 mb-lg-5 pb-4k-5"
+            :title="props.featuredEntry?.name"
+            :text="featuredEntryText"
+            :image="featuredEntryImage"
+            :sub-title="featuredEntrySubTitle"
+            :url="featuredEntryUrl"
+          />
           <div
-            class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4 mb-5"
+            class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4 mb-5 pb-4k-5"
           >
             <div
               v-for="entry in section.entries"
@@ -654,11 +660,20 @@ h2.section-title {
   color: $darkgrey;
   margin-bottom: 2rem;
 
+  @media (min-width: $bp-4k) {
+    margin-bottom: calc(var(--bp-4k-increment) * 2rem);
+  }
+
   &::after {
     content: "";
     display: block;
     border: 1px solid $lightgrey;
     margin-top: 1.5rem;
+
+    @media (min-width: $bp-4k) {
+      border-width: 2px;
+      margin-bottom: calc(var(--bp-4k-increment) * 1.5rem);
+    }
   }
 }
 </style>
