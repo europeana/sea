@@ -26,6 +26,8 @@
       "viewAll": "View all"
     },
     "resultsHaveLoaded": "{0} results found",
+    "seeAll": "See all {content}",
+    "seeMore": "See more {content}",
     "topics": {
       "featuredTopics": "Featured topics",
       "label": "Explore more topics",

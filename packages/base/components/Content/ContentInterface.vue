@@ -20,6 +20,8 @@ import {
   entryHasTaxonomyTerm,
   entryUrl,
 } from "@/utils/contentful/index.js";
+import routeForType from "@/utils/contentRoute.js";
+
 const { d, t } = useI18n({ useScope: "global" });
 
 const props = defineProps({
@@ -86,13 +88,25 @@ const typeLookup = {
   event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
 
-const typeTitleLookup = {
-  BlogPosting: t("news"),
-  ProjectPage: t("projects.projects"),
+const typeSectionLookup = {
+  BlogPosting: {
+    routeTypeQuery: "news",
+    title: t("news"),
+  },
+  ProjectPage: {
+    routeTypeQuery: "project",
+    title: t("projects.projects"),
+  },
   // Story: t(""),
   // ExhibitionPage: t(""),
-  eventTypeTrainingCourse: t("training.training"),
-  eventTypeEvent: t("event.events"),
+  eventTypeTrainingCourse: {
+    routeTypeQuery: "training",
+    title: t("training.training"),
+  },
+  eventTypeEvent: {
+    routeTypeQuery: "event",
+    title: t("event.events"),
+  },
 };
 
 const selectedType = computed(() => {
@@ -148,7 +162,12 @@ const filteredMinimalEntries = computed(() => {
 
 const total = computed(() => {
   return (
-    (fullEntries.value.total || 0) + (featuredEntryInResults.value ? 1 : 0)
+    (fullEntries.value.total ||
+      // when full entries is array of entry sections, get the sum of totals
+      fullEntries.value.reduce?.((memo, collection) => {
+        return memo + collection.total;
+      }, 0) ||
+      0) + (featuredEntryInResults.value ? 1 : 0)
   );
 });
 
@@ -305,35 +324,48 @@ async function fetchFullEntries() {
     return Object.values(contentResponse.data)[0];
   } else {
     const contentResponse = await Promise.all(
-      supportedTaxonomiesAndTypes.value.map(
-        async (taxonomyOrType) =>
-          await contentful.query(
-            contentTypeGraphql[taxonomyOrType],
-            contentVariables,
-          ),
-      ),
+      supportedTaxonomiesAndTypes.value.map(async (taxonomyOrType) => {
+        const res = await contentful.query(
+          contentTypeGraphql[taxonomyOrType],
+          contentVariables,
+        );
+
+        // Save type to response
+        const responseData = Object.values(res.data)[0];
+        return {
+          ...responseData,
+          type: taxonomyOrType,
+        };
+      }),
     );
 
-    const entries = contentResponse
-      .map((res) => Object.values(res.data))
-      .flat()
-      .reduce(
-        (memo, collection) => {
-          memo.items = [...memo.items, collection.items].flat();
-          memo.total = memo.total + collection.total;
-          return memo;
-        },
-        { items: [], total: 0 },
-      );
+    const entries = contentResponse;
 
     return entries;
   }
 }
 
-const normalisedEntries = computed(() => {
-  return fullEntries.value.items
-    .map((entry) => normaliseCard(entry))
-    .filter(Boolean);
+function normalisedEntryCards(entries = []) {
+  return entries.map((entry) => normaliseCard(entry)).filter(Boolean);
+}
+
+const normalisedSections = computed(() => {
+  if (fullEntries.value.items) {
+    return [
+      {
+        entries: normalisedEntryCards(fullEntries.value.items),
+        total: fullEntries.value.total,
+      },
+    ];
+  }
+  if (Array.isArray(fullEntries.value)) {
+    return fullEntries.value.map((collection) => ({
+      entries: normalisedEntryCards(collection.items),
+      type: collection.type,
+      total: collection.total,
+    }));
+  }
+  return [];
 });
 
 const isFilteredByTag = computed(() => selectedTags.value.length > 0);
@@ -348,18 +380,10 @@ const displayCtaBanners = computed(
     !isFilteredByType.value,
 );
 
-function getNormalisedEntriesByType(type) {
-  return normalisedEntries.value.filter((entry) => {
-    return (
-      entryHasTaxonomyTerm(entry, type) || entryHasContentType(entry, type)
-    );
-  });
-}
-
 // This creates an array of card arrays per type and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
 const contentSections = computed(() => {
   if (isFilteredByType.value) {
-    return [{ entries: normalisedEntries.value }];
+    return normalisedSections.value;
   }
 
   const sections = [];
@@ -368,18 +392,8 @@ const contentSections = computed(() => {
   if (displayCtaBanners.value) {
     for (const ctaBanner of props.ctaBanners) {
       sections.push(
-        {
-          type: supportedTaxonomiesAndTypes.value[typeSectionStartIndex],
-          entries: getNormalisedEntriesByType(
-            supportedTaxonomiesAndTypes.value[typeSectionStartIndex],
-          ),
-        },
-        {
-          type: supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1],
-          entries: getNormalisedEntriesByType(
-            supportedTaxonomiesAndTypes.value[typeSectionStartIndex + 1],
-          ),
-        },
+        normalisedSections.value[typeSectionStartIndex],
+        normalisedSections.value[typeSectionStartIndex + 1],
         ctaBanner,
       );
       typeSectionStartIndex = typeSectionStartIndex + 2;
@@ -387,20 +401,13 @@ const contentSections = computed(() => {
   }
 
   // add any remaining e.g. if no or few CTAs
-  if (
-    supportedTaxonomiesAndTypes.value.slice(typeSectionStartIndex).length > 0
-  ) {
-    supportedTaxonomiesAndTypes.value
-      .slice(typeSectionStartIndex)
-      .forEach((type) => {
-        sections.push({
-          type,
-          entries: getNormalisedEntriesByType(type),
-        });
-      });
+  if (normalisedSections.value.slice(typeSectionStartIndex).length > 0) {
+    normalisedSections.value.slice(typeSectionStartIndex).forEach((section) => {
+      sections.push(section);
+    });
   }
 
-  return sections;
+  return sections.filter(Boolean);
 });
 
 function trainingDateHelper(startDate, endDate) {
@@ -551,6 +558,26 @@ if (fullEntriesError.value) {
 watch(page, () => {
   scrollToSelector("#header");
 });
+
+function renderSection(section) {
+  return section?.total > 0 || displayFeaturedEntry(section.type);
+}
+
+function renderMoreLink(section) {
+  return typeSectionLookup[section.type] && section?.total > 4;
+}
+
+function getMoreLinkLabelForSection(section) {
+  if (selectedTags.value.length) {
+    return t("content.seeMore", {
+      content: typeSectionLookup[section.type].title,
+    });
+  } else {
+    return t("content.seeAll", {
+      content: typeSectionLookup[section.type].title,
+    });
+  }
+}
 </script>
 
 <template>
@@ -601,43 +628,58 @@ watch(page, () => {
             :background-image="section.image"
           />
         </div>
-        <div v-else :key="`entry-${index}`" class="container">
-          <h2 v-if="section.type" class="section-ttype">
-            {{ typeTitleLookup[section.type] }}
+        <div
+          v-else-if="renderSection(section)"
+          :key="`section-${section.type}`"
+          class="container mb-5 pb-4k-5"
+        >
+          <h2 v-if="typeSectionLookup[section.type]" class="section-title">
+            {{ typeSectionLookup[section.type].title }}
           </h2>
           <ContentFeaturedCard
             v-if="displayFeaturedEntry(section.type)"
-            class="mb-4 mb-lg-5 pb-4k-5"
+            class="mb-4 mb-lg-5"
             :title="props.featuredEntry?.name"
             :text="featuredEntryText"
             :image="featuredEntryImage"
             :sub-title="featuredEntrySubTitle"
             :url="featuredEntryUrl"
           />
-          <div
-            class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4 mb-5 pb-4k-5"
-          >
+          <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div
               v-for="entry in section.entries"
-              :key="entry.sysId"
+              :key="entry.sys.id"
               class="col"
             >
-              <ContentCard
-                :title="entry.name"
-                :sub-title="entry.subTitle"
-                :url="entry.url"
-                :text="entry.text"
-                :image-url="
-                  entry.primaryImageOfPage?.image &&
-                  entry.primaryImageOfPage.image.url
-                "
-                :image-content-type="
-                  entry.primaryImageOfPage?.image &&
-                  entry.primaryImageOfPage.image.contentType
-                "
-              />
+              <transition appear name="fade">
+                <ContentCard
+                  :title="entry.name"
+                  :sub-title="entry.subTitle"
+                  :url="entry.url"
+                  :text="entry.text"
+                  :image-url="
+                    entry.primaryImageOfPage?.image &&
+                    entry.primaryImageOfPage.image.url
+                  "
+                  :image-content-type="
+                    entry.primaryImageOfPage?.image &&
+                    entry.primaryImageOfPage.image.contentType
+                  "
+                />
+              </transition>
             </div>
           </div>
+          <GenericSmartLink
+            v-if="renderMoreLink(section)"
+            :destination="
+              routeForType(
+                route,
+                typeSectionLookup[section.type].routeTypeQuery,
+              )
+            "
+            class="more-link btn btn-secondary icon-chevron"
+            >{{ getMoreLinkLabelForSection(section) }}</GenericSmartLink
+          >
         </div>
       </transition>
     </template>
@@ -678,5 +720,13 @@ h2.section-title {
 .cta-banner-wrapper:last-child {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+.more-link {
+  margin-top: 2rem;
+
+  @media (min-width: $bp-4k) {
+    margin-top: calc(var(--bp-4k-increment) * 2rem);
+  }
 }
 </style>

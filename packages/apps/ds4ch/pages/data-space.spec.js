@@ -64,6 +64,7 @@ const blogPostingListingMinimalContentfulResponse = {
 const blogPostingsListingContentfulResponse = {
   data: {
     blogPostingCollection: {
+      total: 2,
       items: [
         {
           __typename: "BlogPosting",
