@@ -61,6 +61,7 @@ const props = defineProps({
 });
 
 const supportedContentTypes = computed(() => {
+  // This order also defines the order of sections on the 'view all' tab
   return ["blog post", "event", "training", "project"].filter((ct) =>
     props.contentTypes.includes(ct),
   );
@@ -90,21 +91,21 @@ const typeLookup = {
 
 const typeSectionLookup = {
   BlogPosting: {
-    routeTypeQuery: "news",
+    url: routeForType(route, "news"),
     title: t("news"),
   },
   ProjectPage: {
-    routeTypeQuery: "project",
+    url: routeForType(route, "project"),
     title: t("projects.projects"),
   },
   // Story: t(""),
   // ExhibitionPage: t(""),
   eventTypeTrainingCourse: {
-    routeTypeQuery: "training",
+    url: routeForType(route, "training"),
     title: t("training.training"),
   },
   eventTypeEvent: {
-    routeTypeQuery: "event",
+    url: routeForType(route, "event"),
     title: t("event.events"),
   },
 };
@@ -671,12 +672,7 @@ function getMoreLinkLabelForSection(section) {
           </div>
           <GenericSmartLink
             v-if="renderMoreLink(section)"
-            :destination="
-              routeForType(
-                route,
-                typeSectionLookup[section.type].routeTypeQuery,
-              )
-            "
+            :destination="typeSectionLookup[section.type].url"
             class="more-link btn btn-secondary icon-chevron"
             >{{ getMoreLinkLabelForSection(section) }}</GenericSmartLink
           >
