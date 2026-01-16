@@ -90,14 +90,24 @@ const mockQuery = vi.fn();
 
 // Use this function to create custom mock responses for different test cases
 const contentfulResponse = (query, entries, metadata) => {
-  if (query.definitions?.[0]?.name?.value === "ContentBySysId") {
+  if (query.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return Promise.resolve({
       data: {
         blogPostingCollection: { items: entries.blogs },
+      },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "ProjectPagesListing") {
+    return Promise.resolve({
+      data: {
         projectPageCollection: { items: entries.projects },
+      },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "EventsListing") {
+    return Promise.resolve({
+      data: {
         eventCollection: { items: entries.events },
-        storyCollection: { items: [] },
-        exhibitionPageCollection: { items: [] },
       },
     });
   }
@@ -382,7 +392,7 @@ describe("components/Content/ContentInterface", () => {
       (entry) => entry.__typename === "BlogPosting",
     )[0];
 
-    expect(firstEntry.text).toBe("authored.createdDate");
+    expect(firstEntry.text).toBe("authored.publishedDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
 
@@ -415,7 +425,7 @@ describe("components/Content/ContentInterface", () => {
       (entry) => entry.__typename === "BlogPosting",
     )[0];
 
-    expect(firstEntry.text).toBe("authored.createdDate");
+    expect(firstEntry.text).toBe("authored.publishedDate");
     expect(firstEntry.primaryImageOfPage).toBe(null);
   });
 
@@ -626,7 +636,7 @@ describe("components/Content/ContentInterface", () => {
           },
         });
 
-        expect(wrapper.vm.featuredEntryText).toEqual("authored.createdDate");
+        expect(wrapper.vm.featuredEntryText).toEqual("authored.publishedDate");
       });
     });
     describe("when there is no datePublished field", () => {

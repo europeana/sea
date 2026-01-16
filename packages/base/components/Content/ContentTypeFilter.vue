@@ -1,5 +1,6 @@
 <script setup>
 import { GenericSmartLink } from "#components";
+import routeForType from "@/utils/contentRoute.js";
 
 const { t } = useI18n();
 const route = useRoute();
@@ -18,11 +19,11 @@ const props = defineProps({
 const availableContentTypes = [{ name: t("content.filter.viewAll") }].concat(
   [
     { name: t("content.filter.news"), query: "news", type: "blog post" },
-    { name: t("content.filter.projects"), query: "project" },
     { name: t("content.filter.stories"), query: "story" },
     { name: t("content.filter.exhibitions"), query: "exhibition" },
     { name: t("content.filter.events"), query: "event" },
     { name: t("content.filter.training"), query: "training" },
+    { name: t("content.filter.projects"), query: "project" },
   ].filter((type) => props.contentTypes.includes(type.type || type.query)),
 );
 
@@ -38,16 +39,6 @@ const activeType = computed(() => {
 });
 const isTypeActive = (type) => {
   return type === activeType.value;
-};
-const routeForType = (type) => {
-  const newQuery = { ...route.query };
-  delete newQuery.page;
-  if (type.query) {
-    newQuery.type = type.query;
-  } else {
-    delete newQuery.type;
-  }
-  return { ...route, query: newQuery };
 };
 </script>
 
@@ -65,7 +56,7 @@ const routeForType = (type) => {
               class="nav-link context-label text-decoration-none p-0 ms-3 ms-4k-4 me-0"
               :class="isTypeActive(type) ? 'active' : ''"
               :aria-current="isTypeActive(type) ? 'page' : ''"
-              :destination="routeForType(type)"
+              :destination="routeForType(route, type.query)"
             >
               {{ type.name }}
             </GenericSmartLink>
@@ -95,7 +86,7 @@ const routeForType = (type) => {
               class="dropdown-item context-label text-decoration-none"
               :class="isTypeActive(type) ? 'active' : ''"
               :aria-current="isTypeActive(type) ? 'page' : ''"
-              :destination="routeForType(type)"
+              :destination="routeForType(route, type.query)"
             >
               <span>
                 {{ type.name }}
