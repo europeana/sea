@@ -37,6 +37,7 @@ const factory = async () =>
 describe("components/Content/contentTagsFilter", () => {
   it("fetches categories from Contentful", async () => {
     const wrapper = await factory();
-    expect(wrapper.vm.tags.value.length).toBe(3);
+
+    expect(wrapper.vm.tags.length).toBe(3);
   });
 });
