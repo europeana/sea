@@ -1,12 +1,13 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
-import { services } from "@/utils/services/services";
+import { useServiceDefinitions } from "@europeana/sea-base-layer/composables/serviceDefinitions";
 import useScrollTo from "@/composables/scrollTo.js";
 
 const { $bs } = useNuxtApp();
 
 const { acceptAll, acceptOnly, acceptedServices, rejectAll } =
   useConsentManager();
+const { services } = useServiceDefinitions();
 
 const { scrollToSelector } = useScrollTo();
 
@@ -64,13 +65,15 @@ onMounted(() => {
 
 const show = ref(["thirdPartyContent"]);
 
-const essentialServices = services?.filter((s) =>
+const essentialServices = services.value?.filter((s) =>
   s.purposes.includes("essential"),
 );
 
-const usageServices = services?.filter((s) => s.purposes.includes("usage"));
+const usageServices = services.value?.filter((s) =>
+  s.purposes.includes("usage"),
+);
 
-const thirdPartyContentServices = services?.filter((s) =>
+const thirdPartyContentServices = services.value?.filter((s) =>
   s.purposes.includes("thirdPartyContent"),
 );
 
