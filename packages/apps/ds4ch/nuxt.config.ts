@@ -1,5 +1,4 @@
 import i18nLocales from "./i18n/locales";
-import rollupPluginGraphql from "@rollup/plugin-graphql";
 
 import { name as packageName, version as packageVersion } from "./package.json";
 
@@ -9,7 +8,6 @@ export default defineNuxtConfig({
   css: ["/assets/scss/main.scss"],
   devtools: { enabled: true },
   extends: "@europeana/sea-base-layer",
-  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@nuxtjs/i18n"],
   vite: {
     css: {
       preprocessorOptions: {
@@ -24,7 +22,6 @@ export default defineNuxtConfig({
         },
       },
     },
-    plugins: [rollupPluginGraphql()],
   },
   runtimeConfig: {
     public: {
