@@ -8,31 +8,34 @@ let acceptedServices = ref([]);
 const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
-// FIXME: this is not how the services are obtained
-vi.mock("@/utils/services/services", () => ({
-  services: [
-    {
-      name: "translate",
-      purposes: ["essential"],
-      required: true,
-    },
-    {
-      name: "analytics",
-      purposes: ["usage"],
-    },
-    {
-      name: "bsky",
-      purposes: ["thirdPartyContent", "socialMedia"],
-    },
-    {
-      name: "vimeo",
-      purposes: ["thirdPartyContent", "mediaViewing", "video"],
-    },
-    {
-      name: "other",
-      purposes: ["thirdPartyContent", "other"],
-    },
-  ],
+const services = ref([
+  {
+    name: "translate",
+    purposes: ["essential"],
+    required: true,
+  },
+  {
+    name: "analytics",
+    purposes: ["usage"],
+  },
+  {
+    name: "bsky",
+    purposes: ["thirdPartyContent", "socialMedia"],
+  },
+  {
+    name: "vimeo",
+    purposes: ["thirdPartyContent", "mediaViewing", "video"],
+  },
+  {
+    name: "other",
+    purposes: ["thirdPartyContent", "other"],
+  },
+]);
+
+vi.mock("~/composables/serviceDefinitions", () => ({
+  useServiceDefinitions: () => ({
+    services,
+  }),
 }));
 
 vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
@@ -50,6 +53,22 @@ mockNuxtImport("useI18n", () => {
       fallbackLocale: "en",
       t: (key) => key,
       te: () => true,
+    };
+  };
+});
+
+const showModal = vi.fn();
+class Modal {
+  show() {
+    showModal();
+  }
+}
+mockNuxtImport("useNuxtApp", () => {
+  return () => {
+    return {
+      $bs: {
+        Modal,
+      },
     };
   };
 });

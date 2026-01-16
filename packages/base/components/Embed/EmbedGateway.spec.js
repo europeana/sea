@@ -18,7 +18,7 @@ let consentRequired = ref(true);
 let acceptedServices = ref([]);
 const acceptOnly = vi.fn();
 
-vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
+vi.mock("~/composables/consentManager", () => ({
   useConsentManager: () => ({
     acceptOnly,
     consentRequired,
@@ -26,32 +26,35 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
   }),
 }));
 
-// FIXME: this is not how the services are obtained
-vi.mock("@/utils/services/services", () => ({
-  services: [
-    {
-      name: "translate",
-      purposes: ["essential"],
-      required: true,
-    },
-    {
-      name: "analytics",
-      purposes: ["usage"],
-    },
-    {
-      name: "bsky",
-      purposes: ["thirdPartyContent", "socialMedia"],
-    },
-    {
-      name: "vimeo",
-      purposes: ["thirdPartyContent", "mediaViewing", "video"],
-      schemes: ["https://vimeo.com/*"],
-    },
-    {
-      name: "other",
-      purposes: ["thirdPartyContent", "other"],
-    },
-  ],
+const services = ref([
+  {
+    name: "translate",
+    purposes: ["essential"],
+    required: true,
+  },
+  {
+    name: "analytics",
+    purposes: ["usage"],
+  },
+  {
+    name: "bsky",
+    purposes: ["thirdPartyContent", "socialMedia"],
+  },
+  {
+    name: "vimeo",
+    purposes: ["thirdPartyContent", "mediaViewing", "video"],
+    schemes: ["https://vimeo.com/*"],
+  },
+  {
+    name: "other",
+    purposes: ["thirdPartyContent", "other"],
+  },
+]);
+vi.mock("~/composables/serviceDefinitions", () => ({
+  useServiceDefinitions: () => ({
+    forUrl: (url) => (url.includes("vimeo") ? services.value[3] : null),
+    services,
+  }),
 }));
 
 const vimeoEmbedCode = `'<iframe src="https://vimeo.com/embed/123" width="500" height="400"></iframe>'`;
@@ -106,7 +109,7 @@ describe("components/Embed/EmbedGateway", () => {
   describe("on before mount", () => {
     describe("when an embed code is passed", () => {
       describe("which contains an iframe", () => {
-        it("sets the provider url to it's src and the width and height", () => {
+        it("sets the provider url to its src and the width and height", () => {
           const iframeEmbedCode =
             '<iframe src="https://sketchfab.com/models/1234/embed" width="500" height="400"></iframe>';
 

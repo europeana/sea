@@ -1,6 +1,6 @@
 <script setup>
-import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
-import { useServiceDefinitions } from "@europeana/sea-base-layer/composables/serviceDefinitions";
+import { useConsentManager } from "~/composables/consentManager";
+import { useServiceDefinitions } from "~/composables/serviceDefinitions";
 
 const { acceptedServices, acceptOnly, consentRequired } = useConsentManager();
 const { services, forUrl: serviceForUrl } = useServiceDefinitions();

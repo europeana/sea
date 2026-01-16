@@ -1,5 +1,11 @@
+import rollupPluginGraphql from "@rollup/plugin-graphql";
+
 export default defineNuxtConfig({
+  compatibilityDate: "2025-05-15",
+
   devtools: { enabled: true },
+
+  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@nuxtjs/i18n"],
 
   runtimeConfig: {
     public: {
@@ -17,5 +23,9 @@ export default defineNuxtConfig({
         siteId: null,
       },
     },
+  },
+
+  vite: {
+    plugins: [rollupPluginGraphql()],
   },
 });

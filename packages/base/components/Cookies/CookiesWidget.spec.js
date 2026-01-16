@@ -11,6 +11,23 @@ mockNuxtImport("useI18n", () => {
   };
 });
 
+const hideToast = vi.fn();
+class Toast {
+  hide() {
+    hideToast();
+  }
+  show() {}
+}
+mockNuxtImport("useNuxtApp", () => {
+  return () => {
+    return {
+      $bs: {
+        Toast,
+      },
+    };
+  };
+});
+
 const consentRequired = ref(true);
 const consentSaved = ref(false);
 const acceptAll = vi.fn();
@@ -64,12 +81,13 @@ describe("components/Cookies/CookiesWidget.vue", () => {
   describe("when clicking the learn more button", () => {
     it("renders the modal and hides the toast", () => {
       const wrapper = shallowMount(CookiesWidget);
-      wrapper.vm.toastInstance.hide = vi.fn();
 
+      // FIXME: this causes vitest to report an unhandled error,
+      //        something to do with LazyCookiesModal
       wrapper.find("button.btn-link").trigger("click");
 
       expect(wrapper.vm.renderModal).toBe(true);
-      expect(wrapper.vm.toastInstance.hide).toHaveBeenCalled();
+      expect(hideToast).toHaveBeenCalled();
     });
   });
 
@@ -83,6 +101,8 @@ describe("components/Cookies/CookiesWidget.vue", () => {
 
   describe("when consent is required and saved", () => {
     it("renders updated text", () => {
+      // FIXME: this causes vitest to report an unhandled error,
+      //        something to do with LazyCookiesModal
       consentSaved.value = true;
       const wrapper = shallowMount(CookiesWidget);
 
