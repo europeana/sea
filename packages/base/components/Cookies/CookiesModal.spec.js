@@ -8,6 +8,7 @@ let acceptedServices = ref([]);
 const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
+// FIXME: this is not how the services are obtained
 vi.mock("@/utils/services/services", () => ({
   services: [
     {

@@ -26,6 +26,7 @@ vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
   }),
 }));
 
+// FIXME: this is not how the services are obtained
 vi.mock("@/utils/services/services", () => ({
   services: [
     {
