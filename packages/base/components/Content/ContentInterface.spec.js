@@ -269,7 +269,7 @@ describe("components/Content/ContentInterface", () => {
         const wrapper = await factory();
 
         const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
-        const allContentMetaData = wrapper.vm.minimalEntries.value;
+        const allContentMetaData = wrapper.vm.minimalEntries;
 
         expect(filteredMinimalEntries).toEqual(allContentMetaData);
       });
@@ -286,8 +286,8 @@ describe("components/Content/ContentInterface", () => {
 
         const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
 
-        const expectedContentData = wrapper.vm.minimalEntries.value.filter(
-          (entry) => entry.cats.includes(categories[0]),
+        const expectedContentData = wrapper.vm.minimalEntries.filter((entry) =>
+          entry.cats.includes(categories[0]),
         );
         expect(filteredMinimalEntries).toEqual(expectedContentData);
       });
@@ -304,7 +304,7 @@ describe("components/Content/ContentInterface", () => {
 
         const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
 
-        const expectedContentData = wrapper.vm.minimalEntries.value.filter(
+        const expectedContentData = wrapper.vm.minimalEntries.filter(
           (entry) => entry.__typename === "BlogPosting",
         );
         expect(filteredMinimalEntries).toEqual(expectedContentData);
