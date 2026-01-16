@@ -1,9 +1,9 @@
 <script setup>
 import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
-import { services } from "@/utils/services/services";
-import serviceForUrl from "@/utils/services/index.js";
+import { useServiceDefinitions } from "@europeana/sea-base-layer/composables/serviceDefinitions";
 
 const { acceptedServices, acceptOnly, consentRequired } = useConsentManager();
+const { services, forUrl: serviceForUrl } = useServiceDefinitions();
 
 const { t, te } = useI18n({ useScope: "global" });
 
@@ -120,7 +120,7 @@ const checkConsentAndOpenEmbed = () => {
 };
 
 const consentAllEmbeddedContent = () => {
-  const allThirdPartyContentServices = services
+  const allThirdPartyContentServices = services.value
     .filter((s) => s.purposes.includes("thirdPartyContent"))
     .flat()
     .map((service) => service.name);

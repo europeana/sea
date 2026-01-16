@@ -16,6 +16,7 @@ mockNuxtImport("useI18n", () => useI18nMock);
 
 let acceptedServices = ref([]);
 
+// FIXME: this is not how the services are obtained
 vi.mock("@/utils/services/services", () => ({
   services: [
     {
