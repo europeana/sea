@@ -2,7 +2,12 @@
 import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
-import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
+import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
+import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
+import exhibitionsListingGraphql from "@/graphql/queries/exhibitionsListing.graphql";
+import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
+import storiesListingGraphql from "@/graphql/queries/storiesListing.graphql";
+import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
 import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
@@ -65,7 +70,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 
 const ENTRIES_PER_PAGE = 24;
-const ENTRIES_PER_SECTION = 8;
+const ENTRIES_PER_SECTION = 4;
 
 const selectedTags = computed(() => {
   return route.query.tags?.split(",") || [];
@@ -73,6 +78,7 @@ const selectedTags = computed(() => {
 
 const typeLookup = {
   news: { type: "BlogPosting" },
+  "blog post": { type: "BlogPosting" },
   project: { type: "ProjectPage" },
   story: { type: "Story" },
   exhibition: { type: "ExhibitionPage" },
@@ -97,19 +103,6 @@ const filteredTags = computed(() => {
     .map((tag) => tag.tag);
 
   return uniq(tagsSortedByMostUsed);
-});
-
-const fetchableSysIds = computed(() => {
-  // Paginate
-  const sliceFrom = (page.value - 1) * ENTRIES_PER_PAGE;
-  const sliceTo = sliceFrom + ENTRIES_PER_PAGE;
-  return filteredMinimalEntries.value
-    ?.slice(sliceFrom, sliceTo)
-    ?.map((contentEntry) => contentEntry.sys.id);
-});
-
-const fetchableSysIdsString = computed(() => {
-  return fetchableSysIds.value?.join("-");
 });
 
 const filteredMinimalEntries = computed(() => {
@@ -139,10 +132,7 @@ const filteredMinimalEntries = computed(() => {
 });
 
 const total = computed(() => {
-  return (
-    (filteredMinimalEntries.value?.length || 0) +
-    (showFeaturedEntry.value ? 1 : 0)
-  );
+  return (fullEntries.value.total || 0) + (showFeaturedEntry.value ? 1 : 0);
 });
 
 const page = computed(() => {
@@ -245,37 +235,77 @@ const featuredEntrySubTitle = computed(() => {
 });
 
 async function fetchFullEntries() {
-  if (fetchableSysIds.value.length === 0) {
-    return [];
-  }
-  // Fetch full data for display of page of content entries
+  const selectedTaxonomyOrType =
+    selectedType.value?.taxonomy || selectedType.value?.type;
+
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: ENTRIES_PER_PAGE,
-    ids: fetchableSysIds.value,
-    site: props.site,
+    limit: ENTRIES_PER_SECTION,
+    skip: (page.value - 1) * ENTRIES_PER_PAGE,
+    categoriesFilter: null,
+    excludeSysId: props.featuredEntry?.sys?.id || "",
+    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };
 
-  const contentResponse = await contentful.query(
-    contentBySysIdGraphql,
-    contentVariables,
-  );
+  if (selectedTags.value.length) {
+    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
+      categories: { identifier: cat },
+    }));
+  }
 
-  return Object.values(contentResponse.data)
-    .map((collection) => collection.items || [])
-    .flat();
+  const contentTypeGraphql = {
+    BlogPosting: blogPostingsListingGraphql,
+    ProjectPage: projectPagesListingGraphql,
+    eventTypeEvent: eventsListingGraphql,
+    eventTypeTrainingCourse: trainingsListingGraphql,
+    ExhibitionPage: exhibitionsListingGraphql,
+    Story: storiesListingGraphql,
+  };
+
+  if (selectedTaxonomyOrType) {
+    contentVariables.limit = ENTRIES_PER_PAGE;
+
+    const contentResponse = await contentful.query(
+      contentTypeGraphql[selectedTaxonomyOrType],
+      contentVariables,
+    );
+
+    return Object.values(contentResponse.data)[0];
+  } else {
+    const supportedTypes = supportedContentTypes.value.map(
+      (type) => typeLookup[type].taxonomy || typeLookup[type].type,
+    );
+    const contentResponse = await Promise.all(
+      supportedTypes.map(
+        async (taxonomyOrType) =>
+          await contentful.query(
+            contentTypeGraphql[taxonomyOrType],
+            contentVariables,
+          ),
+      ),
+    );
+
+    // TODO: assign array per type
+    const entries = contentResponse
+      .map((res) => Object.values(res.data))
+      .flat()
+      .reduce(
+        (memo, collection) => {
+          memo.items = [...memo.items, collection.items].flat();
+          memo.total = memo.total + collection.total;
+          return memo;
+        },
+        { items: [], total: 0 },
+      );
+
+    return entries;
+  }
 }
 
 const normalisedEntries = computed(() => {
-  return fetchableSysIds.value
-    .map((sysId) =>
-      normaliseCard(
-        fullEntries.value.find(
-          (contentEntry) => contentEntry?.sys?.id === sysId,
-        ),
-      ),
-    )
+  return fullEntries.value.items
+    .map((entry) => normaliseCard(entry))
     .filter(Boolean);
 });
 
@@ -391,16 +421,7 @@ function normaliseCard(entry) {
   }
 }
 
-function sortByDate(entry) {
-  if (entry.__typename === "ProjectPage") {
-    return entry.project.startDate;
-  } else {
-    return entry.date;
-  }
-}
-
-// Fetch minimal data for all entries to support ordering by datePublished
-// and filtering by categories.
+// Fetch minimal data for all entries to support filtering by categories.
 async function fetchMinimalEntries() {
   const contentIdsVariables = {
     excludeSysId: props.featuredEntry?.sys?.id || "",
@@ -443,13 +464,7 @@ async function fetchMinimalEntries() {
     }
   }
 
-  // Order by date (startDate or published date)
-  const ordered = contentIds.sort((a, b) => {
-    const sortDateA = sortByDate(a);
-    const sortDateB = sortByDate(b);
-    return new Date(sortDateB).getTime() - new Date(sortDateA).getTime();
-  });
-  return ordered;
+  return contentIds;
 }
 
 const { data: minimalEntries, error: minimalEntriesError } = await useAsyncData(
@@ -465,11 +480,11 @@ if (minimalEntriesError.value) {
 }
 
 const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
-  fetchableSysIdsString,
+  "fullEntries",
   fetchFullEntries,
   {
     default: () => [],
-    watch: [fetchableSysIdsString],
+    watch: [selectedTags, selectedType, page],
   },
 );
 if (fullEntriesError.value) {
