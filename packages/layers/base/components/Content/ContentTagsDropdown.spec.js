@@ -13,7 +13,7 @@ const clickedOutside = ref(false);
 const enableClickOutsideListeners = vi.fn();
 const disableClickOutsideListeners = vi.fn();
 
-vi.mock("@europeana/sea-base-layer/composables/clickOutside", () => ({
+vi.mock("~/composables/clickOutside", () => ({
   default: () => ({
     clickedOutside,
     enable: enableClickOutsideListeners,
