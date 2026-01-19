@@ -1,13 +1,19 @@
 import i18nLocales from "./i18n/locales";
-import rollupPluginGraphql from "@rollup/plugin-graphql";
+
+import { name as packageName, version as packageVersion } from "./package.json";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
+
   css: ["/assets/scss/main.scss"],
+
   devtools: { enabled: true },
+
+  modules: ["@nuxt/eslint", "@nuxtjs/i18n"],
+
   extends: "@europeana/sea-base-layer",
-  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@nuxtjs/i18n"],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -22,8 +28,8 @@ export default defineNuxtConfig({
         },
       },
     },
-    plugins: [rollupPluginGraphql()],
   },
+
   runtimeConfig: {
     public: {
       baseUrl: "",
@@ -36,10 +42,17 @@ export default defineNuxtConfig({
         graphqlUrl: null,
         spaceId: null,
       },
+      elastic: {
+        apm: {
+          serviceName: packageName.replace(/^.*\//, ""),
+          serviceVersion: packageVersion,
+        },
+      },
       defaultThumbnail: "",
       internalLinkDomain: "",
     },
   },
+
   i18n: {
     baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
     bundle: {
@@ -55,5 +68,6 @@ export default defineNuxtConfig({
       file: `./${locale.code}.json`,
     })),
   },
+
   watch: ["graphql", "i18n"],
 });

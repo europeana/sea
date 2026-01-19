@@ -1,7 +1,8 @@
 .dockerignore
+.env*
 .gitignore
 .husky
+.nuxtrc
 .prettierignore
-.env*
-pnpm-lock.yaml
 Dockerfile
+pnpm-lock.yaml
