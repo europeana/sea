@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  modules: ["@nuxt/eslint", "@nuxtjs/i18n", "@nuxt/test-utils"],
+  modules: ["@nuxt/eslint", "@nuxtjs/i18n"],
 
   runtimeConfig: {
     public: {
