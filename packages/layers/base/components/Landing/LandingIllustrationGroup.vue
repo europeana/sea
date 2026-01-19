@@ -1,6 +1,6 @@
 <script setup>
-import parseMarkdown from "@europeana/sea-base-layer/utils/markdown/parse.js";
-import useSwiper from "@europeana/sea-base-layer/composables/swiper";
+import parseMarkdown from "~/utils/markdown/parse.js";
+import useSwiper from "~/composables/swiper";
 import "swiper/css/grid"; // for mobile
 import { A11y, Grid, Keyboard, Navigation, Pagination } from "swiper/modules";
 import { GenericSmartLink } from "#components"; // explicit import needed for dynamic components: https://nuxt.com/docs/guide/directory-structure/components#dynamic-components

@@ -38,7 +38,7 @@ vi.mock("~/composables/serviceDefinitions", () => ({
   }),
 }));
 
-vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
+vi.mock("~/composables/consentManager", () => ({
   useConsentManager: () => ({
     acceptAll,
     rejectAll,

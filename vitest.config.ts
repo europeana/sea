@@ -2,15 +2,12 @@ import { defineConfig, coverageConfigDefaults } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: ["**/*.spec.js"],
-    exclude: ["**/node_modules/**", "**/.git/**", "**/tmp/**"],
-    projects: ["packages/apps/*", "packages/base"],
+    projects: ["packages/*/*"],
     coverage: {
       exclude: [
         ...coverageConfigDefaults.exclude,
         "**/*.stories.ts",
         "**/*.config.[jt]s",
-        "packages/apps/ds4ch/i18n/*",
       ],
     },
   },

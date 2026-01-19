@@ -1,4 +1,6 @@
 <script setup>
+import { omit } from "lodash-es";
+
 const props = defineProps({
   /**
    * Number of items per page
@@ -90,11 +92,7 @@ const handlePageInputChange = () => {
 };
 
 const linkGen = (page) => {
-  const query = { ...route.query, page };
-
-  for (const excludeParam of props.excludeParams) {
-    delete query[excludeParam];
-  }
+  const query = omit({ ...route.query, page }, props.excludeParams);
 
   return {
     hash: route.hash,

@@ -5,9 +5,15 @@ import { name as packageName, version as packageVersion } from "./package.json";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
+
   css: ["/assets/scss/main.scss"],
+
   devtools: { enabled: true },
+
+  modules: ["@nuxt/eslint", "@nuxtjs/i18n", "@nuxt/test-utils"],
+
   extends: "@europeana/sea-base-layer",
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -23,6 +29,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   runtimeConfig: {
     public: {
       baseUrl: "",
@@ -45,6 +52,7 @@ export default defineNuxtConfig({
       internalLinkDomain: "",
     },
   },
+
   i18n: {
     baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
     bundle: {
@@ -60,5 +68,6 @@ export default defineNuxtConfig({
       file: `./${locale.code}.json`,
     })),
   },
+
   watch: ["graphql", "i18n"],
 });

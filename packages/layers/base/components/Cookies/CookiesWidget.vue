@@ -1,5 +1,5 @@
 <script setup>
-import { useConsentManager } from "@europeana/sea-base-layer/composables/consentManager";
+import { useConsentManager } from "~/composables/consentManager";
 
 const { t } = useI18n({ useScope: "global" });
 const { $bs } = useNuxtApp();

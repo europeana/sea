@@ -1,5 +1,5 @@
 <script setup>
-import useClickOutside from "@europeana/sea-base-layer/composables/clickOutside";
+import useClickOutside from "~/composables/clickOutside";
 
 const route = useRoute();
 const props = defineProps({

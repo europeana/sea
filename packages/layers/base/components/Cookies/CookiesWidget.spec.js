@@ -33,7 +33,7 @@ const consentSaved = ref(false);
 const acceptAll = vi.fn();
 const rejectAll = vi.fn();
 
-vi.mock("@europeana/sea-base-layer/composables/consentManager", () => ({
+vi.mock("~/composables/consentManager", () => ({
   useConsentManager: () => ({
     acceptAll,
     rejectAll,

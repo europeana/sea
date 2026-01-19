@@ -1,5 +1,5 @@
 <script setup>
-import useCanonicalUrl from "@europeana/sea-base-layer/composables/canonicalUrl";
+import useCanonicalUrl from "~/composables/canonicalUrl";
 
 const { urlWithOnlyQuery } = useCanonicalUrl();
 const { matomo } = useMatomo();

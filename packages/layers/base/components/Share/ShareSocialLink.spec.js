@@ -10,7 +10,7 @@ mockNuxtImport("useMatomo", () => () => ({
   matomo: { value: { trackEvent: trackEventMock } },
 }));
 
-vi.mock("@europeana/sea-base-layer/composables/canonicalUrl", () => ({
+vi.mock("~/composables/canonicalUrl", () => ({
   default: () => ({ urlWithOnlyQuery: ref("/en/page") }),
 }));
 
