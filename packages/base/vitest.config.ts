@@ -10,6 +10,6 @@ export default defineVitestConfig({
         rootDir: fileURLToPath(new URL(".", import.meta.url)),
       },
     },
-    setupFiles: ["tests/unit.setup.ts"],
+    setupFiles: ["../vitest.nuxt.setup.ts"],
   },
 });
