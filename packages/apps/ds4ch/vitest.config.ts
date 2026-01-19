@@ -10,7 +10,6 @@ export default defineVitestProject({
         rootDir: fileURLToPath(new URL(".", import.meta.url)),
       },
     },
-    name: "ds4ch",
     setupFiles: ["../../vitest.nuxt.setup.ts"],
   },
 });
