@@ -291,7 +291,7 @@ async function fetchFullEntries() {
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: ENTRIES_PER_SECTION,
+    limit: selectedTaxonomyOrType ? ENTRIES_PER_PAGE : ENTRIES_PER_SECTION,
     skip: (page.value - 1) * ENTRIES_PER_PAGE,
     categoriesFilter: null,
     excludeSysId: props.featuredEntry?.sys?.id || "",
@@ -313,19 +313,10 @@ async function fetchFullEntries() {
     Story: storiesListingGraphql,
   };
 
-  // TODO check if type is supported? ATTOW user can query story and exhibitions types via URL query.
-  if (selectedTaxonomyOrType) {
-    contentVariables.limit = ENTRIES_PER_PAGE;
-
-    const contentResponse = await contentful.query(
-      contentTypeGraphql[selectedTaxonomyOrType],
-      contentVariables,
-    );
-
-    return Object.values(contentResponse.data)[0];
-  } else {
-    const contentResponse = await Promise.all(
-      supportedTaxonomiesAndTypes.value.map(async (taxonomyOrType) => {
+  return await Promise.all(
+    []
+      .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
+      .map(async (taxonomyOrType) => {
         const res = await contentful.query(
           contentTypeGraphql[taxonomyOrType],
           contentVariables,
@@ -338,12 +329,7 @@ async function fetchFullEntries() {
           type: taxonomyOrType,
         };
       }),
-    );
-
-    const entries = contentResponse;
-
-    return entries;
-  }
+  );
 }
 
 function normalisedEntryCards(entries = []) {
@@ -351,22 +337,11 @@ function normalisedEntryCards(entries = []) {
 }
 
 const normalisedSections = computed(() => {
-  if (fullEntries.value.items) {
-    return [
-      {
-        entries: normalisedEntryCards(fullEntries.value.items),
-        total: fullEntries.value.total,
-      },
-    ];
-  }
-  if (Array.isArray(fullEntries.value)) {
-    return fullEntries.value.map((collection) => ({
-      entries: normalisedEntryCards(collection.items),
-      type: collection.type,
-      total: collection.total,
-    }));
-  }
-  return [];
+  return fullEntries.value.map((collection) => ({
+    entries: normalisedEntryCards(collection.items),
+    type: collection.type,
+    total: collection.total,
+  }));
 });
 
 const isFilteredByTag = computed(() => selectedTags.value.length > 0);
