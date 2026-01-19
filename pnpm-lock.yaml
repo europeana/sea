@@ -112,7 +112,7 @@ importers:
         specifier: workspace:*
         version: link:../../directives/vue-visible-on-scroll
       '@lottiefiles/dotlottie-vue':
-        specifier: ^0.10.0
+        specifier: ^0.10.12
         version: 0.10.12(vue@3.5.26(typescript@5.8.3))
       '@nuxt/test-utils':
         specifier: ^3.22.0
