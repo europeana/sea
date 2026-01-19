@@ -1,8 +1,8 @@
-import { defineVitestConfig } from "@nuxt/test-utils/config";
+import { defineVitestProject } from "@nuxt/test-utils/config";
 
 import { fileURLToPath } from "node:url";
 
-export default defineVitestConfig({
+export default defineVitestProject({
   test: {
     environment: "nuxt",
     environmentOptions: {
@@ -10,6 +10,7 @@ export default defineVitestConfig({
         rootDir: fileURLToPath(new URL(".", import.meta.url)),
       },
     },
+    name: "base",
     setupFiles: ["../vitest.nuxt.setup.ts"],
   },
 });
