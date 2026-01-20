@@ -530,8 +530,8 @@ function renderMoreLink(section) {
   );
 }
 
-function renderTypeTitle(section) {
-  return !selectedType.value && typeSectionLookup[section.type];
+function renderTypeTitle(type) {
+  return !selectedType.value && typeSectionLookup[type];
 }
 
 function getMoreLinkLabelForSection(section) {
