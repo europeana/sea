@@ -85,19 +85,19 @@ const typeLookup = {
 const typeSectionLookup = {
   BlogPosting: {
     url: routeForType(route, "news"),
-    title: t("news"),
+    title: t("news", 2),
   },
   ProjectPage: {
     url: routeForType(route, "project"),
-    title: t("projects.projects"),
+    title: t("project", 2),
   },
   eventTypeTrainingCourse: {
     url: routeForType(route, "training"),
-    title: t("training.training"),
+    title: t("training.training", 2),
   },
   eventTypeEvent: {
     url: routeForType(route, "event"),
-    title: t("event.events"),
+    title: t("event.event", 2),
   },
 };
 
@@ -271,8 +271,8 @@ const featuredEntrySubTitle = computed(() => {
     return undefined;
   }
   return entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
-    ? t("training.label")
-    : t("event.label");
+    ? t("training.training")
+    : t("event.event");
 });
 
 async function fetchFullEntries() {
@@ -427,7 +427,7 @@ function normaliseCard(entry) {
         return {
           ...entry,
           url: entry.url,
-          subTitle: t("training.label"),
+          subTitle: t("training.training"),
           text: trainingDateHelper(entry.startDate, entry.endDate),
           primaryImageOfPage: {
             image: entry.image || props.defaultCardThumbnail?.image,
@@ -437,7 +437,7 @@ function normaliseCard(entry) {
       return {
         ...entry,
         url: entry.url,
-        subTitle: t("event.label"),
+        subTitle: t("event.event"),
         text: eventDateHelper(entry.startDate, entry.endDate),
         primaryImageOfPage: {
           image: entry.image || props.defaultCardThumbnail?.image,

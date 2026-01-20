@@ -135,8 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} to {endDate}",
-    "label": "event",
-    "events": "Events"
+    "event": "Event | Events"
   },
   "featured": "Featured",
   "footer": {
@@ -180,7 +179,7 @@
     "toggle": "Show menu"
   },
   "newWindow": "opens in new window",
-  "news": "News",
+  "news": "News | News",
   "pagination": {
     "label": "Pagination",
     "next": "Next",
@@ -189,7 +188,7 @@
     "previous": "Previous"
   },
   "portal": "Portal",
-  "project": "Project",
+  "project": "Project | Projects",
   "projects": {
     "contract": "Contract number",
     "dates": "{startDate} - {endDate}",
@@ -201,7 +200,6 @@
     "goals": "Project goals",
     "impact": "Key project impact",
     "partners": "Project partners",
-    "projects": "Projects",
     "reports": "Project reports",
     "viewFactSheet": "View fact sheet"
   },
@@ -221,8 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "training",
     "ongoing": "Ongoing",
-    "training": "Training"
+    "training": "Training | Training"
   }
 }
