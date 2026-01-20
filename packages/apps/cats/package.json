@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "h3": "^1.15.3",
-    "nitropack": "^2.12.7"
+    "nitropack": "^2.13.1"
   },
   "dependencies": {
     "bullmq": "^5.58.5",
