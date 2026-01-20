@@ -525,7 +525,13 @@ function renderSection(section) {
 }
 
 function renderMoreLink(section) {
-  return typeSectionLookup[section.type] && section?.total > 4;
+  return (
+    !selectedType.value && typeSectionLookup[section.type] && section?.total > 4
+  );
+}
+
+function renderTypeTitle(section) {
+  return !selectedType.value && typeSectionLookup[section.type];
 }
 
 function getMoreLinkLabelForSection(section) {
@@ -594,7 +600,7 @@ function getMoreLinkLabelForSection(section) {
           :key="`section-${section.type}`"
           class="container mb-5 pb-4k-5"
         >
-          <h2 v-if="typeSectionLookup[section.type]" class="section-title">
+          <h2 v-if="renderTypeTitle(section.type)" class="section-title">
             {{ typeSectionLookup[section.type].title }}
           </h2>
           <ContentFeaturedCard
