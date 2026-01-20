@@ -116,7 +116,7 @@ const contentfulResponse = (query, entries, metadata) => {
       data: { blogPostingCollection: { items: metadata.blogs } },
     });
   }
-  if (query.definitions?.[0]?.name?.value === "ProjectPageListingMinimal") {
+  if (query.definitions?.[0]?.name?.value === "ProjectPagesListingMinimal") {
     return Promise.resolve({
       data: { projectPageCollection: { items: metadata.projects } },
     });

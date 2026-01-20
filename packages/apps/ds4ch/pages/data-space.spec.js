@@ -61,6 +61,14 @@ const blogPostingsListingMinimalContentfulResponse = {
   },
 };
 
+const projectPagesListingMinimalContentfulResponse = {
+  data: {
+    projectPageCollection: {
+      items: [],
+    },
+  },
+};
+
 const blogPostingsListingContentfulResponse = {
   data: {
     blogPostingCollection: {
@@ -93,6 +101,15 @@ const blogPostingsListingContentfulResponse = {
   },
 };
 
+const projectPagesListingContentfulResponse = {
+  data: {
+    projectPageCollection: {
+      total: 0,
+      items: [],
+    },
+  },
+};
+
 const contentHubPageContentfulResponse = {
   data: {
     contentHubPageCollection: {
@@ -101,8 +118,7 @@ const contentHubPageContentfulResponse = {
           name: title,
           headline: description,
           primaryImageOfPage: { image: "stubbed Image" },
-          // FIXME: when adding more content types tests break due to contentTypes beind undefined in ContentTypeFilter
-          contentTypes: ["blog post"],
+          contentTypes: ["project", "blog post"],
         },
       ],
     },
@@ -130,8 +146,14 @@ const handleContentfulQuery = (graphQL) => {
   if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return blogPostingsListingContentfulResponse;
   }
+  if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListing") {
+    return projectPagesListingContentfulResponse;
+  }
   if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListingMinimal") {
     return blogPostingsListingMinimalContentfulResponse;
+  }
+  if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListingMinimal") {
+    return projectPagesListingMinimalContentfulResponse;
   }
   if (graphQL.definitions?.[0]?.name?.value === "ContentHubPage") {
     return contentHubPageContentfulResponse;
@@ -148,6 +170,9 @@ const factory = async () =>
         $contentful: {
           query: (graphQL) => handleContentfulQuery(graphQL),
         },
+      },
+      stubs: {
+        ContentTypeFilter: true,
       },
     },
   });
@@ -192,7 +217,7 @@ describe("dataSpacePage", () => {
       "https://images.ctfassets.net/i01duvb6kq77/7Jnq4yka0vfYdWKo7IV7Dc/5778788f0359b1a6a81ef1f57a260982/feature_1920Olympics.jpg?q=80&fm=webp",
     );
     expect(contentCardImages[1].attributes("src")).toBe(
-      "https://www.example.org/image.jpg",
+      wrapper.vm.defaultCardThumbnail.image.url,
     );
   });
 
@@ -203,6 +228,9 @@ describe("dataSpacePage", () => {
       name: "ContentInterface",
     });
 
-    expect(contentInterface.props("contentTypes")).toEqual(["blog post"]);
+    expect(contentInterface.props("contentTypes")).toEqual([
+      "blog post",
+      "project",
+    ]);
   });
 });
