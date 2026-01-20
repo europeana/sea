@@ -192,18 +192,23 @@ const featuredEntryInResults = computed(() => {
     return false;
   }
   // selected type or taxonomy matches featured entry type or taxonomy; present
-  if (
-    selectedType.value &&
-    (entryHasTaxonomyTerm(props.featuredEntry, selectedType.value.taxonomy) ||
-      entryHasContentType(props.featuredEntry, selectedType.value.type))
-  ) {
-    return true;
+  if (selectedType.value) {
+    if (selectedType.value.taxonomy) {
+      return entryHasTaxonomyTerm(
+        props.featuredEntry,
+        selectedType.value.taxonomy,
+      );
+    } else {
+      return entryHasContentType(props.featuredEntry, selectedType.value.type);
+    }
   }
-  // no selected type; present
-  if (!selectedType.value) {
-    return true;
-  }
-  return false;
+  const featuredEntryIsOfSupportedType =
+    !!supportedTaxonomiesAndTypes.value.filter(
+      (type) =>
+        entryHasTaxonomyTerm(props.featuredEntry, type) ||
+        entryHasContentType(props.featuredEntry, type),
+    ).length;
+  return featuredEntryIsOfSupportedType;
 });
 
 function displayFeaturedEntry(sectionType) {
