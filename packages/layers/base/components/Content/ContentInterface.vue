@@ -4,16 +4,12 @@ import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
 import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
 import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
-import exhibitionsListingGraphql from "@/graphql/queries/exhibitionsListing.graphql";
 import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
-import storiesListingGraphql from "@/graphql/queries/storiesListing.graphql";
 import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
 import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
-// import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
-// import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 
 import {
   entryHasContentType,
@@ -82,8 +78,6 @@ const typeLookup = {
   news: { type: "BlogPosting" },
   "blog post": { type: "BlogPosting" },
   project: { type: "ProjectPage" },
-  story: { type: "Story" },
-  exhibition: { type: "ExhibitionPage" },
   training: { type: "Event", taxonomy: "eventTypeTrainingCourse" },
   event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
@@ -97,8 +91,6 @@ const typeSectionLookup = {
     url: routeForType(route, "project"),
     title: t("projects.projects"),
   },
-  // Story: t(""),
-  // ExhibitionPage: t(""),
   eventTypeTrainingCourse: {
     url: routeForType(route, "training"),
     title: t("training.training"),
@@ -308,8 +300,6 @@ async function fetchFullEntries() {
     ProjectPage: projectPagesListingGraphql,
     eventTypeEvent: eventsListingGraphql,
     eventTypeTrainingCourse: trainingsListingGraphql,
-    ExhibitionPage: exhibitionsListingGraphql,
-    Story: storiesListingGraphql,
   };
 
   return await Promise.all(
@@ -486,10 +476,6 @@ async function fetchMinimalEntries() {
   )
     .map((response) => response.data[Object.keys(response.data)[0]].items || [])
     .flat();
-
-  // TODO: Re-implement retrieval for:
-  // storiesResponse.data.storyCollection?.items,
-  // exhibitionsResponse.data.exhibitionPageCollection?.items,
 
   // Simplify categories
   for (const contentEntry of contentIds) {

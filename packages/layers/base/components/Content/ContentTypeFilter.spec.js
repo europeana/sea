@@ -12,8 +12,6 @@ const i18n = createI18n({
           viewAll: "View All",
           news: "News",
           projects: "Projects",
-          stories: "Stories",
-          exhibitions: "Exhibitions",
         },
       },
     },
