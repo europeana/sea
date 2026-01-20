@@ -42,7 +42,7 @@ mockNuxtImport("useI18n", () => {
 const title = "Explore the data space";
 const description = "DS4CH text";
 
-const blogPostingListingMinimalContentfulResponse = {
+const blogPostingsListingMinimalContentfulResponse = {
   data: {
     blogPostingCollection: {
       items: [
@@ -101,6 +101,7 @@ const contentHubPageContentfulResponse = {
           name: title,
           headline: description,
           primaryImageOfPage: { image: "stubbed Image" },
+          // FIXME: when adding more content types tests break due to contentTypes beind undefined in ContentTypeFilter
           contentTypes: ["blog post"],
         },
       ],
@@ -129,8 +130,8 @@ const handleContentfulQuery = (graphQL) => {
   if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return blogPostingsListingContentfulResponse;
   }
-  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingListingMinimal") {
-    return blogPostingListingMinimalContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListingMinimal") {
+    return blogPostingsListingMinimalContentfulResponse;
   }
   if (graphQL.definitions?.[0]?.name?.value === "ContentHubPage") {
     return contentHubPageContentfulResponse;
@@ -193,5 +194,15 @@ describe("dataSpacePage", () => {
     expect(contentCardImages[1].attributes("src")).toBe(
       "https://www.example.org/image.jpg",
     );
+  });
+
+  it("passes in a sorted list of content types to the content interface", async () => {
+    const wrapper = await factory();
+
+    const contentInterface = wrapper.findComponent({
+      name: "ContentInterface",
+    });
+
+    expect(contentInterface.props("contentTypes")).toEqual(["blog post"]);
   });
 });

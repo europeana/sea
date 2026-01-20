@@ -60,12 +60,11 @@ const props = defineProps({
   },
 });
 
-const supportedContentTypes = computed(() => {
-  // This order also defines the order of sections on the 'view all' tab
-  return ["blog post", "event", "training", "project"].filter((ct) =>
-    props.contentTypes.includes(ct),
-  );
-});
+const supportedContentTypes = computed(() =>
+  props.contentTypes.filter((ct) =>
+    ["blog post", "project", "training", "event"].includes(ct),
+  ),
+);
 
 const { scrollToSelector } = useScrollTo();
 const { localeProperties } = useI18n();

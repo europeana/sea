@@ -1,4 +1,4 @@
-query BlogPostingListingMinimal(
+query BlogPostingsListingMinimal(
   $locale: String!
   $preview: Boolean = false
   $site: String!

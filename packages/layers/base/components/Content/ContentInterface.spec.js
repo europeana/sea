@@ -111,7 +111,7 @@ const contentfulResponse = (query, entries, metadata) => {
       },
     });
   }
-  if (query.definitions?.[0]?.name?.value === "BlogPostingListingMinimal") {
+  if (query.definitions?.[0]?.name?.value === "BlogPostingsListingMinimal") {
     return Promise.resolve({
       data: { blogPostingCollection: { items: metadata.blogs } },
     });
