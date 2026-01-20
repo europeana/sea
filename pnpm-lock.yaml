@@ -73,7 +73,7 @@ importers:
         version: 1.1.2
       contentful-management:
         specifier: ^11.57.4
-        version: 11.67.0
+        version: 11.67.2
       ioredis:
         specifier: ^5.7.0
         version: 5.9.0
@@ -2275,8 +2275,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@rollup/rollup-linux-x64-gnu@4.55.1':
-    resolution: {integrity: sha512-a8G4wiQxQG2BAvo+gU6XrReRRqj+pLS2NGXKm8io19goR+K8lw269eTrPkSdDTALwMmJp4th2Uh0D8J9bEV1vg==}
+  '@rollup/rollup-linux-x64-gnu@4.55.2':
+    resolution: {integrity: sha512-1e30XAuaBP1MAizaOBApsgeGZge2/Byd6wV4a8oa6jPdHELbRHBiw7wvo4dp7Ie2PE8TZT4pj9RLGZv9N4qwlw==}
     cpu: [x64]
     os: [linux]
 
@@ -3383,12 +3383,12 @@ packages:
   constantinople@4.0.1:
     resolution: {integrity: sha512-vCrqcSIq4//Gx74TXXCGnHpulY1dskqLTFGDmhrGxzeXL8lF8kvXv6mpNWlJj1uD4DW23D4ljAqbY4RRaaUZIw==}
 
-  contentful-management@11.67.0:
-    resolution: {integrity: sha512-Al6Dm9eBoLfBERl1nkYWLHGMSR98CCTPdsh466k2tjjlSGDAT3B2D/BnNTzpzidW5vYGIoVjRezGvcedV3vxfg==}
+  contentful-management@11.67.2:
+    resolution: {integrity: sha512-QBcQMcGo2rHcEpRq3hIK2nflhQc4AH+g8nlBhnVkOJueGhwQ+kcfY6dnN2x9mQqvp4vGXM0hPWiooPS1cfS1Cg==}
     engines: {node: '>=18'}
 
-  contentful-sdk-core@9.4.0:
-    resolution: {integrity: sha512-TWrlmuYiTLRtb3D0TqZsBxeZwGiwn8tAyJu78GSSOR5OPINCC5z4vLZpj1fLCUEZXhPbEcBecvOX0PxZ8kd5qQ==}
+  contentful-sdk-core@9.4.1:
+    resolution: {integrity: sha512-l/DRjiabawlX4fb5WZoClWZfNynSNeN/+xnP5qaNAxnBZYtDMXQcEvRDKb4S7qn7aBehNWKhhajnidbBL8n7HA==}
     engines: {node: '>=18'}
 
   conventional-changelog-angular@7.0.0:
@@ -9730,7 +9730,7 @@ snapshots:
   '@rollup/rollup-linux-x64-gnu@4.53.4':
     optional: true
 
-  '@rollup/rollup-linux-x64-gnu@4.55.1':
+  '@rollup/rollup-linux-x64-gnu@4.55.2':
     optional: true
 
   '@rollup/rollup-linux-x64-musl@4.52.5':
@@ -11145,24 +11145,24 @@ snapshots:
       '@babel/parser': 7.28.5
       '@babel/types': 7.28.2
 
-  contentful-management@11.67.0:
+  contentful-management@11.67.2:
     dependencies:
       '@contentful/rich-text-types': 16.8.5
       axios: 1.13.2
-      contentful-sdk-core: 9.4.0
+      contentful-sdk-core: 9.4.1
       fast-copy: 3.0.2
       globals: 15.15.0
     transitivePeerDependencies:
       - debug
 
-  contentful-sdk-core@9.4.0:
+  contentful-sdk-core@9.4.1:
     dependencies:
       fast-copy: 3.0.2
       lodash: 4.17.21
       process: 0.11.10
       qs: 6.14.1
     optionalDependencies:
-      '@rollup/rollup-linux-x64-gnu': 4.55.1
+      '@rollup/rollup-linux-x64-gnu': 4.55.2
 
   conventional-changelog-angular@7.0.0:
     dependencies:
