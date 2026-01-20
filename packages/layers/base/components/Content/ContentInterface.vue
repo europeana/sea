@@ -154,12 +154,9 @@ const filteredMinimalEntries = computed(() => {
 
 const total = computed(() => {
   return (
-    (fullEntries.value.total ||
-      // when full entries is array of entry sections, get the sum of totals
-      fullEntries.value.reduce?.((memo, collection) => {
-        return memo + collection.total;
-      }, 0) ||
-      0) + (featuredEntryInResults.value ? 1 : 0)
+    (fullEntries.value.reduce((memo, collection) => {
+      return memo + collection.total;
+    }, 0) || 0) + (featuredEntryInResults.value ? 1 : 0)
   );
 });
 
