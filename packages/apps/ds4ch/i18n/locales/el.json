@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "με",
-    "createdDate": "Δημιουργήθηκε {date}",
     "publishedDate": "Δημοσιεύτηκε {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Προβολή όλων"
     },
     "resultsHaveLoaded": "{0} αποτελέσματα βρέθηκαν",
+    "seeAll": "Δείτε όλα {content}",
+    "seeMore": "Δείτε περισσότερα {content}",
     "topics": {
       "featuredTopics": "Προτεινόμενα θέματα",
       "label": "Εξερευνήστε περισσότερα θέματα",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} έως {endDate}",
-    "label": "εκδήλωση"
+    "event": "Εκδήλωση | Εκδηλώσεις"
   },
   "featured": "Προτεινόμενα",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Εμφάνιση μενού"
   },
   "newWindow": "ανοίγει σε νέο παράθυρο",
-  "news": "Ειδήσεις",
+  "news": "Νέα | Νέα",
   "pagination": {
     "label": "Σελιδοποίηση",
     "next": "Επόμενο",
@@ -187,7 +188,7 @@
     "previous": "Προηγούμενος"
   },
   "portal": "Πύλη",
-  "project": "Έργο",
+  "project": "Έργο | Έργα",
   "projects": {
     "contract": "Αριθμός σύμβασης",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "εκπαίδευση",
-    "ongoing": "Σε εξέλιξη"
+    "ongoing": "Σε εξέλιξη",
+    "training": "Εκπαίδευση | Εκπαίδευση"
   }
 }

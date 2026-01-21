@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "Szerző:",
-    "createdDate": "Létrehozva {date}",
     "publishedDate": "Közzétéve {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Összes megtekintése"
     },
     "resultsHaveLoaded": "{0} találat",
+    "seeAll": "Összes megtekintése {content}",
+    "seeMore": "Továbbiak megtekintése {content}",
     "topics": {
       "featuredTopics": "Kiemelt témák",
       "label": "Fedezzen fel további témákat",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} – {endDate}",
-    "label": "esemény"
+    "event": "Esemény | Események"
   },
   "featured": "Kiemelt",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Menü megjelenítése"
   },
   "newWindow": "új ablakban nyílik meg",
-  "news": "Hírek",
+  "news": "Hírek | Hírek",
   "pagination": {
     "label": "Lapszámozás",
     "next": "Következő",
@@ -187,7 +188,7 @@
     "previous": "Előző"
   },
   "portal": "Portál",
-  "project": "Projekt",
+  "project": "Projekt | Projektek",
   "projects": {
     "contract": "Szerződés száma",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "képzés",
-    "ongoing": "Folyamatban"
+    "ongoing": "Folyamatban",
+    "training": "Képzés | Képzés"
   }
 }
