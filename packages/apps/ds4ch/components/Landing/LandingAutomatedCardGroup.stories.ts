@@ -21,7 +21,7 @@ export const Default: Story = {
         label: "Items",
       },
       {
-        info: "2,600 +",
+        info: "3,700 +",
         label: "Providing institutions",
       },
     ],
