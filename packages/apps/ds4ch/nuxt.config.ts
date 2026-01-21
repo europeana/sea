@@ -53,6 +53,11 @@ export default defineNuxtConfig({
     },
   },
 
+  elasticApm: {
+    serviceName: packageName.replace(/^.*\//, ""),
+    serviceVersion: packageVersion,
+  },
+
   i18n: {
     baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
     bundle: {

@@ -1,5 +1,7 @@
 import apm from "elastic-apm-node";
 
+// TODO: make part of the module
+
 export default defineNuxtPlugin(async (nuxtApp) => {
   // if (!apm.isStarted()) {
   //   console.log('starting apm on server')
