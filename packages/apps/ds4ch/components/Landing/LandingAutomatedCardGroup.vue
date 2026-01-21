@@ -65,7 +65,7 @@ const fetchCachedData = () => {
       },
     ],
     "dataspace/network-members": 5500,
-    "dataspace/data-providers": 3200,
+    "dataspace/data-providers": 3700,
     "dataspace/hq-items": "63.3%",
     "dataspace/api-requests": 28300000,
   };

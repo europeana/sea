@@ -127,12 +127,9 @@ const filteredTags = computed(() => {
 
 const total = computed(() => {
   return (
-    (fullEntries.value.total ||
-      // when full entries is array of entry sections, get the sum of totals
-      fullEntries.value.reduce?.((memo, collection) => {
-        return memo + collection.total;
-      }, 0) ||
-      0) + (featuredEntryInResults.value ? 1 : 0)
+    (fullEntries.value.reduce((memo, collection) => {
+      return memo + collection.total;
+    }, 0) || 0) + (featuredEntryInResults.value ? 1 : 0)
   );
 });
 
@@ -552,9 +549,11 @@ function getMoreLinkLabelForSection(section) {
     </NuxtErrorBoundary>
     <div class="container">
       <div class="d-flex justify-content-end align-items-center mb-4 mb-4k-5">
-        <span v-if="selectedType" class="context-label ms-0 me-auto">
-          {{ $t("results", total, { count: total }) }}
-        </span>
+        <transition appear name="fade">
+          <span v-if="selectedType" class="context-label ms-0 me-auto">
+            {{ $t("results", total, { count: total }) }}
+          </span>
+        </transition>
         <ContentTypeFilter :content-types="supportedContentTypes" />
         <output form="tags-search-form" class="visually-hidden">
           {{ $t("content.resultsHaveLoaded", [total]) }}
@@ -566,30 +565,28 @@ function getMoreLinkLabelForSection(section) {
     /-->
     </div>
     <template v-for="(section, index) in contentSections">
-      <!-- eslint-disable vue/valid-v-for -->
-      <transition appear name="fade">
-        <!-- eslint-enable vue/valid-v-for -->
-        <div
-          v-if="entryHasContentType(section, 'PrimaryCallToAction')"
-          :key="`cta-banner-${index}`"
-          class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
-        >
-          <GenericCallToActionBanner
-            v-if="ctaBanners.length"
-            :name="section.name"
-            :name-english="section.nameEN"
-            :title="section.name"
-            :text="section.text"
-            :link="section.relatedLink"
-            :illustration="section.image"
-            :background-image="section.image"
-          />
-        </div>
-        <div
-          v-else-if="renderSection(section)"
-          :key="`section-${section.type}`"
-          class="container mb-5 pb-4k-5"
-        >
+      <div
+        v-if="entryHasContentType(section, 'PrimaryCallToAction')"
+        :key="`cta-banner-${index}`"
+        class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
+      >
+        <GenericCallToActionBanner
+          v-if="ctaBanners.length"
+          :name="section.name"
+          :name-english="section.nameEN"
+          :title="section.name"
+          :text="section.text"
+          :link="section.relatedLink"
+          :illustration="section.image"
+          :background-image="section.image"
+        />
+      </div>
+      <div
+        v-else-if="renderSection(section)"
+        :key="`section-${section.type}`"
+        class="container mb-5 pb-4k-5"
+      >
+        <transition-group appear name="fade">
           <h2 v-if="renderTypeTitle(section.type)" class="section-title">
             {{ typeSectionLookup[section.type].title }}
           </h2>
@@ -602,38 +599,34 @@ function getMoreLinkLabelForSection(section) {
             :sub-title="featuredEntrySubTitle"
             :url="featuredEntryUrl"
           />
-          <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <div
-              v-for="entry in section.entries"
-              :key="entry.sys.id"
-              class="col"
-            >
-              <transition appear name="fade">
-                <ContentCard
-                  :title="entry.name"
-                  :sub-title="entry.subTitle"
-                  :url="entry.url"
-                  :text="entry.text"
-                  :image-url="
-                    entry.primaryImageOfPage?.image &&
-                    entry.primaryImageOfPage.image.url
-                  "
-                  :image-content-type="
-                    entry.primaryImageOfPage?.image &&
-                    entry.primaryImageOfPage.image.contentType
-                  "
-                />
-              </transition>
-            </div>
+        </transition-group>
+        <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
+          <div v-for="entry in section.entries" :key="entry.sys.id" class="col">
+            <transition appear name="fade">
+              <ContentCard
+                :title="entry.name"
+                :sub-title="entry.subTitle"
+                :url="entry.url"
+                :text="entry.text"
+                :image-url="
+                  entry.primaryImageOfPage?.image &&
+                  entry.primaryImageOfPage.image.url
+                "
+                :image-content-type="
+                  entry.primaryImageOfPage?.image &&
+                  entry.primaryImageOfPage.image.contentType
+                "
+              />
+            </transition>
           </div>
-          <GenericSmartLink
-            v-if="renderMoreLink(section)"
-            :destination="typeSectionLookup[section.type].url"
-            class="more-link btn btn-secondary icon-chevron"
-            >{{ getMoreLinkLabelForSection(section) }}</GenericSmartLink
-          >
         </div>
-      </transition>
+        <GenericSmartLink
+          v-if="renderMoreLink(section)"
+          :destination="typeSectionLookup[section.type].url"
+          class="more-link btn btn-secondary icon-chevron"
+          >{{ getMoreLinkLabelForSection(section) }}</GenericSmartLink
+        >
+      </div>
     </template>
     <PaginationNavInput
       v-if="selectedType && total > ENTRIES_PER_PAGE"

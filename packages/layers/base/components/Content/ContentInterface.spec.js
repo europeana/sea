@@ -48,18 +48,18 @@ const mockEventMetadata = Array.from({ length: 8 }, (key, index) => ({
   },
 }));
 
-const mockBlogEntries = Array.from({ length: 8 }, (key, index) => ({
+const mockBlogEntries = Array.from({ length: 4 }, (key, index) => ({
   ...mockBlogMetadata[index],
   name: `Blog post entry ${index}`,
 }));
 
-const mockProjectEntries = Array.from({ length: 8 }, (key, index) => ({
+const mockProjectEntries = Array.from({ length: 4 }, (key, index) => ({
   ...mockProjectMetadata[index],
   name: `Project page entry ${index}`,
   headline: `Project headline ${index}`,
 }));
 
-const mockEventEntries = Array.from({ length: 8 }, (key, index) => ({
+const mockEventEntries = Array.from({ length: 4 }, (key, index) => ({
   ...mockEventMetadata[index],
   startDate: `2026-01-${index + 1}`,
   name: `Event entry ${index}`,
@@ -93,21 +93,30 @@ const contentfulResponse = (query, entries, metadata) => {
   if (query.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return Promise.resolve({
       data: {
-        blogPostingCollection: { items: entries.blogs },
+        blogPostingCollection: {
+          total: entries.blogs?.length,
+          items: entries.blogs,
+        },
       },
     });
   }
   if (query.definitions?.[0]?.name?.value === "ProjectPagesListing") {
     return Promise.resolve({
       data: {
-        projectPageCollection: { items: entries.projects },
+        projectPageCollection: {
+          total: entries.projects?.length,
+          items: entries.projects,
+        },
       },
     });
   }
   if (query.definitions?.[0]?.name?.value === "EventsListing") {
     return Promise.resolve({
       data: {
-        eventCollection: { items: entries.events },
+        eventCollection: {
+          total: entries.events?.length,
+          items: entries.events,
+        },
       },
     });
   }
@@ -116,7 +125,7 @@ const contentfulResponse = (query, entries, metadata) => {
       data: { blogPostingCollection: { items: metadata.blogs } },
     });
   }
-  if (query.definitions?.[0]?.name?.value === "ProjectPageListingMinimal") {
+  if (query.definitions?.[0]?.name?.value === "ProjectPagesListingMinimal") {
     return Promise.resolve({
       data: { projectPageCollection: { items: metadata.projects } },
     });
@@ -184,7 +193,7 @@ describe("components/Content/ContentInterface", () => {
     await wrapper.vm.$nextTick();
 
     expect(mockQuery.mock.calls.length).toEqual(6);
-    // expect(wrapper.findAllComponents({ name: "ContentCard" }).length).toBe(24);
+    expect(wrapper.findAll("content-card-stub").length).toBe(12);
   });
   describe("selectedTags", () => {
     it("defaults to an empty array", async () => {
@@ -333,34 +342,27 @@ describe("components/Content/ContentInterface", () => {
       expect(total).toEqual(0);
     });
 
-    // it("is based of the filteredMinimalEntries length", async () => {
-    //   const wrapper = await factory();
+    it("is based of the response total", async () => {
+      const wrapper = await factory();
 
-    //   const total = wrapper.vm.total;
+      const total = wrapper.vm.total;
 
-    //   expect(total).toEqual(24);
-    // });
+      expect(total).toEqual(12);
+    });
+    describe("when there is a featured content entry", () => {
+      it("is based of the sum of the response total and featured content", async () => {
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            __typename: "BlogPosting",
+          },
+        });
 
-    // it("takes into account applied tags", async () => {
-    //   const tag = "network";
-    //   mockQuery.mockImplementation((query) =>
-    //     contentfulResponse(
-    //       query,
-    //       { blogs: mockBlogEntries },
-    //       { blogs: mockBlogMetadataWithCategories },
-    //     ),
-    //   );
-    //   useRouteMock.mockImplementation(() => ({
-    //     query: {
-    //       tags: tag,
-    //     },
-    //   }));
-    //   const wrapper = await factory();
+        const total = wrapper.vm.total;
 
-    //   const total = wrapper.vm.total;
-
-    //   expect(total).toEqual(1);
-    // });
+        expect(total).toEqual(13);
+      });
+    });
   });
 
   describe("page", () => {
@@ -385,126 +387,111 @@ describe("components/Content/ContentInterface", () => {
       expect(page).toBe(3);
     });
   });
-  // it("normalises blog content correctly", async () => {
-  //   const wrapper = await factory();
+  it("normalises blog content correctly", async () => {
+    const wrapper = await factory();
 
-  //   const firstEntry = wrapper.vm.contentSections[0].filter(
-  //     (entry) => entry.__typename === "BlogPosting",
-  //   )[0];
+    const firstEntry = wrapper.vm.contentSections.filter(
+      (section) => section.type === "BlogPosting",
+    )[0].entries[0];
 
-  //   expect(firstEntry.text).toBe("authored.publishedDate");
-  //   expect(firstEntry.primaryImageOfPage).toBe(null);
-  // });
+    expect(firstEntry.text).toBe("authored.publishedDate");
+    expect(firstEntry.primaryImageOfPage).toBe(null);
+  });
 
-  // it("normalises project content correctly", async () => {
-  //   const wrapper = await factory();
+  it("normalises project content correctly", async () => {
+    const wrapper = await factory();
 
-  //   const firstEntry = wrapper.vm.contentSections[0].filter(
-  //     (entry) => entry.__typename === "ProjectPage",
-  //   )[0];
+    const firstEntry = wrapper.vm.contentSections.filter(
+      (section) => section.type === "ProjectPage",
+    )[0].entries[0];
 
-  //   expect(firstEntry.text).toBe("Project headline 7");
-  //   expect(firstEntry.primaryImageOfPage).toBe(null);
-  // });
+    expect(firstEntry.text).toBe("Project headline 0");
+    expect(firstEntry.primaryImageOfPage).toBe(null);
+  });
 
-  // it("normalises event content correctly", async () => {
-  //   const wrapper = await factory();
+  it("normalises event content correctly", async () => {
+    const wrapper = await factory();
 
-  //   const firstEntry = wrapper.vm.contentSections[0].filter(
-  //     (entry) => entry.__typename === "Event",
-  //   )[0];
+    const firstEntry = wrapper.vm.contentSections.filter(
+      (section) => section.type === "eventTypeEvent",
+    )[0].entries[0];
 
-  //   expect(firstEntry.text).toBe("2026-01-8");
-  //   expect(firstEntry.primaryImageOfPage.image).toBe(undefined);
-  // });
+    expect(firstEntry.text).toBe("2026-01-1");
+    expect(firstEntry.primaryImageOfPage.image).toBe(undefined);
+  });
 
-  // it("normalises blog content correctly", async () => {
-  //   const wrapper = await factory();
+  describe("when there is a default card thumbnail", () => {
+    it("is used for when there is no primary image of page", async () => {
+      const defaultCardThumbnail = {
+        image: {
+          url: "https://www.example.eu/img.jpg",
+          contentType: "image/jpeg",
+        },
+      };
+      const wrapper = await factory({ defaultCardThumbnail });
 
-  //   const firstEntry = wrapper.vm.contentSections[0].filter(
-  //     (entry) => entry.__typename === "BlogPosting",
-  //   )[0];
+      const firstEntry = wrapper.vm.contentSections[0].entries[0];
 
-  //   expect(firstEntry.text).toBe("authored.publishedDate");
-  //   expect(firstEntry.primaryImageOfPage).toBe(null);
-  // });
-
-  // it("orders project content by project start date", async () => {
-  //   const wrapper = await factory();
-
-  //   const projectEntries = wrapper.vm.contentSections[0].filter(
-  //     (entry) => entry.__typename === "ProjectPage",
-  //   );
-
-  //   expect(projectEntries[0].project.startDate).toBe("2025-01-8");
-  //   expect(projectEntries[7].project.startDate).toBe("2025-01-1");
-  // });
-
-  // it("orders event content by start date", async () => {
-  //   const wrapper = await factory();
-
-  //   const eventEntries = wrapper.vm.contentSections[0].filter(
-  //     (entry) => entry.__typename === "Event",
-  //   );
-
-  //   expect(eventEntries[0].startDate).toBe("2026-01-8");
-  //   expect(eventEntries[7].startDate).toBe("2026-01-1");
-  // });
-
-  // it("orders content by start or publication date", async () => {
-  //   const wrapper = await factory();
-
-  //   const entries = wrapper.vm.contentSections[0];
-
-  //   expect(entries[0].startDate).toBe("2026-01-8");
-  //   expect(entries[8].project.startDate).toBe("2025-01-8");
-  //   expect(entries[16].date).toBe("2023-01-8");
-  // });
-
-  // describe("when there is a default card thumbnail", () => {
-  //   it("is used for when there is no primary image of page", async () => {
-  //     const defaultCardThumbnail = {
-  //       image: {
-  //         url: "https://www.example.eu/img.jpg",
-  //         contentType: "image/jpeg",
-  //       },
-  //     };
-  //     const wrapper = await factory({ defaultCardThumbnail });
-
-  //     const firstEntry = wrapper.vm.contentSections[0][0];
-
-  //     expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
-  //   });
-  // });
+      expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
+    });
+  });
 
   it("inserts CTA banners in between content entries", async () => {
     const ctaBanners = [
       { __typename: "PrimaryCallToAction", name: "CTA Banner 1" },
       { __typename: "PrimaryCallToAction", name: "CTA Banner 2" },
-      { __typename: "PrimaryCallToAction", name: "CTA Banner 3" },
     ];
 
     const wrapper = await factory({ ctaBanners });
 
-    // Should return an array with 6 elements: [8 entries, 'cta-banner-0', 8 entries, 'cta-banner-1', 8 entries, 'cta-banner-2']
-    expect(wrapper.vm.contentSections.length).toBe(6);
-    // expect(wrapper.vm.contentSections[0].length).toBe(8);
-    // expect(wrapper.vm.contentSections[1]).toBe(ctaBanners[0]);
+    // Should return an array with 5 elements: [[4 entries], [4 entries], 'cta-banner-0', [4 entries], 'cta-banner-1']
+    expect(wrapper.vm.contentSections.length).toBe(5);
+    expect(wrapper.vm.contentSections[0].entries.length).toBe(4);
+    expect(wrapper.vm.contentSections[1].entries.length).toBe(4);
+    expect(wrapper.vm.contentSections[2]).toBe(ctaBanners[0]);
+    expect(wrapper.vm.contentSections[3].entries.length).toBe(4);
+    expect(wrapper.vm.contentSections[4]).toBe(ctaBanners[1]);
   });
 
   describe("featured entry", () => {
-    describe("when there is a featured entry", () => {
-      // describe("and no type filter nor tags are selected and on page 1", () => {
-      //   it("displays a featured content card", async () => {
-      //     const wrapper = await factory({
-      //       featuredEntry: { name: "featured content" },
-      //     });
+    describe("when there is no featured entry", () => {
+      it("does not display a featured content card", async () => {
+        const wrapper = await factory();
 
-      //     expect(
-      //       wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
-      //     ).toBe(true);
-      //   });
-      // });
+        expect(
+          wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+        ).toBe(false);
+      });
+    });
+    describe("when the featured entry is not of a supported content type", () => {
+      it("does not display a featured content card", async () => {
+        const wrapper = await factory({
+          featuredEntry: {
+            name: "featured content",
+            __typename: "LandingPage",
+          },
+        });
+
+        expect(
+          wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+        ).toBe(false);
+      });
+    });
+    describe("when there is a featured entry with a supported content type", () => {
+      describe("and no type filter nor tags are selected and on page 1", () => {
+        it("displays a featured content card", async () => {
+          const wrapper = await factory({
+            featuredEntry: {
+              name: "featured content",
+              __typename: "BlogPosting",
+            },
+          });
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
       describe("and a type filter matching the featured entry type is selected", () => {
         it("displays a featured content card", async () => {
           useRouteMock.mockImplementation(() => ({
@@ -569,26 +556,27 @@ describe("components/Content/ContentInterface", () => {
           ).toBe(false);
         });
       });
-      // describe("and a tag matching one of the featured entry tags is selected", () => {
-      //   it("displays a featured content card", async () => {
-      //     const tag = "network";
-      //     useRouteMock.mockImplementation(() => ({
-      //       query: {
-      //         tags: tag,
-      //       },
-      //     }));
-      //     const wrapper = await factory({
-      //       featuredEntry: {
-      //         categoriesCollection: { items: [{ identifier: tag }] },
-      //         name: "featured content",
-      //       },
-      //     });
+      describe("and a tag matching one of the featured entry tags is selected", () => {
+        it("displays a featured content card", async () => {
+          const tag = "network";
+          useRouteMock.mockImplementation(() => ({
+            query: {
+              tags: tag,
+            },
+          }));
+          const wrapper = await factory({
+            featuredEntry: {
+              __typename: "BlogPosting",
+              categoriesCollection: { items: [{ identifier: tag }] },
+              name: "featured content",
+            },
+          });
 
-      //     expect(
-      //       wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
-      //     ).toBe(true);
-      //   });
-      // });
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
       describe("and a tag not matching any of the featured entry tags is selected", () => {
         it("does not display a featured content card", async () => {
           useRouteMock.mockImplementation(() => ({

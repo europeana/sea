@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "podle",
-    "createdDate": "Vytvořeno {date}",
     "publishedDate": "Publikováno {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Zobrazit vše"
     },
     "resultsHaveLoaded": "{0} nalezených výsledků",
+    "seeAll": "Zobrazit všechny {content}",
+    "seeMore": "Zobrazit více {content}",
     "topics": {
       "featuredTopics": "Doporučená témata",
       "label": "Prozkoumejte další témata",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} až {endDate}",
-    "label": "událost"
+    "event": "Událost | Události"
   },
   "featured": "Doporučené",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "O nás",
+    "about": "O datovém prostoru",
     "close": "Zavřít nabídku",
     "collections": "Prozkoumejte sbírky",
     "dataSpace": "Prozkoumejte datový prostor",
@@ -178,7 +179,7 @@
     "toggle": "Zobrazit nabídku"
   },
   "newWindow": "otevře se v novém okně",
-  "news": "Zprávy",
+  "news": "Novinky | Novinky",
   "pagination": {
     "label": "Stránkování",
     "next": "Další",
@@ -187,7 +188,7 @@
     "previous": "Předchozí"
   },
   "portal": "Portál",
-  "project": "Projekt",
+  "project": "Projekt | Projekty",
   "projects": {
     "contract": "Číslo smlouvy",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "školení",
-    "ongoing": "Probíhající"
+    "ongoing": "Probíhající",
+    "training": "Školení | Školení"
   }
 }

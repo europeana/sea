@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "poolt",
-    "createdDate": "Loodud {date}",
     "publishedDate": "Avaldatud {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Vaata kõiki"
     },
     "resultsHaveLoaded": "{0} tulemusi leitud",
+    "seeAll": "Vaata kõiki {content}",
+    "seeMore": "Vaata lähemalt {content}",
     "topics": {
       "featuredTopics": "Esiletõstetud teemad",
       "label": "Avasta rohkem teemasid",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} kuni {endDate}",
-    "label": "sündmus"
+    "event": "Sündmus | Sündmused"
   },
   "featured": "Esile tõstetud",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "Meist",
+    "about": "Teave andmeruumi kohta",
     "close": "Sule menüü",
     "collections": "Avasta kollektsioone",
     "dataSpace": "Avastage andme ruum",
@@ -178,7 +179,7 @@
     "toggle": "Kuva menüü"
   },
   "newWindow": "avaneb uues aknas",
-  "news": "Uudised",
+  "news": "Uudised | Uudised",
   "pagination": {
     "label": "Paginatsioon",
     "next": "Järgmine",
@@ -187,7 +188,7 @@
     "previous": "Eelmine"
   },
   "portal": "Portaal",
-  "project": "Projekt",
+  "project": "Projekt | Projektid",
   "projects": {
     "contract": "Lepingu number",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "koolitus",
-    "ongoing": "Pooleli"
+    "ongoing": "Pooleli",
+    "training": "Koolitus | Koolitus"
   }
 }

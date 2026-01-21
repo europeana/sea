@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "pagal",
-    "createdDate": "Sukurta {date}",
     "publishedDate": "Paskelbta {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Peržiūrėti visus"
     },
     "resultsHaveLoaded": "{0} rasti rezultatai",
+    "seeAll": "Žiūrėti visus {content}",
+    "seeMore": "Žiūrėti daugiau {content}",
     "topics": {
       "featuredTopics": "Rekomenduojamos temos",
       "label": "Naršyti daugiau temų",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} į {endDate}",
-    "label": "įvykis"
+    "event": "Renginys | Renginiai"
   },
   "featured": "Rekomenduojami",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "Apie mus",
+    "about": "Apie duomenų erdvę",
     "close": "Uždaryti meniu",
     "collections": "Naršykite kolekcijas",
     "dataSpace": "Tyrinėkite duomenų erdvę",
@@ -178,7 +179,7 @@
     "toggle": "Rodyti meniu"
   },
   "newWindow": "atsidaro naujame lange",
-  "news": "Naujienos",
+  "news": "Naujienos | Naujienos",
   "pagination": {
     "label": "Numeracija",
     "next": "Kitas",
@@ -187,7 +188,7 @@
     "previous": "Ankstesnis"
   },
   "portal": "Portalas",
-  "project": "Projektas",
+  "project": "Projektas | Projektai",
   "projects": {
     "contract": "Sutarties numeris",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "mokymas",
-    "ongoing": "Vyksta"
+    "ongoing": "Vyksta",
+    "training": "Mokymai | Mokymai"
   }
 }

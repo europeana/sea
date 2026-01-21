@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "od",
-    "createdDate": "Vytvorené {date}",
     "publishedDate": "Zverejnené {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Zobraziť všetko"
     },
     "resultsHaveLoaded": "{0} nájdených výsledkov",
+    "seeAll": "Zobraziť všetko {content}",
+    "seeMore": "Zobraziť viac {content}",
     "topics": {
       "featuredTopics": "Odporúčané témy",
       "label": "Preskúmajte ďalšie témy",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} na {endDate}",
-    "label": "udalosť"
+    "event": "Udalosť | Udalosti"
   },
   "featured": "Odporúčané",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "O nás",
+    "about": "O dátovom priestore",
     "close": "Zatvoriť ponuku",
     "collections": "Preskúmajte zbierky",
     "dataSpace": "Preskúmajte dátový priestor",
@@ -178,7 +179,7 @@
     "toggle": "Zobraziť ponuku"
   },
   "newWindow": "otvorí sa v novom okne",
-  "news": "Novinky",
+  "news": "Novinky | Novinky",
   "pagination": {
     "label": "Stránkovanie",
     "next": "Ďalšie",
@@ -187,7 +188,7 @@
     "previous": "Predchádzajúce"
   },
   "portal": "Portál",
-  "project": "Projekt",
+  "project": "Projekt | Projekty",
   "projects": {
     "contract": "Číslo zmluvy",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "školenie",
-    "ongoing": "Prebieha"
+    "ongoing": "Prebieha",
+    "training": "Školenie | Školenie"
   }
 }

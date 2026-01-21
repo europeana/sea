@@ -3,7 +3,7 @@ import logoSrc from "@europeana/style/img/DS4CH/logo.svg";
 
 const links = [
   { url: "/", text: "nav.home" },
-  { url: "/about", text: "nav.about" },
+  { url: "/about-the-data-space", text: "nav.about" },
   { url: "/data-space", text: "nav.dataSpace" },
   { url: "/collections", text: "nav.collections" },
 ];

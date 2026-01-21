@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "przez",
-    "createdDate": "Utworzono {date}",
     "publishedDate": "Opublikowano {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Zobacz wszystkie"
     },
     "resultsHaveLoaded": "{0} znalezionych wyników",
+    "seeAll": "Zobacz wszystkie {content}",
+    "seeMore": "Zobacz więcej {content}",
     "topics": {
       "featuredTopics": "Polecane tematy",
       "label": "Poznaj więcej tematów",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} do {endDate}",
-    "label": "wydarzenie"
+    "event": "Wydarzenie | Wydarzenia"
   },
   "featured": "Polecane",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "O nas",
+    "about": "O przestrzeni danych",
     "close": "Zamknij menu",
     "collections": "Przeglądaj kolekcje",
     "dataSpace": "Odkryj przestrzeń danych",
@@ -178,7 +179,7 @@
     "toggle": "Pokaż menu"
   },
   "newWindow": "otwiera się w nowym oknie",
-  "news": "Aktualności",
+  "news": "Aktualności | Aktualności",
   "pagination": {
     "label": "Paginacja",
     "next": "Następny",
@@ -187,7 +188,7 @@
     "previous": "Poprzedni"
   },
   "portal": "Portal",
-  "project": "Projekt",
+  "project": "Projekt | Projekty",
   "projects": {
     "contract": "Numer umowy",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "szkolenie",
-    "ongoing": "Trwa"
+    "ongoing": "Trwa",
+    "training": "Szkolenie | Szkolenie"
   }
 }

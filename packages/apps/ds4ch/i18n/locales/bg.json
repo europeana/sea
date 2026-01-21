@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "от",
-    "createdDate": "Създаден {date}",
     "publishedDate": "Публикувано на {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Преглед на всички"
     },
     "resultsHaveLoaded": "{0} намерени резултати",
+    "seeAll": "Вижте всички {content}",
+    "seeMore": "Вижте повече {content}",
     "topics": {
       "featuredTopics": "Препоръчани теми",
       "label": "Разгледайте още теми",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} до {endDate}",
-    "label": "събитие"
+    "event": "Събитие | Събития"
   },
   "featured": "Препоръчани",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "Относно",
+    "about": "Относно пространството за данни",
     "close": "Затвори менюто",
     "collections": "Разгледайте колекциите",
     "dataSpace": "Разгледайте пространството за данни",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "обучение",
-    "ongoing": "Текущ"
+    "ongoing": "Текущ",
+    "training": "Обучение | Обучение"
   }
 }

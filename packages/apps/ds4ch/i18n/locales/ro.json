@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "de",
-    "createdDate": "Creat {date}",
     "publishedDate": "Publicat {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Vizualizează tot"
     },
     "resultsHaveLoaded": "{0} rezultate găsite",
+    "seeAll": "Vezi toate {content}",
+    "seeMore": "Vezi mai multe {content}",
     "topics": {
       "featuredTopics": "Subiecte recomandate",
       "label": "Explorează mai multe subiecte",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} la {endDate}",
-    "label": "eveniment"
+    "event": "Eveniment | Evenimente"
   },
   "featured": "Recomandate",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "Despre noi",
+    "about": "Despre spațiul de date",
     "close": "Închide meniul",
     "collections": "Explorează colecțiile",
     "dataSpace": "Explorați spațiul de date",
@@ -178,7 +179,7 @@
     "toggle": "Afișează meniul"
   },
   "newWindow": "se deschide într-o fereastră nouă",
-  "news": "Știri",
+  "news": "Știri | Știri",
   "pagination": {
     "label": "Paginare",
     "next": "Următorul",
@@ -187,7 +188,7 @@
     "previous": "Anterior"
   },
   "portal": "Portal",
-  "project": "Proiect",
+  "project": "Proiect | Proiecte",
   "projects": {
     "contract": "Numărul contractului",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "instruire",
-    "ongoing": "În desfășurare"
+    "ongoing": "În desfășurare",
+    "training": "Instruire | Instruire"
   }
 }
