@@ -2,19 +2,22 @@
 import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
-import contentBySysIdGraphql from "@/graphql/queries/contentBySysId.graphql";
+import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
+import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
+import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
+import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
 import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
 import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
 import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
 import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
-// import exhibitionsListingMinimalGraphql from "@/graphql/queries/exhibitionsListingMinimal.graphql";
-// import storiesListingMinimalGraphql from "@/graphql/queries/storiesListingMinimal.graphql";
 
 import {
   entryHasContentType,
   entryHasTaxonomyTerm,
   entryUrl,
 } from "@/utils/contentful/index.js";
+import routeForType from "@/utils/contentRoute.js";
+
 const { d, t } = useI18n({ useScope: "global" });
 
 const props = defineProps({
@@ -53,11 +56,11 @@ const props = defineProps({
   },
 });
 
-const supportedContentTypes = computed(() => {
-  return props.contentTypes.filter((ct) =>
+const supportedContentTypes = computed(() =>
+  props.contentTypes.filter((ct) =>
     ["blog post", "project", "training", "event"].includes(ct),
-  );
-});
+  ),
+);
 
 const { scrollToSelector } = useScrollTo();
 const { localeProperties } = useI18n();
@@ -65,7 +68,7 @@ const route = useRoute();
 const contentful = inject("$contentful");
 
 const ENTRIES_PER_PAGE = 24;
-const ENTRIES_PER_SECTION = 8;
+const ENTRIES_PER_SECTION = 4;
 
 const selectedTags = computed(() => {
   return route.query.tags?.split(",") || [];
@@ -73,15 +76,39 @@ const selectedTags = computed(() => {
 
 const typeLookup = {
   news: { type: "BlogPosting" },
+  "blog post": { type: "BlogPosting" },
   project: { type: "ProjectPage" },
-  story: { type: "Story" },
-  exhibition: { type: "ExhibitionPage" },
   training: { type: "Event", taxonomy: "eventTypeTrainingCourse" },
   event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
 
+const typeSectionLookup = {
+  BlogPosting: {
+    url: routeForType(route, "news"),
+    title: t("news", 2),
+  },
+  ProjectPage: {
+    url: routeForType(route, "project"),
+    title: t("project", 2),
+  },
+  eventTypeTrainingCourse: {
+    url: routeForType(route, "training"),
+    title: t("training.training", 2),
+  },
+  eventTypeEvent: {
+    url: routeForType(route, "event"),
+    title: t("event.event", 2),
+  },
+};
+
 const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
+});
+
+const supportedTaxonomiesAndTypes = computed(() => {
+  return supportedContentTypes.value.map(
+    (type) => typeLookup[type].taxonomy || typeLookup[type].type,
+  );
 });
 
 // FIXME: this needs to include any tags from the featured entry too
@@ -97,19 +124,6 @@ const filteredTags = computed(() => {
     .map((tag) => tag.tag);
 
   return uniq(tagsSortedByMostUsed);
-});
-
-const fetchableSysIds = computed(() => {
-  // Paginate
-  const sliceFrom = (page.value - 1) * ENTRIES_PER_PAGE;
-  const sliceTo = sliceFrom + ENTRIES_PER_PAGE;
-  return filteredMinimalEntries.value
-    ?.slice(sliceFrom, sliceTo)
-    ?.map((contentEntry) => contentEntry.sys.id);
-});
-
-const fetchableSysIdsString = computed(() => {
-  return fetchableSysIds.value?.join("-");
 });
 
 const filteredMinimalEntries = computed(() => {
@@ -140,8 +154,9 @@ const filteredMinimalEntries = computed(() => {
 
 const total = computed(() => {
   return (
-    (filteredMinimalEntries.value?.length || 0) +
-    (showFeaturedEntry.value ? 1 : 0)
+    (fullEntries.value.reduce((memo, collection) => {
+      return memo + collection.total;
+    }, 0) || 0) + (featuredEntryInResults.value ? 1 : 0)
   );
 });
 
@@ -164,39 +179,57 @@ const featuredEntryMatchesSelectedTags = computed(() => {
   );
 });
 
-const showFeaturedEntry = computed(() => {
-  // no featured entry; nothing to show
+const featuredEntryInResults = computed(() => {
+  // no featured entry; not present
   if (!props.featuredEntry) {
     return false;
   }
-  // not on 1st page; don't show
-  if (!isFirstPage.value) {
-    return false;
-  }
-  // tags are selected but featured entry does not have them all; don't show
+  // tags are selected but featured entry does not have them all; not present
   if (!featuredEntryMatchesSelectedTags.value) {
     return false;
   }
-  // no content type is selected; show
-  if (!selectedType.value) {
-    return true;
+  // selected type or taxonomy matches featured entry type or taxonomy; present
+  if (selectedType.value) {
+    if (selectedType.value.taxonomy) {
+      return entryHasTaxonomyTerm(
+        props.featuredEntry,
+        selectedType.value.taxonomy,
+      );
+    } else {
+      return entryHasContentType(props.featuredEntry, selectedType.value.type);
+    }
   }
-  // content type is selected, but featured entry is of a different type; don't show
-  if (!entryHasContentType(props.featuredEntry, selectedType.value.type)) {
-    return false;
-  }
-  // content type is selected, and has no taxonomy; show
-  if (!selectedType.value.taxonomy) {
-    return true;
-  }
-  // show if featured entry has the selected type taxonomy term, else not
-  // FIXME: this needs to check for the eventType taxonomy only
-  return entryHasTaxonomyTerm(props.featuredEntry, selectedType.value.taxonomy);
+  const featuredEntryIsOfSupportedType =
+    !!supportedTaxonomiesAndTypes.value.filter(
+      (type) =>
+        entryHasTaxonomyTerm(props.featuredEntry, type) ||
+        entryHasContentType(props.featuredEntry, type),
+    ).length;
+  return featuredEntryIsOfSupportedType;
 });
+
+function displayFeaturedEntry(sectionType) {
+  // featured entry in results and on first page
+  if (featuredEntryInResults.value && isFirstPage.value) {
+    // and type is selected; show
+    if (selectedType.value) {
+      return true;
+    }
+    // and section type matches featured entry type; show
+    if (
+      sectionType &&
+      (entryHasTaxonomyTerm(props.featuredEntry, sectionType) ||
+        entryHasContentType(props.featuredEntry, sectionType))
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
 
 const featuredEntryText = computed(() => {
   if (props.featuredEntry.datePublished) {
-    return t("authored.createdDate", {
+    return t("authored.publishedDate", {
       date: d(props.featuredEntry.datePublished, "short"),
     });
   } else if (props.featuredEntry.headline) {
@@ -240,43 +273,66 @@ const featuredEntrySubTitle = computed(() => {
     return undefined;
   }
   return entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
-    ? t("training.label")
-    : t("event.label");
+    ? t("training.training")
+    : t("event.event");
 });
 
 async function fetchFullEntries() {
-  if (fetchableSysIds.value.length === 0) {
-    return [];
-  }
-  // Fetch full data for display of page of content entries
+  const selectedTaxonomyOrType =
+    selectedType.value?.taxonomy || selectedType.value?.type;
+
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: ENTRIES_PER_PAGE,
-    ids: fetchableSysIds.value,
-    site: props.site,
+    limit: selectedTaxonomyOrType ? ENTRIES_PER_PAGE : ENTRIES_PER_SECTION,
+    skip: (page.value - 1) * ENTRIES_PER_PAGE,
+    categoriesFilter: null,
+    excludeSysId: props.featuredEntry?.sys?.id || "",
+    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };
 
-  const contentResponse = await contentful.query(
-    contentBySysIdGraphql,
-    contentVariables,
-  );
+  if (selectedTags.value.length) {
+    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
+      categories: { identifier: cat },
+    }));
+  }
 
-  return Object.values(contentResponse.data)
-    .map((collection) => collection.items || [])
-    .flat();
+  const contentTypeGraphql = {
+    BlogPosting: blogPostingsListingGraphql,
+    ProjectPage: projectPagesListingGraphql,
+    eventTypeEvent: eventsListingGraphql,
+    eventTypeTrainingCourse: trainingsListingGraphql,
+  };
+
+  return await Promise.all(
+    []
+      .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
+      .map(async (taxonomyOrType) => {
+        const res = await contentful.query(
+          contentTypeGraphql[taxonomyOrType],
+          contentVariables,
+        );
+
+        // Save type to response
+        const responseData = Object.values(res.data)[0];
+        return {
+          ...responseData,
+          type: taxonomyOrType,
+        };
+      }),
+  );
 }
 
-const normalisedEntries = computed(() => {
-  return fetchableSysIds.value
-    .map((sysId) =>
-      normaliseCard(
-        fullEntries.value.find(
-          (contentEntry) => contentEntry?.sys?.id === sysId,
-        ),
-      ),
-    )
-    .filter(Boolean);
+function normalisedEntryCards(entries = []) {
+  return entries.map((entry) => normaliseCard(entry)).filter(Boolean);
+}
+
+const normalisedSections = computed(() => {
+  return fullEntries.value.map((collection) => ({
+    entries: normalisedEntryCards(collection.items),
+    type: collection.type,
+    total: collection.total,
+  }));
 });
 
 const isFilteredByTag = computed(() => selectedTags.value.length > 0);
@@ -291,32 +347,34 @@ const displayCtaBanners = computed(
     !isFilteredByType.value,
 );
 
-// This creates an array of card arrays and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
+// This creates an array of card arrays per type and 'cta-banner' placeholders to create a layout of containers with cards and full width CTA banners.
 const contentSections = computed(() => {
-  if (!displayCtaBanners.value) {
-    return [normalisedEntries.value];
+  if (isFilteredByType.value) {
+    return normalisedSections.value;
   }
 
   const sections = [];
-  let entryStartIndex = 0;
+  let typeSectionStartIndex = 0;
 
-  for (const ctaBanner of props.ctaBanners) {
-    sections.push(
-      normalisedEntries.value.slice(
-        entryStartIndex,
-        entryStartIndex + ENTRIES_PER_SECTION,
-      ),
-      ctaBanner,
-    );
-    entryStartIndex = entryStartIndex + ENTRIES_PER_SECTION;
+  if (displayCtaBanners.value) {
+    for (const ctaBanner of props.ctaBanners) {
+      sections.push(
+        normalisedSections.value[typeSectionStartIndex],
+        normalisedSections.value[typeSectionStartIndex + 1],
+        ctaBanner,
+      );
+      typeSectionStartIndex = typeSectionStartIndex + 2;
+    }
   }
 
-  // add any remaining e.g. if few CTAs
-  if (normalisedEntries.value.slice(entryStartIndex).length > 0) {
-    sections.push(normalisedEntries.value.slice(entryStartIndex));
+  // add any remaining e.g. if no or few CTAs
+  if (normalisedSections.value.slice(typeSectionStartIndex).length > 0) {
+    normalisedSections.value.slice(typeSectionStartIndex).forEach((section) => {
+      sections.push(section);
+    });
   }
 
-  return sections;
+  return sections.filter(Boolean);
 });
 
 function trainingDateHelper(startDate, endDate) {
@@ -352,7 +410,7 @@ function normaliseCard(entry) {
       return {
         ...entry,
         url: entryUrl(entry),
-        text: t("authored.createdDate", {
+        text: t("authored.publishedDate", {
           date: d(entry.datePublished, "short"),
         }),
         primaryImageOfPage:
@@ -371,7 +429,7 @@ function normaliseCard(entry) {
         return {
           ...entry,
           url: entry.url,
-          subTitle: t("training.label"),
+          subTitle: t("training.training"),
           text: trainingDateHelper(entry.startDate, entry.endDate),
           primaryImageOfPage: {
             image: entry.image || props.defaultCardThumbnail?.image,
@@ -381,7 +439,7 @@ function normaliseCard(entry) {
       return {
         ...entry,
         url: entry.url,
-        subTitle: t("event.label"),
+        subTitle: t("event.event"),
         text: eventDateHelper(entry.startDate, entry.endDate),
         primaryImageOfPage: {
           image: entry.image || props.defaultCardThumbnail?.image,
@@ -391,16 +449,7 @@ function normaliseCard(entry) {
   }
 }
 
-function sortByDate(entry) {
-  if (entry.__typename === "ProjectPage") {
-    return entry.project.startDate;
-  } else {
-    return entry.date;
-  }
-}
-
-// Fetch minimal data for all entries to support ordering by datePublished
-// and filtering by categories.
+// Fetch minimal data for all entries to support filtering by categories.
 async function fetchMinimalEntries() {
   const contentIdsVariables = {
     excludeSysId: props.featuredEntry?.sys?.id || "",
@@ -430,10 +479,6 @@ async function fetchMinimalEntries() {
     .map((response) => response.data[Object.keys(response.data)[0]].items || [])
     .flat();
 
-  // TODO: Re-implement retrieval for:
-  // storiesResponse.data.storyCollection?.items,
-  // exhibitionsResponse.data.exhibitionPageCollection?.items,
-
   // Simplify categories
   for (const contentEntry of contentIds) {
     if (contentEntry.cats?.items) {
@@ -443,13 +488,7 @@ async function fetchMinimalEntries() {
     }
   }
 
-  // Order by date (startDate or published date)
-  const ordered = contentIds.sort((a, b) => {
-    const sortDateA = sortByDate(a);
-    const sortDateB = sortByDate(b);
-    return new Date(sortDateB).getTime() - new Date(sortDateA).getTime();
-  });
-  return ordered;
+  return contentIds;
 }
 
 const { data: minimalEntries, error: minimalEntriesError } = await useAsyncData(
@@ -465,11 +504,11 @@ if (minimalEntriesError.value) {
 }
 
 const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
-  fetchableSysIdsString,
+  "fullEntries",
   fetchFullEntries,
   {
     default: () => [],
-    watch: [fetchableSysIdsString],
+    watch: [selectedTags, selectedType, page],
   },
 );
 if (fullEntriesError.value) {
@@ -482,10 +521,36 @@ if (fullEntriesError.value) {
 watch(page, () => {
   scrollToSelector("#header");
 });
+
+function renderSection(section) {
+  return section?.total > 0 || displayFeaturedEntry(section.type);
+}
+
+function renderMoreLink(section) {
+  return (
+    !selectedType.value && typeSectionLookup[section.type] && section?.total > 4
+  );
+}
+
+function renderTypeTitle(type) {
+  return !selectedType.value && typeSectionLookup[type];
+}
+
+function getMoreLinkLabelForSection(section) {
+  if (selectedTags.value.length) {
+    return t("content.seeMore", {
+      content: typeSectionLookup[section.type].title,
+    });
+  } else {
+    return t("content.seeAll", {
+      content: typeSectionLookup[section.type].title,
+    });
+  }
+}
 </script>
 
 <template>
-  <div id="content-interface">
+  <div id="content-interface" :class="{ 'mb-5 pb-4k-5': selectedType }">
     <NuxtErrorBoundary>
       <ContentTagsFilter
         :filtered-tags="filteredTags"
@@ -498,12 +563,12 @@ watch(page, () => {
       </template>
     </NuxtErrorBoundary>
     <div class="container">
-      <div
-        class="d-flex justify-content-between align-items-center mb-4 mb-4k-5"
-      >
-        <span class="context-label">
-          {{ $t("results", total, { count: total }) }}
-        </span>
+      <div class="d-flex justify-content-end align-items-center mb-4 mb-4k-5">
+        <transition appear name="fade">
+          <span v-if="selectedType" class="context-label ms-0 me-auto">
+            {{ $t("results", total, { count: total }) }}
+          </span>
+        </transition>
         <ContentTypeFilter :content-types="supportedContentTypes" />
         <output form="tags-search-form" class="visually-hidden">
           {{ $t("content.resultsHaveLoaded", [total]) }}
@@ -514,38 +579,45 @@ watch(page, () => {
       class="container position-absolute flex-md-row py-4 text-center"
     /-->
     </div>
-    <div v-if="showFeaturedEntry" class="container mb-4 mb-lg-5 pb-4k-5">
-      <ContentFeaturedCard
-        :title="props.featuredEntry?.name"
-        :text="featuredEntryText"
-        :image="featuredEntryImage"
-        :sub-title="featuredEntrySubTitle"
-        :url="featuredEntryUrl"
-      />
-    </div>
     <template v-for="(section, index) in contentSections">
-      <!-- eslint-disable vue/valid-v-for -->
-      <transition appear name="fade">
-        <!-- eslint-enable vue/valid-v-for -->
-        <div
-          v-if="entryHasContentType(section, 'PrimaryCallToAction')"
-          :key="`cta-banner-${index}`"
-          class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
-        >
-          <GenericCallToActionBanner
-            v-if="ctaBanners.length"
-            :name="section.name"
-            :name-english="section.nameEN"
-            :title="section.name"
-            :text="section.text"
-            :link="section.relatedLink"
-            :illustration="section.image"
-            :background-image="section.image"
+      <div
+        v-if="entryHasContentType(section, 'PrimaryCallToAction')"
+        :key="`cta-banner-${index}`"
+        class="cta-banner-wrapper my-4 my-lg-5 py-4k-5"
+      >
+        <GenericCallToActionBanner
+          v-if="ctaBanners.length"
+          :name="section.name"
+          :name-english="section.nameEN"
+          :title="section.name"
+          :text="section.text"
+          :link="section.relatedLink"
+          :illustration="section.image"
+          :background-image="section.image"
+        />
+      </div>
+      <div
+        v-else-if="renderSection(section)"
+        :key="`section-${section.type}`"
+        class="container mb-5 pb-4k-5"
+      >
+        <transition-group appear name="fade">
+          <h2 v-if="renderTypeTitle(section.type)" class="section-title">
+            {{ typeSectionLookup[section.type].title }}
+          </h2>
+          <ContentFeaturedCard
+            v-if="displayFeaturedEntry(section.type)"
+            class="mb-4 mb-lg-5"
+            :title="props.featuredEntry?.name"
+            :text="featuredEntryText"
+            :image="featuredEntryImage"
+            :sub-title="featuredEntrySubTitle"
+            :url="featuredEntryUrl"
           />
-        </div>
-        <div v-else :key="`entry-${index}`" class="container">
-          <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <div v-for="entry in section" :key="entry.sysId" class="col">
+        </transition-group>
+        <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
+          <div v-for="entry in section.entries" :key="entry.sys.id" class="col">
+            <transition appear name="fade">
               <ContentCard
                 :title="entry.name"
                 :sub-title="entry.subTitle"
@@ -560,13 +632,19 @@ watch(page, () => {
                   entry.primaryImageOfPage.image.contentType
                 "
               />
-            </div>
+            </transition>
           </div>
         </div>
-      </transition>
+        <GenericSmartLink
+          v-if="renderMoreLink(section)"
+          :destination="typeSectionLookup[section.type].url"
+          class="more-link btn btn-secondary icon-chevron"
+          >{{ getMoreLinkLabelForSection(section) }}</GenericSmartLink
+        >
+      </div>
     </template>
     <PaginationNavInput
-      v-if="total > ENTRIES_PER_PAGE"
+      v-if="selectedType && total > ENTRIES_PER_PAGE"
       :per-page="ENTRIES_PER_PAGE"
       :total-items="total"
       class="mt-4 mt-lg-5 pt-4k-5"
@@ -577,4 +655,38 @@ watch(page, () => {
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "@europeana/style/scss/transitions";
+
+h2.section-title {
+  color: $darkgrey;
+  margin-bottom: 2rem;
+
+  @media (min-width: $bp-4k) {
+    margin-bottom: calc(var(--bp-4k-increment) * 2rem);
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    border: 1px solid $lightgrey;
+    margin-top: 1.5rem;
+
+    @media (min-width: $bp-4k) {
+      border-width: 2px;
+      margin-bottom: calc(var(--bp-4k-increment) * 1.5rem);
+    }
+  }
+}
+
+.cta-banner-wrapper:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.more-link {
+  margin-top: 2rem;
+
+  @media (min-width: $bp-4k) {
+    margin-top: calc(var(--bp-4k-increment) * 2rem);
+  }
+}
 </style>

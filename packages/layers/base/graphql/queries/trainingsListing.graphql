@@ -1,0 +1,56 @@
+#import "../fragments/imageFields.graphql"
+
+query TrainingsListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $skip: Int = 0
+  $excludeSysId: String = ""
+  $categoriesFilter: [EventFilter]
+  $query: String = ""
+) {
+  eventCollection(
+    preview: $preview
+    locale: $locale
+    order: [startDate_DESC, datePublished_DESC]
+    limit: $limit
+    skip: $skip
+    where: {
+      AND: [
+        { sys: { id_not: $excludeSysId } }
+        { name_contains: $query }
+        {
+          contentfulMetadata: {
+            concepts_exists: true
+            concepts: { id_contains_some: ["eventTypeTrainingCourse"] }
+          }
+        }
+        { AND: $categoriesFilter }
+      ]
+    }
+  ) {
+    total
+    ...eventCollectionFields
+  }
+}
+
+fragment eventCollectionFields on EventCollection {
+  items {
+    __typename
+    contentfulMetadata {
+      concepts {
+        id
+      }
+    }
+    sys {
+      id
+    }
+    url
+    name
+    image {
+      ...imageFields
+    }
+    startDate
+    endDate
+  }
+}

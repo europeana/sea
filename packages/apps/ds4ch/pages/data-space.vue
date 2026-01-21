@@ -45,10 +45,14 @@ provide("featuredContentTags", [
 const defaultCardThumbnail = {
   image: { url: useRuntimeConfig().public.defaultThumbnail },
 };
+
+const sortedContentTypes = ["blog post", "event", "training", "project"].filter(
+  (ct) => page.value.contentTypes.includes(ct),
+);
 </script>
 
 <template>
-  <div class="mb-5">
+  <div>
     <LandingHero
       :headline="page.name"
       :text="page.headline"
@@ -56,9 +60,9 @@ const defaultCardThumbnail = {
       variant="alternate"
     />
     <ContentInterface
-      class="mt-5 mb-5"
+      class="mt-5"
       site="dataspace-culturalheritage.eu"
-      :content-types="page.contentTypes"
+      :content-types="sortedContentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
       :cta-banners="page.hasPartCollection?.items"
       :featured-entry="page.featuredContent"
