@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "ved",
-    "createdDate": "Oprettet {date}",
     "publishedDate": "Offentliggjort {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Se alle"
     },
     "resultsHaveLoaded": "{0} resultater fundet",
+    "seeAll": "Se alle {content}",
+    "seeMore": "Se mere {content}",
     "topics": {
       "featuredTopics": "Fremhævede emner",
       "label": "Udforsk flere emner",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} til {endDate}",
-    "label": "begivenhed"
+    "event": "Begivenhed | Begivenheder"
   },
   "featured": "Udvalgt",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Vis menu"
   },
   "newWindow": "åbner i nyt vindue",
-  "news": "Nyheder",
+  "news": "Nyheder | Nyheder",
   "pagination": {
     "label": "Paginering",
     "next": "Næste",
@@ -187,7 +188,7 @@
     "previous": "Forrige"
   },
   "portal": "Portal",
-  "project": "Projekt",
+  "project": "Projekt | Projekter",
   "projects": {
     "contract": "Kontraktnummer",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "træning",
-    "ongoing": "I gang"
+    "ongoing": "I gang",
+    "training": "Træning | Træning"
   }
 }

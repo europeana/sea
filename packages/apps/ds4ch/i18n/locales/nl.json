@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "door",
-    "createdDate": "Gemaakt {date}",
     "publishedDate": "Gepubliceerd {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Bekijk alles"
     },
     "resultsHaveLoaded": "{0} resultaten gevonden",
+    "seeAll": "Alles bekijken {content}",
+    "seeMore": "Meer bekijken {content}",
     "topics": {
       "featuredTopics": "Aanbevolen onderwerpen",
       "label": "Ontdek meer onderwerpen",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} tot {endDate}",
-    "label": "evenement"
+    "event": "Evenement | Evenementen"
   },
   "featured": "Aanbevolen",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Menu weergeven"
   },
   "newWindow": "opent in nieuw venster",
-  "news": "Nieuws",
+  "news": "Nieuws | Nieuws",
   "pagination": {
     "label": "Paginering",
     "next": "Volgende",
@@ -187,7 +188,7 @@
     "previous": "Vorige"
   },
   "portal": "Portaal",
-  "project": "Project",
+  "project": "Project | Projecten",
   "projects": {
     "contract": "Contractnummer",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "opleiding",
-    "ongoing": "Lopend"
+    "ongoing": "Lopend",
+    "training": "Training | Training"
   }
 }

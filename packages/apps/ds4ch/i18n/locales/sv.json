@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "av",
-    "createdDate": "Skapad {date}",
     "publishedDate": "Publicerad {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Visa alla"
     },
     "resultsHaveLoaded": "{0} resultat hittades",
+    "seeAll": "Se alla {content}",
+    "seeMore": "Se mer {content}",
     "topics": {
       "featuredTopics": "Utvalda ämnen",
       "label": "Utforska fler ämnen",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} till {endDate}",
-    "label": "händelse"
+    "event": "Evenemang | Evenemang"
   },
   "featured": "Utvalt",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Visa meny"
   },
   "newWindow": "öppnas i nytt fönster",
-  "news": "Nyheter",
+  "news": "Nyheter | Nyheter",
   "pagination": {
     "label": "Paginering",
     "next": "Nästa",
@@ -187,7 +188,7 @@
     "previous": "Föregående"
   },
   "portal": "Portal",
-  "project": "Projekt",
+  "project": "Projekt | Projekt",
   "projects": {
     "contract": "Kontraktets nummer",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "utbildning",
-    "ongoing": "Pågående"
+    "ongoing": "Pågående",
+    "training": "Utbildning | Utbildning"
   }
 }

@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "le",
-    "createdDate": "Cruthaithe {date}",
     "publishedDate": "Foilsithe {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Féach ar fad"
     },
     "resultsHaveLoaded": "{0} torthaí aimsithe",
+    "seeAll": "Féach ar gach {content}",
+    "seeMore": "Féach tuilleadh {content}",
     "topics": {
       "featuredTopics": "Topaicí faoi thrácht",
       "label": "Iniúchadh a dhéanamh ar níos mó topaicí",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} go {endDate}",
-    "label": "imeacht"
+    "event": "Imeacht | Imeachtaí"
   },
   "featured": "Ard-Roghnaithe",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Taispeáin roghchlár"
   },
   "newWindow": "osclaíonn i bhfuinneog nua",
-  "news": "Nuacht",
+  "news": "Nuacht | Nuacht",
   "pagination": {
     "label": "Leathanaigh",
     "next": "Ar Aghaidh",
@@ -187,7 +188,7 @@
     "previous": "Roimhe Seo"
   },
   "portal": "Tairseach",
-  "project": "Tionscadal",
+  "project": "Tionscadal | Tionscadail",
   "projects": {
     "contract": "Uimhir an chonartha",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "oiliúint",
-    "ongoing": "Ar siúl"
+    "ongoing": "Ar siúl",
+    "training": "Oiliúint | Oiliúint"
   }
 }
