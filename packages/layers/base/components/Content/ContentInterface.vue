@@ -3,13 +3,13 @@ import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
 import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
+import blogPostingCategoriesGraphql from "@/graphql/queries/blogPostingCategories.graphql";
 import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
+import eventCategoriesGraphql from "@/graphql/queries/eventCategories.graphql";
 import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
+import projectPageCategoriesGraphql from "@/graphql/queries/projectPageCategories.graphql";
 import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
-import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
-import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
-import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
-import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
+import trainingCategoriesGraphql from "@/graphql/queries/trainingCategories.graphql";
 
 import {
   entryHasContentType,
@@ -111,45 +111,18 @@ const supportedTaxonomiesAndTypes = computed(() => {
   );
 });
 
-// FIXME: this needs to include any tags from the featured entry too
 const filteredTags = computed(() => {
-  const relevantTags = filteredMinimalEntries.value
-    .map((contentEntry) => contentEntry.cats)
-    .flat();
-  const tagsSortedByMostUsed = relevantTags
+  const tagsSortedByMostUsed = categories.value
     .map((tag, i, array) => {
-      return { tag, total: array.filter((t) => t === tag).length };
+      return {
+        tag: tag.identifier,
+        total: array.filter((t) => t.identifier === tag.identifier).length,
+      };
     })
     .sort((a, b) => b.total - a.total)
     .map((tag) => tag.tag);
 
   return uniq(tagsSortedByMostUsed);
-});
-
-const filteredMinimalEntries = computed(() => {
-  let filteredMinimalEntries = minimalEntries.value;
-
-  // Filter by selected type
-  if (selectedType.value) {
-    filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
-      if (!entryHasContentType(contentEntry, selectedType.value.type)) {
-        return false;
-      }
-      if (!selectedType.value.taxonomy) {
-        return true;
-      }
-      return entryHasTaxonomyTerm(contentEntry, selectedType.value.taxonomy);
-    });
-  }
-
-  // Filter by selected categories
-  if (selectedTags.value.length > 0) {
-    filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
-      return selectedTags.value.every((tag) => contentEntry.cats.includes(tag));
-    });
-  }
-
-  return filteredMinimalEntries;
 });
 
 const total = computed(() => {
@@ -452,57 +425,69 @@ function normaliseCard(entry) {
   }
 }
 
-// Fetch minimal data for all entries to support filtering by categories.
-async function fetchMinimalEntries() {
-  const contentIdsVariables = {
-    excludeSysId: props.featuredEntry?.sys?.id || "",
+// Fetch categories.
+async function fetchCategories() {
+  const selectedTaxonomyOrType =
+    selectedType.value?.taxonomy || selectedType.value?.type;
+
+  const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    site: props.site,
+    categoriesFilter: null,
+    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };
   // Splits the request into seperate graphql queries as otherwise
   // the maximum allowed complexity for a query of 11000 is exeeded.
-  // TODO: when selectedType is already set, only retrieve those entries
-  // needs to be accounted for in: { data: minimalEntries } = useAsyncData(...)
 
-  const contentTypeGraphql = {
-    "blog post": blogPostingsListingMinimalGraphql,
-    project: projectPagesListingMinimalGraphql,
-    event: eventsListingMinimalGraphql,
-    training: trainingsListingMinimalGraphql,
-  };
-
-  const contentIds = (
-    await Promise.all(
-      supportedContentTypes.value.map((ctype) =>
-        contentful.query(contentTypeGraphql[ctype], contentIdsVariables),
-      ),
-    )
-  )
-    .map((response) => response.data[Object.keys(response.data)[0]].items || [])
-    .flat();
-
-  // Simplify categories
-  for (const contentEntry of contentIds) {
-    if (contentEntry.cats?.items) {
-      contentEntry.cats = contentEntry.cats.items
-        .filter((cat) => !!cat)
-        .map((cat) => cat.id);
-    }
+  if (selectedTags.value.length) {
+    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
+      categories: { identifier: cat },
+    }));
   }
 
-  return contentIds;
+  const contentTypeGraphql = {
+    BlogPosting: blogPostingCategoriesGraphql,
+    ProjectPage: projectPageCategoriesGraphql,
+    eventTypeEvent: eventCategoriesGraphql,
+    eventTypeTrainingCourse: trainingCategoriesGraphql,
+  };
+
+  const entries = await Promise.all(
+    []
+      .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
+      .map(async (taxonomyOrType) => {
+        // Remove this if statement, it shouldn't be needed
+        if (!contentTypeGraphql[taxonomyOrType]) {
+          return [];
+        }
+
+        const res = await contentful.query(
+          contentTypeGraphql[taxonomyOrType],
+          contentVariables,
+        );
+
+        return (
+          res.data[Object.keys(res.data)[0]].items.map(
+            (item) => item.categoriesCollection?.items,
+          ) || []
+        ).flat();
+      }),
+  ).then((responses) => responses.flat());
+  return entries;
 }
 
-const { data: minimalEntries, error: minimalEntriesError } = await useAsyncData(
-  "minimalEntries",
-  fetchMinimalEntries,
-  { default: () => [] },
+const { data: categories, error: categoriesError } = await useAsyncData(
+  "categories",
+  fetchCategories,
+  {
+    default: () => [],
+    watch: [selectedTags, selectedType, page],
+  },
 );
-if (minimalEntriesError.value) {
+if (categoriesError.value) {
   throw createHttpError(
-    minimalEntriesError.value.statusCode,
-    minimalEntriesError.value,
+    categoriesError.value.statusCode,
+    categoriesError.value,
   );
 }
 
