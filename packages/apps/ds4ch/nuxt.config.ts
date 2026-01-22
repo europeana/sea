@@ -42,12 +42,6 @@ export default defineNuxtConfig({
         graphqlUrl: null,
         spaceId: null,
       },
-      elastic: {
-        apm: {
-          serviceName: packageName.replace(/^.*\//, ""),
-          serviceVersion: packageVersion,
-        },
-      },
       defaultThumbnail: "",
       internalLinkDomain: "",
     },
