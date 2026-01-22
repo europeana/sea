@@ -1,8 +1,14 @@
 <script setup>
+import FeedbackWidget from "@europeana/feedback-widget";
+import "@europeana/feedback-widget/css";
+
 import contentfulLogoSrc from "@europeana/style/img/supporting-technical-partners/Contentful-logo.svg";
 import lokaliseLogoSrc from "@europeana/style/img/supporting-technical-partners/Lokalise-logo.svg";
 import galileoLogoSrc from "@europeana/style/img/supporting-technical-partners/Galileo-logo.webp";
 import disclaimerLogoSrc from "@europeana/style/img/eu-funded/en-Funded by the EU_NEG.svg";
+
+const feedbackWidgetConfig = useRuntimeConfig().public.feedbackWidget;
+const { locale } = useI18n();
 
 // TODO: ensure links go to correct locations
 const sections = {
@@ -136,6 +142,12 @@ const sections = {
         </div>
       </div>
     </div>
+    <FeedbackWidget
+      :api-url="feedbackWidgetConfig.apiUrl"
+      :fallback-locale="feedbackWidgetConfig.fallbackLocale || 'en'"
+      :faq-url="feedbackWidgetConfig.faqUrl"
+      :locale="feedbackWidgetConfig.locale || locale"
+    />
   </footer>
 </template>
 <style lang="scss" scoped>
