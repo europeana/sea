@@ -26,3 +26,5 @@ console.log("elastic-apm-nuxt server.js merged config", config);
 if (config.serverUrl) {
   apm.start(config);
 }
+
+export default {};

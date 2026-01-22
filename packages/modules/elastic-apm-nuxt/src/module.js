@@ -1,4 +1,9 @@
-import { addTemplate, createResolver, defineNuxtModule } from "@nuxt/kit";
+import {
+  addPlugin,
+  addTemplate,
+  createResolver,
+  defineNuxtModule,
+} from "@nuxt/kit";
 
 import defaults from "./elastic-apm.config.json";
 
@@ -27,6 +32,11 @@ export default defineNuxtModule({
     const buildDirResolver = createResolver(nuxt.options.buildDir);
     const moduleDirResolver = createResolver(import.meta.url);
 
+    addPlugin({
+      src: moduleDirResolver.resolve("./plugins/01-elastic-apm.server.ts"),
+      mode: "server",
+    });
+
     addTemplate({
       filename: `${CONFIG_FILENAME}.json`,
       getContents: () => JSON.stringify(moduleOptions, null, 2),
@@ -38,7 +48,39 @@ export default defineNuxtModule({
       write: true,
     });
 
+    // nuxt.hooks.hook("nitro:config", nitroConfig => {
+    //   console.log("nitro:config nitroConfig.rollupConfig", nitroConfig.rollupConfig)
+    //   nitroConfig.rollupConfig.output = { format: 'cjs' }
+    // })
+
+    nuxt.hooks.hook("nitro:build:before", (nitro) => {
+      console.log(
+        "nitro:build:before nitro.options.entry",
+        JSON.stringify(nitro.options.entry, null, 2),
+      );
+      // console.log("nitro:build:before nitro.options.rollupConfig", JSON.stringify(nitro.options.rollupConfig, null, 2));
+
+      // console.log("nitro:build:before nitro.options", JSON.stringify(nitro.options, null, 2));
+
+      // nitro.options.rollupConfig.output.format = 'cjs'
+      // nitro.options.rollupConfig.output.entryFileNames = '[name].cjs';
+      //   nitro.options.rollupConfig.input = {
+      //     // nitro default entrypoint at .output/server.js
+      //     index: nitro.options.entry,
+      //     // custom entrypoint at .output/custom.js
+      //     custom: moduleDirResolver.resolve(`./${SERVER_FILENAME}.js`)
+      //   };
+    });
+
     nuxt.hooks.hook("nitro:init", (nitro) => {
+      console.log(
+        "nitro:init nitro.options.entry",
+        JSON.stringify(nitro.options.entry, null, 2),
+      );
+      console.log(
+        "nitro:init nitro.options.rollupConfig",
+        JSON.stringify(nitro.options.rollupConfig, null, 2),
+      );
       nitro.hooks.hook("rollup:before", (nitro, rollupConfig) => {
         const filePrefix = "\0virtual:elastic-apm-server:";
 
@@ -63,9 +105,6 @@ export default defineNuxtModule({
 
           resolveId(source) {
             if (source.startsWith(filePrefix)) {
-              // TODO: prevent this making it into the main server.js chunks
-              //       and trying to load elastic-apm/lru-cache when the file
-              //       is not explicitly imported
               const filename = source.replace(filePrefix, "");
               const configPath = buildDirResolver.resolve(`./${filename}`);
 

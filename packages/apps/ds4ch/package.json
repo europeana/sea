@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "build": "nuxt build",
+    "build": "NODE_OPTIONS='--loader elastic-apm-node/loader.mjs' nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -26,6 +26,7 @@
     "@storybook/addon-links": "9.1.17",
     "@vitejs/plugin-vue": "^5.2.4",
     "bootstrap": "^5.3.6",
+    "elastic-apm-node": "^4.15.0",
     "happy-dom": "^20.3.1",
     "lodash-es": "^4.17.21",
     "nuxt": "^3.19.0",

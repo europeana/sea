@@ -1,22 +1,22 @@
 import apm from "elastic-apm-node";
 
-// TODO: make part of the module
-
 export default defineNuxtPlugin(async (nuxtApp) => {
-  // if (!apm.isStarted()) {
-  //   console.log('starting apm on server')
-  //   // TODO: try moving this to nitro plugin?
-  //   await apm.start(useRuntimeConfig().public.elastic?.apm)
-
-  //   await import('http');
-  //   await import('http2');
-  //   await import('https');
-  // }
-
   console.log(
     "[elastic-apm.server Nuxt plugin]",
+    apm.isStarted(),
     `${nuxtApp.ssrContext.event.method} ${useRoute().path}`,
   );
+
+  if (!apm.isStarted()) {
+    return;
+    //   console.log('starting apm on server')
+    //   // TODO: try moving this to nitro plugin?
+    //   await apm.start(useRuntimeConfig().public.elastic?.apm)
+
+    //   await import('http');
+    //   await import('http2');
+    //   await import('https');
+  }
 
   // start a transaction because elastic-apm-node doesn't appear to do so
   // automatically on receiving http requests
