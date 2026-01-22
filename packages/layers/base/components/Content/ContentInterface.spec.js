@@ -21,75 +21,64 @@ mockNuxtImport("useI18n", () => {
 
 const categories = ["network", "postcards"];
 
-const mockBlogMetadata = Array.from({ length: 8 }, (key, index) => ({
+// const mockBlogMetadata = Array.from({ length: 8 }, (key, index) => ({
+//   cats: {
+//     items: [],
+//   },
+// }));
+
+// const mockProjectMetadata = Array.from({ length: 8 }, (key, index) => ({
+
+// cats: {
+//   items: [],
+// },
+// }));
+
+// const mockEventMetadata = Array.from({ length: 8 }, (key, index) => ({
+//   cats: {
+//     items: [],
+//   },
+// }));
+
+const mockBlogEntries = Array.from({ length: 4 }, (key, index) => ({
   __typename: "BlogPosting",
   sys: { id: `blog-id${index}` },
   date: `2023-01-${index + 1}`,
-  cats: {
-    items: [],
-  },
-}));
-
-const mockProjectMetadata = Array.from({ length: 8 }, (key, index) => ({
-  __typename: "ProjectPage",
-  sys: { id: `project-id${index}` },
-  cats: {
-    items: [],
-  },
-  project: { startDate: `2025-01-${index + 1}` },
-}));
-
-const mockEventMetadata = Array.from({ length: 8 }, (key, index) => ({
-  __typename: "Event",
-  sys: { id: `event-id${index}` },
-  date: `2026-01-${index + 1}`,
-  cats: {
-    items: [],
-  },
-}));
-
-const mockBlogEntries = Array.from({ length: 4 }, (key, index) => ({
-  ...mockBlogMetadata[index],
   name: `Blog post entry ${index}`,
 }));
 
 const mockProjectEntries = Array.from({ length: 4 }, (key, index) => ({
-  ...mockProjectMetadata[index],
+  __typename: "ProjectPage",
+  sys: { id: `project-id${index}` },
+  project: { startDate: `2025-01-${index + 1}` },
   name: `Project page entry ${index}`,
   headline: `Project headline ${index}`,
 }));
 
 const mockEventEntries = Array.from({ length: 4 }, (key, index) => ({
-  ...mockEventMetadata[index],
+  __typename: "Event",
+  sys: { id: `event-id${index}` },
+  date: `2026-01-${index + 1}`,
   startDate: `2026-01-${index + 1}`,
   name: `Event entry ${index}`,
 }));
 
-const mockBlogMetadataWithCategories = [
+const mockBlogCategories = [
   {
-    __typename: "BlogPosting",
-    sys: { id: "blog-id1" },
-    date: "2023-01-01",
-    cats: { items: [{ id: "network" }] },
+    categoriesCollection: { items: [{ identifier: "network" }] },
   },
   {
-    __typename: "BlogPosting",
-    sys: { id: "blog-id2" },
-    date: "2023-01-02",
-    cats: { items: [{ id: "postcards" }] },
+    categoriesCollection: { items: [{ identifier: "postcards" }] },
   },
   {
-    __typename: "BlogPosting",
-    sys: { id: "blog-id3" },
-    date: "2023-01-03",
-    cats: { items: [{ id: "unknown" }] },
+    categoriesCollection: { items: [{ identifier: "unknown" }] },
   },
 ];
 
 const mockQuery = vi.fn();
 
 // Use this function to create custom mock responses for different test cases
-const contentfulResponse = (query, entries, metadata) => {
+const contentfulResponse = (query, entries, categories) => {
   if (query.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return Promise.resolve({
       data: {
@@ -120,19 +109,19 @@ const contentfulResponse = (query, entries, metadata) => {
       },
     });
   }
-  if (query.definitions?.[0]?.name?.value === "BlogPostingsListingMinimal") {
+  if (query.definitions?.[0]?.name?.value === "BlogPostingCategories") {
     return Promise.resolve({
-      data: { blogPostingCollection: { items: metadata.blogs } },
+      data: { blogPostingCollection: { items: categories.blogs } },
     });
   }
-  if (query.definitions?.[0]?.name?.value === "ProjectPagesListingMinimal") {
+  if (query.definitions?.[0]?.name?.value === "ProjectPageCategories") {
     return Promise.resolve({
-      data: { projectPageCollection: { items: metadata.projects } },
+      data: { projectPageCollection: { items: categories.projects } },
     });
   }
-  if (query.definitions?.[0]?.name?.value === "EventsListingMinimal") {
+  if (query.definitions?.[0]?.name?.value === "EventCategories") {
     return Promise.resolve({
-      data: { eventCollection: { items: metadata.events } },
+      data: { eventCollection: { items: categories.events } },
     });
   }
 };
@@ -175,9 +164,9 @@ describe("components/Content/ContentInterface", () => {
           events: mockEventEntries,
         },
         {
-          blogs: mockBlogMetadata,
-          projects: mockProjectMetadata,
-          events: mockEventMetadata,
+          blogs: mockBlogCategories,
+          projects: [],
+          events: [],
         },
       ),
     );
@@ -265,7 +254,7 @@ describe("components/Content/ContentInterface", () => {
           contentfulResponse(
             query,
             { blogs: mockBlogEntries },
-            { blogs: mockBlogMetadataWithCategories },
+            { blogs: [mockBlogCategories[0]] },
           ),
         );
         useRouteMock.mockImplementation(() => ({
@@ -282,54 +271,6 @@ describe("components/Content/ContentInterface", () => {
     });
   });
 
-  describe("filteredMinimalEntries", () => {
-    describe("when no tags are selected", () => {
-      it("defaults to all content", async () => {
-        const wrapper = await factory();
-
-        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
-        const allContentMetaData = wrapper.vm.minimalEntries;
-
-        expect(filteredMinimalEntries).toEqual(allContentMetaData);
-      });
-    });
-
-    describe("when a tag is selected", () => {
-      it("only selects content which has the selected tags", async () => {
-        useRouteMock.mockImplementation(() => ({
-          query: {
-            tags: categories[0],
-          },
-        }));
-        const wrapper = await factory();
-
-        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
-
-        const expectedContentData = wrapper.vm.minimalEntries.filter((entry) =>
-          entry.cats.includes(categories[0]),
-        );
-        expect(filteredMinimalEntries).toEqual(expectedContentData);
-      });
-    });
-
-    describe("when a type is selected", () => {
-      it("only selects content which has the selected type", async () => {
-        useRouteMock.mockImplementation(() => ({
-          query: {
-            type: "news",
-          },
-        }));
-        const wrapper = await factory();
-
-        const filteredMinimalEntries = wrapper.vm.filteredMinimalEntries;
-
-        const expectedContentData = wrapper.vm.minimalEntries.filter(
-          (entry) => entry.__typename === "BlogPosting",
-        );
-        expect(filteredMinimalEntries).toEqual(expectedContentData);
-      });
-    });
-  });
   describe("total", () => {
     it("defaults to 0", async () => {
       mockQuery.mockImplementation((query) =>

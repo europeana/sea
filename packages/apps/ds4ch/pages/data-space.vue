@@ -49,6 +49,7 @@ const defaultCardThumbnail = {
 const sortedContentTypes = ["blog post", "event", "training", "project"].filter(
   (ct) => page.value.contentTypes.includes(ct),
 );
+console.log("page sortedContentTypes", sortedContentTypes);
 </script>
 
 <template>

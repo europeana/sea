@@ -453,18 +453,12 @@ async function fetchCategories() {
     []
       .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
       .map(async (taxonomyOrType) => {
-        // Remove this if statement, it shouldn't be needed
-        if (!contentTypeGraphql[taxonomyOrType]) {
-          return [];
-        }
-
         const res = await contentful.query(
           contentTypeGraphql[taxonomyOrType],
           contentVariables,
         );
-
         return (
-          res.data[Object.keys(res.data)[0]].items.map(
+          res.data[Object.keys(res.data)[0]].items?.map(
             (item) => item.categoriesCollection?.items,
           ) || []
         ).flat();
