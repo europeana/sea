@@ -4,6 +4,7 @@ import { provide } from "vue";
 import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsyncPageData";
 import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
+import errorImages from "@/utils/errorMessageImages.json";
 
 const slug = "data-space";
 const contentful = inject("$contentful");
@@ -66,7 +67,15 @@ const sortedContentTypes = ["blog post", "event", "training", "project"].filter(
       :default-card-thumbnail="defaultCardThumbnail"
       :cta-banners="page.hasPartCollection?.items"
       :featured-entry="page.featuredContent"
-    />
+    >
+      <template #error-message>
+        <ErrorMessage
+          :error="{ message: 'No results' }"
+          :error-image="errorImages.noResults"
+          title-tag="h2"
+        />
+      </template>
+    </ContentInterface>
   </div>
 </template>
 
