@@ -1,19 +1,20 @@
 <script setup>
+import { uniq } from "lodash-es";
 import useClickOutside from "~/composables/clickOutside";
+import blogPostingCategoriesGraphql from "@/graphql/queries/blogPostingCategories.graphql";
+import eventCategoriesGraphql from "@/graphql/queries/eventCategories.graphql";
+import projectPageCategoriesGraphql from "@/graphql/queries/projectPageCategories.graphql";
+import trainingCategoriesGraphql from "@/graphql/queries/trainingCategories.graphql";
 
 const route = useRoute();
+const { localeProperties } = useI18n();
+const contentful = inject("$contentful");
+
 const props = defineProps({
   /**
    * All tags data
    */
   tags: {
-    type: Array,
-    default: null,
-  },
-  /**
-   * Filtered tags, by relevance and sorted on most used
-   */
-  filteredTags: {
     type: Array,
     default: null,
   },
@@ -24,6 +25,28 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  /**
+   * The active taxonomy or type filter
+   */
+  selectedTaxonomyOrType: {
+    type: String,
+    default: null,
+  },
+  /**
+   * array of the supported taxonomies and types
+   */
+  supportedTaxonomiesAndTypes: {
+    type: Array[String],
+    required: true,
+  },
+  /**
+   * The site value by which to restrict the query
+   * @values dataspace-culturalheritage.eu, www.europeana.eu
+   */
+  site: {
+    type: String,
+    required: true,
+  },
 });
 
 const featuredTags = inject("featuredContentTags", null);
@@ -32,16 +55,97 @@ const searchTag = ref("");
 const tagsInput = useTemplateRef("tagsearchinput");
 const tagsDropdown = useTemplateRef("tagsdropdown");
 
+// Fetch categories.
+async function fetchCategories() {
+  const contentVariables = {
+    locale: localeProperties.value.language,
+    preview: route.query.mode === "preview",
+    categoriesFilter: null,
+    site: props.selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
+  };
+  // Splits the request into seperate graphql queries as otherwise
+  // the maximum allowed complexity for a query of 11000 is exeeded.
+
+  if (props.selectedTags.length) {
+    contentVariables.categoriesFilter = props.selectedTags.map((cat) => ({
+      categories: { identifier: cat },
+    }));
+  }
+
+  const contentTypeGraphql = {
+    BlogPosting: blogPostingCategoriesGraphql,
+    ProjectPage: projectPageCategoriesGraphql,
+    eventTypeEvent: eventCategoriesGraphql,
+    eventTypeTrainingCourse: trainingCategoriesGraphql,
+  };
+
+  const entries = await Promise.all(
+    []
+      .concat(props.selectedTaxonomyOrType || props.supportedTaxonomiesAndTypes)
+      .map(async (taxonomyOrType) => {
+        const res = await contentful.query(
+          contentTypeGraphql[taxonomyOrType],
+          contentVariables,
+        );
+        return (
+          res.data[Object.keys(res.data)[0]].items?.map(
+            (item) => item.categoriesCollection?.items,
+          ) || []
+        ).flat();
+      }),
+  ).then((responses) => responses.flat());
+
+  return entries;
+}
+
+const {
+  data: categories,
+  error: categoriesError,
+  refresh,
+  status,
+} = await useLazyAsyncData("categories", fetchCategories, {
+  immediate: false,
+  default: () => [],
+});
+
+// Fetch categories when dropdown opens, not when closed
+watch(showDropdown, (newVal) => {
+  if (newVal) {
+    refresh();
+  }
+});
+if (categoriesError.value) {
+  throw createHttpError(
+    categoriesError.value.statusCode,
+    categoriesError.value,
+  );
+}
+
+const filteredTags = computed(() => {
+  const tagsSortedByMostUsed = categories.value
+    .map((tag, i, array) => {
+      return {
+        tag: tag.identifier,
+        total: array.filter((t) => t.identifier === tag.identifier).length,
+      };
+    })
+    .sort((a, b) => b.total - a.total)
+    .map((tag) => tag.tag);
+
+  return uniq(tagsSortedByMostUsed);
+});
+
 const allDisplayTags = computed(() => {
   let displayTags;
   const keyword = trimmedKeyword.value;
 
-  if (props.filteredTags) {
+  if (filteredTags.value) {
     // use filteredTags as those are sorted by most used
-    displayTags = props.filteredTags
+    displayTags = filteredTags.value
       .filter((tag) => !props.selectedTags.includes(tag))
       .map((tag) => props.tags.filter((t) => t.identifier === tag)[0]);
   } else {
+    // TODO: Is this still needed?
     displayTags = props.tags;
   }
 
@@ -153,7 +257,7 @@ onUnmounted(() => {
         />
       </form>
       <div
-        v-if="showDropdown"
+        v-if="showDropdown && status === 'success'"
         id="tags-options"
         class="tag-search-dropdown"
         data-qa="tags search dropdown"

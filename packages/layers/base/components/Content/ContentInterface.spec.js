@@ -21,25 +21,6 @@ mockNuxtImport("useI18n", () => {
 
 const categories = ["network", "postcards"];
 
-// const mockBlogMetadata = Array.from({ length: 8 }, (key, index) => ({
-//   cats: {
-//     items: [],
-//   },
-// }));
-
-// const mockProjectMetadata = Array.from({ length: 8 }, (key, index) => ({
-
-// cats: {
-//   items: [],
-// },
-// }));
-
-// const mockEventMetadata = Array.from({ length: 8 }, (key, index) => ({
-//   cats: {
-//     items: [],
-//   },
-// }));
-
 const mockBlogEntries = Array.from({ length: 4 }, (key, index) => ({
   __typename: "BlogPosting",
   sys: { id: `blog-id${index}` },
@@ -63,22 +44,10 @@ const mockEventEntries = Array.from({ length: 4 }, (key, index) => ({
   name: `Event entry ${index}`,
 }));
 
-const mockBlogCategories = [
-  {
-    categoriesCollection: { items: [{ identifier: "network" }] },
-  },
-  {
-    categoriesCollection: { items: [{ identifier: "postcards" }] },
-  },
-  {
-    categoriesCollection: { items: [{ identifier: "unknown" }] },
-  },
-];
-
 const mockQuery = vi.fn();
 
 // Use this function to create custom mock responses for different test cases
-const contentfulResponse = (query, entries, categories) => {
+const contentfulResponse = (query, entries) => {
   if (query.definitions?.[0]?.name?.value === "BlogPostingsListing") {
     return Promise.resolve({
       data: {
@@ -107,21 +76,6 @@ const contentfulResponse = (query, entries, categories) => {
           items: entries.events,
         },
       },
-    });
-  }
-  if (query.definitions?.[0]?.name?.value === "BlogPostingCategories") {
-    return Promise.resolve({
-      data: { blogPostingCollection: { items: categories.blogs } },
-    });
-  }
-  if (query.definitions?.[0]?.name?.value === "ProjectPageCategories") {
-    return Promise.resolve({
-      data: { projectPageCollection: { items: categories.projects } },
-    });
-  }
-  if (query.definitions?.[0]?.name?.value === "EventCategories") {
-    return Promise.resolve({
-      data: { eventCollection: { items: categories.events } },
     });
   }
 };
@@ -156,19 +110,11 @@ const factory = (props = {}) =>
 describe("components/Content/ContentInterface", () => {
   beforeEach(() => {
     mockQuery.mockImplementation((query) =>
-      contentfulResponse(
-        query,
-        {
-          blogs: mockBlogEntries,
-          projects: mockProjectEntries,
-          events: mockEventEntries,
-        },
-        {
-          blogs: mockBlogCategories,
-          projects: [],
-          events: [],
-        },
-      ),
+      contentfulResponse(query, {
+        blogs: mockBlogEntries,
+        projects: mockProjectEntries,
+        events: mockEventEntries,
+      }),
     );
   });
   afterEach(() => {
@@ -181,7 +127,7 @@ describe("components/Content/ContentInterface", () => {
 
     await wrapper.vm.$nextTick();
 
-    expect(mockQuery.mock.calls.length).toEqual(6);
+    expect(mockQuery.mock.calls.length).toEqual(3);
     expect(wrapper.findAll("content-card-stub").length).toBe(12);
   });
   describe("selectedTags", () => {
@@ -246,35 +192,10 @@ describe("components/Content/ContentInterface", () => {
     });
   });
 
-  describe("filteredTags", () => {
-    describe("when content is filtered to a tag", () => {
-      it("selects and sorts categories that are shared with the active filter", async () => {
-        const tag = "network";
-        mockQuery.mockImplementation((query) =>
-          contentfulResponse(
-            query,
-            { blogs: mockBlogEntries },
-            { blogs: [mockBlogCategories[0]] },
-          ),
-        );
-        useRouteMock.mockImplementation(() => ({
-          query: {
-            tags: tag,
-          },
-        }));
-        const wrapper = await factory();
-
-        const filteredTags = wrapper.vm.filteredTags;
-
-        expect(filteredTags).toEqual([tag]);
-      });
-    });
-  });
-
   describe("total", () => {
     it("defaults to 0", async () => {
       mockQuery.mockImplementation((query) =>
-        contentfulResponse(query, { blogs: [] }, { blogs: [] }),
+        contentfulResponse(query, { blogs: [] }),
       );
       const wrapper = await factory();
 

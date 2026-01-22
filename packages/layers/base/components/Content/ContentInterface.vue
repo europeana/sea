@@ -1,15 +1,10 @@
 <script setup>
-import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
 import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
-import blogPostingCategoriesGraphql from "@/graphql/queries/blogPostingCategories.graphql";
 import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
-import eventCategoriesGraphql from "@/graphql/queries/eventCategories.graphql";
 import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
-import projectPageCategoriesGraphql from "@/graphql/queries/projectPageCategories.graphql";
 import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
-import trainingCategoriesGraphql from "@/graphql/queries/trainingCategories.graphql";
 
 import {
   entryHasContentType,
@@ -105,24 +100,14 @@ const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
 });
 
+const selectedTaxonomyOrType = computed(
+  () => selectedType.value?.taxonomy || selectedType.value?.type,
+);
+
 const supportedTaxonomiesAndTypes = computed(() => {
   return supportedContentTypes.value.map(
     (type) => typeLookup[type].taxonomy || typeLookup[type].type,
   );
-});
-
-const filteredTags = computed(() => {
-  const tagsSortedByMostUsed = categories.value
-    .map((tag, i, array) => {
-      return {
-        tag: tag.identifier,
-        total: array.filter((t) => t.identifier === tag.identifier).length,
-      };
-    })
-    .sort((a, b) => b.total - a.total)
-    .map((tag) => tag.tag);
-
-  return uniq(tagsSortedByMostUsed);
 });
 
 const total = computed(() => {
@@ -251,17 +236,16 @@ const featuredEntrySubTitle = computed(() => {
 });
 
 async function fetchFullEntries() {
-  const selectedTaxonomyOrType =
-    selectedType.value?.taxonomy || selectedType.value?.type;
-
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: selectedTaxonomyOrType ? ENTRIES_PER_PAGE : ENTRIES_PER_SECTION,
+    limit: selectedTaxonomyOrType.value
+      ? ENTRIES_PER_PAGE
+      : ENTRIES_PER_SECTION,
     skip: (page.value - 1) * ENTRIES_PER_PAGE,
     categoriesFilter: null,
     excludeSysId: props.featuredEntry?.sys?.id || "",
-    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
+    site: selectedTaxonomyOrType.value === "BlogPosting" ? props.site : null,
   };
 
   if (selectedTags.value.length) {
@@ -279,7 +263,7 @@ async function fetchFullEntries() {
 
   return await Promise.all(
     []
-      .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
+      .concat(selectedTaxonomyOrType.value || supportedTaxonomiesAndTypes.value)
       .map(async (taxonomyOrType) => {
         const res = await contentful.query(
           contentTypeGraphql[taxonomyOrType],
@@ -422,66 +406,6 @@ function normaliseCard(entry) {
   }
 }
 
-// Fetch categories.
-async function fetchCategories() {
-  const selectedTaxonomyOrType =
-    selectedType.value?.taxonomy || selectedType.value?.type;
-
-  const contentVariables = {
-    locale: localeProperties.value.language,
-    preview: route.query.mode === "preview",
-    categoriesFilter: null,
-    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
-  };
-  // Splits the request into seperate graphql queries as otherwise
-  // the maximum allowed complexity for a query of 11000 is exeeded.
-
-  if (selectedTags.value.length) {
-    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
-      categories: { identifier: cat },
-    }));
-  }
-
-  const contentTypeGraphql = {
-    BlogPosting: blogPostingCategoriesGraphql,
-    ProjectPage: projectPageCategoriesGraphql,
-    eventTypeEvent: eventCategoriesGraphql,
-    eventTypeTrainingCourse: trainingCategoriesGraphql,
-  };
-
-  const entries = await Promise.all(
-    []
-      .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
-      .map(async (taxonomyOrType) => {
-        const res = await contentful.query(
-          contentTypeGraphql[taxonomyOrType],
-          contentVariables,
-        );
-        return (
-          res.data[Object.keys(res.data)[0]].items?.map(
-            (item) => item.categoriesCollection?.items,
-          ) || []
-        ).flat();
-      }),
-  ).then((responses) => responses.flat());
-  return entries;
-}
-
-const { data: categories, error: categoriesError } = await useAsyncData(
-  "categories",
-  fetchCategories,
-  {
-    default: () => [],
-    watch: [selectedTags, selectedType, page],
-  },
-);
-if (categoriesError.value) {
-  throw createHttpError(
-    categoriesError.value.statusCode,
-    categoriesError.value,
-  );
-}
-
 const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
   "fullEntries",
   fetchFullEntries,
@@ -532,8 +456,10 @@ function getMoreLinkLabelForSection(section) {
   <div id="content-interface" :class="{ 'mb-5 pb-4k-5': selectedType }">
     <NuxtErrorBoundary>
       <ContentTagsFilter
-        :filtered-tags="filteredTags"
         :selected-tags="selectedTags"
+        :selected-taxonomy-or-type="selectedTaxonomyOrType"
+        :supported-taxonomies-and-types="supportedTaxonomiesAndTypes"
+        :site="site"
       />
       <template #error="{ error }">
         <div class="container">
