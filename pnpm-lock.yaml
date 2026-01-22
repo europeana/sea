@@ -174,8 +174,8 @@ importers:
         specifier: ^2.1.10
         version: 2.1.10
       '@europeana/feedback-widget':
-        specifier: 0.5.0
-        version: 0.5.0(@popperjs/core@2.11.8)(typescript@5.9.3)
+        specifier: 0.5.1
+        version: 0.5.1(@popperjs/core@2.11.8)(typescript@5.9.3)
       '@europeana/style':
         specifier: ^2.13.0
         version: 2.17.1
@@ -203,24 +203,6 @@ importers:
       vue-matomo:
         specifier: ^4.2.0
         version: 4.2.0
-
-  packages/layers/feedback-widget:
-    devDependencies:
-      '@europeana/feedback-widget':
-        specifier: file:~/Development/github/europeana/feedback-widget
-        version: file:../feedback-widget(@popperjs/core@2.11.8)(typescript@5.9.3)
-      '@nuxt/test-utils':
-        specifier: ^3.22.0
-        version: 3.23.0(@vue/test-utils@2.4.6)(happy-dom@20.3.4)(magicast@0.5.1)(typescript@5.9.3)(vitest@3.2.4(@types/node@24.10.1)(happy-dom@20.3.4)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(yaml@2.8.2))
-      nuxt:
-        specifier: ^3.19.0
-        version: 3.20.2(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.10.1)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4)(eslint@9.34.0(jiti@2.6.1))(ioredis@5.9.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.55.2)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(typescript@5.9.3)(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(yaml@2.8.2))(yaml@2.8.2)
-      vite:
-        specifier: ^6.4.1
-        version: 6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(yaml@2.8.2)
-      vue:
-        specifier: ^3.5.25
-        version: 3.5.26(typescript@5.9.3)
 
   packages/plugins/vue-contentful-graphql:
     dependencies:
@@ -1260,12 +1242,8 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@europeana/feedback-widget@0.5.0':
-    resolution: {integrity: sha512-3TUwx9TWqb01ytI0CkXJbvUBXHOLeaPiJ1b32VQ6YndlG2Vg7r0AvCuEOnzUA6ErwuMspfwk5MnCVvS14xoCQQ==}
-    engines: {node: ^18, npm: ^9}
-
-  '@europeana/feedback-widget@file:../feedback-widget':
-    resolution: {directory: ../feedback-widget, type: directory}
+  '@europeana/feedback-widget@0.5.1':
+    resolution: {integrity: sha512-kgwIfK/kjHl3RerzuiJNhnH7TJZATDIw00ANJBPSe+h3y0KydQ8MOOdvi0KIburkhIGLAp1T+slSOnY0oZvB7w==}
     engines: {node: ^18, npm: ^9}
 
   '@europeana/style@2.17.1':
@@ -8245,16 +8223,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@europeana/feedback-widget@0.5.0(@popperjs/core@2.11.8)(typescript@5.9.3)':
-    dependencies:
-      '@europeana/style': 2.17.1
-      bootstrap: 5.3.8(@popperjs/core@2.11.8)
-      vue: 3.5.26(typescript@5.9.3)
-    transitivePeerDependencies:
-      - '@popperjs/core'
-      - typescript
-
-  '@europeana/feedback-widget@file:../feedback-widget(@popperjs/core@2.11.8)(typescript@5.9.3)':
+  '@europeana/feedback-widget@0.5.1(@popperjs/core@2.11.8)(typescript@5.9.3)':
     dependencies:
       '@europeana/style': 2.17.1
       bootstrap: 5.3.8(@popperjs/core@2.11.8)
