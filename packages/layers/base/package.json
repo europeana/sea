@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@elastic/apm-rum-vue": "^2.1.10",
+    "@europeana/feedback-widget": "0.5.1",
     "@europeana/style": "^2.13.0",
     "@nuxt/test-utils": "^3.22.0",
     "@nuxtjs/i18n": "^9.5.6",
