@@ -1,0 +1,47 @@
+#import "../fragments/imageFields.graphql"
+
+query ProjectPagesListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $skip: Int = 0
+  $excludeSysId: String = ""
+  $categoriesFilter: [ProjectPageFilter]
+  $query: String = ""
+) {
+  projectPageCollection(
+    preview: $preview
+    locale: $locale
+    # TODO: order by project startDate, but impossible as it's nested in the project
+    order: datePublished_DESC
+    limit: $limit
+    skip: $skip
+    where: {
+      AND: [
+        { sys: { id_not: $excludeSysId } }
+        { name_contains: $query }
+        { AND: $categoriesFilter }
+      ]
+    }
+  ) {
+    total
+    ...projectPageCollectionFields
+  }
+}
+
+fragment projectPageCollectionFields on ProjectPageCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+    headline
+  }
+}

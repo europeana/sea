@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "by",
-    "createdDate": "Created {date}",
     "publishedDate": "Published {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "View all"
     },
     "resultsHaveLoaded": "{0} results found",
+    "seeAll": "See all {content}",
+    "seeMore": "See more {content}",
     "topics": {
       "featuredTopics": "Featured topics",
       "label": "Explore more topics",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} to {endDate}",
-    "label": "event"
+    "event": "Event | Events"
   },
   "featured": "Featured",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "About",
+    "about": "About the data space",
     "close": "Close menu",
     "collections": "Explore the collections",
     "dataSpace": "Explore the data space",
@@ -178,7 +179,7 @@
     "toggle": "Show menu"
   },
   "newWindow": "opens in new window",
-  "news": "News",
+  "news": "News | News",
   "pagination": {
     "label": "Pagination",
     "next": "Next",
@@ -187,7 +188,7 @@
     "previous": "Previous"
   },
   "portal": "Portal",
-  "project": "Project",
+  "project": "Project | Projects",
   "projects": {
     "contract": "Contract number",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "training",
-    "ongoing": "Ongoing"
+    "ongoing": "Ongoing",
+    "training": "Training | Training"
   }
 }

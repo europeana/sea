@@ -42,7 +42,7 @@ mockNuxtImport("useI18n", () => {
 const title = "Explore the data space";
 const description = "DS4CH text";
 
-const blogPostingListingMinimalContentfulResponse = {
+const blogPostingsListingMinimalContentfulResponse = {
   data: {
     blogPostingCollection: {
       items: [
@@ -61,9 +61,18 @@ const blogPostingListingMinimalContentfulResponse = {
   },
 };
 
-const contentBySysIdContentfulResponse = {
+const projectPagesListingMinimalContentfulResponse = {
+  data: {
+    projectPageCollection: {
+      items: [],
+    },
+  },
+};
+
+const blogPostingsListingContentfulResponse = {
   data: {
     blogPostingCollection: {
+      total: 2,
       items: [
         {
           __typename: "BlogPosting",
@@ -92,6 +101,15 @@ const contentBySysIdContentfulResponse = {
   },
 };
 
+const projectPagesListingContentfulResponse = {
+  data: {
+    projectPageCollection: {
+      total: 0,
+      items: [],
+    },
+  },
+};
+
 const contentHubPageContentfulResponse = {
   data: {
     contentHubPageCollection: {
@@ -100,7 +118,7 @@ const contentHubPageContentfulResponse = {
           name: title,
           headline: description,
           primaryImageOfPage: { image: "stubbed Image" },
-          contentTypes: ["blog post"],
+          contentTypes: ["project", "blog post"],
         },
       ],
     },
@@ -125,11 +143,17 @@ const categoriesContentfulResponse = {
 };
 
 const handleContentfulQuery = (graphQL) => {
-  if (graphQL.definitions?.[0]?.name?.value === "ContentBySysId") {
-    return contentBySysIdContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListing") {
+    return blogPostingsListingContentfulResponse;
   }
-  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingListingMinimal") {
-    return blogPostingListingMinimalContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListing") {
+    return projectPagesListingContentfulResponse;
+  }
+  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListingMinimal") {
+    return blogPostingsListingMinimalContentfulResponse;
+  }
+  if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListingMinimal") {
+    return projectPagesListingMinimalContentfulResponse;
   }
   if (graphQL.definitions?.[0]?.name?.value === "ContentHubPage") {
     return contentHubPageContentfulResponse;
@@ -146,6 +170,9 @@ const factory = async () =>
         $contentful: {
           query: (graphQL) => handleContentfulQuery(graphQL),
         },
+      },
+      stubs: {
+        ContentTypeFilter: true,
       },
     },
   });
@@ -174,10 +201,10 @@ describe("dataSpacePage", () => {
     const contentCardLinks = wrapper.findAll(".card-link");
 
     expect(contentCardLinks[0].attributes("href")).toBe(
-      "/en/news/blog-no-image",
+      "/en/news/blog-identifier",
     );
     expect(contentCardLinks[1].attributes("href")).toBe(
-      "/en/news/blog-identifier",
+      "/en/news/blog-no-image",
     );
   });
 
@@ -187,10 +214,23 @@ describe("dataSpacePage", () => {
     const contentCardImages = wrapper.findAll(".card-img img");
 
     expect(contentCardImages[0].attributes("src")).toBe(
-      "https://www.example.org/image.jpg",
-    );
-    expect(contentCardImages[1].attributes("src")).toBe(
       "https://images.ctfassets.net/i01duvb6kq77/7Jnq4yka0vfYdWKo7IV7Dc/5778788f0359b1a6a81ef1f57a260982/feature_1920Olympics.jpg?q=80&fm=webp",
     );
+    expect(contentCardImages[1].attributes("src")).toBe(
+      wrapper.vm.defaultCardThumbnail.image.url,
+    );
+  });
+
+  it("passes in a sorted list of content types to the content interface", async () => {
+    const wrapper = await factory();
+
+    const contentInterface = wrapper.findComponent({
+      name: "ContentInterface",
+    });
+
+    expect(contentInterface.props("contentTypes")).toEqual([
+      "blog post",
+      "project",
+    ]);
   });
 });

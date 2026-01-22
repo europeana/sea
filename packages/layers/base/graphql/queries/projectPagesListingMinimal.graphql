@@ -1,4 +1,4 @@
-query ProjectPageListingMinimal(
+query ProjectPagesListingMinimal(
   $locale: String!
   $preview: Boolean = false
   $query: String = ""

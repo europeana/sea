@@ -1,0 +1,48 @@
+#import "../fragments/imageFields.graphql"
+
+query BlogPostingsListing(
+  $locale: String!
+  $preview: Boolean = false
+  $limit: Int!
+  $skip: Int = 0
+  $excludeSysId: String = ""
+  $categoriesFilter: [BlogPostingFilter]
+  $site: String = ""
+  $query: String = ""
+) {
+  blogPostingCollection(
+    preview: $preview
+    locale: $locale
+    order: datePublished_DESC
+    limit: $limit
+    skip: $skip
+    where: {
+      AND: [
+        { sys: { id_not: $excludeSysId } }
+        { name_contains: $query }
+        { site: $site }
+        { AND: $categoriesFilter }
+      ]
+    }
+  ) {
+    total
+    ...blogPostingCollectionFields
+  }
+}
+
+fragment blogPostingCollectionFields on BlogPostingCollection {
+  items {
+    __typename
+    sys {
+      id
+    }
+    identifier
+    name
+    primaryImageOfPage {
+      image {
+        ...imageFields
+      }
+    }
+    datePublished
+  }
+}

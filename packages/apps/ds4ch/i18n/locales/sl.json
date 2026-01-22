@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "po",
-    "createdDate": "Ustvarjeno {date}",
     "publishedDate": "Objavljeno {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Poglej vse"
     },
     "resultsHaveLoaded": "{0} najdenih rezultatov",
+    "seeAll": "Oglejte si vse {content}",
+    "seeMore": "Prikaži več {content}",
     "topics": {
       "featuredTopics": "Priporočene teme",
       "label": "Raziščite več tem",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} do {endDate}",
-    "label": "dogodek"
+    "event": "Dogodek | Dogodki"
   },
   "featured": "Predstavljeno",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "O nas",
+    "about": "O podatkovnem prostoru",
     "close": "Zapri meni",
     "collections": "Raziščite zbirke",
     "dataSpace": "Raziščite podatkovni prostor",
@@ -178,7 +179,7 @@
     "toggle": "Pokaži meni"
   },
   "newWindow": "odpre se v novem oknu",
-  "news": "Novice",
+  "news": "Novice | Novice",
   "pagination": {
     "label": "Paginacija",
     "next": "Naslednji",
@@ -187,7 +188,7 @@
     "previous": "Prejšnji"
   },
   "portal": "Portal",
-  "project": "Projekt",
+  "project": "Projekt | Projekti",
   "projects": {
     "contract": "Številka pogodbe",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "usposabljanje",
-    "ongoing": "V teku"
+    "ongoing": "V teku",
+    "training": "Usposabljanje | Usposabljanje"
   }
 }

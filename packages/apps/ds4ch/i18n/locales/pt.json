@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "por",
-    "createdDate": "Criado {date}",
     "publishedDate": "Publicado {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Ver tudo"
     },
     "resultsHaveLoaded": "{0} resultados encontrados",
+    "seeAll": "Ver tudo {content}",
+    "seeMore": "Ver mais {content}",
     "topics": {
       "featuredTopics": "Tópicos em destaque",
       "label": "Explorar mais tópicos",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} a {endDate}",
-    "label": "evento"
+    "event": "Evento | Eventos"
   },
   "featured": "Em destaque",
   "footer": {
@@ -170,7 +171,7 @@
     }
   },
   "nav": {
-    "about": "Sobre nós",
+    "about": "Sobre o espaço de dados",
     "close": "Fechar menu",
     "collections": "Explore as coleções",
     "dataSpace": "Explore o espaço de dados",
@@ -178,7 +179,7 @@
     "toggle": "Mostrar menu"
   },
   "newWindow": "abre numa nova janela",
-  "news": "Notícias",
+  "news": "Notícias | Notícias",
   "pagination": {
     "label": "Paginação",
     "next": "Próximo",
@@ -187,7 +188,7 @@
     "previous": "Anterior"
   },
   "portal": "Portal",
-  "project": "Projeto",
+  "project": "Projeto | Projetos",
   "projects": {
     "contract": "Número do contrato",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "formação",
-    "ongoing": "Em curso"
+    "ongoing": "Em curso",
+    "training": "Formação | Formação"
   }
 }
