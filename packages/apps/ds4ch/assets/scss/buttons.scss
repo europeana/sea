@@ -22,7 +22,7 @@
       }
     }
 
-    &.btn-primary {
+    &.btn-primary:not(.europeana-feedback-button) {
       border: none;
       border-radius: 0;
       background-color: $yellow;
