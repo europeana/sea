@@ -140,7 +140,7 @@ importers:
         version: 20.3.4
       lodash-es:
         specifier: ^4.17.21
-        version: 4.17.22
+        version: 4.17.23
       nuxt:
         specifier: ^3.19.0
         version: 3.20.2(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.10.1)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4)(eslint@9.34.0(jiti@2.6.1))(ioredis@5.9.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.55.2)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(typescript@5.8.3)(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(yaml@2.8.2))(yaml@2.8.2)
@@ -173,6 +173,9 @@ importers:
       '@elastic/apm-rum-vue':
         specifier: ^2.1.10
         version: 2.1.10
+      '@europeana/feedback-widget':
+        specifier: 0.5.1
+        version: 0.5.1(@popperjs/core@2.11.8)(typescript@5.9.3)
       '@europeana/style':
         specifier: ^2.13.0
         version: 2.17.1
@@ -1238,6 +1241,10 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@europeana/feedback-widget@0.5.1':
+    resolution: {integrity: sha512-kgwIfK/kjHl3RerzuiJNhnH7TJZATDIw00ANJBPSe+h3y0KydQ8MOOdvi0KIburkhIGLAp1T+slSOnY0oZvB7w==}
+    engines: {node: ^18, npm: ^9}
 
   '@europeana/style@2.17.1':
     resolution: {integrity: sha512-6PxVa7i6BEXl691PGf8Nk9gW97foZRuvXOTj9nXrHME1by4IS9rA9RdGbA1FMd6IjC//1FDrD+LOvG+etdAYRA==}
@@ -4952,8 +4959,8 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.17.22:
-    resolution: {integrity: sha512-XEawp1t0gxSi9x01glktRZ5HDy0HXqrM0x5pXQM98EaI0NxO6jVM7omDOxsuEo5UIASAnm2bRp1Jt/e0a2XU8Q==}
+  lodash-es@4.17.23:
+    resolution: {integrity: sha512-kVI48u3PZr38HdYz98UmfPnXl2DXrpdctLrFLCd3kOx1xUkOmpFPx7gCWWM5MPkL/fD8zb+Ph0QzjGFs4+hHWg==}
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -8215,6 +8222,15 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@europeana/feedback-widget@0.5.1(@popperjs/core@2.11.8)(typescript@5.9.3)':
+    dependencies:
+      '@europeana/style': 2.17.1
+      bootstrap: 5.3.8(@popperjs/core@2.11.8)
+      vue: 3.5.26(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@popperjs/core'
+      - typescript
 
   '@europeana/style@2.17.1': {}
 
@@ -12869,7 +12885,7 @@ snapshots:
     dependencies:
       p-locate: 6.0.0
 
-  lodash-es@4.17.22: {}
+  lodash-es@4.17.23: {}
 
   lodash.camelcase@4.3.0: {}
 
@@ -13117,7 +13133,7 @@ snapshots:
   netlify@13.3.5:
     dependencies:
       '@netlify/open-api': 2.46.0
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       micro-api-client: 3.3.0
       node-fetch: 3.3.2
       p-wait-for: 5.0.2

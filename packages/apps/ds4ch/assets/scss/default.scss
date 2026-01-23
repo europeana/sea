@@ -136,4 +136,9 @@ div.landing-sub-section {
   --color-primary: #{$black};
   --bp-4k-increment: 2;
   --font-family-primary: #{$font-family-montserrat};
+  --title-2-font-size: #{$font-size-20};
+  --title-2-font-size-lg: #{$font-size-28};
+  --title-2-font-size-4k: #{$font-size-56};
+  --title-2-font-weight: 700;
+  --bs-secondary-color: #{$darkgrey};
 }

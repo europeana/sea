@@ -484,7 +484,10 @@ function getMoreLinkLabelForSection(section) {
       class="container position-absolute flex-md-row py-4 text-center"
     /-->
     </div>
-    <template v-for="(section, index) in contentSections">
+    <div v-if="total < 1" class="err-mess container mb-5">
+      <slot name="error-message" />
+    </div>
+    <template v-for="(section, index) in contentSections" v-else>
       <div
         v-if="entryHasContentType(section, 'PrimaryCallToAction')"
         :key="`cta-banner-${index}`"
