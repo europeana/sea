@@ -126,6 +126,8 @@
   "error": "Earráid",
   "errorMessage": {
     "404": "Tá brón orm! Níl an leathanach atá á lorg agat ann.",
+    "noResults": "0 toradh",
+    "noResultsDescription": "Coigeartaigh na hábhair atá roghnaithe agat thuas, le do thoil.",
     "unknown": "Tharla earráid."
   },
   "errors": {

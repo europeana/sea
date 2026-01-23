@@ -126,6 +126,8 @@
   "error": "Viga",
   "errorMessage": {
     "404": "Vabandust! Otsitavat lehte ei eksisteeri.",
+    "noResults": "0 tulemust",
+    "noResultsDescription": "Palun kohandage ülalpool valitud teemasid.",
     "unknown": "Ilmnes viga."
   },
   "errors": {

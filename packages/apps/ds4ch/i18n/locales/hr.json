@@ -126,6 +126,8 @@
   "error": "Greška",
   "errorMessage": {
     "404": "Žao nam je! Stranica koju tražite ne postoji.",
+    "noResults": "0 rezultata",
+    "noResultsDescription": "Molimo prilagodite teme koje ste odabrali gore.",
     "unknown": "Došlo je do pogreške."
   },
   "errors": {

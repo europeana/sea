@@ -126,6 +126,8 @@
   "error": "Klaida",
   "errorMessage": {
     "404": "Atsiprašome! Puslapis, kurio ieškote, neegzistuoja.",
+    "noResults": "0 rezultatai",
+    "noResultsDescription": "Prašome pakoreguoti aukščiau pasirinktus dalykus.",
     "unknown": "Įvyko klaida."
   },
   "errors": {
