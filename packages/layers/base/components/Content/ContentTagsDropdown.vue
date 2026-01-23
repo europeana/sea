@@ -1,5 +1,6 @@
 <script setup>
 import { uniq } from "lodash-es";
+import { createHttpError } from "@/composables/error.js";
 import useClickOutside from "~/composables/clickOutside";
 import blogPostingCategoriesGraphql from "@/graphql/queries/blogPostingCategories.graphql";
 import eventCategoriesGraphql from "@/graphql/queries/eventCategories.graphql";
