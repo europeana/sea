@@ -126,6 +126,8 @@
   "error": "Fout",
   "errorMessage": {
     "404": "Sorry! De pagina die u zoekt, bestaat niet.",
+    "noResults": "0 resultaten",
+    "noResultsDescription": "Pas de onderwerpen die u hierboven hebt geselecteerd aan.",
     "unknown": "Er is een fout opgetreden."
   },
   "errors": {

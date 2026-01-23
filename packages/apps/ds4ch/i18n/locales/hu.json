@@ -126,6 +126,8 @@
   "error": "Hiba",
   "errorMessage": {
     "404": "Sajnáljuk! A keresett oldal nem létezik.",
+    "noResults": "0 találat",
+    "noResultsDescription": "Kérjük, módosítsa a fent kiválasztott témákat.",
     "unknown": "Hiba történt."
   },
   "errors": {

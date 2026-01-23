@@ -126,6 +126,8 @@
   "error": "Erro",
   "errorMessage": {
     "404": "Lamentamos! A página que procura não existe.",
+    "noResults": "0 resultados",
+    "noResultsDescription": "Por favor, ajuste os tópicos que selecionou acima.",
     "unknown": "Ocorreu um erro."
   },
   "errors": {

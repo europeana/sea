@@ -126,6 +126,8 @@
   "error": "Fel",
   "errorMessage": {
     "404": "Tyvärr! Sidan du letar efter finns inte.",
+    "noResults": "0 resultat",
+    "noResultsDescription": "Justera de ämnen du har valt ovan.",
     "unknown": "Ett fel inträffade."
   },
   "errors": {

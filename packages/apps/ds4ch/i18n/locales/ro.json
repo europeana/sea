@@ -126,6 +126,8 @@
   "error": "Eroare",
   "errorMessage": {
     "404": "Ne pare rău! Pagina pe care o cauți nu există.",
+    "noResults": "0 rezultate",
+    "noResultsDescription": "Vă rugăm să ajustați subiectele pe care le-ați selectat mai sus.",
     "unknown": "A apărut o eroare."
   },
   "errors": {

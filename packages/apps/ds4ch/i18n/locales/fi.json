@@ -126,6 +126,8 @@
   "error": "Virhe",
   "errorMessage": {
     "404": "Anteeksi! Etsimääsi sivua ei ole olemassa.",
+    "noResults": "0 tulosta",
+    "noResultsDescription": "Muokkaa yllä valitsemiasi aiheita.",
     "unknown": "Tapahtui virhe."
   },
   "errors": {

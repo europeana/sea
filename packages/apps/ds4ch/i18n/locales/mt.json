@@ -126,6 +126,8 @@
   "error": "Żball",
   "errorMessage": {
     "404": "Skużana! Il-paġna li qed tfittex ma teżistix.",
+    "noResults": "0 riżultati",
+    "noResultsDescription": "Jekk jogħġbok aġġusta s-suġġetti li għażilt hawn fuq.",
     "unknown": "Seħħ żball."
   },
   "errors": {

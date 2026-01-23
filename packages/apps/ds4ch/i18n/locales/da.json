@@ -126,6 +126,8 @@
   "error": "Fejl",
   "errorMessage": {
     "404": "Beklager! Den side, du leder efter, findes ikke.",
+    "noResults": "0 resultater",
+    "noResultsDescription": "Juster venligst de emner, du har valgt ovenfor.",
     "unknown": "Der opstod en fejl."
   },
   "errors": {

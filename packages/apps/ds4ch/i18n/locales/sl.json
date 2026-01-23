@@ -126,6 +126,8 @@
   "error": "Napaka",
   "errorMessage": {
     "404": "Žal mi je! Stran, ki jo iščete, ne obstaja.",
+    "noResults": "0 rezultatov",
+    "noResultsDescription": "Prilagodite teme, ki ste jih izbrali zgoraj.",
     "unknown": "Prišlo je do napake."
   },
   "errors": {

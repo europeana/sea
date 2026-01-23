@@ -126,6 +126,8 @@
   "error": "Kļūda",
   "errorMessage": {
     "404": "Atvainojiet! Lapa, kuru meklējat, neeksistē.",
+    "noResults": "0 rezultāti",
+    "noResultsDescription": "Lūdzu, pielāgojiet iepriekš atlasītās tēmas.",
     "unknown": "Radās kļūda."
   },
   "errors": {

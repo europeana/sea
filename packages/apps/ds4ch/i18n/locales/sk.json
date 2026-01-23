@@ -126,6 +126,8 @@
   "error": "Chyba",
   "errorMessage": {
     "404": "Prepáčte! Stránka, ktorú hľadáte, neexistuje.",
+    "noResults": "0 výsledkov",
+    "noResultsDescription": "Prosím, upravte témy, ktoré ste vybrali vyššie.",
     "unknown": "Vyskytla sa chyba."
   },
   "errors": {
