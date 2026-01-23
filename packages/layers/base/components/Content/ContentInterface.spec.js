@@ -162,6 +162,7 @@ const factory = (props = {}) =>
       site: "dataspace-culturalheritage.eu",
       ...props,
     },
+    slots: { "error-message": "<div class='error-message' />" },
   });
 
 describe("components/Content/ContentInterface", () => {
@@ -361,6 +362,18 @@ describe("components/Content/ContentInterface", () => {
         const total = wrapper.vm.total;
 
         expect(total).toEqual(13);
+      });
+    });
+    describe("when 0 results", () => {
+      it("renders the error message slot", async () => {
+        mockQuery.mockImplementation((query) =>
+          contentfulResponse(query, { blogs: [] }, { blogs: [] }),
+        );
+        const wrapper = await factory();
+
+        const errorMessage = wrapper.find(".error-message");
+
+        expect(errorMessage.exists()).toBe(true);
       });
     });
   });
