@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "minn",
-    "createdDate": "Maħluq {date}",
     "publishedDate": "Ippubblikat {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Ara kollha"
     },
     "resultsHaveLoaded": "{0} riżultati misjuba",
+    "seeAll": "Ara kollox {content}",
+    "seeMore": "Ara aktar {content}",
     "topics": {
       "featuredTopics": "Suġġetti dehru",
       "label": "Esplora aktar suġġetti",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} sa {endDate}",
-    "label": "avveniment"
+    "event": "Avveniment | Avvenimenti"
   },
   "featured": "Dehru",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Uri l-menù"
   },
   "newWindow": "jiftaħ f'tieqa ġdida",
-  "news": "Aħbarijiet",
+  "news": "Aħbarijiet | Aħbarijiet",
   "pagination": {
     "label": "Paġinazzjoni",
     "next": "Li jmiss",
@@ -187,7 +188,7 @@
     "previous": "Preċedenti"
   },
   "portal": "Portal",
-  "project": "Proġett",
+  "project": "Proġett | Proġetti",
   "projects": {
     "contract": "Numru tal-kuntratt",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "taħriġ",
-    "ongoing": "Għaddej"
+    "ongoing": "Għaddej",
+    "training": "Taħriġ | Taħriġ"
   }
 }

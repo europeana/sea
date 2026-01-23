@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "by",
-    "createdDate": "Luotu {date}",
     "publishedDate": "Julkaistu {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Näytä kaikki"
     },
     "resultsHaveLoaded": "{0} tuloksia löytyi",
+    "seeAll": "Katso kaikki {content}",
+    "seeMore": "Katso lisää {content}",
     "topics": {
       "featuredTopics": "Esittelyssä olevat aiheet",
       "label": "Tutustu lisää aiheisiin",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} – {endDate}",
-    "label": "tapahtuma"
+    "event": "Tapahtuma | Tapahtumat"
   },
   "featured": "Esittelyssä",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Näytä valikko"
   },
   "newWindow": "avautuu uuteen ikkunaan",
-  "news": "Uutiset",
+  "news": "Uutiset | Uutiset",
   "pagination": {
     "label": "Sivunumerointi",
     "next": "Seuraava",
@@ -187,7 +188,7 @@
     "previous": "Edellinen"
   },
   "portal": "Portaali",
-  "project": "Projekti",
+  "project": "Projekti | Projektit",
   "projects": {
     "contract": "Sopimuksen numero",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "koulutus",
-    "ongoing": "Käynnissä"
+    "ongoing": "Käynnissä",
+    "training": "Koulutus | Koulutus"
   }
 }

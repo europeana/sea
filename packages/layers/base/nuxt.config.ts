@@ -18,6 +18,12 @@ export default defineNuxtConfig({
           serviceVersion: null, // TODO: derive from package.json
         },
       },
+      feedbackWidget: {
+        apiUrl: "https://www.europeana.eu/_api/jira-service-desk/feedback",
+        fallbackLocale: undefined,
+        faqUrl: undefined,
+        locale: undefined,
+      },
       matomo: {
         host: null,
         siteId: null,

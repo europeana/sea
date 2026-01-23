@@ -1,6 +1,14 @@
 import { describe, it, expect } from "vitest";
-import { shallowMount } from "@vue/test-utils";
+import { mockNuxtImport, shallowMount } from "@vue/test-utils";
 import PageFooter from "./PageFooter.vue";
+
+mockNuxtImport("useI18n", () => {
+  return () => {
+    return {
+      locale: "en",
+    };
+  };
+});
 
 describe("PageFooter", () => {
   it("renders a footer element", () => {

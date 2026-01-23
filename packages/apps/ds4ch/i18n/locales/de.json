@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "von",
-    "createdDate": "Erstellt {date}",
     "publishedDate": "Veröffentlicht {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Alle anzeigen"
     },
     "resultsHaveLoaded": "{0} Ergebnisse gefunden",
+    "seeAll": "Alle anzeigen {content}",
+    "seeMore": "Mehr anzeigen {content}",
     "topics": {
       "featuredTopics": "Ausgewählte Themen",
       "label": "Weitere Themen erforschen",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} bis {endDate}",
-    "label": "Ereignis"
+    "event": "Veranstaltung | Veranstaltungen"
   },
   "featured": "Ausgewählt",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Menü anzeigen"
   },
   "newWindow": "öffnet sich in einem neuen Fenster",
-  "news": "Nachrichten",
+  "news": "Nachrichten | Nachrichten",
   "pagination": {
     "label": "Paginierung",
     "next": "Weiter",
@@ -187,7 +188,7 @@
     "previous": "Vorherige"
   },
   "portal": "Portal",
-  "project": "Projekt",
+  "project": "Projekt | Projekte",
   "projects": {
     "contract": "Vertragsnummer",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "Ausbildung",
-    "ongoing": "Laufend"
+    "ongoing": "Laufend",
+    "training": "Ausbildung | Ausbildung"
   }
 }

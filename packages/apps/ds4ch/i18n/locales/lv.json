@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "autors",
-    "createdDate": "Izveidots {date}",
     "publishedDate": "Publicēts {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Skatīt visu"
     },
     "resultsHaveLoaded": "{0} atrastie rezultāti",
+    "seeAll": "Skatīt visus {content}",
+    "seeMore": "Skatīt vairāk {content}",
     "topics": {
       "featuredTopics": "Piedāvātās tēmas",
       "label": "Izpētiet citas tēmas",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} līdz {endDate}",
-    "label": "notikums"
+    "event": "Notikums | Notikumi"
   },
   "featured": "Piedāvātie",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Rādīt izvēlni"
   },
   "newWindow": "atveras jaunā logā",
-  "news": "Ziņas",
+  "news": "Ziņas | Ziņas",
   "pagination": {
     "label": "Lapu šķirošana",
     "next": "Nākamais",
@@ -187,7 +188,7 @@
     "previous": "Iepriekšējais"
   },
   "portal": "Portāls",
-  "project": "Projekts",
+  "project": "Projekts | Projekti",
   "projects": {
     "contract": "Līguma numurs",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "apmācība",
-    "ongoing": "Notiek"
+    "ongoing": "Notiek",
+    "training": "Apmācība | Apmācība"
   }
 }

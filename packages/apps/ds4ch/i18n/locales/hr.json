@@ -13,7 +13,6 @@
   },
   "authored": {
     "by": "po",
-    "createdDate": "Kreirano {date}",
     "publishedDate": "Objavljeno {date}"
   },
   "content": {
@@ -26,6 +25,8 @@
       "viewAll": "Pogledaj sve"
     },
     "resultsHaveLoaded": "{0} pronađenih rezultata",
+    "seeAll": "Pogledaj sve {content}",
+    "seeMore": "Vidi više {content}",
     "topics": {
       "featuredTopics": "Istaknute teme",
       "label": "Istražite više tema",
@@ -134,7 +135,7 @@
   },
   "event": {
     "dateRange": "{startDate} do {endDate}",
-    "label": "događaj"
+    "event": "Događaj | Događaji"
   },
   "featured": "Istaknuto",
   "footer": {
@@ -178,7 +179,7 @@
     "toggle": "Prikaži izbornik"
   },
   "newWindow": "otvara se u novom prozoru",
-  "news": "Vijesti",
+  "news": "Vijesti | Vijesti",
   "pagination": {
     "label": "Paginacija",
     "next": "Sljedeći",
@@ -187,7 +188,7 @@
     "previous": "Prethodni"
   },
   "portal": "Portal",
-  "project": "Projekt",
+  "project": "Projekt | Projekti",
   "projects": {
     "contract": "Broj ugovora",
     "dates": "{startDate} - {endDate}",
@@ -218,7 +219,7 @@
   },
   "training": {
     "dateRange": "{startDate} - {endDate}",
-    "label": "trening",
-    "ongoing": "U tijeku"
+    "ongoing": "U tijeku",
+    "training": "Trening | Trening"
   }
 }
