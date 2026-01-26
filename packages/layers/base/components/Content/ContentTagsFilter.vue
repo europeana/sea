@@ -6,21 +6,37 @@ const featuredTags = inject("featuredContentTags", null);
 
 defineProps({
   /**
-   * Filtered tags, by relevance and sorted on most used
-   */
-  filteredTags: {
-    type: Array,
-    default: null,
-  },
-  /**
    * Array of tags which have already been selected.
    */
   selectedTags: {
     type: Array,
     default: () => [],
   },
+  /**
+   * The active taxonomy or type filter
+   */
+  selectedTaxonomyOrType: {
+    type: String,
+    default: null,
+  },
+  /**
+   * array of the supported taxonomies and types
+   */
+  supportedTaxonomiesAndTypes: {
+    type: Array[String],
+    required: true,
+  },
+  /**
+   * The site value by which to restrict the query
+   * @values dataspace-culturalheritage.eu, www.europeana.eu
+   */
+  site: {
+    type: String,
+    required: true,
+  },
 });
 
+// Do we still need to fetch all tags here?
 const { data: tags, error } = await useAsyncData("allCategories", async () => {
   const categoriesVariables = {
     locale: localeProperties.value.language,
@@ -46,7 +62,9 @@ if (error.value) {
   />
   <ContentTagsDropdown
     :tags="tags"
-    :filtered-tags="filteredTags"
     :selected-tags="selectedTags"
+    :selected-taxonomy-or-type="selectedTaxonomyOrType"
+    :supported-taxonomies-and-types="supportedTaxonomiesAndTypes"
+    :site="site"
   />
 </template>

@@ -1,15 +1,10 @@
 <script setup>
-import { uniq } from "lodash-es";
 import useScrollTo from "@/composables/scrollTo.js";
 import { createHttpError } from "@/composables/error.js";
 import blogPostingsListingGraphql from "@/graphql/queries/blogPostingsListing.graphql";
 import eventsListingGraphql from "@/graphql/queries/eventsListing.graphql";
 import projectPagesListingGraphql from "@/graphql/queries/projectPagesListing.graphql";
 import trainingsListingGraphql from "@/graphql/queries/trainingsListing.graphql";
-import blogPostingsListingMinimalGraphql from "@/graphql/queries/blogPostingsListingMinimal.graphql";
-import projectPagesListingMinimalGraphql from "@/graphql/queries/projectPagesListingMinimal.graphql";
-import trainingsListingMinimalGraphql from "@/graphql/queries/trainingsListingMinimal.graphql";
-import eventsListingMinimalGraphql from "@/graphql/queries/eventsListingMinimal.graphql";
 
 import {
   entryHasContentType,
@@ -105,51 +100,14 @@ const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
 });
 
+const selectedTaxonomyOrType = computed(
+  () => selectedType.value?.taxonomy || selectedType.value?.type,
+);
+
 const supportedTaxonomiesAndTypes = computed(() => {
   return supportedContentTypes.value.map(
     (type) => typeLookup[type].taxonomy || typeLookup[type].type,
   );
-});
-
-// FIXME: this needs to include any tags from the featured entry too
-const filteredTags = computed(() => {
-  const relevantTags = filteredMinimalEntries.value
-    .map((contentEntry) => contentEntry.cats)
-    .flat();
-  const tagsSortedByMostUsed = relevantTags
-    .map((tag, i, array) => {
-      return { tag, total: array.filter((t) => t === tag).length };
-    })
-    .sort((a, b) => b.total - a.total)
-    .map((tag) => tag.tag);
-
-  return uniq(tagsSortedByMostUsed);
-});
-
-const filteredMinimalEntries = computed(() => {
-  let filteredMinimalEntries = minimalEntries.value;
-
-  // Filter by selected type
-  if (selectedType.value) {
-    filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
-      if (!entryHasContentType(contentEntry, selectedType.value.type)) {
-        return false;
-      }
-      if (!selectedType.value.taxonomy) {
-        return true;
-      }
-      return entryHasTaxonomyTerm(contentEntry, selectedType.value.taxonomy);
-    });
-  }
-
-  // Filter by selected categories
-  if (selectedTags.value.length > 0) {
-    filteredMinimalEntries = filteredMinimalEntries.filter((contentEntry) => {
-      return selectedTags.value.every((tag) => contentEntry.cats.includes(tag));
-    });
-  }
-
-  return filteredMinimalEntries;
 });
 
 const total = computed(() => {
@@ -278,17 +236,16 @@ const featuredEntrySubTitle = computed(() => {
 });
 
 async function fetchFullEntries() {
-  const selectedTaxonomyOrType =
-    selectedType.value?.taxonomy || selectedType.value?.type;
-
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query.mode === "preview",
-    limit: selectedTaxonomyOrType ? ENTRIES_PER_PAGE : ENTRIES_PER_SECTION,
+    limit: selectedTaxonomyOrType.value
+      ? ENTRIES_PER_PAGE
+      : ENTRIES_PER_SECTION,
     skip: (page.value - 1) * ENTRIES_PER_PAGE,
     categoriesFilter: null,
     excludeSysId: props.featuredEntry?.sys?.id || "",
-    site: selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
+    site: selectedTaxonomyOrType.value === "BlogPosting" ? props.site : null,
   };
 
   if (selectedTags.value.length) {
@@ -306,7 +263,7 @@ async function fetchFullEntries() {
 
   return await Promise.all(
     []
-      .concat(selectedTaxonomyOrType || supportedTaxonomiesAndTypes.value)
+      .concat(selectedTaxonomyOrType.value || supportedTaxonomiesAndTypes.value)
       .map(async (taxonomyOrType) => {
         const res = await contentful.query(
           contentTypeGraphql[taxonomyOrType],
@@ -449,60 +406,6 @@ function normaliseCard(entry) {
   }
 }
 
-// Fetch minimal data for all entries to support filtering by categories.
-async function fetchMinimalEntries() {
-  const contentIdsVariables = {
-    excludeSysId: props.featuredEntry?.sys?.id || "",
-    locale: localeProperties.value.language,
-    preview: route.query.mode === "preview",
-    site: props.site,
-  };
-  // Splits the request into seperate graphql queries as otherwise
-  // the maximum allowed complexity for a query of 11000 is exeeded.
-  // TODO: when selectedType is already set, only retrieve those entries
-  // needs to be accounted for in: { data: minimalEntries } = useAsyncData(...)
-
-  const contentTypeGraphql = {
-    "blog post": blogPostingsListingMinimalGraphql,
-    project: projectPagesListingMinimalGraphql,
-    event: eventsListingMinimalGraphql,
-    training: trainingsListingMinimalGraphql,
-  };
-
-  const contentIds = (
-    await Promise.all(
-      supportedContentTypes.value.map((ctype) =>
-        contentful.query(contentTypeGraphql[ctype], contentIdsVariables),
-      ),
-    )
-  )
-    .map((response) => response.data[Object.keys(response.data)[0]].items || [])
-    .flat();
-
-  // Simplify categories
-  for (const contentEntry of contentIds) {
-    if (contentEntry.cats?.items) {
-      contentEntry.cats = contentEntry.cats.items
-        .filter((cat) => !!cat)
-        .map((cat) => cat.id);
-    }
-  }
-
-  return contentIds;
-}
-
-const { data: minimalEntries, error: minimalEntriesError } = await useAsyncData(
-  "minimalEntries",
-  fetchMinimalEntries,
-  { default: () => [] },
-);
-if (minimalEntriesError.value) {
-  throw createHttpError(
-    minimalEntriesError.value.statusCode,
-    minimalEntriesError.value,
-  );
-}
-
 const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
   "fullEntries",
   fetchFullEntries,
@@ -553,8 +456,10 @@ function getMoreLinkLabelForSection(section) {
   <div id="content-interface" :class="{ 'mb-5 pb-4k-5': selectedType }">
     <NuxtErrorBoundary>
       <ContentTagsFilter
-        :filtered-tags="filteredTags"
         :selected-tags="selectedTags"
+        :selected-taxonomy-or-type="selectedTaxonomyOrType"
+        :supported-taxonomies-and-types="supportedTaxonomiesAndTypes"
+        :site="site"
       />
       <template #error="{ error }">
         <div class="container">
