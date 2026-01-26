@@ -181,14 +181,14 @@ describe("components/Content/ContentInterface", () => {
     it("contains taxonomy info when the type in the URL requires it", async () => {
       useRouteMock.mockImplementation(() => ({
         query: {
-          type: "training",
+          type: "event",
         },
       }));
       const wrapper = await factory();
 
       expect(wrapper.vm.selectedType).toStrictEqual({
         type: "Event",
-        taxonomy: "eventTypeTrainingCourse",
+        taxonomy: "eventTypeEvent",
       });
     });
   });

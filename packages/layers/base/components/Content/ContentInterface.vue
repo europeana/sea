@@ -405,13 +405,16 @@ function normaliseCard(entry) {
     }
   }
 }
-
+// data is refetched when key changes
+const fullEntriesKey = computed(
+  () =>
+    `fullEntries-${selectedTaxonomyOrType.value || "all"}-${selectedTags.value.join("-") || "all"}-${page.value}`,
+);
 const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
-  "fullEntries",
+  fullEntriesKey,
   fetchFullEntries,
   {
     default: () => [],
-    watch: [selectedTags, selectedType, page],
   },
 );
 if (fullEntriesError.value) {
