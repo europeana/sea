@@ -42,7 +42,7 @@ const trackClickLink = () => {
 
 <template>
   <NuxtLink
-    :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center`"
+    :class="`btn btn-secondary social-share ${network.identifier} d-inline-flex align-items-center justify-content-start`"
     :to="network.url"
     target="_blank"
     :aria-label="$t('actions.shareOn', { social: network.name })"
