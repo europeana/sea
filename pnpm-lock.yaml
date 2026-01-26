@@ -174,8 +174,8 @@ importers:
         specifier: ^2.1.10
         version: 2.1.10
       '@europeana/feedback-widget':
-        specifier: ^0.5.2
-        version: 0.5.2(@popperjs/core@2.11.8)(typescript@5.9.3)
+        specifier: 0.5.1
+        version: 0.5.1(@popperjs/core@2.11.8)(typescript@5.9.3)
       '@europeana/style':
         specifier: ^2.13.0
         version: 2.17.1
@@ -1242,8 +1242,8 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@europeana/feedback-widget@0.5.2':
-    resolution: {integrity: sha512-eti4KNK7PJILoMwp8XyzuzDVkMOw0ftm0oVPArwCl1FepEfo8NuBdPsElAMiTiEDyHv9km7DYZ29vf3dF+UN9Q==}
+  '@europeana/feedback-widget@0.5.1':
+    resolution: {integrity: sha512-kgwIfK/kjHl3RerzuiJNhnH7TJZATDIw00ANJBPSe+h3y0KydQ8MOOdvi0KIburkhIGLAp1T+slSOnY0oZvB7w==}
     engines: {node: ^18, npm: ^9}
 
   '@europeana/style@2.17.1':
@@ -7131,8 +7131,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.3:
-    resolution: {integrity: sha512-lpJTa8a+12Cgy/n5OdlQTzQhSWOCu+6zQoNFbl3KYxwAoB95mYIgMLKEYMvQykPJ2ucBDjJJISdIBHc1d9Hd3w==}
+  vue-component-type-helpers@3.2.4:
+    resolution: {integrity: sha512-05lR16HeZDcDpB23ku5b5f1fBOoHqFnMiKRr2CiEvbG5Ux4Yi0McmQBOET0dR0nxDXosxyVqv67q6CzS3AK8rw==}
 
   vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
@@ -8223,7 +8223,7 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@europeana/feedback-widget@0.5.2(@popperjs/core@2.11.8)(typescript@5.9.3)':
+  '@europeana/feedback-widget@0.5.1(@popperjs/core@2.11.8)(typescript@5.9.3)':
     dependencies:
       '@europeana/style': 2.17.1
       bootstrap: 5.3.8(@popperjs/core@2.11.8)
@@ -10181,7 +10181,7 @@ snapshots:
       storybook: 9.1.17(@testing-library/dom@10.4.0)(prettier@3.8.0)(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(yaml@2.8.2))
       type-fest: 2.19.0
       vue: 3.5.26(typescript@5.8.3)
-      vue-component-type-helpers: 3.2.3
+      vue-component-type-helpers: 3.2.4
 
   '@stylistic/eslint-plugin@5.3.1(eslint@9.34.0(jiti@2.6.1))':
     dependencies:
@@ -15542,7 +15542,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.3: {}
+  vue-component-type-helpers@3.2.4: {}
 
   vue-devtools-stub@0.1.0: {}
 
