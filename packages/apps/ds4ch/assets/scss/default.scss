@@ -129,6 +129,72 @@ div.landing-sub-section {
   }
 }
 
+// 4k overrides feedback widget
+.landing-page.xxl-page .europeana-feedback-container {
+  @media (min-width: $bp-4k) {
+    font-size: $font-size-32;
+
+    .btn.btn-primary.europeana-feedback-button {
+      padding: 2rem;
+      right: 2rem;
+      bottom: 2rem;
+
+      &:not(.big) {
+        border-radius: 50%;
+      }
+
+      [class^="icon-"] {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    .europeana-feedback-dialog {
+      width: 67.5rem;
+
+      .feedback-header {
+        padding: 3rem 2rem 0;
+
+        h2 {
+          font-size: $font-size-48;
+        }
+      }
+
+      .europeana-feedback-form {
+        padding: 2rem;
+
+        label,
+        .invalid-feedback,
+        .form-text {
+          font-size: $font-size-28;
+        }
+
+        .form-control {
+          font-size: $font-size-32;
+        }
+
+        input.form-control {
+          height: 6rem;
+        }
+      }
+
+      .form-buttons .mt-3 {
+        margin-top: 2rem !important;
+      }
+
+      .icon-cancel-circle {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      .icon-check-circle {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+}
+
 // CSS variables for theme specific overrides base components
 // TODO: use this approach for other base component style overrides
 :root {
