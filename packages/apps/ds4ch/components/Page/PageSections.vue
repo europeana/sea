@@ -78,14 +78,6 @@ const getClasses = (section) => {
 <style lang="scss">
 @import "@europeana/style/scss/variables";
 
-.image-card-container {
-  @media (min-width: $bp-large) {
-    max-width: none;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
 .testimonial-card-container {
   padding-bottom: 3rem;
 

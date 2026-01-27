@@ -122,12 +122,6 @@ const buttonClass = computed(() => {
   background-repeat: no-repeat;
 }
 
-.container {
-  @media (min-width: $bp-4k) {
-    max-width: 3015px;
-  }
-}
-
 .hero-content {
   padding-top: 3rem;
   padding-bottom: 3rem;
