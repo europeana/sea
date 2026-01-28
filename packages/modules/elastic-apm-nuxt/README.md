@@ -97,6 +97,12 @@ export default defineNuxtConfig({
 });
 ```
 
+## Troubleshooting
+
+### 500 errors on all SSR requests
+
+If when running the built version of the app you get 500 errors for all SSR requests with errors about require/import/export, then try also adding to the Nuxt app's package dependencies `elastic-apm-node`.
+
 ## TODO
 
 - rename to @europeana/nuxt-elastic-apm to be consistent w/ `vue-`
