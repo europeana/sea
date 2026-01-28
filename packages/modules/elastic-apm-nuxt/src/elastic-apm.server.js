@@ -11,12 +11,10 @@ const runtimeConfig = () => ({
 
 const env = runtimeConfig();
 
-const config = { ...defaults };
-for (const key in env) {
-  if (env[key]) {
-    config[key] = env[key];
-  }
-}
+const config = Object.keys(defaults).reduce((memo, key) => {
+  memo[key] = env[key] || defaults[key];
+  return memo;
+}, {});
 
 if (config.serverUrl) {
   apm.start(config);

@@ -99,15 +99,15 @@ importers:
 
   packages/apps/ds4ch:
     devDependencies:
+      '@europeana/elastic-apm-nuxt':
+        specifier: workspace:*
+        version: link:../../modules/elastic-apm-nuxt
       '@europeana/sea-base-layer':
         specifier: workspace:*
         version: link:../../layers/base
       '@europeana/style':
         specifier: ^2.13.0
         version: 2.17.1
-      '@europeana/vue-contentful-graphql':
-        specifier: workspace:*
-        version: link:../../plugins/vue-contentful-graphql
       '@europeana/vue-visible-on-scroll':
         specifier: workspace:*
         version: link:../../directives/vue-visible-on-scroll
@@ -135,6 +135,9 @@ importers:
       bootstrap:
         specifier: ^5.3.6
         version: 5.3.8(@popperjs/core@2.11.8)
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
       elastic-apm-node:
         specifier: ^4.15.0
         version: 4.15.0
@@ -191,12 +194,6 @@ importers:
       '@rollup/plugin-graphql':
         specifier: ^2.0.5
         version: 2.0.5(graphql@16.12.0)(rollup@4.55.2)
-      dotenv:
-        specifier: ^17.2.3
-        version: 17.2.3
-      elastic-apm-node:
-        specifier: ^4.15.0
-        version: 4.15.0
       marked:
         specifier: ^16.0.0
         version: 16.4.2
@@ -7383,8 +7380,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.2:
-    resolution: {integrity: sha512-x8C2nx5XlUNM0WirgfTkHjJGO/ABBxlANZDtHw2HclHtQnn+RFPTnbjMJn8jHZW4TlUam0asHcA14lf1C6Jb+A==}
+  vue-component-type-helpers@3.2.4:
+    resolution: {integrity: sha512-05lR16HeZDcDpB23ku5b5f1fBOoHqFnMiKRr2CiEvbG5Ux4Yi0McmQBOET0dR0nxDXosxyVqv67q6CzS3AK8rw==}
 
   vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
@@ -10469,7 +10466,7 @@ snapshots:
       storybook: 9.1.17(@testing-library/dom@10.4.0)(prettier@3.8.0)(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.44.0)(yaml@2.8.2))
       type-fest: 2.19.0
       vue: 3.5.26(typescript@5.8.3)
-      vue-component-type-helpers: 3.2.2
+      vue-component-type-helpers: 3.2.4
 
   '@stylistic/eslint-plugin@5.3.1(eslint@9.34.0(jiti@2.6.1))':
     dependencies:
@@ -16077,7 +16074,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.2: {}
+  vue-component-type-helpers@3.2.4: {}
 
   vue-devtools-stub@0.1.0: {}
 

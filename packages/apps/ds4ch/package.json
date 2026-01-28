@@ -14,9 +14,9 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@europeana/elastic-apm-nuxt": "workspace:*",
     "@europeana/sea-base-layer": "workspace:*",
     "@europeana/style": "^2.13.0",
-    "@europeana/vue-contentful-graphql": "workspace:*",
     "@europeana/vue-visible-on-scroll": "workspace:*",
     "@lottiefiles/dotlottie-vue": "^0.10.12",
     "@nuxt/test-utils": "^3.22.0",
@@ -26,6 +26,7 @@
     "@storybook/addon-links": "9.1.17",
     "@vitejs/plugin-vue": "^5.2.4",
     "bootstrap": "^5.3.6",
+    "dotenv": "^17.2.3",
     "elastic-apm-node": "^4.15.0",
     "happy-dom": "^20.3.1",
     "lodash-es": "^4.17.21",

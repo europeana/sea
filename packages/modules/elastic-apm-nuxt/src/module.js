@@ -6,6 +6,7 @@ import {
   addTemplate,
   createResolver,
   defineNuxtModule,
+  updateRuntimeConfig,
 } from "@nuxt/kit";
 
 import defaults from "./elastic-apm.config.json";
@@ -28,11 +29,20 @@ export default defineNuxtModule({
     const buildDirResolver = createResolver(nuxt.options.buildDir);
     const moduleDirResolver = createResolver(import.meta.url);
 
+    updateRuntimeConfig({
+      public: {
+        elasticApm: moduleOptions,
+      },
+    });
+
     addPlugin({
-      src: moduleDirResolver.resolve("./plugins/01-elastic-apm.server.ts"),
+      src: moduleDirResolver.resolve("./plugins/elastic-apm.server.js"),
       mode: "server",
     });
-    // TODO: add client plugin
+    addPlugin({
+      src: moduleDirResolver.resolve("./plugins/elastic-apm.client.js"),
+      mode: "client",
+    });
 
     addTemplate({
       filename: `${CONFIG_FILENAME}.json`,
