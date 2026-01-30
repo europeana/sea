@@ -66,7 +66,7 @@ const ENTRIES_PER_PAGE = 24;
 const ENTRIES_PER_SECTION = 4;
 
 const selectedTags = computed(() => {
-  return route.query.tags?.split(",") || [];
+  return route.query.tags?.split(",").sort() || [];
 });
 
 const typeLookup = {
