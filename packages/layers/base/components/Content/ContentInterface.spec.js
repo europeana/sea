@@ -158,6 +158,18 @@ describe("components/Content/ContentInterface", () => {
 
       expect(wrapper.vm.selectedTags.length).toBe(3);
     });
+    it("sorts the tags when multiple are present in the URL", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          tags: "network,art,manuscripts",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedTags[0]).toEqual("art");
+      expect(wrapper.vm.selectedTags[1]).toEqual("manuscripts");
+      expect(wrapper.vm.selectedTags[2]).toEqual("network");
+    });
   });
 
   describe("selectedType", () => {
