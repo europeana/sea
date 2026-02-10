@@ -35,7 +35,7 @@ const tags =
     : null;
 
 usePageMeta({
-  title: page.name,
+  title: page.value.name,
   description: page.value.description,
   image: page.value.primaryImageOfPage?.image,
   ogType: "article",
