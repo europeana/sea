@@ -61,25 +61,34 @@ const closeModalAndShowToast = () => {
       aria-atomic="true"
       data-bs-autohide="false"
     >
-      <div class="toast-body">
+      <div class="toast-body pb-1 pb-4k-3">
         <p>{{ text }}</p>
-        <div class="d-flex justify-content-between align-items-center">
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center"
+        >
           <button
-            class="btn btn-link p-0"
+            class="btn btn-link p-0 mb-2 mb-4k-3 me-2 me-4k-3"
             data-bs-target="#cookie-modal"
             @click="openCookieModal"
           >
             {{ $t("cookies.consentNotice.learnMore") }}
           </button>
-          <button
-            class="btn btn-outline-primary ms-auto me-2 me-4k-3"
-            @click="declineAndHide"
+          <div
+            class="d-flex flex-wrap justify-content-end align-items-center ms-auto"
           >
-            {{ $t("cookies.decline") }}
-          </button>
-          <button class="btn btn-success" @click="acceptAndHide">
-            {{ $t("cookies.ok") }}
-          </button>
+            <button
+              class="btn btn-outline-primary ms-auto mb-2 mb-4k-3"
+              @click="declineAndHide"
+            >
+              {{ $t("cookies.decline") }}
+            </button>
+            <button
+              class="btn btn-success ms-2 ms-4k-3 mb-2 mb-4k-3"
+              @click="acceptAndHide"
+            >
+              {{ $t("cookies.acceptAll") }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -89,3 +98,16 @@ const closeModalAndShowToast = () => {
     />
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import "@europeana/style/scss/variables";
+
+.toast {
+  max-width: calc(100vw - 1rem);
+  width: 25rem;
+
+  @media (min-width: $bp-4k) {
+    width: 50rem;
+  }
+}
+</style>
