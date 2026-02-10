@@ -6,7 +6,10 @@ export const deepFindEntriesOfType = (items = [], type) =>
       if (entryHasContentType(item, type)) {
         return item;
       } else if (item.hasPartCollection) {
-        return deepFindEntriesOfType(item.hasPartCollection.items, type);
+        return deepFindEntriesOfType(
+          item.hasPartCollection.items.filter(Boolean),
+          type,
+        );
       } else {
         return null;
       }

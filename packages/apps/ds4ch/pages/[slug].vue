@@ -24,7 +24,7 @@ const { page } = await useAsyncPageData(
   },
 );
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.value.hasPartCollection?.items.filter(Boolean);
 
 annotateParity(deepFindEntriesOfType(sections, "ImageCard"));
 
