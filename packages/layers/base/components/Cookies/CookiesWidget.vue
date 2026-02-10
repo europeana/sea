@@ -107,7 +107,7 @@ const closeModalAndShowToast = () => {
   width: 25rem;
 
   @media (min-width: $bp-4k) {
-    width: 50rem;
+    width: calc(var(--bp-4k-increment) * 25rem);
   }
 }
 </style>
