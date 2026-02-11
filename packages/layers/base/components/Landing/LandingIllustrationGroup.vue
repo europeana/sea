@@ -115,11 +115,11 @@ const { swiperReady } = useSwiper(swiperOptions);
               class="image-wrapper"
             >
               <ImageOptimised
-                :src="slide.image.url"
+                :src="slide.image?.url"
                 :contentful-image-crop-presets="SRCSET_PRESETS"
                 :image-sizes="imageSizes"
-                :width="slide.image.width"
-                :height="slide.image.height"
+                :width="slide.image?.width"
+                :height="slide.image?.height"
                 :max-width="254"
                 :alt="slide.name || ''"
                 class="swiper-lazy"

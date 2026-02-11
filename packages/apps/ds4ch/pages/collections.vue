@@ -19,7 +19,7 @@ const { page } = await useAsyncPageData(`landingPage:${slug}`, async () => {
   return { page: response.data?.landingPageCollection?.items?.[0] };
 });
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.value.hasPartCollection?.items.filter(Boolean);
 const featuredContent = page.value.featuredContent;
 
 usePageMeta({
@@ -53,7 +53,9 @@ usePageMeta({
       >
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 g-4k-5">
           <div
-            v-for="(card, cardIndex) in section.hasPartCollection?.items"
+            v-for="(card, cardIndex) in section.hasPartCollection?.items.filter(
+              Boolean,
+            )"
             :key="card.url || cardIndex"
             class="col"
           >

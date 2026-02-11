@@ -65,7 +65,7 @@ const sortedContentTypes = ["blog post", "event", "training", "project"].filter(
       site="dataspace-culturalheritage.eu"
       :content-types="sortedContentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
-      :cta-banners="page.hasPartCollection?.items"
+      :cta-banners="page.hasPartCollection?.items.filter(Boolean)"
       :featured-entry="page.featuredContent"
     >
       <template #error-message>

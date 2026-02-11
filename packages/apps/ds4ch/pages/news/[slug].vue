@@ -22,7 +22,7 @@ const { page } = await useAsyncPageData(
   },
 );
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.value.hasPartCollection?.items.filter(Boolean);
 
 const authors =
   page.value.authorCollection?.items.length > 0
