@@ -49,12 +49,14 @@ export default defineNuxtConfig({
         },
       },
       defaultThumbnail: "",
+      i18n: {
+        baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
+      },
       internalLinkDomain: "",
     },
   },
 
   i18n: {
-    baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
     bundle: {
       optimizeTranslationDirective: false,
     },
