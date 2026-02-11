@@ -1,4 +1,5 @@
-import { Job, Worker } from "bullmq";
+import type { Job} from "bullmq";
+import { Worker } from "bullmq";
 
 let contentfulEnvironment;
 
@@ -22,13 +23,21 @@ export const storeQueueWorker = async (job: Job) => {
 
   let entry = await contentfulEnvironment.getEntry(job.data.entryId);
 
+  entry.fields = Object.keys(entry.fields).reduce((memo, fieldId) => {
+    // discard any field not having the source language (English), which
+    // should not have been translated
+    if (Object.keys(entry.fields[fieldId]).includes("en-GB")) {
+      memo[fieldId] = entry.fields[fieldId];
+    }
+    return memo;
+  }, {});
+
   for (const childValue of Object.values(childrenValues)) {
+    const locale = localeForLang(childValue.lang);
     for (const fieldId in childValue.fields) {
-      if (!Object.keys(entry.fields).includes(fieldId)) {
-        entry.fields[fieldId] = {};
+      if (Object.keys(entry.fields).includes(fieldId)) {
+        entry.fields[fieldId][locale] = childValue.fields[fieldId];
       }
-      entry.fields[fieldId][localeForLang(childValue.lang)] =
-        childValue.fields[fieldId];
     }
   }
 

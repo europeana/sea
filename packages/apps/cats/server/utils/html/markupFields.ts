@@ -4,6 +4,9 @@ import { marked } from "marked";
 export const markupFields = ({ entry, contentType, locale = "en-GB" }) => {
   const translatableFields = contentType.fields.filter(
     (field) =>
+      Object.keys(entry.fields).includes(field.id) &&
+      // only include fields with a value in the source locale
+      Object.keys(entry.fields[field.id]).includes(locale) &&
       field.localized &&
       ["Symbol", "Text"].includes(field.items?.type || field.type),
   );
