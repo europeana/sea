@@ -58,7 +58,6 @@ const imageCSSVars = computed(() =>
     <div
       class="hero-background responsive-background-image"
       :style="imageCSSVars"
-      role="img"
       :aria-label="heroImage?.image?.description"
       :alt="heroImage?.image?.description"
     />

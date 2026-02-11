@@ -77,7 +77,6 @@ const buttonClass = computed(() => {
       v-if="heroImage"
       class="hero-background responsive-background-image"
       :style="imageCSSVars"
-      role="img"
     />
     <div class="container d-flex position-relative">
       <div class="row">
