@@ -9,6 +9,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      baseUrl: "",
       cookieConsent: { maxAge: 1296000 }, // 15 days
       elastic: {
         apm: {
@@ -23,6 +24,9 @@ export default defineNuxtConfig({
         fallbackLocale: undefined,
         faqUrl: undefined,
         locale: undefined,
+      },
+      i18n: {
+        baseUrl: "",
       },
       matomo: {
         host: null,
