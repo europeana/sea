@@ -1,6 +1,6 @@
 {
   "name": "@europeana/vue-visible-on-scroll",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue visible-on-scroll directive",
   "license": "EUPL-1.2",
   "type": "module",
