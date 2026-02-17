@@ -44,12 +44,11 @@
       "title": "Paslaugos, kuriomis norėtume naudotis."
     },
     "consentNotice": {
-      "learnMore": "Leisk man pasirinkti",
+      "learnMore": "Tvarkyti slapukų nustatymus",
       "text": "Ar galėtume įjungti saugos, analizės ir trečiųjų šalių turinio paslaugas?",
       "textUpdated": "Nuo jūsų paskutinio apsilankymo kai kurios paslaugos pasikeitė. Ar galėtume įjungti papildomas paslaugas?"
     },
-    "decline": "Aš atsisakau",
-    "ok": "Gerai",
+    "decline": "Atmesti",
     "purposes": {
       "2D": {
         "title": "2D medija"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Prisimink, kad esi žmogus.",
+        "description": "Prisimena, kad saugumo patikrinimas buvo sėkmingai įvykdytas.",
         "title": "Cloudflare"
       },
       "hotjar": {

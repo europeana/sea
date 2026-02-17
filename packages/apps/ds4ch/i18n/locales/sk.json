@@ -44,12 +44,11 @@
       "title": "Služby, ktoré by sme chceli využiť."
     },
     "consentNotice": {
-      "learnMore": "Nechaj ma vybrať si",
+      "learnMore": "Spravovať nastavenia cookies",
       "text": "Môžeme, prosím, povoliť služby pre zabezpečenie, analytiku a obsah tretích strán?",
       "textUpdated": "Od vašej poslednej návštevy došlo k niektorým zmenám v službách. Mohli by sme prosím povoliť ďalšie služby?"
     },
-    "decline": "Odmietam",
-    "ok": "Dobre",
+    "decline": "Odmietnuť",
     "purposes": {
       "2D": {
         "title": "2D médiá"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Pamätá si, že ste človek.",
+        "description": "Zapamätá si, že bezpečnostná výzva bola úspešne splnená.",
         "title": "Cloudflare"
       },
       "hotjar": {

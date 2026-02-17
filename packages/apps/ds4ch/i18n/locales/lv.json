@@ -44,12 +44,11 @@
       "title": "Pakalpojumi, kurus mēs vēlētos izmantot."
     },
     "consentNotice": {
-      "learnMore": "Ļaujiet man izvēlēties",
+      "learnMore": "Pārvaldīt sīkfailu iestatījumus",
       "text": "Vai varam, lūdzu, aktivizēt drošības, analītikas un trešās puses satura pakalpojumus?",
       "textUpdated": "Kopš jūsu pēdējās vizītes pakalpojumos ir veiktas dažas izmaiņas. Vai mēs varētu, lūdzu, iespējot papildu pakalpojumus?"
     },
-    "decline": "Es atsakos",
-    "ok": "Labi",
+    "decline": "Noraidīt",
     "purposes": {
       "2D": {
         "title": "2D multivides"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Atceras, ka esat cilvēks.",
+        "description": "Atceras, ka drošības pārbaude ir veiksmīgi nokārtota.",
         "title": "Cloudflare"
       },
       "hotjar": {

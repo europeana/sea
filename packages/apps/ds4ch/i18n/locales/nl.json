@@ -44,12 +44,11 @@
       "title": "Diensten waar we graag gebruik van willen maken."
     },
     "consentNotice": {
-      "learnMore": "Laat me kiezen",
+      "learnMore": "Cookie-instellingen beheren",
       "text": "Kunnen we alstublieft services inschakelen voor beveiliging, analyse en inhoud van derden?",
       "textUpdated": "Er zijn enkele wijzigingen in de diensten geweest sinds uw laatste bezoek. Kunnen we alstublieft aanvullende diensten inschakelen?"
     },
-    "decline": "Ik weiger",
-    "ok": "Oké",
+    "decline": "Weigeren",
     "purposes": {
       "2D": {
         "title": "2D media"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Onthoudt dat u een mens bent.",
+        "description": "Onthoudt dat de beveiligingscontrole succesvol is doorlopen.",
         "title": "Cloudflare"
       },
       "hotjar": {

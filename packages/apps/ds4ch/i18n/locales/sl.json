@@ -44,12 +44,11 @@
       "title": "Storitve, ki jih želimo uporabljati."
     },
     "consentNotice": {
-      "learnMore": "Naj izberem",
+      "learnMore": "Upravljaj nastavitve piškotkov",
       "text": "Ali lahko omogočimo storitve za varnost, analitiko in vsebino tretjih oseb?",
       "textUpdated": "Od vašega zadnjega obiska so se storitve spremenile. Ali lahko omogočimo dodatne storitve?"
     },
-    "decline": "Zavračam",
-    "ok": "V redu",
+    "decline": "Zavrni",
     "purposes": {
       "2D": {
         "title": "2D mediji"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Se spomni, da si človek.",
+        "description": "Zapomni si, da je bil varnostni izziv uspešno opravljen.",
         "title": "Cloudflare"
       },
       "hotjar": {

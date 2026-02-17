@@ -44,12 +44,11 @@
       "title": "Servicii pe care am dori să le folosim."
     },
     "consentNotice": {
-      "learnMore": "Lasa-ma sa aleg",
+      "learnMore": "Gestionează setările cookie",
       "text": "Putem, vă rugăm, să activăm serviciile pentru securitate, analiză și conținut de la terți?",
       "textUpdated": "Au avut loc câteva schimbări în servicii de la ultima dvs. vizită. Putem activa, vă rugăm, servicii suplimentare?"
     },
-    "decline": "Refuz",
-    "ok": "Bine",
+    "decline": "Respinge",
     "purposes": {
       "2D": {
         "title": "Media 2D"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Își amintește că ești om.",
+        "description": "Își amintește că testul de securitate a fost trecut cu succes.",
         "title": "Cloudflare"
       },
       "hotjar": {

@@ -44,12 +44,11 @@
       "title": "Services que nous aimerions utiliser."
     },
     "consentNotice": {
-      "learnMore": "Laisse-moi choisir",
+      "learnMore": "Gérer les paramètres des cookies",
       "text": "Pourrions-nous activer les services de sécurité, d'analyse et de contenu tiers ?",
       "textUpdated": "Des changements ont été apportés à nos services depuis votre dernière visite. Pourrions-nous activer des services supplémentaires, s’il vous plaît ?"
     },
-    "decline": "Je décline",
-    "ok": "D'accord",
+    "decline": "Refuser",
     "purposes": {
       "2D": {
         "title": "Médias 2D"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Se souvient que vous êtes un être humain.",
+        "description": "Se souvient que le défi de sécurité a été réussi avec succès.",
         "title": "Cloudflare"
       },
       "hotjar": {
