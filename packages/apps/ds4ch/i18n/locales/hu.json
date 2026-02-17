@@ -44,12 +44,11 @@
       "title": "Szolgáltatások, amelyeket szeretnénk igénybe venni."
     },
     "consentNotice": {
-      "learnMore": "Hadd válasszak",
+      "learnMore": "Süti beállítások kezelése",
       "text": "Engedélyezhetjük a biztonsági, analitikai és harmadik féltől származó tartalmakhoz kapcsolódó szolgáltatásokat?",
       "textUpdated": "A legutóbbi látogatása óta néhány szolgáltatás megváltozott. Engedélyezhetnénk további szolgáltatásokat?"
     },
-    "decline": "Elutasítom",
-    "ok": "Rendben",
+    "decline": "Elutasítás",
     "purposes": {
       "2D": {
         "title": "2D média"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Emlékszik arra, hogy ember vagy.",
+        "description": "Megjegyzi, hogy a biztonsági ellenőrzés sikeresen lezajlott.",
         "title": "Cloudflare"
       },
       "hotjar": {

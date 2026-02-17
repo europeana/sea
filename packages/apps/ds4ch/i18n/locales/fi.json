@@ -44,12 +44,11 @@
       "title": "Palvelut, joita haluaisimme käyttää."
     },
     "consentNotice": {
-      "learnMore": "Anna minun valita",
+      "learnMore": "Hallitse evästeasetuksia",
       "text": "Voisimmeko ottaa käyttöön palvelut turvallisuutta, analytiikkaa ja kolmannen osapuolen sisältöä varten?",
       "textUpdated": "Palveluissa on tapahtunut muutoksia edellisen käyntisi jälkeen. Voimmeko ottaa käyttöön lisäpalveluja?"
     },
-    "decline": "Kieltäydyn",
-    "ok": "Okei",
+    "decline": "Hylkää",
     "purposes": {
       "2D": {
         "title": "2D-media"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Muistaa, että olet ihminen.",
+        "description": "Muistaa, että turvahaaste on läpäisty onnistuneesti.",
         "title": "Cloudflare"
       },
       "hotjar": {

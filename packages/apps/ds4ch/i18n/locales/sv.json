@@ -44,12 +44,11 @@
       "title": "Tjänster som vi skulle vilja använda."
     },
     "consentNotice": {
-      "learnMore": "Låt mig välja",
+      "learnMore": "Hantera cookieinställningar",
       "text": "Kan vi aktivera tjänster för säkerhet, analys och tredjepartsinnehåll?",
       "textUpdated": "Det har skett vissa förändringar i tjänsterna sedan ditt senaste besök. Kan vi aktivera ytterligare tjänster?"
     },
-    "decline": "Jag avböjer",
-    "ok": "Okej",
+    "decline": "Neka",
     "purposes": {
       "2D": {
         "title": "2D-media"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Kommer ihåg att du är en människa.",
+        "description": "Påminner om att säkerhetsutmaningen har klarats av framgångsrikt.",
         "title": "Cloudflare"
       },
       "hotjar": {

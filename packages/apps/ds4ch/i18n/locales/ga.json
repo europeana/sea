@@ -44,12 +44,11 @@
       "title": "Seirbhísí ba mhaith linn a úsáid."
     },
     "consentNotice": {
-      "learnMore": "Lig dom a roghnú",
+      "learnMore": "Bainistigh socruithe fianán",
       "text": "An bhféadfaimis seirbhísí a chumasú le haghaidh slándála, anailísíochta agus ábhair tríú páirtí, le do thoil?",
       "textUpdated": "Tá roinnt athruithe tagtha ar sheirbhísí ó d'fhiosrúchán deireanach. An bhféadfaimis seirbhísí breise a chumasú le do thoil?"
     },
-    "decline": "Diúltaím",
-    "ok": "Ceart go leor",
+    "decline": "Diúltaigh",
     "purposes": {
       "2D": {
         "title": "Meáin 2D"
@@ -95,7 +94,7 @@
     },
     "services": {
       "cloudflare": {
-        "description": "Cuimhníonn sé go bhfuil tú i do dhuine.",
+        "description": "Is cuimhin leis go bhfuil an dúshlán slándála curtha i gcrích go rathúil.",
         "title": "Cloudflare"
       },
       "hotjar": {
