@@ -28,6 +28,7 @@ const links = [
       class="offcanvas offcanvas-end bg-dark border-start border-light"
       tabindex="-1"
       data-bs-scroll="true"
+      :aria-label="$t('nav.menu')"
     >
       <div class="offcanvas-header align-items-start">
         <NuxtLinkLocale to="/" class="navbar-brand">
