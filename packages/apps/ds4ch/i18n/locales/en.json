@@ -2,6 +2,7 @@
   "actions": {
     "close": "close",
     "downloadFile": "download {file}",
+    "selectLanguage": "(Select your language)",
     "share": "Share",
     "shareOn": "Share on {social}"
   },
