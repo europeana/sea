@@ -6,3 +6,4 @@
 .prettierignore
 Dockerfile
 pnpm-lock.yaml
+sonar-project.properties
