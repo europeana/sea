@@ -1,8 +1,8 @@
-import { defineVitestProject } from "@nuxt/test-utils/config";
-
+import { defineVitestConfig } from "@nuxt/test-utils/config";
 import { fileURLToPath } from "node:url";
+import { coverageConfigDefaults } from "vitest/config";
 
-export default defineVitestProject({
+export default defineVitestConfig({
   test: {
     environment: "nuxt",
     environmentOptions: {
@@ -11,5 +11,13 @@ export default defineVitestProject({
       },
     },
     setupFiles: ["../vitest.nuxt.setup.ts"],
+    coverage: {
+      reporter: ["text", "html", "lcov"],
+      exclude: [
+        ...coverageConfigDefaults.exclude,
+        "**/*.stories.ts",
+        "**/*.config.[jt]s",
+      ],
+    },
   },
 });

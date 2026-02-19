@@ -8,6 +8,10 @@
     ".": "./src/index.js",
     "./query": "./src/query.js"
   },
+  "scripts": {
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
   "dependencies": {
     "graphql": "^16.11.0",
     "http-errors": "^2.0.1",

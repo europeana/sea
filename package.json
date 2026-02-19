@@ -4,8 +4,8 @@
   "description": "Europeana Service Experience Architecture (SEA)",
   "type": "module",
   "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test": "pnpm -r test",
+    "test:coverage": "pnpm -r test:coverage",
     "prepare": "husky"
   },
   "keywords": [],

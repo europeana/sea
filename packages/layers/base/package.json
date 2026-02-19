@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@elastic/apm-rum-vue": "^2.1.10",
