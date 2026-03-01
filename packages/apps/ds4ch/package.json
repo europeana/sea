@@ -1,7 +1,7 @@
 {
   "name": "@europeana/ds4ch",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./nuxt.config.ts",
   "scripts": {
     "build": "nuxt build",
