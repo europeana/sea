@@ -7,7 +7,7 @@ Nuxt module for app observability using Elastic APM.
 Install the NPM package:
 
 ```shell
-pnpm install --save @europeana/elastic-apm/nuxt
+pnpm install --save @europeana/elastic-apm-nuxt
 ```
 
 Add the Nuxt module to your config:
