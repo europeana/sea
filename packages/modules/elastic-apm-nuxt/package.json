@@ -1,0 +1,13 @@
+{
+  "name": "@europeana/elastic-apm-nuxt",
+  "version": "0.0.1",
+  "description": "Nuxt module for Elastic APM",
+  "license": "EUPL-1.2",
+  "type": "module",
+  "exports": {
+    "./module": "./src/module.js"
+  },
+  "dependencies": {
+    "elastic-apm-node": "^4.15.0"
+  }
+}
