@@ -32,6 +32,10 @@ const factory = async () =>
         },
       },
     },
+    props: {
+      supportedTaxonomiesAndTypes: ["blog post"],
+      site: "dataspace-culturalheritage.eu",
+    },
   });
 
 describe("components/Content/contentTagsFilter", () => {

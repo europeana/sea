@@ -42,26 +42,22 @@ mockNuxtImport("useI18n", () => {
 const title = "Explore the data space";
 const description = "DS4CH text";
 
-const blogPostingsListingMinimalContentfulResponse = {
+const blogPostingCategoriesContentfulResponse = {
   data: {
     blogPostingCollection: {
       items: [
         {
-          date: "2022-02-12T08:00:00.000+01:00",
-          sys: { id: "796f5YKe4b1u8uXtizSBu0" },
-          cats: { items: [{ id: "3d" }, null] },
+          categoriesCollection: { items: [{ identifier: "3d" }] },
         },
         {
-          date: "2023-02-12T07:00:00.000+01:00",
-          sys: { id: "2abe0ffb2af8b39dfdb83d" },
-          cats: { items: [{ id: "network" }, null] },
+          categoriesCollection: { items: [{ identifier: "network" }] },
         },
       ],
     },
   },
 };
 
-const projectPagesListingMinimalContentfulResponse = {
+const projectPageCategoriesContentfulResponse = {
   data: {
     projectPageCollection: {
       items: [],
@@ -149,11 +145,11 @@ const handleContentfulQuery = (graphQL) => {
   if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListing") {
     return projectPagesListingContentfulResponse;
   }
-  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListingMinimal") {
-    return blogPostingsListingMinimalContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "BlogPostingCategories") {
+    return blogPostingCategoriesContentfulResponse;
   }
-  if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListingMinimal") {
-    return projectPagesListingMinimalContentfulResponse;
+  if (graphQL.definitions?.[0]?.name?.value === "ProjectPageCategories") {
+    return projectPageCategoriesContentfulResponse;
   }
   if (graphQL.definitions?.[0]?.name?.value === "ContentHubPage") {
     return contentHubPageContentfulResponse;

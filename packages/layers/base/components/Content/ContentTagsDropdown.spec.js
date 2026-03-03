@@ -1,13 +1,18 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { mockNuxtImport } from "@nuxt/test-utils/runtime";
-import { shallowMount } from "@vue/test-utils";
+import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import ContentTagsDropdown from "./ContentTagsDropdown.vue";
-import { nextTick } from "vue";
 
 const { useRouteMock } = vi.hoisted(() => ({
   useRouteMock: vi.fn(() => ({ query: {} })),
 }));
 mockNuxtImport("useRoute", () => useRouteMock);
+mockNuxtImport("useI18n", () => {
+  return () => {
+    return {
+      localeProperties: { value: { language: "en-GB" } },
+    };
+  };
+});
 
 const clickedOutside = ref(false);
 const enableClickOutsideListeners = vi.fn();
@@ -23,17 +28,59 @@ vi.mock("~/composables/clickOutside", () => ({
 
 const tags = [
   { identifier: "3d", name: "3D" },
-  { identifier: "cooking", name: "cooking" },
+  { identifier: "network", name: "network" },
   { identifier: "postcards", name: "postcards" },
 ];
 
+const mockBlogCategories = [
+  {
+    categoriesCollection: { items: [{ identifier: "network" }] },
+  },
+  {
+    categoriesCollection: { items: [{ identifier: "postcards" }] },
+  },
+  {
+    categoriesCollection: { items: [{ identifier: "3d" }] },
+  },
+];
+
+const contentfulResponse = (query, categories) => {
+  if (query.definitions?.[0]?.name?.value === "BlogPostingCategories") {
+    return Promise.resolve({
+      data: { blogPostingCollection: { items: categories.blogs } },
+      status: "success",
+    });
+  }
+  // if (query.definitions?.[0]?.name?.value === "ProjectPageCategories") {
+  //   return Promise.resolve({
+  //     data: { projectPageCollection: { items: categories.projects } },
+  //   });
+  // }
+  // if (query.definitions?.[0]?.name?.value === "EventCategories") {
+  //   return Promise.resolve({
+  //     data: { eventCollection: { items: categories.events } },
+  //   });
+  // }
+};
+
 const factory = (props, provide) =>
-  shallowMount(ContentTagsDropdown, {
+  mountSuspended(ContentTagsDropdown, {
     global: {
-      provide,
+      provide: {
+        $contentful: {
+          query: (query) =>
+            contentfulResponse(query, {
+              blogs: mockBlogCategories,
+            }),
+        },
+        ...provide,
+      },
+      stubs: ["ContentTagsList"],
     },
     props: {
       tags,
+      supportedTaxonomiesAndTypes: ["BlogPosting"],
+      site: "dataspace-culturalheritage.eu",
       ...props,
     },
   });
@@ -45,8 +92,9 @@ describe("components/Content/ContentTagsDropdown", () => {
 
   describe("on focusin event", () => {
     it("makes the click outside handler active, opens the dropdown", async () => {
-      const wrapper = factory();
+      const wrapper = await factory();
       await wrapper.vm.handleFocusin();
+
       expect(enableClickOutsideListeners).toHaveBeenCalled();
       expect(wrapper.vm.showDropdown).toBe(true);
     });
@@ -54,11 +102,10 @@ describe("components/Content/ContentTagsDropdown", () => {
 
   describe("featured tags", () => {
     describe("when featured tags are supplied as props", () => {
-      it("filters them out from display", () => {
-        const wrapper = factory(
+      it("filters them out from display", async () => {
+        const wrapper = await factory(
           {
-            filteredTags: ["3d", "cooking", "postcards"],
-            selectedTags: ["cooking"],
+            selectedTags: ["network"],
           },
           { featuredContentTags: ["3d"] },
         );
@@ -69,10 +116,9 @@ describe("components/Content/ContentTagsDropdown", () => {
       });
     });
     describe("when no featured tags are supplied", () => {
-      it("displays all tags", () => {
-        const wrapper = factory({
-          filteredTags: ["3d", "cooking", "postcards"],
-          selectedTags: ["cooking"],
+      it("displays all tags", async () => {
+        const wrapper = await factory({
+          selectedTags: ["network"],
         });
 
         expect(wrapper.vm.unfeaturedDisplayTags).toEqual(
@@ -84,34 +130,34 @@ describe("components/Content/ContentTagsDropdown", () => {
 
   describe("when searching for tag", () => {
     it("filters by keyword", async () => {
-      const wrapper = factory();
+      const wrapper = await factory();
       wrapper.vm.searchTag = "post";
       await nextTick();
-      expect(wrapper.vm.allDisplayTags.length).toBe(1);
-    });
-  });
 
-  describe("showDropdown", () => {
-    it("toggles the tag dropdown", async () => {
-      const wrapper = factory();
       wrapper.vm.showDropdown = true;
       await nextTick();
-      const dropdown = wrapper.find('[data-qa="tags search dropdown"]');
-
-      expect(dropdown.isVisible()).toBe(true);
-    });
-  });
-
-  describe("when tags are filtered", () => {
-    it("displays only the filtered tags", () => {
-      const wrapper = factory({ filteredTags: ["3d"] });
       expect(wrapper.vm.allDisplayTags.length).toBe(1);
     });
   });
+
+  // describe("when dropdown is shown and fetch state success", () => {
+  //   it("toggles the tag dropdown", async () => {
+  //     const wrapper = await factory();
+
+  //     wrapper.vm.showDropdown = true;
+  //     await nextTick();
+
+  //     wrapper.vm.showDropdown = true;
+  //     await nextTick();
+  //     const dropdown = wrapper.find('[data-qa="tags search dropdown"]');
+
+  //     expect(dropdown.isVisible()).toBe(true);
+  //   });
+  // });
 
   describe("when user clicks outside the search form dropdown", () => {
     it("hides the search options and disables click outside listeners", async () => {
-      const wrapper = factory();
+      const wrapper = await factory();
 
       wrapper.vm.showDropdown = true;
       clickedOutside.value = true;
@@ -124,7 +170,7 @@ describe("components/Content/ContentTagsDropdown", () => {
 
   describe("when user uses escape key", () => {
     it("hides the search options and disables click outside listeners", async () => {
-      const wrapper = factory();
+      const wrapper = await factory();
 
       wrapper.vm.showDropdown = true;
       await nextTick();

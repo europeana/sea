@@ -1,0 +1,23 @@
+query ProjectPageCategories(
+  $locale: String!
+  $preview: Boolean = false
+  $categoriesFilter: [ProjectPageFilter]
+) {
+  projectPageCollection(
+    preview: $preview
+    locale: $locale
+    limit: 1000
+    where: {
+      AND: [{ categoriesCollection_exists: true }, { AND: $categoriesFilter }]
+    }
+  ) {
+    items {
+      categoriesCollection(limit: 5) {
+        items {
+          identifier
+          name
+        }
+      }
+    }
+  }
+}

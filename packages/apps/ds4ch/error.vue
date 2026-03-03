@@ -1,4 +1,6 @@
 <script setup>
+import errorImages from "@/utils/errorMessageImages.json";
+
 const props = defineProps({
   error: {
     type: Object,
@@ -19,7 +21,10 @@ useHead({
       <div class="container footer-margin pb-5">
         <div class="row justify-content-center">
           <div class="col col-12">
-            <ErrorMessage :error="props.error" />
+            <ErrorMessage
+              :error="props.error"
+              :error-image="errorImages.generic"
+            />
           </div>
         </div>
       </div>

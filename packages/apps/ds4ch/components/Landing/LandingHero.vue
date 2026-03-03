@@ -77,7 +77,6 @@ const buttonClass = computed(() => {
       v-if="heroImage"
       class="hero-background responsive-background-image"
       :style="imageCSSVars"
-      role="img"
     />
     <div class="container d-flex position-relative">
       <div class="row">
@@ -120,12 +119,6 @@ const buttonClass = computed(() => {
   position: absolute;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.container {
-  @media (min-width: $bp-4k) {
-    max-width: 3015px;
-  }
 }
 
 .hero-content {

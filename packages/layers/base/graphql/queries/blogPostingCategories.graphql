@@ -1,0 +1,28 @@
+query BlogPostingCategories(
+  $locale: String!
+  $preview: Boolean = false
+  $categoriesFilter: [BlogPostingFilter]
+  $site: String = ""
+) {
+  blogPostingCollection(
+    preview: $preview
+    locale: $locale
+    limit: 1000
+    where: {
+      AND: [
+        { categoriesCollection_exists: true }
+        { site: $site }
+        { AND: $categoriesFilter }
+      ]
+    }
+  ) {
+    items {
+      categoriesCollection(limit: 5) {
+        items {
+          identifier
+          name
+        }
+      }
+    }
+  }
+}

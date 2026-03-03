@@ -1,0 +1,42 @@
+import type { Meta, StoryObj } from "@nuxtjs/storybook";
+
+import ErrorMessage from "./ErrorMessage.vue";
+
+const errorImage = {
+  creator: "Arbetarbladet, Tierp",
+  provider: "Upplands Museum",
+  license: "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+  image: {
+    url: "https://api.europeana.eu/thumbnail/v3/400/9f7bc2047ec00762abb14704d2cff0b7",
+  },
+  name: "Kattunge vid sambandscentralen hos polisen i Tierp 1972",
+  url: "https://www.europeana.eu/item/91617/upmu_photo_ARB17762",
+};
+
+const meta = {
+  component: ErrorMessage,
+} satisfies Meta<typeof ErrorMessage>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    error: { statusCode: 520, message: "Something went wrong" },
+    errorImage,
+  },
+};
+
+export const NotFound: Story = {
+  args: {
+    error: { statusCode: 404 },
+    errorImage,
+  },
+};
+
+export const NoResults: Story = {
+  args: {
+    error: { message: "No results" },
+    errorImage,
+  },
+};

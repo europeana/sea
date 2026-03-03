@@ -1,0 +1,32 @@
+query EventCategories(
+  $locale: String!
+  $preview: Boolean = false
+  $categoriesFilter: [EventFilter]
+) {
+  eventCollection(
+    preview: $preview
+    locale: $locale
+    limit: 1000
+    where: {
+      AND: [
+        { categoriesCollection_exists: true }
+        {
+          contentfulMetadata: {
+            concepts_exists: true
+            concepts: { id_contains_some: ["eventTypeEvent"] }
+          }
+        }
+        { AND: $categoriesFilter }
+      ]
+    }
+  ) {
+    items {
+      categoriesCollection(limit: 5) {
+        items {
+          identifier
+          name
+        }
+      }
+    }
+  }
+}

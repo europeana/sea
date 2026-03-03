@@ -44,9 +44,7 @@ const getClasses = (section) => {
       <LandingIllustrationGroup
         :title="section.name"
         :text="section.text"
-        :illustrations="
-          section.hasPartCollection && section.hasPartCollection.items
-        "
+        :illustrations="section.hasPartCollection?.items.filter(Boolean)"
       />
     </LandingIllustrationGroupContainer>
     <div
@@ -56,7 +54,7 @@ const getClasses = (section) => {
       <CardGroup
         :title="section.name"
         :text="section.text"
-        :cards="section.hasPartCollection?.items"
+        :cards="section.hasPartCollection?.items.filter(Boolean)"
         card-group-classes="row-cols-1 row-cols-xl-4"
       />
     </div>
@@ -71,20 +69,12 @@ const getClasses = (section) => {
       v-else-if="entryHasContentType(section, 'LandingSubSection')"
       :title="section.name"
       :text="section.text"
-      :sections="section.hasPartCollection && section.hasPartCollection.items"
+      :sections="section.hasPartCollection?.items.filter(Boolean)"
     />
   </div>
 </template>
 <style lang="scss">
 @import "@europeana/style/scss/variables";
-
-.image-card-container {
-  @media (min-width: $bp-large) {
-    max-width: none;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
 
 .testimonial-card-container {
   padding-bottom: 3rem;

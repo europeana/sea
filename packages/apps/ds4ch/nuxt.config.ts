@@ -32,7 +32,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: "",
       contentful: {
         accessToken: {
           delivery: null,
@@ -53,7 +52,6 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
     bundle: {
       optimizeTranslationDirective: false,
     },

@@ -114,7 +114,6 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
 
   @media (min-width: $bp-large) {
     text-align: left;
-    max-width: 1250px;
     margin-bottom: 6rem;
 
     &:nth-child(even),
@@ -136,7 +135,6 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
   }
 
   @media (min-width: $bp-4k) {
-    max-width: 2500px;
     margin-bottom: 15rem;
   }
 
@@ -144,14 +142,14 @@ const isSVG = cardImageWithAttribution?.image?.contentType === "image/svg+xml";
     margin-bottom: 1rem;
 
     @media (min-width: $bp-large) {
-      flex: 0 0 49%;
+      flex: 0 1 49%;
       margin-bottom: 0;
     }
   }
 
   .text-wrapper {
     @media (min-width: $bp-large) {
-      flex: 0 0 51%;
+      flex: 0 1 51%;
       padding-left: 3.625rem;
       padding-right: 2rem;
     }

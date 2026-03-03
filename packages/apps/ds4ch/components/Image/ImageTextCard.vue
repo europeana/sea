@@ -76,8 +76,6 @@ const ctaClasses = computed(() =>
 }
 
 .image-card {
-  max-width: 100%;
-
   @media (min-width: $bp-large) {
     padding-right: 0;
   }
@@ -110,10 +108,6 @@ const ctaClasses = computed(() =>
     @media (min-width: $bp-xxl) {
       flex-basis: 625px;
       padding-right: 0;
-    }
-
-    @media (min-width: $bp-xxl) {
-      flex-basis: 625px;
     }
 
     @media (min-width: $bp-4k) {

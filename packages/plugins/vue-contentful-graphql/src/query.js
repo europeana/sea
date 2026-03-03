@@ -2,6 +2,7 @@
 
 import fetch from "node-fetch-native";
 import httpError from "http-errors";
+import qs from "qs";
 import { print as printGraphql } from "graphql/language/printer.js";
 
 // TODO: ensure presence of required config
@@ -14,13 +15,17 @@ export const query = async (ast, variables = {}, config = {}) => {
     : config.accessToken?.delivery;
 
   const url = new URL(`${origin}${path}`);
+
   // These params will go into the URL query which will not be used by the
   // GraphQL service itself as it's a POST request, but facilitate intermediary
   // caching based on the URL alone, as with the apicache module.
-  url.search = new URLSearchParams({
-    _query: ast?.definitions?.[0]?.name?.value,
-    ...variables,
-  }).toString();
+  url.search = qs.stringify(
+    {
+      _query: ast?.definitions?.[0]?.name?.value,
+      ...variables,
+    },
+    { arrayFormat: "repeat" },
+  );
 
   const query = printGraphql(ast);
 

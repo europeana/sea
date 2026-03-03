@@ -9,12 +9,16 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      baseUrl: "",
       cookieConsent: { maxAge: 1296000 }, // 15 days
       feedbackWidget: {
         apiUrl: "https://www.europeana.eu/_api/jira-service-desk/feedback",
         fallbackLocale: undefined,
         faqUrl: undefined,
         locale: undefined,
+      },
+      i18n: {
+        baseUrl: "",
       },
       matomo: {
         host: null,

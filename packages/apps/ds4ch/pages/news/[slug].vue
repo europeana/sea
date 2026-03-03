@@ -22,7 +22,7 @@ const { page } = await useAsyncPageData(
   },
 );
 
-const sections = page.value.hasPartCollection?.items.filter((item) => !!item);
+const sections = page.value.hasPartCollection?.items.filter(Boolean);
 
 const authors =
   page.value.authorCollection?.items.length > 0
@@ -35,7 +35,7 @@ const tags =
     : null;
 
 usePageMeta({
-  title: page.name,
+  title: page.value.name,
   description: page.value.description,
   image: page.value.primaryImageOfPage?.image,
   ogType: "article",

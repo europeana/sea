@@ -74,4 +74,32 @@ query Page($url: String!) {
       },
     );
   });
+
+  describe("when there are more complex objects in the contentful query variables", () => {
+    it("stringifies the nested object variables with repeating identifiers", async () => {
+      const categoriesFilter = [
+        { categories: { identifier: "3d" } },
+        { categories: { identifier: "reuse" } },
+        { categories: { identifier: "tourism" } },
+      ];
+      const variables = { url: "/", categoriesFilter };
+
+      await query(ast, variables, config);
+
+      expect(fetch).toHaveBeenCalledWith(
+        `${config.graphqlUrl}/content/v1/spaces/${config.spaceId}/environments/${config.environmentId}?_query=Page&url=%2F&categoriesFilter%5Bcategories%5D%5Bidentifier%5D=3d&categoriesFilter%5Bcategories%5D%5Bidentifier%5D=reuse&categoriesFilter%5Bcategories%5D%5Bidentifier%5D=tourism`,
+        {
+          body: JSON.stringify({
+            query: graphqlQuery,
+            variables,
+          }),
+          headers: {
+            authorization: `Bearer ${config.accessToken.delivery}`,
+            "content-type": "application/json",
+          },
+          method: "post",
+        },
+      );
+    });
+  });
 });
