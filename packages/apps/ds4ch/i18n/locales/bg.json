@@ -2,6 +2,7 @@
   "actions": {
     "close": "затвори",
     "downloadFile": "изтегляне {file}",
+    "selectLanguage": "(Изберете вашия език)",
     "share": "Споделяне",
     "shareOn": "Споделяне на {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Обучение",
       "viewAll": "Преглед на всички"
     },
+    "filterContentType": "Филтриране на съдържанието по тип",
     "resultsHaveLoaded": "{0} намерени резултати",
     "seeAll": "Вижте всички {content}",
     "seeMore": "Вижте повече {content}",
@@ -177,6 +179,8 @@
     "collections": "Разгледайте колекциите",
     "dataSpace": "Разгледайте пространството за данни",
     "home": "Начало",
+    "mainNavigation": "Основна навигация",
+    "menu": "Меню",
     "toggle": "Покажи менюто"
   },
   "newWindow": "отваря се в нов прозорец",
