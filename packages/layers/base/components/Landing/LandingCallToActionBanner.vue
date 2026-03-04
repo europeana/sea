@@ -76,7 +76,12 @@ const imageCSSVars = computed(() => {
 </script>
 
 <template>
-  <div class="landing-cta position-relative">
+  <div
+    class="landing-cta position-relative"
+    :class="{
+      'bg-dark': props.backgroundImage?.profile?.background === 'highlight',
+    }"
+  >
     <div
       v-if="props.backgroundImage"
       class="background-image responsive-background-image"
@@ -85,11 +90,10 @@ const imageCSSVars = computed(() => {
     />
     <div
       class="container"
-      :class="
-        props.backgroundImage?.profile?.background === 'highlight'
-          ? 'text-white'
-          : ''
-      "
+      :class="{
+        'text-white':
+          props.backgroundImage?.profile?.background === 'highlight',
+      }"
     >
       <ContentPrimaryCallToAction
         :title="title"
