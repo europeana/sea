@@ -12,10 +12,13 @@ export default defineConfig({
       "packages/plugins/vue-contentful-graphql",
     ],
     coverage: {
+      reporter: ["text", "html", "lcov"],
       exclude: [
         ...coverageConfigDefaults.exclude,
         "**/*.stories.ts",
         "**/*.config.[jt]s",
+        "tmp/**",
+        "**/storybook-static/**",
       ],
     },
   },
