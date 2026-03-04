@@ -17,6 +17,8 @@ export default defineConfig({
         ...coverageConfigDefaults.exclude,
         "**/*.stories.ts",
         "**/*.config.[jt]s",
+        "tmp/**",
+        "**/storybook-static/**",
       ],
     },
   },
