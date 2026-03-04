@@ -1,5 +1,5 @@
 <script setup>
-const { locale, locales } = useI18n();
+const { locale, locales, t } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 
 // TODO:
@@ -21,6 +21,7 @@ const selectedLocale = computed(() => {
     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
       <span class="icon-language me-2" />
       {{ selectedLocale }}
+      <span class="visually-hidden">{{ t("actions.selectLanguage") }}</span>
     </button>
     <ul class="dropdown-menu">
       <li v-for="l in availableLocales" :key="l.code">

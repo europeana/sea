@@ -15,6 +15,7 @@ mockNuxtImport("useI18n", () => {
           { code: "nl", name: "Nederlands" },
         ],
       },
+      t: (key) => key,
     };
   };
 });
@@ -27,11 +28,11 @@ describe("LanguageSelector", () => {
     expect(dropdown.exists()).toBe(true);
   });
 
-  it("has the current locale name as a button label", () => {
+  it("has the current locale name and AT text (for a11y) as a button label", () => {
     const wrapper = shallowMount(LanguageSelector);
     const button = wrapper.find("button.dropdown-toggle");
 
-    expect(button.text()).toBe("English");
+    expect(button.text()).toBe("English actions.selectLanguage");
   });
 
   it("contains language links to alternate language versions of the current page", () => {

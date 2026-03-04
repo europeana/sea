@@ -72,7 +72,10 @@ const buttonClass = computed(() => {
 </script>
 
 <template>
-  <div class="landing-hero position-relative">
+  <div
+    class="landing-hero position-relative"
+    :class="{ 'bg-dark': variant === 'alternate' }"
+  >
     <div
       v-if="heroImage"
       class="hero-background responsive-background-image"
@@ -83,7 +86,7 @@ const buttonClass = computed(() => {
         <div class="col col-12 col-lg-7">
           <header
             class="hero-content"
-            :class="variant === 'alternate' ? 'text-white' : ''"
+            :class="{ 'text-white': variant === 'alternate' }"
           >
             <h1>{{ headline }}</h1>
             <!-- eslint-disable vue/no-v-html -->
