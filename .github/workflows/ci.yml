@@ -83,11 +83,14 @@ jobs:
         run: pnpm install
       - name: Run unit tests, with coverage report
         run: pnpm test:coverage
+      - name: Archive code coverage
+        run: |
+          tar -cf test-coverage.tar coverage
       - name: Upload code coverage
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-lcov-info
-          path: coverage/lcov.info
+          name: test-coverage
+          path: test-coverage.tar
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
@@ -99,8 +102,10 @@ jobs:
       - name: Download code coverage
         uses: actions/download-artifact@v5
         with:
-          name: code-coverage-lcov-info
-          path: coverage/lcov.info
+          name: test-coverage
+          path: .
+      - name: Unarchive code coverage
+        run: tar -xf test-coverage.tar && rm test-coverage.tar
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7
         env:
