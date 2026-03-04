@@ -2,6 +2,7 @@
   "actions": {
     "close": "bezárás",
     "downloadFile": "letöltés {file}",
+    "selectLanguage": "(Válassza ki a nyelvét)",
     "share": "Megosztás",
     "shareOn": "Megosztás a {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Képzés",
       "viewAll": "Összes megtekintése"
     },
+    "filterContentType": "Tartalom szűrése típus szerint",
     "resultsHaveLoaded": "{0} találat",
     "seeAll": "Összes megtekintése {content}",
     "seeMore": "Továbbiak megtekintése {content}",
@@ -177,6 +179,8 @@
     "collections": "Fedezze fel a gyűjteményeket",
     "dataSpace": "Fedezze fel az adattért",
     "home": "Kezdőlap",
+    "mainNavigation": "Fő navigáció",
+    "menu": "Menü",
     "toggle": "Menü megjelenítése"
   },
   "newWindow": "új ablakban nyílik meg",

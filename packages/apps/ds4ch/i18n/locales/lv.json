@@ -2,6 +2,7 @@
   "actions": {
     "close": "aizvērt",
     "downloadFile": "lejupielādēt {file}",
+    "selectLanguage": "(Izvēlieties savu valodu)",
     "share": "Dalīties",
     "shareOn": "Dalīties {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Apmācība",
       "viewAll": "Skatīt visu"
     },
+    "filterContentType": "Filtrēt saturu pēc veida",
     "resultsHaveLoaded": "{0} atrastie rezultāti",
     "seeAll": "Skatīt visus {content}",
     "seeMore": "Skatīt vairāk {content}",
@@ -177,6 +179,8 @@
     "collections": "Izpētiet kolekcijas",
     "dataSpace": "Izpētiet datu telpu",
     "home": "Sākumlapa",
+    "mainNavigation": "Galvenā navigācija",
+    "menu": "Izvēlne",
     "toggle": "Rādīt izvēlni"
   },
   "newWindow": "atveras jaunā logā",

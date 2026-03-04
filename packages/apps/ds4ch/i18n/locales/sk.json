@@ -2,6 +2,7 @@
   "actions": {
     "close": "zatvoriť",
     "downloadFile": "stiahnuť {file}",
+    "selectLanguage": "(Vyberte si jazyk)",
     "share": "Zdieľať",
     "shareOn": "Zdieľať na {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Školenie",
       "viewAll": "Zobraziť všetko"
     },
+    "filterContentType": "Filtrovať obsah podľa typu",
     "resultsHaveLoaded": "{0} nájdených výsledkov",
     "seeAll": "Zobraziť všetko {content}",
     "seeMore": "Zobraziť viac {content}",
@@ -177,6 +179,8 @@
     "collections": "Preskúmajte zbierky",
     "dataSpace": "Preskúmajte dátový priestor",
     "home": "Domov",
+    "mainNavigation": "Hlavná navigácia",
+    "menu": "Menu",
     "toggle": "Zobraziť ponuku"
   },
   "newWindow": "otvorí sa v novom okne",

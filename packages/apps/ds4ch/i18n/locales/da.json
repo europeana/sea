@@ -2,6 +2,7 @@
   "actions": {
     "close": "luk",
     "downloadFile": "hent {file}",
+    "selectLanguage": "(Vælg dit sprog)",
     "share": "Del",
     "shareOn": "Del på {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Træning",
       "viewAll": "Se alle"
     },
+    "filterContentType": "Filtrer indhold efter type",
     "resultsHaveLoaded": "{0} resultater fundet",
     "seeAll": "Se alle {content}",
     "seeMore": "Se mere {content}",
@@ -177,6 +179,8 @@
     "collections": "Udforsk samlingerne",
     "dataSpace": "Udforsk datarummet",
     "home": "Hjem",
+    "mainNavigation": "Hovednavigation",
+    "menu": "Menu",
     "toggle": "Vis menu"
   },
   "newWindow": "åbner i nyt vindue",
