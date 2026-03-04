@@ -45,7 +45,10 @@ const isTypeActive = (type) => {
 
 <template>
   <div>
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <nav
+      class="navbar navbar-expand-sm navbar-light"
+      :aria-label="$t('content.filterContentType')"
+    >
       <div id="content-filter-navbar" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto d-none d-lg-flex">
           <li
