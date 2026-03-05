@@ -94,7 +94,7 @@ describe("slugPage", () => {
 
       expect(mockQuery).toHaveBeenCalledWith(
         expect.any(Object),
-        expect.not.objectContaining({ preview: true }),
+        expect.objectContaining({ preview: false }),
       );
     });
   });
@@ -104,7 +104,7 @@ describe("slugPage", () => {
       useRouteMock.mockImplementation(() => ({
         path: "/en/test-preview",
         params: { slug: "test-preview" },
-        fullPath: "/en/test-preview?mode=preview",
+        fullPath: "/en/test-preview",
         query: {
           mode: "preview",
         },
