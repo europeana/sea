@@ -11,7 +11,6 @@ const contentful = inject("$contentful");
 const { t, localeProperties } = useI18n({ useScope: "global" });
 
 const { page } = await useAsyncPageData(`landingPage:${slug}`, async () => {
-  console.log(route);
   const variables = {
     identifier: slug,
     locale: localeProperties.value.language,

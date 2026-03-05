@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import collectionsPage from "./collections.vue";
+import { ref } from "vue";
 
 const { useRouteMock } = vi.hoisted(() => ({
   useRouteMock: vi.fn(() => {
@@ -21,6 +22,10 @@ mockNuxtImport("useI18n", () => {
       t: (key) => key,
     };
   };
+});
+mockNuxtImport("useAsyncPageData", () => async (cacheId, callback) => {
+  const result = await callback();
+  return { page: ref(result.page) };
 });
 
 const title = "Explore the collections";
@@ -107,19 +112,21 @@ describe("Collections page", () => {
     });
   });
 
-  // describe("when in preview mode", () => {
-  //   it("requests from contentful with the preview arg set to true", async () => {
-  //     await useRouteMock.mockImplementation(() => ({
-  //       path: "/en/collections",
-  //       params: { slug: 'collections' },
-  //       fullPath: '/en/collections?mode=preview',
-  //       query: {
-  //         mode: 'preview',
-  //       },
-  //     }));
-  //     console.log('when in preview mode', useRouteMock.mock);
-  //     await factory();
-  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
-  //   });
-  // });
+  describe("when in preview mode", () => {
+    it("requests from contentful with the preview arg set to true", async () => {
+      await useRouteMock.mockImplementation(() => ({
+        path: "/en/collections",
+        params: { slug: "collections" },
+        fullPath: "/en/collections",
+        query: {
+          mode: "preview",
+        },
+      }));
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: true }),
+      );
+    });
+  });
 });
