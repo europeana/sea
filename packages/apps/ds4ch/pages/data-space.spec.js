@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import dataSpacePage from "./data-space.vue";
 
@@ -15,17 +15,22 @@ mockNuxtImport("useRuntimeConfig", () => {
     },
   });
 });
-
-mockNuxtImport("useRoute", () => {
-  return () => {
+const { useRouteMock } = vi.hoisted(() => ({
+  useRouteMock: vi.fn(() => {
     return {
       path: "/data-space",
       fullPath: "/data-space",
+      params: { slug: "data-space" },
       query: {
         page: 1,
       },
     };
-  };
+  }),
+}));
+mockNuxtImport("useRoute", () => useRouteMock);
+mockNuxtImport("useAsyncPageData", () => async (cacheId, callback) => {
+  const result = await callback();
+  return { page: ref(result.page) };
 });
 
 mockNuxtImport("useI18n", () => {
@@ -159,12 +164,14 @@ const handleContentfulQuery = (graphQL) => {
   }
 };
 
+const mockQuery = vi.fn((graphQL) => handleContentfulQuery(graphQL));
+
 const factory = async () =>
   await mountSuspended(dataSpacePage, {
     global: {
       provide: {
         $contentful: {
-          query: (graphQL) => handleContentfulQuery(graphQL),
+          query: (graphQL, args) => mockQuery(graphQL, args),
         },
       },
       stubs: {
@@ -174,6 +181,10 @@ const factory = async () =>
   });
 
 describe("dataSpacePage", () => {
+  afterEach(() => {
+    useRouteMock.mockReset();
+    vi.clearAllMocks();
+  });
   it("renders landing hero with the attributes from Contentful", async () => {
     const wrapper = await factory();
 
@@ -230,23 +241,31 @@ describe("dataSpacePage", () => {
     ]);
   });
 
-  // describe("when NOT in preview mode", () => {
-  //   it("requests from contentful without the preview arg", async () => {
-  //     await factory();
-  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.not.objectContaining({ preview: true } ));
-  //   });
-  // });
+  describe("when NOT in preview mode", () => {
+    it("requests from contentful with the preview arg set to false", async () => {
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: false }),
+      );
+    });
+  });
 
-  // describe("when in preview mode", () => {
-  //   it("requests from contentful with the preview arg set to true", async () => {
-  //     await useRouteMock.mockImplementation(() => ({
-  //       query: {
-  //         mode: 'preview',
-  //       },
-  //     }));
-
-  //     await factory();
-  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
-  //   });
-  // });
+  describe("when in preview mode", () => {
+    it("requests from contentful with the preview arg set to true", async () => {
+      await useRouteMock.mockImplementation(() => ({
+        path: "/en/data-space",
+        params: { slug: "data-space" },
+        fullPath: "/en/data-space?mode=preview",
+        query: {
+          mode: "preview",
+        },
+      }));
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: true }),
+      );
+    });
+  });
 });

@@ -44,10 +44,10 @@ const mockBlogCategories = [
   },
 ];
 
-const contentfulResponse = (query, categories) => {
+const contentfulResponse = (query) => {
   if (query.definitions?.[0]?.name?.value === "BlogPostingCategories") {
     return Promise.resolve({
-      data: { blogPostingCollection: { items: categories.blogs } },
+      data: { blogPostingCollection: { items: mockBlogCategories } },
       status: "success",
     });
   }
@@ -63,15 +63,13 @@ const contentfulResponse = (query, categories) => {
   // }
 };
 
+const mockQuery = vi.fn((query) => contentfulResponse(query));
 const factory = (props, provide) =>
   mountSuspended(ContentTagsDropdown, {
     global: {
       provide: {
         $contentful: {
-          query: (query) =>
-            contentfulResponse(query, {
-              blogs: mockBlogCategories,
-            }),
+          query: mockQuery,
         },
         ...provide,
       },
@@ -88,6 +86,7 @@ const factory = (props, provide) =>
 describe("components/Content/ContentTagsDropdown", () => {
   afterEach(() => {
     useRouteMock.mockReset();
+    vi.clearAllMocks();
   });
 
   describe("on focusin event", () => {
@@ -182,26 +181,36 @@ describe("components/Content/ContentTagsDropdown", () => {
     });
   });
 
-  // describe("when NOT in preview mode", () => {
-  //   it("requests from contentful without the preview arg", async () => {
-  //     await factory();
-  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.not.objectContaining({ preview: true } ));
-  //   });
-  // });
+  describe("fetchCategories", () => {
+    describe("when NOT in preview mode", () => {
+      it("requests from contentful with the preview arg set to false", async () => {
+        const wrapper = await factory();
+        wrapper.vm.fetchCategories();
+        expect(mockQuery).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ preview: false }),
+        );
+      });
+    });
 
-  // describe("when in preview mode", () => {
-  //   it("requests from contentful with the preview arg set to true", async () => {
-  //     useRouteMock.mockImplementation(() => ({
-  //       path: '/en/listing',
-  //       fullPath: '/en/listing?mode=preview',
-  //       params: { slug: 'listing' },
-  //       query: {
-  //         mode: 'preview',
-  //       },
-  //     }));
+    describe("when in preview mode", () => {
+      it("requests from contentful with the preview arg set to true", async () => {
+        useRouteMock.mockImplementation(() => ({
+          path: "/en/listing",
+          fullPath: "/en/listing?mode=preview",
+          params: { slug: "listing" },
+          query: {
+            mode: "preview",
+          },
+        }));
 
-  //     await factory();
-  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
-  //   });
-  // });
+        const wrapper = await factory();
+        wrapper.vm.fetchCategories();
+        expect(mockQuery).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ preview: true }),
+        );
+      });
+    });
+  });
 });
