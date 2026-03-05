@@ -60,7 +60,7 @@ const tagsDropdown = useTemplateRef("tagsdropdown");
 async function fetchCategories() {
   const contentVariables = {
     locale: localeProperties.value.language,
-    preview: route.query.mode === "preview",
+    preview: route.query?.mode === "preview",
     categoriesFilter: null,
     site: props.selectedTaxonomyOrType === "BlogPosting" ? props.site : null,
   };

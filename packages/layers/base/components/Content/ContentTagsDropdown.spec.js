@@ -181,4 +181,27 @@ describe("components/Content/ContentTagsDropdown", () => {
       expect(disableClickOutsideListeners).toHaveBeenCalled();
     });
   });
+
+  // describe("when NOT in preview mode", () => {
+  //   it("requests from contentful without the preview arg", async () => {
+  //     await factory();
+  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.not.objectContaining({ preview: true } ));
+  //   });
+  // });
+
+  // describe("when in preview mode", () => {
+  //   it("requests from contentful with the preview arg set to true", async () => {
+  //     useRouteMock.mockImplementation(() => ({
+  //       path: '/en/listing',
+  //       fullPath: '/en/listing?mode=preview',
+  //       params: { slug: 'listing' },
+  //       query: {
+  //         mode: 'preview',
+  //       },
+  //     }));
+
+  //     await factory();
+  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
+  //   });
+  // });
 });

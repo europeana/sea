@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import slugPage from "./[slug].vue";
 
@@ -10,6 +10,18 @@ mockNuxtImport("useI18n", () => {
     };
   };
 });
+
+const { useRouteMock } = vi.hoisted(() => ({
+  useRouteMock: vi.fn(() => {
+    return {
+      path: "/en/about",
+      fullPath: "/en/about",
+      params: { slug: "about" },
+      query: {},
+    };
+  }),
+}));
+mockNuxtImport("useRoute", () => useRouteMock);
 
 const title = "DS4CH about us";
 const description = "DS4CH text";
@@ -36,18 +48,22 @@ const contentfulResponse = {
     },
   },
 };
+const mockQuery = vi.fn(() => contentfulResponse);
+
 const factory = async () =>
   await mountSuspended(slugPage, {
     global: {
       provide: {
-        $contentful: {
-          query: () => contentfulResponse,
-        },
+        $contentful: { query: mockQuery },
       },
     },
   });
 
 describe("slugPage", () => {
+  afterEach(() => {
+    useRouteMock.mockReset();
+    vi.clearAllMocks();
+  });
   it("renders landing hero with the attributes from Contentful", async () => {
     const wrapper = await factory();
 
@@ -64,5 +80,40 @@ describe("slugPage", () => {
 
     expect(imageCards[0].classes()).toContain("image-card-odd");
     expect(imageCards[1].classes()).toContain("image-card-even");
+  });
+
+  describe("when NOT in preview mode", () => {
+    it("requests from contentful with the preview arg set to false", async () => {
+      useRouteMock.mockImplementation(() => ({
+        path: "/en/test-no-preview",
+        params: { slug: "test-no-preview" },
+        fullPath: "/en/test-no-preview",
+        query: {},
+      }));
+      await factory();
+
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.not.objectContaining({ preview: true }),
+      );
+    });
+  });
+
+  describe("when in preview mode", () => {
+    it("requests from contentful with the preview arg set to true", async () => {
+      useRouteMock.mockImplementation(() => ({
+        path: "/en/test-preview",
+        params: { slug: "test-preview" },
+        fullPath: "/en/test-preview?mode=preview",
+        query: {
+          mode: "preview",
+        },
+      }));
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: true }),
+      );
+    });
   });
 });

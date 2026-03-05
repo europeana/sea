@@ -162,5 +162,25 @@ describe("ProjectPage", () => {
       expect(dates.text()).toBe("projects.dates");
     });
   });
+
+  // describe("when NOT in preview mode", () => {
+  //   it("requests from contentful without the preview arg", async () => {
+  //     await factory();
+  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.not.objectContaining({ preview: true } ));
+  //   });
+  // });
+
+  // describe("when in preview mode", () => {
+  //   it("requests from contentful with the preview arg set to true", async () => {
+  //     await useRouteMock.mockImplementation(() => ({
+  //       query: {
+  //         mode: 'preview',
+  //       },
+  //     }));
+
+  //     await factory();
+  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
+  //   });
+  // });
   // TODO: add tests for project related fields/sections
 });

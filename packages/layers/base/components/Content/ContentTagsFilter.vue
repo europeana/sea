@@ -1,5 +1,6 @@
 <script setup>
 import categoriesGraphql from "@/graphql/queries/categories.graphql";
+const route = useRoute();
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
 const featuredTags = inject("featuredContentTags", null);
@@ -40,6 +41,7 @@ defineProps({
 const { data: tags, error } = await useAsyncData("allCategories", async () => {
   const categoriesVariables = {
     locale: localeProperties.value.language,
+    preview: route.query?.mode === "preview",
   };
   const categoriesResponse = await contentful.query(
     categoriesGraphql,

@@ -1,7 +1,18 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import collectionsPage from "./collections.vue";
 
+const { useRouteMock } = vi.hoisted(() => ({
+  useRouteMock: vi.fn(() => {
+    return {
+      path: "/en/collections",
+      fullPath: "/en/collections",
+      params: { slug: "collections" },
+      query: {},
+    };
+  }),
+}));
+mockNuxtImport("useRoute", () => useRouteMock);
 mockNuxtImport("useI18n", () => {
   return () => {
     return {
@@ -40,18 +51,25 @@ const contentfulResponse = {
     },
   },
 };
+
+const mockQuery = vi.fn(() => contentfulResponse);
+
 const factory = async () =>
   await mountSuspended(collectionsPage, {
     global: {
       provide: {
         $contentful: {
-          query: () => contentfulResponse,
+          query: mockQuery,
         },
       },
     },
   });
 
-describe("DataPage", () => {
+describe("Collections page", () => {
+  afterEach(() => {
+    useRouteMock.mockReset();
+    vi.clearAllMocks();
+  });
   it("renders landing hero with the attributes from Contentful", async () => {
     const wrapper = await factory();
 
@@ -78,4 +96,27 @@ describe("DataPage", () => {
 
     expect(cards.length).toBe(2);
   });
+  // UNCOMMENT:
+  // describe("when NOT in preview mode", () => {
+  //   it("requests from contentful without the preview arg", async () => {
+  //     await factory();
+  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.not.objectContaining({ preview: true } ));
+  //   });
+  // });
+
+  // describe("when in preview mode", () => {
+  //   it("requests from contentful with the preview arg set to true", async () => {
+  //     await useRouteMock.mockImplementation(() => ({
+  //       path: "/en/collections",
+  //       params: { slug: 'collections' },
+  //       fullPath: '/en/collections?mode=preview',
+  //       query: {
+  //         mode: 'preview',
+  //       },
+  //     }));
+  //     console.log('when in preview mode', useRouteMock.mock);
+  //     await factory();
+  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
+  //   });
+  // });
 });
