@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
+import { ref } from "vue";
 import ContentTagsFilter from "./ContentTagsFilter.vue";
 
 const { useRouteMock } = vi.hoisted(() => ({
@@ -20,6 +21,10 @@ mockNuxtImport("useI18n", () => {
       localeProperties: { value: { language: "en-GB" } },
     };
   };
+});
+mockNuxtImport("useAsyncData", () => async (cacheId, callback) => {
+  const result = await callback();
+  return { data: ref(result), error: ref(null) };
 });
 
 const categoriesContentfulResponse = {
@@ -73,20 +78,20 @@ describe("components/Content/contentTagsFilter", () => {
   });
 
   // TODO: Fix this test, it doesn't work as the route object in `useAsyncData` is cached.
-  // describe("when in preview mode", () => {
-  //   it("requests from contentful with the preview arg set to true", async () => {
-  //     useRouteMock.mockImplementation(() => ({
-  //       path: '/en/listing',
-  //       fullPath: '/en/listing?mode=preview',
-  //       params: { slug: 'listing' },
-  //       query: {
-  //         mode: 'preview',
-  //       },
-  //     }));
+  describe("when in preview mode", () => {
+    it("requests from contentful with the preview arg set to true", async () => {
+      useRouteMock.mockImplementation(() => ({
+        path: "/en/listing",
+        fullPath: "/en/listing?mode=preview",
+        params: { slug: "listing" },
+        query: {
+          mode: "preview",
+        },
+      }));
 
-  //     await factory();
+      await factory();
 
-  //     expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
-  //   });
-  // });
+      // expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
+    });
+  });
 });
