@@ -77,7 +77,6 @@ describe("components/Content/contentTagsFilter", () => {
     });
   });
 
-  // TODO: Fix this test, it doesn't work as the route object in `useAsyncData` is cached.
   describe("when in preview mode", () => {
     it("requests from contentful with the preview arg set to true", async () => {
       useRouteMock.mockImplementation(() => ({
@@ -91,7 +90,10 @@ describe("components/Content/contentTagsFilter", () => {
 
       await factory();
 
-      // expect(mockQuery).toHaveBeenCalledWith(expect.any(Object), expect.objectContaining({ preview: true } ));
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: true }),
+      );
     });
   });
 });
