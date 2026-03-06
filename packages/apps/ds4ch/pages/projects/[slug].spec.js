@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import ProjectPage from "./[slug].vue";
 
@@ -11,6 +11,22 @@ mockNuxtImport("useI18n", () => {
     };
   };
 });
+const { useRouteMock } = vi.hoisted(() => ({
+  useRouteMock: vi.fn(() => {
+    return {
+      path: "/en/news/slug",
+      fullPath: "/en/news/slug",
+      params: { slug: "slug" },
+      query: {},
+    };
+  }),
+}));
+mockNuxtImport("useRoute", () => useRouteMock);
+mockNuxtImport("useAsyncPageData", () => async (cacheId, callback) => {
+  const result = await callback();
+  return { page: ref(result.page) };
+});
+
 const contentfulResponse = {
   data: {
     projectPageCollection: {
@@ -100,19 +116,23 @@ const contentfulResponse = {
     },
   },
 };
-
+const mockQuery = vi.fn(() => contentfulResponse);
 const factory = async () =>
   await mountSuspended(ProjectPage, {
     global: {
       provide: {
         $contentful: {
-          query: () => contentfulResponse,
+          query: mockQuery,
         },
       },
     },
   });
 
 describe("ProjectPage", () => {
+  afterEach(() => {
+    useRouteMock.mockReset();
+    vi.clearAllMocks();
+  });
   // describe('page meta', () => {
   // TODO: add tests
   // });
@@ -160,6 +180,34 @@ describe("ProjectPage", () => {
       const dates = wrapper.find("time");
 
       expect(dates.text()).toBe("projects.dates");
+    });
+  });
+
+  describe("when NOT in preview mode", () => {
+    it("requests from contentful with the preview arg set to false", async () => {
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: false }),
+      );
+    });
+  });
+
+  describe("when in preview mode", () => {
+    it("requests from contentful with the preview arg set to true", async () => {
+      useRouteMock.mockImplementation(() => ({
+        path: "/en/projects/slug",
+        fullPath: "/en/projects/slug?mode=preview",
+        params: { slug: "slug" },
+        query: {
+          mode: "preview",
+        },
+      }));
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: true }),
+      );
     });
   });
   // TODO: add tests for project related fields/sections

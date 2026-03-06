@@ -5,6 +5,7 @@ import { useAsyncPageData } from "@europeana/sea-base-layer/composables/useAsync
 import landingPageQuery from "@/graphql/queries/landingPage.graphql";
 import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 
+const route = useRoute();
 const slug = "collections";
 const contentful = inject("$contentful");
 const { t, localeProperties } = useI18n({ useScope: "global" });
@@ -13,6 +14,7 @@ const { page } = await useAsyncPageData(`landingPage:${slug}`, async () => {
   const variables = {
     identifier: slug,
     locale: localeProperties.value.language,
+    preview: route.query?.mode === "preview",
   };
 
   const response = await contentful.query(landingPageQuery, variables);

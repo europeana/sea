@@ -238,7 +238,7 @@ const featuredEntrySubTitle = computed(() => {
 async function fetchFullEntries() {
   const contentVariables = {
     locale: localeProperties.value.language,
-    preview: route.query.mode === "preview",
+    preview: route.query?.mode === "preview",
     limit: selectedTaxonomyOrType.value
       ? ENTRIES_PER_PAGE
       : ENTRIES_PER_SECTION,

@@ -6,6 +6,7 @@ import contentHubPageQuery from "@/graphql/queries/contentHubPage.graphql";
 import { usePageMeta } from "@europeana/sea-base-layer/composables/pageMeta";
 import errorImages from "@/utils/errorMessageImages.json";
 
+const route = useRoute();
 const slug = "data-space";
 const contentful = inject("$contentful");
 const { localeProperties } = useI18n();
@@ -14,6 +15,7 @@ const { page } = await useAsyncPageData(`contentHubPage:${slug}`, async () => {
   const variables = {
     identifier: slug,
     locale: localeProperties.value.language,
+    preview: route.query?.mode === "preview",
   };
 
   const response = await contentful.query(contentHubPageQuery, variables);

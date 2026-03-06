@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
 import NewsSlugPage from "./[slug].vue";
 
@@ -9,6 +9,22 @@ mockNuxtImport("useI18n", () => {
       localeProperties: { value: { language: "en-GB" } },
     };
   };
+});
+
+const { useRouteMock } = vi.hoisted(() => ({
+  useRouteMock: vi.fn(() => {
+    return {
+      path: "/en/news/slug",
+      fullPath: "/en/news/slug",
+      params: { slug: "slug" },
+      query: {},
+    };
+  }),
+}));
+mockNuxtImport("useRoute", () => useRouteMock);
+mockNuxtImport("useAsyncPageData", () => async (cacheId, callback) => {
+  const result = await callback();
+  return { page: ref(result.page) };
 });
 
 const title = "DS4CH news post";
@@ -31,12 +47,14 @@ const contentfulResponse = {
     },
   },
 };
+
+const mockQuery = vi.fn(() => contentfulResponse);
 const factory = async () =>
   await mountSuspended(NewsSlugPage, {
     global: {
       provide: {
         $contentful: {
-          query: () => contentfulResponse,
+          query: mockQuery,
         },
       },
     },
@@ -44,6 +62,10 @@ const factory = async () =>
 
 // TODO: add more tests
 describe("NewsSlugPage", () => {
+  afterEach(() => {
+    useRouteMock.mockReset();
+    vi.clearAllMocks();
+  });
   it("renders an h1 element with the page name from Contentful", async () => {
     const wrapper = await factory();
 
@@ -61,6 +83,40 @@ describe("NewsSlugPage", () => {
       );
 
       expect(associatedMediaLink.text()).toBe("Data Space Annual Re… (PDF)");
+    });
+  });
+  describe("when NOT in preview mode", () => {
+    it("requests from contentful with the preview arg set to false", async () => {
+      useRouteMock.mockImplementation(() => ({
+        path: "/en/news/slug",
+        fullPath: "/en/news/slug",
+        params: { slug: "slug" },
+        query: {},
+      }));
+      await factory();
+
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: false }),
+      );
+    });
+  });
+
+  describe("when in preview mode", () => {
+    it("requests from contentful with the preview arg set to true", async () => {
+      useRouteMock.mockImplementation(() => ({
+        path: "/en/news/slug",
+        fullPath: "/en/news/slug?mode=preview",
+        params: { slug: "slug" },
+        query: {
+          mode: "preview",
+        },
+      }));
+      await factory();
+      expect(mockQuery).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({ preview: true }),
+      );
     });
   });
 });
