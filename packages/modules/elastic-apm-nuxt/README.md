@@ -28,7 +28,7 @@ For server-side instrumentation to work, it is necessary to modify both build an
 The Nuxt build command needs to use the elastic-apm-node loader:
 
 ```shell
-NODE_OPTIONS='--loader elastic-apm-node/loader.mjs' nuxt build
+NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader' nuxt build
 ```
 
 #### Run

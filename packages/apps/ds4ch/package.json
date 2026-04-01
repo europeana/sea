@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "build": "NODE_OPTIONS='--loader elastic-apm-node/loader.mjs' nuxt build",
+    "build": "NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader' nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

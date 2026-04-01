@@ -5,7 +5,8 @@
   "license": "EUPL-1.2",
   "type": "module",
   "exports": {
-    "./module": "./src/module.js"
+    "./module": "./src/module.js",
+    "./loader": "./src/loader.js"
   },
   "dependencies": {
     "elastic-apm-node": "^4.15.0"
