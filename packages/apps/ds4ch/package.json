@@ -5,10 +5,10 @@
   "main": "./nuxt.config.ts",
   "scripts": {
     "build": "NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader' nuxt build",
-    "dev": "nuxt dev",
+    "dev": "NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader' nuxt dev",
+    "dev:apm": "NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader --import ./.nuxt/dev/elastic-apm.server.mjs' nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "preview:apm": "node --import dotenv/config --import ./.output/server/elastic-apm.server.mjs .output/server/index.mjs",
     "postinstall": "nuxt prepare",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

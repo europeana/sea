@@ -23,17 +23,35 @@ export default defineNuxtConfig({
 
 For server-side instrumentation to work, it is necessary to modify both build and run commands.
 
-#### Build
+The Nuxt dev/build commands needs to use the provided loader, `@europeana/elastic-apm-nuxt/loader`,
+which registers the `elastic-apm-node` loader so that it may instrument libraries in the ES build.
 
-The Nuxt build command needs to use the elastic-apm-node loader:
+When running the app, a generated server initialisation file, `elastic-apm.server.mjs` needs to be
+loaded first, to start the APM before the Nuxt/Nitro/app stack is initialised.
+
+#### Development
+
+##### Preparatory run without server-side APM
+
+```shell
+NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader' nuxt dev
+```
+
+##### Subsequent runs with server-side APM
+
+```shell
+NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader --import ./.nuxt/dev/elastic-apm.server.mjs' nuxt dev
+```
+
+#### Production
+
+##### Build
 
 ```shell
 NODE_OPTIONS='--import @europeana/elastic-apm-nuxt/loader' nuxt build
 ```
 
-#### Run
-
-When running the app, a server initialisation file needs to be loaded first, to start the APM before Nuxt/Nitro/others start importing node libraries:
+##### Run
 
 ```shell
 node --import ./.output/server/elastic-apm.server.mjs .output/server/index.mjs

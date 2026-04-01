@@ -7,7 +7,6 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@elastic/apm-rum-vue": "^2.1.10",
     "@europeana/feedback-widget": "0.5.5",
     "@europeana/style": "^2.13.0",
     "@europeana/vue-contentful-graphql": "workspace:*",
