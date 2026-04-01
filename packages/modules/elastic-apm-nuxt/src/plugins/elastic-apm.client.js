@@ -1,8 +1,12 @@
 import { ApmVuePlugin } from "@elastic/apm-rum-vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(ApmVuePlugin, {
-    router: useRouter(),
-    config: useRuntimeConfig().public.elasticApm,
-  });
+  const config = useRuntimeConfig().public.elasticApm;
+
+  if (config.serverUrl) {
+    nuxtApp.vueApp.use(ApmVuePlugin, {
+      router: useRouter(),
+      config,
+    });
+  }
 });
