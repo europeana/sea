@@ -2,6 +2,7 @@
   "actions": {
     "close": "Sulge",
     "downloadFile": "lae alla {file}",
+    "selectLanguage": "(Vali oma keel)",
     "share": "Jaga",
     "shareOn": "Jaga {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Koolitus",
       "viewAll": "Vaata kõiki"
     },
+    "filterContentType": "Filtreeri sisu tüübi järgi",
     "resultsHaveLoaded": "{0} tulemusi leitud",
     "seeAll": "Vaata kõiki {content}",
     "seeMore": "Vaata lähemalt {content}",
@@ -177,6 +179,8 @@
     "collections": "Avasta kollektsioone",
     "dataSpace": "Avastage andme ruum",
     "home": "Avaleht",
+    "mainNavigation": "Põhinavigatsioon",
+    "menu": "Menüü",
     "toggle": "Kuva menüü"
   },
   "newWindow": "avaneb uues aknas",

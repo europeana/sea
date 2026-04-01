@@ -14,6 +14,7 @@ const { page } = await useAsyncPageData(
     const variables = {
       identifier: route.params.slug,
       locale: localeProperties.value.language,
+      preview: route.query?.mode === "preview",
     };
 
     const response = await contentful.query(projectPageQuery, variables);

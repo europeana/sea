@@ -2,6 +2,7 @@
   "actions": {
     "close": "stäng",
     "downloadFile": "ladda ner {file}",
+    "selectLanguage": "(Välj ditt språk)",
     "share": "Dela",
     "shareOn": "Dela på {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Utbildning",
       "viewAll": "Visa alla"
     },
+    "filterContentType": "Filtrera innehåll efter typ",
     "resultsHaveLoaded": "{0} resultat hittades",
     "seeAll": "Se alla {content}",
     "seeMore": "Se mer {content}",
@@ -177,6 +179,8 @@
     "collections": "Utforska samlingarna",
     "dataSpace": "Utforska datarymden",
     "home": "Hem",
+    "mainNavigation": "Huvudnavigering",
+    "menu": "Meny",
     "toggle": "Visa meny"
   },
   "newWindow": "öppnas i nytt fönster",

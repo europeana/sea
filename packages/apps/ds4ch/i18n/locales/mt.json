@@ -2,6 +2,7 @@
   "actions": {
     "close": "agħlaq",
     "downloadFile": "niżżel {file}",
+    "selectLanguage": "(Agħżel il-lingwa tiegħek)",
     "share": "Ixxerja",
     "shareOn": "Ixxerja fuq {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Taħriġ",
       "viewAll": "Ara kollha"
     },
+    "filterContentType": "Iffiltra l-kontenut skont it-tip",
     "resultsHaveLoaded": "{0} riżultati misjuba",
     "seeAll": "Ara kollox {content}",
     "seeMore": "Ara aktar {content}",
@@ -177,6 +179,8 @@
     "collections": "Esplora l-kollezzjonijiet",
     "dataSpace": "Esplora l-ispazju tad-dejta",
     "home": "Paġna Ewlenija",
+    "mainNavigation": "Navigazzjoni prinċipali",
+    "menu": "Menù",
     "toggle": "Uri l-menù"
   },
   "newWindow": "jiftaħ f'tieqa ġdida",

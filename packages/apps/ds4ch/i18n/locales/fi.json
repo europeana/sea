@@ -2,6 +2,7 @@
   "actions": {
     "close": "sulje",
     "downloadFile": "lataa {file}",
+    "selectLanguage": "(Valitse kielesi)",
     "share": "Jaa",
     "shareOn": "Jaa {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Koulutus",
       "viewAll": "Näytä kaikki"
     },
+    "filterContentType": "Suodata sisältö tyypin mukaan",
     "resultsHaveLoaded": "{0} tuloksia löytyi",
     "seeAll": "Katso kaikki {content}",
     "seeMore": "Katso lisää {content}",
@@ -177,6 +179,8 @@
     "collections": "Tutustu kokoelmiin",
     "dataSpace": "Tutustu tietoavaruuteen",
     "home": "Etusivu",
+    "mainNavigation": "Päänavigointi",
+    "menu": "Valikko",
     "toggle": "Näytä valikko"
   },
   "newWindow": "avautuu uuteen ikkunaan",

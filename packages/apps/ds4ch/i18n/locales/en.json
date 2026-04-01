@@ -2,6 +2,7 @@
   "actions": {
     "close": "close",
     "downloadFile": "download {file}",
+    "selectLanguage": "(Select your language)",
     "share": "Share",
     "shareOn": "Share on {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Training",
       "viewAll": "View all"
     },
+    "filterContentType": "Filter content by type",
     "resultsHaveLoaded": "{0} results found",
     "seeAll": "See all {content}",
     "seeMore": "See more {content}",
@@ -177,6 +179,8 @@
     "collections": "Explore the collections",
     "dataSpace": "Explore the data space",
     "home": "Home",
+    "mainNavigation": "Main navigation",
+    "menu": "Menu",
     "toggle": "Show menu"
   },
   "newWindow": "opens in new window",

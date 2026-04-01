@@ -2,6 +2,7 @@
   "actions": {
     "close": "uždaryti",
     "downloadFile": "parsisiųsti {file}",
+    "selectLanguage": "(Pasirinkite kalbą)",
     "share": "Dalintis",
     "shareOn": "Dalintis {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Mokymai",
       "viewAll": "Peržiūrėti visus"
     },
+    "filterContentType": "Filtruoti turinį pagal tipą",
     "resultsHaveLoaded": "{0} rasti rezultatai",
     "seeAll": "Žiūrėti visus {content}",
     "seeMore": "Žiūrėti daugiau {content}",
@@ -177,6 +179,8 @@
     "collections": "Naršykite kolekcijas",
     "dataSpace": "Tyrinėkite duomenų erdvę",
     "home": "Pradžia",
+    "mainNavigation": "Pagrindinė navigacija",
+    "menu": "Meniu",
     "toggle": "Rodyti meniu"
   },
   "newWindow": "atsidaro naujame lange",

@@ -2,6 +2,7 @@
   "actions": {
     "close": "zatvori",
     "downloadFile": "preuzmi {file}",
+    "selectLanguage": "(Odaberite jezik)",
     "share": "Podijeli",
     "shareOn": "Podijelite na {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Trening",
       "viewAll": "Pogledaj sve"
     },
+    "filterContentType": "Filtriraj sadržaj prema vrsti",
     "resultsHaveLoaded": "{0} pronađenih rezultata",
     "seeAll": "Pogledaj sve {content}",
     "seeMore": "Vidi više {content}",
@@ -177,6 +179,8 @@
     "collections": "Istraži kolekcije",
     "dataSpace": "Istražite podatkovni prostor",
     "home": "Početna",
+    "mainNavigation": "Glavna navigacija",
+    "menu": "Izbornik",
     "toggle": "Prikaži izbornik"
   },
   "newWindow": "otvara se u novom prozoru",

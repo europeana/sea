@@ -9,7 +9,10 @@ const links = [
 ];
 </script>
 <template>
-  <nav role="navigation" class="navbar navbar-expand-lg bg-dark">
+  <nav
+    class="navbar navbar-expand-lg bg-dark"
+    :aria-label="$t('nav.mainNavigation')"
+  >
     <NuxtLinkLocale to="/" class="navbar-brand">
       <img :src="logoSrc" :alt="$t('nav.home')" />
     </NuxtLinkLocale>
@@ -28,6 +31,7 @@ const links = [
       class="offcanvas offcanvas-end bg-dark border-start border-light"
       tabindex="-1"
       data-bs-scroll="true"
+      :aria-label="$t('nav.menu')"
     >
       <div class="offcanvas-header align-items-start">
         <NuxtLinkLocale to="/" class="navbar-brand">

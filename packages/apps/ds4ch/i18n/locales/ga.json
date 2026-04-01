@@ -2,6 +2,7 @@
   "actions": {
     "close": "dún",
     "downloadFile": "íoslódáil {file}",
+    "selectLanguage": "(Roghnaigh do theanga)",
     "share": "Roinn",
     "shareOn": "Roinn ar {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Oiliúint",
       "viewAll": "Féach ar fad"
     },
+    "filterContentType": "Scagadh ábhair de réir cineáil",
     "resultsHaveLoaded": "{0} torthaí aimsithe",
     "seeAll": "Féach ar gach {content}",
     "seeMore": "Féach tuilleadh {content}",
@@ -177,6 +179,8 @@
     "collections": "Déan iniúchadh ar na bailiúcháin",
     "dataSpace": "Déan iniúchadh ar an spás sonraí",
     "home": "Baile",
+    "mainNavigation": "Príomhloingseoireacht",
+    "menu": "Roghchlár",
     "toggle": "Taispeáin roghchlár"
   },
   "newWindow": "osclaíonn i bhfuinneog nua",

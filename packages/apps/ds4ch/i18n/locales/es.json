@@ -2,6 +2,7 @@
   "actions": {
     "close": "cerrar",
     "downloadFile": "descargar {file}",
+    "selectLanguage": "(Seleccione su idioma)",
     "share": "Compartir",
     "shareOn": "Compartir en {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Formación",
       "viewAll": "Ver todo"
     },
+    "filterContentType": "Filtrar contenido por tipo",
     "resultsHaveLoaded": "{0} resultados encontrados",
     "seeAll": "Ver todos los {content}",
     "seeMore": "Ver más {content}",
@@ -177,6 +179,8 @@
     "collections": "Explora las colecciones",
     "dataSpace": "Explora el espacio de datos",
     "home": "Inicio",
+    "mainNavigation": "Navegación principal",
+    "menu": "Menú",
     "toggle": "Mostrar menú"
   },
   "newWindow": "se abre en una nueva ventana",

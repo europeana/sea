@@ -2,6 +2,7 @@
   "actions": {
     "close": "κλείσιμο",
     "downloadFile": "κατεβάστε {file}",
+    "selectLanguage": "(Επιλέξτε τη γλώσσα σας)",
     "share": "Κοινοποίηση",
     "shareOn": "Κοινοποίηση στο {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Εκπαίδευση",
       "viewAll": "Προβολή όλων"
     },
+    "filterContentType": "Φιλτράρισμα περιεχομένου ανά τύπο",
     "resultsHaveLoaded": "{0} αποτελέσματα βρέθηκαν",
     "seeAll": "Δείτε όλα {content}",
     "seeMore": "Δείτε περισσότερα {content}",
@@ -177,6 +179,8 @@
     "collections": "Εξερευνήστε τις συλλογές",
     "dataSpace": "Εξερευνήστε τον χώρο δεδομένων",
     "home": "Αρχική",
+    "mainNavigation": "Κύρια πλοήγηση",
+    "menu": "Μενού",
     "toggle": "Εμφάνιση μενού"
   },
   "newWindow": "ανοίγει σε νέο παράθυρο",

@@ -2,6 +2,7 @@
   "actions": {
     "close": "sluiten",
     "downloadFile": "download {file}",
+    "selectLanguage": "(Selecteer uw taal)",
     "share": "Delen",
     "shareOn": "Delen op {social}"
   },
@@ -24,6 +25,7 @@
       "training": "Opleiding",
       "viewAll": "Bekijk alles"
     },
+    "filterContentType": "Filter content op type",
     "resultsHaveLoaded": "{0} resultaten gevonden",
     "seeAll": "Alles bekijken {content}",
     "seeMore": "Meer bekijken {content}",
@@ -177,6 +179,8 @@
     "collections": "Ontdek de collecties",
     "dataSpace": "Verken de dataspace",
     "home": "Home",
+    "mainNavigation": "Hoofdnavigatie",
+    "menu": "Menu",
     "toggle": "Menu weergeven"
   },
   "newWindow": "opent in nieuw venster",
