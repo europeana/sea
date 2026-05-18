@@ -154,8 +154,8 @@ importers:
         specifier: 9.1.19
         version: 9.1.19(@testing-library/dom@10.4.0)(prettier@3.8.0)(vite@6.4.1(@types/node@25.5.0)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.47.1)(yaml@2.8.2))
       swiper:
-        specifier: ^11.2.10
-        version: 11.2.10
+        specifier: ^12.0.0
+        version: 12.1.4
       unplugin-vue-components:
         specifier: ^28.7.0
         version: 28.7.0(@babel/parser@7.29.3)(@nuxt/kit@3.20.2(magicast@0.5.2))(vue@3.5.26(typescript@5.8.3))
@@ -7914,8 +7914,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  swiper@11.2.10:
-    resolution: {integrity: sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==}
+  swiper@12.1.4:
+    resolution: {integrity: sha512-bihiwoKMOQwW8FfdUbo1DgkVH25E+4ZELIq0oopL1KTKBteLuaTMi/wwFjMxtlhTkk45k3XQ89D1Fvv0spSqBA==}
     engines: {node: '>= 4.7.0'}
 
   sync-child-process@1.0.2:
@@ -8672,8 +8672,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.8:
-    resolution: {integrity: sha512-9689efAXhN/EV86plgkL/XFiJSXhGtWPG6JDboZ+QnjlUWUUQrQ0ILKQtw4iQsuwIwu5k6Aw+JnehDe7161e7A==}
+  vue-component-type-helpers@3.3.0:
+    resolution: {integrity: sha512-vwR8DDsBysI9NWXa0okPFpCcW+BUC3sPTuLBNo1faMzw4QWMFd+3/lFYFu29ZN0q+8UReXWJHEYesC9dcXYCLg==}
 
   vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
@@ -12201,7 +12201,7 @@ snapshots:
       storybook: 9.1.19(@testing-library/dom@10.4.0)(prettier@3.8.0)(vite@6.4.1(@types/node@25.5.0)(jiti@2.6.1)(sass-embedded@1.97.0)(sass@1.97.0)(terser@5.47.1)(yaml@2.8.2))
       type-fest: 2.19.0
       vue: 3.5.26(typescript@5.8.3)
-      vue-component-type-helpers: 3.2.8
+      vue-component-type-helpers: 3.3.0
 
   '@stylistic/eslint-plugin@5.3.1(eslint@9.34.0(jiti@2.7.0))':
     dependencies:
@@ -18249,7 +18249,7 @@ snapshots:
       picocolors: 1.1.1
       sax: 1.4.3
 
-  swiper@11.2.10: {}
+  swiper@12.1.4: {}
 
   sync-child-process@1.0.2:
     dependencies:
@@ -19262,7 +19262,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.8: {}
+  vue-component-type-helpers@3.3.0: {}
 
   vue-devtools-stub@0.1.0: {}
 
