@@ -148,6 +148,10 @@ const truncatedAttachmentLabel = (attachment) => {
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
 
+.author ~ .author::before {
+  content: ", ";
+}
+
 .text-page {
   margin-top: $page-header-height; // leave space for the fixed positioned header
 
