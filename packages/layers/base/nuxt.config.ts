@@ -38,4 +38,9 @@ export default defineNuxtConfig({
   vite: {
     plugins: [rollupPluginGraphql()],
   },
+
+  sourcemap: {
+    server: true,
+    client: true,
+  },
 });
