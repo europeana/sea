@@ -7,13 +7,13 @@
 
 ## Configuration
 
-Configuration options can be set in a .env file (see [.env.example](./packages/portal/.env.example))
+Configuration options can be set in a .env file (see [.env.example](./.env.example))
 or via ENV variables on your machine.
 
 Some core features such as editorial content require the
 relevant configuration options to be specified. In particular, pay attention to the Contentful sections in the example .env file.
 
-## Build
+## Usage
 
 To run from this directory.
 
@@ -25,12 +25,10 @@ pnpm install
 # serve with hot reload at localhost:3000
 pnpm dev
 
-# build for production and launch server
+# build for production and launch preview server
 pnpm build
-pnpm nuxt start
+pnpm nuxt preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 ### Docker
 
