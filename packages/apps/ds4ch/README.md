@@ -27,7 +27,7 @@ pnpm dev
 
 # build for production and launch preview server
 pnpm build
-pnpm nuxt preview
+pnpm preview
 ```
 
 ### Docker
