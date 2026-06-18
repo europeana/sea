@@ -1,75 +1,39 @@
-# Nuxt Minimal Starter
+# Data space for cultural heritage website
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Requirements
 
-## Setup
+1. Node.js version 22, and pnpm
+2. [Contentful](https://www.contentful.com/) CMS account
 
-Make sure to install dependencies:
+## Configuration
 
-```bash
-# npm
-npm install
+Configuration options can be set in a .env file (see [.env.example](./.env.example))
+or via ENV variables on your machine.
 
-# pnpm
+Some core features such as editorial content require the
+relevant configuration options to be specified. In particular, pay attention to the Contentful sections in the example .env file.
+
+## Usage
+
+To run from this directory.
+
+```shell
+
+# install package dependencies
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
+# serve with hot reload at localhost:3000
 pnpm dev
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
+# build for production and launch preview server
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Docker
+
+To run the app via docker, refer to the [README](../../../README.md) in the base of this repo.
+
+## Testing
+
+Refer to the [README](../../../README.md) in the base of this repo.

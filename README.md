@@ -20,6 +20,21 @@ docker run -i --rm --name europeana_${app} -p 8080:8080 europeana/${app}
 
 The app will now be available at http://localhost:8080/
 
+## Testing
+
+`pnpm test` runs all unit tests.
+
+`pnpm test:coverage` runs all unit tests and generates a coverage report.
+
+## Versioning
+
+Versioning of the monorepo [packages](./packages/) is managed using
+[Lerna](https://lerna.js.org/).
+
+```shell
+npx lerna version
+```
+
 ## License
 
 Licensed under the [EUPL v1.2](./LICENSE.md).
