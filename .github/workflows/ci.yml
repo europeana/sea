@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run prettier
-        run: npx prettier . --check
+        run: pnpm dlx prettier . --check
   eslint:
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run eslint
-        run: npx eslint .
+        run: pnpm dlx eslint .
   test-unit:
     runs-on: ubuntu-latest
     steps:
