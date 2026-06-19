@@ -26,10 +26,16 @@ jobs:
           git_commit_message: "chore(ds4ch): update translations"
           custom_github_token: "${{ secrets.GIT_PAT_LOKALISE }}"
           additional_params: |
-            --indentation=2sp
-            --export-empty-as=skip
-            --export-sort=a_z
-            --replace-breaks=false
-            --add-newline-eof=true
-            --language-mapping=[{"original_language_iso":"en_GB","custom_language_iso":"en"},{"original_language_iso":"mt_MT","custom_language_iso":"mt"},{"original_language_iso":"ga_IE","custom_language_iso":"ga"}]
-            --placeholder-format=icu
+            indentation: 2sp
+            export_empty_as: skip
+            export_sort: a_z
+            replace_breaks: false
+            add_newline_eof: true
+            language_mapping:
+              - original_language_iso: en_GB
+                custom_language_iso: en
+              - original_language_iso: mt_MT
+                custom_language_iso: mt
+              - original_language_iso: ga_IE
+                custom_language_iso: ga
+            placeholder_format: icu
