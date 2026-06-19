@@ -115,8 +115,8 @@ importers:
         specifier: workspace:*
         version: link:../../directives/vue-visible-on-scroll
       '@lottiefiles/dotlottie-vue':
-        specifier: 0.10.12
-        version: 0.10.12(vue@3.5.26(typescript@5.9.3))
+        specifier: 0.11.15
+        version: 0.11.15(vue@3.5.26(typescript@5.9.3))
       '@nuxt/test-utils':
         specifier: 3.23.0
         version: 3.23.0(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.26)(@vue/server-renderer@3.5.26(vue@3.5.26(typescript@5.9.3)))(vue@3.5.26(typescript@5.9.3)))(happy-dom@20.10.4)(magicast@0.5.2)(typescript@5.9.3)(vitest@3.2.6(@types/node@25.5.0)(happy-dom@20.10.4)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.47.1)(yaml@2.8.2))
@@ -1381,13 +1381,15 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@lottiefiles/dotlottie-vue@0.10.12':
-    resolution: {integrity: sha512-EJ5as8uLDTtFQBk8RNZ3QmfX2JYZKY1k+SSkrJoejPOMqaZvxKBjs03QnPjr/BH0g99pvVki38MkIUbcza0nRQ==}
+  '@lottiefiles/dotlottie-vue@0.11.15':
+    resolution: {integrity: sha512-qD+8p7pscVFr9fd/Qvb2kvHCoKELLJdUCSFaLlpQsj9ugguqisTQvgbkWiV950+fgMhXCc7kjdJxVaK0CN6JWg==}
+    engines: {node: '>=18.17.0', npm: '>=9.5.0'}
     peerDependencies:
       vue: ^3.3.4
 
-  '@lottiefiles/dotlottie-web@0.60.0':
-    resolution: {integrity: sha512-AbQYmyZ8ZihCGPwjdN0e7bJ7W7yVmHG24IXn8kxyFJJNJmSJEaarpOSivu/1KoFGiw86OMmiWcLXrPs1XjT6Qw==}
+  '@lottiefiles/dotlottie-web@0.74.0':
+    resolution: {integrity: sha512-rG12+dJSVhQDdleGr9epR7zU/UJ6hh8jzBDHAurClHP5t5dSrOh3eP3UCFxolpVPcobaRVYsBnYg4HQokQewpg==}
+    engines: {node: '>=18.17.0', npm: '>=9.5.0'}
 
   '@mapbox/node-pre-gyp@2.0.3':
     resolution: {integrity: sha512-uwPAhccfFJlsfCxMYTwOdVfOz3xqyj8xYL3zJj8f0pb30tLohnnFPhLuqp4/qoEz8sNxe4SESZedcBojRefIzg==}
@@ -9351,12 +9353,12 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lottiefiles/dotlottie-vue@0.10.12(vue@3.5.26(typescript@5.9.3))':
+  '@lottiefiles/dotlottie-vue@0.11.15(vue@3.5.26(typescript@5.9.3))':
     dependencies:
-      '@lottiefiles/dotlottie-web': 0.60.0
+      '@lottiefiles/dotlottie-web': 0.74.0
       vue: 3.5.26(typescript@5.9.3)
 
-  '@lottiefiles/dotlottie-web@0.60.0': {}
+  '@lottiefiles/dotlottie-web@0.74.0': {}
 
   '@mapbox/node-pre-gyp@2.0.3(encoding@0.1.13)':
     dependencies:
