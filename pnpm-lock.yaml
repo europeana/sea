@@ -190,7 +190,7 @@ importers:
         version: 9.5.6(@vue/compiler-dom@3.5.26)(eslint@9.34.0(jiti@2.7.0))(magicast@0.5.2)(rollup@4.61.1)(vue@3.5.26(typescript@5.9.3))
       '@rollup/plugin-graphql':
         specifier: 3.0.0
-        version: 3.0.0(graphql@16.12.0)(rollup@4.61.1)
+        version: 3.0.0(graphql@16.14.2)(rollup@4.61.1)
       marked:
         specifier: 18.0.5
         version: 18.0.5
@@ -211,7 +211,7 @@ importers:
     dependencies:
       graphql:
         specifier: ^16.11.0
-        version: 16.12.0
+        version: 16.14.2
       http-errors:
         specifier: ^2.0.1
         version: 2.0.1
@@ -224,7 +224,7 @@ importers:
     devDependencies:
       graphql-tag:
         specifier: 2.12.6
-        version: 2.12.6(graphql@16.12.0)
+        version: 2.12.6(graphql@16.14.2)
 
 packages:
 
@@ -4793,8 +4793,8 @@ packages:
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
 
-  graphql@16.12.0:
-    resolution: {integrity: sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ==}
+  graphql@16.14.2:
+    resolution: {integrity: sha512-Chq1s4CY7jmh8gO2qvLIJyfCDIN+EHLFW/9iShnp1z8FjBQMoodWP1kDC36VAMXXIvAjj4ARa7ntfAV2BrjsbA==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
   gzip-size@7.0.0:
@@ -10539,11 +10539,11 @@ snapshots:
     optionalDependencies:
       rollup: 4.61.1
 
-  '@rollup/plugin-graphql@3.0.0(graphql@16.12.0)(rollup@4.61.1)':
+  '@rollup/plugin-graphql@3.0.0(graphql@16.14.2)(rollup@4.61.1)':
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.61.1)
-      graphql: 16.12.0
-      graphql-tag: 2.12.6(graphql@16.12.0)
+      graphql: 16.14.2
+      graphql-tag: 2.12.6(graphql@16.14.2)
     optionalDependencies:
       rollup: 4.61.1
 
@@ -13243,12 +13243,12 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  graphql-tag@2.12.6(graphql@16.12.0):
+  graphql-tag@2.12.6(graphql@16.14.2):
     dependencies:
-      graphql: 16.12.0
+      graphql: 16.14.2
       tslib: 2.8.1
 
-  graphql@16.12.0: {}
+  graphql@16.14.2: {}
 
   gzip-size@7.0.0:
     dependencies:
