@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0
 
       - name: Pull from Lokalise
-        uses: lokalise/lokalise-pull-action@54e66e4955a025132182e098dc8e9c73a69e4e8c # v3.14.0
+        uses: lokalise/lokalise-pull-action@8b802cd5a8f4e739da3aace50cb1ec7aaecab260 # v5.2.3
         with:
           api_token: ${{ secrets.LOKALISE_API_TOKEN }}
           project_id: ${{ secrets.LOKALISE_PROJECT_ID }}
@@ -26,10 +26,16 @@ jobs:
           git_commit_message: "chore(ds4ch): update translations"
           custom_github_token: "${{ secrets.GIT_PAT_LOKALISE }}"
           additional_params: |
-            --indentation=2sp
-            --export-empty-as=skip
-            --export-sort=a_z
-            --replace-breaks=false
-            --add-newline-eof=true
-            --language-mapping=[{"original_language_iso":"en_GB","custom_language_iso":"en"},{"original_language_iso":"mt_MT","custom_language_iso":"mt"},{"original_language_iso":"ga_IE","custom_language_iso":"ga"}]
-            --placeholder-format=icu
+            indentation: 2sp
+            export_empty_as: skip
+            export_sort: a_z
+            replace_breaks: false
+            add_newline_eof: true
+            language_mapping:
+              - original_language_iso: en_GB
+                custom_language_iso: en
+              - original_language_iso: mt_MT
+                custom_language_iso: mt
+              - original_language_iso: ga_IE
+                custom_language_iso: ga
+            placeholder_format: icu
