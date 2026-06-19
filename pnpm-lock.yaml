@@ -157,8 +157,8 @@ importers:
         specifier: 12.2.0
         version: 12.2.0
       unplugin-vue-components:
-        specifier: 28.7.0
-        version: 28.7.0(@babel/parser@7.29.7)(@nuxt/kit@3.21.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3))
+        specifier: 28.8.0
+        version: 28.8.0(@babel/parser@7.29.7)(@nuxt/kit@3.21.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3))
       vite:
         specifier: 6.4.3
         version: 6.4.3(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0)
@@ -7717,12 +7717,12 @@ packages:
     resolution: {integrity: sha512-5lWVjgi6vuHhJ526bI4nlCOmkCIF3nnfXkCMDeMJrtdvxTs6ZFCM8oNufGTsDbKv/tJ/xj8RpvXjRuPBZJuJog==}
     engines: {node: '>=20.19.0'}
 
-  unplugin-vue-components@28.7.0:
-    resolution: {integrity: sha512-3SuWAHlTjOiZckqRBGXRdN/k6IMmKyt2Ch5/+DKwYaT321H0ItdZDvW4r8/YkEKQpN9TN3F/SZ0W342gQROC3Q==}
+  unplugin-vue-components@28.8.0:
+    resolution: {integrity: sha512-2Q6ZongpoQzuXDK0ZsVzMoshH0MWZQ1pzVL538G7oIDKRTVzHjppBDS8aB99SADGHN3lpGU7frraCG6yWNoL5Q==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
-      '@nuxt/kit': ^3.2.2
+      '@nuxt/kit': ^3.2.2 || ^4.0.0
       vue: 2 || 3
     peerDependenciesMeta:
       '@babel/parser':
@@ -14460,7 +14460,7 @@ snapshots:
       proc-log: 6.1.0
       semver: 7.7.2
       tar: 7.5.11
-      tinyglobby: 0.2.12
+      tinyglobby: 0.2.17
       undici: 6.27.0
       which: 6.0.1
 
@@ -16545,7 +16545,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.4
 
-  unplugin-vue-components@28.7.0(@babel/parser@7.29.7)(@nuxt/kit@3.21.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3)):
+  unplugin-vue-components@28.8.0(@babel/parser@7.29.7)(@nuxt/kit@3.21.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3)):
     dependencies:
       chokidar: 3.6.0
       debug: 4.4.3
