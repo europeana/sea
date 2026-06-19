@@ -189,8 +189,8 @@ importers:
         specifier: 9.5.6
         version: 9.5.6(@vue/compiler-dom@3.5.26)(eslint@9.34.0(jiti@2.7.0))(magicast@0.5.2)(rollup@4.61.1)(vue@3.5.26(typescript@5.9.3))
       '@rollup/plugin-graphql':
-        specifier: 2.0.5
-        version: 2.0.5(graphql@16.12.0)(rollup@4.61.1)
+        specifier: 3.0.0
+        version: 3.0.0(graphql@16.12.0)(rollup@4.61.1)
       marked:
         specifier: 18.0.5
         version: 18.0.5
@@ -2319,12 +2319,12 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/plugin-graphql@2.0.5':
-    resolution: {integrity: sha512-NMx9uVIheYMOQHV9Aann0sk/2+henT8T5JUbHneOvbD3iUrVUC7AaZ1B1ELJ/1vhqUe2OQIkRtGHzOQwBLoCvg==}
+  '@rollup/plugin-graphql@3.0.0':
+    resolution: {integrity: sha512-AUF2YI2VoMMeEsF0tdhEEE02oZXRW749YhJdaAqgRzM8pgU8PlEAfTwNUSFaVI+7RSX3L6H6rHTnI2qshm5Yew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       graphql: '>=0.9.0'
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+      rollup: ^2.78.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -10548,7 +10548,7 @@ snapshots:
     optionalDependencies:
       rollup: 4.61.1
 
-  '@rollup/plugin-graphql@2.0.5(graphql@16.12.0)(rollup@4.61.1)':
+  '@rollup/plugin-graphql@3.0.0(graphql@16.12.0)(rollup@4.61.1)':
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.61.1)
       graphql: 16.12.0
