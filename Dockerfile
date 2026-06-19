@@ -38,7 +38,7 @@ ARG app
 RUN pnpm --filter @europeana/${app} run build-storybook
 
 
-FROM nginx:stable AS run-storybook
+FROM nginx:stable@sha256:175358c3ce472b488fe33f3088d80b3b52d682a45b0487eaefd05f57f07c61b0 AS run-storybook
 ARG app
 
 COPY --from=build-storybook /build/packages/apps/${app}/storybook-static /usr/share/nginx/html
