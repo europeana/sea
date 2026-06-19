@@ -12,10 +12,15 @@
   "author": "Europeana Foundation",
   "license": "EUPL-1.2",
   "engines": {
-    "node": "^22",
-    "pnpm": ">= 10.7.1"
+    "node": "^22"
   },
-  "packageManager": "pnpm@10.7.1",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": ">=11.0.0 <12.0.0",
+      "onFail": "download"
+    }
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
