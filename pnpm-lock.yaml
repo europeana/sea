@@ -190,7 +190,7 @@ importers:
         version: 9.5.6(@vue/compiler-dom@3.5.26)(eslint@9.34.0(jiti@2.7.0))(magicast@0.5.2)(rollup@4.61.1)(vue@3.5.26(typescript@5.9.3))
       '@rollup/plugin-graphql':
         specifier: 3.0.0
-        version: 3.0.0(graphql@16.14.2)(rollup@4.61.1)
+        version: 3.0.0(graphql@17.0.1)(rollup@4.61.1)
       marked:
         specifier: 18.0.5
         version: 18.0.5
@@ -210,8 +210,8 @@ importers:
   packages/plugins/vue-contentful-graphql:
     dependencies:
       graphql:
-        specifier: ^16.11.0
-        version: 16.14.2
+        specifier: ^17.0.0
+        version: 17.0.1
       http-errors:
         specifier: ^2.0.1
         version: 2.0.1
@@ -224,7 +224,7 @@ importers:
     devDependencies:
       graphql-tag:
         specifier: 2.12.6
-        version: 2.12.6(graphql@16.14.2)
+        version: 2.12.6(graphql@17.0.1)
 
 packages:
 
@@ -4793,9 +4793,9 @@ packages:
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
 
-  graphql@16.14.2:
-    resolution: {integrity: sha512-Chq1s4CY7jmh8gO2qvLIJyfCDIN+EHLFW/9iShnp1z8FjBQMoodWP1kDC36VAMXXIvAjj4ARa7ntfAV2BrjsbA==}
-    engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
+  graphql@17.0.1:
+    resolution: {integrity: sha512-8eWbg5Zcv/8o20nzEjHUGPTj20MLFJjc5kagbIPxbaeGxvFwpitJhemEC/k17n5+UD4M/9ea5rTuce78mELujQ==}
+    engines: {node: ^22.0.0 || ^24.0.0 || ^25.0.0 || >=26.0.0}
 
   gzip-size@7.0.0:
     resolution: {integrity: sha512-O1Ld7Dr+nqPnmGpdhzLmMTQ4vAsD+rHwMm1NLUmoUFFymBOMKxCCrtDxqdBRYXdeEPEi3SyoR4TizJLQrnKBNA==}
@@ -10539,11 +10539,11 @@ snapshots:
     optionalDependencies:
       rollup: 4.61.1
 
-  '@rollup/plugin-graphql@3.0.0(graphql@16.14.2)(rollup@4.61.1)':
+  '@rollup/plugin-graphql@3.0.0(graphql@17.0.1)(rollup@4.61.1)':
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.61.1)
-      graphql: 16.14.2
-      graphql-tag: 2.12.6(graphql@16.14.2)
+      graphql: 17.0.1
+      graphql-tag: 2.12.6(graphql@17.0.1)
     optionalDependencies:
       rollup: 4.61.1
 
@@ -13243,12 +13243,12 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  graphql-tag@2.12.6(graphql@16.14.2):
+  graphql-tag@2.12.6(graphql@17.0.1):
     dependencies:
-      graphql: 16.14.2
+      graphql: 17.0.1
       tslib: 2.8.1
 
-  graphql@16.14.2: {}
+  graphql@17.0.1: {}
 
   gzip-size@7.0.0:
     dependencies:

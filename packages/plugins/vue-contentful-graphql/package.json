@@ -9,7 +9,7 @@
     "./query": "./src/query.js"
   },
   "dependencies": {
-    "graphql": "^16.11.0",
+    "graphql": "^17.0.0",
     "http-errors": "^2.0.1",
     "node-fetch-native": "^1.6.6",
     "qs": "^6.14.1"
