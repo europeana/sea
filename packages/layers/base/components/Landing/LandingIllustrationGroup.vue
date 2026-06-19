@@ -280,7 +280,7 @@ $swiper-pagination-height-4k: 124px;
     top: calc(50% - 3rem);
   }
 
-  ::v-deep svg {
+  :deep(svg) {
     height: 1.25rem;
     overflow: visible;
     padding-left: 2px;
@@ -295,7 +295,7 @@ $swiper-pagination-height-4k: 124px;
     height: 96px;
     width: 96px;
     top: calc(50% - 5rem);
-    ::v-deep svg {
+    :deep(svg) {
       height: 2.5rem;
     }
   }
