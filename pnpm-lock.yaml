@@ -223,8 +223,8 @@ importers:
         version: 6.15.2
     devDependencies:
       graphql-tag:
-        specifier: 2.12.6
-        version: 2.12.6(graphql@17.0.1)
+        specifier: 2.12.7
+        version: 2.12.7(graphql@17.0.1)
 
 packages:
 
@@ -5050,6 +5050,12 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+
+  graphql-tag@2.12.7:
+    resolution: {integrity: sha512-xnE/NFzy+0eIesvAsREJZ284zTl/wYuBAvpsFSDhRGRdRHdnE90M21Q3xAWyYInb0J756c6x0pIQ62+vtvOs1Q==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
   graphql@17.0.1:
     resolution: {integrity: sha512-8eWbg5Zcv/8o20nzEjHUGPTj20MLFJjc5kagbIPxbaeGxvFwpitJhemEC/k17n5+UD4M/9ea5rTuce78mELujQ==}
@@ -13273,6 +13279,11 @@ snapshots:
   graceful-fs@4.2.11: {}
 
   graphql-tag@2.12.6(graphql@17.0.1):
+    dependencies:
+      graphql: 17.0.1
+      tslib: 2.8.1
+
+  graphql-tag@2.12.7(graphql@17.0.1):
     dependencies:
       graphql: 17.0.1
       tslib: 2.8.1
