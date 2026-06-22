@@ -174,8 +174,8 @@ importers:
   packages/layers/base:
     devDependencies:
       '@elastic/apm-rum-vue':
-        specifier: 2.1.10
-        version: 2.1.10
+        specifier: 2.1.14
+        version: 2.1.14
       '@europeana/feedback-widget':
         specifier: 0.5.5
         version: 0.5.5(@popperjs/core@2.11.8)(typescript@5.9.3)
@@ -504,8 +504,8 @@ packages:
     resolution: {integrity: sha512-ebKkhAQwyeJ8U7CNrNqL4MUDDU6lPUBU7uoDNEVuij3k7hUvc9JlNmJklEhpsnfyKaV04O0xfDr2aYdxR9921g==}
     engines: {node: '>=8.0.0'}
 
-  '@elastic/apm-rum-vue@2.1.10':
-    resolution: {integrity: sha512-I4d10gC4fhaBp6d9q3NCkNSeTaajO131FGb8i1vQwJwOr6Cgw3ZAC+tgeR0dM2+RGwNqjdCIjGGQnusakKPRNA==}
+  '@elastic/apm-rum-vue@2.1.14':
+    resolution: {integrity: sha512-1xYG5TJqHuVsqmUnQwDcqF5k5n3ZvncYaQRogHci7u+RUN8w6NXhOK9tB3p3uGKqe9MTl2cJZSwXyyfNInM1rw==}
     engines: {node: '>=8.0.0'}
 
   '@elastic/apm-rum@5.17.4':
@@ -8649,7 +8649,7 @@ snapshots:
       opentracing: 0.14.7
       promise-polyfill: 8.3.0
 
-  '@elastic/apm-rum-vue@2.1.10':
+  '@elastic/apm-rum-vue@2.1.14':
     dependencies:
       '@elastic/apm-rum': 5.17.4
       '@elastic/apm-rum-core': 5.25.2
