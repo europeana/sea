@@ -2,8 +2,11 @@ FROM node:24-alpine@sha256:156b55f92e98ccd5ef49578a8cea0df4679826564bad1c9d4ef04
 
 ARG app
 
-RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/download/v11.8.0/pnpm-linuxstatic-x64"
-RUN chmod +x /bin/pnpm
+# TODO: use the official installer script instead
+#       @see https://pnpm.io/installation#in-a-docker-container
+RUN wget -q "https://github.com/pnpm/pnpm/releases/download/v11.8.0/pnpm-linux-x64-musl.tar.gz"
+RUN tar -xf pnpm-linux-x64-musl.tar.gz
+RUN mv pnpm dist /bin/
 
 RUN test -n "$app"
 
