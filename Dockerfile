@@ -1,6 +1,4 @@
-ARG node_version=22
-
-FROM node:${node_version}-alpine AS build-base
+FROM node:22-alpine AS build-base
 
 ARG app
 # TODO: read this from package.json
@@ -45,7 +43,7 @@ COPY --from=build-storybook /build/packages/apps/${app}/storybook-static /usr/sh
 RUN ls /usr/share/nginx/html/
 
 
-FROM gcr.io/distroless/nodejs${node_version}-debian12 AS run-app
+FROM gcr.io/distroless/nodejs22-debian12 AS run-app
 ARG app
 
 ENV PORT=8080
