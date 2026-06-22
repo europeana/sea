@@ -2,7 +2,7 @@ FROM node:24-alpine@sha256:156b55f92e98ccd5ef49578a8cea0df4679826564bad1c9d4ef04
 
 ARG app
 
-RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/download/v10.34.4/pnpm-linuxstatic-x64"
+RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/download/v11.8.0/pnpm-linuxstatic-x64"
 RUN chmod +x /bin/pnpm
 
 RUN test -n "$app"
