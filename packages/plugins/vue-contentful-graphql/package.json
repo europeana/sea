@@ -11,7 +11,7 @@
   "dependencies": {
     "graphql": "^17.0.0",
     "http-errors": "^2.0.1",
-    "node-fetch-native": "^1.6.6",
+    "node-fetch-native": "catalog:",
     "qs": "^6.14.1"
   },
   "devDependencies": {
