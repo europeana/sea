@@ -1,97 +1,3 @@
----
-lockfileVersion: '9.0'
-
-importers:
-
-  .:
-    configDependencies: {}
-    packageManagerDependencies:
-      '@pnpm/exe':
-        specifier: '>=10.7.1 <11.0.0'
-        version: 10.34.4
-      pnpm:
-        specifier: '>=10.7.1 <11.0.0'
-        version: 10.34.4
-
-packages:
-
-  '@pnpm/exe@10.34.4':
-    resolution: {integrity: sha512-rBg+fjbO68KlFi3bNEnedyBUW5nu+fJdjiA5BmGFeQaRyRkyt0cvm6MBT65ZEP5fplh/Y6M1tmir9Oz09NYxHQ==}
-    hasBin: true
-
-  '@pnpm/linux-arm64@10.34.4':
-    resolution: {integrity: sha512-PCBpbcneXjKwrp86scDasphilTY4ZwWN6KjidudD8H08zHKzqDBJOwYClqUSjvAQzfwTr8wjpGxInLIApdkqEg==}
-    cpu: [arm64]
-    os: [linux]
-    hasBin: true
-
-  '@pnpm/linux-x64@10.34.4':
-    resolution: {integrity: sha512-6gsJT9HUs1kBsJANC5SEJNRGAMzjGMKgxEtCvPLYd7NIktbh1GH5Ktcu7nLYcbxX8SirCHHzhZiMolW0mvzoqA==}
-    cpu: [x64]
-    os: [linux]
-    hasBin: true
-
-  '@pnpm/macos-arm64@10.34.4':
-    resolution: {integrity: sha512-K2quNi8GEwI6INshDRN48G4VprYwKfOJFB5VXwNB2V41j65Ck5LJRjB44AYGaaoOPqDWrVPpxf5SdqjvxaAVaA==}
-    cpu: [arm64]
-    os: [darwin]
-    hasBin: true
-
-  '@pnpm/macos-x64@10.34.4':
-    resolution: {integrity: sha512-JhKmfB3tCrk6OV0GbpDjZWoQP1EGHO7UZdhYO3SW1j/Jp2sM5w1A4sPW3L8QTF3GftUUaX1UfPzS1+XJ2t0KBw==}
-    cpu: [x64]
-    os: [darwin]
-    hasBin: true
-
-  '@pnpm/win-arm64@10.34.4':
-    resolution: {integrity: sha512-Do6YuBNDFP8wmh1a6lXBwPHb73vROg6IFIWZUNRQMG00QngBptN/LGz/oUv1czy62zH7w4D/7MPEhx8yb9nFHA==}
-    cpu: [arm64]
-    os: [win32]
-    hasBin: true
-
-  '@pnpm/win-x64@10.34.4':
-    resolution: {integrity: sha512-KNUojrj5+c6Wk0yYPIr6/LQ3fToLeNq1istUtRPNFW5XjRXEw8ZQ2jw01ipwXMKFC46hHOMxV8dfZ8d2/YPfeQ==}
-    cpu: [x64]
-    os: [win32]
-    hasBin: true
-
-  pnpm@10.34.4:
-    resolution: {integrity: sha512-h2i+VSAK4/Iia2Un/Momh+FLxOXxLXchoPJdo99HkVF3BYZI20F3uvNIEg+guidS2NjZP2vq8f5krhjajelhrw==}
-    engines: {node: '>=18.12'}
-    hasBin: true
-
-snapshots:
-
-  '@pnpm/exe@10.34.4':
-    optionalDependencies:
-      '@pnpm/linux-arm64': 10.34.4
-      '@pnpm/linux-x64': 10.34.4
-      '@pnpm/macos-arm64': 10.34.4
-      '@pnpm/macos-x64': 10.34.4
-      '@pnpm/win-arm64': 10.34.4
-      '@pnpm/win-x64': 10.34.4
-
-  '@pnpm/linux-arm64@10.34.4':
-    optional: true
-
-  '@pnpm/linux-x64@10.34.4':
-    optional: true
-
-  '@pnpm/macos-arm64@10.34.4':
-    optional: true
-
-  '@pnpm/macos-x64@10.34.4':
-    optional: true
-
-  '@pnpm/win-arm64@10.34.4':
-    optional: true
-
-  '@pnpm/win-x64@10.34.4':
-    optional: true
-
-  pnpm@10.34.4: {}
-
----
 lockfileVersion: '9.0'
 
 settings:
@@ -3844,8 +3750,8 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  browserslist@4.28.2:
-    resolution: {integrity: sha512-48xSriZYYg+8qXna9kwqjIVzuQxi+KYWp2+5nCYnYKPTr0LvD89Jqk2Or5ogxz0NUMfIjhh2lIUX/LyX9B4oIg==}
+  browserslist@4.28.4:
+    resolution: {integrity: sha512-MTc8i/x9jBQd1iMw2CFGS+rwMa07eYjLR0CCTLDACl9xhxy+nIs3KeML/biicXtk9JrZ6dnnTatmc7ErPXIxqw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -8444,7 +8350,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -11831,7 +11737,7 @@ snapshots:
 
   autoprefixer@10.5.0(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       caniuse-lite: 1.0.30001799
       fraction.js: 5.3.4
       picocolors: 1.1.1
@@ -11956,13 +11862,13 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  browserslist@4.28.2:
+  browserslist@4.28.4:
     dependencies:
       baseline-browser-mapping: 2.10.38
       caniuse-lite: 1.0.30001799
       electron-to-chromium: 1.5.376
       node-releases: 2.0.48
-      update-browserslist-db: 1.2.3(browserslist@4.28.2)
+      update-browserslist-db: 1.2.3(browserslist@4.28.4)
 
   buffer-crc32@1.0.0: {}
 
@@ -12064,7 +11970,7 @@ snapshots:
 
   caniuse-api@3.0.0:
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       caniuse-lite: 1.0.30001799
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
@@ -12363,7 +12269,7 @@ snapshots:
 
   core-js-compat@3.49.0:
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
 
   core-util-is@1.0.3: {}
 
@@ -12445,7 +12351,7 @@ snapshots:
 
   cssnano-preset-default@7.0.17(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       css-declaration-sorter: 7.4.0(postcss@8.5.15)
       cssnano-utils: 5.0.3(postcss@8.5.15)
       postcss: 8.5.15
@@ -15336,14 +15242,14 @@ snapshots:
   postcss-colormin@7.0.10(postcss@8.5.15):
     dependencies:
       '@colordx/core': 5.4.3
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       caniuse-api: 3.0.0
       postcss: 8.5.15
       postcss-value-parser: 4.2.0
 
   postcss-convert-values@7.0.12(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       postcss: 8.5.15
       postcss-value-parser: 4.2.0
 
@@ -15372,7 +15278,7 @@ snapshots:
 
   postcss-merge-rules@7.0.11(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       caniuse-api: 3.0.0
       cssnano-utils: 5.0.3(postcss@8.5.15)
       postcss: 8.5.15
@@ -15392,14 +15298,14 @@ snapshots:
 
   postcss-minify-params@7.0.9(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       cssnano-utils: 5.0.3(postcss@8.5.15)
       postcss: 8.5.15
       postcss-value-parser: 4.2.0
 
   postcss-minify-selectors@7.1.2(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       caniuse-api: 3.0.0
       cssesc: 3.0.0
       postcss: 8.5.15
@@ -15436,7 +15342,7 @@ snapshots:
 
   postcss-normalize-unicode@7.0.9(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       postcss: 8.5.15
       postcss-value-parser: 4.2.0
 
@@ -15458,7 +15364,7 @@ snapshots:
 
   postcss-reduce-initial@7.0.9(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       caniuse-api: 3.0.0
       postcss: 8.5.15
 
@@ -16282,7 +16188,7 @@ snapshots:
 
   stylehacks@7.0.11(postcss@8.5.15):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       postcss: 8.5.15
       postcss-selector-parser: 7.1.4
 
@@ -16709,9 +16615,9 @@ snapshots:
 
   upath@2.0.1: {}
 
-  update-browserslist-db@1.2.3(browserslist@4.28.2):
+  update-browserslist-db@1.2.3(browserslist@4.28.4):
     dependencies:
-      browserslist: 4.28.2
+      browserslist: 4.28.4
       escalade: 3.2.0
       picocolors: 1.1.1
 
