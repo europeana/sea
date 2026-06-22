@@ -5,6 +5,8 @@ allowBuilds:
   nx: true
   unrs-resolver: true
 catalogs:
+  nuxt3:
+    nuxt: 3.21.8
   vue3:
     vue: 3.5.38
 packages:

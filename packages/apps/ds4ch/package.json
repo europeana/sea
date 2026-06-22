@@ -27,7 +27,7 @@
     "bootstrap": "5.3.8",
     "happy-dom": "20.10.6",
     "lodash-es": "4.18.1",
-    "nuxt": "3.21.8",
+    "nuxt": "catalog:nuxt3",
     "sass-embedded": "1.100.0",
     "storybook": "10.4.6",
     "swiper": "12.2.0",
