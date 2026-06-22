@@ -42,6 +42,7 @@
     "lint-staged": "17.0.7",
     "prettier": "3.8.4",
     "typescript-eslint": "8.61.1",
+    "vite": "7.3.5",
     "vitest": "4.1.9"
   },
   "lint-staged": {
