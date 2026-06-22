@@ -4,6 +4,8 @@ allowBuilds:
   msgpackr-extract: true
   nx: true
   unrs-resolver: true
+catalog:
+  node-fetch-native: "1.6.7"
 catalogs:
   eslint10:
     eslint: "10.5.0"
@@ -15,6 +17,10 @@ catalogs:
     "eslint-config-prettier": "10.1.8"
     "eslint-plugin-vue": "10.9.2"
     "typescript-eslint": "8.61.1"
+  html:
+    cheerio: "1.2.0"
+    marked: "18.0.5"
+    turndown: "7.2.4"
   nuxt3:
     nuxt: 3.21.8
     "@nuxt/test-utils": 3.23.0

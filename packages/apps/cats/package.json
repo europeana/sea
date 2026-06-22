@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "bullmq": "^5.58.5",
-    "cheerio": "^1.1.2",
+    "cheerio": "catalog:html",
     "contentful-management": "^11.57.4",
     "ioredis": "^5.7.0",
-    "marked": "^18.0.0",
+    "marked": "catalog:html",
     "morgan": "^1.10.1",
-    "node-fetch-native": "^1.6.6",
-    "turndown": "^7.2.1"
+    "node-fetch-native": "catalog:",
+    "turndown": "catalog:html"
   }
 }
