@@ -133,7 +133,7 @@ onMounted(() => {
 
 <style lang="scss">
 .europeana-map-map {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 </style>
