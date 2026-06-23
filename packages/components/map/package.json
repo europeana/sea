@@ -1,0 +1,40 @@
+{
+  "name": "@europeana/map",
+  "version": "0.0.3",
+  "description": "Vue 3 component/app to show a map on which clustered points may be displayed.",
+  "license": "EUPL-1.2",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/europeana-map.component.js"
+    },
+    "./app": {
+      "import": "./dist/europeana-map.app.js"
+    },
+    "./component": {
+      "import": "./dist/europeana-map.component.js"
+    },
+    "./css": {
+      "import": "./dist/europeana-map.css"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "pnpm build:component && pnpm build:app",
+    "build:app": "vite build --config vite.build.app.js",
+    "build:component": "vite build --config vite.build.component.js",
+    "preview": "vite preview",
+    "preversion": "pnpm build"
+  },
+  "dependencies": {
+    "ol": "catalog:",
+    "@vueuse/core": "catalog:vue3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:vite7",
+    "vite": "catalog:vite7"
+  },
+  "peerDependencies": {
+    "vue": "catalog:vue3"
+  }
+}
