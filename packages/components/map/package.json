@@ -4,6 +4,9 @@
   "description": "Vue 3 component/app to show a map on which clustered points may be displayed.",
   "license": "EUPL-1.2",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/europeana-map.component.js"
