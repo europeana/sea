@@ -4,7 +4,7 @@ export const configProps = {
     default: null,
   },
   json: {
-    type: Object,
+    type: String,
     default: null,
   },
 };
