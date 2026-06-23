@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { useFetch } from "@vueuse/core";
 
 import { useMapData } from "./mapData.js";
+import { fixtures } from "@test/fixtures.js";
 
 const mocks = vi.hoisted(() => {
   return {
@@ -14,37 +15,6 @@ vi.mock("@vueuse/core", () => {
     useFetch: mocks.useFetch,
   };
 });
-
-const features = [
-  {
-    type: "Feature",
-    id: "http://data.europeana.eu/organization/1",
-    geometry: {
-      type: "Point",
-      coordinates: [18.2924425, 57.6396512],
-    },
-  },
-  {
-    type: "Feature",
-    id: "http://data.europeana.eu/organization/2",
-    geometry: {
-      type: "Point",
-      coordinates: [18.0653779, 59.329777],
-    },
-  },
-];
-
-const fixtures = {
-  onePointFeatureCollection: {
-    type: "FeatureCollection",
-    features: [features[0]],
-  },
-  twoPointsFeatureCollection: {
-    type: "FeatureCollection",
-    features: [features[0], features[1]],
-  },
-  url: "https://example.org/geo.json",
-};
 
 vi.mocked(useFetch).mockReturnValue({
   json: vi.fn().mockResolvedValue({

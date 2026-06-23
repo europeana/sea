@@ -270,6 +270,9 @@ catalogs:
       specifier: 7.3.5
       version: 7.3.5
   vue3:
+    '@vue/test-utils':
+      specifier: 2.4.11
+      version: 2.4.11
     '@vueuse/core':
       specifier: 14.3.0
       version: 14.3.0
@@ -457,6 +460,9 @@ importers:
       '@vitejs/plugin-vue':
         specifier: catalog:vite7
         version: 6.0.7(vite@7.3.5(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.38(typescript@5.9.3))
+      '@vue/test-utils':
+        specifier: catalog:vue3
+        version: 2.4.11(@vue/compiler-dom@3.5.38)(@vue/server-renderer@3.5.38(vue@3.5.38(typescript@5.9.3)))(vue@3.5.38(typescript@5.9.3))
       vite:
         specifier: catalog:vite7
         version: 7.3.5(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0)
