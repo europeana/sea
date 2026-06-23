@@ -74,8 +74,8 @@ const createClustersLayer = () => {
   });
 
   const clusterSource = new Cluster({
-    distance: parseInt(40, 10),
-    minDistance: parseInt(20, 10),
+    distance: Number.parseInt(40, 10),
+    minDistance: Number.parseInt(20, 10),
     source,
   });
 
