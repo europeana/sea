@@ -64,29 +64,5 @@ describe("@/composables/mapData.js", () => {
         });
       });
     });
-
-    describe("centre", () => {
-      it("defaults to the co-ordinates of the centre point of Europe", () => {
-        const arg = {
-          json: JSON.stringify(fixtures.twoPointsFeatureCollection),
-        };
-
-        const { centre } = useMapData(arg);
-
-        expect(centre.value).toEqual([9.254419, 50.102223]);
-      });
-
-      it("uses point co-ordinates if only one", () => {
-        const arg = {
-          json: JSON.stringify(fixtures.onePointFeatureCollection),
-        };
-
-        const { centre } = useMapData(arg);
-
-        expect(centre.value).toEqual(
-          fixtures.onePointFeatureCollection.features[0].geometry.coordinates,
-        );
-      });
-    });
   });
 });

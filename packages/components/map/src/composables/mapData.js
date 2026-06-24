@@ -1,10 +1,7 @@
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import { useFetch } from "@vueuse/core";
 
-const centreOfEurope = [9.254419, 50.102223];
-
-export const useMapData = ({ json, url }) => {
-  const centre = ref(centreOfEurope);
+export const useMapData = ({ json, url } = {}) => {
   const data = ref(null);
 
   if (json) {
@@ -19,11 +16,5 @@ export const useMapData = ({ json, url }) => {
     throw new Error("No data JSON or URL supplied.");
   }
 
-  watchEffect(() => {
-    if (data.value?.features.length === 1) {
-      centre.value = data.value.features[0].geometry.coordinates;
-    }
-  });
-
-  return { data, centre };
+  return { data };
 };
