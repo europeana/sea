@@ -32,7 +32,7 @@
     "swiper": "12.2.0",
     "unplugin-vue-components": "32.1.0",
     "vue": "catalog:vue3",
-    "vue-router": "4.6.4"
+    "vue-router": "5.1.0"
   },
   "overrides": {
     "storybook": "$storybook"
