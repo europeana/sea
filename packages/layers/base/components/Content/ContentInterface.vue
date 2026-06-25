@@ -80,18 +80,22 @@ const typeLookup = {
 const typeSectionLookup = {
   BlogPosting: {
     url: routeForType(route, "news"),
+    slug: "news",
     title: t("news", 2),
   },
   ProjectPage: {
     url: routeForType(route, "project"),
+    slug: "project",
     title: t("project", 2),
   },
   eventTypeTrainingCourse: {
     url: routeForType(route, "training"),
+    slug: "training",
     title: t("training.training", 2),
   },
   eventTypeEvent: {
     url: routeForType(route, "event"),
+    slug: "event",
     title: t("event.event", 2),
   },
 };
@@ -427,6 +431,18 @@ if (fullEntriesError.value) {
 watch(page, () => {
   scrollToSelector("#header");
 });
+
+watch(
+  () => route.query,
+  () => {
+    for (const section in typeSectionLookup) {
+      typeSectionLookup[section].url = routeForType(
+        route,
+        typeSectionLookup[section].slug,
+      );
+    }
+  },
+);
 
 function renderSection(section) {
   return section?.total > 0 || displayFeaturedEntry(section.type);
