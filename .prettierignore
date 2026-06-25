@@ -7,3 +7,4 @@
 Dockerfile
 pnpm-lock.yaml
 sonar-project.properties
+*.svg
