@@ -7,6 +7,7 @@ export default defineConfig({
     projects: [
       "packages/apps/cats",
       "packages/apps/ds4ch",
+      "packages/components/map",
       "packages/directives/vue-visible-on-scroll",
       "packages/layers/base",
       "packages/plugins/vue-contentful-graphql",
