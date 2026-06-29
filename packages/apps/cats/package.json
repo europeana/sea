@@ -1,6 +1,6 @@
 {
   "name": "@europeana/cats",
-  "version": "0.1.1-map.0",
+  "version": "0.1.1-map.2",
   "description": "Content(ful) Automated Translation Service (CATS)",
   "scripts": {
     "build": "nitro build",
