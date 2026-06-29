@@ -24,7 +24,7 @@ catalogs:
     turndown: "7.2.4"
   nuxt3:
     "@nuxt/test-utils": 3.23.0
-    "@nuxtjs/i18n": 9.5.6
+    "@nuxtjs/i18n": 10.4.0
     "@nuxtjs/storybook": 9.0.1
     nuxt: 3.21.8
   vite7:
