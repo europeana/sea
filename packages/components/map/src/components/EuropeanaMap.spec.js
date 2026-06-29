@@ -82,7 +82,7 @@ describe("@/components/EuropeanaMap.vue", () => {
           error = e;
         }
 
-        expect(error.message).toBe("No data JSON or URL supplied in props.");
+        expect(error.message).toBe("No data JSON or URL supplied.");
       });
     });
   });

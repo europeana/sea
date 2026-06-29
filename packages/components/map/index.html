@@ -6,19 +6,22 @@
     <title>Europeana Map</title>
   </head>
   <body>
-    <div
-      id="europeana-map"
-      data-url="https://www.europeana.eu/_api/collections/organisations/geo"
-    ></div>
     <style>
       body {
         margin: 0;
       }
-      .europeana-map-map {
+      #europeana-map {
         width: 100vw;
         height: 100vh;
       }
     </style>
-    <script type="module" src="/src/app.js"></script>
+    <div id="europeana-map" />
+    <script type="module">
+      import EuropeanaMap from "./src/index.js";
+
+      new EuropeanaMap("#europeana-map", {
+        url: "https://www.europeana.eu/_api/collections/organisations/geo",
+      });
+    </script>
   </body>
 </html>

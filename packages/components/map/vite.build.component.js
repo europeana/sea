@@ -11,8 +11,9 @@ export default defineConfig({
       entry: fileURLToPath(
         new URL("./src/components/EuropeanaMap.vue", import.meta.url),
       ),
+      name: "EuropeanaMap",
       fileName: "europeana-map.component",
-      formats: ["es"],
+      formats: ["es", "iife"],
     },
     rollupOptions: {
       external: ["vue"],

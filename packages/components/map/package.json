@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "@vueuse/core": "catalog:vue3",
-    "ol": "catalog:"
+    "ol": "catalog:",
+    "ol-mapbox-style": "^13.4.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:vite7",
