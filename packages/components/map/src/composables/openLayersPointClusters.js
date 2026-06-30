@@ -91,6 +91,7 @@ export const useOpenLayersPointClusters = ({
 
   watchEffect(() => {
     if (mapRef.value && data.value) {
+      // TODO: do not use clusters if only one feature
       mapRef.value.addLayer(createClustersLayer());
       centreMapOnSinglePoint();
     }
