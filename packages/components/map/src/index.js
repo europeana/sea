@@ -37,7 +37,7 @@ export default class EuropeanaMap {
   }
 
   set(name, value) {
-    if (Object.hasOwn(this.config, name)) {
+    if (Object.hasOwn(this.#config, name)) {
       this.#config[name] = value;
     }
   }
