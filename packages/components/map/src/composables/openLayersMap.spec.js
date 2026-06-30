@@ -1,10 +1,14 @@
 // @vitest-environment happy-dom
 
+import { nextTick } from "vue";
 import { shallowMount } from "@vue/test-utils";
-import { describe, it, expect } from "vitest";
+import { afterAll, beforeEach, describe, it, expect, vi } from "vitest";
 import OpenLayersMap from "ol/Map.js";
 
 import { useOpenLayersMap } from "./openLayersMap.js";
+
+const mockFetch = vi.fn();
+global.fetch = mockFetch;
 
 const elementId = "map";
 const component = {
@@ -39,6 +43,14 @@ const factory = ({ props } = {}) =>
   });
 
 describe("@/composables/openLayersMap.js", () => {
+  beforeEach(() => {
+    mockFetch.mockClear();
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
   describe("useOpenLayersMap", () => {
     describe("map", () => {
       it("uses existing map when supplied", () => {
@@ -92,17 +104,53 @@ describe("@/composables/openLayersMap.js", () => {
       });
 
       describe("style", () => {
-        // describe("when supplied in args", () => {
-        // const style = "https://example.org/style.json"
+        describe("when supplied in args", () => {
+          const style = "https://example.org/style.json";
 
-        // TODO: this will call fetch, so need to mock that
-        // it("uses that style URL to create a Mapbox style layer group", () => {
-        //   const wrapper = factory({ props: { style } });
+          it("uses that style URL to create a Mapbox style layer group", async () => {
+            const styleResponse = {
+              version: 8,
+              name: "example-style",
+              sources: {
+                "example-source": {
+                  tiles: ["https://tiles.example.org/tiles/osm/{z}/{x}/{y}"],
+                  type: "vector",
+                  scheme: "xyz",
+                  bounds: [-180, -85.0511287798066, 180, 85.0511287798066],
+                  minzoom: 0,
+                  maxzoom: 14,
+                },
+              },
+              layers: [
+                {
+                  source: "example-source",
+                  id: "water-ocean",
+                  type: "fill",
+                  "source-layer": "ocean",
+                  paint: {
+                    "fill-color": "rgb(193,219,242)",
+                  },
+                },
+              ],
+            };
+            mockFetch.mockResolvedValueOnce({
+              ok: true,
+              status: 200,
+              json: () => Promise.resolve(styleResponse),
+            });
 
-        //   const map = wrapper.vm.map;
-        //   const layer = map.getLayers().getArray()[0]
-        // });
-        // });
+            const wrapper = factory({ props: { style } });
+
+            await nextTick();
+            expect(mockFetch).toHaveBeenCalledTimes(1);
+            const map = wrapper.vm.map;
+            const layer = map.getLayers().getArray()[0];
+            expect(layer.constructor.name).toBe("LayerGroup");
+            // TODO: test that the layer(s) are based on the style response
+            //       ... but how? the following is undefined...
+            // console.log(layer.getLayers().getArray()[0])
+          });
+        });
 
         describe("when not supplied in args", () => {
           it("defaults to using an OSM tile layer", () => {
