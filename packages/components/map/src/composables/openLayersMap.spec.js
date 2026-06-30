@@ -2,7 +2,7 @@
 
 import { shallowMount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import Map from "ol/Map.js";
+import OpenLayersMap from "ol/Map.js";
 
 import { useOpenLayersMap } from "./openLayersMap.js";
 
@@ -12,6 +12,10 @@ const component = {
   props: {
     centre: {
       type: Array,
+      default: null,
+    },
+    map: {
+      type: OpenLayersMap,
       default: null,
     },
     target: {
@@ -32,17 +36,22 @@ const factory = ({ props } = {}) =>
 
 describe("@/composables/openLayersMap.js", () => {
   describe("useOpenLayersMap", () => {
-    describe("onMounted", () => {
-      it("creates OpenLayers map and sets on map ref", () => {
+    describe("map", () => {
+      it("uses existing map when supplied", () => {
+        const map = new OpenLayersMap();
+        const wrapper = factory({ props: { map } });
+
+        expect(wrapper.vm.map).toEqual(map);
+      });
+
+      it("initialises an OpenLayersMap when one not supplied", () => {
         const wrapper = factory();
 
         const map = wrapper.vm.map;
 
-        expect(map instanceof Map).toBe(true);
+        expect(map instanceof OpenLayersMap).toBe(true);
       });
-    });
 
-    describe("map", () => {
       describe("centre", () => {
         describe("when supplied in args", () => {
           const centre = [5.0, 4.0];
