@@ -1,6 +1,6 @@
 {
   "name": "@europeana/vue-contentful-graphql",
-  "version": "0.1.1-map.2",
+  "version": "0.1.1",
   "description": "Vue plugin to query Contentful GraphQL Content API",
   "license": "EUPL-1.2",
   "type": "module",

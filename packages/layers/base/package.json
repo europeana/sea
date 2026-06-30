@@ -1,7 +1,7 @@
 {
   "name": "@europeana/sea-base-layer",
   "type": "module",
-  "version": "0.1.1-map.2",
+  "version": "0.1.1",
   "main": "./nuxt.config.ts",
   "scripts": {
     "postinstall": "nuxt prepare"
