@@ -1,4 +1,4 @@
-import { computed, watchEffect } from "vue";
+import { computed, toRef, watchEffect } from "vue";
 
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
@@ -17,6 +17,8 @@ export const useOpenLayersPointClusters = ({
   map,
   pointIconSrc,
 } = {}) => {
+  const mapRef = toRef(map);
+
   const features = computed(() =>
     data.value.features.map(
       (feature) =>
@@ -81,15 +83,16 @@ export const useOpenLayersPointClusters = ({
 
   const centreMapOnSinglePoint = () => {
     if (data.value?.features?.length === 1) {
-      map.value
+      mapRef.value
         .getView()
         .setCenter(data.value.features[0].geometry.coordinates);
     }
   };
 
   watchEffect(() => {
-    if (map.value && data.value) {
-      map.value.addLayer(createClustersLayer());
+    if (mapRef.value && data.value) {
+      // TODO: do not use clusters if only one feature
+      mapRef.value.addLayer(createClustersLayer());
       centreMapOnSinglePoint();
     }
   });

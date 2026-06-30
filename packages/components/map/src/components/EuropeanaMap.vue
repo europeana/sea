@@ -1,32 +1,60 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref, inject } from "vue";
 import { useFetch } from "@vueuse/core";
-import { configProps } from "@/config.js";
+import "ol/ol.css";
+
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
 import { useOpenLayersPointClusters } from "@/composables/openLayersPointClusters.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
-import "ol/ol.css";
 
-const props = defineProps(configProps);
+const map = inject("map", null);
+const injectedConfig = inject("config", null);
+
+const props = defineProps({
+  json: {
+    type: String,
+    default: null,
+  },
+  style: {
+    type: String,
+    default: null,
+  },
+  url: {
+    type: String,
+    default: null,
+  },
+});
 
 const data = ref(null);
 
-if (props.json) {
-  data.value = JSON.parse(props.json);
-} else if (props.url) {
-  useFetch(props.url)
+const url = computed(() => props.url || injectedConfig?.value?.url);
+const json = computed(() => props.json || injectedConfig?.value?.json);
+const style = computed(() => props.style || injectedConfig?.value?.style);
+
+if (json.value) {
+  data.value = JSON.parse(json.value);
+} else if (url.value) {
+  useFetch(url.value)
     .json()
     .then((fetched) => {
       data.value = fetched.data.value;
     });
 } else {
-  throw new Error("No data JSON or URL supplied in props.");
+  throw new Error("No data JSON or URL supplied.");
 }
 
 const target = "europeana-map-map";
 
-const { map } = useOpenLayersMap({ target });
-useOpenLayersPointClusters({ data, map, pointIconSrc });
+useOpenLayersMap({
+  map,
+  style,
+  target,
+});
+useOpenLayersPointClusters({
+  data,
+  map,
+  pointIconSrc,
+});
 </script>
 
 <template>

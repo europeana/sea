@@ -8,10 +8,10 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      entry: fileURLToPath(new URL("./src/app.js", import.meta.url)),
+      entry: fileURLToPath(new URL("./src/index.js", import.meta.url)),
       name: "EuropeanaMap",
       fileName: "europeana-map.app",
-      formats: ["es"],
+      formats: ["es", "iife"],
     },
     rollupOptions: {
       output: {
