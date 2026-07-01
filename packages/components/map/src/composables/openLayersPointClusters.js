@@ -2,6 +2,7 @@ import { computed, toRef, watchEffect } from "vue";
 
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
+import LineString from "ol/geom/LineString.js";
 import VectorSource from "ol/source/Vector.js";
 import Cluster from "ol/source/Cluster.js";
 import VectorLayer from "ol/layer/Vector.js";
@@ -30,39 +31,90 @@ export const useOpenLayersPointClusters = ({
   );
 
   const clusterStyleCache = {};
+  if (pointIconSrc) {
+    clusterStyleCache[1] = new Style({
+      image: new Icon({
+        src: pointIconSrc,
+        width: 32,
+        height: 32,
+      }),
+    });
+  }
+
+  function degreesToRadians(degrees) {
+    return degrees * (Math.PI / 180);
+  }
+
   const clusterStyle = (feature) => {
     const features = feature.get("features");
-    const size = features.length;
+    const size = features?.length || 0;
+    const zoom = mapRef.value.getView().getZoom();
 
-    if (!clusterStyleCache[size]) {
-      if (pointIconSrc && size === 1) {
-        clusterStyleCache[size] = new Style({
-          image: new Icon({
-            src: pointIconSrc,
-            width: 32,
-            height: 32,
-          }),
-        });
-      } else {
-        clusterStyleCache[size] = new Style({
-          image: new CircleStyle({
-            radius: 14,
+    if (zoom >= 16 && size >= 2) {
+      const styles = features
+        .map((feature, index) => {
+          // a good distance from the original centre co-ordinates to a spread-out one,
+          // at zoom 16 is 0.000265625;
+          // as zoom increases, distance from centre needs to decrease
+          const distance = (0.000265625 * 16) / zoom;
+          const deltaAngle = (degreesToRadians(360) / size) * index;
+          const deltaX = distance * Math.sin(deltaAngle);
+          const deltaY = distance * Math.cos(deltaAngle);
+
+          const pointGeometry = feature.getGeometry().clone();
+          const originalCoordinates = pointGeometry.getCoordinates();
+          pointGeometry.translate(deltaX, deltaY);
+          const newCoordinates = pointGeometry.getCoordinates();
+          const pointStyle = clusterStyleCache[1].clone();
+          pointStyle.setGeometry(pointGeometry);
+
+          const lineStyle = new Style({
+            geometry: new LineString([originalCoordinates, newCoordinates]),
             stroke: new Stroke({
               color: "#000",
+              width: 2,
             }),
-            fill: new Fill({
-              color: "#000",
+          });
+
+          const circleStyle = new Style({
+            image: new CircleStyle({
+              radius: 4,
+              stroke: new Stroke({
+                color: "#000",
+              }),
+              fill: new Fill({
+                color: "#000",
+              }),
             }),
+            geometry: feature.getGeometry(),
+          });
+
+          return [pointStyle, lineStyle, circleStyle];
+        })
+        .flat();
+
+      return styles;
+    }
+
+    if (!clusterStyleCache[size]) {
+      clusterStyleCache[size] = new Style({
+        image: new CircleStyle({
+          radius: 14,
+          stroke: new Stroke({
+            color: "#000",
           }),
-          text: new Text({
-            text: size.toString(),
-            fill: new Fill({
-              color: "#fff",
-            }),
-            font: '700 0.875rem "Open Sans", "Arial", sans-serif',
+          fill: new Fill({
+            color: "#000",
           }),
-        });
-      }
+        }),
+        text: new Text({
+          text: size.toString(),
+          fill: new Fill({
+            color: "#fff",
+          }),
+          font: '700 0.875rem "Open Sans", "Arial", sans-serif',
+        }),
+      });
     }
 
     return clusterStyleCache[size];
@@ -71,8 +123,8 @@ export const useOpenLayersPointClusters = ({
   const createClustersLayer = () => {
     return new VectorLayer({
       source: new Cluster({
-        distance: Number.parseInt(40, 10),
-        minDistance: Number.parseInt(20, 10),
+        distance: 40,
+        minDistance: 20,
         source: new VectorSource({
           features: features.value,
         }),
