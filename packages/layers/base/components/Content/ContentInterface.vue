@@ -77,28 +77,26 @@ const typeLookup = {
   event: { type: "Event", taxonomy: "eventTypeEvent" },
 };
 
-const typeSectionLookup = {
-  BlogPosting: {
-    url: routeForType(route, "news"),
-    slug: "news",
-    title: t("news", 2),
-  },
-  ProjectPage: {
-    url: routeForType(route, "project"),
-    slug: "project",
-    title: t("project", 2),
-  },
-  eventTypeTrainingCourse: {
-    url: routeForType(route, "training"),
-    slug: "training",
-    title: t("training.training", 2),
-  },
-  eventTypeEvent: {
-    url: routeForType(route, "event"),
-    slug: "event",
-    title: t("event.event", 2),
-  },
-};
+const typeSectionLookup = computed(() => {
+  return {
+    BlogPosting: {
+      url: routeForType(route, "news"),
+      title: t("news", 2),
+    },
+    ProjectPage: {
+      url: routeForType(route, "project"),
+      title: t("project", 2),
+    },
+    eventTypeTrainingCourse: {
+      url: routeForType(route, "training"),
+      title: t("training.training", 2),
+    },
+    eventTypeEvent: {
+      url: routeForType(route, "event"),
+      title: t("event.event", 2),
+    },
+  };
+});
 
 const selectedType = computed(() => {
   return typeLookup[route.query?.type] || false;
@@ -432,40 +430,30 @@ watch(page, () => {
   scrollToSelector("#header");
 });
 
-watch(
-  () => route.query,
-  () => {
-    for (const section in typeSectionLookup) {
-      typeSectionLookup[section].url = routeForType(
-        route,
-        typeSectionLookup[section].slug,
-      );
-    }
-  },
-);
-
 function renderSection(section) {
   return section?.total > 0 || displayFeaturedEntry(section.type);
 }
 
 function renderMoreLink(section) {
   return (
-    !selectedType.value && typeSectionLookup[section.type] && section?.total > 4
+    !selectedType.value &&
+    typeSectionLookup.value[section.type] &&
+    section?.total > 4
   );
 }
 
 function renderTypeTitle(type) {
-  return !selectedType.value && typeSectionLookup[type];
+  return !selectedType.value && typeSectionLookup.value[type];
 }
 
 function getMoreLinkLabelForSection(section) {
   if (selectedTags.value.length) {
     return t("content.seeMore", {
-      content: typeSectionLookup[section.type].title,
+      content: typeSectionLookup.value[section.type].title,
     });
   } else {
     return t("content.seeAll", {
-      content: typeSectionLookup[section.type].title,
+      content: typeSectionLookup.value[section.type].title,
     });
   }
 }
