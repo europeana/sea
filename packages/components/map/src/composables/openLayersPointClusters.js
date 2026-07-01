@@ -11,6 +11,7 @@ import Icon from "ol/style/Icon.js";
 import Stroke from "ol/style/Stroke.js";
 import Style from "ol/style/Style.js";
 import Text from "ol/style/Text.js";
+import { boundingExtent } from "ol/extent.js";
 
 export const useOpenLayersPointClusters = ({
   data,
@@ -94,6 +95,22 @@ export const useOpenLayersPointClusters = ({
       // TODO: do not use clusters if only one feature
       mapRef.value.addLayer(createClustersLayer());
       centreMapOnSinglePoint();
+
+      mapRef.value?.on("click", handleClick);
     }
   });
+
+  function handleClick(e) {
+    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
+    const features = clickedFeatures[0]?.get("features");
+
+    if (features?.length > 1) {
+      const extent = boundingExtent(
+        features.map((r) => r.getGeometry().getCoordinates()),
+      );
+      mapRef.value
+        .getView()
+        .fit(extent, { duration: 1000, padding: [50, 50, 50, 50] });
+    }
+  }
 };
