@@ -20,9 +20,9 @@ describe("@/index.js", () => {
     describe(".config", () => {
       it("is a config object", () => {
         const options = {
-          url: "https://example.org/geo.json",
+          json: "{}",
           style: "https://example.org/style.json",
-          json: null,
+          url: "https://example.org/geo.json",
         };
         const europeanaMap = new EuropeanaMap(null, options);
 
@@ -52,6 +52,15 @@ describe("@/index.js", () => {
         europeanaMap.set("style", style);
 
         expect(europeanaMap.config.style).toBe(style);
+      });
+
+      it("does nothing to config if setting is not known", () => {
+        const europeanaMap = new EuropeanaMap();
+        const unknown = "https://example.org/style.json";
+
+        europeanaMap.set("unknown", unknown);
+
+        expect(europeanaMap.config.unknown).toBeUndefined();
       });
     });
   });
