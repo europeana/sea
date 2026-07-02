@@ -139,7 +139,7 @@ export const useOpenLayersPointClusters = ({
   const createClustersLayer = () => {
     const clustersLayer = new VectorLayer({
       source: new Cluster({
-        distance: 32,
+        distance: 48,
         minDistance: 32,
         source: new VectorSource({
           features: features.value,
