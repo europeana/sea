@@ -1,4 +1,6 @@
 import { computed, toRef, watchEffect } from "vue";
+// TODO: add to pkg deps
+import { uniqWith, isEqual } from "lodash-es";
 
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
@@ -50,13 +52,24 @@ export const useOpenLayersPointClusters = ({
     const size = features?.length || 0;
     const zoom = mapRef.value.getView().getZoom();
 
-    if (zoom >= 16 && size >= 2) {
+    // only break clusters apart at zoom level 16+, and if all features are
+    // at exactly the same co-ordinates
+    if (
+      zoom >= 16 &&
+      size >= 2 &&
+      uniqWith(
+        features.map((f) => f.getGeometry().getCoordinates()),
+        isEqual,
+      ).length === 1
+    ) {
+      const coords = features.map((f) => f.getGeometry().getCoordinates());
+      console.log("clustered close coords", coords);
       const styles = features
         .map((feature, index) => {
           const pointGeometry = feature.getGeometry().clone();
           const pointStyle = clusterStyleCache[1].clone();
 
-          const distance = 32; // pixels
+          const distance = 24; // pixels
           const deltaAngle = (degreesToRadians(360) / size) * index;
           const displacementX = distance * Math.sin(deltaAngle);
           const displacementY = distance * Math.cos(deltaAngle);
@@ -126,16 +139,18 @@ export const useOpenLayersPointClusters = ({
   };
 
   const createClustersLayer = () => {
-    return new VectorLayer({
+    const clustersLayer = new VectorLayer({
       source: new Cluster({
-        distance: 40,
-        minDistance: 20,
+        distance: 32,
+        minDistance: 32,
         source: new VectorSource({
           features: features.value,
         }),
       }),
       style: clusterStyle,
     });
+    console.log("clustersLayer properties", clustersLayer.getProperties());
+    return clustersLayer;
   };
 
   const centreMapOnSinglePoint = () => {

@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@vueuse/core": "catalog:vue3",
+    "lodash-es": "catalog:",
     "ol": "catalog:",
     "ol-mapbox-style": "^13.4.1"
   },
