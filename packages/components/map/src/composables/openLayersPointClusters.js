@@ -62,8 +62,6 @@ export const useOpenLayersPointClusters = ({
         isEqual,
       ).length === 1
     ) {
-      const coords = features.map((f) => f.getGeometry().getCoordinates());
-      console.log("clustered close coords", coords);
       const styles = features
         .map((feature, index) => {
           const pointGeometry = feature.getGeometry().clone();
