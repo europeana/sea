@@ -53,19 +53,24 @@ export const useOpenLayersPointClusters = ({
     if (zoom >= 16 && size >= 2) {
       const styles = features
         .map((feature, index) => {
-          // a good distance from the original centre co-ordinates to a spread-out one,
-          // at zoom 16 is 0.000265625;
-          // as zoom increases, distance from centre needs to decrease
-          const distance = (0.000265625 * 16) / zoom;
-          const deltaAngle = (degreesToRadians(360) / size) * index;
-          const deltaX = distance * Math.sin(deltaAngle);
-          const deltaY = distance * Math.cos(deltaAngle);
-
           const pointGeometry = feature.getGeometry().clone();
-          const originalCoordinates = pointGeometry.getCoordinates();
-          pointGeometry.translate(deltaX, deltaY);
-          const newCoordinates = pointGeometry.getCoordinates();
           const pointStyle = clusterStyleCache[1].clone();
+
+          const distance = 32; // pixels
+          const deltaAngle = (degreesToRadians(360) / size) * index;
+          const displacementX = distance * Math.sin(deltaAngle);
+          const displacementY = distance * Math.cos(deltaAngle);
+
+          const originalCoordinates = pointGeometry.getCoordinates();
+          const originalPixel =
+            mapRef.value.getPixelFromCoordinate(originalCoordinates);
+          const newPixel = [
+            originalPixel[0] + displacementX,
+            originalPixel[1] + displacementY,
+          ];
+          const newCoordinates = mapRef.value.getCoordinateFromPixel(newPixel);
+
+          pointGeometry.setCoordinates(newCoordinates);
           pointStyle.setGeometry(pointGeometry);
 
           const lineStyle = new Style({
