@@ -2,7 +2,15 @@
 
 import { nextTick } from "vue";
 import { shallowMount } from "@vue/test-utils";
-import { afterAll, beforeEach, describe, it, expect, vi } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 import OpenLayersMap from "ol/Map.js";
 
 import { useOpenLayersMap } from "./openLayersMap.js";
@@ -26,8 +34,16 @@ const component = {
       type: String,
       default: elementId,
     },
+    hash: {
+      type: Boolean,
+      default: false,
+    },
     style: {
       type: String,
+      default: null,
+    },
+    zoom: {
+      type: Number,
       default: null,
     },
   },
@@ -162,6 +178,60 @@ describe("@/composables/openLayersMap.js", () => {
             const source = layer.getSource();
             expect(source.constructor.name).toBe("OSM");
           });
+        });
+      });
+    });
+
+    describe("hash", () => {
+      afterEach(() => {
+        window.location.hash = undefined;
+      });
+
+      describe("when `true`", () => {
+        const hash = true;
+
+        it("reads centre and zoom from window.location.hash", () => {
+          window.location.hash = "#z=5&c=-5%2C36";
+          const wrapper = factory({ props: { hash } });
+
+          const map = wrapper.vm.map;
+
+          expect(map.getView().getCenter()).toEqual([-5, 36]);
+          expect(map.getView().getZoom()).toBe(5);
+        });
+
+        it("updates hash with centre and zoom on moveend event", () => {
+          const centre = [-5, 36];
+          const zoom = 5;
+          const wrapper = factory({ props: { centre, hash, zoom } });
+
+          const map = wrapper.vm.map;
+          map.dispatchEvent("moveend");
+
+          expect(window.location.hash).toBe("#c=-5%2C36&z=5");
+        });
+      });
+
+      describe("when `false` (default)", () => {
+        it("ignores centre and zoom from window.location.hash", () => {
+          window.location.hash = "#z=5&c=-5%2C36";
+          const wrapper = factory();
+
+          const map = wrapper.vm.map;
+
+          expect(map.getView().getCenter()).not.toEqual([-5, 36]);
+          expect(map.getView().getZoom()).not.toBe(5);
+        });
+
+        it("does not update hash with centre and zoom on moveend event", () => {
+          const centre = [-5, 36];
+          const zoom = 5;
+          const wrapper = factory({ props: { centre, zoom } });
+
+          const map = wrapper.vm.map;
+          map.dispatchEvent("moveend");
+
+          expect(window.location.hash).not.toBe("#c=-5%2C36&z=5");
         });
       });
     });
