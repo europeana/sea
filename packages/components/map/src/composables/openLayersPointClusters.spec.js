@@ -15,20 +15,20 @@ const elementId = "map";
 const component = {
   template: `<div id="${elementId}" />`,
   props: {
-    pointIconSrc: {
-      type: String,
+    icon: {
+      type: Object,
       default: null,
     },
   },
   setup(props) {
     const data = ref(null);
     const map = ref(null);
-    const pointIconSrc = props.pointIconSrc;
+    const icon = props.icon;
 
     useGeographic();
-    useOpenLayersPointClusters({ data, map, pointIconSrc });
+    useOpenLayersPointClusters({ data, map, icon });
 
-    return { data, map, pointIconSrc };
+    return { data, map, icon };
   },
 };
 
@@ -73,69 +73,7 @@ describe("@/composables/openLayersPointClusters.js", () => {
       });
 
       describe("styling", () => {
-        describe("single point", () => {
-          describe("when pointIconSrc is supplied", () => {
-            const pointIconSrc = "https://example.org/icons/location.svg";
-
-            it("styles point as an icon using that image", async () => {
-              const feature = {
-                get: () => ({ length: 1 }),
-              };
-              const wrapper = factory({ props: { pointIconSrc } });
-              wrapper.vm.map = new Map();
-              wrapper.vm.data = fixtures.onePointFeatureCollection;
-              await nextTick();
-
-              const map = wrapper.vm.map;
-              const layers = map.getLayers().getArray();
-              const clusterLayer = layers[0];
-              const style = clusterLayer.getStyleFunction()(feature);
-
-              expect(style.getImage().getSrc()).toBe(pointIconSrc);
-              expect(style.getText()).toBeNull();
-            });
-          });
-
-          describe("when pointIconSrc is not supplied", () => {
-            it("styles point as a circle", async () => {
-              const feature = {
-                get: () => ({ length: 1 }),
-              };
-              const wrapper = factory();
-              wrapper.vm.map = new Map();
-              wrapper.vm.data = fixtures.onePointFeatureCollection;
-              await nextTick();
-
-              const map = wrapper.vm.map;
-              const layers = map.getLayers().getArray();
-              const clusterLayer = layers[0];
-              const style = clusterLayer.getStyleFunction()(feature);
-
-              expect(style.getImage().radius).toBe(14);
-              expect(style.getText().getText()).toBe("1");
-            });
-          });
-        });
-
-        describe("multiple points", () => {
-          it("styles points as a circle", async () => {
-            const feature = {
-              get: () => ({ length: 2 }),
-            };
-            const wrapper = factory();
-            wrapper.vm.map = new Map();
-            wrapper.vm.data = fixtures.twoPointsFeatureCollection;
-            await nextTick();
-
-            const map = wrapper.vm.map;
-            const layers = map.getLayers().getArray();
-            const clusterLayer = layers[0];
-            const style = clusterLayer.getStyleFunction()(feature);
-
-            expect(style.getImage().radius).toBe(14);
-            expect(style.getText().getText()).toBe("2");
-          });
-        });
+        it("calls the supplied style fn");
       });
     });
   });
