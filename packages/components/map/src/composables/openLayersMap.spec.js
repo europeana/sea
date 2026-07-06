@@ -182,6 +182,44 @@ describe("@/composables/openLayersMap.js", () => {
       });
     });
 
+    describe("controls", () => {
+      it("has zoom control", () => {
+        const wrapper = factory();
+
+        const map = wrapper.vm.map;
+        const controls = map.getControls().getArray();
+        const zoomControlExists = controls.some(
+          (control) => control.constructor.name === "Zoom",
+        );
+
+        expect(zoomControlExists).toBe(true);
+      });
+
+      it("has attribution control", () => {
+        const wrapper = factory();
+
+        const map = wrapper.vm.map;
+        const controls = map.getControls().getArray();
+        const zoomControlExists = controls.some(
+          (control) => control.constructor.name === "Attribution",
+        );
+
+        expect(zoomControlExists).toBe(true);
+      });
+
+      it("has full-screen control", () => {
+        const wrapper = factory();
+
+        const map = wrapper.vm.map;
+        const controls = map.getControls().getArray();
+        const zoomControlExists = controls.some(
+          (control) => control.constructor.name === "FullScreen",
+        );
+
+        expect(zoomControlExists).toBe(true);
+      });
+    });
+
     describe("hash", () => {
       afterEach(() => {
         window.location.hash = undefined;
