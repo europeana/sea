@@ -48,12 +48,12 @@ describe("@/composables/openLayersPointsVectorLayer.js", () => {
 
         const map = wrapper.vm.map;
         const layers = map.getLayers().getArray();
-        expect(layers.length).toBe(1);
-        expect(layers[0] instanceof VectorLayer).toBe(true);
+        expect(layers).toHaveLength(1);
+        expect(layers[0]).toBeInstanceOf(VectorLayer);
 
         const clusterSource = layers[0].getSource();
-        expect(clusterSource instanceof Cluster).toBe(true);
-        expect(clusterSource.getSource().getFeatures().length).toBe(
+        expect(clusterSource).toBeInstanceOf(Cluster);
+        expect(clusterSource.getSource().getFeatures()).toHaveLength(
           fixtures.twoPointsFeatureCollection.features.length,
         );
       });
