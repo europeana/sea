@@ -9,6 +9,7 @@ import {
   describe,
   expect,
   it,
+  test,
   vi,
 } from "vitest";
 import OpenLayersMap from "ol/Map.js";
@@ -183,40 +184,20 @@ describe("@/composables/openLayersMap.js", () => {
     });
 
     describe("controls", () => {
-      it("has zoom control", () => {
+      test.each([
+        ["zoom", "Zoom"],
+        ["attribution", "Attribution"],
+        ["full-screen", "FullScreen"],
+      ])("has %s control", (name, className) => {
         const wrapper = factory();
 
         const map = wrapper.vm.map;
         const controls = map.getControls().getArray();
-        const zoomControlExists = controls.some(
-          (control) => control.constructor.name === "Zoom",
+        const controlExists = controls.some(
+          (control) => control.constructor.name === className,
         );
 
-        expect(zoomControlExists).toBe(true);
-      });
-
-      it("has attribution control", () => {
-        const wrapper = factory();
-
-        const map = wrapper.vm.map;
-        const controls = map.getControls().getArray();
-        const zoomControlExists = controls.some(
-          (control) => control.constructor.name === "Attribution",
-        );
-
-        expect(zoomControlExists).toBe(true);
-      });
-
-      it("has full-screen control", () => {
-        const wrapper = factory();
-
-        const map = wrapper.vm.map;
-        const controls = map.getControls().getArray();
-        const zoomControlExists = controls.some(
-          (control) => control.constructor.name === "FullScreen",
-        );
-
-        expect(zoomControlExists).toBe(true);
+        expect(controlExists).toBe(true);
       });
     });
 
