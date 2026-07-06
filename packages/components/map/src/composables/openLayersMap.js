@@ -2,6 +2,7 @@ import { onMounted, toRef, unref, watch } from "vue";
 
 import Map from "ol/Map.js";
 import View from "ol/View.js";
+import FullScreen from "ol/control/FullScreen.js";
 import TileLayer from "ol/layer/Tile.js";
 import OSM from "ol/source/OSM.js";
 import { useGeographic } from "ol/proj.js";
@@ -82,6 +83,7 @@ export const useOpenLayersMap = ({
       mapRef.value = new Map();
     }
 
+    mapRef.value.addControl(new FullScreen());
     mapRef.value.setTarget(targetRef.value);
     mapRef.value.setView(createView());
     mapRef.value.setLayers([createLayer()]);
