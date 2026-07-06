@@ -12,7 +12,7 @@ import Stroke from "ol/style/Stroke.js";
 import Style from "ol/style/Style.js";
 import Text from "ol/style/Text.js";
 
-export const useOpenLayersPointClusters = ({
+export const useOpenLayersPointsVectorLayer = ({
   data,
   map,
   pointIconSrc,
@@ -29,6 +29,36 @@ export const useOpenLayersPointClusters = ({
     ),
   );
 
+  const pointIconStyle =
+    pointIconSrc &&
+    new Style({
+      image: new Icon({
+        src: pointIconSrc,
+        width: 32,
+        height: 32,
+      }),
+    });
+
+  const pointCircleCountStyle = (size) =>
+    new Style({
+      image: new CircleStyle({
+        radius: 14,
+        stroke: new Stroke({
+          color: "#000",
+        }),
+        fill: new Fill({
+          color: "#000",
+        }),
+      }),
+      text: new Text({
+        text: size.toString(),
+        fill: new Fill({
+          color: "#fff",
+        }),
+        font: '700 0.875rem "Open Sans", "Arial", sans-serif',
+      }),
+    });
+
   const clusterStyleCache = {};
   const clusterStyle = (feature) => {
     const features = feature.get("features");
@@ -36,36 +66,21 @@ export const useOpenLayersPointClusters = ({
 
     if (!clusterStyleCache[size]) {
       if (pointIconSrc && size === 1) {
-        clusterStyleCache[size] = new Style({
-          image: new Icon({
-            src: pointIconSrc,
-            width: 32,
-            height: 32,
-          }),
-        });
+        clusterStyleCache[size] = pointIconStyle;
       } else {
-        clusterStyleCache[size] = new Style({
-          image: new CircleStyle({
-            radius: 14,
-            stroke: new Stroke({
-              color: "#000",
-            }),
-            fill: new Fill({
-              color: "#000",
-            }),
-          }),
-          text: new Text({
-            text: size.toString(),
-            fill: new Fill({
-              color: "#fff",
-            }),
-            font: '700 0.875rem "Open Sans", "Arial", sans-serif',
-          }),
-        });
+        clusterStyleCache[size] = pointCircleCountStyle(size);
       }
     }
 
     return clusterStyleCache[size];
+  };
+
+  const pointStyle = () => {
+    if (pointIconSrc) {
+      return pointIconStyle;
+    } else {
+      return pointCircleCountStyle(1);
+    }
   };
 
   const createClustersLayer = () => {
@@ -81,6 +96,15 @@ export const useOpenLayersPointClusters = ({
     });
   };
 
+  const createSinglePointLayer = () => {
+    return new VectorLayer({
+      source: new VectorSource({
+        features: features.value,
+      }),
+      style: pointStyle,
+    });
+  };
+
   const centreMapOnSinglePoint = () => {
     if (data.value?.features?.length === 1) {
       mapRef.value
@@ -91,9 +115,13 @@ export const useOpenLayersPointClusters = ({
 
   watchEffect(() => {
     if (mapRef.value && data.value) {
-      // TODO: do not use clusters if only one feature
-      mapRef.value.addLayer(createClustersLayer());
-      centreMapOnSinglePoint();
+      if (data.value?.features?.length === 1) {
+        mapRef.value.addLayer(createSinglePointLayer());
+
+        centreMapOnSinglePoint();
+      } else {
+        mapRef.value.addLayer(createClustersLayer());
+      }
     }
   });
 };

@@ -4,7 +4,7 @@ import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
-import { useOpenLayersPointClusters } from "@/composables/openLayersPointClusters.js";
+import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVectorLayer.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 const map = inject("map", null);
@@ -50,7 +50,7 @@ useOpenLayersMap({
   style,
   target,
 });
-useOpenLayersPointClusters({
+useOpenLayersPointsVectorLayer({
   data,
   map,
   pointIconSrc,

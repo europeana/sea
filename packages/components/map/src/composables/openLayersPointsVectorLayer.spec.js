@@ -8,7 +8,7 @@ import VectorLayer from "ol/layer/Vector.js";
 import Cluster from "ol/source/Cluster.js";
 import { useGeographic } from "ol/proj.js";
 
-import { useOpenLayersPointClusters } from "./openLayersPointClusters.js";
+import { useOpenLayersPointsVectorLayer } from "./openLayersPointsVectorLayer.js";
 import { fixtures } from "@test/fixtures.js";
 
 const elementId = "map";
@@ -26,7 +26,7 @@ const component = {
     const pointIconSrc = props.pointIconSrc;
 
     useGeographic();
-    useOpenLayersPointClusters({ data, map, pointIconSrc });
+    useOpenLayersPointsVectorLayer({ data, map, pointIconSrc });
 
     return { data, map, pointIconSrc };
   },
@@ -37,8 +37,8 @@ const factory = ({ props } = {}) =>
     props,
   });
 
-describe("@/composables/openLayersPointClusters.js", () => {
-  describe("useOpenLayersPointClusters", () => {
+describe("@/composables/openLayersPointsVectorLayer.js", () => {
+  describe("useOpenLayersPointsVectorLayer", () => {
     describe("when data and map values become present", () => {
       it("adds VectorLayer for clustered points to map", async () => {
         const wrapper = factory();
