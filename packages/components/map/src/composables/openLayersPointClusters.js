@@ -6,6 +6,7 @@ import Point from "ol/geom/Point.js";
 import VectorSource from "ol/source/Vector.js";
 import Cluster from "ol/source/Cluster.js";
 import VectorLayer from "ol/layer/Vector.js";
+import { boundingExtent } from "ol/extent.js";
 
 export const useOpenLayersPointClusters = ({
   data,
@@ -53,6 +54,22 @@ export const useOpenLayersPointClusters = ({
       // TODO: do not use clusters if only one feature
       mapRef.value.addLayer(createClustersLayer());
       centreMapOnSinglePoint();
+
+      mapRef.value?.on("click", handleClick);
     }
   });
+
+  function handleClick(e) {
+    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
+    const features = clickedFeatures[0]?.get("features");
+
+    if (features?.length > 1) {
+      const extent = boundingExtent(
+        features.map((r) => r.getGeometry().getCoordinates()),
+      );
+      mapRef.value
+        .getView()
+        .fit(extent, { duration: 1000, padding: [50, 50, 50, 50] });
+    }
+  }
 };
