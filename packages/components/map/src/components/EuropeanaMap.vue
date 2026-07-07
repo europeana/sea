@@ -62,8 +62,8 @@ if (json.value) {
 const target = "europeana-map-map";
 const icon = {
   src: pointIconSrc,
-  width: 32,
-  height: 32,
+  width: 24,
+  height: 24,
 };
 
 useOpenLayersMap({

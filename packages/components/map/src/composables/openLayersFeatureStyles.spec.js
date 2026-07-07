@@ -81,7 +81,7 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
             const styleFeature = wrapper.vm.styleFeature;
             const style = styleFeature(feature);
 
-            expect(style.getImage().radius).toBe(14);
+            expect(style.getImage().radius).toBe(12);
             expect(style.getText().getText()).toBe("1");
           });
         });
@@ -104,7 +104,7 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
             const styleFeature = wrapper.vm.styleFeature;
             const style = styleFeature(feature);
 
-            expect(style.getImage().radius).toBe(14);
+            expect(style.getImage().radius).toBe(12);
             expect(style.getText().getText()).toBe("2");
           });
         });
@@ -118,7 +118,7 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
             const styleFeature = wrapper.vm.styleFeature;
             const style = styleFeature(feature);
 
-            expect(style.length).toBe(5);
+            expect(style).toHaveLength(5);
             expect(style[0].getGeometry().constructor.name).toBe("Point");
             expect(style[0].getImage().constructor.name).toBe("CircleStyle");
             expect(style[0].getText()).toBeNull();

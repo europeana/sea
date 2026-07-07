@@ -43,7 +43,7 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
     return styleCache[key];
   };
 
-  const moveGeometry = (geometry, distance, angle) => {
+  const getNewCoordinates = (geometry, distance, angle) => {
     const originalCoordinates = geometry.getCoordinates();
     const originalPixel =
       mapRef.value.getPixelFromCoordinate(originalCoordinates);
@@ -55,7 +55,11 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
       originalPixel[0] + displacementX,
       originalPixel[1] + displacementY,
     ];
-    const newCoordinates = mapRef.value.getCoordinateFromPixel(newPixel);
+    return mapRef.value.getCoordinateFromPixel(newPixel);
+  };
+
+  const moveGeometry = (geometry, distance, angle) => {
+    const newCoordinates = getNewCoordinates(geometry, distance, angle);
 
     geometry.setCoordinates(newCoordinates);
   };
@@ -69,7 +73,7 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
       // of the spokes
       new Style({
         image: new CircleStyle({
-          radius: 4,
+          radius: 3,
           stroke: new Stroke({
             color: "#000",
           }),
@@ -81,7 +85,7 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
       }),
     ];
 
-    const distance = getSingleFeatureStyleMinDimension() * 0.75; // in pixels
+    const distance = getSingleFeatureStyleMinDimension(); // in pixels
     const unitAngle = degreesToRadians(360) / features.length;
 
     // for each feature, draw a point marker, moved out from the
@@ -91,7 +95,11 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
       const pointGeometry = feature.getGeometry().clone();
       const originalCoordinates = pointGeometry.getCoordinates();
       moveGeometry(pointGeometry, distance, angle);
-      const newCoordinates = pointGeometry.getCoordinates();
+      const newCoordinates = getNewCoordinates(
+        pointGeometry,
+        -distance / 4,
+        angle,
+      );
 
       const pointStyle = styleSingleFeature().clone();
       pointStyle.setGeometry(pointGeometry);
@@ -101,7 +109,7 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
         geometry: new LineString([originalCoordinates, newCoordinates]),
         stroke: new Stroke({
           color: "#000",
-          width: 2,
+          width: 1,
         }),
       });
       styles.push(lineStyle);
@@ -111,9 +119,10 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
   };
 
   const getNumberedCircleStyle = (number) => {
+    const radius = number >= 100 ? 16 : 12;
     return new Style({
       image: new CircleStyle({
-        radius: 14,
+        radius,
         stroke: new Stroke({
           color: "#000",
         }),
