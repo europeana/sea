@@ -11,9 +11,9 @@ export default class EuropeanaMap {
   constructor(target, options = {}) {
     this.#olMap = new OpenLayersMap();
 
-    this.#config.url = options.url;
-    this.#config.style = options.style;
-    this.#config.json = options.json;
+    for (const prop in EuropeanaMapComponent.props) {
+      this.#config[prop] = options[prop];
+    }
 
     this.#app = createApp(EuropeanaMapComponent);
     this.#app.provide(

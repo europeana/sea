@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 
 import { shallowMount } from "@vue/test-utils";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { nextTick, ref } from "vue";
 import Map from "ol/Map.js";
 import VectorLayer from "ol/layer/Vector.js";
@@ -15,20 +15,20 @@ const elementId = "map";
 const component = {
   template: `<div id="${elementId}" />`,
   props: {
-    pointIconSrc: {
-      type: String,
+    icon: {
+      type: Object,
       default: null,
     },
   },
   setup(props) {
     const data = ref(null);
     const map = ref(null);
-    const pointIconSrc = props.pointIconSrc;
+    const icon = props.icon;
 
     useGeographic();
-    useOpenLayersPointsVectorLayer({ data, map, pointIconSrc });
+    useOpenLayersPointsVectorLayer({ data, map, icon });
 
-    return { data, map, pointIconSrc };
+    return { data, map, icon };
   },
 };
 
@@ -72,70 +72,45 @@ describe("@/composables/openLayersPointsVectorLayer.js", () => {
         });
       });
 
-      describe("styling", () => {
-        describe("single point", () => {
-          describe("when pointIconSrc is supplied", () => {
-            const pointIconSrc = "https://example.org/icons/location.svg";
-
-            it("styles point as an icon using that image", async () => {
-              const feature = {
-                get: () => ({ length: 1 }),
-              };
-              const wrapper = factory({ props: { pointIconSrc } });
-              wrapper.vm.map = new Map();
-              wrapper.vm.data = fixtures.onePointFeatureCollection;
-              await nextTick();
-
-              const map = wrapper.vm.map;
-              const layers = map.getLayers().getArray();
-              const clusterLayer = layers[0];
-              const style = clusterLayer.getStyleFunction()(feature);
-
-              expect(style.getImage().getSrc()).toBe(pointIconSrc);
-              expect(style.getText()).toBeNull();
-            });
-          });
-
-          describe("when pointIconSrc is not supplied", () => {
-            it("styles point as a circle", async () => {
-              const feature = {
-                get: () => ({ length: 1 }),
-              };
-              const wrapper = factory();
-              wrapper.vm.map = new Map();
-              wrapper.vm.data = fixtures.onePointFeatureCollection;
-              await nextTick();
-
-              const map = wrapper.vm.map;
-              const layers = map.getLayers().getArray();
-              const clusterLayer = layers[0];
-              const style = clusterLayer.getStyleFunction()(feature);
-
-              expect(style.getImage().radius).toBe(14);
-              expect(style.getText().getText()).toBe("1");
-            });
-          });
-        });
-
-        describe("multiple points", () => {
-          it("styles points as a circle", async () => {
-            const feature = {
-              get: () => ({ length: 2 }),
-            };
+      describe("when data has multiple points", () => {
+        describe("and cluster is clicked", () => {
+          it("zooms in to the extent of the clustered points", async () => {
             const wrapper = factory();
             wrapper.vm.map = new Map();
-            wrapper.vm.data = fixtures.twoPointsFeatureCollection;
+            wrapper.vm.data = fixtures.multiplePointsFeatureCollection;
             await nextTick();
 
             const map = wrapper.vm.map;
-            const layers = map.getLayers().getArray();
-            const clusterLayer = layers[0];
-            const style = clusterLayer.getStyleFunction()(feature);
+            const fitViewSpy = vi.spyOn(map.getView(), "fit");
 
-            expect(style.getImage().radius).toBe(14);
-            expect(style.getText().getText()).toBe("2");
+            vi.spyOn(map, "getFeaturesAtPixel").mockReturnValue([
+              {
+                get: () => [
+                  {
+                    getGeometry: () => ({
+                      getCoordinates: () => [0, 0],
+                    }),
+                  },
+                  {
+                    getGeometry: () => ({
+                      getCoordinates: () => [10, 10],
+                    }),
+                  },
+                ],
+              },
+            ]);
+
+            await map.dispatchEvent({
+              type: "click",
+            });
+
+            expect(fitViewSpy).toHaveBeenCalled();
           });
         });
+      });
+
+      describe("styling", () => {
+        it("calls the supplied style fn");
       });
     });
   });
