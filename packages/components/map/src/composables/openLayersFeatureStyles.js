@@ -95,11 +95,7 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
       const pointGeometry = feature.getGeometry().clone();
       const originalCoordinates = pointGeometry.getCoordinates();
       moveGeometry(pointGeometry, distance, angle);
-      const newCoordinates = getNewCoordinates(
-        pointGeometry,
-        -distance / 4,
-        angle,
-      );
+      const newCoordinates = pointGeometry.getCoordinates();
 
       const pointStyle = styleSingleFeature().clone();
       pointStyle.setGeometry(pointGeometry);
