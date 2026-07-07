@@ -8,7 +8,7 @@ import VectorLayer from "ol/layer/Vector.js";
 import Cluster from "ol/source/Cluster.js";
 import { useGeographic } from "ol/proj.js";
 
-import { useOpenLayersPointClusters } from "./openLayersPointClusters.js";
+import { useOpenLayersPointsVectorLayer } from "./openLayersPointsVectorLayer.js";
 import { fixtures } from "@test/fixtures.js";
 
 const elementId = "map";
@@ -26,7 +26,7 @@ const component = {
     const icon = props.icon;
 
     useGeographic();
-    useOpenLayersPointClusters({ data, map, icon });
+    useOpenLayersPointsVectorLayer({ data, map, icon });
 
     return { data, map, icon };
   },
@@ -37,8 +37,8 @@ const factory = ({ props } = {}) =>
     props,
   });
 
-describe("@/composables/openLayersPointClusters.js", () => {
-  describe("useOpenLayersPointClusters", () => {
+describe("@/composables/openLayersPointsVectorLayer.js", () => {
+  describe("useOpenLayersPointsVectorLayer", () => {
     describe("when data and map values become present", () => {
       it("adds VectorLayer for clustered points to map", async () => {
         const wrapper = factory();
@@ -48,12 +48,12 @@ describe("@/composables/openLayersPointClusters.js", () => {
 
         const map = wrapper.vm.map;
         const layers = map.getLayers().getArray();
-        expect(layers.length).toBe(1);
-        expect(layers[0] instanceof VectorLayer).toBe(true);
+        expect(layers).toHaveLength(1);
+        expect(layers[0]).toBeInstanceOf(VectorLayer);
 
         const clusterSource = layers[0].getSource();
-        expect(clusterSource instanceof Cluster).toBe(true);
-        expect(clusterSource.getSource().getFeatures().length).toBe(
+        expect(clusterSource).toBeInstanceOf(Cluster);
+        expect(clusterSource.getSource().getFeatures()).toHaveLength(
           fixtures.twoPointsFeatureCollection.features.length,
         );
       });

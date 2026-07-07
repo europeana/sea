@@ -27,7 +27,9 @@
     "build:app": "vite build --config vite.build.app.js",
     "build:component": "vite build --config vite.build.component.js",
     "preview": "vite preview",
-    "preversion": "pnpm build"
+    "preversion": "pnpm build",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@vueuse/core": "catalog:vue3",

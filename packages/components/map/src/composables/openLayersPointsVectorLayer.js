@@ -8,7 +8,7 @@ import Cluster from "ol/source/Cluster.js";
 import VectorLayer from "ol/layer/Vector.js";
 import { boundingExtent } from "ol/extent.js";
 
-export const useOpenLayersPointClusters = ({
+export const useOpenLayersPointsVectorLayer = ({
   data,
   distance,
   minDistance,
@@ -41,6 +41,15 @@ export const useOpenLayersPointClusters = ({
     return clustersLayer;
   };
 
+  const createSinglePointLayer = () => {
+    return new VectorLayer({
+      source: new VectorSource({
+        features: features.value,
+      }),
+      style: styleFeature,
+    });
+  };
+
   const centreMapOnSinglePoint = () => {
     if (data.value?.features?.length === 1) {
       mapRef.value
@@ -51,11 +60,15 @@ export const useOpenLayersPointClusters = ({
 
   watchEffect(() => {
     if (mapRef.value && data.value) {
-      // TODO: do not use clusters if only one feature
-      mapRef.value.addLayer(createClustersLayer());
-      centreMapOnSinglePoint();
+      if (data.value?.features?.length === 1) {
+        mapRef.value.addLayer(createSinglePointLayer());
 
-      mapRef.value?.on("click", handleClick);
+        centreMapOnSinglePoint();
+      } else {
+        mapRef.value.addLayer(createClustersLayer());
+
+        mapRef.value?.on("click", handleClick);
+      }
     }
   });
 

@@ -161,13 +161,13 @@ export const useOpenLayersFeatureStyles = ({ icon, map }) => {
   };
 
   const styleFeature = (feature) => {
-    const features = feature.get("features");
-    const size = features?.length || 0;
+    const clusteredFeatures = feature.get("features");
+    const size = clusteredFeatures?.length || 1;
 
     if (size === 1) {
       return styleSingleFeature();
     } else {
-      return styleMultipleFeatures(features);
+      return styleMultipleFeatures(clusteredFeatures);
     }
   };
 
