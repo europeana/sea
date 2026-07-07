@@ -19,9 +19,10 @@
     <script type="module">
       import EuropeanaMap from "./src/index.js";
 
-      new EuropeanaMap("#europeana-map", {
+      const map = new EuropeanaMap({
         url: "https://www.europeana.eu/_api/collections/organisations/geo",
       });
+      map.mount("#europeana-map");
     </script>
   </body>
 </html>

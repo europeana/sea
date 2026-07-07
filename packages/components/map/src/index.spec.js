@@ -24,7 +24,7 @@ describe("@/index.js", () => {
           style: "https://example.org/style.json",
           json: null,
         };
-        const europeanaMap = new EuropeanaMap(null, options);
+        const europeanaMap = new EuropeanaMap(options);
 
         const config = europeanaMap.config;
 
