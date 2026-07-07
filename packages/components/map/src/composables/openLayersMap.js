@@ -10,7 +10,6 @@ import { apply as applyMapboxStyle } from "ol-mapbox-style";
 import LayerGroup from "ol/layer/Group.js";
 
 const projection = "EPSG:3857";
-
 const centreOfEurope = [9.254419, 50.102223];
 
 export const useOpenLayersMap = ({

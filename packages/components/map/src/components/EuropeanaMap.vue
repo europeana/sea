@@ -4,6 +4,7 @@ import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
+import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
 import { useOpenLayersPointClusters } from "@/composables/openLayersPointClusters.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
@@ -59,6 +60,11 @@ if (json.value) {
 }
 
 const target = "europeana-map-map";
+const icon = {
+  src: pointIconSrc,
+  width: 24,
+  height: 24,
+};
 
 useOpenLayersMap({
   centre,
@@ -68,10 +74,15 @@ useOpenLayersMap({
   target,
   zoom,
 });
+const { getSingleFeatureStyleMinDimension, styleFeature } =
+  useOpenLayersFeatureStyles({ icon, map });
+const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 useOpenLayersPointClusters({
   data,
+  distance: singleFeatureStyleMinDimension * 1.5,
+  minDistance: singleFeatureStyleMinDimension * 0.75,
   map,
-  pointIconSrc,
+  styleFeature,
 });
 </script>
 
