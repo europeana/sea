@@ -25,7 +25,7 @@ const props = defineProps({
     default: null,
   },
   style: {
-    type: String,
+    type: [Object, String],
     default: null,
   },
   url: {
