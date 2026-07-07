@@ -94,28 +94,40 @@ describe("@/composables/openLayersMap.js", () => {
         });
       });
 
-      describe("centre", () => {
-        describe("when supplied in args", () => {
-          const centre = [5.0, 4.0];
+      describe("view", () => {
+        describe("maxZoom", () => {
+          it("is 20", () => {
+            const wrapper = factory();
 
-          it("uses those coordinates", () => {
-            const wrapper = factory({ props: { centre } });
+            const maxZoom = wrapper.vm.map.getView().getMaxZoom();
 
-            const map = wrapper.vm.map;
-
-            expect(map.getView().getCenter()).toEqual(centre);
+            expect(maxZoom).toBe(20);
           });
         });
 
-        describe("when not supplied in args", () => {
-          it("defaults to centre of Europe coordinates", () => {
-            const wrapper = factory();
+        describe("centre", () => {
+          describe("when supplied in args", () => {
+            const centre = [5.0, 4.0];
 
-            const map = wrapper.vm.map;
+            it("uses those coordinates", () => {
+              const wrapper = factory({ props: { centre } });
 
-            expect(map.getView().getCenter()).toEqual([
-              9.254419, 50.10222300000001,
-            ]);
+              const map = wrapper.vm.map;
+
+              expect(map.getView().getCenter()).toEqual(centre);
+            });
+          });
+
+          describe("when not supplied in args", () => {
+            it("defaults to centre of Europe coordinates", () => {
+              const wrapper = factory();
+
+              const map = wrapper.vm.map;
+
+              expect(map.getView().getCenter()).toEqual([
+                9.254419, 50.10222300000001,
+              ]);
+            });
           });
         });
       });
