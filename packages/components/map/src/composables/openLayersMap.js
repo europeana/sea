@@ -46,6 +46,7 @@ export const useOpenLayersMap = ({
     return new View({
       center: centreRef.value,
       minZoom: 1,
+      maxZoom: 20,
       projection,
       zoom: zoomRef.value,
     });
