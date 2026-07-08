@@ -6,6 +6,7 @@ import "ol/ol.css";
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
 import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVectorLayer.js";
 import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
+import { useOpenLayersKeyboardNavigation } from "@/composables/openLayersKeyboardNavigation.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 const map = inject("map", null);
@@ -78,22 +79,34 @@ useOpenLayersMap({
 const { getSingleFeatureStyleMinDimension, styleFeature } =
   useOpenLayersFeatureStyles({ icon, map });
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
-useOpenLayersPointsVectorLayer({
+const { clusterSource, zoomInOnCluster } = useOpenLayersPointsVectorLayer({
   data,
   distance: singleFeatureStyleMinDimension * 1.5,
   minDistance: singleFeatureStyleMinDimension * 0.75,
   map,
   styleFeature,
 });
+// TODO: only initialise when points are interactive
+const { handleFocusOnKeyDown, clearFocusFeature } =
+  useOpenLayersKeyboardNavigation({
+    map,
+    clusterSource,
+    zoomInOnCluster,
+  });
 </script>
 
 <template>
-  <div :id="target" :class="target" />
+  <button @keydown="handleFocusOnKeyDown" @blur="clearFocusFeature">
+    Cycle
+  </button>
+  <!-- TODO: consider implementing a button component similar to the MediaImageViewerKeyboardToggle -->
+  <!-- keep tabindex set to 0 to enable keyboard a11y -->
+  <div :id="target" :class="target" tabindex="0" />
 </template>
 
 <style lang="scss">
 .europeana-map-map {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 80vh;
 }
 </style>

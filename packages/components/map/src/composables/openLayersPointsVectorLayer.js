@@ -1,8 +1,7 @@
-import { computed, toRef, watchEffect } from "vue";
+import { computed, ref, toRef, watchEffect } from "vue";
 
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
-
 import VectorSource from "ol/source/Vector.js";
 import Cluster from "ol/source/Cluster.js";
 import VectorLayer from "ol/layer/Vector.js";
@@ -16,6 +15,7 @@ export const useOpenLayersPointsVectorLayer = ({
   styleFeature,
 } = {}) => {
   const mapRef = toRef(map);
+  const clusterSource = ref(null);
 
   const features = computed(() =>
     data.value.features.map(
@@ -28,14 +28,16 @@ export const useOpenLayersPointsVectorLayer = ({
   );
 
   const createClustersLayer = () => {
-    const clustersLayer = new VectorLayer({
-      source: new Cluster({
-        distance,
-        minDistance,
-        source: new VectorSource({
-          features: features.value,
-        }),
+    clusterSource.value = new Cluster({
+      distance,
+      minDistance,
+      source: new VectorSource({
+        features: features.value,
       }),
+    });
+
+    const clustersLayer = new VectorLayer({
+      source: clusterSource.value,
       style: styleFeature,
     });
     return clustersLayer;
@@ -72,10 +74,7 @@ export const useOpenLayersPointsVectorLayer = ({
     }
   });
 
-  function handleClick(e) {
-    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
-    const features = clickedFeatures[0]?.get("features");
-
+  const zoomInOnCluster = (features) => {
     if (features?.length > 1) {
       const extent = boundingExtent(
         features.map((r) => r.getGeometry().getCoordinates()),
@@ -84,5 +83,14 @@ export const useOpenLayersPointsVectorLayer = ({
         .getView()
         .fit(extent, { duration: 1000, padding: [50, 50, 50, 50] });
     }
+  };
+
+  function handleClick(e) {
+    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
+    const features = clickedFeatures[0]?.get("features");
+
+    zoomInOnCluster(features);
   }
+
+  return { clusterSource, zoomInOnCluster };
 };
