@@ -10,7 +10,6 @@ import VectorSource from "ol/source/Vector.js";
 export const useOpenLayersKeyboardNavigation = ({
   map,
   clusterSource,
-  zoomInOnCluster,
 } = {}) => {
   // TODO: handle keyboard select for single point if/when actionable
 
@@ -62,12 +61,6 @@ export const useOpenLayersKeyboardNavigation = ({
     focusSource.value.addFeature(focusFeature);
   };
 
-  const triggerClusterAction = (cluster) => {
-    const features = cluster.get("features");
-    console.log(features);
-    zoomInOnCluster(features);
-  };
-
   // TODO: add/ trigger AT text on focus
   const handleFocusOnKeyDown = (event) => {
     if (
@@ -117,9 +110,24 @@ export const useOpenLayersKeyboardNavigation = ({
           }
         }
 
+        // Simulate click event on Enter or Spacebar
         if (["Enter", " "].includes(event.key)) {
           if (focusedFeatureIndex.value > -1) {
-            triggerClusterAction(visibleClusters[focusedFeatureIndex.value]);
+            const focusedFeatureCoordinate = visibleClusters[
+              focusedFeatureIndex.value
+            ]
+              .getGeometry()
+              .getCoordinates();
+            const pixel = mapRef.value.getPixelFromCoordinate(
+              focusedFeatureCoordinate,
+            );
+
+            const mockEvent = {
+              type: "click",
+              pixel: pixel,
+            };
+
+            mapRef.value.dispatchEvent(mockEvent);
           }
         }
       }

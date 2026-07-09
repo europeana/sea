@@ -75,22 +75,22 @@ export const useOpenLayersPointsVectorLayer = ({
   });
 
   const zoomInOnCluster = (features) => {
-    if (features?.length > 1) {
-      const extent = boundingExtent(
-        features.map((r) => r.getGeometry().getCoordinates()),
-      );
-      mapRef.value
-        .getView()
-        .fit(extent, { duration: 1000, padding: [50, 50, 50, 50] });
-    }
+    const extent = boundingExtent(
+      features.map((r) => r.getGeometry().getCoordinates()),
+    );
+    mapRef.value
+      .getView()
+      .fit(extent, { duration: 1000, padding: [50, 50, 50, 50] });
   };
 
   function handleClick(e) {
     const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
     const features = clickedFeatures[0]?.get("features");
 
-    zoomInOnCluster(features);
+    if (features?.length > 1) {
+      zoomInOnCluster(features);
+    }
   }
 
-  return { clusterSource, zoomInOnCluster };
+  return { clusterSource };
 };

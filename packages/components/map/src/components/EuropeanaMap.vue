@@ -79,19 +79,18 @@ useOpenLayersMap({
 const { getSingleFeatureStyleMinDimension, styleFeature } =
   useOpenLayersFeatureStyles({ icon, map });
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
-const { clusterSource, zoomInOnCluster } = useOpenLayersPointsVectorLayer({
+const { clusterSource } = useOpenLayersPointsVectorLayer({
   data,
   distance: singleFeatureStyleMinDimension * 1.5,
   minDistance: singleFeatureStyleMinDimension * 0.75,
   map,
   styleFeature,
 });
-// TODO: only initialise when points are interactive
+// TODO: only initialise when points are interactive / when there are clusters
 const { handleFocusOnKeyDown, clearFocusFeature } =
   useOpenLayersKeyboardNavigation({
     map,
     clusterSource,
-    zoomInOnCluster,
   });
 </script>
 
