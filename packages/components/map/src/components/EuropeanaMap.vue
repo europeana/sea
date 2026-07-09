@@ -24,6 +24,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  pinPopover: {
+    type: Object,
+    default: null,
+  },
   style: {
     type: [Object, String],
     default: null,
@@ -43,6 +47,9 @@ const data = ref(null);
 const centre = computed(() => props.centre || injectedConfig?.value?.centre);
 const hash = computed(() => props.hash || injectedConfig?.value?.hash);
 const json = computed(() => props.json || injectedConfig?.value?.json);
+const pinPopover = computed(
+  () => props.pinPopover || injectedConfig?.value?.pinPopover,
+);
 const style = computed(() => props.style || injectedConfig?.value?.style);
 const url = computed(() => props.url || injectedConfig?.value?.url);
 const zoom = computed(() => props.zoom || injectedConfig?.value?.zoom);
@@ -83,6 +90,7 @@ useOpenLayersPointsVectorLayer({
   distance: singleFeatureStyleMinDimension * 1.5,
   minDistance: singleFeatureStyleMinDimension * 0.75,
   map,
+  pinPopover,
   styleFeature,
 });
 </script>
