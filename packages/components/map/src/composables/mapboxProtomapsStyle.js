@@ -8,7 +8,9 @@ export const useMapboxProtomapsStyle = ({ apiKey, locale = "en" } = {}) => {
   const style = JSON.parse(
     JSON.stringify(protomapsStyle).replace(/"name:en"/g, `"name:${locale}"`),
   );
-  style.sources.protomaps.tiles[0] = `${style.sources.protomaps.tiles[0]}?key=${apiKey}`;
+  const url = new URL(style.sources.protomaps.tiles[0]);
+  url.searchParams.set("key", apiKey);
+  style.sources.protomaps.tiles[0] = url.toString();
 
   return style;
 };
