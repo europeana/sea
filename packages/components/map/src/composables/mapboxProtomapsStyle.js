@@ -2,7 +2,7 @@ import protomapsStyle from "@/assets/style/protomaps.json" with { type: "json" }
 
 const DEFAULT_LOCALE = "en";
 // @see https://docs.protomaps.com/basemaps/localization#list-of-supported-languages
-const SUPPORTED_LOCALES = [
+const SUPPORTED_LOCALES = new Set([
   "ar",
   "bg",
   "cs",
@@ -44,7 +44,7 @@ const SUPPORTED_LOCALES = [
   "vi",
   "zh-Hans",
   "zh-Hant",
-];
+]);
 
 export const useMapboxProtomapsStyle = ({
   apiKey,
@@ -54,7 +54,7 @@ export const useMapboxProtomapsStyle = ({
     throw new Error("protomaps style requires API key in apiKey option");
   }
 
-  if (!SUPPORTED_LOCALES.includes(locale)) {
+  if (!SUPPORTED_LOCALES.has(locale)) {
     locale = DEFAULT_LOCALE;
   }
 
