@@ -20,7 +20,7 @@
       id="popover"
       style="background-color: white; padding: 1rem; margin: 0.2rem"
     >
-      Pover content
+      Popover content
     </div>
     <script type="module">
       import EuropeanaMap from "./src/index.js";
@@ -30,8 +30,7 @@
         // json: JSON.stringify({ features: [{type:'Feature',id:'http://data.europeana.eu/organization/1',geometry:{type:'Point',coordinates:[18.2924425,57.6396512]}}]}),
         url: "https://www.europeana.eu/_api/collections/organisations/geo",
         hash: true,
-        // Uncomment for popover testing
-        // pinPopover: document.getElementById('popover')
+        pinPopover: document.getElementById("popover"),
       });
     </script>
   </body>
