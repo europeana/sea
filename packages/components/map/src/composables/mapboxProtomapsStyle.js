@@ -59,7 +59,7 @@ export const useMapboxProtomapsStyle = ({
   }
 
   const style = JSON.parse(
-    JSON.stringify(protomapsStyle).replace(/"name:en"/g, `"name:${locale}"`),
+    JSON.stringify(protomapsStyle).replaceAll('"name:en"', `"name:${locale}"`),
   );
   const url = new URL(style.sources.protomaps.tiles[0]);
   url.searchParams.set("key", apiKey);
