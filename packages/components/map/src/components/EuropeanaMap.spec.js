@@ -5,11 +5,13 @@ import { describe, it, expect, vi } from "vitest";
 import { useFetch } from "@vueuse/core";
 
 import EuropeanaMap from "./EuropeanaMap.vue";
+import { useMapboxProtomapsStyle } from "@/composables/mapboxProtomapsStyle.js";
 import { fixtures } from "@test/fixtures.js";
 
 const mocks = vi.hoisted(() => {
   return {
     useFetch: vi.fn(),
+    useMapboxProtomapsStyle: vi.fn(),
   };
 });
 
@@ -18,11 +20,27 @@ vi.mock("@vueuse/core", () => {
     useFetch: mocks.useFetch,
   };
 });
+vi.mock("@/composables/mapboxProtomapsStyle.js", () => {
+  return {
+    useMapboxProtomapsStyle: mocks.useMapboxProtomapsStyle,
+  };
+});
 
 vi.mocked(useFetch).mockReturnValue({
   json: vi.fn().mockResolvedValue({
     data: { value: fixtures.twoPointsFeatureCollection },
   }),
+});
+vi.mocked(useMapboxProtomapsStyle).mockReturnValue({
+  version: 8,
+  name: "mocked protomaps style",
+  layers: [
+    {
+      id: "background",
+      type: "background",
+    },
+  ],
+  sources: {},
 });
 
 const factory = ({ props } = {}) =>
@@ -83,6 +101,32 @@ describe("@/components/EuropeanaMap.vue", () => {
         }
 
         expect(error.message).toBe("No data JSON or URL supplied.");
+      });
+    });
+  });
+
+  describe("style", () => {
+    describe("when using protomaps", () => {
+      const style = "protomaps";
+
+      it("passes locale (from props) and API key (from styleOptions) to the useMapboxProtomapsStyle composable", () => {
+        const locale = "fr";
+        const apiKey = "my_key";
+        const styleOptions = { apiKey };
+        const props = {
+          json: JSON.stringify(fixtures.onePointFeatureCollection),
+          locale,
+          style,
+          styleOptions,
+        };
+
+        const wrapper = factory({ props });
+
+        expect(vi.mocked(useMapboxProtomapsStyle)).toHaveBeenCalledWith({
+          apiKey,
+          locale,
+        });
+        expect(wrapper.vm.style.name).toBe("mocked protomaps style");
       });
     });
   });
