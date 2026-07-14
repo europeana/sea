@@ -33,6 +33,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  pinPopover: {
+    type: Object,
+    default: null,
+  },
   style: {
     type: [Object, String],
     default: null,
@@ -58,6 +62,9 @@ const hash = computed(() => props.hash || injectedConfig?.value?.hash);
 const json = computed(() => props.json || injectedConfig?.value?.json);
 const locale = computed(
   () => props.locale || injectedConfig?.value?.locale || DEFAULT_LOCALE,
+);
+const pinPopover = computed(
+  () => props.pinPopover || injectedConfig?.value?.pinPopover,
 );
 const styleOptions = computed(
   () => props.styleOptions || injectedConfig?.value?.styleOptions,
@@ -114,6 +121,7 @@ useOpenLayersPointsVectorLayer({
   distance: singleFeatureStyleMinDimension * 1.5,
   minDistance: singleFeatureStyleMinDimension * 0.75,
   map,
+  pinPopover,
   styleFeature,
 });
 </script>
