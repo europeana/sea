@@ -9,76 +9,49 @@ const countSubStrings = (string, substring) => {
 
 describe("@/composables/mapbox/protomapsStyle.spec.js", () => {
   describe("useMapboxProtomapsStyle", () => {
-    describe("without protomaps API key", () => {
-      const apiKey = undefined;
+    it("uses Europeana-proxied Protomaps as vector tile source", () => {
+      const style = useMapboxProtomapsStyle();
 
-      it("throws error", () => {
-        let error;
-        try {
-          useMapboxProtomapsStyle({ apiKey });
-        } catch (e) {
-          error = e;
-        }
+      const tileUrl = style.sources.protomaps.tiles[0];
 
-        expect(error.message).toBe(
-          "protomaps style requires API key in apiKey option",
-        );
+      expect(tileUrl).toBe(
+        "https://protomaps.tiles.test.eanadev.org/tiles/v4/{z}/{x}/{y}.mvt",
+      );
+    });
+
+    describe("without locale specified", () => {
+      const locale = undefined;
+
+      it("uses default en for text fields", () => {
+        const styleJson = JSON.stringify(useMapboxProtomapsStyle({ locale }));
+
+        const nameEnCount = countSubStrings(styleJson, '"name:en"');
+
+        expect(nameEnCount).toBe(132);
       });
     });
 
-    describe("with protomaps API key", () => {
-      const apiKey = "my_key";
+    describe("with supported locale specified", () => {
+      const locale = "fr";
 
-      it("uses Protomaps as vector tile source, with API key injected", () => {
-        const style = useMapboxProtomapsStyle({ apiKey });
+      it("uses that locale for text fields", () => {
+        const styleJson = JSON.stringify(useMapboxProtomapsStyle({ locale }));
 
-        const tileUrl = style.sources.protomaps.tiles[0];
+        const nameFrCount = countSubStrings(styleJson, '"name:fr"');
 
-        expect(tileUrl).toBe(
-          `https://api.protomaps.com/tiles/v4/%7Bz%7D/%7Bx%7D/%7By%7D.mvt?key=${apiKey}`,
-        );
+        expect(nameFrCount).toBe(132);
       });
+    });
 
-      describe("without locale specified", () => {
-        const locale = undefined;
+    describe("with unsupported locale specified", () => {
+      const locale = "eu";
 
-        it("uses default en for text fields", () => {
-          const styleJson = JSON.stringify(
-            useMapboxProtomapsStyle({ apiKey, locale }),
-          );
+      it("uses default en for text fields", () => {
+        const styleJson = JSON.stringify(useMapboxProtomapsStyle({ locale }));
 
-          const nameEnCount = countSubStrings(styleJson, '"name:en"');
+        const nameEnCount = countSubStrings(styleJson, '"name:en"');
 
-          expect(nameEnCount).toBe(132);
-        });
-      });
-
-      describe("with supported locale specified", () => {
-        const locale = "fr";
-
-        it("uses that locale for text fields", () => {
-          const styleJson = JSON.stringify(
-            useMapboxProtomapsStyle({ apiKey, locale }),
-          );
-
-          const nameFrCount = countSubStrings(styleJson, '"name:fr"');
-
-          expect(nameFrCount).toBe(132);
-        });
-      });
-
-      describe("with unsupported locale specified", () => {
-        const locale = "eu";
-
-        it("uses default en for text fields", () => {
-          const styleJson = JSON.stringify(
-            useMapboxProtomapsStyle({ apiKey, locale }),
-          );
-
-          const nameEnCount = countSubStrings(styleJson, '"name:en"');
-
-          expect(nameEnCount).toBe(132);
-        });
+        expect(nameEnCount).toBe(132);
       });
     });
   });

@@ -46,20 +46,7 @@ const SUPPORTED_LOCALES = new Set([
   "zh-Hant",
 ]);
 
-// TODO: require tiles url to be supplied instead of api key,
-//       which would include the api key if using https://api.protomaps.com,
-//       but not if self-hosted.
-//       or: keep that as the default URL, requiring an api key, but permit
-//       overriding that default URL w/ another (self-hosted) URL, in which
-//       case, do not require API key
-export const useMapboxProtomapsStyle = ({
-  apiKey,
-  locale = DEFAULT_LOCALE,
-} = {}) => {
-  if (!apiKey) {
-    throw new Error("protomaps style requires API key in apiKey option");
-  }
-
+export const useMapboxProtomapsStyle = ({ locale = DEFAULT_LOCALE } = {}) => {
   if (!SUPPORTED_LOCALES.has(locale)) {
     locale = DEFAULT_LOCALE;
   }
@@ -67,9 +54,6 @@ export const useMapboxProtomapsStyle = ({
   const style = JSON.parse(
     JSON.stringify(protomapsStyle).replaceAll('"name:en"', `"name:${locale}"`),
   );
-  const url = new URL(style.sources.protomaps.tiles[0]);
-  url.searchParams.set("key", apiKey);
-  style.sources.protomaps.tiles[0] = url.toString();
 
   return style;
 };
