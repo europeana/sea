@@ -8,6 +8,7 @@ import OSM from "ol/source/OSM.js";
 import { useGeographic } from "ol/proj.js";
 import { apply as applyMapboxStyle } from "ol-mapbox-style";
 import LayerGroup from "ol/layer/Group.js";
+import { DEFAULT_STYLE_ID } from "./mapbox/style.js";
 
 const projection = "EPSG:3857";
 const centreOfEurope = [9.254419, 50.102223];
@@ -24,7 +25,7 @@ export const useOpenLayersMap = ({
   const centreRef = toRef(unref(centre) || centreOfEurope);
   const hashRef = toRef(hash);
   const mapRef = toRef(map);
-  const styleRef = toRef(style);
+  const styleRef = toRef(style || DEFAULT_STYLE_ID);
   const targetRef = toRef(target);
   // unref first in case it's a computed and we need to set it
   const zoomRef = toRef(unref(zoom) || 4);
@@ -33,12 +34,12 @@ export const useOpenLayersMap = ({
   useGeographic();
 
   const createLayer = () => {
-    if (styleRef.value) {
+    if (styleRef.value === "openstreetmap") {
+      return new TileLayer({ source: new OSM() });
+    } else if (styleRef.value) {
       const layerGroup = new LayerGroup();
       applyMapboxStyle(layerGroup, styleRef.value);
       return layerGroup;
-    } else {
-      return new TileLayer({ source: new OSM() });
     }
   };
 
@@ -78,6 +79,9 @@ export const useOpenLayersMap = ({
     window.location.replace(url);
   };
 
+  const applyStyle = () =>
+    mapRef.value?.setLayers([createLayer()].filter(Boolean));
+
   const initMap = () => {
     if (!mapRef.value) {
       mapRef.value = new Map();
@@ -86,16 +90,14 @@ export const useOpenLayersMap = ({
     mapRef.value.addControl(new FullScreen());
     mapRef.value.setTarget(targetRef.value);
     mapRef.value.setView(createView());
-    mapRef.value.setLayers([createLayer()]);
+    applyStyle();
 
     if (hashRef.value) {
       mapRef.value.on("moveend", trackInHash);
     }
   };
 
-  watch(styleRef, () => {
-    mapRef.value?.setLayers([createLayer()]);
-  });
+  watch(styleRef, applyStyle, { immediate: true });
 
   onMounted(() => {
     if (hashRef.value) {

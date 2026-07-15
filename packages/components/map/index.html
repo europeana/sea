@@ -31,11 +31,24 @@
         url: "https://www.europeana.eu/_api/collections/organisations/geo",
         hash: true,
         pinPopover: document.getElementById("popover"),
-        locale: "en",
+        // Map styles
+        //
+        // OpenStreetmap (default)
+        // style: "openstreetmap",
+        //
+        // Protomaps -- @assets/style/protomaps.json
+        //
         // style: "protomaps",
         // styleOptions: {
-        //   apiKey: "" // @see https://protomaps.com/account
+        //   apiKey: "", // @see https://protomaps.com/account
+        //   locale: "en",
         // }
+        //
+        // Versatiles -- @assets/style/versatiles.json
+        style: "versatiles",
+        //
+        // Other Mapbox StyleJSON URL
+        // style: "https://tiles.openfreemap.org/styles/liberty"
       });
     </script>
   </body>

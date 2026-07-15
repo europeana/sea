@@ -2,13 +2,12 @@
 
 import { describe, it, expect } from "vitest";
 
-import { useMapboxProtomapsStyle } from "./mapboxProtomapsStyle.js";
-
+import { useMapboxProtomapsStyle } from "./protomapsStyle.js";
 const countSubStrings = (string, substring) => {
   return (string.match(new RegExp(substring, "g")) || []).length;
 };
 
-describe("@/composables/mapboxProtomapsStyle.spec.js", () => {
+describe("@/composables/mapbox/protomapsStyle.spec.js", () => {
   describe("useMapboxProtomapsStyle", () => {
     describe("without protomaps API key", () => {
       const apiKey = undefined;

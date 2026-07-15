@@ -27,21 +27,21 @@ const component = {
       type: Array,
       default: null,
     },
+    hash: {
+      type: Boolean,
+      default: false,
+    },
     map: {
       type: OpenLayersMap,
+      default: null,
+    },
+    style: {
+      type: String,
       default: null,
     },
     target: {
       type: String,
       default: elementId,
-    },
-    hash: {
-      type: Boolean,
-      default: false,
-    },
-    style: {
-      type: String,
-      default: null,
     },
     zoom: {
       type: Number,
@@ -171,6 +171,7 @@ describe("@/composables/openLayersMap.js", () => {
             const wrapper = factory({ props: { style } });
 
             await nextTick();
+
             expect(mockFetch).toHaveBeenCalledTimes(1);
             const map = wrapper.vm.map;
             const layer = map.getLayers().getArray()[0];
@@ -182,8 +183,9 @@ describe("@/composables/openLayersMap.js", () => {
         });
 
         describe("when not supplied in args", () => {
-          it("defaults to using an OSM tile layer", () => {
+          it("defaults to using an OSM tile layer", async () => {
             const wrapper = factory();
+            await nextTick();
 
             const map = wrapper.vm.map;
             const layer = map.getLayers().getArray()[0];

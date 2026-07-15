@@ -3,7 +3,8 @@ import { computed, ref, inject } from "vue";
 import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
-import { useMapboxProtomapsStyle } from "@/composables/mapboxProtomapsStyle.js";
+import { useMapboxStyle } from "@/composables/mapbox/style.js";
+
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
 import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVectorLayer.js";
 import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
@@ -12,7 +13,7 @@ import pointIconSrc from "@/assets/img/ic_location.svg";
 const map = inject("map", null);
 const injectedConfig = inject("config", null);
 
-const DEFAULT_LOCALE = "en";
+// const DEFAULT_LOCALE = "en";
 
 // NOTE: consider carefully if setting any defaults for props as they would
 //       take precedence over injectedConfig values which may not be intended
@@ -29,10 +30,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  locale: {
-    type: String,
-    default: null,
-  },
+  // locale: {
+  //   type: String,
+  //   default: null,
+  // },
   pinPopover: {
     type: Object,
     default: null,
@@ -60,27 +61,16 @@ const data = ref(null);
 const centre = computed(() => props.centre || injectedConfig?.value?.centre);
 const hash = computed(() => props.hash || injectedConfig?.value?.hash);
 const json = computed(() => props.json || injectedConfig?.value?.json);
-const locale = computed(
-  () => props.locale || injectedConfig?.value?.locale || DEFAULT_LOCALE,
-);
+// const locale = computed(
+//   () => props.locale || injectedConfig?.value?.locale || DEFAULT_LOCALE,
+// );
 const pinPopover = computed(
   () => props.pinPopover || injectedConfig?.value?.pinPopover,
 );
 const styleOptions = computed(
   () => props.styleOptions || injectedConfig?.value?.styleOptions,
 );
-const style = computed(() => {
-  const suppliedStyle = props.style || injectedConfig?.value?.style;
-
-  if (suppliedStyle === "protomaps") {
-    return useMapboxProtomapsStyle({
-      ...styleOptions.value,
-      locale: locale.value,
-    });
-  }
-
-  return suppliedStyle;
-});
+const styleRef = ref(null);
 const url = computed(() => props.url || injectedConfig?.value?.url);
 const zoom = computed(() => props.zoom || injectedConfig?.value?.zoom);
 
@@ -103,11 +93,18 @@ const icon = {
   height: 24,
 };
 
+useMapboxStyle(
+  props.style || injectedConfig?.value?.style,
+  styleOptions.value,
+).then((mapboxStyle) => {
+  styleRef.value = mapboxStyle;
+});
+
 useOpenLayersMap({
   centre,
   hash,
   map,
-  style,
+  style: styleRef,
   target,
   zoom,
 });
