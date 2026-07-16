@@ -100,13 +100,13 @@ describe("@/composables/openLayersControls.js", () => {
         });
 
         expect(zoomOut.getAttribute("disabled")).toBe("true");
-        expect(zoomIn.getAttribute("disabled")).toBe(null);
+        expect(zoomIn.getAttribute("disabled")).toBeNull();
 
         view.getZoom = vi.fn(() => 20);
         view.dispatchEvent("change:resolution");
 
         expect(zoomIn.getAttribute("disabled")).toBe("true");
-        expect(zoomOut.getAttribute("disabled")).toBe(null);
+        expect(zoomOut.getAttribute("disabled")).toBeNull();
       });
     });
   });
