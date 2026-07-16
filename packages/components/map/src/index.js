@@ -9,7 +9,7 @@ export default class EuropeanaMap {
   #config = reactive({});
 
   constructor(target, options = {}) {
-    this.#olMap = new OpenLayersMap();
+    this.#olMap = new OpenLayersMap({ controls: [] });
 
     for (const prop in EuropeanaMapComponent.props) {
       this.#config[prop] = options[prop];

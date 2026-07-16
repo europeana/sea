@@ -6,6 +6,7 @@ import "ol/ol.css";
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
 import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVectorLayer.js";
 import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
+import { useOpenLayersControls } from "@/composables/openLayersControls.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 const map = inject("map", null);
@@ -14,6 +15,10 @@ const injectedConfig = inject("config", null);
 const props = defineProps({
   centre: {
     type: Array,
+    default: null,
+  },
+  controls: {
+    type: Object,
     default: null,
   },
   hash: {
@@ -45,6 +50,9 @@ const props = defineProps({
 const data = ref(null);
 
 const centre = computed(() => props.centre || injectedConfig?.value?.centre);
+const controls = computed(
+  () => props.controls || injectedConfig?.value?.controls,
+);
 const hash = computed(() => props.hash || injectedConfig?.value?.hash);
 const json = computed(() => props.json || injectedConfig?.value?.json);
 const pinPopover = computed(
@@ -93,6 +101,7 @@ useOpenLayersPointsVectorLayer({
   pinPopover,
   styleFeature,
 });
+useOpenLayersControls({ map, controls });
 </script>
 
 <template>
@@ -103,5 +112,24 @@ useOpenLayersPointsVectorLayer({
 .europeana-map-map {
   width: 100%;
   height: 100%;
+
+  .ol-zoom {
+    top: auto;
+    right: 1.25rem;
+    bottom: 4rem;
+    left: auto;
+
+    button:disabled {
+      background-color: lightgrey;
+      cursor: not-allowed;
+    }
+  }
+
+  .ol-full-screen {
+    top: auto;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    left: auto;
+  }
 }
 </style>
