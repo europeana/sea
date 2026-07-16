@@ -3,13 +3,19 @@
 import { describe, it, expect } from "vitest";
 import OpenLayersMap from "ol/Map.js";
 
-import EuropeanaMap from "./index.js";
+import { EuropeanaMapComponent, EuropeanaMapWrapper } from "./index.js";
 
 describe("@/index.js", () => {
-  describe("EuropeanaMap", () => {
+  describe("EuropeanaMapComponent", () => {
+    it("exports the EuropeanaMap component", () => {
+      expect(EuropeanaMapComponent["__name"]).toBe("EuropeanaMap");
+    });
+  });
+
+  describe("EuropeanaMapWrapper", () => {
     describe(".olMap", () => {
       it("is an OpenLayers Map", () => {
-        const europeanaMap = new EuropeanaMap();
+        const europeanaMap = new EuropeanaMapWrapper();
 
         const olMap = europeanaMap.olMap;
 
@@ -24,7 +30,7 @@ describe("@/index.js", () => {
           style: "https://example.org/style.json",
           url: "https://example.org/geo.json",
         };
-        const europeanaMap = new EuropeanaMap(null, options);
+        const europeanaMap = new EuropeanaMapWrapper(null, options);
 
         const config = europeanaMap.config;
 
@@ -36,7 +42,7 @@ describe("@/index.js", () => {
 
     describe(".app", () => {
       it("is a Vue app instance mounting the EuropeanaMap component", () => {
-        const europeanaMap = new EuropeanaMap();
+        const europeanaMap = new EuropeanaMapWrapper();
 
         const app = europeanaMap.app;
 
@@ -46,7 +52,7 @@ describe("@/index.js", () => {
 
     describe(".set()", () => {
       it("updates config if setting is known", () => {
-        const europeanaMap = new EuropeanaMap();
+        const europeanaMap = new EuropeanaMapWrapper();
         const style = "https://example.org/style.json";
 
         europeanaMap.set("style", style);
@@ -55,7 +61,7 @@ describe("@/index.js", () => {
       });
 
       it("does nothing to config if setting is not known", () => {
-        const europeanaMap = new EuropeanaMap();
+        const europeanaMap = new EuropeanaMapWrapper();
         const unknown = "https://example.org/style.json";
 
         europeanaMap.set("unknown", unknown);

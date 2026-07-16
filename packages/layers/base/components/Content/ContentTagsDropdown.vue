@@ -126,8 +126,8 @@ const filteredTags = computed(() => {
   const tagsSortedByMostUsed = categories.value
     .map((tag, i, array) => {
       return {
-        tag: tag.identifier,
-        total: array.filter((t) => t.identifier === tag.identifier).length,
+        tag: tag?.identifier,
+        total: array.filter((t) => t?.identifier === tag?.identifier).length,
       };
     })
     .sort((a, b) => b.total - a.total)
@@ -144,7 +144,7 @@ const allDisplayTags = computed(() => {
     // use filteredTags as those are sorted by most used
     displayTags = filteredTags.value
       .filter((tag) => !props.selectedTags.includes(tag))
-      .map((tag) => props.tags.filter((t) => t.identifier === tag)[0]);
+      .map((tag) => props.tags.filter((t) => t?.identifier === tag)[0]);
   } else {
     // TODO: Is this still needed?
     displayTags = props.tags;
@@ -166,7 +166,7 @@ const unfeaturedDisplayTags = computed(() => {
   }
   return (
     allDisplayTags.value?.filter(
-      (tag) => !featuredTags.includes(tag.identifier),
+      (tag) => !featuredTags.includes(tag?.identifier),
     ) || []
   );
 });
@@ -174,8 +174,8 @@ const unfeaturedDisplayTags = computed(() => {
 const displaySelectedTags = computed(() => {
   return props.tags.filter(
     (tag) =>
-      !featuredTags?.includes(tag.identifier) &&
-      props.selectedTags.includes(tag.identifier),
+      !featuredTags?.includes(tag?.identifier) &&
+      props.selectedTags.includes(tag?.identifier),
   );
 });
 const trimmedKeyword = computed(() => {
