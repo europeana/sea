@@ -6,13 +6,11 @@ import viteConfig from "./vite.config.js";
 export default defineConfig({
   ...viteConfig,
   build: {
-    emptyOutDir: false,
+    emptyOutDir: true,
     lib: {
-      entry: fileURLToPath(
-        new URL("./src/components/EuropeanaMap.vue", import.meta.url),
-      ),
+      entry: fileURLToPath(new URL("./src/index.js", import.meta.url)),
       name: "EuropeanaMap",
-      fileName: "europeana-map.component",
+      fileName: "europeana-map",
       formats: ["es", "iife"],
     },
     rollupOptions: {
