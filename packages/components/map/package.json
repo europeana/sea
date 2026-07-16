@@ -17,9 +17,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-s clean:dist build:lib",
-    "build:lib": "vite build --config vite.build.lib.js",
-    "clean:dist": "rimraf dist",
+    "build": "vite build --config vite.build.lib.js",
     "preview": "vite preview",
     "preversion": "pnpm build",
     "test": "vitest",
@@ -34,8 +32,6 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:vite7",
     "@vue/test-utils": "catalog:vue3",
-    "npm-run-all": "catalog:",
-    "rimraf": "catalog:",
     "vite": "catalog:vite7"
   },
   "peerDependencies": {
