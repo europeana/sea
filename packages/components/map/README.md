@@ -16,15 +16,19 @@ When single points are clicked a `change:activefeature` event with a `activeFeat
 
 The attributions control is added by default.
 
-To add and customise the zoom and/or fullscreen controls pass in the `controls` prop with each control to be added and the options:
+To add and customise the zoom, fullscreen and attribution controls pass in the `controls` prop with each control to be added and the options:
 
 ```
-{ zoom: options, fullscreen: options }
+{ zoom: options, fullscreen: options, attribution: options }
 ```
 
-Zoom control docs with list of options: https://openlayers.org/en/latest/apidoc/module-ol_control_Zoom-Zoom.html
+The attribution will be added by default, but can be customised. E.g. to use localised text and display as collapsible element.
 
-Fullscreen control docs with list of options: https://openlayers.org/en/latest/apidoc/module-ol_control_FullScreen-FullScreen.html
+Zoom, Fullscreen and Attribution control docs with list of options:
+
+- https://openlayers.org/en/latest/apidoc/module-ol_control_Zoom-Zoom.html
+- https://openlayers.org/en/latest/apidoc/module-ol_control_FullScreen-FullScreen.html
+- https://openlayers.org/en/latest/apidoc/module-ol_control_Attribution-Attribution.html
 
 ## License
 

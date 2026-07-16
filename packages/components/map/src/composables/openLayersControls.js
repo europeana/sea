@@ -52,8 +52,9 @@ export const useOpenLayersControls = ({ map, controls } = {}) => {
           new FullScreen({ ...controlsRef.value.fullscreen }),
         );
       }
-
-      mapRef.value.addControl(new Attribution());
+      mapRef.value.addControl(
+        new Attribution({ ...controlsRef.value?.attribution }),
+      );
     }
   });
 };

@@ -113,23 +113,85 @@ useOpenLayersControls({ map, controls });
   width: 100%;
   height: 100%;
 
-  .ol-zoom {
+  .ol-control {
+    background-color: transparent;
     top: auto;
     right: 1.25rem;
-    bottom: 4rem;
     left: auto;
 
-    button:disabled {
-      background-color: lightgrey;
-      cursor: not-allowed;
+    &.ol-zoom {
+      bottom: 6.25rem;
+
+      button:disabled {
+        background-color: lightgrey;
+        cursor: not-allowed;
+      }
     }
-  }
 
-  .ol-full-screen {
-    top: auto;
-    right: 1.25rem;
-    bottom: 1.25rem;
-    left: auto;
+    &.ol-full-screen {
+      bottom: 3.5rem;
+    }
+
+    button {
+      font-size: 0; // visually-hide text, acessible for AT (a11y)
+      width: 2.25rem;
+      height: 2.25rem;
+      padding: 0.25rem;
+      margin: 0 0 0.5rem 0;
+      border-radius: 0;
+
+      &:before {
+        content: "";
+        background-color: black;
+        width: 100%;
+        display: block;
+        height: 100%;
+        mask-repeat: no-repeat;
+        mask-position: center;
+      }
+
+      &:hover {
+        outline: none;
+
+        &:before {
+          background-color: #4d4d4d;
+        }
+      }
+      &:focus {
+        outline: none;
+      }
+      &:focus-visible {
+        outline: auto;
+      }
+
+      &.ol-full-screen-false:before {
+        mask-image: url(@/assets/img/ic_fullscreen.svg);
+      }
+      &.ol-full-screen-true:before {
+        mask-image: url(@/assets/img/ic_fullscreenexit.svg);
+      }
+      &.ol-zoom-in:before {
+        mask-image: url(@/assets/img/ic_zoomin.svg);
+      }
+      &.ol-zoom-out:before {
+        mask-image: url(@/assets/img/ic_zoomout.svg);
+      }
+    }
+
+    &.ol-attribution {
+      bottom: 1rem;
+      background-color: white;
+      margin-bottom: 0.25rem;
+      border-radius: 0;
+
+      button {
+        margin-bottom: 0;
+
+        &:before {
+          mask-image: url(@/assets/img/ic_infocircle.svg);
+        }
+      }
+    }
   }
 }
 </style>
