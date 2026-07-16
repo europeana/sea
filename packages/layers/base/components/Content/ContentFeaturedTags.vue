@@ -21,7 +21,7 @@ const scrollWidth = ref(featuredTagsRef.value?.$refs.tagswrapper?.scrollWidth);
 
 const featuredDisplayTags = computed(() => {
   return props.tags?.filter((tag) =>
-    (featuredTags || []).includes(tag.identifier),
+    (featuredTags || []).includes(tag?.identifier),
   );
 });
 

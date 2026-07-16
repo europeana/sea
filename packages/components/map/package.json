@@ -1,6 +1,6 @@
 {
   "name": "@europeana/map",
-  "version": "0.1.6-protomaps.2",
+  "version": "0.1.7",
   "description": "Vue 3 component/app to show a map on which clustered points may be displayed.",
   "license": "EUPL-1.2",
   "type": "module",
@@ -9,13 +9,7 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/europeana-map.component.js"
-    },
-    "./app": {
-      "import": "./dist/europeana-map.app.js"
-    },
-    "./component": {
-      "import": "./dist/europeana-map.component.js"
+      "import": "./dist/europeana-map.js"
     },
     "./css": {
       "import": "./dist/europeana-map.css"
@@ -23,9 +17,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "pnpm build:component && pnpm build:app",
-    "build:app": "vite build --config vite.build.app.js",
-    "build:component": "vite build --config vite.build.component.js",
+    "build": "vite build --config vite.build.lib.js",
     "preview": "vite preview",
     "preversion": "pnpm build",
     "test": "vitest",
