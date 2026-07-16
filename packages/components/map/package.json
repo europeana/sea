@@ -9,13 +9,7 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/europeana-map.component.js"
-    },
-    "./app": {
-      "import": "./dist/europeana-map.app.js"
-    },
-    "./component": {
-      "import": "./dist/europeana-map.component.js"
+      "import": "./dist/europeana-map.js"
     },
     "./css": {
       "import": "./dist/europeana-map.css"
@@ -23,9 +17,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "pnpm build:component && pnpm build:app",
-    "build:app": "vite build --config vite.build.app.js",
-    "build:component": "vite build --config vite.build.component.js",
+    "build": "run-s clean:dist build:lib",
+    "build:lib": "vite build --config vite.build.lib.js",
+    "clean:dist": "rimraf dist",
     "preview": "vite preview",
     "preversion": "pnpm build",
     "test": "vitest",
@@ -40,6 +34,8 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:vite7",
     "@vue/test-utils": "catalog:vue3",
+    "npm-run-all": "catalog:",
+    "rimraf": "catalog:",
     "vite": "catalog:vite7"
   },
   "peerDependencies": {
