@@ -173,28 +173,20 @@ describe("@/composables/openLayersControls.js", () => {
             .getArray()[2]
             .element.getHTML();
 
-          expect(
-            zoomControlHTML.includes(
-              '<span style="font-size: 0px;">zoom in label</span>',
-            ),
-          ).toBe(true);
-          expect(
-            zoomControlHTML.includes(
-              '<span style="font-size: 0px;">zoom out label</span>',
-            ),
-          ).toBe(true);
+          expect(zoomControlHTML).toContain(
+            '<span style="font-size: 0px;">zoom in label</span>',
+          );
+          expect(zoomControlHTML).toContain(
+            '<span style="font-size: 0px;">zoom out label</span>',
+          );
 
-          expect(
-            fullscreenControlHTML.includes(
-              '<span style="font-size: 0px;">fullscreen label</span>',
-            ),
-          ).toBe(true);
+          expect(fullscreenControlHTML).toContain(
+            '<span style="font-size: 0px;">fullscreen label</span>',
+          );
 
-          expect(
-            attributionControlHTML.includes(
-              '<span style="font-size: 0px;">attribution label</span>',
-            ),
-          ).toBe(true);
+          expect(attributionControlHTML).toContain(
+            '<span style="font-size: 0px;">attribution label</span>',
+          );
         });
 
         it("does not apply style properties to tip label options", () => {
@@ -219,20 +211,16 @@ describe("@/composables/openLayersControls.js", () => {
             .getArray()[2]
             .element.getHTML();
 
-          expect(zoomControlHTML.includes('title="zoom in tip label"')).toBe(
-            true,
-          );
-          expect(zoomControlHTML.includes('title="zoom out tip label"')).toBe(
-            true,
+          expect(zoomControlHTML).toContain('title="zoom in tip label"');
+          expect(zoomControlHTML).toContain('title="zoom out tip label"');
+
+          expect(fullscreenControlHTML).toContain(
+            'title="fullscreen tip label"',
           );
 
-          expect(
-            fullscreenControlHTML.includes('title="fullscreen tip label"'),
-          ).toBe(true);
-
-          expect(
-            attributionControlHTML.includes('title="attribution tip label"'),
-          ).toBe(true);
+          expect(attributionControlHTML).toContain(
+            'title="attribution tip label"',
+          );
         });
       });
     });
