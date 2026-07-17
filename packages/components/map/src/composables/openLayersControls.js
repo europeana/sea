@@ -68,6 +68,36 @@ export const useOpenLayersControls = ({ map, controls, styleLabels } = {}) => {
   );
 };
 
+const styleElement = (element, styles) => {
+  for (const styleProperty in styles) {
+    element.style.setProperty(styleProperty, styles[styleProperty]);
+  }
+
+  return element;
+};
+
+const coerceControlLabelOptionToElement = (controlLabelOption) => {
+  let element;
+
+  if (typeof controlLabelOption === "string") {
+    // convert string to a span element
+    element = document.createElement("span");
+    element.appendChild(document.createTextNode(controlLabelOption));
+  } else if (
+    typeof controlLabelOption === "object" &&
+    controlLabelOption.constructor.name === "Text"
+  ) {
+    // convert text node to a span element
+    element = document.createElement("span");
+    element.appendChild(controlLabelOption);
+  } else {
+    // otherwise, assume controlLabelOption is already an HTML element
+    element = controlLabelOption;
+  }
+
+  return element;
+};
+
 // if any style properties are supplied, all supplied control labels (not tip labels)
 // will be converted to span elements and have those style properties applied to them
 //
@@ -81,36 +111,19 @@ const styleControlLabels = (controls, styles) => {
     memo[controlKey] = {};
 
     for (const optionKey in controls[controlKey]) {
-      memo[controlKey][optionKey] = controls[controlKey][optionKey];
+      const controlOption = controls[controlKey][optionKey];
       const optionKeyLowerCase = optionKey.toLowerCase();
+
       if (
         optionKeyLowerCase.includes("label") &&
         !optionKeyLowerCase.includes("tiplabel")
       ) {
-        if (typeof memo[controlKey][optionKey] === "string") {
-          // convert string to a span element
-          const element = document.createElement("span");
-          element.appendChild(
-            document.createTextNode(memo[controlKey][optionKey]),
-          );
-          memo[controlKey][optionKey] = element;
-        } else if (typeof memo[controlKey][optionKey] === "object") {
-          if (memo[controlKey][optionKey].constructor.name === "Text") {
-            // convert text node to a span element
-            const element = document.createElement("span");
-            element.appendChild(memo[controlKey][optionKey]);
-            memo[controlKey][optionKey] = element;
-          } else {
-            // assume already an HTML element
-          }
-        }
-
-        for (const styleProperty in styles) {
-          memo[controlKey][optionKey].style.setProperty(
-            styleProperty,
-            styles[styleProperty],
-          );
-        }
+        memo[controlKey][optionKey] = styleElement(
+          coerceControlLabelOptionToElement(controlOption),
+          styles,
+        );
+      } else {
+        memo[controlKey][optionKey] = controlOption;
       }
     }
 
