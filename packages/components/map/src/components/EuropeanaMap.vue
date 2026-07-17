@@ -50,6 +50,7 @@ const props = defineProps({
 const data = ref(null);
 
 const centre = computed(() => props.centre || injectedConfig?.value?.centre);
+// TODO: set some defaults, deep merged with supplied?
 const controls = computed(
   () => props.controls || injectedConfig?.value?.controls,
 );
@@ -101,7 +102,7 @@ useOpenLayersPointsVectorLayer({
   pinPopover,
   styleFeature,
 });
-useOpenLayersControls({ map, controls });
+useOpenLayersControls({ map, controls, styleLabels: { "font-size": 0 } });
 </script>
 
 <template>
