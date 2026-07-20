@@ -55,7 +55,10 @@ export const useOpenLayersPointsVectorLayer = ({
 
   const createPopoverOverlay = () => {
     popoverOverlay.value = new Overlay({
-      element: pinPopover.value,
+      element:
+        typeof pinPopover.value === "string"
+          ? document.getElementById(pinPopover.value)
+          : pinPopover.value,
       autoPan: {
         animation: {
           duration: 250,
