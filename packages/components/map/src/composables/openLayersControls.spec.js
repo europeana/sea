@@ -18,17 +18,12 @@ const component = {
       type: Object,
       default: null,
     },
-    styleLabels: {
-      type: Object,
-      default: null,
-    },
   },
   setup(props) {
     const map = props.map;
     const controls = props.controls;
-    const styleLabels = props.styleLabels;
 
-    useOpenLayersControls({ map, controls, styleLabels });
+    useOpenLayersControls({ map, controls });
     return { map, controls };
   },
 };
@@ -112,116 +107,6 @@ describe("@/composables/openLayersControls.js", () => {
 
         expect(zoomIn.getAttribute("disabled")).toBe("true");
         expect(zoomOut.getAttribute("disabled")).toBeNull();
-      });
-    });
-
-    describe("styleLabels option", () => {
-      const styleLabels = {
-        "font-size": "0",
-      };
-
-      describe.each([
-        ["string", (string) => string],
-        ["Text", (string) => document.createTextNode(string)],
-        [
-          "HTMLElement",
-          (string) => {
-            const element = document.createElement("span");
-            element.appendChild(document.createTextNode(string));
-            return element;
-          },
-        ],
-      ])("with %s labels", async (argType, labelOptionGenerator) => {
-        const controls = {
-          fullscreen: {
-            label: labelOptionGenerator("fullscreen label"),
-            labelActive: labelOptionGenerator("fullscreen label active"),
-            tipLabel: "fullscreen tip label",
-          },
-          zoom: {
-            zoomInLabel: labelOptionGenerator("zoom in label"),
-            zoomOutLabel: labelOptionGenerator("zoom out label"),
-            zoomInTipLabel: "zoom in tip label",
-            zoomOutTipLabel: "zoom out tip label",
-          },
-          attribution: {
-            label: labelOptionGenerator("attribution label"),
-            collapseLabel: labelOptionGenerator("attribution collapse label"),
-            tipLabel: "attribution tip label",
-          },
-        };
-
-        it("applies style properties to each label option as a span element", () => {
-          const wrapper = factory({
-            props: {
-              map: new Map({ controls: [] }),
-              controls,
-              styleLabels,
-            },
-          });
-
-          const zoomControlHTML = wrapper.vm.map
-            .getControls()
-            .getArray()[0]
-            .element.getHTML();
-          const fullscreenControlHTML = wrapper.vm.map
-            .getControls()
-            .getArray()[1]
-            .element.getHTML();
-          const attributionControlHTML = wrapper.vm.map
-            .getControls()
-            .getArray()[2]
-            .element.getHTML();
-
-          expect(zoomControlHTML).toContain(
-            '<span style="font-size: 0px;">zoom in label</span>',
-          );
-          expect(zoomControlHTML).toContain(
-            '<span style="font-size: 0px;">zoom out label</span>',
-          );
-
-          expect(fullscreenControlHTML).toContain(
-            '<span style="font-size: 0px;">fullscreen label</span>',
-          );
-
-          expect(attributionControlHTML).toContain(
-            '<span style="font-size: 0px;">attribution label</span>',
-          );
-        });
-
-        it("does not apply style properties to tip label options", () => {
-          const wrapper = factory({
-            props: {
-              map: new Map({ controls: [] }),
-              controls,
-              styleLabels,
-            },
-          });
-
-          const zoomControlHTML = wrapper.vm.map
-            .getControls()
-            .getArray()[0]
-            .element.getHTML();
-          const fullscreenControlHTML = wrapper.vm.map
-            .getControls()
-            .getArray()[1]
-            .element.getHTML();
-          const attributionControlHTML = wrapper.vm.map
-            .getControls()
-            .getArray()[2]
-            .element.getHTML();
-
-          expect(zoomControlHTML).toContain('title="zoom in tip label"');
-          expect(zoomControlHTML).toContain('title="zoom out tip label"');
-
-          expect(fullscreenControlHTML).toContain(
-            'title="fullscreen tip label"',
-          );
-
-          expect(attributionControlHTML).toContain(
-            'title="attribution tip label"',
-          );
-        });
       });
     });
   });

@@ -102,7 +102,7 @@ useOpenLayersPointsVectorLayer({
   pinPopover,
   styleFeature,
 });
-useOpenLayersControls({ map, controls, styleLabels: { "font-size": 0 } });
+useOpenLayersControls({ map, controls });
 </script>
 
 <template>

@@ -1,14 +1,12 @@
-import { computed, toRef, unref, watch } from "vue";
+import { toRef, watch } from "vue";
 
 import Attribution from "ol/control/Attribution.js";
 import FullScreen from "ol/control/FullScreen.js";
 import Zoom from "ol/control/Zoom.js";
 
-export const useOpenLayersControls = ({ map, controls, styleLabels } = {}) => {
+export const useOpenLayersControls = ({ map, controls } = {}) => {
   const mapRef = toRef(map);
-  const controlsRef = computed(() =>
-    styleControlLabels(unref(controls), unref(styleLabels)),
-  );
+  const controlsRef = toRef(controls);
 
   const checkZoomAndDisableButton = (view) => {
     const maxZoom = view.getMaxZoom();
@@ -66,67 +64,4 @@ export const useOpenLayersControls = ({ map, controls, styleLabels } = {}) => {
       once: true,
     },
   );
-};
-
-const styleElement = (element, styles) => {
-  for (const styleProperty in styles) {
-    element.style.setProperty(styleProperty, styles[styleProperty]);
-  }
-
-  return element;
-};
-
-const coerceControlLabelOptionToElement = (controlLabelOption) => {
-  let element;
-
-  if (typeof controlLabelOption === "string") {
-    // convert string to a span element
-    element = document.createElement("span");
-    element.appendChild(document.createTextNode(controlLabelOption));
-  } else if (
-    typeof controlLabelOption === "object" &&
-    controlLabelOption.constructor.name === "Text"
-  ) {
-    // convert text node to a span element
-    element = document.createElement("span");
-    element.appendChild(controlLabelOption);
-  } else {
-    // otherwise, assume controlLabelOption is already an HTML element
-    element = controlLabelOption;
-  }
-
-  return element;
-};
-
-// if any style properties are supplied, all supplied control labels (not tip labels)
-// will be converted to span elements and have those style properties applied to them
-//
-// intended to be used where for some reason CSS rules do not get applied as desired
-const styleControlLabels = (controls, styles) => {
-  if (!controls || !styles) {
-    return controls;
-  }
-
-  return Object.keys(controls).reduce((memo, controlKey) => {
-    memo[controlKey] = {};
-
-    for (const optionKey in controls[controlKey]) {
-      const controlOption = controls[controlKey][optionKey];
-      const optionKeyLowerCase = optionKey.toLowerCase();
-
-      if (
-        optionKeyLowerCase.includes("label") &&
-        !optionKeyLowerCase.includes("tiplabel")
-      ) {
-        memo[controlKey][optionKey] = styleElement(
-          coerceControlLabelOptionToElement(controlOption),
-          styles,
-        );
-      } else {
-        memo[controlKey][optionKey] = controlOption;
-      }
-    }
-
-    return memo;
-  }, {});
 };
