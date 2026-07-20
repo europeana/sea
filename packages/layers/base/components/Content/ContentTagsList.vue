@@ -69,7 +69,7 @@ const orderedTags = computed(() => {
   const unselected = [];
 
   for (const tag of props.tags) {
-    if (props.selected.includes(tag.identifier)) {
+    if (props.selected.includes(tag?.identifier)) {
       selected.push(tag);
     } else {
       unselected.push(tag);
@@ -142,22 +142,22 @@ watch(orderedTags, () => {
       >
         <span v-if="tagIcon" class="icon-ic-tag" />
         <ul class="nav" :class="{ 'ms-n2': !tagIcon }">
-          <li v-for="tag in orderedTags.filter(Boolean)" :key="tag.identifier">
+          <li v-for="tag in orderedTags.filter(Boolean)" :key="tag?.identifier">
             <NuxtLinkLocale
               class="badge text-capitalize ms-2 ms-4k-3 mb-2 mb-4k-3"
               :class="{
                 [badgeVariant]: true,
-                selected: isActive(tag.identifier),
+                selected: isActive(tag?.identifier),
               }"
-              :active="isActive(tag.identifier)"
-              :to="badgeLink(tag.identifier)"
+              :active="isActive(tag?.identifier)"
+              :to="badgeLink(tag?.identifier)"
               :data-qa="`${tag.name} tag`"
               @keydown.left="handleLeft"
               @keydown.right="handleRight"
-              @click="clickBadge(tag.identifier)"
+              @click="clickBadge(tag?.identifier)"
             >
               <span>{{ tag.name }}</span>
-              <span v-if="isActive(tag.identifier)" class="icon icon-clear" />
+              <span v-if="isActive(tag?.identifier)" class="icon icon-clear" />
             </NuxtLinkLocale>
           </li>
         </ul>

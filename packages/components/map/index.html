@@ -16,12 +16,26 @@
       }
     </style>
     <div id="europeana-map" />
+    <div
+      id="popover"
+      style="background-color: white; padding: 1rem; margin: 0.2rem"
+    >
+      Popover content
+    </div>
     <script type="module">
-      import EuropeanaMap from "./src/index.js";
+      import { EuropeanaMapWrapper } from "./src/index.js";
 
-      new EuropeanaMap("#europeana-map", {
+      new EuropeanaMapWrapper("#europeana-map", {
+        // Uncomment for single feature testing
+        // json: JSON.stringify({ features: [{type:'Feature',id:'http://data.europeana.eu/organization/1',geometry:{type:'Point',coordinates:[18.2924425,57.6396512]}}]}),
         url: "https://www.europeana.eu/_api/collections/organisations/geo",
         hash: true,
+        pinPopover: document.getElementById("popover"),
+        controls: {
+          fullscreen: {},
+          zoom: {},
+          attribution: { collapsible: true },
+        },
       });
     </script>
   </body>

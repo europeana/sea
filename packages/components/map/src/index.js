@@ -2,14 +2,15 @@ import { createApp, computed, reactive } from "vue";
 import OpenLayersMap from "ol/Map.js";
 
 import EuropeanaMapComponent from "@/components/EuropeanaMap.vue";
+export { EuropeanaMapComponent };
 
-export default class EuropeanaMap {
+export class EuropeanaMapWrapper {
   #app;
   #olMap;
   #config = reactive({});
 
   constructor(target, options = {}) {
-    this.#olMap = new OpenLayersMap();
+    this.#olMap = new OpenLayersMap({ controls: [] });
 
     for (const prop in EuropeanaMapComponent.props) {
       this.#config[prop] = options[prop];
