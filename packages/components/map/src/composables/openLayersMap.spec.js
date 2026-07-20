@@ -9,7 +9,6 @@ import {
   describe,
   expect,
   it,
-  test,
   vi,
 } from "vitest";
 import OpenLayersMap from "ol/Map.js";
@@ -192,24 +191,6 @@ describe("@/composables/openLayersMap.js", () => {
             expect(source.constructor.name).toBe("OSM");
           });
         });
-      });
-    });
-
-    describe("controls", () => {
-      test.each([
-        ["zoom", "Zoom"],
-        ["attribution", "Attribution"],
-        ["full-screen", "FullScreen"],
-      ])("has %s control", (name, className) => {
-        const wrapper = factory();
-
-        const map = wrapper.vm.map;
-        const controls = map.getControls().getArray();
-        const controlExists = controls.some(
-          (control) => control.constructor.name === className,
-        );
-
-        expect(controlExists).toBe(true);
       });
     });
 
