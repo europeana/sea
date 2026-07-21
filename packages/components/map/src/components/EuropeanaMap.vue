@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, inject } from "vue";
+import { computed, nextTick, ref, inject } from "vue";
 import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
@@ -95,21 +95,33 @@ useOpenLayersMap({
 const { getSingleFeatureStyleMinDimension, styleFeature } =
   useOpenLayersFeatureStyles({ icon, map });
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
-const { clusterSource } = useOpenLayersPointsVectorLayer({
-  data,
-  distance: singleFeatureStyleMinDimension * 1.5,
-  minDistance: singleFeatureStyleMinDimension * 0.75,
-  map,
-  pinPopover,
-  styleFeature,
-});
-// TODO: only initialise when points are interactive / when there are clusters
-const { handleFocusOnKeyDown, clearFocusFeature } =
-  useOpenLayersKeyboardNavigation({
+
+let clusterSource;
+let handleFocusOnKeyDown;
+let clearFocusFeature;
+
+nextTick().then(() => {
+  const vectorLayer = useOpenLayersPointsVectorLayer({
+    data,
+    distance: singleFeatureStyleMinDimension * 1.5,
+    minDistance: singleFeatureStyleMinDimension * 0.75,
+    map,
+    pinPopover,
+    styleFeature,
+  });
+  clusterSource = vectorLayer.clusterSource;
+
+  // FIXME
+  // TODO: only initialise when points are interactive / when there are clusters
+  const keyboardNav = useOpenLayersKeyboardNavigation({
     map,
     clusterSource,
   });
-useOpenLayersControls({ map, controls });
+  handleFocusOnKeyDown = keyboardNav.handleFocusOnKeyDown;
+  clearFocusFeature = keyboardNav.clearFocusFeature;
+
+  useOpenLayersControls({ map, controls });
+});
 </script>
 
 <template>

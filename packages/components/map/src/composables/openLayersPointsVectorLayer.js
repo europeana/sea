@@ -20,9 +20,10 @@ export const useOpenLayersPointsVectorLayer = ({
   const clusterSource = ref(null);
   // TODO: split out popover to  separate composable?
   const popoverOverlay = ref(null);
+  const ready = ref(false);
 
   const features = computed(() =>
-    data.value.features.map(
+    (data.value?.features || []).map(
       (feature) =>
         new Feature({
           geometry: new Point(feature.geometry.coordinates),
@@ -40,11 +41,10 @@ export const useOpenLayersPointsVectorLayer = ({
       }),
     });
 
-    const clustersLayer = new VectorLayer({
+    return new VectorLayer({
       source: clusterSource.value,
       style: styleFeature,
     });
-    return clustersLayer;
   };
 
   const createSinglePointLayer = () => {
@@ -58,7 +58,10 @@ export const useOpenLayersPointsVectorLayer = ({
 
   const createPopoverOverlay = () => {
     popoverOverlay.value = new Overlay({
-      element: pinPopover.value,
+      element:
+        typeof pinPopover.value === "string"
+          ? document.getElementById(pinPopover.value)
+          : pinPopover.value,
       autoPan: {
         animation: {
           duration: 250,
@@ -69,31 +72,43 @@ export const useOpenLayersPointsVectorLayer = ({
   };
 
   const centreMapOnSinglePoint = () => {
-    if (data.value?.features?.length === 1) {
+    if (features.value.length === 1) {
       mapRef.value
         .getView()
-        .setCenter(data.value.features[0].geometry.coordinates);
+        .setCenter(features.value[0].getGeometry().getCoordinates());
     }
   };
 
+  const initLayer = () => {
+    if (features.value.length === 1) {
+      mapRef.value.addLayer(createSinglePointLayer());
+
+      centreMapOnSinglePoint();
+    } else {
+      mapRef.value.addLayer(createClustersLayer());
+    }
+
+    if (pinPopover.value && !popoverOverlay.value) {
+      createPopoverOverlay();
+    }
+
+    // Pins are clickable when there are clusters and/or popover
+    if (features.value.length > 1 || pinPopover.value) {
+      mapRef.value?.on("click", handleClick);
+    }
+
+    ready.value = true;
+  };
+
+  const unwatchInitLayer = watchEffect(() => {
+    if (mapRef.value && features.value.length > 0) {
+      initLayer();
+    }
+  });
+
   watchEffect(() => {
-    if (mapRef.value && data.value) {
-      if (data.value?.features?.length === 1) {
-        mapRef.value.addLayer(createSinglePointLayer());
-
-        centreMapOnSinglePoint();
-      } else {
-        mapRef.value.addLayer(createClustersLayer());
-      }
-
-      if (pinPopover.value && !popoverOverlay.value) {
-        createPopoverOverlay();
-      }
-
-      // Pins are clickable when there are clusters and/or popover
-      if (data.value?.features?.length > 1 || pinPopover.value) {
-        mapRef.value?.on("click", handleClick);
-      }
+    if (ready.value) {
+      unwatchInitLayer();
     }
   });
 
