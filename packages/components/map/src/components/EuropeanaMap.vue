@@ -20,7 +20,17 @@ const props = defineProps({
   },
   controls: {
     type: Object,
-    default: null,
+    default: () => ({
+      fullscreen: {},
+      zoom: {},
+      attribution: { collapsible: true },
+      keyboardPanAndZoom: {
+        label: "Use arrow keys to pan, -/+ keys zoom the map",
+      },
+      keyboardNavigatePins: {
+        label: "Use arrow keys to navigate pins and clusters",
+      },
+    }),
   },
   hash: {
     type: Boolean,
@@ -120,13 +130,12 @@ nextTick().then(() => {
 </script>
 
 <template>
-  <!-- TODO: translate a11y buttons -->
   <div :id="target" :class="target">
     <button id="map-keyboard-toggle">
-      Use arrow keys to pan, -/+ keys zoom the map
+      {{ controls.keyboardPanAndZoom.label }}
     </button>
     <button id="map-keyboard-focus-pin-toggle">
-      Use arrow keys to select pins and clusters
+      {{ controls.keyboardNavigatePins.label }}
     </button>
   </div>
 </template>
