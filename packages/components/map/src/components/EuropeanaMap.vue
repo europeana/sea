@@ -121,12 +121,17 @@ nextTick().then(() => {
 
 <template>
   <div :id="target" :class="target">
-    <button v-if="controls?.keyboardPanAndZoom" id="map-keyboard-toggle">
+    <button
+      v-if="controls?.keyboardPanAndZoom"
+      id="map-keyboard-toggle"
+      class="keyboard-control"
+    >
       {{ controls.keyboardPanAndZoom.label }}
     </button>
     <button
       v-if="controls?.keyboardNavigatePins"
       id="map-keyboard-focus-pin-toggle"
+      class="keyboard-control keyboard-nav-control"
     >
       {{ controls.keyboardNavigatePins.label }}
     </button>
@@ -137,6 +142,28 @@ nextTick().then(() => {
 .europeana-map-map {
   width: 100%;
   height: 100%;
+
+  .keyboard-control {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    opacity: 0; // hidden but accessible
+    left: auto;
+    background-color: #fff;
+    border: none;
+    padding: 0.5rem;
+    z-index: -1;
+
+    &:focus,
+    &:focus ~ div .keyboard-nav-control {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+
+  .keyboard-nav-control {
+    top: 3.5rem;
+  }
 
   .ol-control {
     background-color: transparent;
