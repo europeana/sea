@@ -20,17 +20,7 @@ const props = defineProps({
   },
   controls: {
     type: Object,
-    default: () => ({
-      fullscreen: {},
-      zoom: {},
-      attribution: { collapsible: true },
-      keyboardPanAndZoom: {
-        label: "Use arrow keys to pan, -/+ keys zoom the map",
-      },
-      keyboardNavigatePins: {
-        label: "Use arrow keys to navigate pins and clusters",
-      },
-    }),
+    default: null,
   },
   hash: {
     type: Boolean,
@@ -131,10 +121,13 @@ nextTick().then(() => {
 
 <template>
   <div :id="target" :class="target">
-    <button id="map-keyboard-toggle">
+    <button v-if="controls?.keyboardPanAndZoom" id="map-keyboard-toggle">
       {{ controls.keyboardPanAndZoom.label }}
     </button>
-    <button id="map-keyboard-focus-pin-toggle">
+    <button
+      v-if="controls?.keyboardNavigatePins"
+      id="map-keyboard-focus-pin-toggle"
+    >
       {{ controls.keyboardNavigatePins.label }}
     </button>
   </div>
