@@ -113,6 +113,7 @@ nextTick().then(() => {
   useOpenLayersKeyboardNavigation({
     map,
     clusterOrPinSource,
+    pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
   });
 
   useOpenLayersControls({ map, controls });
@@ -128,13 +129,20 @@ nextTick().then(() => {
     >
       {{ controls.keyboardPanAndZoom.label }}
     </button>
-    <button
-      v-if="controls?.keyboardNavigatePins"
-      id="map-keyboard-focus-pin-toggle"
-      class="keyboard-control keyboard-nav-control"
-    >
-      {{ controls.keyboardNavigatePins.label }}
-    </button>
+    <template v-if="controls?.keyboardNavigatePins">
+      <button
+        id="map-keyboard-focus-pin-toggle"
+        class="keyboard-control keyboard-nav-control"
+      >
+        {{ controls.keyboardNavigatePins.label }}
+      </button>
+      <span
+        id="announcer"
+        aria-live="polite"
+        class="sr-only"
+        aria-atomic="true"
+      ></span>
+    </template>
   </div>
 </template>
 

@@ -11,6 +11,7 @@ import VectorSource from "ol/source/Vector.js";
 export const useOpenLayersKeyboardNavigation = ({
   map,
   clusterOrPinSource,
+  pinSrLabel,
 } = {}) => {
   // TODO: handle keyboard select for single point if/when actionable
 
@@ -41,10 +42,20 @@ export const useOpenLayersKeyboardNavigation = ({
   const clearFocusFeature = () => {
     focusSource.value.clear();
     unsetFeatureFocus();
+    const announcer = document.getElementById("announcer");
+    announcer.innerHTML = "";
   };
 
   const setFocus = (cluster) => {
     const coordinates = cluster.getGeometry().getCoordinates();
+    const announcer = document.getElementById("announcer");
+    if (pinSrLabel) {
+      if (cluster.get("features")?.length > 1) {
+        announcer.innerHTML = `${pinSrLabel.multiple} ${cluster.get("features")?.length}`;
+      } else {
+        announcer.innerHTML = pinSrLabel.single;
+      }
+    }
 
     focusSource.value.clear();
 
