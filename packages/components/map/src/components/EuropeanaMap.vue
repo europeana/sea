@@ -97,8 +97,6 @@ const { getSingleFeatureStyleMinDimension, styleFeature } =
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
 let clusterSource;
-let handleFocusOnKeyDown;
-let clearFocusFeature;
 
 nextTick().then(() => {
   const vectorLayer = useOpenLayersPointsVectorLayer({
@@ -111,26 +109,26 @@ nextTick().then(() => {
   });
   clusterSource = vectorLayer.clusterSource;
 
-  // FIXME
   // TODO: only initialise when points are interactive / when there are clusters
-  const keyboardNav = useOpenLayersKeyboardNavigation({
+  useOpenLayersKeyboardNavigation({
     map,
     clusterSource,
   });
-  handleFocusOnKeyDown = keyboardNav.handleFocusOnKeyDown;
-  clearFocusFeature = keyboardNav.clearFocusFeature;
 
   useOpenLayersControls({ map, controls });
 });
 </script>
 
 <template>
-  <button @keydown="handleFocusOnKeyDown" @blur="clearFocusFeature">
-    Cycle
-  </button>
-  <!-- TODO: consider implementing a button component similar to the MediaImageViewerKeyboardToggle -->
-  <!-- keep tabindex set to 0 to enable keyboard a11y -->
-  <div :id="target" :class="target" tabindex="0" />
+  <!-- TODO: translate a11y buttons -->
+  <div :id="target" :class="target">
+    <button id="map-keyboard-toggle">
+      Use arrow keys to pan, -/+ keys zoom the map
+    </button>
+    <button id="map-keyboard-focus-pin-toggle">
+      Use arrow keys to select pins and clusters
+    </button>
+  </div>
 </template>
 
 <style lang="scss">

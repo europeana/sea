@@ -1,5 +1,6 @@
-import { onMounted, ref, toRef } from "vue";
+import { ref, toRef, watch } from "vue";
 import Circle from "ol/style/Circle.js";
+import Control from "ol/control/Control.js";
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
 import Stroke from "ol/style/Stroke.js";
@@ -31,14 +32,6 @@ export const useOpenLayersKeyboardNavigation = ({
       }),
     }),
     zIndex: 2,
-  });
-
-  onMounted(() => {
-    if (mapRef.value) {
-      mapRef.value.addLayer(focusLayer);
-      mapRef.value.on("pointerdown", clearFocusFeature);
-      mapRef.value.getView().on("change:resolution", clearFocusFeature);
-    }
   });
 
   const unsetFeatureFocus = () => {
@@ -134,5 +127,30 @@ export const useOpenLayersKeyboardNavigation = ({
     }
   };
 
-  return { handleFocusOnKeyDown, clearFocusFeature };
+  const initNavigatePinsControl = () => {
+    const element = document.getElementById("map-keyboard-focus-pin-toggle");
+    element.addEventListener("keydown", handleFocusOnKeyDown);
+    element.addEventListener("blur", clearFocusFeature);
+
+    const navigatePinsControl = new Control({
+      element,
+    });
+    mapRef.value.addControl(navigatePinsControl);
+  };
+
+  watch(
+    mapRef,
+    () => {
+      if (mapRef.value) {
+        initNavigatePinsControl();
+        mapRef.value.addLayer(focusLayer);
+        mapRef.value.on("pointerdown", clearFocusFeature);
+        mapRef.value.getView().on("change:resolution", clearFocusFeature);
+      }
+    },
+    {
+      immediate: true,
+      once: true,
+    },
+  );
 };
