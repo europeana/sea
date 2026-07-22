@@ -17,7 +17,7 @@ export const useOpenLayersPointsVectorLayer = ({
   styleFeature,
 } = {}) => {
   const mapRef = toRef(map);
-  const clusterSource = ref(null);
+  const clusterOrPinSource = ref(null);
   // TODO: split out popover to  separate composable?
   const popoverOverlay = ref(null);
   const ready = ref(false);
@@ -33,7 +33,7 @@ export const useOpenLayersPointsVectorLayer = ({
   );
 
   const createClustersLayer = () => {
-    clusterSource.value = new Cluster({
+    clusterOrPinSource.value = new Cluster({
       distance,
       minDistance,
       source: new VectorSource({
@@ -42,16 +42,18 @@ export const useOpenLayersPointsVectorLayer = ({
     });
 
     return new VectorLayer({
-      source: clusterSource.value,
+      source: clusterOrPinSource.value,
       style: styleFeature,
     });
   };
 
   const createSinglePointLayer = () => {
+    clusterOrPinSource.value = new VectorSource({
+      features: features.value,
+    });
+
     return new VectorLayer({
-      source: new VectorSource({
-        features: features.value,
-      }),
+      source: clusterOrPinSource.value,
       style: styleFeature,
     });
   };
@@ -149,5 +151,5 @@ export const useOpenLayersPointsVectorLayer = ({
     }
   }
 
-  return { clusterSource };
+  return { clusterOrPinSource };
 };

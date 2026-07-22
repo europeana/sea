@@ -96,7 +96,7 @@ const { getSingleFeatureStyleMinDimension, styleFeature } =
   useOpenLayersFeatureStyles({ icon, map });
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
-let clusterSource;
+let clusterOrPinSource;
 
 nextTick().then(() => {
   const vectorLayer = useOpenLayersPointsVectorLayer({
@@ -107,12 +107,12 @@ nextTick().then(() => {
     pinPopover,
     styleFeature,
   });
-  clusterSource = vectorLayer.clusterSource;
+  clusterOrPinSource = vectorLayer.clusterOrPinSource;
 
   // TODO: only initialise when points are interactive / when there are clusters
   useOpenLayersKeyboardNavigation({
     map,
-    clusterSource,
+    clusterOrPinSource,
   });
 
   useOpenLayersControls({ map, controls });

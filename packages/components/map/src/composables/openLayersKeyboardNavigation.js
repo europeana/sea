@@ -10,7 +10,7 @@ import VectorSource from "ol/source/Vector.js";
 
 export const useOpenLayersKeyboardNavigation = ({
   map,
-  clusterSource,
+  clusterOrPinSource,
 } = {}) => {
   // TODO: handle keyboard select for single point if/when actionable
 
@@ -65,22 +65,21 @@ export const useOpenLayersKeyboardNavigation = ({
         "Enter",
         " ",
       ].includes(event.key) &&
-      clusterSource.value &&
+      clusterOrPinSource.value &&
       mapRef.value
     ) {
       // TODO: fetch extent and clusters once, not on each keydown
       const extent = mapRef.value
         .getView()
         .calculateExtent(mapRef.value.getSize());
-      const visibleClusters = clusterSource.value
-        .getFeatures()
-        .filter((feature) => {
-          return feature.getGeometry().intersectsExtent(extent);
-        });
+      const features = clusterOrPinSource.value.getFeatures();
+      const visibleClustersOrPins = features.filter((feature) => {
+        return feature.getGeometry().intersectsExtent(extent);
+      });
 
-      if (visibleClusters.length > 0) {
+      if (visibleClustersOrPins.length > 0) {
         // Sort left to right
-        visibleClusters.sort((a, b) => {
+        visibleClustersOrPins.sort((a, b) => {
           const coordA = a.getGeometry().getCoordinates();
           const coordB = b.getGeometry().getCoordinates();
 
@@ -89,9 +88,9 @@ export const useOpenLayersKeyboardNavigation = ({
 
         if (["ArrowDown", "ArrowRight"].includes(event.key)) {
           const nextIndex = focusedFeatureIndex.value + 1;
-          if (nextIndex < visibleClusters.length) {
+          if (nextIndex < visibleClustersOrPins.length) {
             focusedFeatureIndex.value = nextIndex;
-            setFocus(visibleClusters[focusedFeatureIndex.value]);
+            setFocus(visibleClustersOrPins[focusedFeatureIndex.value]);
           }
         }
 
@@ -99,14 +98,14 @@ export const useOpenLayersKeyboardNavigation = ({
           const previousIndex = focusedFeatureIndex.value - 1;
           if (previousIndex > -1) {
             focusedFeatureIndex.value = previousIndex;
-            setFocus(visibleClusters[focusedFeatureIndex.value]);
+            setFocus(visibleClustersOrPins[focusedFeatureIndex.value]);
           }
         }
 
         // Simulate click event on Enter or Spacebar
         if (["Enter", " "].includes(event.key)) {
           if (focusedFeatureIndex.value > -1) {
-            const focusedFeatureCoordinate = visibleClusters[
+            const focusedFeatureCoordinate = visibleClustersOrPins[
               focusedFeatureIndex.value
             ]
               .getGeometry()
