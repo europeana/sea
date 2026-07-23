@@ -6,8 +6,6 @@ Vue 3 component/app to show a map on which clustered points may be displayed.
 
 TODO
 
-prerelease auto-publish test #2
-
 ### Popover
 
 To use the popover feature pass in the `pinPopover` prop with an existing HTML element.
