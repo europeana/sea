@@ -1,6 +1,6 @@
 {
   "name": "@europeana/map-styles",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Custom styles for @europeana/map",
   "repository": {
     "type": "git",

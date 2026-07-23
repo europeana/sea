@@ -49,10 +49,15 @@ export const localise = (locale) => {
 };
 
 export function* build() {
+  yield {
+    file: "europeana-map-styles.versatiles.json",
+    data: baseStyle,
+  };
+
   for (const locale of LOCALES.values()) {
     yield {
       file: `europeana-map-styles.versatiles.${locale}.json`,
-      data: JSON.stringify(localise(locale)),
+      data: localise(locale),
     };
   }
 }
