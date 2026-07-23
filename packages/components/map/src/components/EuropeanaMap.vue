@@ -109,12 +109,15 @@ nextTick().then(() => {
   });
   clusterOrPinSource = vectorLayer.clusterOrPinSource;
 
-  // TODO: only initialise when points are interactive / when there are clusters
-  useOpenLayersKeyboardNavigation({
-    map,
-    clusterOrPinSource,
-    pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
-  });
+  if (controls.value?.keyboardNavigatePins) {
+    useOpenLayersKeyboardNavigation({
+      map,
+      clusterOrPinSource,
+      navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
+      announcerId: "announcer",
+      pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
+    });
+  }
 
   useOpenLayersControls({ map, controls });
 });

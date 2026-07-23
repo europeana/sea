@@ -16,10 +16,23 @@ When single points are clicked a `change:activefeature` event with a `activeFeat
 
 The attributions control is added by default.
 
-To add and customise the zoom, fullscreen and attribution controls pass in the `controls` prop with each control to be added and the options:
+To add and customise the zoom, fullscreen, attribution and keyboard a11y controls pass in the `controls` prop with each control to be added and the options:
 
 ```
-{ zoom: options, fullscreen: options, attribution: options }
+{ zoom: options,
+  fullscreen: options,
+  attribution: options,
+  keyboardPanAndZoom: {
+    label,
+  },
+  keyboardNavigatePins: {
+    label,
+    srLabel: {
+      multiple,
+      single,
+    },
+  }
+}
 ```
 
 The attribution will be added by default, but can be customised. E.g. to use localised text and display as collapsible element.

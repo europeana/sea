@@ -11,13 +11,15 @@ import VectorSource from "ol/source/Vector.js";
 export const useOpenLayersKeyboardNavigation = ({
   map,
   clusterOrPinSource,
+  navigatePinsButtonId,
+  announcerId,
   pinSrLabel,
 } = {}) => {
-  // TODO: handle keyboard select for single point if/when actionable
-
   const mapRef = toRef(map);
+  const clusterOrPinSourceRef = toRef(clusterOrPinSource);
   const focusSource = ref(new VectorSource());
   const focusedFeatureIndex = ref(-1);
+  const currentlyVisibleFeatures = ref([]);
 
   const focusLayer = new VectorLayer({
     source: focusSource.value,
@@ -42,18 +44,17 @@ export const useOpenLayersKeyboardNavigation = ({
   const clearFocusFeature = () => {
     focusSource.value.clear();
     unsetFeatureFocus();
-    const announcer = document.getElementById("announcer");
-    announcer.innerHTML = "";
+    document.getElementById(announcerId).innerHTML = "";
   };
 
   const setFocus = (cluster) => {
     const coordinates = cluster.getGeometry().getCoordinates();
-    const announcer = document.getElementById("announcer");
     if (pinSrLabel) {
       if (cluster.get("features")?.length > 1) {
-        announcer.innerHTML = `${pinSrLabel.multiple} ${cluster.get("features")?.length}`;
+        document.getElementById(announcerId).innerHTML =
+          `${pinSrLabel.multiple} ${cluster.get("features")?.length}`;
       } else {
-        announcer.innerHTML = pinSrLabel.single;
+        document.getElementById(announcerId).innerHTML = pinSrLabel.single;
       }
     }
 
@@ -65,7 +66,25 @@ export const useOpenLayersKeyboardNavigation = ({
     focusSource.value.addFeature(focusFeature);
   };
 
-  // TODO: add/ trigger AT text on focus
+  const setCurrentlyVisibleFeatures = () => {
+    const extent = mapRef.value
+      .getView()
+      .calculateExtent(mapRef.value.getSize());
+    const features = clusterOrPinSourceRef.value.getFeatures();
+    const visibleFeatures = features.filter((feature) => {
+      return feature.getGeometry().intersectsExtent(extent);
+    });
+
+    // Sort left to right
+    visibleFeatures.sort((a, b) => {
+      const coordA = a.getGeometry().getCoordinates();
+      const coordB = b.getGeometry().getCoordinates();
+
+      return coordA[0] - coordB[0];
+    });
+    currentlyVisibleFeatures.value = visibleFeatures;
+  };
+
   const handleFocusOnKeyDown = (event) => {
     if (
       [
@@ -75,33 +94,14 @@ export const useOpenLayersKeyboardNavigation = ({
         "ArrowRight",
         "Enter",
         " ",
-      ].includes(event.key) &&
-      clusterOrPinSource.value &&
-      mapRef.value
+      ].includes(event.key)
     ) {
-      // TODO: fetch extent and clusters once, not on each keydown
-      const extent = mapRef.value
-        .getView()
-        .calculateExtent(mapRef.value.getSize());
-      const features = clusterOrPinSource.value.getFeatures();
-      const visibleClustersOrPins = features.filter((feature) => {
-        return feature.getGeometry().intersectsExtent(extent);
-      });
-
-      if (visibleClustersOrPins.length > 0) {
-        // Sort left to right
-        visibleClustersOrPins.sort((a, b) => {
-          const coordA = a.getGeometry().getCoordinates();
-          const coordB = b.getGeometry().getCoordinates();
-
-          return coordA[0] - coordB[0];
-        });
-
+      if (currentlyVisibleFeatures.value.length > 0) {
         if (["ArrowDown", "ArrowRight"].includes(event.key)) {
           const nextIndex = focusedFeatureIndex.value + 1;
-          if (nextIndex < visibleClustersOrPins.length) {
+          if (nextIndex < currentlyVisibleFeatures.value.length) {
             focusedFeatureIndex.value = nextIndex;
-            setFocus(visibleClustersOrPins[focusedFeatureIndex.value]);
+            setFocus(currentlyVisibleFeatures.value[focusedFeatureIndex.value]);
           }
         }
 
@@ -109,14 +109,14 @@ export const useOpenLayersKeyboardNavigation = ({
           const previousIndex = focusedFeatureIndex.value - 1;
           if (previousIndex > -1) {
             focusedFeatureIndex.value = previousIndex;
-            setFocus(visibleClustersOrPins[focusedFeatureIndex.value]);
+            setFocus(currentlyVisibleFeatures.value[focusedFeatureIndex.value]);
           }
         }
 
         // Simulate click event on Enter or Spacebar
         if (["Enter", " "].includes(event.key)) {
           if (focusedFeatureIndex.value > -1) {
-            const focusedFeatureCoordinate = visibleClustersOrPins[
+            const focusedFeatureCoordinate = currentlyVisibleFeatures.value[
               focusedFeatureIndex.value
             ]
               .getGeometry()
@@ -137,15 +137,18 @@ export const useOpenLayersKeyboardNavigation = ({
     }
   };
 
-  const initNavigatePinsControl = () => {
-    const element = document.getElementById("map-keyboard-focus-pin-toggle");
-    element.addEventListener("keydown", handleFocusOnKeyDown);
-    element.addEventListener("blur", clearFocusFeature);
+  const initNavigatePinsControl = async () => {
+    const navigatePinsButton = document.getElementById(navigatePinsButtonId);
 
-    const navigatePinsControl = new Control({
-      element,
-    });
-    mapRef.value.addControl(navigatePinsControl);
+    if (navigatePinsButton) {
+      navigatePinsButton.addEventListener("keydown", handleFocusOnKeyDown);
+      navigatePinsButton.addEventListener("blur", clearFocusFeature);
+
+      const navigatePinsControl = new Control({
+        element: navigatePinsButton,
+      });
+      mapRef.value.addControl(navigatePinsControl);
+    }
   };
 
   watch(
@@ -163,4 +166,24 @@ export const useOpenLayersKeyboardNavigation = ({
       once: true,
     },
   );
+
+  watch(
+    clusterOrPinSourceRef,
+    () => {
+      if (mapRef.value && clusterOrPinSourceRef.value) {
+        setCurrentlyVisibleFeatures();
+        mapRef.value.on("moveend", setCurrentlyVisibleFeatures);
+      }
+    },
+    {
+      once: true,
+    },
+  );
+
+  return {
+    handleFocusOnKeyDown,
+    clearFocusFeature,
+    setCurrentlyVisibleFeatures,
+    focusedFeatureIndex,
+  };
 };
