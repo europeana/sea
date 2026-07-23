@@ -12,10 +12,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    "./protomaps": "./src/protomaps/index.js",
-    "./versatiles": "./src/protomaps/versatiles.js"
-  },
   "scripts": {
     "build": "pnpm build:protomaps && pnpm build:versatiles",
     "build:protomaps": "pnpm cli protomaps build",
