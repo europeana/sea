@@ -8,7 +8,6 @@ import OSM from "ol/source/OSM.js";
 import { useGeographic } from "ol/proj.js";
 import { apply as applyMapboxStyle } from "ol-mapbox-style";
 import LayerGroup from "ol/layer/Group.js";
-import { DEFAULT_STYLE_ID } from "./mapbox/style.js";
 
 const projection = "EPSG:3857";
 const centreOfEurope = [9.254419, 50.102223];
@@ -25,7 +24,7 @@ export const useOpenLayersMap = ({
   const centreRef = toRef(unref(centre) || centreOfEurope);
   const hashRef = toRef(hash);
   const mapRef = toRef(map);
-  const styleRef = toRef(style || DEFAULT_STYLE_ID);
+  const styleRef = toRef(style || "openstreetmap");
   const targetRef = toRef(target);
   // unref first in case it's a computed and we need to set it
   const zoomRef = toRef(unref(zoom) || 4);
