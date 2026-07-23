@@ -19,7 +19,7 @@ const STYLES = STYLE_DIRENTS.reduce((memo, dirent) => {
 
 const write = (styleName, entry) => {
   const filepath = path.resolve(STYLES[styleName].dir, entry.file);
-  fs.writeFileSync(filepath, entry.data);
+  fs.writeFileSync(filepath, JSON.stringify(entry.data));
 };
 
 const build = async (styleName) => {
