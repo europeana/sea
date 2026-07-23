@@ -49,7 +49,7 @@ export const localise = (locale) => {
 export function* build() {
   for (const locale of LOCALES.values()) {
     yield {
-      file: `europeana-map.style.protomaps.${locale}.json`,
+      file: `europeana-map-styles.protomaps.${locale}.json`,
       data: JSON.stringify(localise(locale)),
     };
   }
