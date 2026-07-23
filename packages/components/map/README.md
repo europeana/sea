@@ -6,7 +6,7 @@ Vue 3 component/app to show a map on which clustered points may be displayed.
 
 TODO
 
-prerelease auto-publish test #1
+prerelease auto-publish test #2
 
 ### Popover
 
