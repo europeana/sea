@@ -13,7 +13,7 @@ jobs:
     name: "NPM: publish"
     strategy:
       matrix:
-        package: ["@europeana/map", "@europeana/map-styles"]
+        package: ["map", "map-styles"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm --filter ${{ matrix.package }} build
+        run: pnpm --filter @europeana/${{ matrix.package }} build
       - name: Publish
         # use `--no-git-checks` to avoid ERR_PNPM_GIT_UNKNOWN_BRANCH
         # see https://github.com/pnpm/pnpm/issues/5894
-        run: pnpm --filter ${{ matrix.package }} publish --access public --no-git-checks
+        run: pnpm --filter @europeana/${{ matrix.package }} publish --access public --no-git-checks
