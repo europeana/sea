@@ -13,7 +13,7 @@ jobs:
     name: "NPM: publish"
     strategy:
       matrix:
-        package: ["@europeana/map"]
+        package: ["@europeana/map", "@europeana/map-styles"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
