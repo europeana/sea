@@ -1,0 +1,26 @@
+{
+  "name": "@europeana/map-styles",
+  "version": "0.1.12",
+  "description": "Custom styles for @europeana/map",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
+  "bin": "./bin/cli.js",
+  "license": "EUPL-1.2",
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    "./protomaps": "./src/protomaps/index.js",
+    "./versatiles": "./src/protomaps/versatiles.js"
+  },
+  "scripts": {
+    "build": "pnpm build:protomaps && pnpm build:versatiles",
+    "build:protomaps": "pnpm cli protomaps build",
+    "build:versatiles": "pnpm cli versatiles build",
+    "cli": "./bin/cli.js"
+  }
+}

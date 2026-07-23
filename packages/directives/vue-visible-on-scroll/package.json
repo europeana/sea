@@ -1,7 +1,11 @@
 {
   "name": "@europeana/vue-visible-on-scroll",
-  "version": "0.1.1",
+  "version": "0.1.10-auto-publish.3",
   "description": "Vue visible-on-scroll directive",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
   "license": "EUPL-1.2",
   "type": "module",
   "exports": {

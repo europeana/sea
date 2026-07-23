@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, inject } from "vue";
+import { computed, nextTick, ref, inject } from "vue";
 import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
@@ -122,14 +122,17 @@ const { getSingleFeatureStyleMinDimension, styleFeature } =
   useOpenLayersFeatureStyles({ icon, map });
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
-useOpenLayersPointsVectorLayer({
-  data,
-  distance: singleFeatureStyleMinDimension * 1.5,
-  minDistance: singleFeatureStyleMinDimension * 0.75,
-  map,
-  pinPopover,
-  styleFeature,
-});
+
+nextTick().then(() =>
+  useOpenLayersPointsVectorLayer({
+    data,
+    distance: singleFeatureStyleMinDimension * 1.5,
+    minDistance: singleFeatureStyleMinDimension * 0.75,
+    map,
+    pinPopover,
+    styleFeature,
+  }),
+);
 useOpenLayersControls({ map, controls });
 </script>
 

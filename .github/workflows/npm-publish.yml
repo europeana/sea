@@ -1,0 +1,37 @@
+name: "NPM: publish"
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  npm-publish:
+    name: "NPM: publish"
+    strategy:
+      matrix:
+        package: ["map", "map-styles"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+        name: Install pnpm
+        with:
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm --filter @europeana/${{ matrix.package }} build
+      - name: Publish
+        # use `--no-git-checks` to avoid ERR_PNPM_GIT_UNKNOWN_BRANCH
+        # see https://github.com/pnpm/pnpm/issues/5894
+        run: pnpm --filter @europeana/${{ matrix.package }} publish --access public --no-git-checks
