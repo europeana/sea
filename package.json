@@ -2,6 +2,10 @@
   "name": "@europeana/sea",
   "version": "0.0.1",
   "description": "Europeana Service Experience Architecture (SEA)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
   "type": "module",
   "scripts": {
     "test": "vitest",

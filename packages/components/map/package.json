@@ -2,6 +2,10 @@
   "name": "@europeana/map",
   "version": "0.1.10-auto-publish.2",
   "description": "Vue 3 component/app to show a map on which clustered points may be displayed.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
   "license": "EUPL-1.2",
   "type": "module",
   "files": [
