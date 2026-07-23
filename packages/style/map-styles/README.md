@@ -1,5 +1,7 @@
 # Europeana Map styles
 
+NOTE: map-styles pre-release #1
+
 Custom styles for `@europeana/map`.
 
 Includes two custom styles:
