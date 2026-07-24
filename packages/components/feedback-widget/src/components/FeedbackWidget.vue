@@ -1,12 +1,12 @@
 <script setup>
 import { computed, defineProps, provide, ref, watch, watchEffect } from "vue";
 
-import { createI18n } from "@/utils/i18n.js";
-import * as messages from "@/locales/index.js";
-import { configProps } from "@/config.js";
+import { createI18n } from "../utils/i18n.js";
+import * as messages from "../locales/index.js";
+import { configProps } from "../config.js";
 
-import FeedbackButton from "@/components/FeedbackButton.vue";
-import FeedbackDialog from "@/components/FeedbackDialog.vue";
+import FeedbackButton from "../components/FeedbackButton.vue";
+import FeedbackDialog from "../components/FeedbackDialog.vue";
 
 const props = defineProps(configProps);
 

@@ -1,7 +1,7 @@
 <script setup>
 import { inject } from "vue";
 
-import FeedbackForm from "@/components/FeedbackForm.vue";
+import FeedbackForm from "./FeedbackForm.vue";
 
 const i18n = inject("i18n");
 </script>

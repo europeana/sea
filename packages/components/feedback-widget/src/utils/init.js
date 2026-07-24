@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { configProps } from "@/config.js";
+import { configProps } from "../config.js";
 
 export const initFeedbackWidgetApp = (
   rootComponent,

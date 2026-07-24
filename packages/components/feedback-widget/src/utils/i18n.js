@@ -1,4 +1,4 @@
-import * as messages from "@/locales/index.js";
+import * as messages from "../locales/index.js";
 
 export const locales = Object.keys(messages);
 

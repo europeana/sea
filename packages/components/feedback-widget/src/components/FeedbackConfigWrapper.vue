@@ -1,10 +1,10 @@
 <script setup>
 import { defineProps, ref } from "vue";
 
-import FeedbackWidget from "@/components/FeedbackWidget.vue";
+import FeedbackWidget from "./FeedbackWidget.vue";
 
-import { configProps } from "@/config.js";
-import { locales } from "@/utils/i18n.js";
+import { configProps } from "../config.js";
+import { locales } from "../utils/i18n.js";
 
 const props = defineProps(configProps);
 

@@ -1,9 +1,8 @@
-import { fileURLToPath, URL } from "node:url";
+// import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import svgLoader from "vite-svg-loader";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   css: {
     preprocessorOptions: {
@@ -14,12 +13,12 @@ export default defineConfig({
     },
   },
   define: {
-    "process.env": {},
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
   },
   plugins: [vue(), svgLoader()],
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     "@": fileURLToPath(new URL("./src", import.meta.url)),
+  //   },
+  // },
 });
