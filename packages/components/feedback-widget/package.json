@@ -13,19 +13,34 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/europeana-feedback-widget.component.js"
+      "import": "./src/components/FeedbackWidget.vue"
     },
     "./app": {
-      "import": "./dist/europeana-feedback-widget.app.js"
+      "import": "./src/main.js"
     },
     "./component": {
-      "import": "./dist/europeana-feedback-widget.component.js"
+      "import": "./src/components/FeedbackWidget.vue"
     },
     "./css": {
-      "import": "./dist/europeana-feedback-widget.css"
+      "import": "./src/assets/style.scss"
     }
   },
-  "style": "./dist/europeana-feedback-widget.css",
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./dist/europeana-feedback-widget.component.js"
+      },
+      "./app": {
+        "import": "./dist/europeana-feedback-widget.app.js"
+      },
+      "./component": {
+        "import": "./dist/europeana-feedback-widget.component.js"
+      },
+      "./css": {
+        "import": "./dist/europeana-feedback-widget.css"
+      }
+    }
+  },
   "scripts": {
     "dev": "concurrently \"npm:dev:backend\" \"npm:dev:frontend\"",
     "dev:backend": "nodemon -w dev/server.js dev/server.js",
