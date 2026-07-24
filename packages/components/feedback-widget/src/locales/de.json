@@ -1,0 +1,19 @@
+{
+  "cancel": "Abbrechen",
+  "close": "Schließen",
+  "emailAddress": "E-Mail-Adresse",
+  "emailOptional": "Möglicherweise möchten wir nachfassen. Geben Sie Ihre E-Mail-Adresse ein, wenn Sie damit einverstanden sind, dass wir Sie kontaktieren.",
+  "failed": "Die Anfrage ist fehlgeschlagen. Bitte versuche es erneut.",
+  "faq": "Gehen Sie zu den häufig gestellten Fragen",
+  "feedback": "Feedback",
+  "next": "Weiter",
+  "policies": "Indem Sie fortfahren, stimmen Sie unseren {termsAndPolicies} und erkennen unsere {privacyStatement}.",
+  "privacyPolicy": "Datenschutzerklärung",
+  "send": "Senden",
+  "skipSend": "Überspringen und senden",
+  "success": "Ihr Feedback wurde gesendet.",
+  "termsAndPolicies": "Bedingungen und Richtlinien",
+  "thankYou": "Vielen Dank!",
+  "title": "Feedback abschicken",
+  "validFeedback": "Ihr Feedback muss mindestens 5 Wörter enthalten."
+}

@@ -1,0 +1,19 @@
+{
+  "cancel": "Mégse",
+  "close": "Bezárás",
+  "emailAddress": "E-mail cím",
+  "emailOptional": "Érdemes lehet utánajárnunk. Írja be az e-mail címét, ha örül, hogy kapcsolatba lépünk Önnel.",
+  "failed": "A kérés nem sikerült. Kérlek próbáld újra.",
+  "faq": "Ugrás a gyakran ismételt kérdésekre",
+  "feedback": "Visszajelzés",
+  "next": "Következő",
+  "policies": "A folytatással elfogadja {termsAndPolicies} és a {privacyStatement}.",
+  "privacyPolicy": "Adatvédelmi nyilatkozat",
+  "send": "Küld",
+  "skipSend": "Kihagyás és küldés",
+  "success": "Visszajelzését elküldtük.",
+  "termsAndPolicies": "Feltételek és szabályzatok",
+  "thankYou": "Köszönöm!",
+  "title": "Visszajelzés küldése",
+  "validFeedback": "A visszajelzésnek legalább 5 szót kell tartalmaznia."
+}

@@ -1,0 +1,19 @@
+{
+  "cancel": "Zrušiť",
+  "close": "Zatvoriť",
+  "emailAddress": "E-mailová adresa",
+  "emailOptional": "Možno budeme chcieť nadviazať ďalšie kroky. Ak chcete, aby sme vás kontaktovali, zadajte svoj e-mail.",
+  "failed": "Žiadosť zlyhala. Prosím skúste znova.",
+  "faq": "Prejdite na často kladené otázky",
+  "feedback": "Spätná väzba",
+  "next": "Ďalšie",
+  "policies": "Pokračovaním súhlasíte s našimi {termsAndPolicies} a beriete na vedomie naše {privacyStatement}.",
+  "privacyPolicy": "Vyhlásenie o ochrane osobných údajov",
+  "send": "Poslať",
+  "skipSend": "Preskočiť a odoslať",
+  "success": "Vaša spätná väzba bola odoslaná.",
+  "termsAndPolicies": "Podmienky a zásady",
+  "thankYou": "Ďakujeme!",
+  "title": "Odoslať spätnú väzbu",
+  "validFeedback": "Vaša spätná väzba musí obsahovať minimálne 5 slov."
+}

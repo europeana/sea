@@ -1,0 +1,75 @@
+{
+  "name": "@europeana/feedback-widget",
+  "version": "0.5.5",
+  "description": "Europeana feedback widget",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
+  "license": "EUPL-1.2",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/europeana-feedback-widget.component.js"
+    },
+    "./app": {
+      "import": "./dist/europeana-feedback-widget.app.js"
+    },
+    "./component": {
+      "import": "./dist/europeana-feedback-widget.component.js"
+    },
+    "./css": {
+      "import": "./dist/europeana-feedback-widget.css"
+    }
+  },
+  "style": "./dist/europeana-feedback-widget.css",
+  "scripts": {
+    "dev": "concurrently \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:backend": "nodemon -w dev/server.js dev/server.js",
+    "dev:frontend": "vite",
+    "build": "pnpm build:component && pnpm build:app",
+    "build:app": "vite build --config vite.build.app.js",
+    "build:component": "vite build --config vite.build.component.js",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "test:coverage": "vitest --coverage",
+    "preversion": "npm run build",
+    "version": "node ./bin/version.js && git add README.md"
+  },
+  "dependencies": {
+    "@europeana/style": "catalog:frontend",
+    "bootstrap": "catalog:frontend"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:vite7",
+    "@vue/test-utils": "catalog:vue3",
+    "body-parser": "2.3.0",
+    "concurrently": "8.2.2",
+    "cors": "2.8.5",
+    "express": "4.22.1",
+    "jsdom": "23.2.0",
+    "morgan": "1.11.0",
+    "msw": "2.12.4",
+    "nodemon": "3.1.10",
+    "sass": "1.93.2",
+    "ssri": "10.0.6",
+    "vite-svg-loader": "5.1.0",
+    "vite": "catalog:vite7"
+  },
+  "peerDependencies": {
+    "vue": "catalog:vue3"
+  },
+  "contributors": [
+    "Richard Doe <richard.doe@europeana.eu>",
+    "Leonie Peters <leonie.peters@europeana.eu>",
+    "Lutz Biedinger <lutz.biedinger@europeana.eu>"
+  ],
+  "keywords": [
+    "europeana",
+    "feedback",
+    "vue"
+  ]
+}

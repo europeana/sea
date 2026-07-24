@@ -2,6 +2,7 @@ allowBuilds:
   "@parcel/watcher": true
   esbuild: true
   msgpackr-extract: true
+  msw: true
   nx: true
   unrs-resolver: true
 catalog:
@@ -19,6 +20,9 @@ catalogs:
     "eslint-config-prettier": "10.1.8"
     "eslint-plugin-vue": "10.9.2"
     "typescript-eslint": "8.61.1"
+  frontend:
+    "@europeana/style": "2.17.1"
+    "bootstrap": "5.3.8"
   html:
     cheerio: "1.2.0"
     marked: "18.0.5"

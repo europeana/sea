@@ -1,0 +1,19 @@
+{
+  "cancel": "Cancel",
+  "close": "Close",
+  "emailAddress": "Email address",
+  "emailOptional": "We may wish to follow up. Enter your email if you're happy for us to contact you.",
+  "failed": "The request failed. Please try again.",
+  "faq": "Go to frequently asked questions",
+  "feedback": "Feedback",
+  "next": "Next",
+  "policies": "By continuing, you agree to our {termsAndPolicies} and acknowledge our {privacyStatement}.",
+  "privacyPolicy": "Privacy Statement",
+  "send": "Send",
+  "skipSend": "Skip and send",
+  "success": "Your feedback has been sent.",
+  "termsAndPolicies": "Terms & Policies",
+  "thankYou": "Thank you!",
+  "title": "Send feedback",
+  "validFeedback": "Your feedback must contain a minimum of 5 words."
+}

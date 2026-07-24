@@ -1,0 +1,19 @@
+{
+  "cancel": "Atšaukti",
+  "close": "Uždaryti",
+  "emailAddress": "El. pašto adresas",
+  "emailOptional": "Galbūt norėsime tęsti. Įveskite savo el. Pašto adresą, jei džiaugiatės, kad susisieksime su jumis.",
+  "failed": "Užklausa nepavyko. Prašome, pabandykite dar kartą.",
+  "faq": "Eikite į dažniausiai užduodamus klausimus",
+  "feedback": "Atsiliepimas",
+  "next": "Kitas",
+  "policies": "Tęsdami sutinkate su mūsų {termsAndPolicies} ir patvirtinate mūsų {privacyStatement}.",
+  "privacyPolicy": "Privatumo pareiškimas",
+  "send": "Siųsti",
+  "skipSend": "Praleisti ir siųsti",
+  "success": "Jūsų atsiliepimas išsiųstas.",
+  "termsAndPolicies": "Sąlygos ir politika",
+  "thankYou": "Ačiū!",
+  "title": "Siųsti atsiliepimą",
+  "validFeedback": "Jūsų atsiliepimą turi sudaryti ne mažiau kaip 5 žodžiai."
+}

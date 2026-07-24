@@ -1,0 +1,19 @@
+{
+  "cancel": "Anuluj",
+  "close": "Zamknij",
+  "emailAddress": "Adres e-mail",
+  "emailOptional": "Możemy chcieć podjąć działania następcze. Jeśli chcesz się z Nami skontaktować, wpisz swój adres e-mail.",
+  "failed": "Żądanie nie powiodło się. Proszę spróbować ponownie.",
+  "faq": "Przejdź do najczęściej zadawanych pytań",
+  "feedback": "Twoja opinia",
+  "next": "Następny",
+  "policies": "Kontynuując, zgadzasz się na nasze {termsAndPolicies} i przyjmujesz do wiadomości nasze {privacyStatement}.",
+  "privacyPolicy": "Oświadczenie o ochronie prywatności",
+  "send": "Wyślij",
+  "skipSend": "Pomiń i wyślij",
+  "success": "Twoja opinia została wysłana.",
+  "termsAndPolicies": "Warunki i zasady",
+  "thankYou": "Dziękuję!",
+  "title": "Wyślij opinię",
+  "validFeedback": "Twoja opinia musi zawierać co najmniej 5 słów."
+}
