@@ -75,5 +75,5 @@ const handleFormSubmit = () => {
 </template>
 
 <style lang="scss">
-@import "@/assets/style";
+@import "../assets/style";
 </style>
