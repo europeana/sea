@@ -42,23 +42,27 @@ export const useOpenLayersKeyboardNavigation = ({
     document.getElementById(announcerId).innerHTML = "";
   };
 
-  const setFocus = (cluster) => {
-    const coordinates = cluster.getGeometry().getCoordinates();
-    if (pinSrLabel) {
-      if (cluster.get("features")?.length > 1) {
-        document.getElementById(announcerId).innerHTML =
-          `${pinSrLabel.multiple} ${cluster.get("features")?.length}`;
-      } else {
-        document.getElementById(announcerId).innerHTML = pinSrLabel.single;
+  const setFocus = (index) => {
+    if (index > -1 && index < currentlyVisibleFeatures.value.length) {
+      focusedFeatureIndex.value = index;
+      const cluster = currentlyVisibleFeatures.value[index];
+      const coordinates = cluster.getGeometry().getCoordinates();
+      if (pinSrLabel) {
+        if (cluster.get("features")?.length > 1) {
+          document.getElementById(announcerId).innerHTML =
+            `${pinSrLabel.multiple} ${cluster.get("features")?.length}`;
+        } else {
+          document.getElementById(announcerId).innerHTML = pinSrLabel.single;
+        }
       }
+
+      focusSource.value.clear();
+
+      const focusFeature = new Feature({
+        geometry: new Point(coordinates),
+      });
+      focusSource.value.addFeature(focusFeature);
     }
-
-    focusSource.value.clear();
-
-    const focusFeature = new Feature({
-      geometry: new Point(coordinates),
-    });
-    focusSource.value.addFeature(focusFeature);
   };
 
   const setCurrentlyVisibleFeatures = () => {
@@ -80,53 +84,50 @@ export const useOpenLayersKeyboardNavigation = ({
     currentlyVisibleFeatures.value = visibleFeatures;
   };
 
+  const isKeyWithInteraction = (key) => {
+    return [
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "Enter",
+      " ",
+    ].includes(key);
+  };
+
   const handleFocusOnKeyDown = (event) => {
     if (
-      [
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-        "Enter",
-        " ",
-      ].includes(event.key)
+      isKeyWithInteraction(event.key) &&
+      currentlyVisibleFeatures.value.length > 0
     ) {
-      if (currentlyVisibleFeatures.value.length > 0) {
-        if (["ArrowDown", "ArrowRight"].includes(event.key)) {
-          const nextIndex = focusedFeatureIndex.value + 1;
-          if (nextIndex < currentlyVisibleFeatures.value.length) {
-            focusedFeatureIndex.value = nextIndex;
-            setFocus(currentlyVisibleFeatures.value[focusedFeatureIndex.value]);
-          }
-        }
+      if (["ArrowDown", "ArrowRight"].includes(event.key)) {
+        const nextIndex = focusedFeatureIndex.value + 1;
+        setFocus(nextIndex);
+      }
 
-        if (["ArrowLeft", "ArrowUp"].includes(event.key)) {
-          const previousIndex = focusedFeatureIndex.value - 1;
-          if (previousIndex > -1) {
-            focusedFeatureIndex.value = previousIndex;
-            setFocus(currentlyVisibleFeatures.value[focusedFeatureIndex.value]);
-          }
-        }
+      if (["ArrowLeft", "ArrowUp"].includes(event.key)) {
+        const previousIndex = focusedFeatureIndex.value - 1;
+        setFocus(previousIndex);
+      }
 
-        // Simulate click event on Enter or Spacebar
-        if (["Enter", " "].includes(event.key)) {
-          if (focusedFeatureIndex.value > -1) {
-            const focusedFeatureCoordinate = currentlyVisibleFeatures.value[
-              focusedFeatureIndex.value
-            ]
-              .getGeometry()
-              .getCoordinates();
-            const pixel = mapRef.value.getPixelFromCoordinate(
-              focusedFeatureCoordinate,
-            );
+      // Simulate click event on Enter or Spacebar
+      if (["Enter", " "].includes(event.key)) {
+        if (focusedFeatureIndex.value > -1) {
+          const focusedFeatureCoordinate = currentlyVisibleFeatures.value[
+            focusedFeatureIndex.value
+          ]
+            .getGeometry()
+            .getCoordinates();
+          const pixel = mapRef.value.getPixelFromCoordinate(
+            focusedFeatureCoordinate,
+          );
 
-            const mockEvent = {
-              type: "click",
-              pixel: pixel,
-            };
+          const mockEvent = {
+            type: "click",
+            pixel: pixel,
+          };
 
-            mapRef.value.dispatchEvent(mockEvent);
-          }
+          mapRef.value.dispatchEvent(mockEvent);
         }
       }
     }
@@ -176,6 +177,7 @@ export const useOpenLayersKeyboardNavigation = ({
   );
 
   return {
+    clusterOrPinSourceRef,
     focusSource,
     focusedFeatureIndex,
     clearFocusFeature,

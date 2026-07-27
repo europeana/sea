@@ -144,7 +144,7 @@ nextTick().then(() => {
       <span
         id="announcer"
         aria-live="polite"
-        class="sr-only"
+        class="visually-hidden"
         aria-atomic="true"
       ></span>
     </template>

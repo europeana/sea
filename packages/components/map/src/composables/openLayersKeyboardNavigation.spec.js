@@ -28,8 +28,16 @@ const featureMock = {
     getCoordinates: vi.fn(() => [10, 20]),
   }),
 };
+
+const featureClusterMock = {
+  get: vi.fn(() => [featureMock, featureMock]),
+  getGeometry: () => ({
+    intersectsExtent: vi.fn(() => true),
+    getCoordinates: vi.fn(() => [10, 20]),
+  }),
+};
 const clusterOrPinSourceMock = {
-  getFeatures: vi.fn(() => [featureMock, featureMock, featureMock]),
+  getFeatures: vi.fn(() => [featureClusterMock, featureMock, featureMock]),
 };
 
 const elementId = "map";
@@ -71,6 +79,7 @@ const component = {
     const announcerId = props.announcerId;
 
     const {
+      clusterOrPinSourceRef,
       focusSource,
       focusedFeatureIndex,
       clearFocusFeature,
@@ -91,6 +100,7 @@ const component = {
       pinSrLabel,
       navigatePinsButtonId,
       announcerId,
+      clusterOrPinSourceRef,
       focusSource,
       focusedFeatureIndex,
       clearFocusFeature,
@@ -226,13 +236,39 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
         });
         vi.spyOn(wrapper.vm.focusSource, "clear");
         vi.spyOn(wrapper.vm.focusSource, "addFeature");
-        wrapper.vm.setFocus(featureMock);
+        wrapper.vm.setCurrentlyVisibleFeatures();
+
+        wrapper.vm.setFocus(0);
+
+        expect(document.getElementById(announcerId).innerHTML).toBe(
+          `${pinSrLabel.multiple} 2`,
+        );
+        expect(wrapper.vm.focusSource.clear).toHaveBeenCalled();
+        expect(wrapper.vm.focusSource.addFeature).toHaveBeenCalled();
+        wrapper.vm.setFocus(1);
 
         expect(document.getElementById(announcerId).innerHTML).toBe(
           pinSrLabel.single,
         );
-        expect(wrapper.vm.focusSource.clear).toHaveBeenCalled();
-        expect(wrapper.vm.focusSource.addFeature).toHaveBeenCalled();
+      });
+    });
+
+    describe("when clusterOrPinSource becomes present", () => {
+      it("sets the currently visible features and starts listening to moveend", async () => {
+        const wrapper = factory({
+          props: {
+            map: mapMock,
+          },
+        });
+
+        wrapper.vm.clusterOrPinSourceRef = clusterOrPinSourceMock;
+
+        await wrapper.vm.$nextTick();
+
+        expect(mapMock.on).toHaveBeenCalledWith(
+          "moveend",
+          wrapper.vm.setCurrentlyVisibleFeatures,
+        );
       });
     });
   });
