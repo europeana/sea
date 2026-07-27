@@ -28,108 +28,18 @@ Zoom, Fullscreen and Attribution control docs with list of options:
 
 ### Style
 
-Specify the style using the `style` prop, indicating either just the name of an
-explicitly supported style, or a URL to a StyleJSON file.
+Specify the style using the `style` prop, supplying a URL to a StyleJSON file.
 
 ```js
 {
-  style: "STYLE_NAME_OR_URL";
+  style: "https://map.example.org/style.json";
 }
 ```
 
-If passed an array, the first value is the style name/URL, and the second is an
-object of style options for supported styles.
+If no value is specified, or the special value "openstreetmap" is supplied, then
+standard [OpenStreetMap](https://www.openstreetmap.org/) tiles will be used.
 
-#### OpenStreetMap (default)
-
-Uses standard [OpenStreetMap](https://www.openstreetmap.org/) tiles.
-
-```js
-// optional as this is the default
-{
-  style: "openstreetmap";
-}
-```
-
-Options: none.
-
-#### Protomaps
-
-Uses customised [Protomaps](https://protomaps.com/) tiles, via [`@europeana/map-styles`](https://github.com/europeana/sea/tree/main/packages/style/map-styles).
-
-No native-language version is available, so locale must be supplied.
-
-```js
-{
-  style: ["protomaps", { locale: "en" }];
-}
-```
-
-Options:
-
-- `baseURL` — base URL of the CDN to use, defaults to `"https://cdn.jsdelivr.net/npm"`
-  ```js
-  {
-    style: ["protomaps", { baseURL: "https://unpkg.com" }];
-  }
-  ```
-- `locale` — locale to use for the localised place names
-  ```js
-  {
-    style: ["protomaps", { locale: "en" }];
-  }
-  ```
-- `version` — `@europeana/map-styles` version to load, or latest if omitted
-  ```js
-  {
-    style: ["protomaps", { version: "0.1.13" }];
-  }
-  ```
-
-#### Versatiles
-
-Uses customised [Versatiles](https://versatiles.org/) tiles, via [`@europeana/map-styles`](https://github.com/europeana/sea/tree/main/packages/style/map-styles).
-
-Native-language version is available, so locale is optional.
-
-```js
-{
-  style: "versatiles";
-}
-```
-
-Options:
-
-- `baseURL` — base URL of the CDN to use, defaults to `"https://cdn.jsdelivr.net/npm"`
-  ```js
-  {
-    style: ["versatiles", { baseURL: "https://unpkg.com" }];
-  }
-  ```
-- `locale` — locale to use for the localised place names
-  ```js
-  {
-    style: ["versatiles", { locale: "en" }];
-  }
-  ```
-- `version` — `@europeana/map-styles` version to load, or latest if omitted
-  ```js
-  {
-    style: ["versatiles", { version: "0.1.13" }];
-  }
-  ```
-
-#### Other (URL)
-
-Other styles may be loaded by supplying the URL to the StyleJSON file.
-
-```js
-{
-  style: "https://tiles.openfreemap.org/styles/liberty";
-}
-```
-
-Options: none.
+For pre-built Europeana map styles, see [@europeana/map-styles](../../style/map-styles/README.md).
 
 ### Popover
 
