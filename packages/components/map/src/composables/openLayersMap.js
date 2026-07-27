@@ -9,6 +9,11 @@ import { useGeographic } from "ol/proj.js";
 import { apply as applyMapboxStyle } from "ol-mapbox-style";
 import LayerGroup from "ol/layer/Group.js";
 
+import {
+  EUROPEANA_MAP_STYLE_NAMES,
+  useEuropeanaMapStyle,
+} from "./europeanaMapStyle.js";
+
 const projection = "EPSG:3857";
 const centreOfEurope = [9.254419, 50.102223];
 
@@ -33,11 +38,27 @@ export const useOpenLayersMap = ({
   useGeographic();
 
   const createLayer = () => {
-    if (styleRef.value === "openstreetmap") {
+    let styleNameOrURL;
+    let styleOptions;
+    let styleURL;
+
+    if (Array.isArray(styleRef.value)) {
+      styleNameOrURL = styleRef.value[0];
+      styleOptions = styleRef.value[1];
+    } else {
+      styleNameOrURL = styleRef.value;
+    }
+
+    if (styleNameOrURL === "openstreetmap") {
       return new TileLayer({ source: new OSM() });
-    } else if (styleRef.value) {
+    } else if (styleNameOrURL) {
+      if (EUROPEANA_MAP_STYLE_NAMES.includes(styleNameOrURL)) {
+        styleURL = useEuropeanaMapStyle(styleNameOrURL, styleOptions);
+      } else {
+        styleURL = styleNameOrURL;
+      }
       const layerGroup = new LayerGroup();
-      applyMapboxStyle(layerGroup, styleRef.value);
+      applyMapboxStyle(layerGroup, styleURL);
       return layerGroup;
     }
   };
