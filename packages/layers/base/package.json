@@ -8,6 +8,7 @@
   "version": "0.1.10-auto-publish.3",
   "main": "./nuxt.config.ts",
   "scripts": {
+    "build": "nuxt build",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
