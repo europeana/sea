@@ -7,7 +7,7 @@ import {
   FALLBACK_LOCALE as VERSATILES_FALLBACK_LOCALE,
 } from "./styles/versatiles/index.js";
 
-const EUROPEANA_MAP_STYLE_NAMES = ["protomaps", "versatiles"];
+export const EUROPEANA_MAP_STYLE_NAMES = ["protomaps", "versatiles"];
 const LOCALES = {
   protomaps: PROTOMAPS_LOCALES,
   versatiles: VERSATILES_LOCALES,
