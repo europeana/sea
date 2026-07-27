@@ -30,6 +30,7 @@ export const LOCALES = new Set([
   "sl",
   "sv",
 ]);
+export const FALLBACK_LOCALE = DEFAULT_LOCALE;
 
 export const localise = (locale) => {
   if (!LOCALES.has(locale)) {
@@ -46,7 +47,7 @@ export const localise = (locale) => {
   return style;
 };
 
-export function* build() {
+export function* generator() {
   for (const locale of LOCALES.values()) {
     yield {
       file: `europeana-map-styles.protomaps.${locale}.json`,
