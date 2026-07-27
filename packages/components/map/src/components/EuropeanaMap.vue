@@ -98,28 +98,29 @@ const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
 let clusterOrPinSource;
 
-(async () => await nextTick())();
-const vectorLayer = useOpenLayersPointsVectorLayer({
-  data,
-  distance: singleFeatureStyleMinDimension * 1.5,
-  minDistance: singleFeatureStyleMinDimension * 0.75,
-  map,
-  pinPopover,
-  styleFeature,
-});
-clusterOrPinSource = vectorLayer.clusterOrPinSource;
-
-if (controls.value?.keyboardNavigatePins) {
-  useOpenLayersKeyboardNavigation({
+nextTick().then(() => {
+  const vectorLayer = useOpenLayersPointsVectorLayer({
+    data,
+    distance: singleFeatureStyleMinDimension * 1.5,
+    minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
-    clusterOrPinSource,
-    navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
-    announcerId: "announcer",
-    pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
+    pinPopover,
+    styleFeature,
   });
-}
+  clusterOrPinSource = vectorLayer.clusterOrPinSource;
 
-useOpenLayersControls({ map, controls });
+  if (controls.value?.keyboardNavigatePins) {
+    useOpenLayersKeyboardNavigation({
+      map,
+      clusterOrPinSource,
+      navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
+      announcerId: "announcer",
+      pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
+    });
+  }
+
+  useOpenLayersControls({ map, controls });
+});
 </script>
 
 <template>
