@@ -22,6 +22,7 @@ const mapMock = {
 };
 
 const featureMock = {
+  get: vi.fn(),
   getGeometry: () => ({
     intersectsExtent: vi.fn(() => true),
     getCoordinates: vi.fn(() => [10, 20]),
@@ -33,6 +34,11 @@ const clusterOrPinSourceMock = {
 
 const elementId = "map";
 const keyboardNavButtonId = "map-keyboard-focus-pin-toggle";
+const announcerId = "announcer";
+const pinSrLabel = {
+  single: "Toggle pin",
+  multiple: "Zoom in to cluster",
+};
 const component = {
   template: `<div id="${elementId}"></div>`,
   props: {
@@ -65,10 +71,12 @@ const component = {
     const announcerId = props.announcerId;
 
     const {
-      handleFocusOnKeyDown,
-      clearFocusFeature,
-      setCurrentlyVisibleFeatures,
+      focusSource,
       focusedFeatureIndex,
+      clearFocusFeature,
+      setFocus,
+      setCurrentlyVisibleFeatures,
+      handleFocusOnKeyDown,
     } = useOpenLayersKeyboardNavigation({
       map,
       clusterOrPinSource,
@@ -83,10 +91,12 @@ const component = {
       pinSrLabel,
       navigatePinsButtonId,
       announcerId,
-      handleFocusOnKeyDown,
-      clearFocusFeature,
-      setCurrentlyVisibleFeatures,
+      focusSource,
       focusedFeatureIndex,
+      clearFocusFeature,
+      setFocus,
+      setCurrentlyVisibleFeatures,
+      handleFocusOnKeyDown,
     };
   },
 };
@@ -134,6 +144,95 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
           wrapper.vm.handleFocusOnKeyDown({ key: "ArrowDown" });
           expect(wrapper.vm.focusedFeatureIndex).toBe(1);
         });
+      });
+      describe("when left or up arrow key is pressed", () => {
+        it("moves focus to the previous pin", async () => {
+          const wrapper = factory({
+            props: {
+              map: mapMock,
+              clusterOrPinSource: clusterOrPinSourceMock,
+              navigatePinsButtonId: keyboardNavButtonId,
+            },
+          });
+
+          wrapper.vm.focusedFeatureIndex = 2;
+          wrapper.vm.setCurrentlyVisibleFeatures();
+          wrapper.vm.handleFocusOnKeyDown({ key: "ArrowLeft" });
+          expect(wrapper.vm.focusedFeatureIndex).toBe(1);
+          wrapper.vm.handleFocusOnKeyDown({ key: "ArrowUp" });
+          expect(wrapper.vm.focusedFeatureIndex).toBe(0);
+        });
+      });
+      describe("when Enter or spacebar key is pressed", () => {
+        describe("and there is a focused feature", () => {
+          it("dispatches a click event", async () => {
+            const wrapper = factory({
+              props: {
+                map: mapMock,
+                clusterOrPinSource: clusterOrPinSourceMock,
+                navigatePinsButtonId: keyboardNavButtonId,
+              },
+            });
+
+            wrapper.vm.focusedFeatureIndex = 0;
+            wrapper.vm.setCurrentlyVisibleFeatures();
+            wrapper.vm.handleFocusOnKeyDown({ key: "Enter" });
+
+            expect(mapMock.dispatchEvent).toHaveBeenCalledWith({
+              type: "click",
+              pixel: [10, 20],
+            });
+            expect(mapMock.dispatchEvent).toHaveBeenCalledOnce();
+            wrapper.vm.handleFocusOnKeyDown({ key: " " });
+            expect(mapMock.dispatchEvent).toHaveBeenCalledTimes(2);
+          });
+        });
+      });
+    });
+
+    describe("clearFocusFeature", () => {
+      it("clears focus and removes announcer content", async () => {
+        document.body.innerHTML = `
+    <span id="${announcerId}">message</span>
+  `;
+        const wrapper = factory({
+          props: {
+            map: mapMock,
+            announcerId,
+          },
+        });
+        vi.spyOn(wrapper.vm.focusSource, "clear");
+        wrapper.vm.focusedFeatureIndex = 3;
+        wrapper.vm.clearFocusFeature();
+
+        expect(wrapper.vm.focusSource.clear).toHaveBeenCalled();
+        expect(wrapper.vm.focusedFeatureIndex).toBe(-1);
+        expect(document.getElementById(announcerId).innerHTML).toBe("");
+      });
+    });
+
+    describe("setFocus", () => {
+      it("sets announcer message and focus feature", async () => {
+        document.body.innerHTML = `
+    <span id="${announcerId}"></span>
+  `;
+        const wrapper = factory({
+          props: {
+            map: mapMock,
+            clusterOrPinSource: clusterOrPinSourceMock,
+            announcerId,
+            pinSrLabel,
+          },
+        });
+        vi.spyOn(wrapper.vm.focusSource, "clear");
+        vi.spyOn(wrapper.vm.focusSource, "addFeature");
+        wrapper.vm.setFocus(featureMock);
+
+        expect(document.getElementById(announcerId).innerHTML).toBe(
+          pinSrLabel.single,
+        );
+        expect(wrapper.vm.focusSource.clear).toHaveBeenCalled();
+        expect(wrapper.vm.focusSource.addFeature).toHaveBeenCalled();
       });
     });
   });

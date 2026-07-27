@@ -27,7 +27,6 @@ export const useOpenLayersKeyboardNavigation = ({
       image: new Circle({
         radius: 17,
         stroke: new Stroke({
-          // TODO use branded color?
           color: "blue",
           lineDash: [5, 10],
           width: 4,
@@ -37,13 +36,9 @@ export const useOpenLayersKeyboardNavigation = ({
     zIndex: 2,
   });
 
-  const unsetFeatureFocus = () => {
-    focusedFeatureIndex.value = -1;
-  };
-
   const clearFocusFeature = () => {
     focusSource.value.clear();
-    unsetFeatureFocus();
+    focusedFeatureIndex.value = -1;
     document.getElementById(announcerId).innerHTML = "";
   };
 
@@ -181,9 +176,11 @@ export const useOpenLayersKeyboardNavigation = ({
   );
 
   return {
-    handleFocusOnKeyDown,
-    clearFocusFeature,
-    setCurrentlyVisibleFeatures,
+    focusSource,
     focusedFeatureIndex,
+    clearFocusFeature,
+    setFocus,
+    setCurrentlyVisibleFeatures,
+    handleFocusOnKeyDown,
   };
 };
