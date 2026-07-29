@@ -17,6 +17,10 @@ export default defineConfig({
       reporter: ["text", "html", "lcov"],
       exclude: [
         ...coverageConfigDefaults.exclude,
+        "**/*.json",
+        "**/*.graphql",
+        "**/*.svg",
+        "**/*.scss",
         "**/*.stories.ts",
         "**/*.config.[jt]s",
         "tmp/**",
