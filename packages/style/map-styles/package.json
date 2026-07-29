@@ -17,6 +17,7 @@
       "require": "./dist/index.cjs"
     }
   },
+  "main": "./dist/index.cjs",
   "scripts": {
     "build": "pnpm unbuild && pnpm generate",
     "generate": "pnpm generate:protomaps && pnpm generate:versatiles",
