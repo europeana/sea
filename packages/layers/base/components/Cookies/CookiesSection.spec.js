@@ -41,7 +41,7 @@ vi.mock("~/composables/consentManager", () => ({
   }),
 }));
 
-describe("components/Page/CookiesSection.vue", () => {
+describe("components/Cookies/CookiesSection.vue", () => {
   beforeEach(() => {
     vi.resetAllMocks();
     acceptedServices.value = [];

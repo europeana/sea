@@ -94,7 +94,7 @@ const factory = (props) =>
     },
   });
 
-describe("components/Page/CookiesModal.vue", () => {
+describe("components/Cookies/CookiesModal.vue", () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
