@@ -11,6 +11,7 @@ export default defineConfig({
       "packages/directives/vue-visible-on-scroll",
       "packages/layers/base",
       "packages/plugins/vue-contentful-graphql",
+      "packages/style/map-styles",
     ],
     coverage: {
       reporter: ["text", "html", "lcov"],

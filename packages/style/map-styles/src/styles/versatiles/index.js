@@ -12,6 +12,7 @@ export const LOCALES = new Set([
   "pl",
   "pt",
 ]);
+export const FALLBACK_LOCALE = undefined;
 
 export const localise = (locale) => {
   if (!LOCALES.has(locale)) {
@@ -48,7 +49,7 @@ export const localise = (locale) => {
   return style;
 };
 
-export function* build() {
+export function* generator() {
   yield {
     file: "europeana-map-styles.versatiles.json",
     data: baseStyle,

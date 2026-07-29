@@ -1,61 +1,60 @@
-import fs from "node:fs";
-import path from "node:path";
+import {
+  LOCALES as PROTOMAPS_LOCALES,
+  FALLBACK_LOCALE as PROTOMAPS_FALLBACK_LOCALE,
+} from "./styles/protomaps/index.js";
+import {
+  LOCALES as VERSATILES_LOCALES,
+  FALLBACK_LOCALE as VERSATILES_FALLBACK_LOCALE,
+} from "./styles/versatiles/index.js";
 
-const STYLE_DIRENTS = fs
-  .readdirSync(path.resolve(import.meta.dirname, "./"), {
-    withFileTypes: true,
-  })
-  .filter((dirent) => dirent.isDirectory());
-
-const STYLES = STYLE_DIRENTS.reduce((memo, dirent) => {
-  memo[dirent.name] = {
-    build: import(
-      path.resolve(dirent.parentPath, `${dirent.name}/index.js`)
-    ).then((module) => module.build),
-    dir: path.resolve(import.meta.dirname, `../dist/${dirent.name}`),
-  };
-  return memo;
-}, {});
-
-const write = (styleName, entry) => {
-  const filepath = path.resolve(STYLES[styleName].dir, entry.file);
-  fs.writeFileSync(filepath, JSON.stringify(entry.data));
+export const EUROPEANA_MAP_STYLE_NAMES = ["protomaps", "versatiles"];
+const LOCALES = {
+  protomaps: PROTOMAPS_LOCALES,
+  versatiles: VERSATILES_LOCALES,
+};
+const FALLBACK_LOCALE = {
+  protomaps: PROTOMAPS_FALLBACK_LOCALE,
+  versatiles: VERSATILES_FALLBACK_LOCALE,
 };
 
-const build = async (styleName) => {
-  clean(styleName);
-  mkdir(styleName);
+// TODO: some of this should be shared w/ tasks.js
+const EUROPEANA_MAP_STYLES_PACKAGE_NAME = "@europeana/map-styles";
+const EUROPEANA_MAP_STYLES_DIR_NAME = "dist";
+const EUROPEANA_MAP_STYLES_FILE_NAME = "europeana-map-styles";
+const EUROPEANA_MAP_STYLES_FILE_EXTENSION = "json";
+const JSDELIVR_CDN_BASE_URL = "https://cdn.jsdelivr.net/npm";
 
-  const builder = (await STYLES[styleName].build)();
-
-  let result = builder.next();
-  while (!result.done) {
-    write(styleName, result.value);
-    result = builder.next();
-  }
-};
-
-const clean = (styleName) => {
-  fs.rmSync(STYLES[styleName].dir, { force: true, recursive: true });
-};
-
-const mkdir = (styleName) => {
-  fs.mkdirSync(STYLES[styleName].dir, { recursive: true });
-};
-
-const TASKS = {
-  build,
-  clean,
-  mkdir,
-};
-
-export const runTask = (styleName, task) => {
-  if (!Object.hasOwn(STYLES, styleName)) {
-    throw new Error(`Unknown style ${styleName}`);
-  }
-  if (!Object.hasOwn(TASKS, task)) {
-    throw new Error(`Unknown task ${task}`);
+// TODO: this needs to be imported into portal.js and called from there
+// generates a CDN URL for a customised Europeana map style
+export const useEuropeanaMapStyle = (
+  styleName,
+  { baseURL, locale, version } = {},
+) => {
+  if (!EUROPEANA_MAP_STYLE_NAMES.includes(styleName)) {
+    throw new Error(
+      `Invalid style name: ${styleName}. Supported styles: ${EUROPEANA_MAP_STYLE_NAMES}`,
+    );
   }
 
-  TASKS[task](styleName);
+  if (!LOCALES[styleName].has(locale)) {
+    locale = FALLBACK_LOCALE[styleName];
+  }
+
+  let url = baseURL || JSDELIVR_CDN_BASE_URL;
+
+  url = `${url}/${EUROPEANA_MAP_STYLES_PACKAGE_NAME}`;
+
+  if (version) {
+    url = `${url}@${version}`;
+  }
+
+  url = `${url}/${EUROPEANA_MAP_STYLES_DIR_NAME}/${styleName}/${EUROPEANA_MAP_STYLES_FILE_NAME}.${styleName}`;
+
+  if (locale) {
+    url = `${url}.${locale}`;
+  }
+
+  url = `${url}.${EUROPEANA_MAP_STYLES_FILE_EXTENSION}`;
+
+  return url;
 };
