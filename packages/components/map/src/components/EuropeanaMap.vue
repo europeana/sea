@@ -8,6 +8,7 @@ import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVe
 import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
 import { useOpenLayersKeyboardNavigation } from "@/composables/openLayersKeyboardNavigation.js";
 import { useOpenLayersControls } from "@/composables/openLayersControls.js";
+import { useOpenLayersPinPopoverOverlay } from "@/composables/openLayersPinPopoverOverlay.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 const map = inject("map", null);
@@ -104,11 +105,11 @@ nextTick().then(() => {
     distance: singleFeatureStyleMinDimension * 1.5,
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
-    pinPopover,
     styleFeature,
   });
   clusterOrPinSource = vectorLayer.clusterOrPinSource;
 
+  // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
   if (controls.value?.keyboardNavigatePins) {
     useOpenLayersKeyboardNavigation({
       map,
@@ -118,6 +119,11 @@ nextTick().then(() => {
       pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
     });
   }
+
+  useOpenLayersPinPopoverOverlay({
+    map,
+    pinPopover,
+  });
 
   useOpenLayersControls({ map, controls });
 });
