@@ -6,7 +6,6 @@ import { styles } from "./styles/index.js";
 const STYLES = Object.keys(styles).reduce((memo, styleName) => {
   memo[styleName] = {
     ...styles[styleName],
-    // TODO: write to a different dir than dist? e.g. json
     dir: path.resolve(import.meta.dirname, `../dist/${styleName}`),
   };
   return memo;
@@ -45,11 +44,11 @@ const TASKS = {
 };
 
 export const runTask = (task, styleName) => {
-  if (!Object.hasOwn(STYLES, styleName)) {
-    throw new Error(`Unknown style ${styleName}`);
-  }
   if (!Object.hasOwn(TASKS, task)) {
     throw new Error(`Unknown task ${task}`);
+  }
+  if (!Object.hasOwn(STYLES, styleName)) {
+    throw new Error(`Unknown style ${styleName}`);
   }
 
   TASKS[task](styleName);

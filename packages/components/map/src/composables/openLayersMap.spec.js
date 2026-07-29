@@ -2,15 +2,7 @@
 
 import { nextTick } from "vue";
 import { shallowMount } from "@vue/test-utils";
-import {
-  afterAll,
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import OpenLayersMap from "ol/Map.js";
 
 import { useOpenLayersMap } from "./openLayersMap.js";
@@ -59,10 +51,9 @@ const factory = ({ props } = {}) =>
   });
 
 describe("@/composables/openLayersMap.js", () => {
-  beforeEach(() => {
-    mockFetch.mockClear();
+  afterEach(() => {
+    vi.clearAllMocks();
   });
-
   afterAll(() => {
     vi.restoreAllMocks();
   });

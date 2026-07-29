@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 
 import { shallowMount } from "@vue/test-utils";
-import { describe, it, expect, vi } from "vitest";
+import { afterAll, afterEach, describe, it, expect, vi } from "vitest";
 import { useFetch } from "@vueuse/core";
 
 import EuropeanaMap from "./EuropeanaMap.vue";
@@ -31,6 +31,13 @@ const factory = ({ props } = {}) =>
   });
 
 describe("@/components/EuropeanaMap.vue", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
   it("renders a map container element", () => {
     const wrapper = factory({
       props: {
