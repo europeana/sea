@@ -83,7 +83,10 @@ export const useOpenLayersMap = ({
 
   const initMap = () => {
     if (!mapRef.value) {
-      mapRef.value = new Map({ controls: [] });
+      mapRef.value = new Map({
+        controls: [],
+        keyboardEventTarget: "map-keyboard-toggle",
+      });
     }
 
     mapRef.value.setTarget(targetRef.value);

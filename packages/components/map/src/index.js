@@ -10,7 +10,10 @@ export class EuropeanaMapWrapper {
   #config = reactive({});
 
   constructor(target, options = {}) {
-    this.#olMap = new OpenLayersMap({ controls: [] });
+    this.#olMap = new OpenLayersMap({
+      controls: [],
+      keyboardEventTarget: "map-keyboard-toggle",
+    });
 
     for (const prop in EuropeanaMapComponent.props) {
       this.#config[prop] = options[prop];
