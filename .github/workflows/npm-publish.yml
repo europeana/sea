@@ -28,7 +28,7 @@ jobs:
           node-version: 24
           cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm pnpm --filter @europeana/${{ matrix.package }} install
       - name: Build
         run: pnpm --filter @europeana/${{ matrix.package }} build
       - name: Publish
