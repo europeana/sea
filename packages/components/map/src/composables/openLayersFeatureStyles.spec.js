@@ -23,6 +23,10 @@ const createMapStub = ({ coordinate, pixel, zoom }) => {
 const component = {
   template: `<div />`,
   props: {
+    coordinate: {
+      type: Array,
+      default: null,
+    },
     icon: {
       type: Object,
       default: null,
@@ -33,7 +37,9 @@ const component = {
     },
   },
   setup(props) {
-    const map = ref(createMapStub({ zoom: props.zoom }));
+    const map = ref(
+      createMapStub({ coordinate: props.coordinate, zoom: props.zoom }),
+    );
 
     const icon = props.icon;
 
@@ -95,8 +101,8 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
           ],
         });
 
-        describe("at zoom levels below 16", () => {
-          const zoom = 15;
+        describe("at zoom levels below 19", () => {
+          const zoom = 18;
 
           it("styles features clustered as a circle with number in text", () => {
             const wrapper = factory({ props: { zoom } });
@@ -109,31 +115,43 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
           });
         });
 
-        describe("at zoom levels 16 and over", () => {
-          const zoom = 16;
+        describe("at zoom levels 19 and over", () => {
+          const zoom = 19;
 
           it("styles features spread out from the cluster centre", async () => {
-            const wrapper = factory({ props: { zoom } });
+            const newCoordinate = [9.254419, 50.112];
+            const wrapper = factory({
+              props: { coordinate: newCoordinate, zoom },
+            });
+
+            const features = feature.get("features");
 
             const styleFeature = wrapper.vm.styleFeature;
-            const style = styleFeature(feature);
+            styleFeature(feature);
 
-            expect(style).toHaveLength(5);
+            expect(features[0].getProperties().originalGeometry).toBeDefined();
+            expect(
+              features[0].getProperties().originalGeometry.getCoordinates(),
+            ).toEqual(coordinates);
+            expect(features[0].getGeometry().getCoordinates()).toEqual(
+              newCoordinate,
+            );
+
+            const spreadFeature = new Feature({
+              features: [features[0]],
+            });
+
+            const style = styleFeature(spreadFeature);
+
+            expect(style).toHaveLength(3);
             expect(style[0].getGeometry().constructor.name).toBe("Point");
             expect(style[0].getImage().constructor.name).toBe("CircleStyle");
             expect(style[0].getText()).toBeNull();
-            expect(style[1].getGeometry().constructor.name).toBe("Point");
             expect(style[1].getImage().constructor.name).toBe("CircleStyle");
             expect(style[1].getText().constructor.name).toBe("Text");
             expect(style[2].getGeometry().constructor.name).toBe("LineString");
             expect(style[2].getImage()).toBeNull();
             expect(style[2].getText()).toBeNull();
-            expect(style[3].getGeometry().constructor.name).toBe("Point");
-            expect(style[3].getImage().constructor.name).toBe("CircleStyle");
-            expect(style[3].getText().constructor.name).toBe("Text");
-            expect(style[4].getGeometry().constructor.name).toBe("LineString");
-            expect(style[4].getImage()).toBeNull();
-            expect(style[4].getText()).toBeNull();
           });
         });
       });
