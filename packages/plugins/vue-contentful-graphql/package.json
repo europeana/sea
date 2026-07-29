@@ -1,6 +1,6 @@
 {
   "name": "@europeana/vue-contentful-graphql",
-  "version": "0.1.14-map-styles-cdn.0",
+  "version": "0.1.10-auto-publish.3",
   "description": "Vue plugin to query Contentful GraphQL Content API",
   "repository": {
     "type": "git",
