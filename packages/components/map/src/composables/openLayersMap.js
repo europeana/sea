@@ -33,12 +33,12 @@ export const useOpenLayersMap = ({
   useGeographic();
 
   const createLayer = () => {
-    if (styleRef.value) {
+    if (!styleRef.value || styleRef.value === "openstreetmap") {
+      return new TileLayer({ source: new OSM() });
+    } else {
       const layerGroup = new LayerGroup();
       applyMapboxStyle(layerGroup, styleRef.value);
       return layerGroup;
-    } else {
-      return new TileLayer({ source: new OSM() });
     }
   };
 
@@ -78,6 +78,9 @@ export const useOpenLayersMap = ({
     window.location.replace(url);
   };
 
+  const applyStyle = () =>
+    mapRef.value?.setLayers([createLayer()].filter(Boolean));
+
   const initMap = () => {
     if (!mapRef.value) {
       mapRef.value = new Map({
@@ -88,16 +91,14 @@ export const useOpenLayersMap = ({
 
     mapRef.value.setTarget(targetRef.value);
     mapRef.value.setView(createView());
-    mapRef.value.setLayers([createLayer()]);
+    applyStyle();
 
     if (hashRef.value) {
       mapRef.value.on("moveend", trackInHash);
     }
   };
 
-  watch(styleRef, () => {
-    mapRef.value?.setLayers([createLayer()]);
-  });
+  watch(styleRef, applyStyle, { immediate: true });
 
   onMounted(() => {
     if (hashRef.value) {

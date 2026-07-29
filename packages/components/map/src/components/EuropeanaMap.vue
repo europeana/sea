@@ -14,6 +14,8 @@ import pointIconSrc from "@/assets/img/ic_location.svg";
 const map = inject("map", null);
 const injectedConfig = inject("config", null);
 
+// NOTE: consider carefully if setting any defaults for props as they would
+//       take precedence over injectedConfig values which may not be intended
 const props = defineProps({
   centre: {
     type: Array,
@@ -95,6 +97,7 @@ useOpenLayersMap({
 
 const { getSingleFeatureStyleMinDimension, styleFeature } =
   useOpenLayersFeatureStyles({ icon, map });
+
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
 let clusterOrPinSource;
