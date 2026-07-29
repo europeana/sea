@@ -6,7 +6,9 @@ import "ol/ol.css";
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
 import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVectorLayer.js";
 import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
+import { useOpenLayersKeyboardNavigation } from "@/composables/openLayersKeyboardNavigation.js";
 import { useOpenLayersControls } from "@/composables/openLayersControls.js";
+import { useOpenLayersPinPopoverOverlay } from "@/composables/openLayersPinPopoverOverlay.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 const map = inject("map", null);
@@ -98,27 +100,92 @@ const { getSingleFeatureStyleMinDimension, styleFeature } =
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
-nextTick().then(() =>
-  useOpenLayersPointsVectorLayer({
+let clusterOrPinSource;
+
+nextTick().then(() => {
+  const vectorLayer = useOpenLayersPointsVectorLayer({
     data,
     distance: singleFeatureStyleMinDimension * 1.5,
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
-    pinPopover,
     styleFeature,
-  }),
-);
-useOpenLayersControls({ map, controls });
+  });
+  clusterOrPinSource = vectorLayer.clusterOrPinSource;
+
+  // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
+  if (controls.value?.keyboardNavigatePins) {
+    useOpenLayersKeyboardNavigation({
+      map,
+      clusterOrPinSource,
+      navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
+      announcerId: "announcer",
+      pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
+    });
+  }
+
+  useOpenLayersPinPopoverOverlay({
+    map,
+    pinPopover,
+  });
+
+  useOpenLayersControls({ map, controls });
+});
 </script>
 
 <template>
-  <div :id="target" :class="target" />
+  <div :id="target" :class="target">
+    <button
+      v-if="controls?.keyboardPanAndZoom"
+      id="map-keyboard-toggle"
+      class="keyboard-control"
+      type="button"
+    >
+      {{ controls.keyboardPanAndZoom.label }}
+    </button>
+    <template v-if="controls?.keyboardNavigatePins">
+      <button
+        id="map-keyboard-focus-pin-toggle"
+        class="keyboard-control keyboard-nav-control"
+        type="button"
+      >
+        {{ controls.keyboardNavigatePins.label }}
+      </button>
+      <span
+        id="announcer"
+        aria-live="polite"
+        class="visually-hidden"
+        aria-atomic="true"
+      ></span>
+    </template>
+  </div>
 </template>
 
 <style lang="scss">
 .europeana-map-map {
   width: 100%;
   height: 100%;
+
+  .keyboard-control {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    opacity: 0; // hidden but accessible
+    left: auto;
+    background-color: #fff;
+    border: none;
+    padding: 0.5rem;
+    z-index: -1;
+
+    &:focus,
+    &:focus ~ div .keyboard-nav-control {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+
+  .keyboard-nav-control {
+    top: 3.5rem;
+  }
 
   .ol-control {
     background-color: transparent;
