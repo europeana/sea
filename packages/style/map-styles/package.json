@@ -12,12 +12,10 @@
     "dist"
   ],
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "scripts": {
     "build": "pnpm unbuild && pnpm generate",
     "generate": "pnpm generate:protomaps && pnpm generate:versatiles",
