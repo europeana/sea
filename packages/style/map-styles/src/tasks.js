@@ -21,12 +21,12 @@ const generate = (styleName) => {
   clean(styleName);
   mkdir(styleName);
 
-  const generator = STYLES[styleName].generator();
+  const iterator = STYLES[styleName].generator();
 
-  let result = generator.next();
+  let result = iterator.next();
   while (!result.done) {
     write(styleName, result.value);
-    result = generator.next();
+    result = iterator.next();
   }
 };
 
