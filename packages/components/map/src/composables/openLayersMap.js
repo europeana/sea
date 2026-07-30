@@ -3,6 +3,7 @@ import { onMounted, toRef, unref, watch } from "vue";
 import Map from "ol/Map.js";
 import View from "ol/View.js";
 
+import { defaults as defaultInteractions } from "ol/interaction/defaults.js";
 import TileLayer from "ol/layer/Tile.js";
 import OSM from "ol/source/OSM.js";
 import { useGeographic } from "ol/proj.js";
@@ -11,6 +12,17 @@ import LayerGroup from "ol/layer/Group.js";
 
 const projection = "EPSG:3857";
 const centreOfEurope = [9.254419, 50.102223];
+
+export const createOpenLayersMap = () => {
+  return new Map({
+    controls: [],
+    interactions: defaultInteractions({
+      altShiftDragRotate: false,
+      pinchRotate: false,
+    }),
+    keyboardEventTarget: "map-keyboard-toggle",
+  });
+};
 
 export const useOpenLayersMap = ({
   centre,
@@ -83,10 +95,7 @@ export const useOpenLayersMap = ({
 
   const initMap = () => {
     if (!mapRef.value) {
-      mapRef.value = new Map({
-        controls: [],
-        keyboardEventTarget: "map-keyboard-toggle",
-      });
+      mapRef.value = createOpenLayersMap();
     }
 
     mapRef.value.setTarget(targetRef.value);
