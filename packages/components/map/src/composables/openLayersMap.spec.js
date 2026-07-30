@@ -30,7 +30,7 @@ const component = {
       type: String,
       default: null,
     },
-    target: {
+    elementId: {
       type: String,
       default: elementId,
     },
@@ -104,11 +104,11 @@ describe("@/composables/openLayersMap.js", () => {
       });
 
       describe("target", () => {
-        it("is set from supplied arg", () => {
-          const target = "#europeana-map";
-          const wrapper = factory({ props: { target } });
+        it("is set from supplied elementId arg", () => {
+          const elementId = "#europeana-map";
+          const wrapper = factory({ props: { elementId } });
 
-          expect(wrapper.vm.map.getTarget()).toBe(target);
+          expect(wrapper.vm.map.getTarget()).toBe(elementId);
         });
       });
 
@@ -224,7 +224,7 @@ describe("@/composables/openLayersMap.js", () => {
         const hash = true;
 
         it("reads centre and zoom from window.location.hash", () => {
-          window.location.hash = "#z=5&c=-5%2C36";
+          window.location.hash = "#em-id=map&em-z=5&em-c=-5%2C36";
           const wrapper = factory({ props: { hash } });
 
           const map = wrapper.vm.map;
@@ -233,21 +233,22 @@ describe("@/composables/openLayersMap.js", () => {
           expect(map.getView().getZoom()).toBe(5);
         });
 
-        it("updates hash with centre and zoom on moveend event", () => {
+        it("updates hash with centre and zoom on moveend event (after loadend event)", () => {
           const centre = [-5, 36];
           const zoom = 5;
           const wrapper = factory({ props: { centre, hash, zoom } });
 
           const map = wrapper.vm.map;
+          map.dispatchEvent("loadend");
           map.dispatchEvent("moveend");
 
-          expect(window.location.hash).toBe("#c=-5%2C36&z=5");
+          expect(window.location.hash).toBe("#em-id=map&em-c=-5%2C36&em-z=5");
         });
       });
 
       describe("when `false` (default)", () => {
         it("ignores centre and zoom from window.location.hash", () => {
-          window.location.hash = "#z=5&c=-5%2C36";
+          window.location.hash = "#em-id=map&em-z=5&em-c=-5%2C36";
           const wrapper = factory();
 
           const map = wrapper.vm.map;
