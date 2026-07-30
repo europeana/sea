@@ -1,4 +1,5 @@
 import { computed, ref, toRef, watchEffect } from "vue";
+import { uniqWith, isEqual } from "lodash-es";
 
 import Cluster from "ol/source/Cluster.js";
 import Feature from "ol/Feature.js";
@@ -13,6 +14,7 @@ export const useOpenLayersPointsVectorLayer = ({
   minDistance,
   map,
   styleFeature,
+  spreadCluster,
 } = {}) => {
   const mapRef = toRef(map);
   const clusterOrPinSource = ref(null);
@@ -100,12 +102,27 @@ export const useOpenLayersPointsVectorLayer = ({
   };
 
   function handleClick(e) {
-    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
+    const clickedFeatures = mapRef.value
+      .getFeaturesAtPixel(e.pixel)
+      .filter((feature) => feature.getGeometry() instanceof Point);
     // Get clustered or single point feature(s)
     const features = clickedFeatures[0]?.get("features") || clickedFeatures;
 
     if (features?.length > 1) {
-      zoomInOnCluster(features);
+      const zoom = mapRef.value.getView().getZoom();
+      // only break clusters apart at zoom level 19+, and if all features are
+      // at exactly the same co-ordinates
+      if (
+        zoom >= 19 &&
+        uniqWith(
+          features.map((f) => f.getGeometry().getCoordinates()),
+          isEqual,
+        ).length === 1
+      ) {
+        spreadCluster(features);
+      } else {
+        zoomInOnCluster(features);
+      }
     }
   }
 

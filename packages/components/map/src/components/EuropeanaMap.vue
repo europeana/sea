@@ -9,6 +9,7 @@ import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyle
 import { useOpenLayersKeyboardNavigation } from "@/composables/openLayersKeyboardNavigation.js";
 import { useOpenLayersControls } from "@/composables/openLayersControls.js";
 import { useOpenLayersPinPopoverOverlay } from "@/composables/openLayersPinPopoverOverlay.js";
+import { useOpenLayersPinSpread } from "@/composables/openLayersPinSpread.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 const map = inject("map", null);
@@ -95,10 +96,16 @@ useOpenLayersMap({
   zoom,
 });
 
-const { getSingleFeatureStyleMinDimension, styleFeature } =
-  useOpenLayersFeatureStyles({ icon, map });
+const { getSingleFeatureStyleMinDimension, styleFeature, styleSingleFeature } =
+  useOpenLayersFeatureStyles({ icon });
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
+
+const { spreadCluster } = useOpenLayersPinSpread({
+  getSingleFeatureStyleMinDimension,
+  map,
+  styleSingleFeature,
+});
 
 let clusterOrPinSource;
 
@@ -109,6 +116,7 @@ nextTick().then(() => {
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
     styleFeature,
+    spreadCluster,
   });
   clusterOrPinSource = vectorLayer.clusterOrPinSource;
 

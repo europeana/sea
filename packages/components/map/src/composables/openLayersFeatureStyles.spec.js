@@ -95,8 +95,8 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
           ],
         });
 
-        describe("at zoom levels below 16", () => {
-          const zoom = 15;
+        describe("at zoom levels below 19", () => {
+          const zoom = 18;
 
           it("styles features clustered as a circle with number in text", () => {
             const wrapper = factory({ props: { zoom } });
@@ -109,31 +109,28 @@ describe("@/composables/openLayersFeatureStyles.spec.js", () => {
           });
         });
 
-        describe("at zoom levels 16 and over", () => {
-          const zoom = 16;
+        describe("at zoom levels 19 and over and expanded", () => {
+          const zoom = 19;
 
-          it("styles features spread out from the cluster centre", async () => {
+          it("styles original cluster features as a dot", async () => {
             const wrapper = factory({ props: { zoom } });
 
+            const expandedFeature = new Feature({
+              features: [
+                new Feature({
+                  geometry: new Point(coordinates),
+                  expanded: true,
+                }),
+                new Feature({
+                  geometry: new Point(coordinates),
+                  expanded: true,
+                }),
+              ],
+            });
             const styleFeature = wrapper.vm.styleFeature;
-            const style = styleFeature(feature);
+            const style = styleFeature(expandedFeature);
 
-            expect(style).toHaveLength(5);
-            expect(style[0].getGeometry().constructor.name).toBe("Point");
-            expect(style[0].getImage().constructor.name).toBe("CircleStyle");
-            expect(style[0].getText()).toBeNull();
-            expect(style[1].getGeometry().constructor.name).toBe("Point");
-            expect(style[1].getImage().constructor.name).toBe("CircleStyle");
-            expect(style[1].getText().constructor.name).toBe("Text");
-            expect(style[2].getGeometry().constructor.name).toBe("LineString");
-            expect(style[2].getImage()).toBeNull();
-            expect(style[2].getText()).toBeNull();
-            expect(style[3].getGeometry().constructor.name).toBe("Point");
-            expect(style[3].getImage().constructor.name).toBe("CircleStyle");
-            expect(style[3].getText().constructor.name).toBe("Text");
-            expect(style[4].getGeometry().constructor.name).toBe("LineString");
-            expect(style[4].getImage()).toBeNull();
-            expect(style[4].getText()).toBeNull();
+            expect(style.getImage().constructor.name).toBe("CircleStyle");
           });
         });
       });

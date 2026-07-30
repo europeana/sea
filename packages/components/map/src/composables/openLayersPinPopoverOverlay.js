@@ -1,6 +1,7 @@
 import { ref, toRef, watch } from "vue";
 
 import Overlay from "ol/Overlay.js";
+import Point from "ol/geom/Point.js";
 
 export const useOpenLayersPinPopoverOverlay = ({ map, pinPopover } = {}) => {
   const mapRef = toRef(map);
@@ -24,7 +25,9 @@ export const useOpenLayersPinPopoverOverlay = ({ map, pinPopover } = {}) => {
   };
 
   function handleClick(e) {
-    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
+    const clickedFeatures = mapRef.value
+      .getFeaturesAtPixel(e.pixel)
+      .filter((feature) => feature.getGeometry() instanceof Point);
     // Get clustered or single point feature(s)
     const features = clickedFeatures[0]?.get("features") || clickedFeatures;
 
