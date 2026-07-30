@@ -29,22 +29,29 @@ export const useOpenLayersPinPopoverOverlay = ({ map, pinPopover } = {}) => {
     const features = clickedFeatures[0]?.get("features") || clickedFeatures;
 
     // Show popover when single point
+    // NOTE: a single feature may just be background, e.g. from a click on
+    //       the sea, i.e. not necessarily a plotted point
     if (features?.length === 1 && popoverOverlay.value) {
       const feature = features[0];
       const activeFeatureName = feature.get("name");
 
-      // Dispatch custom event the parent app can listen too
-      mapRef.value.dispatchEvent({
-        type: "change:activefeature",
-        activeFeatureName,
-      });
+      // Dispatch custom event the parent app can listen to
+      if (activeFeatureName) {
+        mapRef.value.dispatchEvent({
+          type: "change:activefeature",
+          activeFeatureName,
+        });
 
-      const coordinates = feature.getGeometry().getCoordinates();
-      popoverOverlay.value.setPosition(coordinates);
-    } else {
-      // Hide popover when clicked anywhere else
-      popoverOverlay.value?.setPosition(undefined);
+        const coordinates = feature.getGeometry().getCoordinates();
+        popoverOverlay.value.setPosition(coordinates);
+
+        return;
+      }
     }
+
+    // Hide popover when clicked anywhere else, or on a single point without
+    // geometry, like the sea background
+    popoverOverlay.value?.setPosition(undefined);
   }
 
   watch(
