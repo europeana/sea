@@ -11,7 +11,7 @@ export class EuropeanaMapWrapper {
   #config = reactive({});
 
   constructor(target, options = {}) {
-    this.#olMap = createOpenLayersMap();
+    this.#olMap = createOpenLayersMap(options.elementId);
 
     for (const prop in EuropeanaMapComponent.props) {
       this.#config[prop] = options[prop];

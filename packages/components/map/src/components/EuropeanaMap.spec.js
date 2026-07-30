@@ -45,7 +45,7 @@ describe("@/components/EuropeanaMap.vue", () => {
       },
     });
 
-    const map = wrapper.get("#europeana-map-map");
+    const map = wrapper.get("#europeana-map");
 
     expect(map.isVisible()).toBe(true);
   });
