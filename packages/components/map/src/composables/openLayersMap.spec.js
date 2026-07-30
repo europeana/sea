@@ -5,7 +5,7 @@ import { shallowMount } from "@vue/test-utils";
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import OpenLayersMap from "ol/Map.js";
 
-import { useOpenLayersMap } from "./openLayersMap.js";
+import { createOpenLayersMap, useOpenLayersMap } from "./openLayersMap.js";
 
 const mockFetch = vi.fn();
 global.fetch = mockFetch;
@@ -56,6 +56,34 @@ describe("@/composables/openLayersMap.js", () => {
   });
   afterAll(() => {
     vi.restoreAllMocks();
+  });
+
+  describe("createOpenLayersMap", () => {
+    it("returns a new instance of OpenLayers Map class", () => {
+      const map = createOpenLayersMap();
+
+      expect(map.constructor.name).toBe("Map");
+    });
+
+    it("has no controls by default", () => {
+      const map = createOpenLayersMap();
+
+      const controlsCount = map.getControls().getLength();
+
+      expect(controlsCount).toBe(0);
+    });
+
+    it("disables rotation interactions", () => {
+      const map = createOpenLayersMap();
+
+      const interactions = map
+        .getInteractions()
+        .getArray()
+        .map((interaction) => interaction.constructor.name);
+
+      expect(interactions.includes("DragRotate")).toBe(false);
+      expect(interactions.includes("PinchRotate")).toBe(false);
+    });
   });
 
   describe("useOpenLayersMap", () => {

@@ -1,7 +1,8 @@
 import { createApp, computed, reactive } from "vue";
-import OpenLayersMap from "ol/Map.js";
 
+import { createOpenLayersMap } from "@/composables/openLayersMap.js";
 import EuropeanaMapComponent from "@/components/EuropeanaMap.vue";
+
 export { EuropeanaMapComponent };
 
 export class EuropeanaMapWrapper {
@@ -10,10 +11,7 @@ export class EuropeanaMapWrapper {
   #config = reactive({});
 
   constructor(target, options = {}) {
-    this.#olMap = new OpenLayersMap({
-      controls: [],
-      keyboardEventTarget: "map-keyboard-toggle",
-    });
+    this.#olMap = createOpenLayersMap();
 
     for (const prop in EuropeanaMapComponent.props) {
       this.#config[prop] = options[prop];
