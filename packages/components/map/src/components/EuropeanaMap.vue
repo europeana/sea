@@ -11,6 +11,8 @@ import { useOpenLayersControls } from "@/composables/openLayersControls.js";
 import { useOpenLayersPinPopoverOverlay } from "@/composables/openLayersPinPopoverOverlay.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
+import { elementIdFor } from "@/utils/elementIdFor.js";
+
 const map = inject("map", null);
 const injectedConfig = inject("config", null);
 
@@ -23,6 +25,10 @@ const props = defineProps({
   },
   controls: {
     type: Object,
+    default: null,
+  },
+  elementId: {
+    type: String,
     default: null,
   },
   hash: {
@@ -58,6 +64,9 @@ const centre = computed(() => props.centre || injectedConfig?.value?.centre);
 const controls = computed(
   () => props.controls || injectedConfig?.value?.controls,
 );
+const elementId = computed(
+  () => props.elementId || injectedConfig?.value?.elementId || "europeana-map",
+);
 const hash = computed(() => props.hash || injectedConfig?.value?.hash);
 const json = computed(() => props.json || injectedConfig?.value?.json);
 const pinPopover = computed(
@@ -79,7 +88,6 @@ if (json.value) {
   throw new Error("No data JSON or URL supplied.");
 }
 
-const target = "europeana-map-map";
 const icon = {
   src: pointIconSrc,
   width: 24,
@@ -88,10 +96,10 @@ const icon = {
 
 useOpenLayersMap({
   centre,
+  elementId,
   hash,
   map,
   style,
-  target,
   zoom,
 });
 
@@ -117,7 +125,10 @@ nextTick().then(() => {
     useOpenLayersKeyboardNavigation({
       map,
       clusterOrPinSource,
-      navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
+      navigatePinsButtonId: elementIdFor(
+        elementId.value,
+        "keyboardFocusPinToggle",
+      ),
       announcerId: "announcer",
       pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
     });
@@ -133,10 +144,10 @@ nextTick().then(() => {
 </script>
 
 <template>
-  <div :id="target" :class="target">
+  <div :id="elementId" class="europeana-map">
     <button
       v-if="controls?.keyboardPanAndZoom"
-      id="map-keyboard-toggle"
+      :id="elementIdFor(elementId.value, 'keyboardEventTarget')"
       class="keyboard-control"
       type="button"
     >
@@ -144,7 +155,7 @@ nextTick().then(() => {
     </button>
     <template v-if="controls?.keyboardNavigatePins">
       <button
-        id="map-keyboard-focus-pin-toggle"
+        :id="elementIdFor(elementId.value, 'keyboardFocusPinToggle')"
         class="keyboard-control keyboard-nav-control"
         type="button"
       >
@@ -161,9 +172,10 @@ nextTick().then(() => {
 </template>
 
 <style lang="scss">
-.europeana-map-map {
+.europeana-map {
   width: 100%;
   height: 100%;
+  scroll-margin-top: 5em;
 
   .keyboard-control {
     position: absolute;
