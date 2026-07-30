@@ -100,23 +100,20 @@ const { getSingleFeatureStyleMinDimension, styleFeature } =
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
-let clusterOrPinSource;
-
 nextTick().then(() => {
-  const vectorLayer = useOpenLayersPointsVectorLayer({
+  const { source } = useOpenLayersPointsVectorLayer({
     data,
     distance: singleFeatureStyleMinDimension * 1.5,
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
     styleFeature,
   });
-  clusterOrPinSource = vectorLayer.clusterOrPinSource;
 
   // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
   if (controls.value?.keyboardNavigatePins) {
     useOpenLayersKeyboardNavigation({
       map,
-      clusterOrPinSource,
+      source,
       navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
       announcerId: "announcer",
       pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,
