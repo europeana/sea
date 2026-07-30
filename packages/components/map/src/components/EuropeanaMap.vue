@@ -175,6 +175,7 @@ nextTick().then(() => {
 .europeana-map {
   width: 100%;
   height: 100%;
+  scroll-margin-top: 5em;
 
   .keyboard-control {
     position: absolute;
