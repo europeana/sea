@@ -16,6 +16,7 @@ export const useOpenLayersPointsVectorLayer = ({
 } = {}) => {
   const mapRef = toRef(map);
   const layer = ref(null);
+  const source = ref(null);
   const ready = ref(false);
 
   const features = computed(() =>
@@ -43,13 +44,13 @@ export const useOpenLayersPointsVectorLayer = ({
     });
 
   const createVectorLayer = () => {
-    const source =
+    source.value =
       features.value.length === 1
         ? createSinglePointSource()
         : createClusterSource();
 
     return new VectorLayer({
-      source,
+      source: source.value,
       style: styleFeature,
     });
   };
@@ -107,7 +108,7 @@ export const useOpenLayersPointsVectorLayer = ({
   }
 
   return {
-    layer: layer.value,
-    source: layer.value?.getSource(),
+    layer,
+    source,
   };
 };

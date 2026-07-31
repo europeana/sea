@@ -101,13 +101,15 @@ const { getSingleFeatureStyleMinDimension, styleFeature } =
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
 nextTick().then(() => {
-  const { source } = useOpenLayersPointsVectorLayer({
+  const { layer, source } = useOpenLayersPointsVectorLayer({
     data,
     distance: singleFeatureStyleMinDimension * 1.5,
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
     styleFeature,
   });
+  console.log("source", source);
+  console.log("layer", layer);
 
   // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
   if (controls.value?.keyboardNavigatePins) {

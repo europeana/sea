@@ -166,6 +166,7 @@ export const useOpenLayersKeyboardNavigation = ({
   watch(
     sourceRef,
     () => {
+      console.log("watch sourceRef");
       if (mapRef.value && sourceRef.value) {
         setCurrentlyVisibleFeatures();
         mapRef.value.on("moveend", setCurrentlyVisibleFeatures);
