@@ -222,17 +222,6 @@ describe("@/composables/openLayersMap.js", () => {
         });
       });
 
-      // it("updates hash with centre and zoom on moveend event (after loadend event)", () => {
-
-      //   const wrapper = factory({ props: { centre, hash, zoom } });
-
-      //   const map = wrapper.vm.map;
-      //   map.dispatchEvent("loadend");
-      //   map.dispatchEvent("moveend");
-
-      //   expect(window.location.hash).toBe("#em-id=map&em-c=-5%2C36&em-z=5");
-      // });
-
       describe("moveend event listener", () => {
         const centre = [-5, 36];
         const zoom = 5;
@@ -271,48 +260,5 @@ describe("@/composables/openLayersMap.js", () => {
         });
       });
     });
-
-    //   describe("hash", () => {
-    //     afterEach(() => {
-    //       window.location.hash = undefined;
-    //     });
-
-    //     describe("when `true`", () => {
-    //       const hash = true;
-
-    //       it("reads centre and zoom from window.location.hash", () => {
-    //         window.location.hash = "#em-id=map&em-z=5&em-c=-5%2C36";
-    //         const wrapper = factory({ props: { hash } });
-
-    //         const map = wrapper.vm.map;
-
-    //         expect(map.getView().getCenter()).toEqual([-5, 36]);
-    //         expect(map.getView().getZoom()).toBe(5);
-    //       });
-    //     });
-
-    //     describe("when `false` (default)", () => {
-    //       it("ignores centre and zoom from window.location.hash", () => {
-    //         window.location.hash = "#em-id=map&em-z=5&em-c=-5%2C36";
-    //         const wrapper = factory();
-
-    //         const map = wrapper.vm.map;
-
-    //         expect(map.getView().getCenter()).not.toEqual([-5, 36]);
-    //         expect(map.getView().getZoom()).not.toBe(5);
-    //       });
-
-    //       it("does not update hash with centre and zoom on moveend event", () => {
-    //         const centre = [-5, 36];
-    //         const zoom = 5;
-    //         const wrapper = factory({ props: { centre, zoom } });
-
-    //         const map = wrapper.vm.map;
-    //         map.dispatchEvent("moveend");
-
-    //         expect(window.location.hash).not.toBe("#c=-5%2C36&z=5");
-    //       });
-    //     });
-    //   });
   });
 });

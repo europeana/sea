@@ -96,7 +96,7 @@ const icon = {
 };
 
 if (hash.value) {
-  useLocationHash({ centre, elementId, map, zoom });
+  useLocationHash({ centre, elementId, zoom });
 }
 
 useOpenLayersMap({
