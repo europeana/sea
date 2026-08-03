@@ -107,12 +107,6 @@ export const useOpenLayersMap = ({
     }
   };
 
-  // only break clusters apart at zoom level 19+
-  const spreadPinsAllowed = () => {
-    const zoom = mapRef.value.getView().getZoom();
-    return zoom >= 19;
-  };
-
   watch(styleRef, applyStyle, { immediate: true });
 
   onMounted(() => {
@@ -123,7 +117,6 @@ export const useOpenLayersMap = ({
   });
 
   return {
-    spreadPinsAllowed,
     map: mapRef,
   };
 };

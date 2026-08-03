@@ -87,7 +87,7 @@ const icon = {
   height: 24,
 };
 
-const { spreadPinsAllowed } = useOpenLayersMap({
+useOpenLayersMap({
   centre,
   hash,
   map,
@@ -101,12 +101,12 @@ const { getSingleFeatureStyleMinDimension, styleFeature, styleSingleFeature } =
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
-const { spreadCluster, spreadClusterSource } = useOpenLayersPinSpread({
-  spreadPinsAllowed,
-  getSingleFeatureStyleMinDimension,
-  map,
-  styleSingleFeature,
-});
+const { spreadCluster, spreadClusterSource, spreadPinsAllowed } =
+  useOpenLayersPinSpread({
+    getSingleFeatureStyleMinDimension,
+    map,
+    styleSingleFeature,
+  });
 
 let clusterOrPinSource;
 
