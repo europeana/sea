@@ -15,7 +15,18 @@ export const useOpenLayersPinSpread = ({
 } = {}) => {
   const mapRef = toRef(map);
 
-  const spreadSource = new VectorSource();
+  let spreadLayer;
+  let spreadSource;
+
+  const initSpreadLayer = () => {
+    spreadSource = new VectorSource();
+    spreadLayer = new VectorLayer({
+      source: spreadSource,
+      style: styleSingleFeature,
+      zIndex: 2, // TODO: is this needed?
+    });
+    mapRef.value.addLayer(spreadLayer);
+  };
 
   const degreesToRadians = (degrees) => {
     return degrees * (Math.PI / 180);
@@ -46,6 +57,9 @@ export const useOpenLayersPinSpread = ({
   // a dot at the centre point (the original co-ordinates) to a marker for
   // each of the features moved away from the centre in a different direction
   const spreadCluster = async (originalFeatures) => {
+    if (!spreadLayer) {
+      initSpreadLayer();
+    }
     // clear features from the vector source
     spreadSource.clear();
     // reset listener to preven duplicate addition
@@ -86,13 +100,6 @@ export const useOpenLayersPinSpread = ({
       // Set custom expanded prop so the spread features can be recognised and styles appropriately
       feature.set("expanded", true);
     });
-    mapRef.value.addLayer(
-      new VectorLayer({
-        source: spreadSource,
-        style: styleSingleFeature,
-        zIndex: 2, // TODO: is this needed?
-      }),
-    );
 
     mapRef.value.on("moveend", () => resetSpreadCluster(originalFeatures));
   };
