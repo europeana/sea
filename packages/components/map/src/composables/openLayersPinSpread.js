@@ -1,4 +1,4 @@
-import { toRef } from "vue";
+import { ref, toRef } from "vue";
 
 import Feature from "ol/Feature.js";
 import Point from "ol/geom/Point.js";
@@ -16,12 +16,12 @@ export const useOpenLayersPinSpread = ({
   const mapRef = toRef(map);
 
   let spreadLayer;
-  let spreadSource;
+  const spreadSource = ref(null);
 
   const initSpreadLayer = () => {
-    spreadSource = new VectorSource();
+    spreadSource.value = new VectorSource();
     spreadLayer = new VectorLayer({
-      source: spreadSource,
+      source: spreadSource.value,
       style: styleSingleFeature,
       zIndex: 2, // TODO: is this needed?
     });
@@ -63,7 +63,7 @@ export const useOpenLayersPinSpread = ({
     }
 
     // clear features from the vector source
-    spreadSource.clear();
+    spreadSource.value.clear();
 
     // calculate new coordinates and add cloned features
     const distance = getSingleFeatureStyleMinDimension() * 1.5; // in pixels
@@ -94,8 +94,8 @@ export const useOpenLayersPinSpread = ({
         }),
       );
 
-      spreadSource.addFeature(line);
-      spreadSource.addFeature(featureClone);
+      spreadSource.value.addFeature(line);
+      spreadSource.value.addFeature(featureClone);
 
       // Set custom expanded prop so the spread features can be recognised and styles appropriately
       feature.set("expanded", true);
@@ -114,9 +114,9 @@ export const useOpenLayersPinSpread = ({
       originalExpandedFeatures.forEach((originalFeature) =>
         originalFeature.unset("expanded"),
       );
-      spreadSource.clear();
+      spreadSource.value.clear();
     }
   };
 
-  return { spreadCluster };
+  return { spreadCluster, spreadClusterSource: spreadSource };
 };

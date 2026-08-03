@@ -101,7 +101,7 @@ const { getSingleFeatureStyleMinDimension, styleFeature, styleSingleFeature } =
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
-const { spreadCluster } = useOpenLayersPinSpread({
+const { spreadCluster, spreadClusterSource } = useOpenLayersPinSpread({
   getSingleFeatureStyleMinDimension,
   map,
   styleSingleFeature,
@@ -125,6 +125,7 @@ nextTick().then(() => {
     useOpenLayersKeyboardNavigation({
       map,
       clusterOrPinSource,
+      spreadClusterSource,
       navigatePinsButtonId: "map-keyboard-focus-pin-toggle",
       announcerId: "announcer",
       pinSrLabel: controls.value?.keyboardNavigatePins?.srLabel,

@@ -24,7 +24,6 @@ const mapMock = {
 const featureMock = {
   get: vi.fn(),
   getGeometry: () => ({
-    intersectsExtent: vi.fn(() => true),
     getCoordinates: vi.fn(() => [10, 20]),
   }),
 };
@@ -32,14 +31,17 @@ const featureMock = {
 const featureClusterMock = {
   get: vi.fn(() => [featureMock, featureMock]),
   getGeometry: () => ({
-    intersectsExtent: vi.fn(() => true),
     getCoordinates: vi.fn(() => [10, 20]),
   }),
 };
 const clusterOrPinSourceMock = {
   getFeatures: vi.fn(() => [featureClusterMock, featureMock, featureMock]),
+  getFeaturesInExtent: vi.fn(() => [featureClusterMock, featureMock]),
 };
 
+const spreadClusterSourceMock = {
+  getFeaturesInExtent: vi.fn(() => [featureMock, featureMock]),
+};
 const elementId = "map";
 const keyboardNavButtonId = "map-keyboard-focus-pin-toggle";
 const announcerId = "announcer";
@@ -86,6 +88,7 @@ const component = {
       setFocus,
       setCurrentlyVisibleFeatures,
       handleFocusOnKeyDown,
+      initLayerAndListeners,
     } = useOpenLayersKeyboardNavigation({
       map,
       clusterOrPinSource,
@@ -107,6 +110,7 @@ const component = {
       setFocus,
       setCurrentlyVisibleFeatures,
       handleFocusOnKeyDown,
+      initLayerAndListeners,
     };
   },
 };
@@ -253,22 +257,40 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
       });
     });
 
-    describe("when clusterOrPinSource becomes present", () => {
-      it("sets the currently visible features and starts listening to moveend", async () => {
-        const wrapper = factory({
-          props: {
-            map: mapMock,
-          },
+    describe("Layers and listeners are initialised", () => {
+      describe("on render complete", () => {
+        describe("and cluster or pin source exists", () => {
+          it("starts listening to rendercomplete", () => {
+            const wrapper = factory({
+              props: {
+                map: mapMock,
+              },
+            });
+            wrapper.vm.initLayerAndListeners();
+            wrapper.vm.clusterOrPinSourceRef = clusterOrPinSourceMock;
+
+            expect(mapMock.on).toHaveBeenCalledWith(
+              "rendercomplete",
+              wrapper.vm.setCurrentlyVisibleFeatures,
+            );
+          });
         });
+        describe("and spread cluster source exists", () => {
+          it("starts listening to rendercomplete", () => {
+            const wrapper = factory({
+              props: {
+                map: mapMock,
+              },
+            });
+            wrapper.vm.initLayerAndListeners();
+            wrapper.vm.spreadClusterSourceRef = spreadClusterSourceMock;
 
-        wrapper.vm.clusterOrPinSourceRef = clusterOrPinSourceMock;
-
-        await wrapper.vm.$nextTick();
-
-        expect(mapMock.on).toHaveBeenCalledWith(
-          "moveend",
-          wrapper.vm.setCurrentlyVisibleFeatures,
-        );
+            expect(mapMock.on).toHaveBeenCalledWith(
+              "rendercomplete",
+              wrapper.vm.setCurrentlyVisibleFeatures,
+            );
+          });
+        });
       });
     });
   });
