@@ -57,13 +57,13 @@ export const useOpenLayersPinSpread = ({
   // a dot at the centre point (the original co-ordinates) to a marker for
   // each of the features moved away from the centre in a different direction
   const spreadCluster = async (originalFeatures) => {
+    // init the layer if needed
     if (!spreadLayer) {
       initSpreadLayer();
     }
+
     // clear features from the vector source
     spreadSource.clear();
-    // reset listener to preven duplicate addition
-    mapRef.value.un("moveend", () => resetSpreadCluster(originalFeatures));
 
     // calculate new coordinates and add cloned features
     const distance = getSingleFeatureStyleMinDimension() * 1.5; // in pixels
@@ -101,11 +101,10 @@ export const useOpenLayersPinSpread = ({
       feature.set("expanded", true);
     });
 
-    mapRef.value.on("moveend", () => resetSpreadCluster(originalFeatures));
+    mapRef.value.once("moveend", () => resetSpreadCluster(originalFeatures));
   };
 
   // Recalculate or re-cluster the spread cluster
-  // FIXME: on subsequent spread pin clicks new spread clusters are create per pin
   const resetSpreadCluster = (originalExpandedFeatures) => {
     const zoom = mapRef.value.getView().getZoom();
 
