@@ -87,7 +87,7 @@ const icon = {
   height: 24,
 };
 
-useOpenLayersMap({
+const { spreadPinsAllowed } = useOpenLayersMap({
   centre,
   hash,
   map,
@@ -102,6 +102,7 @@ const { getSingleFeatureStyleMinDimension, styleFeature, styleSingleFeature } =
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
 
 const { spreadCluster, spreadClusterSource } = useOpenLayersPinSpread({
+  spreadPinsAllowed,
   getSingleFeatureStyleMinDimension,
   map,
   styleSingleFeature,
@@ -113,6 +114,7 @@ nextTick().then(() => {
   const vectorLayer = useOpenLayersPointsVectorLayer({
     data,
     distance: singleFeatureStyleMinDimension * 1.5,
+    spreadPinsAllowed,
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
     styleFeature,

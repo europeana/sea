@@ -11,6 +11,7 @@ import { boundingExtent } from "ol/extent.js";
 export const useOpenLayersPointsVectorLayer = ({
   data,
   distance,
+  spreadPinsAllowed,
   minDistance,
   map,
   styleFeature,
@@ -109,11 +110,10 @@ export const useOpenLayersPointsVectorLayer = ({
     const features = clickedFeatures[0]?.get("features") || clickedFeatures;
 
     if (features?.length > 1) {
-      const zoom = mapRef.value.getView().getZoom();
-      // only break clusters apart at zoom level 19+, and if all features are
+      // only break clusters apart when allowed, and if all features are
       // at exactly the same co-ordinates
       if (
-        zoom >= 19 &&
+        spreadPinsAllowed() &&
         uniqWith(
           features.map((f) => f.getGeometry().getCoordinates()),
           isEqual,

@@ -9,6 +9,7 @@ import VectorLayer from "ol/layer/Vector.js";
 import VectorSource from "ol/source/Vector.js";
 
 export const useOpenLayersPinSpread = ({
+  spreadPinsAllowed,
   getSingleFeatureStyleMinDimension,
   map,
   styleSingleFeature,
@@ -106,9 +107,7 @@ export const useOpenLayersPinSpread = ({
 
   // Recalculate or re-cluster the spread cluster
   const resetSpreadCluster = (originalExpandedFeatures) => {
-    const zoom = mapRef.value.getView().getZoom();
-
-    if (zoom >= 19) {
+    if (spreadPinsAllowed()) {
       spreadCluster(originalExpandedFeatures);
     } else {
       originalExpandedFeatures.forEach((originalFeature) =>
