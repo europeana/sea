@@ -57,19 +57,15 @@ export const useOpenLayersPointsVectorLayer = ({
     });
   };
 
-  const centreMapOnSinglePoint = () => {
-    if (features.value.length === 1) {
-      mapRef.value
-        .getView()
-        .setCenter(features.value[0].getGeometry().getCoordinates());
-    }
+  const centreMapOnSinglePoint = (coordinates) => {
+    mapRef.value.getView().setCenter(coordinates);
   };
 
   const initLayer = () => {
     if (features.value.length === 1) {
       mapRef.value.addLayer(createSinglePointLayer());
 
-      centreMapOnSinglePoint();
+      centreMapOnSinglePoint(features.value[0].getGeometry().getCoordinates());
     } else {
       mapRef.value.addLayer(createClustersLayer());
     }

@@ -23,7 +23,6 @@ export const useOpenLayersPinSpread = ({
     spreadLayer = new VectorLayer({
       source: spreadSource.value,
       style: styleSingleFeature,
-      zIndex: 2, // TODO: is this needed?
     });
     mapRef.value.addLayer(spreadLayer);
   };
@@ -56,7 +55,7 @@ export const useOpenLayersPinSpread = ({
   // add cloned features for multiple features at the same co-ordinates as spokes coming from
   // a dot at the centre point (the original co-ordinates) to a marker for
   // each of the features moved away from the centre in a different direction
-  const spreadCluster = async (originalFeatures) => {
+  const spreadCluster = (originalFeatures) => {
     // init the layer if needed
     if (!spreadLayer) {
       initSpreadLayer();
@@ -118,11 +117,12 @@ export const useOpenLayersPinSpread = ({
       originalExpandedFeatures.forEach((originalFeature) =>
         originalFeature.unset("expanded"),
       );
-      spreadSource.value.clear();
+      spreadSource.value?.clear();
     }
   };
 
   return {
+    resetSpreadCluster,
     spreadCluster,
     spreadClusterSource: spreadSource,
     spreadPinsAllowed,
