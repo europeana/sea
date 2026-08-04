@@ -5,7 +5,7 @@
     "url": "https://github.com/europeana/sea"
   },
   "type": "module",
-  "version": "0.1.10-auto-publish.3",
+  "version": "0.1.15",
   "main": "./nuxt.config.ts",
   "scripts": {
     "build": "nuxt build",
