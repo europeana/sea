@@ -1,4 +1,4 @@
-import { onMounted, toRef, unref, watch } from "vue";
+import { onMounted, toRef, watch } from "vue";
 
 import Map from "ol/Map.js";
 import View from "ol/View.js";
@@ -28,19 +28,22 @@ export const createOpenLayersMap = (elementId) => {
 export const useOpenLayersMap = ({
   centre,
   elementId,
-  hash,
   map,
   style,
   zoom,
 } = {}) => {
-  // unref first in case it's a computed and we need to set it
-  const centreRef = toRef(unref(centre) || centreOfEurope);
-  const hashRef = toRef(hash);
+  const centreRef = toRef(centre);
   const elementIdRef = toRef(elementId);
   const mapRef = toRef(map);
   const styleRef = toRef(style);
-  // unref first in case it's a computed and we need to set it
-  const zoomRef = toRef(unref(zoom) || 4);
+  const zoomRef = toRef(zoom);
+
+  if (!centreRef.value) {
+    centreRef.value = centreOfEurope;
+  }
+  if (!zoomRef.value) {
+    zoomRef.value = 4;
+  }
 
   // use Geographic projection for correct position of geo coordinates
   useGeographic();
@@ -65,43 +68,6 @@ export const useOpenLayersMap = ({
     });
   };
 
-  // TODO: mv hash init/track to own composable
-  const initFromHash = () => {
-    if (window.location.hash) {
-      const hashParams = new URLSearchParams(window.location.hash.slice(1));
-      const hashId = hashParams.get("em-id");
-      if (hashId !== elementIdRef.value) {
-        // there may be multiple maps on the page, but only 1 active & tracked via the URL hash
-        return;
-      }
-      const hashCentre = hashParams.get("em-c");
-      const hashZoom = hashParams.get("em-z");
-
-      if (hashCentre) {
-        centreRef.value = hashCentre.split(",").map(Number);
-      }
-      if (hashZoom) {
-        zoomRef.value = Number(hashZoom);
-      }
-      if (hashCentre || hashZoom) {
-        document.getElementById(elementIdRef.value)?.scrollIntoView();
-      }
-    }
-  };
-
-  const trackInHash = () => {
-    const url = new URL(window.location);
-    const hashCentre = mapRef.value.getView().getCenter().join(",");
-    const hashZoom = mapRef.value.getView().getZoom();
-    const hashParams = new URLSearchParams({
-      "em-id": elementIdRef.value,
-      "em-c": hashCentre,
-      "em-z": hashZoom,
-    }).toString();
-    url.hash = `#${hashParams}`;
-    window.location.replace(url);
-  };
-
   const applyStyle = () =>
     mapRef.value?.setLayers([createLayer()].filter(Boolean));
 
@@ -112,22 +78,27 @@ export const useOpenLayersMap = ({
 
     mapRef.value.setTarget(elementIdRef.value);
     mapRef.value.setView(createView());
+    registerMapEventHandler();
     applyStyle();
-
-    if (hashRef.value) {
-      // prevent moveend callback firing during initial rendering which we don't want
-      mapRef.value.once("loadend", () => {
-        mapRef.value.on("moveend", trackInHash);
-      });
-    }
   };
 
   watch(styleRef, applyStyle, { immediate: true });
 
+  const updateRefsFromMapView = () => {
+    centreRef.value = mapRef.value.getView().getCenter();
+    zoomRef.value = mapRef.value.getView().getZoom();
+  };
+
+  const registerMapEventHandler = () => {
+    // prevent moveend callback firing during initial rendering which we don't want
+    mapRef.value.once("loadend", () => {
+      mapRef.value.on("moveend", () => {
+        updateRefsFromMapView();
+      });
+    });
+  };
+
   onMounted(() => {
-    if (hashRef.value) {
-      initFromHash();
-    }
     initMap();
   });
 
