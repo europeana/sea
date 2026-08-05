@@ -8,15 +8,25 @@ export const useOpenLayersControls = ({ map, controls } = {}) => {
   const mapRef = toRef(map);
   const controlsRef = toRef(controls);
 
+  function getMinZoomForViewport() {
+    const viewport = mapRef.value.getTargetElement();
+    const width = viewport?.clientWidth;
+    const height = viewport?.clientHeight;
+
+    if (width >= height) {
+      return Math.LOG2E * Math.log(width / 256); // https://openlayers.org/en/latest/examples/min-zoom.html
+    } else {
+      return Math.LOG2E * Math.log(height / 256);
+    }
+  }
+
   const checkZoomAndDisableButton = (view) => {
     const maxZoom = view.getMaxZoom();
     const minZoomConfig = view.getMinZoom();
-    const minZoomWorld = view.getZoomForResolution(
-      view.getResolutionForExtent(view.getProjection().getWorldExtent()),
-    );
-    const minZoom = Math.max(minZoomConfig, minZoomWorld);
+    const minZoomForViewport = getMinZoomForViewport();
+    const minZoom = Math.max(minZoomConfig, minZoomForViewport);
     const currentZoom = view.getZoom();
-    const nextMinZoom = currentZoom - 1;
+    const nextMinZoom = currentZoom - 0.01;
 
     const zoomInButton = document.querySelector(".ol-zoom-in");
     const zoomOutButton = document.querySelector(".ol-zoom-out");
