@@ -144,7 +144,7 @@ nextTick().then(() => {
   <div :id="elementId" class="europeana-map">
     <button
       v-if="controls?.keyboardPanAndZoom"
-      :id="elementIdFor(elementId.value, 'keyboardEventTarget')"
+      :id="elementIdFor(elementId, 'keyboardEventTarget')"
       class="keyboard-control"
       type="button"
     >
@@ -152,7 +152,7 @@ nextTick().then(() => {
     </button>
     <template v-if="controls?.keyboardNavigatePins">
       <button
-        :id="elementIdFor(elementId.value, 'keyboardFocusPinToggle')"
+        :id="elementIdFor(elementId, 'keyboardFocusPinToggle')"
         class="keyboard-control keyboard-nav-control"
         type="button"
       >
