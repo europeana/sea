@@ -139,8 +139,8 @@ describe("@/composables/openLayersPinSpread.js", () => {
           vi.spyOn(wrapper.vm.spreadClusterSource, "clear");
           wrapper.vm.resetSpreadCluster(featuresToSpread);
 
-          expect(featuresToSpread[0].get("expanded")).toBe(undefined);
-          expect(featuresToSpread[1].get("expanded")).toBe(undefined);
+          expect(featuresToSpread[0].get("expanded")).toBeUndefined();
+          expect(featuresToSpread[1].get("expanded")).toBeUndefined();
           expect(wrapper.vm.spreadClusterSource.clear).toHaveBeenCalled();
         });
       });

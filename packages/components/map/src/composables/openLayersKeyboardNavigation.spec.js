@@ -3,8 +3,15 @@
 import { shallowMount } from "@vue/test-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import Point from "ol/geom/Point.js";
+
 import { useOpenLayersKeyboardNavigation } from "./openLayersKeyboardNavigation.js";
 
+const getViewMock = {
+  on: vi.fn(),
+  calculateExtent: vi.fn(() => [0, 0, 100, 100]),
+  un: vi.fn(),
+};
 const mapMock = {
   addControl: vi.fn(),
   addLayer: vi.fn(),
@@ -15,17 +22,14 @@ const mapMock = {
   getControls: () => ({
     getArray: () => [],
   }),
-  getView: () => ({
-    on: vi.fn(),
-    calculateExtent: vi.fn(() => [0, 0, 100, 100]),
-  }),
+  getView: () => getViewMock,
+  removeLayer: vi.fn(),
+  un: vi.fn(),
 };
 
 const featureMock = {
   get: vi.fn(),
-  getGeometry: () => ({
-    getCoordinates: vi.fn(() => [10, 20]),
-  }),
+  getGeometry: () => new Point([10, 10]),
 };
 
 const featureClusterMock = {
@@ -60,6 +64,10 @@ const component = {
       type: Object,
       default: null,
     },
+    spreadClusterSource: {
+      type: Object,
+      default: null,
+    },
     navigatePinsButtonId: {
       type: String,
       default: null,
@@ -76,6 +84,7 @@ const component = {
   setup(props) {
     const map = props.map;
     const clusterOrPinSource = props.clusterOrPinSource;
+    const spreadClusterSource = props.spreadClusterSource;
     const pinSrLabel = props.pinSrLabel;
     const navigatePinsButtonId = props.navigatePinsButtonId;
     const announcerId = props.announcerId;
@@ -86,12 +95,14 @@ const component = {
       focusedFeatureIndex,
       clearFocusFeature,
       setFocus,
+      getCurrentlyVisibleFeatures,
       setCurrentlyVisibleFeatures,
       handleFocusOnKeyDown,
       initLayerAndListeners,
     } = useOpenLayersKeyboardNavigation({
       map,
       clusterOrPinSource,
+      spreadClusterSource,
       pinSrLabel,
       navigatePinsButtonId,
       announcerId,
@@ -108,6 +119,7 @@ const component = {
       focusedFeatureIndex,
       clearFocusFeature,
       setFocus,
+      getCurrentlyVisibleFeatures,
       setCurrentlyVisibleFeatures,
       handleFocusOnKeyDown,
       initLayerAndListeners,
@@ -123,12 +135,13 @@ const factory = ({ props } = {}) =>
 describe("@/composables/openLayersKeyboardNavigation.js", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    document.body.innerHTML = `
+    <button id="${keyboardNavButtonId}"></button>
+    <span id="${announcerId}"></span>
+  `;
   });
   describe("useOpenLayersKeyboardNavigation", () => {
     it("adds a navigate pins control", async () => {
-      document.body.innerHTML = `
-    <button id="${keyboardNavButtonId}"></button>
-  `;
       const wrapper = factory({
         props: {
           map: mapMock,
@@ -139,6 +152,35 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.vm.map.addControl).toHaveBeenCalledOnce();
+    });
+
+    describe("When navigate pins button loses focus", () => {
+      it("removes layer and listeners", () => {
+        const wrapper = factory({
+          props: {
+            map: mapMock,
+            navigatePinsButtonId: keyboardNavButtonId,
+          },
+        });
+
+        document
+          .getElementById(keyboardNavButtonId)
+          .dispatchEvent(new Event("blur"));
+
+        expect(mapMock.removeLayer).toHaveBeenCalled();
+        expect(mapMock.un).toHaveBeenCalledWith(
+          "pointerdown",
+          wrapper.vm.clearFocusFeature,
+        );
+        expect(getViewMock.un).toHaveBeenCalledWith(
+          "change:resolution",
+          wrapper.vm.clearFocusFeature,
+        );
+        expect(mapMock.un).toHaveBeenCalledWith(
+          "rendercomplete",
+          wrapper.vm.setCurrentlyVisibleFeatures,
+        );
+      });
     });
 
     describe("handleFocusOnKeyDown", () => {
@@ -206,9 +248,6 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
 
     describe("clearFocusFeature", () => {
       it("clears focus and removes announcer content", async () => {
-        document.body.innerHTML = `
-    <span id="${announcerId}">message</span>
-  `;
         const wrapper = factory({
           props: {
             map: mapMock,
@@ -226,34 +265,59 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
     });
 
     describe("setFocus", () => {
-      it("sets announcer message and focus feature", async () => {
-        document.body.innerHTML = `
-    <span id="${announcerId}"></span>
-  `;
-        const wrapper = factory({
-          props: {
-            map: mapMock,
-            clusterOrPinSource: clusterOrPinSourceMock,
-            announcerId,
-            pinSrLabel,
-          },
+      describe("when index is more than -1 and less than total visible features length", () => {
+        it("sets announcer message and focus feature", async () => {
+          const wrapper = factory({
+            props: {
+              map: mapMock,
+              clusterOrPinSource: clusterOrPinSourceMock,
+              announcerId,
+              pinSrLabel,
+            },
+          });
+          vi.spyOn(wrapper.vm.focusSource, "clear");
+          vi.spyOn(wrapper.vm.focusSource, "addFeature");
+          wrapper.vm.setCurrentlyVisibleFeatures();
+
+          wrapper.vm.setFocus(0);
+
+          expect(document.getElementById(announcerId).innerHTML).toBe(
+            `${pinSrLabel.multiple} 2`,
+          );
+          expect(wrapper.vm.focusSource.clear).toHaveBeenCalled();
+          expect(wrapper.vm.focusSource.addFeature).toHaveBeenCalled();
+          wrapper.vm.setFocus(1);
+
+          expect(document.getElementById(announcerId).innerHTML).toBe(
+            pinSrLabel.single,
+          );
         });
-        vi.spyOn(wrapper.vm.focusSource, "clear");
-        vi.spyOn(wrapper.vm.focusSource, "addFeature");
-        wrapper.vm.setCurrentlyVisibleFeatures();
+      });
+      describe("when index is -1", () => {
+        it("does NOT set announcer message NOR focus feature", async () => {
+          const wrapper = factory({
+            props: {
+              map: mapMock,
+              clusterOrPinSource: clusterOrPinSourceMock,
+              announcerId,
+              pinSrLabel,
+            },
+          });
+          vi.spyOn(wrapper.vm.focusSource, "clear");
+          vi.spyOn(wrapper.vm.focusSource, "addFeature");
+          wrapper.vm.setCurrentlyVisibleFeatures();
 
-        wrapper.vm.setFocus(0);
+          wrapper.vm.setFocus(-1);
 
-        expect(document.getElementById(announcerId).innerHTML).toBe(
-          `${pinSrLabel.multiple} 2`,
-        );
-        expect(wrapper.vm.focusSource.clear).toHaveBeenCalled();
-        expect(wrapper.vm.focusSource.addFeature).toHaveBeenCalled();
-        wrapper.vm.setFocus(1);
+          expect(document.getElementById(announcerId).innerHTML).toBe("");
+          expect(wrapper.vm.focusSource.clear).not.toHaveBeenCalled();
+          expect(wrapper.vm.focusSource.addFeature).not.toHaveBeenCalled();
 
-        expect(document.getElementById(announcerId).innerHTML).toBe(
-          pinSrLabel.single,
-        );
+          wrapper.vm.setFocus(10);
+          expect(document.getElementById(announcerId).innerHTML).toBe("");
+          expect(wrapper.vm.focusSource.clear).not.toHaveBeenCalled();
+          expect(wrapper.vm.focusSource.addFeature).not.toHaveBeenCalled();
+        });
       });
     });
 
@@ -280,10 +344,10 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
             const wrapper = factory({
               props: {
                 map: mapMock,
+                spreadClusterSource: spreadClusterSourceMock,
               },
             });
             wrapper.vm.initLayerAndListeners();
-            wrapper.vm.spreadClusterSourceRef = spreadClusterSourceMock;
 
             expect(mapMock.on).toHaveBeenCalledWith(
               "rendercomplete",
@@ -291,6 +355,22 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
             );
           });
         });
+      });
+    });
+
+    describe("when spread cluster source exists", () => {
+      it("adds visible spread features to the visible features", () => {
+        const wrapper = factory({
+          props: {
+            map: mapMock,
+            spreadClusterSource: spreadClusterSourceMock,
+          },
+        });
+
+        wrapper.vm.spreadClusterSourceRef = spreadClusterSourceMock;
+        const visibleFeatures = wrapper.vm.getCurrentlyVisibleFeatures();
+
+        expect(visibleFeatures).toEqual([featureMock, featureMock]);
       });
     });
   });

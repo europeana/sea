@@ -67,7 +67,7 @@ export const useOpenLayersKeyboardNavigation = ({
     }
   };
 
-  const setCurrentlyVisibleFeatures = () => {
+  const getCurrentlyVisibleFeatures = () => {
     const extent = mapRef.value
       .getView()
       .calculateExtent(mapRef.value.getSize());
@@ -103,7 +103,12 @@ export const useOpenLayersKeyboardNavigation = ({
 
       return coordA[0] - coordB[0];
     });
-    currentlyVisibleFeatures.value = visibleFeatures;
+
+    return visibleFeatures;
+  };
+
+  const setCurrentlyVisibleFeatures = () => {
+    currentlyVisibleFeatures.value = getCurrentlyVisibleFeatures();
   };
 
   const isKeyWithInteraction = (key) => {
@@ -203,6 +208,7 @@ export const useOpenLayersKeyboardNavigation = ({
     focusedFeatureIndex,
     clearFocusFeature,
     setFocus,
+    getCurrentlyVisibleFeatures,
     setCurrentlyVisibleFeatures,
     handleFocusOnKeyDown,
     initLayerAndListeners,
