@@ -12,12 +12,9 @@ export const useOpenLayersControls = ({ map, controls } = {}) => {
     const viewport = mapRef.value.getTargetElement();
     const width = viewport?.clientWidth;
     const height = viewport?.clientHeight;
+    const tallestSide = width >= height ? width : height;
 
-    if (width >= height) {
-      return Math.LOG2E * Math.log(width / 256); // https://openlayers.org/en/latest/examples/min-zoom.html
-    } else {
-      return Math.LOG2E * Math.log(height / 256);
-    }
+    return Math.log2(tallestSide / 256); // https://openlayers.org/en/latest/examples/min-zoom.html
   }
 
   const checkZoomAndDisableButton = (view) => {
