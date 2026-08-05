@@ -86,11 +86,14 @@ describe("@/composables/openLayersControls.js", () => {
         document.body.appendChild(zoomOut);
 
         const map = new Map({ controls: [] });
+        map.getTargetElement = vi.fn(() => ({
+          clientHeight: 900,
+          clientWidth: 1920,
+        }));
         const view = map.getView();
         view.getMaxZoom = vi.fn(() => 20);
         view.getMinZoom = vi.fn(() => 1);
-        view.getZoom = vi.fn(() => 1.5);
-        view.getZoomForResolution = vi.fn(() => 1);
+        view.getZoom = vi.fn(() => 2.91);
 
         factory({
           props: {
