@@ -12,7 +12,7 @@ export const useOpenLayersControls = ({ map, controls } = {}) => {
     const viewport = mapRef.value.getTargetElement();
     const width = viewport?.clientWidth;
     const height = viewport?.clientHeight;
-    const tallestSide = width >= height ? width : height;
+    const tallestSide = Math.max(width, height);
 
     return Math.log2(tallestSide / 256); // https://openlayers.org/en/latest/examples/min-zoom.html
   }
