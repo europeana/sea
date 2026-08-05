@@ -10,13 +10,13 @@ import VectorSource from "ol/source/Vector.js";
 
 export const useOpenLayersKeyboardNavigation = ({
   map,
-  clusterOrPinSource,
+  source,
   navigatePinsButtonId,
   announcerId,
   pinSrLabel,
 } = {}) => {
   const mapRef = toRef(map);
-  const clusterOrPinSourceRef = toRef(clusterOrPinSource);
+  const sourceRef = toRef(source);
   const focusSource = ref(new VectorSource());
   const focusedFeatureIndex = ref(-1);
   const currentlyVisibleFeatures = ref([]);
@@ -69,7 +69,7 @@ export const useOpenLayersKeyboardNavigation = ({
     const extent = mapRef.value
       .getView()
       .calculateExtent(mapRef.value.getSize());
-    const features = clusterOrPinSourceRef.value.getFeatures();
+    const features = sourceRef.value.getFeatures();
     const visibleFeatures = features.filter((feature) => {
       return feature.getGeometry().intersectsExtent(extent);
     });
@@ -164,9 +164,9 @@ export const useOpenLayersKeyboardNavigation = ({
   );
 
   watch(
-    clusterOrPinSourceRef,
+    sourceRef,
     () => {
-      if (mapRef.value && clusterOrPinSourceRef.value) {
+      if (mapRef.value && sourceRef.value) {
         setCurrentlyVisibleFeatures();
         mapRef.value.on("moveend", setCurrentlyVisibleFeatures);
       }
@@ -177,7 +177,7 @@ export const useOpenLayersKeyboardNavigation = ({
   );
 
   return {
-    clusterOrPinSourceRef,
+    sourceRef,
     focusSource,
     focusedFeatureIndex,
     clearFocusFeature,
