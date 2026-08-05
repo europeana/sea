@@ -83,9 +83,6 @@ export const useOpenLayersMap = ({
       if (hashZoom) {
         zoomRef.value = Number(hashZoom);
       }
-      if (hashCentre || hashZoom) {
-        document.getElementById(elementIdRef.value)?.scrollIntoView();
-      }
     }
   };
 
