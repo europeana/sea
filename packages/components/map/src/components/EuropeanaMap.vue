@@ -9,6 +9,7 @@ import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyle
 import { useOpenLayersKeyboardNavigation } from "@/composables/openLayersKeyboardNavigation.js";
 import { useOpenLayersControls } from "@/composables/openLayersControls.js";
 import { useOpenLayersPinPopoverOverlay } from "@/composables/openLayersPinPopoverOverlay.js";
+import { useOpenLayersPinSpread } from "@/composables/openLayersPinSpread.js";
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 import { elementIdFor } from "@/utils/elementIdFor.js";
@@ -103,24 +104,34 @@ useOpenLayersMap({
   zoom,
 });
 
-const { getSingleFeatureStyleMinDimension, styleFeature } =
-  useOpenLayersFeatureStyles({ icon, map });
+const { getSingleFeatureStyleMinDimension, styleFeature, styleSingleFeature } =
+  useOpenLayersFeatureStyles({ icon });
 
 const singleFeatureStyleMinDimension = getSingleFeatureStyleMinDimension();
+
+const { spreadCluster, spreadClusterSource, spreadPinsAllowed } =
+  useOpenLayersPinSpread({
+    getSingleFeatureStyleMinDimension,
+    map,
+    styleSingleFeature,
+  });
 
 nextTick().then(() => {
   const { source } = useOpenLayersPointsVectorLayer({
     data,
     distance: singleFeatureStyleMinDimension * 1.5,
+    spreadPinsAllowed,
     minDistance: singleFeatureStyleMinDimension * 0.75,
     map,
     styleFeature,
+    spreadCluster,
   });
 
   // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
   if (controls.value?.keyboardNavigatePins) {
     useOpenLayersKeyboardNavigation({
       map,
+      spreadClusterSource,
       source,
       navigatePinsButtonId: elementIdFor(
         elementId.value,

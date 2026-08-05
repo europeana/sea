@@ -1,4 +1,5 @@
 import { computed, ref, toRef, watchEffect } from "vue";
+import { uniqWith, isEqual } from "lodash-es";
 
 import Cluster from "ol/source/Cluster.js";
 import Feature from "ol/Feature.js";
@@ -10,9 +11,11 @@ import { boundingExtent } from "ol/extent.js";
 export const useOpenLayersPointsVectorLayer = ({
   data,
   distance,
+  spreadPinsAllowed,
   minDistance,
   map,
   styleFeature,
+  spreadCluster,
 } = {}) => {
   const mapRef = toRef(map);
   const layer = ref(null);
@@ -55,12 +58,8 @@ export const useOpenLayersPointsVectorLayer = ({
     });
   };
 
-  const centreMapOnSinglePoint = () => {
-    if (features.value.length === 1) {
-      mapRef.value
-        .getView()
-        .setCenter(features.value[0].getGeometry().getCoordinates());
-    }
+  const centreMapOnSinglePoint = (coordinates) => {
+    mapRef.value.getView().setCenter(coordinates);
   };
 
   const initLayer = () => {
@@ -68,7 +67,7 @@ export const useOpenLayersPointsVectorLayer = ({
     mapRef.value.addLayer(layer.value);
 
     if (features.value.length === 1) {
-      centreMapOnSinglePoint();
+      centreMapOnSinglePoint(features.value[0].getGeometry().getCoordinates());
     } else if (features.value.length > 1) {
       mapRef.value?.on("click", handleClick);
     }
@@ -98,12 +97,26 @@ export const useOpenLayersPointsVectorLayer = ({
   };
 
   function handleClick(e) {
-    const clickedFeatures = mapRef.value.getFeaturesAtPixel(e.pixel);
+    const clickedFeatures = mapRef.value
+      .getFeaturesAtPixel(e.pixel)
+      .filter((feature) => feature.getGeometry() instanceof Point);
     // Get clustered or single point feature(s)
     const features = clickedFeatures[0]?.get("features") || clickedFeatures;
 
     if (features?.length > 1) {
-      zoomInOnCluster(features);
+      // only break clusters apart when allowed, and if all features are
+      // at exactly the same co-ordinates
+      if (
+        spreadPinsAllowed() &&
+        uniqWith(
+          features.map((f) => f.getGeometry().getCoordinates()),
+          isEqual,
+        ).length === 1
+      ) {
+        spreadCluster(features);
+      } else {
+        zoomInOnCluster(features);
+      }
     }
   }
 

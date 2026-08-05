@@ -10,12 +10,14 @@ import VectorSource from "ol/source/Vector.js";
 
 export const useOpenLayersKeyboardNavigation = ({
   map,
+  spreadClusterSource,
   source,
   navigatePinsButtonId,
   announcerId,
   pinSrLabel,
 } = {}) => {
   const mapRef = toRef(map);
+  const spreadClusterSourceRef = toRef(spreadClusterSource);
   const sourceRef = toRef(source);
   const focusSource = ref(new VectorSource());
   const focusedFeatureIndex = ref(-1);
@@ -65,14 +67,34 @@ export const useOpenLayersKeyboardNavigation = ({
     }
   };
 
-  const setCurrentlyVisibleFeatures = () => {
+  const getCurrentlyVisibleFeatures = () => {
     const extent = mapRef.value
       .getView()
       .calculateExtent(mapRef.value.getSize());
-    const features = sourceRef.value.getFeatures();
-    const visibleFeatures = features.filter((feature) => {
-      return feature.getGeometry().intersectsExtent(extent);
-    });
+
+    let visibleFeatures = [];
+
+    if (sourceRef.value) {
+      visibleFeatures = visibleFeatures.concat(
+        sourceRef.value.getFeaturesInExtent(extent),
+      );
+    }
+
+    if (spreadClusterSourceRef.value) {
+      visibleFeatures = visibleFeatures.concat(
+        spreadClusterSourceRef.value.getFeaturesInExtent(extent),
+      );
+      // Only Point features and leave out expanded cluster feature
+      visibleFeatures = visibleFeatures.filter(
+        (feature) =>
+          feature &&
+          feature.getGeometry() instanceof Point &&
+          (!feature.get?.("features") ||
+            feature
+              ?.get?.("features")
+              .every((feature) => !feature.get("expanded"))),
+      );
+    }
 
     // Sort left to right
     visibleFeatures.sort((a, b) => {
@@ -81,7 +103,12 @@ export const useOpenLayersKeyboardNavigation = ({
 
       return coordA[0] - coordB[0];
     });
-    currentlyVisibleFeatures.value = visibleFeatures;
+
+    return visibleFeatures;
+  };
+
+  const setCurrentlyVisibleFeatures = () => {
+    currentlyVisibleFeatures.value = getCurrentlyVisibleFeatures();
   };
 
   const isKeyWithInteraction = (key) => {
@@ -133,12 +160,27 @@ export const useOpenLayersKeyboardNavigation = ({
     }
   };
 
+  const initLayerAndListeners = () => {
+    mapRef.value.addLayer(focusLayer);
+    mapRef.value.on("pointerdown", clearFocusFeature);
+    mapRef.value.getView().on("change:resolution", clearFocusFeature);
+    mapRef.value.on("rendercomplete", setCurrentlyVisibleFeatures);
+  };
+
+  const removeLayerAndListeners = () => {
+    mapRef.value.removeLayer(focusLayer);
+    mapRef.value.un("pointerdown", clearFocusFeature);
+    mapRef.value.getView().un("change:resolution", clearFocusFeature);
+    mapRef.value.un("rendercomplete", setCurrentlyVisibleFeatures);
+  };
+
   const initNavigatePinsControl = async () => {
     const navigatePinsButton = document.getElementById(navigatePinsButtonId);
 
     if (navigatePinsButton) {
+      navigatePinsButton.addEventListener("focus", initLayerAndListeners);
       navigatePinsButton.addEventListener("keydown", handleFocusOnKeyDown);
-      navigatePinsButton.addEventListener("blur", clearFocusFeature);
+      navigatePinsButton.addEventListener("blur", removeLayerAndListeners);
 
       const navigatePinsControl = new Control({
         element: navigatePinsButton,
@@ -152,26 +194,10 @@ export const useOpenLayersKeyboardNavigation = ({
     () => {
       if (mapRef.value) {
         initNavigatePinsControl();
-        mapRef.value.addLayer(focusLayer);
-        mapRef.value.on("pointerdown", clearFocusFeature);
-        mapRef.value.getView().on("change:resolution", clearFocusFeature);
       }
     },
     {
       immediate: true,
-      once: true,
-    },
-  );
-
-  watch(
-    sourceRef,
-    () => {
-      if (mapRef.value && sourceRef.value) {
-        setCurrentlyVisibleFeatures();
-        mapRef.value.on("moveend", setCurrentlyVisibleFeatures);
-      }
-    },
-    {
       once: true,
     },
   );
@@ -182,7 +208,9 @@ export const useOpenLayersKeyboardNavigation = ({
     focusedFeatureIndex,
     clearFocusFeature,
     setFocus,
+    getCurrentlyVisibleFeatures,
     setCurrentlyVisibleFeatures,
     handleFocusOnKeyDown,
+    initLayerAndListeners,
   };
 };
