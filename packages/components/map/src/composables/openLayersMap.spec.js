@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 
-import { nextTick } from "vue";
+import { nextTick, ref } from "vue";
 import { shallowMount } from "@vue/test-utils";
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import OpenLayersMap from "ol/Map.js";
@@ -40,8 +40,16 @@ const component = {
     },
   },
   setup(props) {
-    const { map } = useOpenLayersMap(props);
-    return { map };
+    const centre = ref(props.centre);
+    const zoom = ref(props.zoom);
+
+    const { map } = useOpenLayersMap({
+      ...props,
+      centre,
+      zoom,
+    });
+
+    return { centre, map, zoom };
   },
 };
 
@@ -213,59 +221,42 @@ describe("@/composables/openLayersMap.js", () => {
           });
         });
       });
-    });
 
-    describe("hash", () => {
-      afterEach(() => {
-        window.location.hash = undefined;
-      });
+      describe("moveend event listener", () => {
+        const centre = [-5, 36];
+        const zoom = 5;
 
-      describe("when `true`", () => {
-        const hash = true;
+        describe("before loadend event", () => {
+          it("does not update centre and zoom ref values", async () => {
+            const wrapper = factory();
 
-        it("reads centre and zoom from window.location.hash", () => {
-          window.location.hash = "#em-id=map&em-z=5&em-c=-5%2C36";
-          const wrapper = factory({ props: { hash } });
+            const map = wrapper.vm.map;
+            map.getView().setCenter(centre);
+            map.getView().setZoom(zoom);
+            map.dispatchEvent("moveend");
 
-          const map = wrapper.vm.map;
+            await nextTick();
 
-          expect(map.getView().getCenter()).toEqual([-5, 36]);
-          expect(map.getView().getZoom()).toBe(5);
+            expect(wrapper.vm.zoom).not.toBe(zoom);
+            expect(wrapper.vm.centre).not.toEqual(centre);
+          });
         });
 
-        it("updates hash with centre and zoom on moveend event (after loadend event)", () => {
-          const centre = [-5, 36];
-          const zoom = 5;
-          const wrapper = factory({ props: { centre, hash, zoom } });
+        describe("after loadend event", () => {
+          it("updates centre and zoom ref values", async () => {
+            const wrapper = factory();
 
-          const map = wrapper.vm.map;
-          map.dispatchEvent("loadend");
-          map.dispatchEvent("moveend");
+            const map = wrapper.vm.map;
+            map.getView().setCenter(centre);
+            map.getView().setZoom(zoom);
+            map.dispatchEvent("loadend");
+            map.dispatchEvent("moveend");
 
-          expect(window.location.hash).toBe("#em-id=map&em-c=-5%2C36&em-z=5");
-        });
-      });
+            await nextTick();
 
-      describe("when `false` (default)", () => {
-        it("ignores centre and zoom from window.location.hash", () => {
-          window.location.hash = "#em-id=map&em-z=5&em-c=-5%2C36";
-          const wrapper = factory();
-
-          const map = wrapper.vm.map;
-
-          expect(map.getView().getCenter()).not.toEqual([-5, 36]);
-          expect(map.getView().getZoom()).not.toBe(5);
-        });
-
-        it("does not update hash with centre and zoom on moveend event", () => {
-          const centre = [-5, 36];
-          const zoom = 5;
-          const wrapper = factory({ props: { centre, zoom } });
-
-          const map = wrapper.vm.map;
-          map.dispatchEvent("moveend");
-
-          expect(window.location.hash).not.toBe("#c=-5%2C36&z=5");
+            expect(wrapper.vm.zoom).toBe(zoom);
+            expect(wrapper.vm.centre).toEqual(centre);
+          });
         });
       });
     });

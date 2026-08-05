@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, ref, inject } from "vue";
 import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
+import { useLocationHash } from "@/composables/locationHash.js";
 import { useOpenLayersMap } from "@/composables/openLayersMap.js";
 import { useOpenLayersPointsVectorLayer } from "@/composables/openLayersPointsVectorLayer.js";
 import { useOpenLayersFeatureStyles } from "@/composables/openLayersFeatureStyles.js";
@@ -66,7 +67,7 @@ const props = defineProps({
 
 const data = ref(null);
 
-const centre = computed(() => props.centre || injectedConfig?.value?.centre);
+const centre = ref(props.centre || injectedConfig?.value?.centre);
 // TODO: set some defaults, deep merged with supplied?
 const controls = computed(
   () => props.controls || injectedConfig?.value?.controls,
@@ -84,7 +85,7 @@ const scrollTo = computed(
 );
 const style = computed(() => props.style || injectedConfig?.value?.style);
 const url = computed(() => props.url || injectedConfig?.value?.url);
-const zoom = computed(() => props.zoom || injectedConfig?.value?.zoom);
+const zoom = ref(props.zoom || injectedConfig?.value?.zoom);
 
 if (json.value) {
   data.value = JSON.parse(json.value);
@@ -104,10 +105,13 @@ const icon = {
   height: 24,
 };
 
+if (hash.value) {
+  useLocationHash({ centre, elementId, zoom });
+}
+
 useOpenLayersMap({
   centre,
   elementId,
-  hash,
   map,
   style,
   zoom,
