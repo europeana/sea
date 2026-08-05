@@ -116,10 +116,8 @@ const { spreadCluster, spreadClusterSource, spreadPinsAllowed } =
     styleSingleFeature,
   });
 
-let clusterOrPinSource;
-
 nextTick().then(() => {
-  const vectorLayer = useOpenLayersPointsVectorLayer({
+  const { source } = useOpenLayersPointsVectorLayer({
     data,
     distance: singleFeatureStyleMinDimension * 1.5,
     spreadPinsAllowed,
@@ -128,14 +126,13 @@ nextTick().then(() => {
     styleFeature,
     spreadCluster,
   });
-  clusterOrPinSource = vectorLayer.clusterOrPinSource;
 
   // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
   if (controls.value?.keyboardNavigatePins) {
     useOpenLayersKeyboardNavigation({
       map,
-      clusterOrPinSource,
       spreadClusterSource,
+      source,
       navigatePinsButtonId: elementIdFor(
         elementId.value,
         "keyboardFocusPinToggle",
@@ -158,7 +155,7 @@ nextTick().then(() => {
   <div :id="elementId" class="europeana-map">
     <button
       v-if="controls?.keyboardPanAndZoom"
-      :id="elementIdFor(elementId.value, 'keyboardEventTarget')"
+      :id="elementIdFor(elementId, 'keyboardEventTarget')"
       class="keyboard-control"
       type="button"
     >
@@ -166,7 +163,7 @@ nextTick().then(() => {
     </button>
     <template v-if="controls?.keyboardNavigatePins">
       <button
-        :id="elementIdFor(elementId.value, 'keyboardFocusPinToggle')"
+        :id="elementIdFor(elementId, 'keyboardFocusPinToggle')"
         class="keyboard-control keyboard-nav-control"
         type="button"
       >

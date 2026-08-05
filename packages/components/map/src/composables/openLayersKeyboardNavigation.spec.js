@@ -38,7 +38,7 @@ const featureClusterMock = {
     getCoordinates: vi.fn(() => [10, 20]),
   }),
 };
-const clusterOrPinSourceMock = {
+const sourceMock = {
   getFeatures: vi.fn(() => [featureClusterMock, featureMock, featureMock]),
   getFeaturesInExtent: vi.fn(() => [featureClusterMock, featureMock]),
 };
@@ -60,7 +60,7 @@ const component = {
       type: Object,
       default: null,
     },
-    clusterOrPinSource: {
+    source: {
       type: Object,
       default: null,
     },
@@ -83,14 +83,14 @@ const component = {
   },
   setup(props) {
     const map = props.map;
-    const clusterOrPinSource = props.clusterOrPinSource;
     const spreadClusterSource = props.spreadClusterSource;
+    const source = props.source;
     const pinSrLabel = props.pinSrLabel;
     const navigatePinsButtonId = props.navigatePinsButtonId;
     const announcerId = props.announcerId;
 
     const {
-      clusterOrPinSourceRef,
+      sourceRef,
       focusSource,
       focusedFeatureIndex,
       clearFocusFeature,
@@ -101,8 +101,8 @@ const component = {
       initLayerAndListeners,
     } = useOpenLayersKeyboardNavigation({
       map,
-      clusterOrPinSource,
       spreadClusterSource,
+      source,
       pinSrLabel,
       navigatePinsButtonId,
       announcerId,
@@ -110,11 +110,11 @@ const component = {
 
     return {
       map,
-      clusterOrPinSource,
+      source,
       pinSrLabel,
       navigatePinsButtonId,
       announcerId,
-      clusterOrPinSourceRef,
+      sourceRef,
       focusSource,
       focusedFeatureIndex,
       clearFocusFeature,
@@ -189,7 +189,7 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
           const wrapper = factory({
             props: {
               map: mapMock,
-              clusterOrPinSource: clusterOrPinSourceMock,
+              source: sourceMock,
               navigatePinsButtonId: keyboardNavButtonId,
             },
           });
@@ -206,7 +206,7 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
           const wrapper = factory({
             props: {
               map: mapMock,
-              clusterOrPinSource: clusterOrPinSourceMock,
+              source: sourceMock,
               navigatePinsButtonId: keyboardNavButtonId,
             },
           });
@@ -225,7 +225,7 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
             const wrapper = factory({
               props: {
                 map: mapMock,
-                clusterOrPinSource: clusterOrPinSourceMock,
+                source: sourceMock,
                 navigatePinsButtonId: keyboardNavButtonId,
               },
             });
@@ -270,7 +270,7 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
           const wrapper = factory({
             props: {
               map: mapMock,
-              clusterOrPinSource: clusterOrPinSourceMock,
+              source: sourceMock,
               announcerId,
               pinSrLabel,
             },
@@ -298,7 +298,7 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
           const wrapper = factory({
             props: {
               map: mapMock,
-              clusterOrPinSource: clusterOrPinSourceMock,
+              source: sourceMock,
               announcerId,
               pinSrLabel,
             },
@@ -331,7 +331,7 @@ describe("@/composables/openLayersKeyboardNavigation.js", () => {
               },
             });
             wrapper.vm.initLayerAndListeners();
-            wrapper.vm.clusterOrPinSourceRef = clusterOrPinSourceMock;
+            wrapper.vm.sourceRef = sourceMock;
 
             expect(mapMock.on).toHaveBeenCalledWith(
               "rendercomplete",

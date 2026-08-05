@@ -18,7 +18,8 @@ export const useOpenLayersPointsVectorLayer = ({
   spreadCluster,
 } = {}) => {
   const mapRef = toRef(map);
-  const clusterOrPinSource = ref(null);
+  const layer = ref(null);
+  const source = ref(null);
   const ready = ref(false);
 
   const features = computed(() =>
@@ -31,8 +32,8 @@ export const useOpenLayersPointsVectorLayer = ({
     ),
   );
 
-  const createClustersLayer = () => {
-    clusterOrPinSource.value = new Cluster({
+  const createClusterSource = () =>
+    new Cluster({
       distance,
       minDistance,
       source: new VectorSource({
@@ -40,19 +41,19 @@ export const useOpenLayersPointsVectorLayer = ({
       }),
     });
 
-    return new VectorLayer({
-      source: clusterOrPinSource.value,
-      style: styleFeature,
-    });
-  };
-
-  const createSinglePointLayer = () => {
-    clusterOrPinSource.value = new VectorSource({
+  const createSinglePointSource = () =>
+    new VectorSource({
       features: features.value,
     });
 
+  const createVectorLayer = () => {
+    source.value =
+      features.value.length === 1
+        ? createSinglePointSource()
+        : createClusterSource();
+
     return new VectorLayer({
-      source: clusterOrPinSource.value,
+      source: source.value,
       style: styleFeature,
     });
   };
@@ -62,15 +63,12 @@ export const useOpenLayersPointsVectorLayer = ({
   };
 
   const initLayer = () => {
+    layer.value = createVectorLayer();
+    mapRef.value.addLayer(layer.value);
+
     if (features.value.length === 1) {
-      mapRef.value.addLayer(createSinglePointLayer());
-
       centreMapOnSinglePoint(features.value[0].getGeometry().getCoordinates());
-    } else {
-      mapRef.value.addLayer(createClustersLayer());
-    }
-
-    if (features.value.length > 1) {
+    } else if (features.value.length > 1) {
       mapRef.value?.on("click", handleClick);
     }
 
@@ -122,5 +120,8 @@ export const useOpenLayersPointsVectorLayer = ({
     }
   }
 
-  return { clusterOrPinSource };
+  return {
+    layer,
+    source,
+  };
 };

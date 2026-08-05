@@ -10,15 +10,15 @@ import VectorSource from "ol/source/Vector.js";
 
 export const useOpenLayersKeyboardNavigation = ({
   map,
-  clusterOrPinSource,
   spreadClusterSource,
+  source,
   navigatePinsButtonId,
   announcerId,
   pinSrLabel,
 } = {}) => {
   const mapRef = toRef(map);
-  const clusterOrPinSourceRef = toRef(clusterOrPinSource);
   const spreadClusterSourceRef = toRef(spreadClusterSource);
+  const sourceRef = toRef(source);
   const focusSource = ref(new VectorSource());
   const focusedFeatureIndex = ref(-1);
   const currentlyVisibleFeatures = ref([]);
@@ -74,9 +74,9 @@ export const useOpenLayersKeyboardNavigation = ({
 
     let visibleFeatures = [];
 
-    if (clusterOrPinSourceRef.value) {
+    if (sourceRef.value) {
       visibleFeatures = visibleFeatures.concat(
-        clusterOrPinSourceRef.value.getFeaturesInExtent(extent),
+        sourceRef.value.getFeaturesInExtent(extent),
       );
     }
 
@@ -203,7 +203,7 @@ export const useOpenLayersKeyboardNavigation = ({
   );
 
   return {
-    clusterOrPinSourceRef,
+    sourceRef,
     focusSource,
     focusedFeatureIndex,
     clearFocusFeature,
