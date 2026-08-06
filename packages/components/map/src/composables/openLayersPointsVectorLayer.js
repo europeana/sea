@@ -1,4 +1,4 @@
-import { computed, ref, toRef, watchEffect } from "vue";
+import { computed, ref, toRef, watch, watchEffect } from "vue";
 import { uniqWith, isEqual } from "lodash-es";
 
 import Cluster from "ol/source/Cluster.js";
@@ -16,8 +16,10 @@ export const useOpenLayersPointsVectorLayer = ({
   map,
   styleFeature,
   spreadCluster,
+  zoom,
 } = {}) => {
   const mapRef = toRef(map);
+  const zoomRef = toRef(zoom);
   const layer = ref(null);
   const source = ref(null);
   const ready = ref(false);
@@ -32,14 +34,32 @@ export const useOpenLayersPointsVectorLayer = ({
     ),
   );
 
-  const createClusterSource = () =>
-    new Cluster({
-      distance,
-      minDistance,
+  const createClusterSource = () => {
+    const cluster = new Cluster({
       source: new VectorSource({
         features: features.value,
       }),
     });
+
+    watch(
+      zoomRef,
+      () => {
+        const maxZoom = mapRef.value.getView().getMaxZoom();
+        if (features.value.length > 1) {
+          if (zoomRef.value >= maxZoom - 1) {
+            cluster.setDistance(0);
+            cluster.setMinDistance(0);
+          } else {
+            cluster.setDistance(distance);
+            cluster.setMinDistance(minDistance);
+          }
+        }
+      },
+      { immediate: true },
+    );
+
+    return cluster;
+  };
 
   const createSinglePointSource = () =>
     new VectorSource({
@@ -97,12 +117,10 @@ export const useOpenLayersPointsVectorLayer = ({
         mapRef.value.getViewport().clientWidth,
         mapRef.value.getViewport().clientHeight,
       ) / 10;
-    mapRef.value
-      .getView()
-      .fit(extent, {
-        duration: 1000,
-        padding: [padding, padding, padding, padding],
-      });
+    mapRef.value.getView().fit(extent, {
+      duration: 1000,
+      padding: [padding, padding, padding, padding],
+    });
   };
 
   function handleClick(e) {

@@ -103,10 +103,11 @@ export const useOpenLayersPinSpread = ({
     mapRef.value.once("moveend", () => resetSpreadCluster(originalFeatures));
   };
 
-  // only break clusters apart at zoom level 19+
+  // only break clusters apart at zoom level 1 less than max
   const spreadPinsAllowed = () => {
     const zoom = mapRef.value.getView().getZoom();
-    return zoom >= 19;
+    const maxZoom = mapRef.value.getView().getMaxZoom();
+    return zoom >= maxZoom - 1;
   };
 
   // Recalculate or re-cluster the spread cluster

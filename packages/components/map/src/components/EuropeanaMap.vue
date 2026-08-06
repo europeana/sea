@@ -133,6 +133,7 @@ nextTick().then(() => {
     map,
     styleFeature,
     spreadCluster,
+    zoom,
   });
 
   // The order of adding the keyboard buttons, popover and controls here also defines the order these are inserted to the DOM
