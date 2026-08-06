@@ -196,17 +196,25 @@ nextTick().then(() => {
     position: absolute;
     top: 1.25rem;
     right: 1.25rem;
-    opacity: 0; // hidden but accessible
     left: auto;
     background-color: #fff;
     border: none;
-    padding: 0.5rem;
     z-index: -1;
+    // visually hidden, but accessible
+    opacity: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:focus,
     &:focus ~ div .keyboard-nav-control {
       z-index: 1;
       opacity: 1;
+      padding: 0.5rem;
+      height: auto;
+      width: auto;
+      white-space: wrap;
     }
   }
 
