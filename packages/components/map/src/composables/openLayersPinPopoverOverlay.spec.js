@@ -110,7 +110,7 @@ describe("@/composables/openLayersPinPopoverOverlay.js", () => {
           });
 
           describe("and feature has NO name", () => {
-            it("does NOT dispatch change:activefeature event, but sets overlay position", async () => {
+            it("dispatches change:activefeature event with null", async () => {
               const wrapper = factory({
                 props: {
                   map: new Map(),
@@ -124,42 +124,52 @@ describe("@/composables/openLayersPinPopoverOverlay.js", () => {
               vi.spyOn(map, "getFeaturesAtPixel").mockReturnValue([
                 new Feature({ geometry: new Point(coordinates) }),
               ]);
-              const overlay = map.getOverlays().getArray()[0];
-              const setPositionSpy = vi.spyOn(overlay, "setPosition");
 
               await map.dispatchEvent({
                 type: "click",
               });
 
-              expect(dispatchEventSpy).toHaveBeenCalledTimes(1); // Once for the click trigger above
-              expect(dispatchEventSpy).not.toHaveBeenCalledWith({
+              expect(dispatchEventSpy).toHaveBeenCalledTimes(2); // Once for the click trigger above
+              expect(dispatchEventSpy).toHaveBeenCalledWith({
                 type: "change:activefeature",
-                activeFeatureName: name,
+                activeFeatureName: null,
               });
-              expect(setPositionSpy).toHaveBeenCalled();
             });
           });
         });
 
-        describe("and NO point is clicked", () => {
-          it("hides popover by setting overlay position to undefined", async () => {
-            const wrapper = factory({
-              props: {
-                map: new Map(),
-                pinPopover: "popover",
-              },
+        describe("when popover is positioned", () => {
+          describe("and NO point is clicked", () => {
+            it("dispatches change:activefeature event with null, sets overlay position to undefined", async () => {
+              const wrapper = factory({
+                props: {
+                  map: new Map(),
+                  pinPopover: "popover",
+                },
+              });
+
+              const map = wrapper.vm.map;
+              vi.spyOn(map, "getFeaturesAtPixel").mockReturnValue([]);
+
+              const overlay = map.getOverlays().getArray()[0];
+              // mock positioned popover
+              overlay.setPosition([coordinates]);
+
+              const setPositionSpy = vi.spyOn(overlay, "setPosition");
+              const dispatchEventSpy = vi.spyOn(map, "dispatchEvent");
+
+              await map.dispatchEvent({
+                type: "click",
+              });
+
+              expect(dispatchEventSpy).toHaveBeenCalledTimes(2); // Once for the click trigger above
+              expect(dispatchEventSpy).toHaveBeenCalledWith({
+                type: "change:activefeature",
+                activeFeatureName: null,
+              });
+
+              expect(setPositionSpy).toHaveBeenCalledWith(undefined);
             });
-
-            const map = wrapper.vm.map;
-            vi.spyOn(map, "getFeaturesAtPixel").mockReturnValue([]);
-            const overlay = map.getOverlays().getArray()[0];
-            const setPositionSpy = vi.spyOn(overlay, "setPosition");
-
-            await map.dispatchEvent({
-              type: "click",
-            });
-
-            expect(setPositionSpy).toHaveBeenCalledWith(undefined);
           });
         });
       });
