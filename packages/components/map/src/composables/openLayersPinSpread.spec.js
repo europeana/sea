@@ -16,6 +16,7 @@ const mapMock = {
   getPixelFromCoordinate: vi.fn(() => [100, 200]),
   getCoordinateFromPixel: vi.fn(() => [10, 20]),
   getView: () => ({
+    getMaxZoom: vi.fn(),
     getZoom: vi.fn(),
   }),
 };
@@ -111,6 +112,7 @@ describe("@/composables/openLayersPinSpread.js", () => {
       describe("and spread is allowed", () => {
         it("calls spreadCluster", () => {
           mapMock.getView = () => ({
+            getMaxZoom: vi.fn(() => 20),
             getZoom: vi.fn(() => 19),
           });
 
@@ -130,6 +132,7 @@ describe("@/composables/openLayersPinSpread.js", () => {
       describe("and spread is NOT allowed", () => {
         it("unsets expanded prop for each feature and clears source", () => {
           mapMock.getView = () => ({
+            getMaxZoom: vi.fn(() => 20),
             getZoom: vi.fn(() => 18),
           });
 
