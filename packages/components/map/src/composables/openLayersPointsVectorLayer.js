@@ -91,9 +91,18 @@ export const useOpenLayersPointsVectorLayer = ({
     const extent = boundingExtent(
       features.map((r) => r.getGeometry().getCoordinates()),
     );
+    // padding is 10% of the longer side of the viewport
+    const padding =
+      Math.max(
+        mapRef.value.getViewport().clientWidth,
+        mapRef.value.getViewport().clientHeight,
+      ) / 10;
     mapRef.value
       .getView()
-      .fit(extent, { duration: 1000, padding: [50, 50, 50, 50] });
+      .fit(extent, {
+        duration: 1000,
+        padding: [padding, padding, padding, padding],
+      });
   };
 
   function handleClick(e) {
