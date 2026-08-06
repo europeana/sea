@@ -121,11 +121,15 @@ const { spreadCluster, spreadClusterSource, spreadPinsAllowed } =
   });
 
 nextTick().then(() => {
+  const distanceFactor = 2;
+  const distance = singleFeatureStyleMinDimension * distanceFactor;
+  const minDistance = distance / 2;
+
   const { source } = useOpenLayersPointsVectorLayer({
     data,
-    distance: singleFeatureStyleMinDimension * 1.5,
+    distance,
     spreadPinsAllowed,
-    minDistance: singleFeatureStyleMinDimension * 0.75,
+    minDistance,
     map,
     styleFeature,
     spreadCluster,
