@@ -1,0 +1,19 @@
+{
+  "cancel": "Annuleren",
+  "close": "Sluiten",
+  "emailAddress": "E-mailadres",
+  "emailOptional": "We willen hier misschien een vervolg aan geven. Voer uw e-mailadres in als u het niet erg vindt als wij contact met u opnemen.",
+  "failed": "Het verzoek is mislukt. Probeer het opnieuw.",
+  "faq": "Ga naar veelgestelde vragen",
+  "feedback": "Feedback",
+  "next": "Volgende",
+  "policies": "Door verder te gaan, gaat u akkoord met onze {termsAndPolicies} en erkent u onze {privacyStatement}.",
+  "privacyPolicy": "Privacyverklaring",
+  "send": "Verzenden",
+  "skipSend": "Overslaan en verzenden",
+  "success": "Uw feedback is verzonden.",
+  "termsAndPolicies": "Voorwaarden en beleid",
+  "thankYou": "Dank u!",
+  "title": "Feedback verzenden",
+  "validFeedback": "Uw feedback moet minimaal 5 woorden bevatten."
+}

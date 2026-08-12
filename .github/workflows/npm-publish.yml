@@ -13,7 +13,7 @@ jobs:
     name: "NPM: publish"
     strategy:
       matrix:
-        package: ["map", "map-styles"]
+        package: ["feedback-widget", "map", "map-styles"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

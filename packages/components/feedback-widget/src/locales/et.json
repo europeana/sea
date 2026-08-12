@@ -1,0 +1,19 @@
+{
+  "cancel": "Tühista",
+  "close": "Sulge",
+  "emailAddress": "E-posti aadress",
+  "emailOptional": "Võime soovida jätkata. Sisestage oma e-posti aadress, kui olete rahul, et meiega ühendust võtame.",
+  "failed": "Taotlus nurjus. Palun proovi uuesti.",
+  "faq": "Minge korduma kippuvate küsimuste juurde",
+  "feedback": "Tagasiside",
+  "next": "Järgmine",
+  "policies": "Jätkates nõustute meie {termsAndPolicies} ja kinnitate meie {privacyStatement}.",
+  "privacyPolicy": "Privaatsusavaldus",
+  "send": "Saada",
+  "skipSend": "Jäta vahele ja saada",
+  "success": "Teie tagasiside on saadetud.",
+  "termsAndPolicies": "Tingimused ja eeskirjad",
+  "thankYou": "Aitäh!",
+  "title": "Saada tagasisidet",
+  "validFeedback": "Teie tagasiside peab sisaldama vähemalt 5 sõna."
+}

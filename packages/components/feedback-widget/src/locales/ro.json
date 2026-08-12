@@ -1,0 +1,19 @@
+{
+  "cancel": "Anulează",
+  "close": "Închidere",
+  "emailAddress": "Adresă de e-mail",
+  "emailOptional": "S-ar putea să dorim să urmărim acest lucru. Introduceți adresa dvs. de e-mail dacă sunteți de acord să vă contactăm.",
+  "failed": "Solicitarea nu a reușit. Încercați din nou.",
+  "faq": "Accesați întrebările frecvente",
+  "feedback": "Feedback",
+  "next": "Următorul",
+  "policies": "Continuând, sunteți de acord cu {termsAndPolicies} și acceptați {privacyStatement}.",
+  "privacyPolicy": "Declarație de confidențialitate",
+  "send": "Trimite",
+  "skipSend": "Săriți și trimiteți",
+  "success": "Feedbackul dvs. a fost trimis.",
+  "termsAndPolicies": "Termeni și politici",
+  "thankYou": "Mulțumesc!",
+  "title": "Trimite feedback",
+  "validFeedback": "Feedback-ul dvs. trebuie să conțină cel puțin 5 cuvinte."
+}
