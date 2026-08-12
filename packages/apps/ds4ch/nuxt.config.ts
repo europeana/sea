@@ -48,6 +48,10 @@ export default defineNuxtConfig({
         },
       },
       defaultThumbnail: "",
+      hotjar: {
+        id: null,
+        snippetVersion: null,
+      },
       internalLinkDomain: "",
     },
   },
