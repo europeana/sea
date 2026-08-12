@@ -18,5 +18,11 @@
     "name": "matomo",
     "purposes": ["usage"],
     "title": "Matomo"
+  },
+  {
+    "cookies": ["^_hj$", "^mtm_cookie_consent$"],
+    "name": "hotjar",
+    "purposes": ["usage"],
+    "title": "Hotjar"
   }
 ]
