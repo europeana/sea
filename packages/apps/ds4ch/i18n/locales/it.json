@@ -65,6 +65,10 @@
         "description": "Questi servizi sono essenziali per il corretto funzionamento di questo sito web. Includono le preferenze di lingua e mantengono sicura la tua visita. Non puoi disattivarli, altrimenti il sito web non funzionerebbe correttamente.",
         "title": "Servizi essenziali per la sicurezza e la personalizzazione"
       },
+      "hotjar": {
+        "description": "Raccoglie dati sull'utilizzo per aiutarci ad analizzare le interazioni degli utenti. Attiva un widget di sondaggio che ti offre la possibilità di rispondere ai nostri sondaggi sulla soddisfazione dei visitatori.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Questi servizi caricano immagini (2D), 3D, audio e video per la visualizzazione.",
         "title": "Servizi di visualizzazione dei media"

@@ -65,6 +65,10 @@
         "description": "Tieto služby sú nevyhnutné pre správne fungovanie tejto webovej stránky. Zahŕňajú jazykové preferencie a zabezpečujú bezpečnosť vašej návštevy. Nemôžete ich zakázať, pretože inak by webová stránka nefungovala správne.",
         "title": "Základné služby pre bezpečnosť a prispôsobenie"
       },
+      "hotjar": {
+        "description": "Zhromažďuje údaje o používaní, ktoré nám pomáhajú analyzovať interakcie používateľov. Aktivuje widget prieskumu, ktorý vám dáva možnosť odpovedať na naše prieskumy spokojnosti návštevníkov.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Tieto služby načítavajú obrazové (2D), 3D, zvukové a video položky na zobrazenie.",
         "title": "Služby sledovania médií"

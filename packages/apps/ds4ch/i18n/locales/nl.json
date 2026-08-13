@@ -65,6 +65,10 @@
         "description": "Deze diensten zijn essentieel voor de correcte werking van deze website. Ze omvatten taalvoorkeuren en zorgen voor een veilig bezoek. U kunt ze niet uitschakelen, omdat de website anders niet goed functioneert.",
         "title": "Essentiële services voor beveiliging en maatwerk"
       },
+      "hotjar": {
+        "description": "Verzamelt gebruiksgegevens om ons te helpen gebruikersinteracties te analyseren. Activeert een enquêtewidget waarmee u kunt deelnemen aan onze tevredenheidsenquêtes voor bezoekers.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Deze services laden afbeeldingen (2D), 3D, audio en video om te bekijken.",
         "title": "Diensten voor het bekijken van media"

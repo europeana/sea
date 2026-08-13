@@ -65,6 +65,10 @@
         "description": "Ces services sont essentiels au bon fonctionnement de ce site web. Ils incluent les préférences linguistiques et assurent la sécurité de votre visite. Vous ne pouvez pas les désactiver, car le site ne fonctionnerait pas correctement autrement.",
         "title": "Services essentiels pour la sécurité et la personnalisation"
       },
+      "hotjar": {
+        "description": "Collecte des données d'utilisation pour nous aider à analyser les interactions avec les utilisateurs. Active un widget d'enquête vous donnant la possibilité de répondre à nos enquêtes de satisfaction des visiteurs.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Ces services chargent des éléments d'image (2D), 3D, audio et vidéo en vue de leur visualisation.",
         "title": "Services de visionnage de médias"

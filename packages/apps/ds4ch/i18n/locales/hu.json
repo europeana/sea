@@ -65,6 +65,10 @@
         "description": "Ezek a szolgáltatások elengedhetetlenek a webhely megfelelő működéséhez. Ide tartoznak a nyelvi beállítások, és gondoskodnak látogatásod biztonságáról. Nem lehet őket letiltani, mert enélkül a webhely nem működne megfelelően.",
         "title": "Alapvető szolgáltatások a biztonság és a testreszabás érdekében"
       },
+      "hotjar": {
+        "description": "Használati adatokat gyűjt, hogy segítsen nekünk elemezni a felhasználói interakciókat. Aktivál egy felmérési widgetet, amely lehetőséget ad arra, hogy válaszoljon a látogatói elégedettségi felméréseinkre.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Ezek a szolgáltatások (2D) képeket, 3D, hang és videó elemeket töltenek be megtekintésre.",
         "title": "Médianézési szolgáltatások"

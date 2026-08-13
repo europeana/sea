@@ -65,6 +65,10 @@
         "description": "Šios paslaugos yra būtinos tinkamam šios svetainės veikimui. Jos apima kalbos nuostatas ir užtikrina jūsų apsilankymo saugumą. Jų išjungti negalite, nes priešingu atveju svetainė neveiktų tinkamai.",
         "title": "Esminės saugos ir tinkinimo paslaugos"
       },
+      "hotjar": {
+        "description": "Renka naudojimo duomenis, kad galėtume analizuoti naudotojų sąveiką. Įjungia apklausos valdiklį, suteikiantį jums galimybę atsakyti į mūsų lankytojų pasitenkinimo apklausas.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Šios paslaugos įkelia vaizdus (2D) , 3D, garso ir vaizdo elementus, kad juos būtų galima peržiūrėti.",
         "title": "Žiniasklaidos peržiūros paslaugos"

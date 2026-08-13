@@ -65,6 +65,10 @@
         "description": "Šie pakalpojumi ir būtiski pareizai šīs vietnes darbībai. Tie ietver valodas preferences un nodrošina jūsu apmeklējuma drošību. Jūs nevarat tos atspējot, jo pretējā gadījumā vietne nedarbosies pareizi.",
         "title": "Būtiski pakalpojumi drošībai un pielāgošanai"
       },
+      "hotjar": {
+        "description": "Apkopo lietošanas datus, lai palīdzētu mums analizēt lietotāju mijiedarbību. Aktivizē aptaujas logrīku, kas sniedz jums iespēju atbildēt uz mūsu apmeklētāju apmierinātības aptaujām.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Šie pakalpojumi ielādē attēlus (2D), 3D, audio un video vienumus skatīšanai.",
         "title": "Multivides skatīšanās pakalpojumi"

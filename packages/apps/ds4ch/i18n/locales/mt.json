@@ -65,6 +65,10 @@
         "description": "Dawn is-servizzi huma essenzjali għall-funzjonament korrett ta’ dan il-websajt. Dawn jinkludu l-preferenzi tal-lingwa u jżommu ż-żjara tiegħek sigura. Ma tistax tiddiżattivahom għax mod ieħor il-websajt ma taħdimx kif suppost.",
         "title": "Servizzi essenzjali għas-sigurtà u l-personalizzazzjoni"
       },
+      "hotjar": {
+        "description": "Jikkolletta data dwar l-użu biex jgħinna nanalizzaw l-interazzjonijiet tal-utenti. Jattiva widget ta' stħarriġ li jagħtik l-għażla li twieġeb għall-istħarriġiet ta' sodisfazzjon tal-viżitaturi tagħna.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Dawn is-servizzi jgħabbu immaġni (2D), 3D, awdjo, u oġġetti tal-vidjow għall-wiri.",
         "title": "Servizzi ta' wiri tal-midja"
