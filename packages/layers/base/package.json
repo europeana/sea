@@ -5,7 +5,7 @@
     "url": "https://github.com/europeana/sea"
   },
   "type": "module",
-  "version": "0.1.15",
+  "version": "0.1.20",
   "main": "./nuxt.config.ts",
   "scripts": {
     "postinstall": "nuxt prepare"
