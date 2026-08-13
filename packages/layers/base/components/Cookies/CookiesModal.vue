@@ -226,9 +226,7 @@ const scrollToSection = (modalContainer, sectionId) => {
                 <GenericSmartLink
                   destination="https://www.europeana.eu/rights/privacy-statement"
                 >
-                  {{ $t("cookies.consentModal.privacyStatement")
-                  }}<!-- This comment removes white space
-              -->
+                  {{ $t("cookies.consentModal.privacyStatement") }}
                 </GenericSmartLink>
               </template>
             </i18n-t>
