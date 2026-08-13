@@ -65,6 +65,10 @@
         "description": "Usługi te są niezbędne do prawidłowego działania tej strony. Obejmują preferencje językowe i zapewniają bezpieczeństwo Twojej wizyty. Nie możesz ich wyłączyć, ponieważ w przeciwnym razie strona nie działałaby poprawnie.",
         "title": "Niezbędne usługi w zakresie bezpieczeństwa i dostosowywania"
       },
+      "hotjar": {
+        "description": "Zbiera dane dotyczące użytkowania, aby pomóc nam analizować interakcje użytkowników. Aktywuje widżet ankiety, który daje możliwość odpowiedzi na nasze ankiety dotyczące satysfakcji odwiedzających.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Usługi te ładują obrazy (2D), elementy 3D, audio i wideo do przeglądania.",
         "title": "Usługi przeglądania multimediów"

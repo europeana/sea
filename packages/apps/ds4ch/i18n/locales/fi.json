@@ -65,6 +65,10 @@
         "description": "Nämä palvelut ovat välttämättömiä tämän verkkosivuston moitteettoman toiminnan kannalta. Ne sisältävät kieliasetukset ja pitävät vierailusi turvallisena. Et voi poistaa niitä käytöstä, sillä muuten verkkosivusto ei toimisi oikein.",
         "title": "Olennaiset turvallisuus- ja mukautuspalvelut"
       },
+      "hotjar": {
+        "description": "Kerää käyttäjätietoja, jotta voimme analysoida käyttäjien vuorovaikutusta. Aktivoi kyselywidgetin, jonka avulla voit vastata kävijöiden tyytyväisyyskyselyihimme.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Nämä palvelut lataavat kuvia (2D) , 3D-, ääni- ja videokohteita katselua varten.",
         "title": "Median katselupalvelut"

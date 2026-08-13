@@ -65,6 +65,10 @@
         "description": "Disse tjenester er afgørende for, at dette websted fungerer korrekt. De omfatter sprogindstillinger og holder dit besøg sikkert. Du kan ikke deaktivere dem, da hjemmesiden ellers ikke ville fungere korrekt.",
         "title": "Essentielle tjenester til sikkerhed og tilpasning"
       },
+      "hotjar": {
+        "description": "Indsamler brugsdata for at hjælpe os med at analysere brugerinteraktioner. Aktiverer en undersøgelses-widget, der giver dig mulighed for at svare på vores undersøgelser af besøgendes tilfredshed.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Disse tjenester indlæser billed- (2D), 3D-, lyd- og videoelementer til visning.",
         "title": "Tjenester til visning af medier"

@@ -65,6 +65,10 @@
         "description": "Te storitve so ključne za pravilno delovanje tega spletnega mesta. Vključujejo jezikovne nastavitve in skrbijo za varnost vašega obiska. Onemogočiti jih ni mogoče, saj spletno mesto sicer ne bi delovalo pravilno.",
         "title": "Bistvene storitve za varnost in prilagajanje"
       },
+      "hotjar": {
+        "description": "Zbira podatke o uporabi, da nam pomaga analizirati interakcije uporabnikov. Aktivira pripomoček za anketo, ki vam omogoča odgovoriti na naše ankete o zadovoljstvu obiskovalcev.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Te storitve nalagajo slike (2D), 3D, zvočne in video elemente za ogled.",
         "title": "Storitve gledanja medijev"

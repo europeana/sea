@@ -65,6 +65,10 @@
         "description": "Tá na seirbhísí seo riachtanach chun go n-oibreoidh an suíomh gréasáin seo mar is ceart. Cuimsíonn siad sainroghanna teanga agus coimeádann siad do chuairt slán. Ní féidir leat iad a dhíchumasú, mar ní oibreodh an suíomh gréasáin i gceart murach sin.",
         "title": "Seirbhísí riachtanacha maidir le slándáil agus saincheaptha"
       },
+      "hotjar": {
+        "description": "Bailíonn sé sonraí úsáide chun cabhrú linn idirghníomhaíochtaí úsáideoirí a anailísiú. Gníomhaíonn sé giuirléid suirbhé a thugann na rogha duit freagra a thabhairt ar ár suirbhéanna sástachta cuairteoirí.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Luchtaíonn na seirbhísí seo míreanna íomhá (2D), 3D, fuaime agus físe le breathnú orthu.",
         "title": "Seirbhísí féachana meáin"

@@ -65,6 +65,10 @@
         "description": "Ove su usluge neophodne za ispravno funkcioniranje ove web stranice. One uključuju jezične postavke i čuvaju vašu posjetu sigurnom. Ne možete ih onemogućiti jer web stranica inače ne bi radila ispravno.",
         "title": "Osnovne usluge za sigurnost i prilagodbu"
       },
+      "hotjar": {
+        "description": "Prikuplja podatke o korištenju kako bi nam pomogao analizirati interakcije korisnika. Aktivira widget za anketu koji vam omogućuje sudjelovanje u našim anketama o zadovoljstvu posjetitelja.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Ove usluge učitavaju slike (2D), 3D, audio i video stavke za gledanje.",
         "title": "Usluge pregledavanja medija"

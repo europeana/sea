@@ -65,6 +65,10 @@
         "description": "Need teenused on selle veebisaidi õigeks toimimiseks hädavajalikud. Need hõlmavad keeleeelistusi ja hoiavad teie külastuse turvalisena. Te ei saa neid keelata, kuna vastasel juhul veebisait ei töötaks korralikult.",
         "title": "Olulised teenused turvalisuse ja kohandamise jaoks"
       },
+      "hotjar": {
+        "description": "Kogub kasutusandmeid, et aidata meil analüüsida kasutajate interaktsioone. Aktiveerib küsitluse vidina, mis annab teile võimaluse vastata meie külastajate rahulolu küsitlustele.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Need teenused laadivad vaatamiseks pilte (2D) , 3D-, heli- ja videoelemente.",
         "title": "Meedia vaatamise teenused"

@@ -65,6 +65,10 @@
         "description": "Aceste servicii sunt esențiale pentru funcționarea corectă a acestui site web. Ele includ preferințele de limbă și mențin vizita dvs. în siguranță. Nu le puteți dezactiva, deoarece site-ul web nu ar funcționa corect în caz contrar.",
         "title": "Servicii esențiale pentru securitate și personalizare"
       },
+      "hotjar": {
+        "description": "Colectează date de utilizare pentru a ne ajuta să analizăm interacțiunile utilizatorilor. Activează un widget de sondaj care vă oferă opțiunea de a răspunde la sondajele noastre privind satisfacția vizitatorilor.",
+        "title": "Hotjar"
+      },
       "mediaViewing": {
         "description": "Aceste servicii încarcă imagini (2D), elemente 3D, audio și video pentru vizualizare.",
         "title": "Servicii de vizionare media"
