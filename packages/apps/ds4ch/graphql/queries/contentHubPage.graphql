@@ -32,6 +32,7 @@ query ContentHubPage(
           ...imageFields
         }
       }
+      # TODO: remove feat content
       featuredContent {
         __typename
         ... on BlogPosting {

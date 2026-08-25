@@ -7,6 +7,7 @@ query BlogPostingsListing(
   $skip: Int = 0
   $excludeSysId: String = ""
   $categoriesFilter: [BlogPostingFilter]
+  $tagsFilter: [BlogPostingFilter]
   $site: String = ""
   $query: String = ""
 ) {
@@ -22,6 +23,7 @@ query BlogPostingsListing(
         { name_contains: $query }
         { site: $site }
         { AND: $categoriesFilter }
+        { AND: $tagsFilter }
       ]
     }
   ) {
