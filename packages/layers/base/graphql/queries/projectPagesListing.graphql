@@ -45,5 +45,6 @@ fragment projectPageCollectionFields on ProjectPageCollection {
       }
     }
     headline
+    datePublished
   }
 }

@@ -117,13 +117,12 @@ const categoriesFilter = computed(() => {
   return null;
 });
 
-const featuredEntries = ref([]);
-// TODO: sort by date and pick last published
-const featuredEntry = computed(() => featuredEntries.value[0]?.items[0]);
+const sectionEntries = computed(() => fullEntries.value.sectionEntries);
+const featuredEntry = computed(() => fullEntries.value.featuredEntry);
 
 const total = computed(() => {
   return (
-    (fullEntries.value.reduce((memo, collection) => {
+    (sectionEntries.value.reduce((memo, collection) => {
       return memo + collection.total;
     }, 0) || 0) + (featuredEntry.value ? 1 : 0)
   );
@@ -153,11 +152,13 @@ function displayFeaturedEntry(sectionType) {
 }
 
 const featuredEntryText = computed(() => {
-  if (featuredEntry.value.datePublished) {
+  if (entryHasContentType(featuredEntry.value, typeLookup.news.type)) {
     return t("authored.publishedDate", {
       date: d(featuredEntry.value.datePublished, "short"),
     });
-  } else if (featuredEntry.value.headline) {
+  } else if (
+    entryHasContentType(featuredEntry.value, typeLookup.project.type)
+  ) {
     return featuredEntry.value.headline;
   } else if (
     entryHasTaxonomyTerm(featuredEntry.value, typeLookup.training.taxonomy)
@@ -251,14 +252,18 @@ const fetchFeaturedEntries = async () => {
     },
   };
 
-  featuredEntries.value = await fetchEntries(contentVariables);
+  return await fetchEntries(contentVariables);
 };
 
 const fetchFullEntries = async () => {
+  let featuredEntry;
   if (isFirstPage.value) {
-    await fetchFeaturedEntries();
+    const featuredEntries = await fetchFeaturedEntries();
+    featuredEntry = featuredEntries
+      .map((entry) => entry.items[0])
+      .sort((a, b) => new Date(b.datePublished) - new Date(a.datePublished))[0];
   } else {
-    featuredEntries.value = [];
+    featuredEntry = null;
   }
 
   const contentVariables = {
@@ -266,10 +271,14 @@ const fetchFullEntries = async () => {
       ? ENTRIES_PER_PAGE
       : ENTRIES_PER_SECTION,
     skip: (page.value - 1) * ENTRIES_PER_PAGE,
-    excludeSysId: featuredEntry.value?.sys?.id || "",
+    excludeSysId: featuredEntry?.sys?.id || "",
   };
 
-  return await fetchEntries(contentVariables);
+  const sectionEntries = await fetchEntries(contentVariables);
+  return {
+    featuredEntry,
+    sectionEntries,
+  };
 };
 
 function normalisedEntryCards(entries = []) {
@@ -277,7 +286,7 @@ function normalisedEntryCards(entries = []) {
 }
 
 const normalisedSections = computed(() => {
-  return fullEntries.value.map((collection) => ({
+  return sectionEntries.value.map((collection) => ({
     entries: normalisedEntryCards(collection.items),
     type: collection.type,
     total: collection.total,
@@ -406,7 +415,7 @@ const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
   fullEntriesKey,
   fetchFullEntries,
   {
-    default: () => [],
+    default: () => {},
   },
 );
 if (fullEntriesError.value) {

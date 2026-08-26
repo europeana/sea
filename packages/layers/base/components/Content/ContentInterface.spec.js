@@ -28,7 +28,7 @@ const categories = ["network", "postcards"];
 const mockBlogEntries = Array.from({ length: 4 }, (key, index) => ({
   __typename: "BlogPosting",
   sys: { id: `blog-id${index}` },
-  date: `2023-01-${index + 1}`,
+  datePublished: `2023-01-${index + 1}`,
   name: `Blog post entry ${index}`,
 }));
 
@@ -43,7 +43,6 @@ const mockProjectEntries = Array.from({ length: 4 }, (key, index) => ({
 const mockEventEntries = Array.from({ length: 4 }, (key, index) => ({
   __typename: "Event",
   sys: { id: `event-id${index}` },
-  date: `2026-01-${index + 1}`,
   startDate: `2026-01-${index + 1}`,
   name: `Event entry ${index}`,
 }));
@@ -53,8 +52,20 @@ const fullContentMock = {
   projects: mockProjectEntries,
   events: mockEventEntries,
 };
-
+const featuredContentMock = {
+  blogs: [
+    {
+      __typename: "BlogPosting",
+      sys: { id: "blog-id-featured" },
+      datePublished: "2023-01-01",
+      name: "Blog post entry featured",
+    },
+  ],
+  projects: [],
+  events: [],
+};
 const mockQuery = vi.fn();
+// Use this function to create custom mock entry data, returned as part of the contentfulResponse mock
 const createMock = (
   fullContent = fullContentMock,
   featuredContent = {
@@ -73,18 +84,10 @@ const createMock = (
   };
 };
 const allTypesNoFeaturedContentMock = createMock();
-const allTypesAndFeaturedContentMock = createMock(fullContentMock, {
-  blogs: [
-    {
-      __typename: "BlogPosting",
-      sys: { id: "blog-id-featured" },
-      date: "2023-01-01",
-      name: "Blog post entry featured",
-    },
-  ],
-  projects: [],
-  events: [],
-});
+const allTypesAndFeaturedContentMock = createMock(
+  fullContentMock,
+  featuredContentMock,
+);
 const noContentMock = createMock({ blogs: [] });
 
 // Use this function to create custom mock responses for different test cases
@@ -416,20 +419,29 @@ describe("components/Content/ContentInterface", () => {
           ).toBe(true);
         });
       });
-      // describe("and there are more than one featured entries", () => {
-      //   it("displays the most recently published entry", async () => {
-      //     useRouteMock.mockImplementation(() => ({
-      //       query: {
-      //         tags: "history",
-      //       },
-      //     }));
-      //     const wrapper = await factory();
+      describe("and there are more than one featured entries", () => {
+        it("displays the most recently published entry", async () => {
+          const lastPublishedFeaturedEntry = {
+            __typename: "Event",
+            datePublished: "2024-01-01",
+          };
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              ...featuredContentMock,
+              projects: [
+                {
+                  __typename: "ProjectPage",
+                  datePublished: "2022-12-01",
+                },
+              ],
+              events: [lastPublishedFeaturedEntry],
+            }),
+          );
+          const wrapper = await factory();
 
-      //     expect(
-      //       wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
-      //     ).toBe(false);
-      //   });
-      // });
+          expect(wrapper.vm.featuredEntry).toEqual(lastPublishedFeaturedEntry);
+        });
+      });
       // });
       // describe("when there is a datePublished field", () => {
       //   it("uses the date as text on the featured content card", async () => {
