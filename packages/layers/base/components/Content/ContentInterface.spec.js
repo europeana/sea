@@ -442,70 +442,97 @@ describe("components/Content/ContentInterface", () => {
           expect(wrapper.vm.featuredEntry).toEqual(lastPublishedFeaturedEntry);
         });
       });
-      // });
-      // describe("when there is a datePublished field", () => {
-      //   it("uses the date as text on the featured content card", async () => {
-      //               mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
-      //     const wrapper = await factory({
-      //       featuredEntry: {
-      //         name: "featured content",
-      //         datePublished: new Date("29-10-2025"),
-      //       },
-      //     });
+      describe("when the featured entry is a news post", () => {
+        it("uses the date as text on the featured content card", async () => {
+          mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
+          const wrapper = await factory();
 
-      //     expect(wrapper.vm.featuredEntryText).toEqual("authored.publishedDate");
-      //   });
-      // });
-      // describe("when there is no datePublished field", () => {
-      //   it("uses the headline as text on the featured content card", async () => {
-      //     mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
-      //     const headline = "This is a headline";
-      //     const wrapper = await factory();
+          expect(wrapper.vm.featuredEntryText).toEqual(
+            "authored.publishedDate",
+          );
+        });
+      });
+      describe("when the featured entry is a project page", () => {
+        it("uses the headline as text on the featured content card", async () => {
+          const headline = "This is a headline";
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              blogs: [],
+              projects: [
+                {
+                  __typename: "ProjectPage",
+                  datePublished: "2022-12-01",
+                  headline,
+                  name: "featured project",
+                },
+              ],
+              events: [],
+            }),
+          );
 
-      //     expect(wrapper.vm.featuredEntryText).toEqual(headline);
-      //   });
-      // });
-      //   describe("when it is for a training course", () => {
-      //     it("uses the formatted training dates as a text on the featured card", async () => {
-      //       const startDate = "2025-10-16T00:00:00.000+01:00";
-      //       const wrapper = await factory({
-      //         featuredEntry: {
-      //           name: "featured content",
-      //           contentfulMetadata: {
-      //             concepts: [
-      //               {
-      //                 id: "eventTypeTrainingCourse",
-      //               },
-      //             ],
-      //           },
-      //           startDate,
-      //         },
-      //       });
+          const wrapper = await factory();
 
-      //       expect(wrapper.vm.featuredEntryText).toEqual("training.dateRange");
-      //     });
-      //   });
-      //   describe("when it is for an event", () => {
-      //     it("uses the formatted event dates as a text on the featured card", async () => {
-      //       const startDate = "2025-10-16T00:00:00.000+01:00";
-      //       const endDate = "2025-15-16T00:00:00.000+01:00";
-      //       const wrapper = await factory({
-      //         featuredEntry: {
-      //           name: "featured content",
-      //           contentfulMetadata: {
-      //             concepts: [
-      //               {
-      //                 id: "eventTypeEvent",
-      //               },
-      //             ],
-      //           },
-      //           startDate,
-      //           endDate,
-      //         },
-      //       });
+          expect(wrapper.vm.featuredEntryText).toEqual(headline);
+        });
+      });
+      describe("when the featured entry is a training course", () => {
+        it("uses the formatted training dates as a text on the featured card", async () => {
+          const startDate = "2025-10-16T00:00:00.000+01:00";
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              blogs: [],
+              projects: [],
+              events: [
+                {
+                  name: "featured content",
+                  contentfulMetadata: {
+                    concepts: [
+                      {
+                        id: "eventTypeTrainingCourse",
+                      },
+                    ],
+                  },
+                  startDate,
+                },
+              ],
+            }),
+          );
 
-      //       expect(wrapper.vm.featuredEntryText).toEqual("event.dateRange");
-      //     });
+          const wrapper = await factory();
+
+          expect(wrapper.vm.featuredEntryText).toEqual("training.dateRange");
+        });
+      });
+      describe("when the featured entry is an event", () => {
+        it("uses the formatted event dates as a text on the featured card", async () => {
+          const startDate = "2025-10-16T00:00:00.000+01:00";
+          const endDate = "2025-15-16T00:00:00.000+01:00";
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              blogs: [],
+              projects: [],
+              events: [
+                {
+                  name: "featured content",
+                  contentfulMetadata: {
+                    concepts: [
+                      {
+                        id: "eventTypeEvent",
+                      },
+                    ],
+                  },
+                  startDate,
+                  endDate,
+                },
+              ],
+            }),
+          );
+
+          const wrapper = await factory();
+
+          expect(wrapper.vm.featuredEntryText).toEqual("event.dateRange");
+        });
+      });
     });
   });
 });
