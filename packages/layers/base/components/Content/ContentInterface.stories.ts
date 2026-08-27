@@ -1,3 +1,4 @@
+// FIXME: update contentful responses
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 import { mocked } from "storybook/test";
 import { query as queryContentful } from "@europeana/vue-contentful-graphql/query";
@@ -68,12 +69,5 @@ export const WithFeaturedNews: Story = {
     site: "www.europeana.eu",
     contentTypes: ["blog post"],
     defaultCardThumbnail: { image: { url: sampleData.thumbnails[0] } },
-    featuredEntry: {
-      __typename: "BlogPosting",
-      sys: { id: "id30" },
-      datePublished: Date.now() + 30 * 3_600,
-      name: "Entry 30",
-      primaryImageOfPage: { image: { url: sampleData.thumbnails[0] } },
-    },
   },
 };
