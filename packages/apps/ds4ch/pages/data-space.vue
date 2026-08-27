@@ -62,14 +62,12 @@ const sortedContentTypes = ["blog post", "event", "training", "project"].filter(
       :hero-image="page.primaryImageOfPage"
       variant="alternate"
     />
-    <!-- TODO: remove featuredEntry prop -->
     <ContentInterface
       class="mt-5"
       site="dataspace-culturalheritage.eu"
       :content-types="sortedContentTypes"
       :default-card-thumbnail="defaultCardThumbnail"
       :cta-banners="page.hasPartCollection?.items.filter(Boolean)"
-      :featured-entry="page.featuredContent"
     >
       <template #error-message>
         <ErrorMessage
