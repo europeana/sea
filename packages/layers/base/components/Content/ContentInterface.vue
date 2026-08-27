@@ -251,14 +251,11 @@ const fetchFeaturedEntries = async () => {
 
 const fetchFullEntries = async () => {
   let featuredEntry;
-  if (isFirstPage.value) {
-    const featuredEntries = await fetchFeaturedEntries();
-    featuredEntry = featuredEntries
-      .map((entry) => entry.items[0])
-      .sort((a, b) => new Date(b.datePublished) - new Date(a.datePublished))[0];
-  } else {
-    featuredEntry = null;
-  }
+
+  const featuredEntries = await fetchFeaturedEntries();
+  featuredEntry = featuredEntries
+    .map((entry) => entry.items[0])
+    .sort((a, b) => new Date(b.datePublished) - new Date(a.datePublished))[0];
 
   const contentVariables = {
     limit: selectedTaxonomyOrType.value

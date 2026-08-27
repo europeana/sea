@@ -181,7 +181,7 @@ describe("components/Content/ContentInterface", () => {
   });
 
   describe("and page is not 1", () => {
-    it("does not fetch nor display a featured content card", async () => {
+    it("does fetch but not display a featured content card", async () => {
       useRouteMock.mockImplementation(() => ({
         query: {
           page: 2,
@@ -189,7 +189,7 @@ describe("components/Content/ContentInterface", () => {
       }));
       const wrapper = await factory();
 
-      expect(mockQuery).toHaveBeenCalledTimes(3);
+      expect(mockQuery).toHaveBeenCalledTimes(6);
       expect(wrapper.findAll("content-card-stub").length).toBe(12);
       expect(wrapper.findAll("content-featured-card-stub").length).toBe(0);
     });
