@@ -152,8 +152,8 @@ const allDisplayTags = computed(() => {
 
   if (keyword) {
     displayTags = displayTags.filter((tag) => {
-      const tagLabel = tag.name;
-      const tagNameMatch = tagLabel.toLowerCase().indexOf(keyword) > -1;
+      const tagLabel = tag?.name;
+      const tagNameMatch = tagLabel?.toLowerCase().indexOf(keyword) > -1;
       return tagNameMatch;
     });
   }
