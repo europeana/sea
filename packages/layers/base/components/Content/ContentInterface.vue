@@ -212,12 +212,6 @@ const fetchEntries = async (variables) => {
     ...variables,
   };
 
-  if (selectedTags.value.length) {
-    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
-      categories: { identifier: cat },
-    }));
-  }
-
   const contentTypeGraphql = {
     BlogPosting: blogPostingsListingGraphql,
     ProjectPage: projectPagesListingGraphql,
