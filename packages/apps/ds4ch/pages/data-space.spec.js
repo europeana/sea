@@ -143,9 +143,9 @@ const categoriesContentfulResponse = {
   },
 };
 
-const handleContentfulQuery = (graphQL) => {
+const handleContentfulQuery = (graphQL, blogs = {}) => {
   if (graphQL.definitions?.[0]?.name?.value === "BlogPostingsListing") {
-    return blogPostingsListingContentfulResponse;
+    return blogs;
   }
   if (graphQL.definitions?.[0]?.name?.value === "ProjectPagesListing") {
     return projectPagesListingContentfulResponse;
@@ -164,7 +164,19 @@ const handleContentfulQuery = (graphQL) => {
   }
 };
 
-const mockQuery = vi.fn((graphQL) => handleContentfulQuery(graphQL));
+const mockQuery = vi.fn((graphQL, args) => {
+  if (args.tagsFilter) {
+    return handleContentfulQuery(graphQL, {
+      data: { blogPostingsCollection: { items: [] } },
+    });
+  } else {
+    return handleContentfulQuery(
+      graphQL,
+      blogPostingsListingContentfulResponse,
+      projectPagesListingContentfulResponse,
+    );
+  }
+});
 
 const factory = async () =>
   await mountSuspended(dataSpacePage, {
@@ -253,7 +265,7 @@ describe("dataSpacePage", () => {
 
   describe("when in preview mode", () => {
     it("requests from contentful with the preview arg set to true", async () => {
-      await useRouteMock.mockImplementation(() => ({
+      useRouteMock.mockImplementation(() => ({
         path: "/en/data-space",
         params: { slug: "data-space" },
         fullPath: "/en/data-space?mode=preview",

@@ -7,6 +7,7 @@ query TrainingsListing(
   $skip: Int = 0
   $excludeSysId: String = ""
   $categoriesFilter: [EventFilter]
+  $tagsFilter: [EventFilter]
   $query: String = ""
 ) {
   eventCollection(
@@ -26,6 +27,7 @@ query TrainingsListing(
           }
         }
         { AND: $categoriesFilter }
+        { AND: $tagsFilter }
       ]
     }
   ) {
@@ -52,5 +54,6 @@ fragment eventCollectionFields on EventCollection {
     }
     startDate
     endDate
+    datePublished
   }
 }

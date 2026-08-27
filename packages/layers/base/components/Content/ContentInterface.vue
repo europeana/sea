@@ -20,10 +20,6 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  featuredEntry: {
-    type: Object,
-    default: () => {},
-  },
   /**
    * Contentful Image to use for cards which don't have any image.
    * @param {Object} defaultCardThumbnail.image - image object
@@ -112,11 +108,23 @@ const supportedTaxonomiesAndTypes = computed(() => {
   );
 });
 
+const categoriesFilter = computed(() => {
+  if (selectedTags.value.length) {
+    return selectedTags.value.map((cat) => ({
+      categories: { identifier: cat },
+    }));
+  }
+  return null;
+});
+
+const sectionEntries = computed(() => fullEntries.value.sectionEntries);
+const featuredEntry = computed(() => fullEntries.value.featuredEntry);
+
 const total = computed(() => {
   return (
-    (fullEntries.value.reduce((memo, collection) => {
+    (sectionEntries.value.reduce((memo, collection) => {
       return memo + collection.total;
-    }, 0) || 0) + (featuredEntryInResults.value ? 1 : 0)
+    }, 0) || 0) + (featuredEntry.value ? 1 : 0)
   );
 });
 
@@ -124,53 +132,9 @@ const page = computed(() => {
   return Number(route.query.page || 1);
 });
 
-const featuredEntryTags = computed(() => {
-  return (
-    props.featuredEntry?.categoriesCollection?.items?.map(
-      (cat) => cat.identifier,
-    ) || []
-  );
-});
-
-const featuredEntryMatchesSelectedTags = computed(() => {
-  return (
-    selectedTags.value.length === 0 ||
-    selectedTags.value.every((tag) => featuredEntryTags.value.includes(tag))
-  );
-});
-
-const featuredEntryInResults = computed(() => {
-  // no featured entry; not present
-  if (!props.featuredEntry) {
-    return false;
-  }
-  // tags are selected but featured entry does not have them all; not present
-  if (!featuredEntryMatchesSelectedTags.value) {
-    return false;
-  }
-  // selected type or taxonomy matches featured entry type or taxonomy; present
-  if (selectedType.value) {
-    if (selectedType.value.taxonomy) {
-      return entryHasTaxonomyTerm(
-        props.featuredEntry,
-        selectedType.value.taxonomy,
-      );
-    } else {
-      return entryHasContentType(props.featuredEntry, selectedType.value.type);
-    }
-  }
-  const featuredEntryIsOfSupportedType =
-    !!supportedTaxonomiesAndTypes.value.filter(
-      (type) =>
-        entryHasTaxonomyTerm(props.featuredEntry, type) ||
-        entryHasContentType(props.featuredEntry, type),
-    ).length;
-  return featuredEntryIsOfSupportedType;
-});
-
 function displayFeaturedEntry(sectionType) {
   // featured entry in results and on first page
-  if (featuredEntryInResults.value && isFirstPage.value) {
+  if (featuredEntry.value && isFirstPage.value) {
     // and type is selected; show
     if (selectedType.value) {
       return true;
@@ -178,8 +142,8 @@ function displayFeaturedEntry(sectionType) {
     // and section type matches featured entry type; show
     if (
       sectionType &&
-      (entryHasTaxonomyTerm(props.featuredEntry, sectionType) ||
-        entryHasContentType(props.featuredEntry, sectionType))
+      (entryHasTaxonomyTerm(featuredEntry.value, sectionType) ||
+        entryHasContentType(featuredEntry.value, sectionType))
     ) {
       return true;
     }
@@ -188,73 +152,65 @@ function displayFeaturedEntry(sectionType) {
 }
 
 const featuredEntryText = computed(() => {
-  if (props.featuredEntry.datePublished) {
+  if (entryHasContentType(featuredEntry.value, typeLookup.news.type)) {
     return t("authored.publishedDate", {
-      date: d(props.featuredEntry.datePublished, "short"),
+      date: d(featuredEntry.value.datePublished, "short"),
     });
-  } else if (props.featuredEntry.headline) {
-    return props.featuredEntry.headline;
   } else if (
-    entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
+    entryHasContentType(featuredEntry.value, typeLookup.project.type)
+  ) {
+    return featuredEntry.value.headline;
+  } else if (
+    entryHasTaxonomyTerm(featuredEntry.value, typeLookup.training.taxonomy)
   ) {
     return trainingDateHelper(
-      props.featuredEntry.startDate,
-      props.featuredEntry.endDate,
+      featuredEntry.value.startDate,
+      featuredEntry.value.endDate,
     );
   } else if (
-    entryHasTaxonomyTerm(props.featuredEntry, typeLookup.event.taxonomy)
+    entryHasTaxonomyTerm(featuredEntry.value, typeLookup.event.taxonomy)
   ) {
     return eventDateHelper(
-      props.featuredEntry.startDate,
-      props.featuredEntry.endDate,
+      featuredEntry.value.startDate,
+      featuredEntry.value.endDate,
     );
   }
   return undefined;
 });
 
 const featuredEntryImage = computed(() => {
-  if (props.featuredEntry?.primaryImageOfPage?.image) {
-    return props.featuredEntry?.primaryImageOfPage?.image;
-  } else if (props.featuredEntry?.image) {
-    return props.featuredEntry?.image;
+  if (featuredEntry.value?.primaryImageOfPage?.image) {
+    return featuredEntry.value?.primaryImageOfPage?.image;
+  } else if (featuredEntry.value?.image) {
+    return featuredEntry.value?.image;
   }
   return undefined;
 });
 
 const featuredEntryUrl = computed(() => {
-  if (props.featuredEntry.url) {
-    return props.featuredEntry.url;
+  if (featuredEntry.value.url) {
+    return featuredEntry.value.url;
   }
-  return entryUrl(props.featuredEntry);
+  return entryUrl(featuredEntry.value);
 });
 
 const featuredEntrySubTitle = computed(() => {
-  if (!entryHasContentType(props.featuredEntry, "Event")) {
+  if (!entryHasContentType(featuredEntry.value, "Event")) {
     return undefined;
   }
-  return entryHasTaxonomyTerm(props.featuredEntry, typeLookup.training.taxonomy)
+  return entryHasTaxonomyTerm(featuredEntry.value, typeLookup.training.taxonomy)
     ? t("training.training")
     : t("event.event");
 });
 
-async function fetchFullEntries() {
+const fetchEntries = async (variables) => {
   const contentVariables = {
     locale: localeProperties.value.language,
     preview: route.query?.mode === "preview",
-    limit: selectedTaxonomyOrType.value
-      ? ENTRIES_PER_PAGE
-      : ENTRIES_PER_SECTION,
-    skip: (page.value - 1) * ENTRIES_PER_PAGE,
-    categoriesFilter: null,
-    excludeSysId: props.featuredEntry?.sys?.id || "",
+    categoriesFilter: categoriesFilter.value,
     site: selectedTaxonomyOrType.value === "BlogPosting" ? props.site : null,
+    ...variables,
   };
-
-  if (selectedTags.value.length) {
-    contentVariables.categoriesFilter = selectedTags.value.map((cat) => ({
-      categories: { identifier: cat },
-    }));
-  }
 
   const contentTypeGraphql = {
     BlogPosting: blogPostingsListingGraphql,
@@ -280,14 +236,48 @@ async function fetchFullEntries() {
         };
       }),
   );
-}
+};
+
+const fetchFeaturedEntries = async () => {
+  const contentVariables = {
+    limit: 1,
+    tagsFilter: {
+      contentfulMetadata: { tags: { id_contains_some: ["featured"] } },
+    },
+  };
+
+  return await fetchEntries(contentVariables);
+};
+
+const fetchFullEntries = async () => {
+  let featuredEntry;
+
+  const featuredEntries = await fetchFeaturedEntries();
+  featuredEntry = featuredEntries
+    .map((entry) => entry.items[0])
+    .sort((a, b) => new Date(b.datePublished) - new Date(a.datePublished))[0];
+
+  const contentVariables = {
+    limit: selectedTaxonomyOrType.value
+      ? ENTRIES_PER_PAGE
+      : ENTRIES_PER_SECTION,
+    skip: (page.value - 1) * ENTRIES_PER_PAGE,
+    excludeSysId: featuredEntry?.sys?.id || "",
+  };
+
+  const sectionEntries = await fetchEntries(contentVariables);
+  return {
+    featuredEntry,
+    sectionEntries,
+  };
+};
 
 function normalisedEntryCards(entries = []) {
   return entries.map((entry) => normaliseCard(entry)).filter(Boolean);
 }
 
 const normalisedSections = computed(() => {
-  return fullEntries.value.map((collection) => ({
+  return sectionEntries.value.map((collection) => ({
     entries: normalisedEntryCards(collection.items),
     type: collection.type,
     total: collection.total,
@@ -416,7 +406,7 @@ const { data: fullEntries, error: fullEntriesError } = await useAsyncData(
   fullEntriesKey,
   fetchFullEntries,
   {
-    default: () => [],
+    default: () => {},
   },
 );
 if (fullEntriesError.value) {
@@ -523,7 +513,7 @@ function getMoreLinkLabelForSection(section) {
           <ContentFeaturedCard
             v-if="displayFeaturedEntry(section.type)"
             class="mb-4 mb-lg-5"
-            :title="props.featuredEntry?.name"
+            :title="featuredEntry?.name"
             :text="featuredEntryText"
             :image="featuredEntryImage"
             :sub-title="featuredEntrySubTitle"
