@@ -5,7 +5,7 @@ query ProjectPagesListing(
   $preview: Boolean = false
   $limit: Int!
   $skip: Int = 0
-  $excludeSysId: String = ""
+  $excludeSysIds: [String] = []
   $categoriesFilter: [ProjectPageFilter]
   $tagsFilter: [ProjectPageFilter]
   $query: String = ""
@@ -19,7 +19,7 @@ query ProjectPagesListing(
     skip: $skip
     where: {
       AND: [
-        { sys: { id_not: $excludeSysId } }
+        { sys: { id_not_in: $excludeSysIds } }
         { name_contains: $query }
         { AND: $categoriesFilter }
         { AND: $tagsFilter }

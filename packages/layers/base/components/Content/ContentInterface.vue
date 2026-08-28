@@ -117,14 +117,13 @@ const categoriesFilter = computed(() => {
   return null;
 });
 
-const sectionEntries = computed(() => fullEntries.value.sectionEntries);
-const featuredEntry = computed(() => fullEntries.value.featuredEntry);
+const sectionEntries = computed(() => fullEntries.value);
 
 const total = computed(() => {
   return (
-    (sectionEntries.value.reduce((memo, collection) => {
-      return memo + collection.total;
-    }, 0) || 0) + (featuredEntry.value ? 1 : 0)
+    sectionEntries.value.reduce((memo, collection) => {
+      return memo + collection.total + (collection.featuredEntry ? 1 : 0);
+    }, 0) || 0
   );
 });
 
@@ -132,76 +131,13 @@ const page = computed(() => {
   return Number(route.query.page || 1);
 });
 
-function displayFeaturedEntry(sectionType) {
-  // featured entry in results and on first page
-  if (featuredEntry.value && isFirstPage.value) {
-    // and type is selected; show
-    if (selectedType.value) {
-      return true;
-    }
-    // and section type matches featured entry type; show
-    if (
-      sectionType &&
-      (entryHasTaxonomyTerm(featuredEntry.value, sectionType) ||
-        entryHasContentType(featuredEntry.value, sectionType))
-    ) {
-      return true;
-    }
+function displayFeaturedEntry(section) {
+  // featured entries in results and on first page
+  if (section.featuredEntry && isFirstPage.value) {
+    return true;
   }
   return false;
 }
-
-const featuredEntryText = computed(() => {
-  if (entryHasContentType(featuredEntry.value, typeLookup.news.type)) {
-    return t("authored.publishedDate", {
-      date: d(featuredEntry.value.datePublished, "short"),
-    });
-  } else if (
-    entryHasContentType(featuredEntry.value, typeLookup.project.type)
-  ) {
-    return featuredEntry.value.headline;
-  } else if (
-    entryHasTaxonomyTerm(featuredEntry.value, typeLookup.training.taxonomy)
-  ) {
-    return trainingDateHelper(
-      featuredEntry.value.startDate,
-      featuredEntry.value.endDate,
-    );
-  } else if (
-    entryHasTaxonomyTerm(featuredEntry.value, typeLookup.event.taxonomy)
-  ) {
-    return eventDateHelper(
-      featuredEntry.value.startDate,
-      featuredEntry.value.endDate,
-    );
-  }
-  return undefined;
-});
-
-const featuredEntryImage = computed(() => {
-  if (featuredEntry.value?.primaryImageOfPage?.image) {
-    return featuredEntry.value?.primaryImageOfPage?.image;
-  } else if (featuredEntry.value?.image) {
-    return featuredEntry.value?.image;
-  }
-  return undefined;
-});
-
-const featuredEntryUrl = computed(() => {
-  if (featuredEntry.value.url) {
-    return featuredEntry.value.url;
-  }
-  return entryUrl(featuredEntry.value);
-});
-
-const featuredEntrySubTitle = computed(() => {
-  if (!entryHasContentType(featuredEntry.value, "Event")) {
-    return undefined;
-  }
-  return entryHasTaxonomyTerm(featuredEntry.value, typeLookup.training.taxonomy)
-    ? t("training.training")
-    : t("event.event");
-});
 
 const fetchEntries = async (variables) => {
   const contentVariables = {
@@ -250,26 +186,23 @@ const fetchFeaturedEntries = async () => {
 };
 
 const fetchFullEntries = async () => {
-  let featuredEntry;
-
   const featuredEntries = await fetchFeaturedEntries();
-  featuredEntry = featuredEntries
-    .map((entry) => entry.items[0])
-    .sort((a, b) => new Date(b.datePublished) - new Date(a.datePublished))[0];
 
   const contentVariables = {
     limit: selectedTaxonomyOrType.value
       ? ENTRIES_PER_PAGE
       : ENTRIES_PER_SECTION,
     skip: (page.value - 1) * ENTRIES_PER_PAGE,
-    excludeSysId: featuredEntry?.sys?.id || "",
+    excludeSysIds: featuredEntries.map((entry) => entry?.items[0]?.sys?.id),
   };
 
   const sectionEntries = await fetchEntries(contentVariables);
-  return {
-    featuredEntry,
-    sectionEntries,
-  };
+  sectionEntries.forEach((section) => {
+    section.featuredEntry = featuredEntries.find(
+      (entry) => entry.type === section.type,
+    )?.items[0];
+  });
+  return sectionEntries;
 };
 
 function normalisedEntryCards(entries = []) {
@@ -279,6 +212,7 @@ function normalisedEntryCards(entries = []) {
 const normalisedSections = computed(() => {
   return sectionEntries.value.map((collection) => ({
     entries: normalisedEntryCards(collection.items),
+    featuredEntry: normaliseCard(collection.featuredEntry),
     type: collection.type,
     total: collection.total,
   }));
@@ -363,7 +297,7 @@ function normaliseCard(entry) {
           date: d(entry.datePublished, "short"),
         }),
         primaryImageOfPage:
-          entry.primaryImageOfPage || props.defaultCardThumbnail,
+          entry.primaryImageOfPage || entry.image || props.defaultCardThumbnail,
       };
     } else if (entryHasContentType(entry, "ProjectPage")) {
       return {
@@ -371,7 +305,7 @@ function normaliseCard(entry) {
         url: entryUrl(entry),
         text: entry.headline,
         primaryImageOfPage:
-          entry.primaryImageOfPage || props.defaultCardThumbnail,
+          entry.primaryImageOfPage || entry.image || props.defaultCardThumbnail,
       };
     } else if (entryHasContentType(entry, "Event")) {
       if (entryHasTaxonomyTerm(entry, typeLookup.training.taxonomy)) {
@@ -421,7 +355,7 @@ watch(page, () => {
 });
 
 function renderSection(section) {
-  return section?.total > 0 || displayFeaturedEntry(section.type);
+  return section?.total > 0 || displayFeaturedEntry(section);
 }
 
 function renderMoreLink(section) {
@@ -511,13 +445,13 @@ function getMoreLinkLabelForSection(section) {
             {{ typeSectionLookup[section.type].title }}
           </h2>
           <ContentFeaturedCard
-            v-if="displayFeaturedEntry(section.type)"
+            v-if="displayFeaturedEntry(section)"
             class="mb-4 mb-lg-5"
-            :title="featuredEntry?.name"
-            :text="featuredEntryText"
-            :image="featuredEntryImage"
-            :sub-title="featuredEntrySubTitle"
-            :url="featuredEntryUrl"
+            :title="section.featuredEntry.name"
+            :text="section.featuredEntry.text"
+            :image="section.featuredEntry.primaryImageOfPage.image"
+            :sub-title="section.featuredEntry.subTitle"
+            :url="section.featuredEntry.url"
           />
         </transition-group>
         <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">

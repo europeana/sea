@@ -5,7 +5,7 @@ query BlogPostingsListing(
   $preview: Boolean = false
   $limit: Int!
   $skip: Int = 0
-  $excludeSysId: String = ""
+  $excludeSysIds: [String] = []
   $categoriesFilter: [BlogPostingFilter]
   $tagsFilter: [BlogPostingFilter]
   $site: String = ""
@@ -19,7 +19,7 @@ query BlogPostingsListing(
     skip: $skip
     where: {
       AND: [
-        { sys: { id_not: $excludeSysId } }
+        { sys: { id_not_in: $excludeSysIds } }
         { name_contains: $query }
         { site: $site }
         { AND: $categoriesFilter }
