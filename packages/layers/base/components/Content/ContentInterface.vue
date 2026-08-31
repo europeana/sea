@@ -449,7 +449,7 @@ function getMoreLinkLabelForSection(section) {
             class="mb-4 mb-lg-5"
             :title="section.featuredEntry.name"
             :text="section.featuredEntry.text"
-            :image="section.featuredEntry.primaryImageOfPage.image"
+            :image="section.featuredEntry.primaryImageOfPage?.image"
             :sub-title="section.featuredEntry.subTitle"
             :url="section.featuredEntry.url"
           />
@@ -462,13 +462,9 @@ function getMoreLinkLabelForSection(section) {
                 :sub-title="entry.subTitle"
                 :url="entry.url"
                 :text="entry.text"
-                :image-url="
-                  entry.primaryImageOfPage?.image &&
-                  entry.primaryImageOfPage.image.url
-                "
+                :image-url="entry.primaryImageOfPage?.image?.url"
                 :image-content-type="
-                  entry.primaryImageOfPage?.image &&
-                  entry.primaryImageOfPage.image.contentType
+                  entry.primaryImageOfPage?.image?.contentType
                 "
               />
             </transition>
