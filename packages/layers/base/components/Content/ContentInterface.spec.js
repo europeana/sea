@@ -396,7 +396,7 @@ describe("components/Content/ContentInterface", () => {
     expect(wrapper.vm.contentSections[4]).toBe(ctaBanners[1]);
   });
 
-  describe("featured entry", () => {
+  describe("adds featured entries to each section", () => {
     describe("when there is no featured entry", () => {
       it("does not display a featured content card", async () => {
         const wrapper = await factory();
@@ -419,41 +419,41 @@ describe("components/Content/ContentInterface", () => {
           ).toBe(true);
         });
       });
+
       describe("and there are more than one featured entries", () => {
-        it("displays the most recently published entry", async () => {
-          const lastPublishedFeaturedEntry = {
-            __typename: "Event",
-            datePublished: "2024-01-01",
-          };
+        it("displays one for each section", async () => {
           mockQuery.mockImplementation(
             createMock(fullContentMock, {
               ...featuredContentMock,
-              projects: [
-                {
-                  __typename: "ProjectPage",
-                  datePublished: "2022-12-01",
-                },
-              ],
-              events: [lastPublishedFeaturedEntry],
+              projects: [{ __typename: "ProjectPage" }],
+              events: [{ __typename: "Event" }],
             }),
           );
           const wrapper = await factory();
 
-          expect(wrapper.vm.featuredEntry).toEqual(lastPublishedFeaturedEntry);
+          expect(wrapper.vm.sectionEntries[0].featuredEntry.__typename).toEqual(
+            "BlogPosting",
+          );
+          expect(wrapper.vm.sectionEntries[1].featuredEntry.__typename).toEqual(
+            "ProjectPage",
+          );
+          expect(wrapper.vm.sectionEntries[2].featuredEntry.__typename).toEqual(
+            "Event",
+          );
         });
       });
       describe("when the featured entry is a news post", () => {
-        it("uses the date as text on the featured content card", async () => {
+        it("is present in the blog section", async () => {
           mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
           const wrapper = await factory();
 
-          expect(wrapper.vm.featuredEntryText).toEqual(
-            "authored.publishedDate",
+          expect(wrapper.vm.sectionEntries[0].featuredEntry.name).toEqual(
+            "Blog post entry featured",
           );
         });
       });
       describe("when the featured entry is a project page", () => {
-        it("uses the headline as text on the featured content card", async () => {
+        it("is present and uses the headline as text", async () => {
           const headline = "This is a headline";
           mockQuery.mockImplementation(
             createMock(fullContentMock, {
@@ -472,11 +472,13 @@ describe("components/Content/ContentInterface", () => {
 
           const wrapper = await factory();
 
-          expect(wrapper.vm.featuredEntryText).toEqual(headline);
+          expect(wrapper.vm.sectionEntries[1].featuredEntry.headline).toEqual(
+            headline,
+          );
         });
       });
       describe("when the featured entry is a training course", () => {
-        it("uses the formatted training dates as a text on the featured card", async () => {
+        it("is present in the training section entries", async () => {
           const startDate = "2025-10-16T00:00:00.000+01:00";
           mockQuery.mockImplementation(
             createMock(fullContentMock, {
@@ -484,7 +486,7 @@ describe("components/Content/ContentInterface", () => {
               projects: [],
               events: [
                 {
-                  name: "featured content",
+                  name: "featured training",
                   contentfulMetadata: {
                     concepts: [
                       {
@@ -500,11 +502,13 @@ describe("components/Content/ContentInterface", () => {
 
           const wrapper = await factory();
 
-          expect(wrapper.vm.featuredEntryText).toEqual("training.dateRange");
+          expect(wrapper.vm.sectionEntries[2].featuredEntry.name).toEqual(
+            "featured training",
+          );
         });
       });
       describe("when the featured entry is an event", () => {
-        it("uses the formatted event dates as a text on the featured card", async () => {
+        it("is present in the event section entries", async () => {
           const startDate = "2025-10-16T00:00:00.000+01:00";
           const endDate = "2025-15-16T00:00:00.000+01:00";
           mockQuery.mockImplementation(
@@ -513,7 +517,7 @@ describe("components/Content/ContentInterface", () => {
               projects: [],
               events: [
                 {
-                  name: "featured content",
+                  name: "featured event",
                   contentfulMetadata: {
                     concepts: [
                       {
@@ -530,7 +534,9 @@ describe("components/Content/ContentInterface", () => {
 
           const wrapper = await factory();
 
-          expect(wrapper.vm.featuredEntryText).toEqual("event.dateRange");
+          expect(wrapper.vm.sectionEntries[2].featuredEntry.name).toEqual(
+            "featured event",
+          );
         });
       });
     });
