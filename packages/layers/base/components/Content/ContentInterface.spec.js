@@ -422,24 +422,14 @@ describe("components/Content/ContentInterface", () => {
 
       describe("and there are more than one featured entries", () => {
         it("displays one for each section", async () => {
-          const lastPublishedFeaturedEntry = {
-            __typename: "Event",
-            datePublished: "2024-01-01",
-          };
           mockQuery.mockImplementation(
             createMock(fullContentMock, {
               ...featuredContentMock,
-              projects: [
-                {
-                  __typename: "ProjectPage",
-                  datePublished: "2022-12-01",
-                },
-              ],
-              events: [lastPublishedFeaturedEntry],
+              projects: [{ __typename: "ProjectPage" }],
+              events: [{ __typename: "Event" }],
             }),
           );
           const wrapper = await factory();
-          console.log(wrapper.vm.sectionEntries);
 
           expect(wrapper.vm.sectionEntries[0].featuredEntry.__typename).toEqual(
             "BlogPosting",
