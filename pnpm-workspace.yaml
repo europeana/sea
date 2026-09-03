@@ -27,7 +27,7 @@ catalogs:
     "@nuxt/test-utils": 3.23.0
     "@nuxtjs/i18n": 9.5.6
     "@nuxtjs/storybook": 9.0.1
-    nuxt: 3.21.8
+    nuxt: 4.5.2
   vite7:
     "@vitejs/plugin-vue": "6.0.7"
     vite: "7.3.5"
