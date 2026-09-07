@@ -441,6 +441,23 @@ describe("components/Content/ContentInterface", () => {
             "Event",
           );
         });
+        it("loads the first card image eagerly and the others lazy", async () => {
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              ...featuredContentMock,
+              projects: [{ __typename: "ProjectPage" }],
+              events: [{ __typename: "Event" }],
+            }),
+          );
+          const wrapper = await factory();
+
+          expect(
+            wrapper.findAll("content-featured-card-stub")[0].attributes("lazy"),
+          ).toEqual("false");
+          expect(
+            wrapper.findAll("content-featured-card-stub")[1].attributes("lazy"),
+          ).toEqual("true");
+        });
       });
       describe("when the featured entry is a news post", () => {
         it("is present in the blog section", async () => {

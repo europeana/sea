@@ -41,6 +41,13 @@ const props = defineProps({
     type: [String, Object],
     default: "",
   },
+  /**
+   * If `true`, image will be lazy-loaded
+   */
+  lazy: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const imageCropPresets = {
@@ -77,7 +84,7 @@ const imageSizes = [
     :image-content-type="props.image?.contentType"
     :image-sizes="imageSizes"
     :contentful-image-crop-presets="imageCropPresets"
-    :lazy="false"
+    :lazy="props.lazy"
     class="featured-content-card mw-100"
   />
 </template>

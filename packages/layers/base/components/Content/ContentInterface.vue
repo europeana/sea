@@ -452,6 +452,7 @@ function getMoreLinkLabelForSection(section) {
             :image="section.featuredEntry.primaryImageOfPage?.image"
             :sub-title="section.featuredEntry.subTitle"
             :url="section.featuredEntry.url"
+            :lazy="index > 0"
           />
         </transition-group>
         <div class="row g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4">

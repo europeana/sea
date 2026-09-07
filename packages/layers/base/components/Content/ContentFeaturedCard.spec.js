@@ -23,6 +23,7 @@ describe("components/content/ContentFeaturedCard", () => {
     expect(card.props("contentfulImageCropPresets")).toEqual(
       wrapper.vm.imageCropPresets,
     );
+    expect(card.props("lazy")).toEqual(true);
   });
 
   describe("when an image with url and content type are passed", () => {
@@ -35,6 +36,16 @@ describe("components/content/ContentFeaturedCard", () => {
 
       expect(card.props("imageUrl")).toEqual(url);
       expect(card.props("imageContentType")).toEqual(contentType);
+    });
+  });
+
+  describe("when the lazy prop is passed", () => {
+    it("renders a content card with passed down lazy", () => {
+      const wrapper = factory({ ...testProps, lazy: false });
+
+      const card = wrapper.findComponent("content-card-stub");
+
+      expect(card.props("lazy")).toEqual(false);
     });
   });
 });
