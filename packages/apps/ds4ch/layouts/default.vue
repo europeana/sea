@@ -1,5 +1,5 @@
 <script setup>
-import favIconImage from "@europeana/style/img/DS4CH/favicon.ico";
+import favIconImage from "/favicon.ico";
 
 const i18nHead = useLocaleHead({
   seo: true,
