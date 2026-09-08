@@ -205,6 +205,9 @@ settings:
 
 catalogs:
   default:
+    '@europeana/style':
+      specifier: 2.38.0
+      version: 2.38.0
     lodash-es:
       specifier: 4.18.1
       version: 4.18.1
@@ -391,8 +394,8 @@ importers:
         specifier: workspace:*
         version: link:../../layers/base
       '@europeana/style':
-        specifier: 2.17.1
-        version: 2.17.1
+        specifier: 'catalog:'
+        version: 2.38.0
       '@europeana/vue-contentful-graphql':
         specifier: workspace:*
         version: link:../../plugins/vue-contentful-graphql
@@ -440,7 +443,7 @@ importers:
         version: 12.2.0
       unplugin-vue-components:
         specifier: 32.1.0
-        version: 32.1.0(@nuxt/kit@4.4.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3))
+        version: 32.1.0(@nuxt/kit@3.21.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3))
       vue:
         specifier: catalog:vue3
         version: 3.5.38(typescript@5.9.3)
@@ -487,8 +490,8 @@ importers:
         specifier: 0.5.5
         version: 0.5.5(@popperjs/core@2.11.8)(typescript@5.9.3)
       '@europeana/style':
-        specifier: 2.17.1
-        version: 2.17.1
+        specifier: 'catalog:'
+        version: 2.38.0
       '@nuxtjs/i18n':
         specifier: catalog:nuxt3
         version: 9.5.6(@vue/compiler-dom@3.5.38)(eslint@10.5.0(jiti@2.7.0))(magicast@0.5.3)(rollup@4.62.2)(vue@3.5.38(typescript@5.9.3))
@@ -1411,6 +1414,9 @@ packages:
 
   '@europeana/style@2.17.1':
     resolution: {integrity: sha512-6PxVa7i6BEXl691PGf8Nk9gW97foZRuvXOTj9nXrHME1by4IS9rA9RdGbA1FMd6IjC//1FDrD+LOvG+etdAYRA==}
+
+  '@europeana/style@2.38.0':
+    resolution: {integrity: sha512-WVP4oZ2os+PKohXkknI/3efA88ESIllVvV+uWvx84mX+Qmwl1EQl6A0CMuTcehzyu+Sodk+axUYcmHtLR+OGWA==}
 
   '@gar/promise-retry@1.0.3':
     resolution: {integrity: sha512-GmzA9ckNokPypTg10pgpeHNQe7ph+iIKKmhKu3Ob9ANkswreCx7R3cKmY781K8QK3AqVL3xVh9A42JvIAbkkSA==}
@@ -8581,11 +8587,11 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
+  vue-component-type-helpers@3.3.11:
+    resolution: {integrity: sha512-LwcxzeliO9fkQcpJG0PoX8X5kmAhKmH9wkpDLxNabwzkQ9Zeib2YVHwFV4pcWmMLfXVfjr/dSV+DaJ3cIPgSNA==}
+
   vue-component-type-helpers@3.3.5:
     resolution: {integrity: sha512-Fe1jyPJoUGpJOYKOri44jduR7My4yYINOMJISuMAbmrs+L5LbIDUc8NTWZYY3EJLK0yPLuCmcd5zoCsE4k2/KA==}
-
-  vue-component-type-helpers@3.3.8:
-    resolution: {integrity: sha512-troqCMmQodQDqUqn63NQaFi+CDSclSe7sc8VEBFqf5GFLqmGR2Ph3P2WEC7qwpRVyEWsTi/aAr4vyOe/B1hU3g==}
 
   vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
@@ -9598,6 +9604,8 @@ snapshots:
       - typescript
 
   '@europeana/style@2.17.1': {}
+
+  '@europeana/style@2.38.0': {}
 
   '@gar/promise-retry@1.0.3': {}
 
@@ -11568,7 +11576,7 @@ snapshots:
       storybook: 10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       type-fest: 2.19.0
       vue: 3.5.38(typescript@5.9.3)
-      vue-component-type-helpers: 3.3.8
+      vue-component-type-helpers: 3.3.11
 
   '@stylistic/eslint-plugin@5.10.0(eslint@10.5.0(jiti@2.7.0))':
     dependencies:
@@ -17193,7 +17201,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.4
 
-  unplugin-vue-components@32.1.0(@nuxt/kit@4.4.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3)):
+  unplugin-vue-components@32.1.0(@nuxt/kit@3.21.8(magicast@0.5.3))(vue@3.5.38(typescript@5.9.3)):
     dependencies:
       chokidar: 5.0.0
       local-pkg: 1.2.1
@@ -17206,7 +17214,7 @@ snapshots:
       unplugin-utils: 0.3.1
       vue: 3.5.38(typescript@5.9.3)
     optionalDependencies:
-      '@nuxt/kit': 4.4.8(magicast@0.5.3)
+      '@nuxt/kit': 3.21.8(magicast@0.5.3)
 
   unplugin-vue-router@0.12.0(vue-router@4.6.4(vue@3.5.38(typescript@5.9.3)))(vue@3.5.38(typescript@5.9.3)):
     dependencies:
@@ -17528,9 +17536,9 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.3.5: {}
+  vue-component-type-helpers@3.3.11: {}
 
-  vue-component-type-helpers@3.3.8: {}
+  vue-component-type-helpers@3.3.5: {}
 
   vue-devtools-stub@0.1.0: {}
 
