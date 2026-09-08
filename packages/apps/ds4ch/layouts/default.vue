@@ -1,6 +1,4 @@
 <script setup>
-import favIconImage from "/favicon.ico";
-
 const i18nHead = useLocaleHead({
   seo: true,
 });
@@ -9,7 +7,7 @@ useHead({
   link: [
     {
       rel: "icon",
-      href: favIconImage,
+      href: "/favicon.ico",
       type: "image/x-icon",
     },
   ],
