@@ -38,5 +38,6 @@ catalogs:
     "@vueuse/core": "14.3.0"
 minimumReleaseAgeExclude:
   - "@europeana/style@2.38.0"
+  - "@europeana/feedback-widget@0.5.6"
 packages:
   - packages/**

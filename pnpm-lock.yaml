@@ -487,8 +487,8 @@ importers:
         specifier: 2.1.14
         version: 2.1.14
       '@europeana/feedback-widget':
-        specifier: 0.5.5
-        version: 0.5.5(@popperjs/core@2.11.8)(typescript@5.9.3)
+        specifier: 0.5.6
+        version: 0.5.6(@popperjs/core@2.11.8)(typescript@5.9.3)
       '@europeana/style':
         specifier: 'catalog:'
         version: 2.38.0
@@ -1408,12 +1408,9 @@ packages:
     resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@europeana/feedback-widget@0.5.5':
-    resolution: {integrity: sha512-jtqx8dyrL3IvPcc4JhtLRGxeddK0j/A/+QKJ/OSKKWoO0HDX6ipkeW1JR9bJIASvQ0zJTv4YhAdfckqWt1767g==}
-    engines: {node: ^18, npm: ^9}
-
-  '@europeana/style@2.17.1':
-    resolution: {integrity: sha512-6PxVa7i6BEXl691PGf8Nk9gW97foZRuvXOTj9nXrHME1by4IS9rA9RdGbA1FMd6IjC//1FDrD+LOvG+etdAYRA==}
+  '@europeana/feedback-widget@0.5.6':
+    resolution: {integrity: sha512-XBpw1XCei/+Ll6vCZG5ivtwG0Kp7Qs9pw2DaPaFMYA8t+QmKE+dKPnFEVcHKg8AXuGyyUy/kqjd6jspy6XeEyw==}
+    engines: {node: ^24.0.0, pnpm: '>= 11.8.0'}
 
   '@europeana/style@2.38.0':
     resolution: {integrity: sha512-WVP4oZ2os+PKohXkknI/3efA88ESIllVvV+uWvx84mX+Qmwl1EQl6A0CMuTcehzyu+Sodk+axUYcmHtLR+OGWA==}
@@ -9601,16 +9598,14 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@europeana/feedback-widget@0.5.5(@popperjs/core@2.11.8)(typescript@5.9.3)':
+  '@europeana/feedback-widget@0.5.6(@popperjs/core@2.11.8)(typescript@5.9.3)':
     dependencies:
-      '@europeana/style': 2.17.1
+      '@europeana/style': 2.38.0
       bootstrap: 5.3.8(@popperjs/core@2.11.8)
       vue: 3.5.38(typescript@5.9.3)
     transitivePeerDependencies:
       - '@popperjs/core'
       - typescript
-
-  '@europeana/style@2.17.1': {}
 
   '@europeana/style@2.38.0': {}
 

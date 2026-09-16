@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@elastic/apm-rum-vue": "2.1.14",
-    "@europeana/feedback-widget": "0.5.5",
+    "@europeana/feedback-widget": "0.5.6",
     "@europeana/style": "catalog:",
     "@nuxtjs/i18n": "catalog:nuxt3",
     "@rollup/plugin-graphql": "3.0.0",
