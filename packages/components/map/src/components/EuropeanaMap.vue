@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, ref, inject } from "vue";
+import { computed, nextTick, onMounted, ref, inject } from "vue";
 import { useFetch } from "@vueuse/core";
 import "ol/ol.css";
 
@@ -11,6 +11,7 @@ import { useOpenLayersKeyboardNavigation } from "@/composables/openLayersKeyboar
 import { useOpenLayersControls } from "@/composables/openLayersControls.js";
 import { useOpenLayersPinPopoverOverlay } from "@/composables/openLayersPinPopoverOverlay.js";
 import { useOpenLayersPinSpread } from "@/composables/openLayersPinSpread.js";
+
 import pointIconSrc from "@/assets/img/ic_location.svg";
 
 import { elementIdFor } from "@/utils/elementIdFor.js";
@@ -45,6 +46,11 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  // if an object, expected to be a Promise
+  scrollTo: {
+    type: [Boolean, Object],
+    default: false,
+  },
   style: {
     type: [Object, String],
     default: null,
@@ -73,6 +79,9 @@ const hash = computed(() => props.hash || injectedConfig?.value?.hash);
 const json = computed(() => props.json || injectedConfig?.value?.json);
 const pinPopover = computed(
   () => props.pinPopover || injectedConfig?.value?.pinPopover,
+);
+const scrollTo = computed(
+  () => props.scrollTo || injectedConfig?.value?.scrollTo,
 );
 const style = computed(() => props.style || injectedConfig?.value?.style);
 const url = computed(() => props.url || injectedConfig?.value?.url);
@@ -157,6 +166,21 @@ nextTick().then(() => {
   });
 
   useOpenLayersControls({ map, controls });
+});
+
+const scrollToMap = () => {
+  const promise =
+    scrollTo.value instanceof Promise ? scrollTo.value : Promise.resolve();
+
+  promise.then(() => {
+    document.getElementById(elementId.value)?.scrollIntoView();
+  });
+};
+
+onMounted(() => {
+  if (scrollTo.value) {
+    scrollToMap();
+  }
 });
 </script>
 

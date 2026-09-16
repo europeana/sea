@@ -22,9 +22,6 @@ export const useLocationHash = ({ centre, elementId, zoom }) => {
       if (hashZoom) {
         zoomRef.value = Number(hashZoom);
       }
-      if (hashCentre || hashZoom) {
-        document.getElementById(elementIdRef.value)?.scrollIntoView();
-      }
     }
   };
 
