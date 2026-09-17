@@ -23,6 +23,6 @@
     "nuxt": "catalog:nuxt3",
     "sass-embedded": "1.100.0",
     "vue": "catalog:vue3",
-    "vue-router": "4.6.4"
+    "vue-router": "5.3.1"
   }
 }
