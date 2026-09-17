@@ -388,7 +388,7 @@ importers:
         specifier: 2.13.4
         version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
 
-  packages/apps/contentful:
+  packages/apps/ctf-apps:
     devDependencies:
       '@europeana/sea-base-layer':
         specifier: workspace:*

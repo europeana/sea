@@ -5,8 +5,8 @@ export default defineConfig({
     // NOTE: do not rely on globs like "packages/*/*" as it causes
     //       failures in the nuxt-environment test suites
     projects: [
-      "packages/apps/contentful",
       "packages/apps/cats",
+      "packages/apps/ctf-apps",
       "packages/apps/ds4ch",
       "packages/components/map",
       "packages/directives/vue-visible-on-scroll",
