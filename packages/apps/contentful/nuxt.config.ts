@@ -1,0 +1,50 @@
+import { name as packageName, version as packageVersion } from "./package.json";
+
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  compatibilityDate: "2025-05-15",
+
+  css: ["/assets/scss/main.scss"],
+
+  devtools: { enabled: true },
+
+  modules: ["@nuxt/eslint", "@nuxtjs/i18n"],
+
+  extends: "@europeana/sea-base-layer",
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Silence deprecation warnings until Bootstrap 5 updates Sass: https://github.com/twbs/bootstrap/issues/40962
+          silenceDeprecations: [
+            "global-builtin",
+            "import",
+            "color-functions",
+            "if-function",
+          ],
+        },
+      },
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      contentful: {
+        accessToken: {
+          delivery: null,
+          preview: null,
+        },
+        environmentId: null,
+        graphqlUrl: null,
+        spaceId: null,
+      },
+      elastic: {
+        apm: {
+          serviceName: packageName.replace(/^.*\//, ""),
+          serviceVersion: packageVersion,
+        },
+      },
+    },
+  },
+});
