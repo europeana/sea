@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
   <div class="contentful">
     <form class="mb-3">
-      <input id="value" v-model="fieldValue" class="" />
+      <input v-model="fieldValue" class="" />
     </form>
   </div>
 </template>
