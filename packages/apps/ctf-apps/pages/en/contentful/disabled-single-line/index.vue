@@ -1,28 +1,27 @@
 <script setup>
-
-const value = ref(true);
+const fieldValue = ref("");
 const contentfulExtensionSdk = ref(true);
 
 useHead({
-    title: 'Firelserver manager - Contentful app',
-    bodyAttrs: {
-        class: '',
-        style: 'background: transparent;'
-    }
+  title: "Disabled single line text - Contentful app",
+  bodyAttrs: {
+    class: "",
+    style: "background: transparent;",
+  },
 });
 
 const updateValue = (newValue) => {
-  value.value = newValue;
+  fieldValue.value = newValue;
 };
-console.log('setting up mounted');
+
 onMounted(() => {
-  console.log('mounted');
-  console.log('window.contentfulExtension', window.contentfulExtension);
-  window.contentfulExtension.init(sdk => {
+  window.contentfulExtension.init((sdk) => {
     contentfulExtensionSdk.value = sdk;
-    if (sdk.location.is(window.contentfulExtension.locations.LOCATION_ENTRY_FIELD)) {
+    if (
+      sdk.location.is(window.contentfulExtension.locations.LOCATION_ENTRY_FIELD)
+    ) {
       sdk.window.startAutoResizer();
-      value.value = sdk.field.getValue();
+      fieldValue.value = sdk.field.getValue();
       // onValueChanged returns a detachValueChangeHandler, should we use this?
       sdk.field.onValueChanged(updateValue);
     }
@@ -32,20 +31,23 @@ onMounted(() => {
 
 <template>
   <div class="contentful">
-      {{ value }}
-      <b-form-group>
-        <b-form-input
-          v-model="value"
-          type="text"
-          disabled
-        />
-      </b-form-group>
+    <form class="mb-3">
+      <input id="value" v-model="fieldValue" class="" disabled />
+    </form>
   </div>
 </template>
 
-
 <style lang="scss" scoped>
-  .contentful {
-    font-size: 11px;
+.contentful {
+  font-size: 11px;
+
+  input:disabled {
+    // thse styles need to be moved to somewhere where they can be shared among contentful applications
+    background-color: #e9ecef;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    border: 0;
   }
+}
 </style>
