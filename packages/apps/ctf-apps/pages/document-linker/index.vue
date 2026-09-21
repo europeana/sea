@@ -3,7 +3,7 @@ const fieldValue = ref("");
 const contentfulExtensionSdk = ref(true);
 
 useHead({
-  title: "Firelserver manager - Contentful app",
+  title: "Document linker - Contentful app",
   bodyAttrs: {
     class: "",
     style: "background: transparent;",

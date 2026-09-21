@@ -5,11 +5,11 @@ import IndexPage from "./index.vue";
 const factory = async () => await mountSuspended(IndexPage, {});
 
 describe("IndexPage", () => {
-  it("renders info text", async () => {
+  it("renders heading", async () => {
     const wrapper = await factory();
 
-    const div = wrapper.find(".contentful-app");
+    const h1 = wrapper.find("h1");
 
-    expect(div.text()).toBe("Hello from contentful app index page!");
+    expect(h1.text()).toContain("Contentful apps");
   });
 });
