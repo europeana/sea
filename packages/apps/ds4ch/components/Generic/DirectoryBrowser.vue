@@ -23,7 +23,7 @@ const itemURL = (item) => {
   if (item.type === "directory") {
     url = `${url}/`;
   }
-  url = url.replace(/\/\//g, "/");
+  url = url.replaceAll(/\/\//g, "/");
   return url;
 };
 
