@@ -31,11 +31,12 @@ const { data } = useAsyncData(`DirectoryBrowser:${props.url}`, () =>
   $fetch(props.url),
 );
 
-const items = computed(() =>
-  data.value.map((item) => ({
-    ...item,
-    url: itemURL(item),
-  })),
+const items = computed(
+  () =>
+    data.value?.map((item) => ({
+      ...item,
+      url: itemURL(item),
+    })) || [],
 );
 </script>
 
