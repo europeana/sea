@@ -14,6 +14,8 @@ const updateValue = (newValue) => {
   fieldValue.value = newValue;
 };
 
+const url = ref("");
+
 onMounted(() => {
   window.contentfulExtension.init((sdk) => {
     contentfulExtensionSdk.value = sdk;
@@ -24,6 +26,8 @@ onMounted(() => {
       fieldValue.value = sdk.field.getValue();
       // onValueChanged returns a detachValueChangeHandler, should we use this?
       sdk.field.onValueChanged(updateValue);
+
+      url.value = sdk.parameters.instance.url;
     }
   });
 });
@@ -32,6 +36,7 @@ onMounted(() => {
 <template>
   <div class="contentful">
     <form class="mb-3">
+      {{ url }}
       <input v-model="fieldValue" class="" />
     </form>
   </div>
