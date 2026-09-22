@@ -20,12 +20,10 @@ onMounted(() => {
   initContentfulApp((sdk) => {
     if (sdk.location.is(contentfulAppLocations.LOCATION_ENTRY_FIELD)) {
       sdk.window.startAutoResizer();
-      field.value = sdk.field.getValue();
-      // onValueChanged returns a detachValueChangeHandler, should we use this?
-      sdk.field.onValueChanged((value) => (field.value = value));
-
       url.value = sdk.parameters.instance.url;
 
+      field.value = sdk.field.getValue();
+      sdk.field.onValueChanged((value) => (field.value = value));
       watch(field, (value) => sdk.field.setValue(value));
     }
   });
