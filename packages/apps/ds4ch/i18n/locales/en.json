@@ -6,6 +6,7 @@
     "share": "Share",
     "shareOn": "Share on {social}"
   },
+  "added": "Added {date}",
   "attribution": {
     "creator": "Creator:",
     "institution": "Institution:",

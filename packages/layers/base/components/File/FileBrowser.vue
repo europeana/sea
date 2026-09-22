@@ -1,4 +1,7 @@
 <script setup>
+import { filesize } from "filesize";
+const { d, t } = useI18n();
+
 const props = defineProps({
   url: {
     type: String,
@@ -36,6 +39,8 @@ const items = computed(
     data.value?.map((item) => ({
       ...item,
       url: itemURL(item),
+      text: `${item.name} (${filesize(item.size || 0)})`,
+      dateAdded: t("added", { date: d(new Date(item.mtime), "numeric") }),
     })) || [],
 );
 </script>
@@ -44,7 +49,7 @@ const items = computed(
   <div :id="`file-browser-${level}`" class="accordion accordion-flush">
     <div
       v-for="(item, index) in items"
-      :key="item.name + index"
+      :key="`${item.name}-${index}`"
       class="accordion-item"
     >
       <template v-if="item.type === 'directory'">
@@ -75,17 +80,20 @@ const items = computed(
           </div>
         </div>
       </template>
-      <GenericSmartLink
-        v-else-if="item.type === 'file'"
-        :destination="item.url"
-        class="file-link text-decoration-none d-flex align-items-center p-3"
-      >
-        <span class="icon-file me-2" />
-        <span class="link-text">{{ item.name }}</span>
-        <span
-          class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
-        />
-      </GenericSmartLink>
+      <div v-else-if="item.type === 'file'" class="file-link p-3">
+        <GenericSmartLink
+          :destination="item.url"
+          target="_blank"
+          class="text-decoration-none d-flex align-items-center"
+        >
+          <span class="icon-file me-2" />
+          <span class="link-text">{{ item.text }}</span>
+          <span
+            class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
+          />
+        </GenericSmartLink>
+        <div class="date-added ms-3">{{ item.dateAdded }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -138,8 +146,12 @@ const items = computed(
   .link-text {
     text-decoration: underline;
   }
-  &:hover .link-text {
+  a:hover .link-text {
     text-decoration: none;
+  }
+
+  .date-added {
+    color: $darkgrey;
   }
 }
 

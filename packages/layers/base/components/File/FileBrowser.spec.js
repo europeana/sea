@@ -1,8 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 
 import FileBrowser from "./FileBrowser.vue";
+
+mockNuxtImport("useI18n", () => () => ({
+  t: (key, slot) => `${key} ${slot.date}`,
+  d: (key, format) => format,
+}));
 
 const items = [
   {
@@ -52,6 +57,22 @@ describe("components/Generic/FileBrowser", () => {
     expect(wrapper.find(".accordion").exists()).toBe(true);
     expect(wrapper.find(".accordion-header").exists()).toBe(true);
     expect(wrapper.find(".file-link").exists()).toBe(true);
+  });
+
+  it("renders the file size and numeric added date", () => {
+    const wrapper = mount(FileBrowser, {
+      props: {
+        url: "https://files.example.org/",
+      },
+      global: {
+        stubs: ["RouterLink"],
+      },
+    });
+
+    expect(wrapper.find(".file-link a").text()).toEqual(
+      "Europeana Advocacy Framework.doc (145.41 kB)",
+    );
+    expect(wrapper.find(".date-added").text()).toEqual("added numeric");
   });
 
   describe("when there are subdirectories", () => {
