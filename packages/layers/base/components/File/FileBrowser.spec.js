@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 
-import DirectoryBrowser from "./DirectoryBrowser.vue";
+import FileBrowser from "./FileBrowser.vue";
 
 const items = [
   {
@@ -38,14 +38,14 @@ mockNuxtImport("useAsyncData", () => () => {
 });
 
 const factory = (props) =>
-  shallowMount(DirectoryBrowser, {
+  shallowMount(FileBrowser, {
     props: {
       url: "https://files.example.org/",
       ...props,
     },
   });
 
-describe("components/Generic/DirectoryBrowser", () => {
+describe("components/Generic/FileBrowser", () => {
   it("renders an accordian with directory as accordion header and file", () => {
     const wrapper = factory();
 
@@ -58,25 +58,19 @@ describe("components/Generic/DirectoryBrowser", () => {
     it("sets numbered accordion and collapse ids per nesting level", async () => {
       const wrapper = factory();
 
-      expect(wrapper.findAll("#directory-browser-0").length).toBe(1);
+      expect(wrapper.findAll("#file-browser-0").length).toBe(1);
       expect(wrapper.findAll("#collapse-0-0").length).toBe(1);
 
       await wrapper.find(".accordion-button").trigger("click");
-      expect(wrapper.find("directory-browser-stub").attributes("level")).toBe(
-        "1",
-      );
+      expect(wrapper.find("file-browser-stub").attributes("level")).toBe("1");
 
       const wrapper1 = factory({ level: 1 });
 
-      expect(wrapper1.findAll("#directory-browser-1").length).toBe(1);
+      expect(wrapper1.findAll("#file-browser-1").length).toBe(1);
       expect(wrapper1.findAll("#collapse-0-1").length).toBe(1);
 
-      await wrapper1
-        .find("#directory-browser-1 .accordion-button")
-        .trigger("click");
-      expect(wrapper1.find("directory-browser-stub").attributes("level")).toBe(
-        "2",
-      );
+      await wrapper1.find("#file-browser-1 .accordion-button").trigger("click");
+      expect(wrapper1.find("file-browser-stub").attributes("level")).toBe("2");
     });
   });
 

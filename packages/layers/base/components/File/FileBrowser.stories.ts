@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 import { http, HttpResponse } from "msw";
-import DirectoryBrowser from "./DirectoryBrowser.vue";
+import FileBrowser from "./FileBrowser.vue";
 
 const mockResponse = [
   {
@@ -32,19 +32,13 @@ const mockResponse = [
 ];
 
 const meta = {
-  component: DirectoryBrowser,
-} satisfies Meta<typeof DirectoryBrowser>;
+  component: FileBrowser,
+} satisfies Meta<typeof FileBrowser>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    url: "https://files.example.org/",
-  },
-};
-
-export const MockedSuccess: Story = {
   beforeEach({ msw }) {
     msw.use(
       http.get("https://files.example.org/", () => {

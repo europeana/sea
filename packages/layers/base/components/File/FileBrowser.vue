@@ -27,7 +27,7 @@ const itemURL = (item) => {
   return url;
 };
 
-const { data } = useAsyncData(`DirectoryBrowser:${props.url}`, () =>
+const { data } = useAsyncData(`FileBrowser:${props.url}`, () =>
   $fetch(props.url),
 );
 
@@ -41,7 +41,7 @@ const items = computed(
 </script>
 
 <template>
-  <div :id="`directory-browser-${level}`" class="accordion accordion-flush">
+  <div :id="`file-browser-${level}`" class="accordion accordion-flush">
     <div
       v-for="(item, index) in items"
       :key="item.name + index"
@@ -64,10 +64,10 @@ const items = computed(
         <div
           :id="`collapse-${index}-${level}`"
           class="accordion-collapse collapse"
-          :data-bs-parent="`directory-browser-${level}`"
+          :data-bs-parent="`file-browser-${level}`"
         >
           <div class="accordion-body">
-            <DirectoryBrowser
+            <FileBrowser
               v-if="isOpen(item)"
               :url="item.url"
               :level="level + 1"

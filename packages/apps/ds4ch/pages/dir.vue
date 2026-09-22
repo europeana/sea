@@ -4,7 +4,7 @@
 
 <template>
   <div class="container my-5 pt-5">
-    <GenericDirectoryBrowser
+    <FileBrowser
       class="mt-5"
       url="https://pro-beta.europeana.eu/files/Europeana_Professional/"
     />
