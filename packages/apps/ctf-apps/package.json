@@ -24,5 +24,8 @@
     "sass-embedded": "1.100.0",
     "vue": "catalog:vue3",
     "vue-router": "4.6.4"
+  },
+  "dependencies": {
+    "@contentful/app-sdk": "^4.70.0"
   }
 }

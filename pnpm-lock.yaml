@@ -389,6 +389,10 @@ importers:
         version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
 
   packages/apps/ctf-apps:
+    dependencies:
+      '@contentful/app-sdk':
+        specifier: ^4.70.0
+        version: 4.70.0
     devDependencies:
       '@europeana/sea-base-layer':
         specifier: workspace:*
@@ -812,6 +816,9 @@ packages:
   '@commitlint/types@21.0.1':
     resolution: {integrity: sha512-4u7w8jcoCUFWhjWnASYzZHAP34OqOtuFBN87nQmFvqda03YU0T6z+yB4w0gSAMpekiRqqGk5rt+qSlW+a2vSEg==}
     engines: {node: '>=22.12.0'}
+
+  '@contentful/app-sdk@4.70.0':
+    resolution: {integrity: sha512-jQep2RpBPSgTIMxbHh1fLsXJ4d6/uhGeGPurocxarYVV036ww98j4PqTYK3/YdMFpWj7ViBaLJCK/LZT74LtyA==}
 
   '@contentful/rich-text-types@16.8.5':
     resolution: {integrity: sha512-q18RJuJCOuYveGiCIjE5xLCQc5lZ3L2Qgxrlg/H2YEobDFqdtmklazRi1XwEWaK3tMg6yVXBzKKkQfLB4qW14A==}
@@ -4529,6 +4536,10 @@ packages:
   contentful-management@11.76.0:
     resolution: {integrity: sha512-KsqIZ65q1A6IP55sxTfuAMhBTNJfgGxlVZBoV2ghBuR1LaZZyTqway5vj9KHRDl/Z1uOQQsYSiz+FayMxBXXEw==}
     engines: {node: '>=18'}
+
+  contentful-management@12.17.0:
+    resolution: {integrity: sha512-ddp/0iXmw5X/lo3kWmFMIc2A4koWN5eF8xnAN6qAKIaaVFxfOyWgOe1mTetbpkMC5R/+XLVFC44Z2kuTWDmF3Q==}
+    engines: {node: '>=20'}
 
   contentful-sdk-core@9.4.5:
     resolution: {integrity: sha512-8eGTMO11LXFAiosaiV38bjvW6cjoQFtNE38pNtVilZTXpmGFinClljihH0eriv11Ispd4q82TqtsXMJPYD/C+A==}
@@ -9200,6 +9211,13 @@ snapshots:
       conventional-commits-parser: 6.4.0
       picocolors: 1.1.1
 
+  '@contentful/app-sdk@4.70.0':
+    dependencies:
+      contentful-management: 12.17.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
   '@contentful/rich-text-types@16.8.5': {}
 
   '@conventional-changelog/git-client@2.7.0(conventional-commits-parser@6.4.0)':
@@ -12811,6 +12829,18 @@ snapshots:
       contentful-sdk-core: 9.4.5
       fast-copy: 3.0.2
       globals: 15.15.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
+  contentful-management@12.17.0:
+    dependencies:
+      '@contentful/rich-text-types': 16.8.5
+      axios: 1.18.0
+      contentful-sdk-core: 9.4.5
+      fast-copy: 3.0.2
+      globals: 15.15.0
+      process: 0.11.10
     transitivePeerDependencies:
       - debug
       - supports-color

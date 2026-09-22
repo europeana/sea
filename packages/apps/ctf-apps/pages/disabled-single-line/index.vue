@@ -1,6 +1,10 @@
 <script setup>
-const fieldValue = ref("");
-const contentfulExtensionSdk = ref(true);
+import {
+  init as initContentfulApp,
+  locations as contentfulAppLocations,
+} from "@contentful/app-sdk";
+
+const field = ref("");
 
 useHead({
   title: "Disabled single line text - Contentful app",
@@ -10,20 +14,13 @@ useHead({
   },
 });
 
-const updateValue = (newValue) => {
-  fieldValue.value = newValue;
-};
-
 onMounted(() => {
-  window.contentfulExtension.init((sdk) => {
-    contentfulExtensionSdk.value = sdk;
-    if (
-      sdk.location.is(window.contentfulExtension.locations.LOCATION_ENTRY_FIELD)
-    ) {
+  initContentfulApp((sdk) => {
+    if (sdk.location.is(contentfulAppLocations.LOCATION_ENTRY_FIELD)) {
       sdk.window.startAutoResizer();
-      fieldValue.value = sdk.field.getValue();
+      field.value = sdk.field.getValue();
       // onValueChanged returns a detachValueChangeHandler, should we use this?
-      sdk.field.onValueChanged(updateValue);
+      sdk.field.onValueChanged((value) => (field.value = value));
     }
   });
 });
@@ -32,7 +29,7 @@ onMounted(() => {
 <template>
   <div class="contentful">
     <form class="mb-3">
-      <input v-model="fieldValue" class="" disabled />
+      <input v-model="field" class="" disabled />
     </form>
   </div>
 </template>

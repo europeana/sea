@@ -1,4 +1,9 @@
 <script setup>
+import {
+  init as initContentfulApp,
+  locations as contentfulAppLocations,
+} from "@contentful/app-sdk";
+
 const field = ref("");
 
 useHead({
@@ -12,10 +17,8 @@ useHead({
 const url = ref("");
 
 onMounted(() => {
-  window.contentfulExtension.init((sdk) => {
-    if (
-      sdk.location.is(window.contentfulExtension.locations.LOCATION_ENTRY_FIELD)
-    ) {
+  initContentfulApp((sdk) => {
+    if (sdk.location.is(contentfulAppLocations.LOCATION_ENTRY_FIELD)) {
       sdk.window.startAutoResizer();
       field.value = sdk.field.getValue();
       // onValueChanged returns a detachValueChangeHandler, should we use this?
