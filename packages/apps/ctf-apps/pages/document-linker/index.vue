@@ -1,5 +1,5 @@
 <script setup>
-const fieldValue = ref("");
+const field = ref("");
 const contentfulExtensionSdk = ref(true);
 
 useHead({
@@ -11,7 +11,7 @@ useHead({
 });
 
 const updateValue = (newValue) => {
-  fieldValue.value = newValue;
+  field.value = newValue;
 };
 
 const url = ref("");
@@ -23,7 +23,7 @@ onMounted(() => {
       sdk.location.is(window.contentfulExtension.locations.LOCATION_ENTRY_FIELD)
     ) {
       sdk.window.startAutoResizer();
-      fieldValue.value = sdk.field.getValue();
+      field.value = sdk.field.getValue();
       // onValueChanged returns a detachValueChangeHandler, should we use this?
       sdk.field.onValueChanged(updateValue);
 
@@ -37,7 +37,7 @@ onMounted(() => {
   <div class="contentful">
     <form class="mb-3">
       {{ url }}
-      <input v-model="fieldValue" class="" />
+      <input v-model="field" class="" />
     </form>
   </div>
 </template>
