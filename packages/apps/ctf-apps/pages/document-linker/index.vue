@@ -1,6 +1,5 @@
 <script setup>
 const field = ref("");
-const contentfulExtensionSdk = ref(true);
 
 useHead({
   title: "Document linker - Contentful app",
@@ -10,24 +9,21 @@ useHead({
   },
 });
 
-const updateValue = (newValue) => {
-  field.value = newValue;
-};
-
 const url = ref("");
 
 onMounted(() => {
   window.contentfulExtension.init((sdk) => {
-    contentfulExtensionSdk.value = sdk;
     if (
       sdk.location.is(window.contentfulExtension.locations.LOCATION_ENTRY_FIELD)
     ) {
       sdk.window.startAutoResizer();
       field.value = sdk.field.getValue();
       // onValueChanged returns a detachValueChangeHandler, should we use this?
-      sdk.field.onValueChanged(updateValue);
+      sdk.field.onValueChanged((value) => (field.value = value));
 
       url.value = sdk.parameters.instance.url;
+
+      watch(field, (value) => sdk.field.setValue(value));
     }
   });
 });
