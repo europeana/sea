@@ -93,22 +93,48 @@ const items = computed(
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
 @import "assets/scss/variables";
+@import "@europeana/style/scss/icon-font";
 
 .accordion {
   --bs-accordion-active-bg: transparent;
   --bs-accordion-active-color: $black;
+  --bs-accordion-btn-focus-box-shadow: none;
   border-top: 1px solid $black;
-  border-bottom: 1px solid $black;
+
+  .accordion {
+    border-top: none;
+  }
 }
 
-.accordion-button:not(.collapsed) {
-  font-weight: 600;
+.accordion-button {
+  border-bottom: 1px solid $black;
+
+  &:not(.collapsed) {
+    font-weight: 600;
+    box-shadow: none;
+  }
+
+  &:after {
+    @extend %icon-font;
+
+    content: "\e91b";
+    background-image: none;
+    font-size: $font-size-smallest;
+    line-height: 2;
+  }
+}
+
+.accordion-item {
+  border: none;
 }
 
 .accordion-body {
   padding: 0 0 0 1rem;
 }
+
 .file-link {
+  border-bottom: 1px solid $black;
+
   .link-text {
     text-decoration: underline;
   }
@@ -116,6 +142,7 @@ const items = computed(
     text-decoration: none;
   }
 }
+
 .icon-ic-download {
   height: 1.5rem;
   width: 1.5rem;

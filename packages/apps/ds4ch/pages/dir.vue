@@ -3,7 +3,10 @@
 </script>
 
 <template>
-  <GenericDirectoryBrowser
-    url="https://pro-beta.europeana.eu/files/Europeana_Professional/"
-  />
+  <div class="container my-5 pt-5">
+    <GenericDirectoryBrowser
+      class="mt-5"
+      url="https://pro-beta.europeana.eu/files/Europeana_Professional/"
+    />
+  </div>
 </template>
