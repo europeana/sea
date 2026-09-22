@@ -29,7 +29,7 @@ onMounted(() => {
 <template>
   <div class="contentful">
     <form class="mb-3">
-      <input v-model="field" disabled />
+      <input id="field" v-model="field" disabled />
     </form>
   </div>
 </template>

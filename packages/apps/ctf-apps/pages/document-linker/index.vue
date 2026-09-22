@@ -34,7 +34,7 @@ onMounted(() => {
   <div class="contentful">
     <form class="mb-3">
       {{ url }}
-      <input v-model="field" class="" />
+      <input id="field" v-model="field" class="" />
     </form>
   </div>
 </template>
@@ -45,7 +45,6 @@ onMounted(() => {
 }
 
 input {
-  background-color: #e9ecef;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   border-radius: 0.25rem;
