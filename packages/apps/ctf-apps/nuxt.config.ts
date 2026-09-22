@@ -30,15 +30,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      contentful: {
-        accessToken: {
-          delivery: null,
-          preview: null,
-        },
-        environmentId: null,
-        graphqlUrl: null,
-        spaceId: null,
-      },
       elastic: {
         apm: {
           serviceName: packageName.replace(/^.*\//, ""),
