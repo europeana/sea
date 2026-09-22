@@ -46,10 +46,12 @@ const factory = (props) =>
   });
 
 describe("components/Generic/DirectoryBrowser", () => {
-  it("renders an accordian", () => {
+  it("renders an accordian with directory as accordion header and file", () => {
     const wrapper = factory();
 
     expect(wrapper.find(".accordion").exists()).toBe(true);
+    expect(wrapper.find(".accordion-header").exists()).toBe(true);
+    expect(wrapper.find(".file-link").exists()).toBe(true);
   });
 
   describe("when there are subdirectories", () => {
@@ -75,6 +77,15 @@ describe("components/Generic/DirectoryBrowser", () => {
       expect(wrapper1.find("directory-browser-stub").attributes("level")).toBe(
         "2",
       );
+    });
+  });
+
+  describe("when there is no data fetched", () => {
+    it("items is an empty array", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.data = undefined;
+      expect(wrapper.vm.items).toEqual([]);
     });
   });
 });
