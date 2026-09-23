@@ -118,7 +118,7 @@ describe("components/Generic/FileBrowser", () => {
 
   describe("when select prop is set to true", () => {
     it("renders a radio input for each item and associates the button or link as label", async () => {
-      const wrapper = factory({ select: true });
+      const wrapper = factory({ props: { select: true } });
 
       expect(wrapper.findAll(".form-check-input").length).toBe(2);
       expect(

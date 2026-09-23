@@ -102,7 +102,11 @@ const items = computed(
             {{ item.text }}
           </button>
         </div>
-        <div :id="`collapse${item.id}`" class="accordion-collapse collapse">
+        <div
+          :id="`collapse${item.id}`"
+          class="accordion-collapse"
+          :class="{ collapse: !isOpen(item) }"
+        >
           <div class="accordion-body">
             <FileBrowser
               v-if="isOpen(item)"
