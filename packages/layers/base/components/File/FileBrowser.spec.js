@@ -76,22 +76,26 @@ describe("components/Generic/FileBrowser", () => {
   });
 
   describe("when there are subdirectories", () => {
-    it("sets numbered accordion and collapse ids per nesting level", async () => {
+    it("sets accordion and collapse ids per nesting level", async () => {
       const wrapper = factory();
-
-      expect(wrapper.findAll("#file-browser-0").length).toBe(1);
-      expect(wrapper.findAll("#collapse-0-0").length).toBe(1);
+      expect(wrapper.findAll("#file-browser").length).toBe(1);
+      expect(wrapper.findAll("#collapse-Advocacy").length).toBe(1);
 
       await wrapper.find(".accordion-button").trigger("click");
-      expect(wrapper.find("file-browser-stub").attributes("level")).toBe("1");
+      expect(wrapper.find("file-browser-stub").attributes("idsuffix")).toBe(
+        "-Advocacy",
+      );
 
-      const wrapper1 = factory({ level: 1 });
+      const wrapper1 = factory({ idSuffix: "-Base" });
+      expect(wrapper1.findAll("#file-browser-Base").length).toBe(1);
+      expect(wrapper1.findAll("#collapse-Base-Advocacy").length).toBe(1);
 
-      expect(wrapper1.findAll("#file-browser-1").length).toBe(1);
-      expect(wrapper1.findAll("#collapse-0-1").length).toBe(1);
-
-      await wrapper1.find("#file-browser-1 .accordion-button").trigger("click");
-      expect(wrapper1.find("file-browser-stub").attributes("level")).toBe("2");
+      await wrapper1
+        .find("#file-browser-Base .accordion-button")
+        .trigger("click");
+      expect(wrapper1.find("file-browser-stub").attributes("idsuffix")).toBe(
+        "-Base-Advocacy",
+      );
     });
   });
 

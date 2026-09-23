@@ -12,9 +12,9 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  level: {
-    type: Number,
-    default: 0,
+  idSuffix: {
+    type: String,
+    default: "",
   },
   select: {
     type: Boolean,
@@ -49,6 +49,7 @@ const items = computed(
   () =>
     data.value?.map((item) => ({
       dateAdded: t("added", { date: d(new Date(item.mtime), "numeric") }),
+      id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
       text:
         item.type === "file"
           ? `${item.name} (${filesize(item.size || 0)})`
@@ -60,8 +61,8 @@ const items = computed(
 </script>
 
 <template>
-  <div :id="`file-browser-${level}`" class="accordion accordion-flush">
-    <div v-for="(item, index) in items" :key="item.url" class="accordion-item">
+  <div :id="`file-browser${idSuffix}`" class="accordion accordion-flush">
+    <div v-for="item in items" :key="item.url" class="accordion-item">
       <input
         v-if="select"
         v-model="model"
@@ -75,26 +76,25 @@ const items = computed(
             class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            :data-bs-target="`#collapse-${index}-${level}`"
+            :data-bs-target="`#collapse${item.id}`"
             aria-expanded="false"
-            :aria-controls="`collapse-${index}-${level}`"
+            :aria-controls="`collapse${item.id}`"
             @click="handleClickAccordionButton(item)"
           >
             {{ item.text }}
           </button>
         </div>
         <div
-          :id="`collapse-${index}-${level}`"
-          class="accordion-collapse collapse"
-          :data-bs-parent="`file-browser-${level}`"
+          :id="`collapse${item.id}`"
+          class="accordion-collapse collapse show"
         >
           <div class="accordion-body">
             <FileBrowser
               v-if="isOpen(item)"
               v-model="model"
+              :id-suffix="`${item.id}`"
               :url="item.url"
               :select="select"
-              :level="level + 1"
             />
           </div>
         </div>
@@ -104,6 +104,7 @@ const items = computed(
           :destination="item.url"
           target="_blank"
           class="text-decoration-none d-flex align-items-center"
+          hide-external-icon
         >
           <span class="icon-file me-2" />
           <span class="link-text">{{ item.text }}</span>
