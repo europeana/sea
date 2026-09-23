@@ -2,6 +2,11 @@
 import { filesize } from "filesize";
 const { d, t } = useI18n();
 
+const model = defineModel({
+  type: String,
+  default: null,
+});
+
 const props = defineProps({
   url: {
     type: String,
@@ -10,6 +15,10 @@ const props = defineProps({
   idSuffix: {
     type: String,
     default: "",
+  },
+  select: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -31,7 +40,10 @@ const itemURL = (item) => {
   return url.toString();
 };
 
-const { data } = useFetch(props.url);
+const { data } = useAsyncData(
+  computed(() => `FileBrowser:${props.url}`),
+  () => $fetch(props.url),
+);
 
 const items = computed(
   () =>
@@ -52,9 +64,18 @@ const items = computed(
   <div :id="`file-browser${idSuffix}`" class="accordion accordion-flush">
     <div v-for="item in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
-        <div class="accordion-header">
+        <div class="accordion-header p-3" :class="{ 'd-flex': select }">
+          <input
+            v-if="select"
+            v-model="model"
+            class="form-check-input me-2"
+            type="radio"
+            :value="item.url"
+            :aria-labelledby="`label${item.id}`"
+          />
           <button
-            class="accordion-button collapsed"
+            :id="select ? `label${item.id}` : undefined"
+            class="accordion-button collapsed p-0"
             type="button"
             data-bs-toggle="collapse"
             :data-bs-target="`#collapse${item.id}`"
@@ -69,26 +90,46 @@ const items = computed(
           <div class="accordion-body">
             <FileBrowser
               v-if="isOpen(item)"
+              v-model="model"
               :id-suffix="`${item.id}`"
               :url="item.url"
+              :select="select"
             />
           </div>
         </div>
       </template>
-      <div v-else-if="item.type === 'file'" class="file-link p-3">
-        <GenericSmartLink
-          :destination="item.url"
-          target="_blank"
-          class="text-decoration-none d-flex align-items-center"
-          hide-external-icon
-        >
-          <span class="icon-file me-2" />
-          <span class="link-text">{{ item.text }}</span>
-          <span
-            class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
-          />
-        </GenericSmartLink>
-        <div class="date-added ms-3">{{ item.dateAdded }}</div>
+      <div
+        v-else-if="item.type === 'file'"
+        class="file-link p-3"
+        :class="{ 'd-flex': select }"
+      >
+        <input
+          v-if="select"
+          v-model="model"
+          class="form-check-input me-2"
+          type="radio"
+          :value="item.url"
+          :aria-labelledby="`label${item.id}`"
+        />
+        <div :class="{ 'flex-grow-1': select }">
+          <GenericSmartLink
+            :destination="item.url"
+            target="_blank"
+            class="text-decoration-none d-flex align-items-center"
+            hide-external-icon
+          >
+            <span class="icon-file me-2" />
+            <span
+              :id="select ? `label${item.id}` : undefined"
+              class="link-text"
+              >{{ item.text }}</span
+            >
+            <span
+              class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
+            />
+          </GenericSmartLink>
+          <div class="date-added ms-3">{{ item.dateAdded }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -100,8 +141,9 @@ const items = computed(
 
 .accordion {
   --bs-accordion-active-bg: transparent;
-  --bs-accordion-active-color: $black;
+  --bs-accordion-active-color: #{$black};
   --bs-accordion-btn-focus-box-shadow: none;
+  --bs-border-color: #{$darkgrey};
   border-top: 1px solid $black;
 
   .accordion {
@@ -109,9 +151,11 @@ const items = computed(
   }
 }
 
-.accordion-button {
+.accordion-header {
   border-bottom: 1px solid $black;
+}
 
+.accordion-button {
   &:not(.collapsed) {
     font-weight: 600;
     box-shadow: none;

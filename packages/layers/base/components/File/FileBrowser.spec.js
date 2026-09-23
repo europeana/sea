@@ -38,7 +38,7 @@ const items = [
   },
 ];
 
-mockNuxtImport("useFetch", () => () => {
+mockNuxtImport("useAsyncData", () => () => {
   return { data: ref(items), error: ref(null) };
 });
 
@@ -75,6 +75,15 @@ describe("components/Generic/FileBrowser", () => {
     expect(wrapper.find(".date-added").text()).toEqual("added numeric");
   });
 
+  describe("when there is no data fetched", () => {
+    it("items is an empty array", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.data = undefined;
+      expect(wrapper.vm.items).toEqual([]);
+    });
+  });
+
   describe("when there are subdirectories", () => {
     it("sets accordion and collapse ids per nesting level", async () => {
       const wrapper = factory();
@@ -99,12 +108,15 @@ describe("components/Generic/FileBrowser", () => {
     });
   });
 
-  describe("when there is no data fetched", () => {
-    it("items is an empty array", async () => {
-      const wrapper = factory();
+  describe("when select prop is set to true", () => {
+    it("renders a radio input for each item and associates the button or link as label", async () => {
+      const wrapper = factory({ select: true });
 
-      wrapper.vm.data = undefined;
-      expect(wrapper.vm.items).toEqual([]);
+      expect(wrapper.findAll(".form-check-input").length).toBe(2);
+      expect(
+        wrapper.findAll(".form-check-input")[0].attributes("aria-labelledby"),
+      ).toBe("label-Advocacy");
+      expect(wrapper.find("#label-Advocacy").exists()).toBe(true);
     });
   });
 });
