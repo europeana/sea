@@ -1,6 +1,8 @@
 <script setup>
 // NOTE: this is a temporary page for previewing live directory listing data
-const field = ref(null);
+const field = ref(
+  "https://pro-beta.europeana.eu/files/Europeana_Professional/Europeana_Network/Documents/",
+);
 </script>
 
 <template>

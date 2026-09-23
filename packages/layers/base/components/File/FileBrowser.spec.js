@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
+import { nextTick } from "vue";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 
 import FileBrowser from "./FileBrowser.vue";
@@ -42,10 +43,17 @@ mockNuxtImport("useAsyncData", () => () => {
   return { data: ref(items), error: ref(null) };
 });
 
-const factory = (props) =>
+const url = "https://files.example.org/";
+
+const factory = ({ data, props } = {}) =>
   shallowMount(FileBrowser, {
+    data() {
+      return {
+        ...data,
+      };
+    },
     props: {
-      url: "https://files.example.org/",
+      url,
       ...props,
     },
   });
@@ -62,7 +70,7 @@ describe("components/Generic/FileBrowser", () => {
   it("renders the file size and numeric added date", () => {
     const wrapper = mount(FileBrowser, {
       props: {
-        url: "https://files.example.org/",
+        url,
       },
       global: {
         stubs: ["RouterLink"],
@@ -86,7 +94,7 @@ describe("components/Generic/FileBrowser", () => {
         "-Advocacy",
       );
 
-      const wrapper1 = factory({ idSuffix: "-Base" });
+      const wrapper1 = factory({ props: { idSuffix: "-Base" } });
       expect(wrapper1.findAll("#file-browser-Base").length).toBe(1);
       expect(wrapper1.findAll("#collapse-Base-Advocacy").length).toBe(1);
 
@@ -105,6 +113,18 @@ describe("components/Generic/FileBrowser", () => {
 
       wrapper.vm.data = undefined;
       expect(wrapper.vm.items).toEqual([]);
+    });
+  });
+
+  describe("when the v-model specifies a nested path", () => {
+    const model = `${url}dir/subdir/report.pdf`;
+
+    it("opens the accordion for the next-level parent path", async () => {
+      const wrapper = factory({ data: { model } });
+
+      await nextTick();
+
+      expect(wrapper.vm.opened).toContain(`${url}dir/`);
     });
   });
 });
