@@ -2,6 +2,11 @@
 import { filesize } from "filesize";
 const { d, t } = useI18n();
 
+const model = defineModel({
+  type: String,
+  default: null,
+});
+
 const props = defineProps({
   url: {
     type: String,
@@ -10,6 +15,10 @@ const props = defineProps({
   level: {
     type: Number,
     default: 0,
+  },
+  select: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -31,7 +40,10 @@ const itemURL = (item) => {
   return url.toString();
 };
 
-const { data } = useFetch(props.url);
+const { data } = useAsyncData(
+  computed(() => `FileBrowser:${props.url}`),
+  () => $fetch(props.url),
+);
 
 const items = computed(
   () =>
@@ -50,6 +62,13 @@ const items = computed(
 <template>
   <div :id="`file-browser-${level}`" class="accordion accordion-flush">
     <div v-for="(item, index) in items" :key="item.url" class="accordion-item">
+      <input
+        v-if="select"
+        v-model="model"
+        class="form-check-input"
+        type="radio"
+        :value="item.url"
+      />
       <template v-if="item.type === 'directory'">
         <div class="accordion-header">
           <button
@@ -72,7 +91,9 @@ const items = computed(
           <div class="accordion-body">
             <FileBrowser
               v-if="isOpen(item)"
+              v-model="model"
               :url="item.url"
+              :select="select"
               :level="level + 1"
             />
           </div>
