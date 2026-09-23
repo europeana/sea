@@ -6,6 +6,7 @@ export default defineConfig({
     //       failures in the nuxt-environment test suites
     projects: [
       "packages/apps/cats",
+      "packages/apps/ctf-apps",
       "packages/apps/ds4ch",
       "packages/components/map",
       "packages/directives/vue-visible-on-scroll",
