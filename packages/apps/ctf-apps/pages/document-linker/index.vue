@@ -22,9 +22,10 @@ onMounted(() => {
       sdk.window.startAutoResizer();
       url.value = sdk.parameters.instance.url;
 
-      field.value = sdk.field.getValue();
-      sdk.field.onValueChanged((value) => (field.value = value));
       watch(field, (value) => sdk.field.setValue(value));
+      sdk.field.onValueChanged((value) => (field.value = value));
+
+      field.value = sdk.field.getValue();
     }
   });
 });
@@ -33,8 +34,8 @@ onMounted(() => {
 <template>
   <div class="contentful">
     <form class="mb-3">
-      {{ url }}
-      <input id="field" v-model="field" class="" />
+      <input id="field" v-model="field" class="" size="80" /><br />
+      <small>Full URL, including the base URL: {{ url }}</small>
     </form>
   </div>
 </template>
