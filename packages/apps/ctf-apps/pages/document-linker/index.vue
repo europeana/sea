@@ -21,9 +21,10 @@ onMounted(() => {
       sdk.window.startAutoResizer();
       url.value = sdk.parameters.instance.url;
 
-      field.value = sdk.field.getValue();
-      sdk.field.onValueChanged((value) => (field.value = value));
       watch(field, (value) => sdk.field.setValue(value));
+      sdk.field.onValueChanged((value) => (field.value = value));
+
+      field.value = sdk.field.getValue();
     }
   });
 });
