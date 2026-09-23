@@ -69,10 +69,12 @@ const items = computed(
         class="form-check-input"
         type="radio"
         :value="item.url"
+        :aria-labelledby="`label${item.id}`"
       />
       <template v-if="item.type === 'directory'">
         <div class="accordion-header">
           <button
+            :id="select ? `label${item.id}` : undefined"
             class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
@@ -107,7 +109,11 @@ const items = computed(
           hide-external-icon
         >
           <span class="icon-file me-2" />
-          <span class="link-text">{{ item.text }}</span>
+          <span
+            :id="select ? `label${item.id}` : undefined"
+            class="link-text"
+            >{{ item.text }}</span
+          >
           <span
             class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
           />
