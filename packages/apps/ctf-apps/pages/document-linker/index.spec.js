@@ -57,13 +57,13 @@ describe("pages/DocumentLinker/index.vue", () => {
     expect(sdk.window.startAutoResizer).toHaveBeenCalledWith();
   });
 
-  it("displays the URL from the instance parameter", async () => {
+  it("displays the field value", async () => {
     const wrapper = factory();
     await nextTick();
 
     const text = wrapper.text();
 
-    expect(text).toContain(url);
+    expect(text).toContain("Field value: stored value");
   });
 
   it("initialises the field value to that stored in CTF", () => {
@@ -86,9 +86,9 @@ describe("pages/DocumentLinker/index.vue", () => {
 
   it("updates value in CTF when field value changes", async () => {
     const wrapper = factory();
-    const input = wrapper.find("input");
 
-    await input.setValue("new value");
+    wrapper.vm.field = "new value";
+    await nextTick();
 
     expect(sdk.field.setValue).toHaveBeenCalledWith("new value");
   });

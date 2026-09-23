@@ -5,6 +5,7 @@ import {
 } from "@contentful/app-sdk";
 
 const field = ref("");
+const url = ref("");
 
 useHead({
   title: "Document linker - Contentful app",
@@ -13,8 +14,6 @@ useHead({
     style: "background: transparent;",
   },
 });
-
-const url = ref("");
 
 onMounted(() => {
   initContentfulApp((sdk) => {
@@ -32,10 +31,8 @@ onMounted(() => {
 
 <template>
   <div class="contentful">
-    <form class="mb-3">
-      {{ url }}
-      <input id="field" v-model="field" class="" />
-    </form>
+    Field value: {{ field }}
+    <FileBrowser v-model="field" :select="true" :url="url" />
   </div>
 </template>
 
