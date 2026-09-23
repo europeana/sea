@@ -63,19 +63,19 @@ const items = computed(
 <template>
   <div :id="`file-browser${idSuffix}`" class="accordion accordion-flush">
     <div v-for="item in items" :key="item.url" class="accordion-item">
-      <input
-        v-if="select"
-        v-model="model"
-        class="form-check-input"
-        type="radio"
-        :value="item.url"
-        :aria-labelledby="`label${item.id}`"
-      />
       <template v-if="item.type === 'directory'">
-        <div class="accordion-header">
+        <div class="accordion-header p-3" :class="{ 'd-flex': select }">
+          <input
+            v-if="select"
+            v-model="model"
+            class="form-check-input me-2"
+            type="radio"
+            :value="item.url"
+            :aria-labelledby="`label${item.id}`"
+          />
           <button
             :id="select ? `label${item.id}` : undefined"
-            class="accordion-button collapsed"
+            class="accordion-button collapsed p-0"
             type="button"
             data-bs-toggle="collapse"
             :data-bs-target="`#collapse${item.id}`"
@@ -86,10 +86,7 @@ const items = computed(
             {{ item.text }}
           </button>
         </div>
-        <div
-          :id="`collapse${item.id}`"
-          class="accordion-collapse collapse show"
-        >
+        <div :id="`collapse${item.id}`" class="accordion-collapse collapse">
           <div class="accordion-body">
             <FileBrowser
               v-if="isOpen(item)"
@@ -101,24 +98,38 @@ const items = computed(
           </div>
         </div>
       </template>
-      <div v-else-if="item.type === 'file'" class="file-link p-3">
-        <GenericSmartLink
-          :destination="item.url"
-          target="_blank"
-          class="text-decoration-none d-flex align-items-center"
-          hide-external-icon
-        >
-          <span class="icon-file me-2" />
-          <span
-            :id="select ? `label${item.id}` : undefined"
-            class="link-text"
-            >{{ item.text }}</span
+      <div
+        v-else-if="item.type === 'file'"
+        class="file-link p-3"
+        :class="{ 'd-flex': select }"
+      >
+        <input
+          v-if="select"
+          v-model="model"
+          class="form-check-input me-2"
+          type="radio"
+          :value="item.url"
+          :aria-labelledby="`label${item.id}`"
+        />
+        <div :class="{ 'flex-grow-1': select }">
+          <GenericSmartLink
+            :destination="item.url"
+            target="_blank"
+            class="text-decoration-none d-flex align-items-center"
+            hide-external-icon
           >
-          <span
-            class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
-          />
-        </GenericSmartLink>
-        <div class="date-added ms-3">{{ item.dateAdded }}</div>
+            <span class="icon-file me-2" />
+            <span
+              :id="select ? `label${item.id}` : undefined"
+              class="link-text"
+              >{{ item.text }}</span
+            >
+            <span
+              class="icon-ic-download d-flex align-items-center justify-content-center ms-auto"
+            />
+          </GenericSmartLink>
+          <div class="date-added ms-3">{{ item.dateAdded }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -130,8 +141,9 @@ const items = computed(
 
 .accordion {
   --bs-accordion-active-bg: transparent;
-  --bs-accordion-active-color: $black;
+  --bs-accordion-active-color: #{$black};
   --bs-accordion-btn-focus-box-shadow: none;
+  --bs-border-color: #{$darkgrey};
   border-top: 1px solid $black;
 
   .accordion {
@@ -139,9 +151,11 @@ const items = computed(
   }
 }
 
-.accordion-button {
+.accordion-header {
   border-bottom: 1px solid $black;
+}
 
+.accordion-button {
   &:not(.collapsed) {
     font-weight: 600;
     box-shadow: none;
