@@ -37,21 +37,20 @@ const { data } = useAsyncData(`FileBrowser:${props.url}`, () =>
 const items = computed(
   () =>
     data.value?.map((item) => ({
-      ...item,
-      url: itemURL(item),
-      text: `${item.name} (${filesize(item.size || 0)})`,
       dateAdded: t("added", { date: d(new Date(item.mtime), "numeric") }),
+      text:
+        item.type === "file"
+          ? `${item.name} (${filesize(item.size || 0)})`
+          : item.name,
+      type: item.type,
+      url: itemURL(item),
     })) || [],
 );
 </script>
 
 <template>
   <div :id="`file-browser-${level}`" class="accordion accordion-flush">
-    <div
-      v-for="(item, index) in items"
-      :key="`${item.name}-${index}`"
-      class="accordion-item"
-    >
+    <div v-for="(item, index) in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
         <div class="accordion-header">
           <button
@@ -63,7 +62,7 @@ const items = computed(
             :aria-controls="`collapse-${index}-${level}`"
             @click="handleClickAccordionButton(item)"
           >
-            {{ item.name }}
+            {{ item.text }}
           </button>
         </div>
         <div
