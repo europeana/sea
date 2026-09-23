@@ -30,9 +30,7 @@ const itemURL = (item) => {
   return url;
 };
 
-const { data } = useAsyncData(`FileBrowser:${props.url}`, () =>
-  $fetch(props.url),
-);
+const { data } = useFetch(props.url);
 
 const items = computed(
   () =>

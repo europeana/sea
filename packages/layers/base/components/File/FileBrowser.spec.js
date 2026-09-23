@@ -38,7 +38,7 @@ const items = [
   },
 ];
 
-mockNuxtImport("useAsyncData", () => () => {
+mockNuxtImport("useFetch", () => () => {
   return { data: ref(items), error: ref(null) };
 });
 
