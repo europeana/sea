@@ -22,12 +22,13 @@ const handleClickAccordionButton = (item) => {
 const isOpen = (item) => opened.value.includes(item.url);
 
 const itemURL = (item) => {
-  let url = `${props.url}/${item.name}`;
+  const url = new URL(props.url);
+  url.pathname = `${url.pathname}/${item.name}`;
   if (item.type === "directory") {
-    url = `${url}/`;
+    url.pathname = `${url.pathname}/`;
   }
-  url = url.replaceAll("//", "/");
-  return url;
+  url.pathname = url.pathname.replaceAll("//", "/");
+  return url.toString();
 };
 
 const { data } = useFetch(props.url);

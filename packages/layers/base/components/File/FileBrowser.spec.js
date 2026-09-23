@@ -70,7 +70,7 @@ describe("components/Generic/FileBrowser", () => {
     });
 
     expect(wrapper.find(".file-link a").text()).toEqual(
-      "Europeana Advocacy Framework.doc (145.41 kB)",
+      "Europeana Advocacy Framework.doc (145.41 kB) (newWindow)",
     );
     expect(wrapper.find(".date-added").text()).toEqual("added numeric");
   });
