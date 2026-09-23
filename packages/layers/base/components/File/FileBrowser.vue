@@ -30,6 +30,22 @@ const handleClickAccordionButton = (item) => {
 
 const isOpen = (item) => opened.value.includes(item.url);
 
+watchEffect(() => {
+  // if the model value indicates a pre-selected file/directory, open up
+  // any parent directories to show the pre-selected in context
+  if (
+    model.value?.startsWith(props.url) &&
+    model.value.length > props.url.length
+  ) {
+    const pathname = model.value.replace(props.url, "");
+    const paths = pathname.split("/").filter(Boolean);
+    if (paths.length > 1) {
+      const dirUrl = `${props.url}${paths.shift()}/`;
+      opened.value.push(dirUrl);
+    }
+  }
+});
+
 const itemURL = (item) => {
   const url = new URL(props.url);
   url.pathname = `${url.pathname}/${item.name}`;
@@ -86,7 +102,11 @@ const items = computed(
             {{ item.text }}
           </button>
         </div>
-        <div :id="`collapse${item.id}`" class="accordion-collapse collapse">
+        <div
+          :id="`collapse${item.id}`"
+          class="accordion-collapse"
+          :class="{ collapse: !isOpen(item) }"
+        >
           <div class="accordion-body">
             <FileBrowser
               v-if="isOpen(item)"
