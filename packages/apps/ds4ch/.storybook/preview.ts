@@ -5,6 +5,8 @@ import type { Preview } from "@nuxtjs/storybook";
 import { watch } from "vue";
 import i18nLocales from "../i18n/locales";
 
+import { mswLoader } from "msw-storybook-addon/csf3";
+
 sb.mock(import("@europeana/vue-contentful-graphql/query"));
 
 const defaultLocale = "en";
@@ -54,6 +56,12 @@ const preview: Preview = {
     },
   },
   tags: ["autodocs"],
+  /*
+   * Register the MSW loader for all stories
+   * See https://github.com/mswjs/msw-storybook-addon#csf-30
+   * to learn how to customize it
+   */
+  loaders: [mswLoader()],
 };
 
 export default preview;
