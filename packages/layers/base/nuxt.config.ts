@@ -7,6 +7,15 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/eslint", "@nuxtjs/i18n"],
 
+  i18n: {
+    bundle: {
+      // NOTE: without this, inclusion of the @nuxtjs/i18n module results in
+      //       inaccurate or absent test coverage reporting for .vue files.
+      //       See: https://github.com/nuxt-modules/i18n/issues/3238#issuecomment-2672492536
+      optimizeTranslationDirective: false,
+    },
+  },
+
   runtimeConfig: {
     public: {
       baseUrl: "",
