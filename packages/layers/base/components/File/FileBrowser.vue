@@ -120,7 +120,6 @@ const items = computed(
 
 <style lang="scss" scoped>
 @import "@europeana/style/scss/variables";
-@import "assets/scss/variables";
 @import "@europeana/style/scss/icon-font";
 
 .accordion {
@@ -181,12 +180,12 @@ const items = computed(
   background-color: $black;
   color: $white;
   border-radius: 50%;
-  font-size: $font-size-18;
+  font-size: 1.125rem;
 
   @media (min-width: $bp-4k) {
     height: 3rem;
     width: 3rem;
-    font-size: $font-size-36;
+    font-size: 2.25rem;
   }
 }
 </style>
