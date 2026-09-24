@@ -16,6 +16,7 @@
     "@europeana/style": "catalog:",
     "@nuxtjs/i18n": "catalog:nuxt3",
     "@rollup/plugin-graphql": "3.0.0",
+    "bootstrap": "catalog:",
     "filesize": "^11.0.24",
     "marked": "catalog:html",
     "nuxt": "catalog:nuxt3",

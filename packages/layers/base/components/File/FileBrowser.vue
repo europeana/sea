@@ -1,6 +1,6 @@
 <script setup>
 import { filesize } from "filesize";
-const { d, t } = useI18n();
+const { d, t, te } = useI18n();
 
 const model = defineModel({
   type: String,
@@ -64,7 +64,9 @@ const { data } = useAsyncData(
 const items = computed(
   () =>
     data.value?.map((item) => ({
-      dateAdded: t("added", { date: d(new Date(item.mtime), "numeric") }),
+      dateAdded: te("added")
+        ? t("added", { date: d(new Date(item.mtime), "numeric") })
+        : new Date(item.mtime).toLocaleString(),
       id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
       text:
         item.type === "file"
