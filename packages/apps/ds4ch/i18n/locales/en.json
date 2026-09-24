@@ -147,7 +147,7 @@
   },
   "featured": "Featured",
   "fileBrowser": {
-    "notFound": "There is no directory or file found"
+    "notFound": "No directory or file available"
   },
   "footer": {
     "accessibility": "Accessibility",
