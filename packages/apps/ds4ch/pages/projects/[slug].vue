@@ -171,7 +171,11 @@ usePageMeta({
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.reports") }}
                     </h2>
-                    <FileBrowser id="reports-link" :url="reportsLink" />
+                    <FileBrowser
+                      id="reports-link"
+                      class="mb-5 pb-4k-5"
+                      :url="reportsLink"
+                    />
                   </template>
                   <template v-else-if="reports.length > 0">
                     <h2>
@@ -186,7 +190,11 @@ usePageMeta({
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.viewFactSheet") }}
                     </h2>
-                    <FileBrowser id="factsheet-link" :url="factsheetLink" />
+                    <FileBrowser
+                      id="factsheet-link"
+                      class="mb-5 pb-4k-5"
+                      :url="factsheetLink"
+                    />
                   </template>
                   <template v-else-if="page.project?.factSheet">
                     <h2 class="mb-3 pb-4k-3">
