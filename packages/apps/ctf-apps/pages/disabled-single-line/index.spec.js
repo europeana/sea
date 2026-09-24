@@ -1,5 +1,6 @@
 import { afterEach, describe, it, expect, vi } from "vitest";
 import { shallowMount } from "@vue/test-utils";
+import { nextTick } from "vue";
 import { init as initContentfulApp } from "@contentful/app-sdk";
 
 import DisabledSingleLine from "./index.vue";
@@ -57,11 +58,21 @@ describe("pages/disabled-single-line/index.vue", () => {
     expect(field).toBe("stored value");
   });
 
-  it("does not permit editing through the UI", () => {
+  it("does not permit editing through the UI", async () => {
     const wrapper = factory();
+    await nextTick();
 
     const input = wrapper.find("input");
 
     expect(input.isDisabled()).toBe(true);
+  });
+
+  it("does not show the input label for the field location", async () => {
+    const wrapper = factory();
+    await nextTick();
+
+    const label = wrapper.find("label");
+
+    expect(label.exists()).toBe(false);
   });
 });
