@@ -18,6 +18,7 @@
     "@europeana/sea-base-layer": "workspace:*",
     "@europeana/style": "catalog:",
     "@vitejs/plugin-vue": "6.0.7",
+    "bootstrap": "catalog:",
     "happy-dom": "20.10.6",
     "lodash-es": "catalog:",
     "nuxt": "catalog:nuxt3",
