@@ -3,7 +3,7 @@ import { shallowMount, mount } from "@vue/test-utils";
 import { nextTick } from "vue";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 
-import FileBrowser from "./FileBrowser.vue";
+import DocumentBrowser from "./DocumentBrowser.vue";
 
 mockNuxtImport("useI18n", () => () => ({
   t: (key, slot) => `${key} ${slot.date}`,
@@ -47,7 +47,7 @@ mockNuxtImport("useAsyncData", () => () => {
 const url = "https://files.example.org/";
 
 const factory = ({ data, props } = {}) =>
-  shallowMount(FileBrowser, {
+  shallowMount(DocumentBrowser, {
     data() {
       return {
         ...data,
@@ -59,7 +59,7 @@ const factory = ({ data, props } = {}) =>
     },
   });
 
-describe("components/Generic/FileBrowser", () => {
+describe("components/Generic/DocumentBrowser", () => {
   it("renders an accordian with directory as accordion header and file", () => {
     const wrapper = factory();
 
@@ -69,7 +69,7 @@ describe("components/Generic/FileBrowser", () => {
   });
 
   it("renders the file size and numeric added date", () => {
-    const wrapper = mount(FileBrowser, {
+    const wrapper = mount(DocumentBrowser, {
       props: {
         url,
       },
@@ -96,24 +96,24 @@ describe("components/Generic/FileBrowser", () => {
   describe("when there are subdirectories", () => {
     it("sets accordion and collapse ids per nesting level", async () => {
       const wrapper = factory();
-      expect(wrapper.findAll("#file-browser").length).toBe(1);
+      expect(wrapper.findAll("#document-browser").length).toBe(1);
       expect(wrapper.findAll("#collapse-Advocacy").length).toBe(1);
 
       await wrapper.find(".accordion-button").trigger("click");
-      expect(wrapper.find("file-browser-stub").attributes("idsuffix")).toBe(
+      expect(wrapper.find("document-browser-stub").attributes("idsuffix")).toBe(
         "-Advocacy",
       );
 
       const wrapper1 = factory({ props: { idSuffix: "-Base" } });
-      expect(wrapper1.findAll("#file-browser-Base").length).toBe(1);
+      expect(wrapper1.findAll("#document-browser-Base").length).toBe(1);
       expect(wrapper1.findAll("#collapse-Base-Advocacy").length).toBe(1);
 
       await wrapper1
-        .find("#file-browser-Base .accordion-button")
+        .find("#document-browser-Base .accordion-button")
         .trigger("click");
-      expect(wrapper1.find("file-browser-stub").attributes("idsuffix")).toBe(
-        "-Base-Advocacy",
-      );
+      expect(
+        wrapper1.find("document-browser-stub").attributes("idsuffix"),
+      ).toBe("-Base-Advocacy");
     });
   });
 

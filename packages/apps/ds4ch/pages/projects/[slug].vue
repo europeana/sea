@@ -171,7 +171,7 @@ usePageMeta({
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.reports") }}
                     </h2>
-                    <FileBrowser
+                    <DocumentBrowser
                       id="reports-link"
                       class="mb-5 pb-4k-5"
                       :url="reportsLink"
@@ -190,7 +190,7 @@ usePageMeta({
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.viewFactSheet") }}
                     </h2>
-                    <FileBrowser
+                    <DocumentBrowser
                       id="factsheet-link"
                       class="mb-5 pb-4k-5"
                       :url="factsheetLink"

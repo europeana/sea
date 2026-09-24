@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 
-import LinkSection from "./LinkSection";
+import DocumentLinkSection from "./DocumentLinkSection";
 
 const factory = ({ data, props } = {}) =>
-  shallowMount(LinkSection, {
+  shallowMount(DocumentLinkSection, {
     data() {
       return {
         ...data,
@@ -17,7 +17,7 @@ const factory = ({ data, props } = {}) =>
     },
   });
 
-describe("components/Document/LinkSection", () => {
+describe("components/Document/DocumentLinkSection", () => {
   it("the headline as a title", () => {
     const wrapper = factory();
 
