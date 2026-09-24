@@ -33,7 +33,7 @@ catalogs:
     nuxt: 3.21.8
   vite7:
     "@vitejs/plugin-vue": "6.0.7"
-    vite: "7.3.5"
+    vite: "8.3.0"
   vitest4:
     "@vitest/coverage-v8": "4.1.11"
     vitest: "4.1.11"
