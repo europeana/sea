@@ -7,6 +7,7 @@ import FileBrowser from "./FileBrowser.vue";
 
 mockNuxtImport("useI18n", () => () => ({
   t: (key, slot) => `${key} ${slot.date}`,
+  te: () => true,
   d: (key, format) => format,
 }));
 
