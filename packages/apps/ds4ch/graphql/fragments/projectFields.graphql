@@ -32,6 +32,8 @@ fragment projectFields on Project {
   factSheet {
     ...pdfDocumentFields
   }
+  reportsLink
+  factsheetLink
 }
 fragment testimonialCardFields on TestimonialCard {
   text

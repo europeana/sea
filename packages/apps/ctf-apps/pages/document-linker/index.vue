@@ -40,6 +40,6 @@ onMounted(() => {
     >
       Clear
     </button>
-    <FileBrowser v-model="field" :select="true" :url="url" />
+    <DocumentBrowser v-model="field" :select="true" :url="url" />
   </div>
 </template>
