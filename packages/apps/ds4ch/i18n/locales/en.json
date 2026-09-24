@@ -146,6 +146,9 @@
     "event": "Event | Events"
   },
   "featured": "Featured",
+  "fileBrowser": {
+    "notFound": "There is no directory or file found"
+  },
   "footer": {
     "accessibility": "Accessibility",
     "cookies": "Cookies",

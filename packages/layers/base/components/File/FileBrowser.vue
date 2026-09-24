@@ -56,7 +56,7 @@ const itemURL = (item) => {
   return url.toString();
 };
 
-const { data } = useAsyncData(
+const { data, error } = useAsyncData(
   computed(() => `FileBrowser:${props.url}`),
   () => $fetch(props.url),
 );
@@ -77,7 +77,10 @@ const items = computed(
 </script>
 
 <template>
-  <div :id="`file-browser${idSuffix}`" class="accordion accordion-flush">
+  <div v-if="error" class="p-3 border-bottom">
+    {{ $t("fileBrowser.notFound") }}
+  </div>
+  <div v-else :id="`file-browser${idSuffix}`" class="accordion accordion-flush">
     <div v-for="item in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
         <div class="accordion-header p-3" :class="{ 'd-flex': select }">
