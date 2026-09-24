@@ -55,7 +55,7 @@ const attributionFields = (fields) => {
     :url="section.url"
     class="mb-4 mb-md-5 pb-4k-5"
   />
-  <FileDocumentLinkSection
+  <DocumentLinkSection
     v-else-if="entryHasContentType(section, 'DocumentLinkSection')"
     :headline="section.headline"
     :url="section.link"
