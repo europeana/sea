@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook";
 import { http, HttpResponse } from "msw";
-import FileBrowser from "./FileBrowser.vue";
+import DocumentBrowser from "./DocumentBrowser.vue";
 
 const mockResponse = [
   {
@@ -32,8 +32,8 @@ const mockResponse = [
 ];
 
 const meta = {
-  component: FileBrowser,
-} satisfies Meta<typeof FileBrowser>;
+  component: DocumentBrowser,
+} satisfies Meta<typeof DocumentBrowser>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -50,6 +50,10 @@ query BlogPostPage(
             url
             text
           }
+          ... on DocumentLinkSection {
+            headline
+            link
+          }
         }
       }
       authorCollection {
