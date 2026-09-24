@@ -32,23 +32,14 @@ onMounted(() => {
 
 <template>
   <div class="contentful">
-    Field value: {{ field }}
+    <div class="field-value m-3">Selected: {{ field }}</div>
+    <button
+      v-if="field"
+      class="btn btn-secondary mb-3 ms-3"
+      @click="field = null"
+    >
+      Clear
+    </button>
     <FileBrowser v-model="field" :select="true" :url="url" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.contentful {
-  font-size: 11px;
-}
-
-input {
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  border-radius: 0.25rem;
-  box-shadow: rgba(225, 228, 232, 0.2) 0px 2px 0px inset;
-  box-sizing: border-box;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(207, 217, 224);
-}
-</style>
