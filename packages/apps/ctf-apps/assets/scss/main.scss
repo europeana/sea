@@ -5,3 +5,19 @@
 @import "@europeana/style/scss/fonts";
 @import "@europeana/style/scss/default";
 @import "@europeana/style/scss/icons";
+
+.contentful {
+  font-size: $font-size-small;
+
+  input:disabled {
+    background-color: #e9ecef;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    border: 0;
+  }
+
+  .accordion-button {
+    font-size: $font-size-small;
+  }
+}
