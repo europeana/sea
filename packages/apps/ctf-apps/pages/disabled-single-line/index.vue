@@ -5,6 +5,9 @@ import {
 } from "@contentful/app-sdk";
 
 const field = ref("");
+const fieldId = ref("field");
+const showLabel = ref(true);
+const ready = ref(false);
 
 useHead({
   title: "Disabled single line text - Contentful app",
@@ -18,9 +21,17 @@ onMounted(() => {
   initContentfulApp((sdk) => {
     if (sdk.location.is(contentfulAppLocations.LOCATION_ENTRY_FIELD)) {
       sdk.window.startAutoResizer();
+
       field.value = sdk.field.getValue();
+      fieldId.value = sdk.field.id;
+
       // onValueChanged returns a detachValueChangeHandler, should we use this?
       sdk.field.onValueChanged((value) => (field.value = value));
+
+      // input label will be rendered outside the iframe by Contentful
+      showLabel.value = false;
+
+      ready.value = true;
     }
   });
 });
@@ -28,23 +39,9 @@ onMounted(() => {
 
 <template>
   <div class="contentful">
-    <form class="mb-3">
-      <input id="field" v-model="field" disabled />
+    <form v-if="ready" class="mb-3">
+      <label v-if="showLabel" :for="fieldId"> Value: </label>
+      <input :id="fieldId" v-model="field" disabled />
     </form>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.contentful {
-  font-size: 11px;
-
-  input:disabled {
-    // thse styles need to be moved to somewhere where they can be shared among contentful applications
-    background-color: #e9ecef;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    border: 0;
-  }
-}
-</style>

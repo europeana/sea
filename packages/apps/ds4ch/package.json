@@ -27,7 +27,7 @@
     "@storybook/addon-docs": "10.4.6",
     "@storybook/addon-links": "10.4.6",
     "@vitejs/plugin-vue": "6.0.7",
-    "bootstrap": "5.3.8",
+    "bootstrap": "catalog:",
     "happy-dom": "20.10.6",
     "lodash-es": "catalog:",
     "msw": "^2.15.0",

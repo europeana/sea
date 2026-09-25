@@ -41,6 +41,9 @@ const reports = page.value.project?.reportsCollection?.items.map((report) => {
   return { label: report.title, icon: "ic-download", url: report.url };
 });
 
+const reportsLink = page.value.project?.reportsLink;
+const factsheetLink = page.value.project?.factsheetLink;
+
 const tags =
   page.value.categoriesCollection?.items.length > 0
     ? page.value.categoriesCollection.items
@@ -164,7 +167,17 @@ usePageMeta({
                       :table-data="impactMetrics"
                     />
                   </template>
-                  <template v-if="reports.length > 0">
+                  <template v-if="reportsLink">
+                    <h2 class="mb-3 pb-4k-3">
+                      {{ $t("projects.reports") }}
+                    </h2>
+                    <DocumentBrowser
+                      id="reports-link"
+                      class="mb-5 pb-4k-5"
+                      :url="reportsLink"
+                    />
+                  </template>
+                  <template v-else-if="reports.length > 0">
                     <h2>
                       {{ $t("projects.reports") }}
                     </h2>
@@ -173,7 +186,17 @@ usePageMeta({
                       :table-data="reports"
                     />
                   </template>
-                  <template v-if="page.project?.factSheet">
+                  <template v-if="factsheetLink">
+                    <h2 class="mb-3 pb-4k-3">
+                      {{ $t("projects.viewFactSheet") }}
+                    </h2>
+                    <DocumentBrowser
+                      id="factsheet-link"
+                      class="mb-5 pb-4k-5"
+                      :url="factsheetLink"
+                    />
+                  </template>
+                  <template v-else-if="page.project?.factSheet">
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.factSheet") }}
                     </h2>

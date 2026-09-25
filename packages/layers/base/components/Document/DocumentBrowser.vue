@@ -1,6 +1,6 @@
 <script setup>
 import { filesize } from "filesize";
-const { d, t } = useI18n();
+const { d, t, te } = useI18n();
 
 const model = defineModel({
   type: String,
@@ -10,7 +10,7 @@ const model = defineModel({
 const props = defineProps({
   url: {
     type: String,
-    required: true,
+    default: null,
   },
   idSuffix: {
     type: String,
@@ -56,31 +56,66 @@ const itemURL = (item) => {
   return url.toString();
 };
 
+const singleFileName = computed(() => {
+  if (!props.url || props.url.endsWith("/")) {
+    return null;
+  } else {
+    return props.url.split("/").pop();
+  }
+});
+
+const dirUrl = computed(() => {
+  if (!props.url) {
+    return null;
+  } else if (props.url.endsWith("/")) {
+    return props.url;
+  } else {
+    return props.url.split("/").slice(0, -1).join("/") + "/";
+  }
+});
+
 const { data, error } = useAsyncData(
-  computed(() => `FileBrowser:${props.url}`),
-  () => $fetch(props.url),
+  computed(() => `DocumentBrowser:${dirUrl.value}`),
+  () => $fetch(dirUrl.value),
 );
 
-const items = computed(
-  () =>
-    data.value?.map((item) => ({
-      dateAdded: t("added", { date: d(new Date(item.mtime), "numeric") }),
-      id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
-      text:
-        item.type === "file"
-          ? `${item.name} (${filesize(item.size || 0)})`
-          : item.name,
-      type: item.type,
-      url: itemURL(item),
-    })) || [],
+const itemDisplay = (item) => ({
+  dateAdded: te("added")
+    ? t("added", { date: d(new Date(item.mtime), "numeric") })
+    : new Date(item.mtime).toLocaleString(),
+  id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
+  text:
+    item.type === "file"
+      ? `${item.name} (${filesize(item.size || 0)})`
+      : item.name,
+  type: item.type,
+  url: itemURL(item),
+});
+
+const items = computed(() =>
+  [data.value]
+    .flat()
+    .filter(Boolean)
+    .filter(
+      (item) => !singleFileName.value || item.name === singleFileName.value,
+    )
+    .map(itemDisplay),
 );
 </script>
 
 <template>
   <div v-if="error" class="p-3 border-bottom">
-    {{ $t("fileBrowser.notFound") }}
+    {{
+      $te("documentBrowser.notFound")
+        ? $t("documentBrowser.notFound")
+        : "Not Found"
+    }}
   </div>
-  <div v-else :id="`file-browser${idSuffix}`" class="accordion accordion-flush">
+  <div
+    v-else
+    :id="`document-browser${idSuffix}`"
+    class="accordion accordion-flush"
+  >
     <div v-for="item in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
         <div class="accordion-header p-3" :class="{ 'd-flex': select }">
@@ -111,7 +146,7 @@ const items = computed(
           :class="{ collapse: !isOpen(item) }"
         >
           <div class="accordion-body">
-            <FileBrowser
+            <DocumentBrowser
               v-if="isOpen(item)"
               v-model="model"
               :id-suffix="`${item.id}`"

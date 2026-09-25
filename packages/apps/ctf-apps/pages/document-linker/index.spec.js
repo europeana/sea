@@ -61,9 +61,9 @@ describe("pages/DocumentLinker/index.vue", () => {
     const wrapper = factory();
     await nextTick();
 
-    const text = wrapper.text();
+    const text = wrapper.find(".field-value").text();
 
-    expect(text).toContain("Field value: stored value");
+    expect(text).toContain("Selected: stored value");
   });
 
   it("initialises the field value to that stored in CTF", () => {
@@ -91,5 +91,24 @@ describe("pages/DocumentLinker/index.vue", () => {
     await nextTick();
 
     expect(sdk.field.setValue).toHaveBeenCalledWith("new value");
+  });
+
+  describe("when there is a value selected", () => {
+    it("renders a clear button", async () => {
+      const wrapper = factory();
+      await nextTick();
+
+      expect(wrapper.find(".btn").text()).toEqual("Clear");
+    });
+  });
+
+  describe("when there is NO value selected", () => {
+    it("does not render a clear button", async () => {
+      const wrapper = factory();
+      wrapper.vm.field = "";
+      await nextTick();
+
+      expect(wrapper.find("btn").exists()).toBe(false);
+    });
   });
 });

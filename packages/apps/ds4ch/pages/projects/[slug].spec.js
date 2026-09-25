@@ -98,6 +98,8 @@ const contentfulResponse = {
                 },
               ],
             },
+            reportsLink: "https://example.org/filesystem/directory/",
+            factsheetLink: "https://example.org/filesystem/directory/",
           },
           categoriesCollection: {
             items: [
@@ -180,6 +182,21 @@ describe("ProjectPage", () => {
       const dates = wrapper.find("time");
 
       expect(dates.text()).toBe("projects.dates");
+    });
+
+    it("renders the reports link fileBrowser", async () => {
+      const wrapper = await factory();
+      const reportsBrowser = wrapper.find("#reports-link");
+
+      expect(reportsBrowser.exists()).toBe(true);
+    });
+
+    it("renders the factsheet link fileBrowser", async () => {
+      const wrapper = await factory();
+
+      const factsheetBrowser = wrapper.find("#factsheet-link");
+
+      expect(factsheetBrowser.exists()).toBe(true);
     });
   });
 
