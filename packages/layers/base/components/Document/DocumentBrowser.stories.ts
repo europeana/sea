@@ -63,3 +63,59 @@ export const Default: Story = {
     url: "https://files.example.org/",
   },
 };
+
+export const FailedAtTop: Story = {
+  beforeEach({ msw }) {
+    msw.use(
+      http.get("https://files.example.org/", () => {
+        return new HttpResponse(null, {
+          status: 403,
+        });
+      }),
+    );
+    msw.use(
+      http.get("https://files.example.org/Advocacy/", () => {
+        return HttpResponse.json(mockResponse[0].items);
+      }),
+    );
+    msw.use(
+      http.get(
+        "https:/files.example.org/Advocacy/2016%20Update%20to%20copyright%20mandate/",
+        () => {
+          return HttpResponse.json(mockResponse[0].items[0].items);
+        },
+      ),
+    );
+  },
+  args: {
+    url: "https://files.example.org/",
+  },
+};
+
+export const FailedAtNested: Story = {
+  beforeEach({ msw }) {
+    msw.use(
+      http.get("https://files.example.org/", () => {
+        return HttpResponse.json(mockResponse);
+      }),
+    );
+    msw.use(
+      http.get("https://files.example.org/Advocacy/", () => {
+        return HttpResponse.json(mockResponse[0].items);
+      }),
+    );
+    msw.use(
+      http.get(
+        "https:/files.example.org/Advocacy/2016%20Update%20to%20copyright%20mandate/",
+        () => {
+          return new HttpResponse(null, {
+            status: 403,
+          });
+        },
+      ),
+    );
+  },
+  args: {
+    url: "https://files.example.org/",
+  },
+};

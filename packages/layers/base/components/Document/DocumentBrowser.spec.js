@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
 import { nextTick } from "vue";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
@@ -40,9 +40,12 @@ const items = [
   },
 ];
 
-mockNuxtImport("useAsyncData", () => () => {
-  return { data: ref(items), error: ref(null) };
-});
+const { useAsyncDataMock } = vi.hoisted(() => ({
+  useAsyncDataMock: vi.fn(() => {
+    return { data: ref(items), error: ref(null) };
+  }),
+}));
+mockNuxtImport("useAsyncData", () => useAsyncDataMock);
 
 const url = "https://files.example.org/";
 
@@ -138,6 +141,18 @@ describe("components/Generic/DocumentBrowser", () => {
       await nextTick();
 
       expect(wrapper.vm.opened).toContain(`${url}dir/`);
+    });
+  });
+
+  describe("when fetching from the URL errors", () => {
+    it("shows a message the content is not found", () => {
+      useAsyncDataMock.mockImplementation(() => ({
+        data: ref(null),
+        error: ref(new Error()),
+      }));
+      const wrapper = factory();
+
+      expect(wrapper.text()).toEqual("documentBrowser.notFound");
     });
   });
 });

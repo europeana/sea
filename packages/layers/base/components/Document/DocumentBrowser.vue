@@ -10,7 +10,7 @@ const model = defineModel({
 const props = defineProps({
   url: {
     type: String,
-    required: true,
+    default: null,
   },
   idSuffix: {
     type: String,
@@ -67,15 +67,14 @@ const singleFileName = computed(() => {
 const dirUrl = computed(() => {
   if (!props.url) {
     return null;
-  }
-  if (props.url.endsWith("/")) {
+  } else if (props.url.endsWith("/")) {
     return props.url;
   } else {
     return props.url.split("/").slice(0, -1).join("/") + "/";
   }
 });
 
-const { data } = useAsyncData(
+const { data, error } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
 );
@@ -105,7 +104,18 @@ const items = computed(() =>
 </script>
 
 <template>
-  <div :id="`document-browser${idSuffix}`" class="accordion accordion-flush">
+  <div v-if="error" class="p-3 border-bottom">
+    {{
+      $te("documentBrowser.notFound")
+        ? $t("documentBrowser.notFound")
+        : "Not Found"
+    }}
+  </div>
+  <div
+    v-else
+    :id="`document-browser${idSuffix}`"
+    class="accordion accordion-flush"
+  >
     <div v-for="item in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
         <div class="accordion-header p-3" :class="{ 'd-flex': select }">
