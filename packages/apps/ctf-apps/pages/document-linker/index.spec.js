@@ -103,10 +103,11 @@ describe("pages/DocumentLinker/index.vue", () => {
   });
 
   describe("when there is NO value selected", () => {
-    it("renders a clear button", async () => {
+    it("does not render a clear button", async () => {
       const wrapper = factory();
       wrapper.vm.field = "";
       await nextTick();
+
       expect(wrapper.find("btn").exists()).toBe(false);
     });
   });
