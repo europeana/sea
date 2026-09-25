@@ -57,7 +57,7 @@ const itemURL = (item) => {
 };
 
 const singleFileName = computed(() => {
-  if (props.url.endsWith("/")) {
+  if (!props.url || props.url.endsWith("/")) {
     return null;
   } else {
     return props.url.split("/").pop();
@@ -65,6 +65,9 @@ const singleFileName = computed(() => {
 });
 
 const dirUrl = computed(() => {
+  if (!props.url) {
+    return null;
+  }
   if (props.url.endsWith("/")) {
     return props.url;
   } else {
@@ -91,8 +94,8 @@ const itemDisplay = (item) => ({
 });
 
 const items = computed(() =>
-  []
-    .concat(data.value)
+  [data.value]
+    .flat()
     .filter(Boolean)
     .filter(
       (item) => !singleFileName.value || item.name === singleFileName.value,
