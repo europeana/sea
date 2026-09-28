@@ -145,14 +145,14 @@ describe("components/Generic/DocumentBrowser", () => {
   });
 
   describe("when fetching from the URL errors", () => {
-    it("shows a message the content is not found", () => {
+    it("shows a message the content is empty", () => {
       useAsyncDataMock.mockImplementation(() => ({
         data: ref(null),
         error: ref(new Error()),
       }));
       const wrapper = factory();
 
-      expect(wrapper.text()).toEqual("documentBrowser.notFound");
+      expect(wrapper.text()).toEqual("documentBrowser.empty");
     });
   });
 });

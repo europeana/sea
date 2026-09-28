@@ -106,9 +106,7 @@ const items = computed(() =>
 <template>
   <div v-if="error" class="p-3 border-bottom">
     {{
-      $te("documentBrowser.notFound")
-        ? $t("documentBrowser.notFound")
-        : "Not Found"
+      $te("documentBrowser.empty") ? $t("documentBrowser.empty") : "Not Found"
     }}
   </div>
   <div
