@@ -82,9 +82,11 @@ describe("components/Generic/DocumentBrowser", () => {
     });
 
     expect(wrapper.find(".file-link a").text()).toEqual(
-      "Europeana Advocacy Framework.doc (145.41 kB) (newWindow)",
+      "Europeana Advocacy Framework.doc (newWindow)",
     );
-    expect(wrapper.find(".date-added").text()).toEqual("added numeric");
+    expect(wrapper.find(".file-info").text()).toEqual(
+      "145.41 kB • added numeric",
+    );
   });
 
   describe("when there is no data fetched", () => {
@@ -145,14 +147,14 @@ describe("components/Generic/DocumentBrowser", () => {
   });
 
   describe("when fetching from the URL errors", () => {
-    it("shows a message the content is not found", () => {
+    it("shows a message the content is empty", () => {
       useAsyncDataMock.mockImplementation(() => ({
         data: ref(null),
         error: ref(new Error()),
       }));
       const wrapper = factory();
 
-      expect(wrapper.text()).toEqual("documentBrowser.notFound");
+      expect(wrapper.text()).toEqual("documentBrowser.empty");
     });
   });
 });
