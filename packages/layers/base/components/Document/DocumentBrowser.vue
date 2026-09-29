@@ -1,5 +1,7 @@
 <script setup>
 import { filesize } from "filesize";
+import { Collapse } from "bootstrap";
+
 const { d, t, te } = useI18n();
 
 const model = defineModel({
@@ -22,11 +24,9 @@ const props = defineProps({
   },
 });
 
-const opened = ref(new Set());
+const emit = defineEmits(["fetched"]);
 
-const handleClickAccordionButton = (item) => {
-  opened.value.add(item.url);
-};
+const opened = ref(new Set());
 
 const isOpen = (item) => opened.value.has(item.url);
 
@@ -74,10 +74,44 @@ const dirUrl = computed(() => {
   }
 });
 
-const { data, error } = useAsyncData(
+const { data, error, status } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
 );
+
+// Emit fetched event to show collapse once content is fetched
+watch(status, (newStatus) => {
+  if (["success", "error"].includes(newStatus)) {
+    emit("fetched");
+  }
+});
+
+const handleClickAccordionButton = (item) => {
+  const collapseEl = document.getElementById(`collapse${item.id}`);
+
+  // First click mounts the child to fetch data
+  if (!opened.value.has(item.url)) {
+    opened.value.add(item.url);
+    return;
+  }
+
+  // When opened before and content is already ready
+  const collapse = Collapse.getOrCreateInstance(collapseEl);
+
+  if (collapseEl.classList.contains("show")) {
+    collapse.hide();
+  } else {
+    collapse.show();
+  }
+};
+
+const handleFetched = async (id) => {
+  await nextTick();
+
+  const collapseEl = document.getElementById(`collapse${id}`);
+
+  Collapse.getOrCreateInstance(collapseEl).show();
+};
 
 const itemDisplay = (item) => ({
   dateAdded: te("added")
@@ -131,11 +165,9 @@ const items = computed(() =>
             :id="select ? `label${item.id}` : undefined"
             class="accordion-button collapsed p-0"
             type="button"
-            data-bs-toggle="collapse"
-            :data-bs-target="`#collapse${item.id}`"
             aria-expanded="false"
             :aria-controls="`collapse${item.id}`"
-            @click="handleClickAccordionButton(item)"
+            @click.stop="handleClickAccordionButton(item)"
           >
             {{ item.text }}
           </button>
@@ -148,6 +180,7 @@ const items = computed(() =>
               :id-suffix="`${item.id}`"
               :url="item.url"
               :select="select"
+              @fetched="handleFetched(item.id)"
             />
           </div>
         </div>
