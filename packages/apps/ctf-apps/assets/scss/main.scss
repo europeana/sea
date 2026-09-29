@@ -21,3 +21,7 @@
     font-size: $font-size-small;
   }
 }
+// CSS variables for theme specific overrides base components
+:root {
+  --bp-4k-increment: 1;
+}
