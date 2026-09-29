@@ -22,13 +22,13 @@ const props = defineProps({
   },
 });
 
-const opened = ref(new Set());
+const opened = ref([]);
 
 const handleClickAccordionButton = (item) => {
-  opened.value.add(item.url);
+  opened.value.push(item.url);
 };
 
-const isOpen = (item) => opened.value.has(item.url);
+const isOpen = (item) => opened.value.includes(item.url);
 
 watchEffect(() => {
   // if the model value indicates a pre-selected file/directory, open up
@@ -41,7 +41,7 @@ watchEffect(() => {
     const paths = pathname.split("/").filter(Boolean);
     if (paths.length > 1) {
       const dirUrl = `${props.url}${paths.shift()}/`;
-      opened.value.add(dirUrl);
+      opened.value.push(dirUrl);
     }
   }
 });
@@ -140,7 +140,11 @@ const items = computed(() =>
             {{ item.text }}
           </button>
         </div>
-        <div :id="`collapse${item.id}`" class="accordion-collapse collapse">
+        <div
+          :id="`collapse${item.id}`"
+          class="accordion-collapse"
+          :class="{ collapse: !isOpen(item) }"
+        >
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"
