@@ -1,4 +1,5 @@
 <script setup>
+import md5 from "md5";
 import { filesize } from "filesize";
 const { d, t, te } = useI18n();
 
@@ -11,10 +12,6 @@ const props = defineProps({
   url: {
     type: String,
     default: null,
-  },
-  idSuffix: {
-    type: String,
-    default: "",
   },
   select: {
     type: Boolean,
@@ -74,23 +71,30 @@ const dirUrl = computed(() => {
   }
 });
 
+const id = computed(() => `document-browser-${md5(dirUrl)}`);
+
 const { data, error } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
 );
 
-const itemDisplay = (item) => ({
-  dateAdded: te("added")
-    ? t("added", { date: d(new Date(item.mtime), "numeric") })
-    : new Date(item.mtime).toLocaleString(),
-  id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
-  text:
-    item.type === "file"
-      ? `${item.name} (${filesize(item.size || 0)})`
-      : item.name,
-  type: item.type,
-  url: itemURL(item),
-});
+const itemDisplay = (item) => {
+  const url = itemURL(item);
+  const id = md5(url);
+
+  return {
+    dateAdded: te("added")
+      ? t("added", { date: d(new Date(item.mtime), "numeric") })
+      : new Date(item.mtime).toLocaleString(),
+    id,
+    text:
+      item.type === "file"
+        ? `${item.name} (${filesize(item.size || 0)})`
+        : item.name,
+    type: item.type,
+    url,
+  };
+};
 
 const items = computed(() =>
   [data.value]
@@ -111,11 +115,7 @@ const items = computed(() =>
         : "Not Found"
     }}
   </div>
-  <div
-    v-else
-    :id="`document-browser${idSuffix}`"
-    class="accordion accordion-flush"
-  >
+  <div v-else :id="id" class="accordion accordion-flush">
     <div v-for="item in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
         <div class="accordion-header p-3" :class="{ 'd-flex': select }">
@@ -125,27 +125,26 @@ const items = computed(() =>
             class="form-check-input me-2"
             type="radio"
             :value="item.url"
-            :aria-labelledby="`label${item.id}`"
+            :aria-labelledby="`label-${item.id}`"
           />
           <button
-            :id="select ? `label${item.id}` : undefined"
+            :id="select ? `label-${item.id}` : undefined"
             class="accordion-button collapsed p-0"
             type="button"
             data-bs-toggle="collapse"
-            :data-bs-target="`#collapse${item.id}`"
+            :data-bs-target="`#collapse-${item.id}`"
             aria-expanded="false"
-            :aria-controls="`collapse${item.id}`"
+            :aria-controls="`collapse-${item.id}`"
             @click="handleClickAccordionButton(item)"
           >
             {{ item.text }}
           </button>
         </div>
-        <div :id="`collapse${item.id}`" class="accordion-collapse collapse">
+        <div :id="`collapse-${item.id}`" class="accordion-collapse collapse">
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"
               v-model="model"
-              :id-suffix="`${item.id}`"
               :url="item.url"
               :select="select"
             />
@@ -163,7 +162,7 @@ const items = computed(() =>
           class="form-check-input me-2"
           type="radio"
           :value="item.url"
-          :aria-labelledby="`label${item.id}`"
+          :aria-labelledby="`label-${item.id}`"
         />
         <div :class="{ 'flex-grow-1': select }">
           <GenericSmartLink
@@ -174,7 +173,7 @@ const items = computed(() =>
           >
             <span class="icon-file me-2" />
             <span
-              :id="select ? `label${item.id}` : undefined"
+              :id="select ? `label-${item.id}` : undefined"
               class="link-text"
               >{{ item.text }}</span
             >
