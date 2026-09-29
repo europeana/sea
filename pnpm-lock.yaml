@@ -206,8 +206,8 @@ settings:
 catalogs:
   default:
     '@europeana/style':
-      specifier: 2.38.0
-      version: 2.38.0
+      specifier: 2.39.2
+      version: 2.39.2
     bootstrap:
       specifier: 5.3.8
       version: 5.3.8
@@ -409,7 +409,7 @@ importers:
         version: link:../../layers/base
       '@europeana/style':
         specifier: 'catalog:'
-        version: 2.38.0
+        version: 2.39.2
       '@vitejs/plugin-vue':
         specifier: 6.0.7
         version: 6.0.7(vite@7.3.5(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.38(typescript@5.9.3))
@@ -442,7 +442,7 @@ importers:
         version: link:../../layers/base
       '@europeana/style':
         specifier: 'catalog:'
-        version: 2.38.0
+        version: 2.39.2
       '@europeana/vue-contentful-graphql':
         specifier: workspace:*
         version: link:../../plugins/vue-contentful-graphql
@@ -544,7 +544,7 @@ importers:
         version: 0.5.6(@popperjs/core@2.11.8)(typescript@5.9.3)
       '@europeana/style':
         specifier: 'catalog:'
-        version: 2.38.0
+        version: 2.39.2
       '@nuxtjs/i18n':
         specifier: catalog:nuxt3
         version: 9.5.6(@vue/compiler-dom@3.5.38)(eslint@10.5.0(jiti@2.7.0))(magicast@0.5.3)(rollup@4.62.2)(vue@3.5.38(typescript@5.9.3))
@@ -1474,8 +1474,11 @@ packages:
     resolution: {integrity: sha512-XBpw1XCei/+Ll6vCZG5ivtwG0Kp7Qs9pw2DaPaFMYA8t+QmKE+dKPnFEVcHKg8AXuGyyUy/kqjd6jspy6XeEyw==}
     engines: {node: ^24.0.0, pnpm: '>= 11.8.0'}
 
-  '@europeana/style@2.38.0':
-    resolution: {integrity: sha512-WVP4oZ2os+PKohXkknI/3efA88ESIllVvV+uWvx84mX+Qmwl1EQl6A0CMuTcehzyu+Sodk+axUYcmHtLR+OGWA==}
+  '@europeana/style@2.39.1':
+    resolution: {integrity: sha512-ExkfzSRk5If6xVs0A1SSjSeuJ2mgFYtS8Gz71DQdDTpk1D8KBzBGOwnsK4h3f8Dy+iI0HvbQImgO8GPluQSzQQ==}
+
+  '@europeana/style@2.39.2':
+    resolution: {integrity: sha512-fhU293UNaXgV1jvlyNfrrPW2pfAWGN8i0f06Lern9LKIQrZx6tnuEuoOErZhba5qipGTX6VrfQ5nQKBqR2n5bg==}
 
   '@gar/promise-retry@1.0.3':
     resolution: {integrity: sha512-GmzA9ckNokPypTg10pgpeHNQe7ph+iIKKmhKu3Ob9ANkswreCx7R3cKmY781K8QK3AqVL3xVh9A42JvIAbkkSA==}
@@ -9792,14 +9795,16 @@ snapshots:
 
   '@europeana/feedback-widget@0.5.6(@popperjs/core@2.11.8)(typescript@5.9.3)':
     dependencies:
-      '@europeana/style': 2.38.0
+      '@europeana/style': 2.39.1
       bootstrap: 5.3.8(@popperjs/core@2.11.8)
       vue: 3.5.38(typescript@5.9.3)
     transitivePeerDependencies:
       - '@popperjs/core'
       - typescript
 
-  '@europeana/style@2.38.0': {}
+  '@europeana/style@2.39.1': {}
+
+  '@europeana/style@2.39.2': {}
 
   '@gar/promise-retry@1.0.3': {}
 
