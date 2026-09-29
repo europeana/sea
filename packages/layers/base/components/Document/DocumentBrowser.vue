@@ -22,13 +22,13 @@ const props = defineProps({
   },
 });
 
-const opened = ref([]);
+const opened = ref(new Set());
 
 const handleClickAccordionButton = (item) => {
-  opened.value.push(item.url);
+  opened.value.add(item.url);
 };
 
-const isOpen = (item) => opened.value.includes(item.url);
+const isOpen = (item) => opened.value.has(item.url);
 
 watchEffect(() => {
   // if the model value indicates a pre-selected file/directory, open up
@@ -41,7 +41,7 @@ watchEffect(() => {
     const paths = pathname.split("/").filter(Boolean);
     if (paths.length > 1) {
       const dirUrl = `${props.url}${paths.shift()}/`;
-      opened.value.push(dirUrl);
+      opened.value.add(dirUrl);
     }
   }
 });
@@ -154,12 +154,7 @@ const items = computed(() =>
             {{ item.name }}
           </button>
         </div>
-        <!-- FIXME: collapse class should always be set -->
-        <div
-          :id="`collapse${item.id}`"
-          class="accordion-collapse"
-          :class="{ collapse: !isOpen(item) }"
-        >
+        <div :id="`collapse${item.id}`" class="accordion-collapse collapse">
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"
