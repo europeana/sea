@@ -6,6 +6,7 @@
     "share": "Delen",
     "shareOn": "Delen op {social}"
   },
+  "added": "Toegevoegd {date}",
   "attribution": {
     "creator": "Maker:",
     "institution": "Instelling:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Onbekende provider"
     }
+  },
+  "documentBrowser": {
+    "empty": "Deze map is leeg"
   },
   "embedNotification": {
     "ifNotAll": "Als u niet alle ingesloten media wilt laden, kunt u {0}.",

@@ -6,6 +6,7 @@
     "share": "Udostępnij",
     "shareOn": "Udostępnij na {social}"
   },
+  "added": "Dodano {date}",
   "attribution": {
     "creator": "Twórca:",
     "institution": "Instytucja:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Nieznany dostawca"
     }
+  },
+  "documentBrowser": {
+    "empty": "Ten folder jest pusty"
   },
   "embedNotification": {
     "ifNotAll": "Jeśli nie chcesz ładować wszystkich osadzonych multimediów, możesz {0}.",

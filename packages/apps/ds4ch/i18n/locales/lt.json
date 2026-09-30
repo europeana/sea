@@ -6,6 +6,7 @@
     "share": "Dalintis",
     "shareOn": "Dalintis {social}"
   },
+  "added": "Pridėta {date}",
   "attribution": {
     "creator": "Autorius:",
     "institution": "Įstaiga:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Nežinomas tiekėjas"
     }
+  },
+  "documentBrowser": {
+    "empty": "Šis aplankas tuščias"
   },
   "embedNotification": {
     "ifNotAll": "Jei nenorite įkelti visos įterptosios medijos, galite {0}.",

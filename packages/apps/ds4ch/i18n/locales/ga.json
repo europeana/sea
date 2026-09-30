@@ -6,6 +6,7 @@
     "share": "Roinn",
     "shareOn": "Roinn ar {social}"
   },
+  "added": "Curtha leis {date}",
   "attribution": {
     "creator": "Cruthaitheoir:",
     "institution": "Institiúid:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Soláthraí anaithnid"
     }
+  },
+  "documentBrowser": {
+    "empty": "Tá an fillteán seo folamh"
   },
   "embedNotification": {
     "ifNotAll": "Mura bhfuil tú ag iarraidh gach meán leabaithe a luchtú, is féidir leat {0}.",

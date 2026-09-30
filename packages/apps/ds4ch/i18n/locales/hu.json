@@ -6,6 +6,7 @@
     "share": "Megosztás",
     "shareOn": "Megosztás a {social}"
   },
+  "added": "Hozzáadva: {date}",
   "attribution": {
     "creator": "Alkotó:",
     "institution": "Intézmény:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Ismeretlen szolgáltató"
     }
+  },
+  "documentBrowser": {
+    "empty": "Ez a mappa üres"
   },
   "embedNotification": {
     "ifNotAll": "Ha nem szeretné betölteni az összes beágyazott médiát, akkor {0}.",

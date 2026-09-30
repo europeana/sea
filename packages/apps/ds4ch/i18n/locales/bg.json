@@ -6,6 +6,7 @@
     "share": "Споделяне",
     "shareOn": "Споделяне на {social}"
   },
+  "added": "Добавено: {date}",
   "attribution": {
     "creator": "Създател:",
     "institution": "Институция:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Неизвестен доставчик"
     }
+  },
+  "documentBrowser": {
+    "empty": "Тази папка е празна"
   },
   "embedNotification": {
     "ifNotAll": "Ако не искате да зареждате всички вградени мултимедийни файлове, можете да {0}.",
