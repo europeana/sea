@@ -6,6 +6,7 @@
     "share": "Deli",
     "shareOn": "Deli prek {social}"
   },
+  "added": "Dodano: {date}",
   "attribution": {
     "creator": "Ustvarjalec:",
     "institution": "Ustanova:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Neznani ponudnik"
     }
+  },
+  "documentBrowser": {
+    "empty": "Ta mapa je prazna"
   },
   "embedNotification": {
     "ifNotAll": "Če ne želite naložiti vseh vdelanih medijev, lahko {0}.",

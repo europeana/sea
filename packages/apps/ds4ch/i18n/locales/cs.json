@@ -6,6 +6,7 @@
     "share": "sdílet",
     "shareOn": "Sdílet na {social}"
   },
+  "added": "Přidáno {date}",
   "attribution": {
     "creator": "Tvůrce:",
     "institution": "Instituce:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Neznámý poskytovatel"
     }
+  },
+  "documentBrowser": {
+    "empty": "Tato složka je prázdná"
   },
   "embedNotification": {
     "ifNotAll": "Pokud nechcete načíst všechna vložená média, můžete {0}.",

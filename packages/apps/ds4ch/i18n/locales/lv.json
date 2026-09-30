@@ -6,6 +6,7 @@
     "share": "Dalīties",
     "shareOn": "Dalīties {social}"
   },
+  "added": "Pievienots: {date}",
   "attribution": {
     "creator": "Autors:",
     "institution": "Iestāde:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Nezināms nodrošinātājs"
     }
+  },
+  "documentBrowser": {
+    "empty": "Šī mape ir tukša"
   },
   "embedNotification": {
     "ifNotAll": "Ja nevēlaties ielādēt visus iegultos multivides failus, varat {0}.",

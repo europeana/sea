@@ -6,6 +6,7 @@
     "share": "Κοινοποίηση",
     "shareOn": "Κοινοποίηση στο {social}"
   },
+  "added": "Προστέθηκε {date}",
   "attribution": {
     "creator": "Δημιουργός:",
     "institution": "Ίδρυμα:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Άγνωστος πάροχος"
     }
+  },
+  "documentBrowser": {
+    "empty": "Αυτός ο φάκελος είναι κενός"
   },
   "embedNotification": {
     "ifNotAll": "Αν δεν θέλετε να φορτώσετε όλα τα ενσωματωμένα πολυμέσα, μπορείτε να {0}.",

@@ -6,6 +6,7 @@
     "share": "Del",
     "shareOn": "Del på {social}"
   },
+  "added": "Tilføjede {date}",
   "attribution": {
     "creator": "Oprettet af:",
     "institution": "Institution:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Ukendt udbyder"
     }
+  },
+  "documentBrowser": {
+    "empty": "Denne mappe er tom"
   },
   "embedNotification": {
     "ifNotAll": "Hvis du ikke ønsker at indlæse alle indlejrede medier, kan du {0}.",
