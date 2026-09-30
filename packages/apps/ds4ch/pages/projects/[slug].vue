@@ -128,6 +128,7 @@ usePageMeta({
               <div class="row" tag="section">
                 <div class="col col-12 col-lg-9">
                   <ContentRichText
+                    v-if="page.description"
                     :text="page.description"
                     class="mb-3 pb-3 mb-4k-5"
                   />
@@ -135,6 +136,7 @@ usePageMeta({
                     {{ $t("projects.goals") }}
                   </h2>
                   <ContentRichText
+                    v-if="page.project?.goals"
                     :text="page.project?.goals"
                     class="mb-4 mb-md-5 pb-4k-5"
                   />
@@ -148,6 +150,7 @@ usePageMeta({
                     {{ $t("projects.partners") }}
                   </h2>
                   <ContentRichText
+                    v-if="partnerList"
                     :text="partnerList"
                     class="mb-4 mb-md-5 pb-4k-5"
                   />
