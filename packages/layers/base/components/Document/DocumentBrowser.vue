@@ -83,7 +83,7 @@ const fileInfo = (item) => {
   if (item.type === "file") {
     const dateString = te("added")
       ? t("added", { date: d(new Date(item.mtime), "numeric") })
-      : new Date(item.mtime).toLocaleString();
+      : new Date(item.mtime).toLocaleString("en-GB");
     const sizeString = `${filesize(item.size || 0)}`;
     return `${sizeString} • ${dateString}`;
   } else {
