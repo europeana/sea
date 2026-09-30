@@ -12,6 +12,8 @@ export default defineNuxtConfig({
 
   extends: "@europeana/sea-base-layer",
 
+  plugins: ["@europeana/sea-base-layer/plugins/client/bootstrap.client.ts"],
+
   vite: {
     css: {
       preprocessorOptions: {
