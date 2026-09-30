@@ -166,28 +166,28 @@ describe("components/Generic/DocumentBrowser", () => {
   });
 
   describe("when an accordian toggle button is clicked", () => {
-    const item = {
-      collapseId: "document-browser-v-0-collapse-0",
-      url: "https://files.example.org/123",
-    };
-    describe("and the item had already been opened", () => {
-      it("toggles the collapse instance", () => {
-        const wrapper = factory();
-
-        wrapper.vm.opened.add(item.url);
-        wrapper.vm.handleClickAccordionButton(item);
-
-        expect(toggleCollapse).toHaveBeenCalled();
-      });
-    });
     describe("and the item had not yet been opened", () => {
       it("adds the item to the 'opened' ref, dus not toggle the collapse", () => {
         const wrapper = factory();
 
-        wrapper.vm.handleClickAccordionButton(item);
+        wrapper.find(".accordion-button").trigger("click");
 
-        expect(wrapper.vm.opened).toContain(item.url);
+        expect(wrapper.vm.opened).toContain(
+          "https://files.example.org/Advocacy/",
+        );
         expect(toggleCollapse).not.toHaveBeenCalled();
+      });
+    });
+    describe("and the item had already been opened", () => {
+      it("toggles the collapse instance", async () => {
+        const wrapper = factory();
+
+        wrapper.find(".accordion-button").trigger("click");
+        expect(toggleCollapse).not.toHaveBeenCalled();
+
+        // Subsequent click
+        wrapper.find(".accordion-button").trigger("click");
+        expect(toggleCollapse).toHaveBeenCalled();
       });
     });
   });
@@ -201,6 +201,33 @@ describe("components/Generic/DocumentBrowser", () => {
       await nextTick();
 
       expect(showCollapse).toHaveBeenCalled();
+    });
+  });
+
+  describe("when content is fetched with success or error", () => {
+    it("emits the fetched event", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.status = "error";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched").length).toBe(1);
+
+      wrapper.vm.status = "success";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched").length).toBe(2);
+    });
+  });
+
+  describe("when content is fetched with another state", () => {
+    it("doesn NOT emit the fetched event", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.status = "pending";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched")).toBeFalsy();
     });
   });
 });
