@@ -12,10 +12,6 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  idSuffix: {
-    type: String,
-    default: "",
-  },
   select: {
     type: Boolean,
     default: false,
@@ -74,6 +70,9 @@ const dirUrl = computed(() => {
   }
 });
 
+// Create unique id's for each instance
+const instanceId = `document-browser-${useId()}`;
+
 const { data, error } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
@@ -91,9 +90,10 @@ const fileInfo = (item) => {
   }
 };
 
-const itemDisplay = (item) => ({
+const itemDisplay = (item, index) => ({
+  collapseId: `${instanceId}-collapse-${index}`,
   fileInfo: fileInfo(item),
-  id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
+  labelId: `${instanceId}-label-${index}`,
   name: item.name,
   type: item.type,
   url: itemURL(item),
@@ -116,11 +116,7 @@ const items = computed(() =>
       $te("documentBrowser.empty") ? $t("documentBrowser.empty") : "Not Found"
     }}
   </div>
-  <div
-    v-else
-    :id="`document-browser${idSuffix}`"
-    class="accordion accordion-flush"
-  >
+  <div v-else :id="instanceId" class="accordion accordion-flush">
     <div
       v-for="item in items"
       :key="item.url"
@@ -137,16 +133,16 @@ const items = computed(() =>
             class="form-check-input mt-1 me-2 me-4k-3"
             type="radio"
             :value="item.url"
-            :aria-labelledby="`label${item.id}`"
+            :aria-labelledby="item.labelId"
           />
           <button
-            :id="select ? `label${item.id}` : undefined"
+            :id="select ? item.labelId : undefined"
             class="accordion-button collapsed align-items-start p-0"
             type="button"
             data-bs-toggle="collapse"
-            :data-bs-target="`#collapse${item.id}`"
+            :data-bs-target="`#${item.collapseId}`"
             aria-expanded="false"
-            :aria-controls="`collapse${item.id}`"
+            :aria-controls="item.collapseId"
             @click="handleClickAccordionButton(item)"
           >
             <span class="icon-chevron me-2 me-4k-3" />
@@ -154,16 +150,11 @@ const items = computed(() =>
             {{ item.name }}
           </button>
         </div>
-        <div
-          :id="`collapse${item.id}`"
-          class="accordion-collapse"
-          :class="{ collapse: !isOpen(item) }"
-        >
+        <div :id="item.collapseId" class="accordion-collapse collapse">
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"
               v-model="model"
-              :id-suffix="`${item.id}`"
               :url="item.url"
               :select="select"
             />
@@ -181,7 +172,7 @@ const items = computed(() =>
           class="form-check-input mt-1 me-2 me-4k-3"
           type="radio"
           :value="item.url"
-          :aria-labelledby="`label${item.id}`"
+          :aria-labelledby="item.labelId"
         />
         <div :class="{ 'flex-grow-1': select }">
           <GenericSmartLink
@@ -192,7 +183,7 @@ const items = computed(() =>
           >
             <span class="icon-file align-self-start me-2 me-4k-3" />
             <span
-              :id="select ? `label${item.id}` : undefined"
+              :id="select ? item.labelId : undefined"
               class="link-text me-2 me-4k-3"
               >{{ item.name }}</span
             >
