@@ -6,6 +6,7 @@
     "share": "Jaga",
     "shareOn": "Jaga {social}"
   },
+  "added": "Lisatud {date}",
   "attribution": {
     "creator": "Looja:",
     "institution": "Institutsioon:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Tundmatu pakkuja"
     }
+  },
+  "documentBrowser": {
+    "empty": "See kaust on tühi"
   },
   "embedNotification": {
     "ifNotAll": "Kui te ei soovi kõiki manustatud meediume laadida, saate {0}.",

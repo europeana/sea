@@ -6,6 +6,7 @@
     "share": "Ixxerja",
     "shareOn": "Ixxerja fuq {social}"
   },
+  "added": "Miżjud {date}",
   "attribution": {
     "creator": "Kreatur:",
     "institution": "Istituzzjoni:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Fornitur mhux magħruf"
     }
+  },
+  "documentBrowser": {
+    "empty": "Dan il-folder huwa vojt"
   },
   "embedNotification": {
     "ifNotAll": "Jekk ma tridx tagħbija l-midja inkorporata kollha, tista' {0}.",
