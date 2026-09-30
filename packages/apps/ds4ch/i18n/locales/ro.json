@@ -6,6 +6,7 @@
     "share": "Distribuiți",
     "shareOn": "Distribuie pe {social}"
   },
+  "added": "Adăugat {date}",
   "attribution": {
     "creator": "Creator:",
     "institution": "Instituție:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Furnizor necunoscut"
     }
+  },
+  "documentBrowser": {
+    "empty": "Acest dosar este gol"
   },
   "embedNotification": {
     "ifNotAll": "Dacă nu doriți să încărcați tot conținutul încorporat, puteți {0}.",

@@ -82,9 +82,11 @@ describe("components/Generic/DocumentBrowser", () => {
     });
 
     expect(wrapper.find(".file-link a").text()).toEqual(
-      "Europeana Advocacy Framework.doc (145.41 kB) (newWindow)",
+      "Europeana Advocacy Framework.doc (newWindow)",
     );
-    expect(wrapper.find(".date-added").text()).toEqual("added numeric");
+    expect(wrapper.find(".file-info").text()).toEqual(
+      "145.41 kB • added numeric",
+    );
   });
 
   describe("when there is no data fetched", () => {
@@ -96,28 +98,11 @@ describe("components/Generic/DocumentBrowser", () => {
     });
   });
 
-  describe("when there are subdirectories", () => {
-    it("sets accordion and collapse ids per nesting level", async () => {
-      const wrapper = factory();
-      expect(wrapper.findAll("#document-browser").length).toBe(1);
-      expect(wrapper.findAll("#collapse-Advocacy").length).toBe(1);
+  it("sets accordion and collapse ids from unique instance id", async () => {
+    const wrapper = factory();
 
-      await wrapper.find(".accordion-button").trigger("click");
-      expect(wrapper.find("document-browser-stub").attributes("idsuffix")).toBe(
-        "-Advocacy",
-      );
-
-      const wrapper1 = factory({ props: { idSuffix: "-Base" } });
-      expect(wrapper1.findAll("#document-browser-Base").length).toBe(1);
-      expect(wrapper1.findAll("#collapse-Base-Advocacy").length).toBe(1);
-
-      await wrapper1
-        .find("#document-browser-Base .accordion-button")
-        .trigger("click");
-      expect(
-        wrapper1.find("document-browser-stub").attributes("idsuffix"),
-      ).toBe("-Base-Advocacy");
-    });
+    expect(wrapper.findAll("#document-browser-v-0").length).toBe(1);
+    expect(wrapper.findAll("#document-browser-v-0-collapse-0").length).toBe(1);
   });
 
   describe("when select prop is set to true", () => {
@@ -127,8 +112,8 @@ describe("components/Generic/DocumentBrowser", () => {
       expect(wrapper.findAll(".form-check-input").length).toBe(2);
       expect(
         wrapper.findAll(".form-check-input")[0].attributes("aria-labelledby"),
-      ).toBe("label-Advocacy");
-      expect(wrapper.find("#label-Advocacy").exists()).toBe(true);
+      ).toBe("document-browser-v-0-label-0");
+      expect(wrapper.find("#document-browser-v-0-label-0").exists()).toBe(true);
     });
   });
 
@@ -145,14 +130,14 @@ describe("components/Generic/DocumentBrowser", () => {
   });
 
   describe("when fetching from the URL errors", () => {
-    it("shows a message the content is not found", () => {
+    it("shows a message the content is empty", () => {
       useAsyncDataMock.mockImplementation(() => ({
         data: ref(null),
         error: ref(new Error()),
       }));
       const wrapper = factory();
 
-      expect(wrapper.text()).toEqual("documentBrowser.notFound");
+      expect(wrapper.text()).toEqual("documentBrowser.empty");
     });
   });
 });

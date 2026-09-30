@@ -6,7 +6,7 @@ allowBuilds:
   nx: true
   unrs-resolver: true
 catalog:
-  "@europeana/style": "2.38.0"
+  "@europeana/style": "2.39.2"
   bootstrap: "5.3.8"
   lodash-es: "4.18.1"
   node-fetch-native: "1.6.7"
@@ -42,7 +42,7 @@ catalogs:
     "@vue/test-utils": "2.4.11"
     "@vueuse/core": "14.3.0"
 minimumReleaseAgeExclude:
-  - "@europeana/style@2.38.0"
+  - "@europeana/style"
   - "@europeana/feedback-widget@0.5.6"
 packages:
   - packages/**

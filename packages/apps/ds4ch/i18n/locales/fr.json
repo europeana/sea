@@ -6,6 +6,7 @@
     "share": "Partager",
     "shareOn": "Partager sur {social}"
   },
+  "added": "Ajouté {date}",
   "attribution": {
     "creator": "Créateur :",
     "institution": "Institution :",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Fournisseur inconnu"
     }
+  },
+  "documentBrowser": {
+    "empty": "Ce dossier est vide"
   },
   "embedNotification": {
     "ifNotAll": "Si vous ne voulez pas charger tous les médias intégrés, vous pouvez {0}.",

@@ -6,6 +6,7 @@
     "share": "Jaa",
     "shareOn": "Jaa {social}"
   },
+  "added": "Lisätty {date}",
   "attribution": {
     "creator": "Luoja:",
     "institution": "kulttuuriperintölaitos:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Tuntematon palveluntarjoaja"
     }
+  },
+  "documentBrowser": {
+    "empty": "Tämä kansio on tyhjä"
   },
   "embedNotification": {
     "ifNotAll": "Jos et halua ladata kaikkea upotettua mediaa, voit {0}.",

@@ -8,5 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       router: useRouter(),
       config: useRuntimeConfig().public.elastic?.apm,
     });
+  } else {
+    console.warn("Elastic APM server URL not configured.");
   }
 });
