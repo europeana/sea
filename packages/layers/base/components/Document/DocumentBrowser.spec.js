@@ -102,7 +102,7 @@ describe("components/Generic/DocumentBrowser", () => {
     const wrapper = factory();
 
     expect(wrapper.findAll("#document-browser-v-0").length).toBe(1);
-    expect(wrapper.findAll("#collapse-v-0-0").length).toBe(1);
+    expect(wrapper.findAll("#document-browser-v-0-collapse-0").length).toBe(1);
   });
 
   describe("when select prop is set to true", () => {
@@ -112,8 +112,8 @@ describe("components/Generic/DocumentBrowser", () => {
       expect(wrapper.findAll(".form-check-input").length).toBe(2);
       expect(
         wrapper.findAll(".form-check-input")[0].attributes("aria-labelledby"),
-      ).toBe("label-v-0-0");
-      expect(wrapper.find("#label-v-0-0").exists()).toBe(true);
+      ).toBe("document-browser-v-0-label-0");
+      expect(wrapper.find("#document-browser-v-0-label-0").exists()).toBe(true);
     });
   });
 
