@@ -1,5 +1,4 @@
 <script setup>
-import md5 from "md5";
 import { filesize } from "filesize";
 const { d, t, te } = useI18n();
 
@@ -71,16 +70,18 @@ const dirUrl = computed(() => {
   }
 });
 
-const id = computed(() => `document-browser-${md5(dirUrl)}`);
+// Create unique id's for each instance
+const instanceId = useId();
+const accordionId = `document-browser-${instanceId}`;
 
 const { data, error } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
 );
 
-const itemDisplay = (item) => {
+const itemDisplay = (item, index) => {
   const url = itemURL(item);
-  const id = md5(url);
+  const id = `${instanceId}-${index}`;
 
   return {
     dateAdded: te("added")
@@ -115,7 +116,7 @@ const items = computed(() =>
         : "Not Found"
     }}
   </div>
-  <div v-else :id="id" class="accordion accordion-flush">
+  <div v-else :id="accordionId" class="accordion accordion-flush">
     <div v-for="item in items" :key="item.url" class="accordion-item">
       <template v-if="item.type === 'directory'">
         <div class="accordion-header p-3" :class="{ 'd-flex': select }">

@@ -96,16 +96,11 @@ describe("components/Generic/DocumentBrowser", () => {
     });
   });
 
-  it("sets accordion and collapse ids from URL md5 hashes", async () => {
+  it("sets accordion and collapse ids from unique instance id", async () => {
     const wrapper = factory();
 
-    expect(
-      wrapper.findAll("#document-browser-3449c9e5e332f1dbb81505cd739fbf3f")
-        .length,
-    ).toBe(1);
-    expect(
-      wrapper.findAll("#collapse-2d7f00ed2f50cdfc06d73d61488abc00").length,
-    ).toBe(1);
+    expect(wrapper.findAll("#document-browser-v-0").length).toBe(1);
+    expect(wrapper.findAll("#collapse-v-0-0").length).toBe(1);
   });
 
   describe("when select prop is set to true", () => {
@@ -115,10 +110,8 @@ describe("components/Generic/DocumentBrowser", () => {
       expect(wrapper.findAll(".form-check-input").length).toBe(2);
       expect(
         wrapper.findAll(".form-check-input")[0].attributes("aria-labelledby"),
-      ).toBe("label-2d7f00ed2f50cdfc06d73d61488abc00");
-      expect(
-        wrapper.find("#label-2d7f00ed2f50cdfc06d73d61488abc00").exists(),
-      ).toBe(true);
+      ).toBe("label-v-0-0");
+      expect(wrapper.find("#label-v-0-0").exists()).toBe(true);
     });
   });
 

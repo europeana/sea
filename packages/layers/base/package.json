@@ -22,8 +22,5 @@
     "nuxt": "catalog:nuxt3",
     "vue": "catalog:vue3",
     "vue-matomo": "4.2.0"
-  },
-  "dependencies": {
-    "md5": "^2.3.0"
   }
 }
