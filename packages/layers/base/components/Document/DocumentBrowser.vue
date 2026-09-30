@@ -1,6 +1,6 @@
 <script setup>
 import { filesize } from "filesize";
-import { Collapse } from "bootstrap";
+const { $bs } = useNuxtApp();
 
 const { d, t, te } = useI18n();
 
@@ -85,31 +85,28 @@ watch(status, (newStatus) => {
   }
 });
 
+const collapseRefs = useTemplateRef("collapse");
+const getCollapseInstanceById = (id) => {
+  const collapseElement = collapseRefs.value.find((el) => el.id === id);
+  return new $bs.Collapse(collapseElement);
+};
 const handleClickAccordionButton = (item) => {
-  const collapseEl = document.getElementById(item.collapseId);
+  // When item already in opened, assume collapsed content is fetched and ready to be shown
+  if (opened.value.has(item.url)) {
+    const collapse = getCollapseInstanceById(item.collapseId);
 
-  // First click mounts the child to fetch data
-  if (!opened.value.has(item.url)) {
-    opened.value.add(item.url);
-    return;
-  }
-
-  // When opened before and content is already ready
-  const collapse = Collapse.getOrCreateInstance(collapseEl);
-
-  if (collapseEl.classList.contains("show")) {
-    collapse.hide();
+    collapse.toggle();
   } else {
-    collapse.show();
+    opened.value.add(item.url);
+    // Showing the collapsed content will be triggerd in handleFetched
   }
 };
 
 const handleFetched = async (collapseId) => {
   await nextTick();
+  const collapse = getCollapseInstanceById(collapseId);
 
-  const collapseEl = document.getElementById(collapseId);
-
-  Collapse.getOrCreateInstance(collapseEl).show();
+  collapse.show();
 };
 
 const fileInfo = (item) => {
@@ -182,7 +179,11 @@ const items = computed(() =>
             {{ item.name }}
           </button>
         </div>
-        <div :id="item.collapseId" class="accordion-collapse collapse">
+        <div
+          :id="item.collapseId"
+          ref="collapse"
+          class="accordion-collapse collapse"
+        >
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"

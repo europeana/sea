@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
 import { nextTick } from "vue";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
@@ -42,11 +42,30 @@ const items = [
 
 const { useAsyncDataMock } = vi.hoisted(() => ({
   useAsyncDataMock: vi.fn(() => {
-    return { data: ref(items), error: ref(null) };
+    return { data: ref(items), error: ref(null), status: ref("success") };
   }),
 }));
 mockNuxtImport("useAsyncData", () => useAsyncDataMock);
 
+const showCollapse = vi.fn();
+const toggleCollapse = vi.fn();
+class Collapse {
+  show() {
+    showCollapse();
+  }
+  toggle() {
+    toggleCollapse();
+  }
+}
+mockNuxtImport("useNuxtApp", () => {
+  return () => {
+    return {
+      $bs: {
+        Collapse,
+      },
+    };
+  };
+});
 const url = "https://files.example.org/";
 
 const factory = ({ data, props } = {}) =>
@@ -63,6 +82,10 @@ const factory = ({ data, props } = {}) =>
   });
 
 describe("components/Generic/DocumentBrowser", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it("renders an accordian with directory as accordion header and file", () => {
     const wrapper = factory();
 
@@ -77,12 +100,12 @@ describe("components/Generic/DocumentBrowser", () => {
         url,
       },
       global: {
-        stubs: ["RouterLink"],
+        stubs: { SmartLink: { template: "<a><slot /></a>" } },
       },
     });
 
     expect(wrapper.find(".file-link a").text()).toEqual(
-      "Europeana Advocacy Framework.doc (newWindow)",
+      "Europeana Advocacy Framework.doc",
     );
     expect(wrapper.find(".file-info").text()).toEqual(
       "145.41 kB • added numeric",
@@ -134,10 +157,50 @@ describe("components/Generic/DocumentBrowser", () => {
       useAsyncDataMock.mockImplementation(() => ({
         data: ref(null),
         error: ref(new Error()),
+        status: ref("error"),
       }));
       const wrapper = factory();
 
       expect(wrapper.text()).toEqual("documentBrowser.empty");
+    });
+  });
+
+  describe("when an accordian toggle button is clicked", () => {
+    const item = {
+      collapseId: "document-browser-v-0-collapse-0",
+      url: "https://files.example.org/123",
+    };
+    describe("and the item had already been opened", () => {
+      it("toggles the collapse instance", () => {
+        const wrapper = factory();
+
+        wrapper.vm.opened.add(item.url);
+        wrapper.vm.handleClickAccordionButton(item);
+
+        expect(toggleCollapse).toHaveBeenCalled();
+      });
+    });
+    describe("and the item had not yet been opened", () => {
+      it("adds the item to the 'opened' ref, dus not toggle the collapse", () => {
+        const wrapper = factory();
+
+        wrapper.vm.handleClickAccordionButton(item);
+
+        expect(wrapper.vm.opened).toContain(item.url);
+        expect(toggleCollapse).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe("when a nested document browser's content has been fetched", () => {
+    it("toggles the collapse instance", async () => {
+      const collapseId = "document-browser-v-0-collapse-0";
+      const wrapper = factory();
+
+      wrapper.vm.handleFetched(collapseId);
+      await nextTick();
+
+      expect(showCollapse).toHaveBeenCalled();
     });
   });
 });
