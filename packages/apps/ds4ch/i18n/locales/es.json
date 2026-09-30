@@ -6,6 +6,7 @@
     "share": "Compartir",
     "shareOn": "Compartir en {social}"
   },
+  "added": "Agregado {date}",
   "attribution": {
     "creator": "Creador:",
     "institution": "Institución:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Proveedor desconocido"
     }
+  },
+  "documentBrowser": {
+    "empty": "Esta carpeta está vacía"
   },
   "embedNotification": {
     "ifNotAll": "Si no desea cargar todos los medios incrustados, puede {0}.",

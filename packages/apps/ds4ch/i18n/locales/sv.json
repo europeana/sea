@@ -6,6 +6,7 @@
     "share": "Dela",
     "shareOn": "Dela på {social}"
   },
+  "added": "Lade till {date}",
   "attribution": {
     "creator": "Skapare:",
     "institution": "Institution:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Okänd leverantör"
     }
+  },
+  "documentBrowser": {
+    "empty": "Den här mappen är tom"
   },
   "embedNotification": {
     "ifNotAll": "Om du inte vill ladda all inbäddad media kan du {0}.",

@@ -6,6 +6,7 @@
     "share": "Podijeli",
     "shareOn": "Podijelite na {social}"
   },
+  "added": "Dodano {date}",
   "attribution": {
     "creator": "Stvorio\/la:",
     "institution": "Institucija:",
@@ -117,6 +118,9 @@
       },
       "unknownProvider": "Nepoznati pružatelj"
     }
+  },
+  "documentBrowser": {
+    "empty": "Ova mapa je prazna"
   },
   "embedNotification": {
     "ifNotAll": "Ako ne želite učitati sve ugrađene medije, možete {0}.",
