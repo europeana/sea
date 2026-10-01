@@ -13,5 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     image: sampleData.person[0].image,
+    name: "Frida Kahlo",
+    role: "painter",
   },
 };
