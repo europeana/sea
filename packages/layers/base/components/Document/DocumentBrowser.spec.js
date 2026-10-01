@@ -42,7 +42,7 @@ const items = [
 
 const { useAsyncDataMock } = vi.hoisted(() => ({
   useAsyncDataMock: vi.fn(() => {
-    return { data: ref(items), error: ref(null), status: ref("success") };
+    return { data: ref(items), error: ref(null), status: ref(undefined) };
   }),
 }));
 mockNuxtImport("useAsyncData", () => useAsyncDataMock);
@@ -167,7 +167,7 @@ describe("components/Generic/DocumentBrowser", () => {
 
   describe("when an accordian toggle button is clicked", () => {
     describe("and the item had not yet been opened", () => {
-      it("adds the item to the 'opened' ref, dus not toggle the collapse", () => {
+      it("adds the item to the 'opened' ref, does not toggle the collapse", () => {
         const wrapper = factory();
 
         wrapper.find(".accordion-button").trigger("click");
@@ -204,7 +204,17 @@ describe("components/Generic/DocumentBrowser", () => {
     });
   });
 
-  describe("when content is fetched with success or error", () => {
+  describe("when content is fetched with success", () => {
+    it("emits the fetched event", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.status = "success";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched").length).toBe(1);
+    });
+  });
+  describe("when content is fetched with error", () => {
     it("emits the fetched event", async () => {
       const wrapper = factory();
 
@@ -212,11 +222,6 @@ describe("components/Generic/DocumentBrowser", () => {
       await nextTick();
 
       expect(wrapper.emitted("fetched").length).toBe(1);
-
-      wrapper.vm.status = "success";
-      await nextTick();
-
-      expect(wrapper.emitted("fetched").length).toBe(2);
     });
   });
 
