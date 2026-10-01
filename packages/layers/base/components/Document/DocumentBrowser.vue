@@ -1,5 +1,7 @@
 <script setup>
 import { filesize } from "filesize";
+const { $bs } = useNuxtApp();
+
 const { d, t, te } = useI18n();
 
 const model = defineModel({
@@ -18,11 +20,9 @@ const props = defineProps({
   },
 });
 
-const opened = ref(new Set());
+const emit = defineEmits(["fetched"]);
 
-const handleClickAccordionButton = (item) => {
-  opened.value.add(item.url);
-};
+const opened = ref(new Set());
 
 const isOpen = (item) => opened.value.has(item.url);
 
@@ -73,10 +73,41 @@ const dirUrl = computed(() => {
 // Create unique id's for each instance
 const instanceId = `document-browser-${useId()}`;
 
-const { data, error } = useAsyncData(
+const { data, error, status } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
 );
+
+// Emit fetched event to show collapse once content is fetched
+watch(status, (newStatus) => {
+  if (["success", "error"].includes(newStatus)) {
+    emit("fetched");
+  }
+});
+
+const collapseRefs = useTemplateRef("collapse");
+const getCollapseInstanceById = (id) => {
+  const collapseElement = collapseRefs.value.find((el) => el.id === id);
+  return new $bs.Collapse(collapseElement);
+};
+const handleClickAccordionButton = (item) => {
+  // When item already in opened, assume collapsed content is fetched and ready to be shown
+  if (opened.value.has(item.url)) {
+    const collapse = getCollapseInstanceById(item.collapseId);
+
+    collapse.toggle();
+  } else {
+    opened.value.add(item.url);
+    // Showing the collapsed content will be triggerd in handleFetched
+  }
+};
+
+const handleFetched = async (collapseId) => {
+  await nextTick();
+  const collapse = getCollapseInstanceById(collapseId);
+
+  collapse.show();
+};
 
 const fileInfo = (item) => {
   if (item.type === "file") {
@@ -139,24 +170,27 @@ const items = computed(() =>
             :id="select ? item.labelId : undefined"
             class="accordion-button collapsed align-items-start p-0"
             type="button"
-            data-bs-toggle="collapse"
-            :data-bs-target="`#${item.collapseId}`"
             aria-expanded="false"
             :aria-controls="item.collapseId"
-            @click="handleClickAccordionButton(item)"
+            @click.stop="handleClickAccordionButton(item)"
           >
             <span class="icon-chevron me-2 me-4k-3" />
             <span class="icon-folder me-2 me-4k-3" />
             {{ item.name }}
           </button>
         </div>
-        <div :id="item.collapseId" class="accordion-collapse collapse">
+        <div
+          :id="item.collapseId"
+          ref="collapse"
+          class="accordion-collapse collapse"
+        >
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"
               v-model="model"
               :url="item.url"
               :select="select"
+              @fetched="handleFetched(item.collapseId)"
             />
           </div>
         </div>
