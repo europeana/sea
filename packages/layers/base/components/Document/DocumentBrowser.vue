@@ -44,7 +44,9 @@ watchEffect(() => {
 
 const itemURL = (item) => {
   const url = new URL(props.url);
-  url.pathname = `${url.pathname}/${item.name}`;
+  if (!singleFileName.value) {
+    url.pathname = `${url.pathname}/${item.name}`;
+  }
   if (item.type === "directory") {
     url.pathname = `${url.pathname}/`;
   }
