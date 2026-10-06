@@ -16,7 +16,7 @@ export default defineNuxtConfig({
 
   plugins: [
     "@europeana/sea-base-layer/plugins/client/bootstrap.client.ts",
-    "@europeana/sea-base-layer/plugins/client/elastic-apm.client.ts",
+    // "@europeana/sea-base-layer/plugins/client/elastic-apm.client.ts",
     "@europeana/sea-base-layer/plugins/client/vue-matomo.client.ts",
   ],
 
