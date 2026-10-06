@@ -1,5 +1,7 @@
 <script setup>
 import { filesize } from "filesize";
+const { $bs } = useNuxtApp();
+
 const { d, t, te } = useI18n();
 
 const model = defineModel({
@@ -12,21 +14,15 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  idSuffix: {
-    type: String,
-    default: "",
-  },
   select: {
     type: Boolean,
     default: false,
   },
 });
 
-const opened = ref(new Set());
+const emit = defineEmits(["fetched"]);
 
-const handleClickAccordionButton = (item) => {
-  opened.value.add(item.url);
-};
+const opened = ref(new Set());
 
 const isOpen = (item) => opened.value.has(item.url);
 
@@ -48,7 +44,9 @@ watchEffect(() => {
 
 const itemURL = (item) => {
   const url = new URL(props.url);
-  url.pathname = `${url.pathname}/${item.name}`;
+  if (!singleFileName.value) {
+    url.pathname = `${url.pathname}/${item.name}`;
+  }
   if (item.type === "directory") {
     url.pathname = `${url.pathname}/`;
   }
@@ -60,7 +58,7 @@ const singleFileName = computed(() => {
   if (!props.url || props.url.endsWith("/")) {
     return null;
   } else {
-    return props.url.split("/").pop();
+    return decodeURI(props.url.split("/").pop());
   }
 });
 
@@ -74,16 +72,50 @@ const dirUrl = computed(() => {
   }
 });
 
-const { data, error } = useAsyncData(
+// Create unique id's for each instance
+const instanceId = `document-browser-${useId()}`;
+
+const { data, error, status } = useAsyncData(
   computed(() => `DocumentBrowser:${dirUrl.value}`),
   () => $fetch(dirUrl.value),
 );
+
+// Emit fetched event to show collapse once content is fetched
+watch(status, (newStatus) => {
+  if (["success", "error"].includes(newStatus)) {
+    emit("fetched");
+  }
+});
+
+const collapseRefs = useTemplateRef("collapse");
+const getCollapseInstanceById = (id) => {
+  const collapseElement = collapseRefs.value.find((el) => el.id === id);
+  return new $bs.Collapse(collapseElement);
+};
+const handleClickAccordionButton = (item) => {
+  // When item already in opened, assume collapsed content is fetched and ready to be shown
+  if (opened.value.has(item.url)) {
+    const collapse = getCollapseInstanceById(item.collapseId);
+
+    collapse.toggle();
+  } else {
+    opened.value.add(item.url);
+    // Showing the collapsed content will be triggerd in handleFetched
+  }
+};
+
+const handleFetched = async (collapseId) => {
+  await nextTick();
+  const collapse = getCollapseInstanceById(collapseId);
+
+  collapse.show();
+};
 
 const fileInfo = (item) => {
   if (item.type === "file") {
     const dateString = te("added")
       ? t("added", { date: d(new Date(item.mtime), "numeric") })
-      : new Date(item.mtime).toLocaleString();
+      : new Date(item.mtime).toLocaleString("en-GB");
     const sizeString = `${filesize(item.size || 0)}`;
     return `${sizeString} • ${dateString}`;
   } else {
@@ -91,9 +123,10 @@ const fileInfo = (item) => {
   }
 };
 
-const itemDisplay = (item) => ({
+const itemDisplay = (item, index) => ({
+  collapseId: `${instanceId}-collapse-${index}`,
   fileInfo: fileInfo(item),
-  id: `${props.idSuffix}-${item.name.replaceAll(" ", "")}`,
+  labelId: `${instanceId}-label-${index}`,
   name: item.name,
   type: item.type,
   url: itemURL(item),
@@ -116,11 +149,7 @@ const items = computed(() =>
       $te("documentBrowser.empty") ? $t("documentBrowser.empty") : "Not Found"
     }}
   </div>
-  <div
-    v-else
-    :id="`document-browser${idSuffix}`"
-    class="accordion accordion-flush"
-  >
+  <div v-else :id="instanceId" class="accordion accordion-flush">
     <div
       v-for="item in items"
       :key="item.url"
@@ -137,17 +166,15 @@ const items = computed(() =>
             class="form-check-input mt-1 me-2 me-4k-3"
             type="radio"
             :value="item.url"
-            :aria-labelledby="`label${item.id}`"
+            :aria-labelledby="item.labelId"
           />
           <button
-            :id="select ? `label${item.id}` : undefined"
+            :id="select ? item.labelId : undefined"
             class="accordion-button collapsed align-items-start p-0"
             type="button"
-            data-bs-toggle="collapse"
-            :data-bs-target="`#collapse${item.id}`"
             aria-expanded="false"
-            :aria-controls="`collapse${item.id}`"
-            @click="handleClickAccordionButton(item)"
+            :aria-controls="item.collapseId"
+            @click.stop="handleClickAccordionButton(item)"
           >
             <span class="icon-chevron me-2 me-4k-3" />
             <span class="icon-folder me-2 me-4k-3" />
@@ -155,17 +182,17 @@ const items = computed(() =>
           </button>
         </div>
         <div
-          :id="`collapse${item.id}`"
-          class="accordion-collapse"
-          :class="{ collapse: !isOpen(item) }"
+          :id="item.collapseId"
+          ref="collapse"
+          class="accordion-collapse collapse"
         >
           <div class="accordion-body">
             <DocumentBrowser
               v-if="isOpen(item)"
               v-model="model"
-              :id-suffix="`${item.id}`"
               :url="item.url"
               :select="select"
+              @fetched="handleFetched(item.collapseId)"
             />
           </div>
         </div>
@@ -181,7 +208,7 @@ const items = computed(() =>
           class="form-check-input mt-1 me-2 me-4k-3"
           type="radio"
           :value="item.url"
-          :aria-labelledby="`label${item.id}`"
+          :aria-labelledby="item.labelId"
         />
         <div :class="{ 'flex-grow-1': select }">
           <GenericSmartLink
@@ -192,7 +219,7 @@ const items = computed(() =>
           >
             <span class="icon-file align-self-start me-2 me-4k-3" />
             <span
-              :id="select ? `label${item.id}` : undefined"
+              :id="select ? item.labelId : undefined"
               class="link-text me-2 me-4k-3"
               >{{ item.name }}</span
             >

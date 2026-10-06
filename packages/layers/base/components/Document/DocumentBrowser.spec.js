@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
 import { nextTick } from "vue";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
@@ -42,11 +42,30 @@ const items = [
 
 const { useAsyncDataMock } = vi.hoisted(() => ({
   useAsyncDataMock: vi.fn(() => {
-    return { data: ref(items), error: ref(null) };
+    return { data: ref(items), error: ref(null), status: ref(undefined) };
   }),
 }));
 mockNuxtImport("useAsyncData", () => useAsyncDataMock);
 
+const showCollapse = vi.fn();
+const toggleCollapse = vi.fn();
+class Collapse {
+  show() {
+    showCollapse();
+  }
+  toggle() {
+    toggleCollapse();
+  }
+}
+mockNuxtImport("useNuxtApp", () => {
+  return () => {
+    return {
+      $bs: {
+        Collapse,
+      },
+    };
+  };
+});
 const url = "https://files.example.org/";
 
 const factory = ({ data, props } = {}) =>
@@ -63,6 +82,10 @@ const factory = ({ data, props } = {}) =>
   });
 
 describe("components/Generic/DocumentBrowser", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it("renders an accordian with directory as accordion header and file", () => {
     const wrapper = factory();
 
@@ -77,12 +100,12 @@ describe("components/Generic/DocumentBrowser", () => {
         url,
       },
       global: {
-        stubs: ["RouterLink"],
+        stubs: { SmartLink: { template: "<a><slot /></a>" } },
       },
     });
 
     expect(wrapper.find(".file-link a").text()).toEqual(
-      "Europeana Advocacy Framework.doc (newWindow)",
+      "Europeana Advocacy Framework.doc",
     );
     expect(wrapper.find(".file-info").text()).toEqual(
       "145.41 kB • added numeric",
@@ -98,28 +121,11 @@ describe("components/Generic/DocumentBrowser", () => {
     });
   });
 
-  describe("when there are subdirectories", () => {
-    it("sets accordion and collapse ids per nesting level", async () => {
-      const wrapper = factory();
-      expect(wrapper.findAll("#document-browser").length).toBe(1);
-      expect(wrapper.findAll("#collapse-Advocacy").length).toBe(1);
+  it("sets accordion and collapse ids from unique instance id", async () => {
+    const wrapper = factory();
 
-      await wrapper.find(".accordion-button").trigger("click");
-      expect(wrapper.find("document-browser-stub").attributes("idsuffix")).toBe(
-        "-Advocacy",
-      );
-
-      const wrapper1 = factory({ props: { idSuffix: "-Base" } });
-      expect(wrapper1.findAll("#document-browser-Base").length).toBe(1);
-      expect(wrapper1.findAll("#collapse-Base-Advocacy").length).toBe(1);
-
-      await wrapper1
-        .find("#document-browser-Base .accordion-button")
-        .trigger("click");
-      expect(
-        wrapper1.find("document-browser-stub").attributes("idsuffix"),
-      ).toBe("-Base-Advocacy");
-    });
+    expect(wrapper.findAll("#document-browser-v-0").length).toBe(1);
+    expect(wrapper.findAll("#document-browser-v-0-collapse-0").length).toBe(1);
   });
 
   describe("when select prop is set to true", () => {
@@ -129,8 +135,32 @@ describe("components/Generic/DocumentBrowser", () => {
       expect(wrapper.findAll(".form-check-input").length).toBe(2);
       expect(
         wrapper.findAll(".form-check-input")[0].attributes("aria-labelledby"),
-      ).toBe("label-Advocacy");
-      expect(wrapper.find("#label-Advocacy").exists()).toBe(true);
+      ).toBe("document-browser-v-0-label-0");
+      expect(wrapper.find("#document-browser-v-0-label-0").exists()).toBe(true);
+    });
+  });
+
+  describe("singleFileName", () => {
+    describe("when the URL prop specifies a directory", () => {
+      it("is null", async () => {
+        const wrapper = factory({ props: { url } });
+
+        await nextTick();
+
+        expect(wrapper.vm.singleFileName).toBeNull();
+      });
+    });
+
+    describe("when the URL prop specifies single file path", () => {
+      const singleFileUrl = `${url}dir/subdir/annual%20report.pdf`;
+
+      it("returns the file basename, URL-decoded", async () => {
+        const wrapper = factory({ props: { url: singleFileUrl } });
+
+        await nextTick();
+
+        expect(wrapper.vm.singleFileName).toBe("annual report.pdf");
+      });
     });
   });
 
@@ -151,10 +181,82 @@ describe("components/Generic/DocumentBrowser", () => {
       useAsyncDataMock.mockImplementation(() => ({
         data: ref(null),
         error: ref(new Error()),
+        status: ref("error"),
       }));
       const wrapper = factory();
 
       expect(wrapper.text()).toEqual("documentBrowser.empty");
+    });
+  });
+
+  describe("when an accordian toggle button is clicked", () => {
+    describe("and the item had not yet been opened", () => {
+      it("adds the item to the 'opened' ref, does not toggle the collapse", () => {
+        const wrapper = factory();
+
+        wrapper.find(".accordion-button").trigger("click");
+
+        expect(wrapper.vm.opened).toContain(
+          "https://files.example.org/Advocacy/",
+        );
+        expect(toggleCollapse).not.toHaveBeenCalled();
+      });
+    });
+    describe("and the item had already been opened", () => {
+      it("toggles the collapse instance", async () => {
+        const wrapper = factory();
+
+        wrapper.find(".accordion-button").trigger("click");
+        expect(toggleCollapse).not.toHaveBeenCalled();
+
+        // Subsequent click
+        wrapper.find(".accordion-button").trigger("click");
+        expect(toggleCollapse).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe("when a nested document browser's content has been fetched", () => {
+    it("toggles the collapse instance", async () => {
+      const collapseId = "document-browser-v-0-collapse-0";
+      const wrapper = factory();
+
+      wrapper.vm.handleFetched(collapseId);
+      await nextTick();
+
+      expect(showCollapse).toHaveBeenCalled();
+    });
+  });
+
+  describe("when content is fetched with success", () => {
+    it("emits the fetched event", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.status = "success";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched").length).toBe(1);
+    });
+  });
+  describe("when content is fetched with error", () => {
+    it("emits the fetched event", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.status = "error";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched").length).toBe(1);
+    });
+  });
+
+  describe("when content is fetched with another state", () => {
+    it("doesn NOT emit the fetched event", async () => {
+      const wrapper = factory();
+
+      wrapper.vm.status = "pending";
+      await nextTick();
+
+      expect(wrapper.emitted("fetched")).toBeFalsy();
     });
   });
 });
