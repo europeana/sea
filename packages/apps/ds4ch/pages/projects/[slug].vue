@@ -37,10 +37,6 @@ const impactMetrics = page.value.project?.impactMetrics?.map((metric) => {
   return { label: parts[0], value: parts[1] };
 });
 
-const reports = page.value.project?.reportsCollection?.items.map((report) => {
-  return { label: report.title, icon: "ic-download", url: report.url };
-});
-
 const reportsLink = page.value.project?.reportsLink;
 const factsheetLink = page.value.project?.factsheetLink;
 
@@ -180,15 +176,6 @@ usePageMeta({
                       :url="reportsLink"
                     />
                   </template>
-                  <template v-else-if="reports.length > 0">
-                    <h2>
-                      {{ $t("projects.reports") }}
-                    </h2>
-                    <GenericInfoTable
-                      class="mb-5 pb-4k-5"
-                      :table-data="reports"
-                    />
-                  </template>
                   <template v-if="factsheetLink">
                     <h2 class="mb-3 pb-4k-3">
                       {{ $t("projects.viewFactSheet") }}
@@ -198,26 +185,6 @@ usePageMeta({
                       class="mb-5 pb-4k-5"
                       :url="factsheetLink"
                     />
-                  </template>
-                  <template v-else-if="page.project?.factSheet">
-                    <h2 class="mb-3 pb-4k-3">
-                      {{ $t("projects.factSheet") }}
-                    </h2>
-                    <a
-                      :href="page.project?.factSheet.url"
-                      class="btn btn-secondary me-4 me-4k-5 mb-4 mb-sm-3 mb-4k-4"
-                    >
-                      <span class="icon-text-bold me-2" />
-                      {{ $t("projects.viewFactSheet") }}
-                    </a>
-                    <a
-                      :href="page.project?.factSheet.url"
-                      :download="page.project?.factSheet.title"
-                      class="btn btn-secondary mb-4 mb-sm-3 mb-4k-4"
-                    >
-                      <span class="icon-ic-download me-2" />
-                      {{ $t("projects.downloadFactSheet") }}
-                    </a>
                   </template>
                 </div>
               </div>
