@@ -82,8 +82,6 @@ const { data, error, status } = useAsyncData(
 
 // Emit fetched event to show collapse once content is fetched
 watch(status, (newStatus) => {
-  console.log("singleFileName", singleFileName.value);
-  console.log("data", data.value);
   if (["success", "error"].includes(newStatus)) {
     emit("fetched");
   }
