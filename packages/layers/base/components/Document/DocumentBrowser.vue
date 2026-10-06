@@ -58,7 +58,7 @@ const singleFileName = computed(() => {
   if (!props.url || props.url.endsWith("/")) {
     return null;
   } else {
-    return props.url.split("/").pop();
+    return decodeURI(props.url.split("/").pop());
   }
 });
 
@@ -82,6 +82,8 @@ const { data, error, status } = useAsyncData(
 
 // Emit fetched event to show collapse once content is fetched
 watch(status, (newStatus) => {
+  console.log("singleFileName", singleFileName.value);
+  console.log("data", data.value);
   if (["success", "error"].includes(newStatus)) {
     emit("fetched");
   }

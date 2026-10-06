@@ -140,6 +140,30 @@ describe("components/Generic/DocumentBrowser", () => {
     });
   });
 
+  describe("singleFileName", () => {
+    describe("when the URL prop specifies a directory", () => {
+      it("is null", async () => {
+        const wrapper = factory({ props: { url } });
+
+        await nextTick();
+
+        expect(wrapper.vm.singleFileName).toBeNull();
+      });
+    });
+
+    describe("when the URL prop specifies single file path", () => {
+      const singleFileUrl = `${url}dir/subdir/annual%20report.pdf`;
+
+      it("returns the file basename, URL-decoded", async () => {
+        const wrapper = factory({ props: { url: singleFileUrl } });
+
+        await nextTick();
+
+        expect(wrapper.vm.singleFileName).toBe("annual report.pdf");
+      });
+    });
+  });
+
   describe("when the v-model specifies a nested path", () => {
     const model = `${url}dir/subdir/report.pdf`;
 
