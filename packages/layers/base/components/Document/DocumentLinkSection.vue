@@ -17,7 +17,7 @@ const props = defineProps({
       <h2 v-if="props.headline">
         {{ props.headline }}
       </h2>
-      <DocumentBrowser id="reports-link" :url="props.url" />
+      <DocumentBrowser :url="props.url" />
     </div>
   </div>
 </template>

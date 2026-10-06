@@ -58,7 +58,7 @@ const singleFileName = computed(() => {
   if (!props.url || props.url.endsWith("/")) {
     return null;
   } else {
-    return props.url.split("/").pop();
+    return decodeURI(props.url.split("/").pop());
   }
 });
 
