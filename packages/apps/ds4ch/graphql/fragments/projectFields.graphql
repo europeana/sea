@@ -1,5 +1,4 @@
 #import "../fragments/illustrationFields.graphql"
-#import "@europeana/sea-base-layer/graphql/fragments/pdfDocumentFields.graphql"
 
 fragment projectFields on Project {
   name
@@ -24,14 +23,6 @@ fragment projectFields on Project {
     }
   }
   impactMetrics
-  reportsCollection {
-    items {
-      ...pdfDocumentFields
-    }
-  }
-  factSheet {
-    ...pdfDocumentFields
-  }
   reportsLink
   factsheetLink
 }

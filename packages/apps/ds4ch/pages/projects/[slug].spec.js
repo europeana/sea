@@ -49,12 +49,6 @@ const contentfulResponse = {
             logo: null,
             startDate: "2025-02-01T00:00:00.000+02:00",
             endDate: "2026-07-31T00:00:00.000+02:00",
-            factSheet: {
-              contentType: "application/pdf",
-              url: "https://example.org/report_1.pdf",
-              description: null,
-              title: "report1.pdf",
-            },
             goals:
               "- Strengthen and enrich the common European data space.\n- Advance the digital transformation of cultural heritage institutions.",
             partners: "- A, Italy \n- B, Belgium \n- C, Netherlands",
@@ -82,22 +76,6 @@ const contentfulResponse = {
                 title: "Logo - Co-financed by the European Union",
               },
             ],
-            reportsCollection: {
-              items: [
-                {
-                  contentType: "application/pdf",
-                  url: "https://example.org/report_1.pdf",
-                  description: null,
-                  title: "report1.pdf",
-                },
-                {
-                  contentType: "application/pdf",
-                  url: "https://example.org/report_2.pdf",
-                  description: null,
-                  title: "report2.pdf",
-                },
-              ],
-            },
             reportsLink: "https://example.org/filesystem/directory/",
             factsheetLink: "https://example.org/filesystem/directory/",
           },
