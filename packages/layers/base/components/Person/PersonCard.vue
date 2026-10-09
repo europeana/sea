@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   /**
    * Image object
    * Expected props: url, width, height, contentType
@@ -22,6 +22,14 @@ defineProps({
     type: String,
     default: null,
   },
+  email: {
+    type: String,
+    default: null,
+  },
+  website: {
+    type: String,
+    default: null,
+  },
   /**
    * If `true`, image will be lazy-loaded
    */
@@ -31,6 +39,16 @@ defineProps({
   },
 });
 
+const linkedIn = props.website?.startsWith("https://www.linkedin.com")
+  ? props.website
+  : null;
+
+let imageError = false;
+
+const imageNotFound = () => {
+  imageError.value = false;
+};
+
 const contentfulImageCropPresets = {
   small: { w: 120, h: 120, fit: "fill", f: "face", r: 100 },
 };
@@ -39,6 +57,7 @@ const contentfulImageCropPresets = {
 <template>
   <div class="person-card text-center">
     <ImageOptimised
+      v-if="!imageError && image?.url"
       :src="image?.url"
       :width="image?.width"
       :height="image?.height"
@@ -47,8 +66,30 @@ const contentfulImageCropPresets = {
       :picture-source-media-resolutions="[1, 2]"
       :lazy="lazy"
       class="person-image"
+      @error="imageNotFound"
     />
-    <!-- TODO: Add fallback image / handle image not found -->
+    <!-- TODO: use the new fallback .svg instead of the account icon here. -->
+    <span v-else class="icon-account person-fallback-image" />
+    <div v-if="email || linkedIn" class="btn-overlay">
+      <NuxtLink
+        v-if="email"
+        class="btn email-btn"
+        :to="`mailto:${email}`"
+        target="_blank"
+        :aria-label="$t('actions.email')"
+      >
+        <span class="icon-email" />
+      </NuxtLink>
+      <NuxtLink
+        v-if="linkedIn"
+        class="btn linked-in-btn"
+        :to="linkedIn"
+        target="_blank"
+        :aria-label="$t('actions.linkedIn')"
+      >
+        <span class="icon-linkedin" />
+      </NuxtLink>
+    </div>
     <p v-if="name" class="person-name mb-1 mb-4k-2">{{ name }}</p>
     <p v-if="role" class="person-role mb-0">{{ role }}</p>
   </div>
@@ -99,6 +140,27 @@ const contentfulImageCropPresets = {
       height: calc(var(--bp-4k-increment) * 7.5rem);
       margin-bottom: calc(var(--bp-4k-increment) * 0.875rem);
     }
+  }
+}
+
+.btn-overlay {
+  position: relative;
+  top: -2.375rem;
+  margin-bottom: -2.375rem;
+
+  .btn {
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.person-fallback-image {
+  color: $mediumgrey;
+  font-size: 7.5rem;
+
+  @media (min-width: $bp-4k) {
+    font-size: calc(var(--bp-4k-increment) * 7.5rem);
   }
 }
 </style>

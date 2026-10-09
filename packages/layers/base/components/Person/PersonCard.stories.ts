@@ -15,5 +15,12 @@ export const Default: Story = {
     image: sampleData.person[0].image,
     name: "Frida Kahlo",
     role: "painter",
+    email: "frida@example.org",
+    website: "https://www.linkedin.com/frida",
+  },
+};
+export const WithFallbaccks: Story = {
+  args: {
+    name: "Mr. E. Persoon",
   },
 };
