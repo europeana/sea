@@ -11,8 +11,8 @@
     "dev": "nitro dev"
   },
   "devDependencies": {
-    "h3": "1.15.11",
-    "nitropack": "2.13.4"
+    "h3": "catalog:nitro2",
+    "nitropack": "catalog:nitro2"
   },
   "dependencies": {
     "bullmq": "^5.58.5",

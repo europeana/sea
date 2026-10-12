@@ -258,6 +258,13 @@ catalogs:
     turndown:
       specifier: 7.2.4
       version: 7.2.4
+  nitro2:
+    h3:
+      specifier: 1.15.11
+      version: 1.15.11
+    nitropack:
+      specifier: 2.13.4
+      version: 2.13.4
   nuxt3:
     '@nuxt/test-utils':
       specifier: 3.23.0
@@ -392,10 +399,10 @@ importers:
         version: 7.2.4
     devDependencies:
       h3:
-        specifier: 1.15.11
+        specifier: catalog:nitro2
         version: 1.15.11
       nitropack:
-        specifier: 2.13.4
+        specifier: catalog:nitro2
         version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
 
   packages/apps/ctf-apps:
