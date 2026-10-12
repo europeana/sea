@@ -405,6 +405,31 @@ importers:
         specifier: catalog:nitro2
         version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
 
+  packages/apps/cazis:
+    dependencies:
+      bullmq:
+        specifier: ^5.58.5
+        version: 5.79.0
+      contentful-management:
+        specifier: ^11.57.4
+        version: 11.76.0
+      ioredis:
+        specifier: ^5.7.0
+        version: 5.11.1
+      morgan:
+        specifier: ^1.10.1
+        version: 1.11.0
+      node-fetch-native:
+        specifier: 'catalog:'
+        version: 1.6.7
+    devDependencies:
+      h3:
+        specifier: catalog:nitro2
+        version: 1.15.11
+      nitropack:
+        specifier: catalog:nitro2
+        version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
+
   packages/apps/ctf-apps:
     dependencies:
       '@contentful/app-sdk':
