@@ -259,9 +259,15 @@ catalogs:
       specifier: 7.2.4
       version: 7.2.4
   nitro2:
+    '@types/morgan':
+      specifier: 1.9.10
+      version: 1.9.10
     h3:
       specifier: 1.15.11
       version: 1.15.11
+    morgan:
+      specifier: 1.12.1
+      version: 1.12.1
     nitropack:
       specifier: 2.13.4
       version: 2.13.4
@@ -398,6 +404,34 @@ importers:
         specifier: catalog:html
         version: 7.2.4
     devDependencies:
+      h3:
+        specifier: catalog:nitro2
+        version: 1.15.11
+      nitropack:
+        specifier: catalog:nitro2
+        version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
+
+  packages/apps/cazis:
+    dependencies:
+      bullmq:
+        specifier: ^5.58.5
+        version: 5.79.0
+      contentful-management:
+        specifier: ^11.57.4
+        version: 11.76.0
+      ioredis:
+        specifier: ^5.7.0
+        version: 5.11.1
+      morgan:
+        specifier: catalog:nitro2
+        version: 1.12.1
+      node-fetch-native:
+        specifier: 'catalog:'
+        version: 1.6.7
+    devDependencies:
+      '@types/morgan':
+        specifier: catalog:nitro2
+        version: 1.9.10
       h3:
         specifier: catalog:nitro2
         version: 1.15.11
@@ -3585,6 +3619,9 @@ packages:
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
 
+  '@types/morgan@1.9.10':
+    resolution: {integrity: sha512-sS4A1zheMvsADRVfT0lYbJ4S9lmsey8Zo2F7cnbYjWHP67Q0AwMYuuzLlkIM2N8gAbb9cubhIVFwcIN2XyYCkA==}
+
   '@types/node@26.0.0':
     resolution: {integrity: sha512-vf2YFi1iY9lHGwNJMs01biZFbKJkrZR1T6/MlzjhJLPdntOHLhTrDSnSVcdtvjihi4VQNlrFRIxLsDBlQpAipA==}
 
@@ -6545,6 +6582,10 @@ packages:
     resolution: {integrity: sha512-zSkVu3t18r39pw4ixfBKvfZi3y2UOqr7d4WYwcj3m8nXpEQK4rPO6GLzs/CExoRgmX3y9EjmmcXqv6jq0SK46g==}
     engines: {node: '>= 0.8.0'}
 
+  morgan@1.12.1:
+    resolution: {integrity: sha512-tljKC0ex20AjO58Ob/eZ53JloycbVswbVNCHx6V6VLGzqt/w8dIynVGL0G8qVjNKwiA7sYSogCrN6QtJ82IV+g==}
+    engines: {node: '>= 0.8.0'}
+
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
     engines: {node: '>=10'}
@@ -8786,8 +8827,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.3.11:
-    resolution: {integrity: sha512-LwcxzeliO9fkQcpJG0PoX8X5kmAhKmH9wkpDLxNabwzkQ9Zeib2YVHwFV4pcWmMLfXVfjr/dSV+DaJ3cIPgSNA==}
+  vue-component-type-helpers@3.3.13:
+    resolution: {integrity: sha512-02KCxSmKDhIITjKyJ4QT5csP6L0WoRborLqY/34a40+S9uvMvdNgMV0yVjO3p2Gkz3ZoPmFz/0JsGHacwJYTxw==}
 
   vue-component-type-helpers@3.3.5:
     resolution: {integrity: sha512-Fe1jyPJoUGpJOYKOri44jduR7My4yYINOMJISuMAbmrs+L5LbIDUc8NTWZYY3EJLK0yPLuCmcd5zoCsE4k2/KA==}
@@ -11829,7 +11870,7 @@ snapshots:
       storybook: 10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       type-fest: 2.19.0
       vue: 3.5.38(typescript@5.9.3)
-      vue-component-type-helpers: 3.3.11
+      vue-component-type-helpers: 3.3.13
 
   '@stylistic/eslint-plugin@5.10.0(eslint@10.5.0(jiti@2.7.0))':
     dependencies:
@@ -11899,6 +11940,10 @@ snapshots:
   '@types/mdx@2.0.14': {}
 
   '@types/minimist@1.2.5': {}
+
+  '@types/morgan@1.9.10':
+    dependencies:
+      '@types/node': 26.0.0
 
   '@types/node@26.0.0':
     dependencies:
@@ -15146,6 +15191,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  morgan@1.12.1:
+    dependencies:
+      basic-auth: 2.0.1
+      debug: 2.6.9
+      depd: 2.0.0
+      on-finished: 2.4.1
+      on-headers: 1.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   mrmime@2.0.1: {}
 
   ms@2.0.0: {}
@@ -17875,7 +17930,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.3.11: {}
+  vue-component-type-helpers@3.3.13: {}
 
   vue-component-type-helpers@3.3.5: {}
 
