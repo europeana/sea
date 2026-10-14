@@ -1,6 +1,6 @@
 {
   "name": "@europeana/cats",
-  "version": "0.1.10-auto-publish.3",
+  "version": "0.1.26",
   "description": "Content(ful) Automated Task Service (CATS)",
   "type": "module",
   "repository": {
