@@ -1,15 +1,15 @@
 import { Job, FlowProducer, Worker } from "bullmq";
-import { useContentfulEnvironment } from "../../contentfulEnvironment";
-import { supportedLocales } from "../../i18n/locales";
-import { useQueueOptions } from "../queue";
-import { markupFields } from "../../html/markupFields";
-import { requestTranslation } from "../../eTranslation";
+import { useContentfulEnvironment } from "../../../contentfulEnvironment";
+import { supportedLocales } from "../../../i18n/locales";
+import { useQueueOptions } from "../../queue";
+import { markupFields } from "../../../html/markupFields";
+import { requestTranslation } from "../../../eTranslation";
 
 let contentfulEnvironment;
 let flowProducer;
 
-export const useRequestQueueWorker = () =>
-  new Worker("request", requestQueueWorker, {
+export const useTranslateRequestQueueWorker = () =>
+  new Worker("translate:request", translateRequestQueueWorker, {
     ...useQueueOptions(),
     removeOnComplete: { count: 100 },
     // removeOnFail: { count: 5000 },
@@ -36,8 +36,8 @@ const targetLanguagesFromTags = (tags = []) => {
     .map((locale) => locale.split("-").shift().toUpperCase());
 };
 
-export const requestQueueWorker = async (job: Job) => {
-  console.log("worker(request)", job.id);
+export const translateRequestQueueWorker = async (job: Job) => {
+  console.log("worker(translate:request)", job.id);
 
   if (!contentfulEnvironment) {
     contentfulEnvironment = await useContentfulEnvironment();
@@ -69,7 +69,7 @@ export const requestQueueWorker = async (job: Job) => {
   }
 
   await flowProducer.add({
-    queueName: "store",
+    queueName: "translate:store",
     name: "translation",
     data: { entryId: job.data.entry.sys.id },
     opts: {
@@ -81,7 +81,7 @@ export const requestQueueWorker = async (job: Job) => {
       },
     },
     children: targetLanguages.map((lang) => ({
-      queueName: "receive",
+      queueName: "translate:receive",
       name: "translation",
       data: {
         contentType: job.data.contentType,
