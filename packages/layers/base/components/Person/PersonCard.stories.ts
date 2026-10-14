@@ -19,6 +19,9 @@ export const Default: Story = {
     website: "https://www.linkedin.com/frida",
   },
 };
+
+// TODO: add story with only email / website, only name (no role)
+
 export const WithFallbaccks: Story = {
   args: {
     name: "Mr. E. Persoon",
