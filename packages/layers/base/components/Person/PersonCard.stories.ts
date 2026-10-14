@@ -15,15 +15,39 @@ export const Default: Story = {
     image: sampleData.person[0].image,
     name: "Frida Kahlo",
     role: "painter",
+  },
+};
+
+export const WithButtons: Story = {
+  args: {
+    image: sampleData.person[0].image,
+    name: "Frida Kahlo",
+    role: "painter",
     email: "frida@example.org",
     website: "https://www.linkedin.com/frida",
   },
 };
 
-// TODO: add story with only email / website, only name (no role)
+export const WithOneButton: Story = {
+  args: {
+    image: sampleData.person[0].image,
+    name: "Frida Kahlo",
+    role: "painter",
+    email: "frida@example.org",
+  },
+};
 
-export const WithFallbaccks: Story = {
+export const WithFallbackImage: Story = {
   args: {
     name: "Mr. E. Persoon",
+  },
+};
+
+export const WithFallbackImageAndButtons: Story = {
+  args: {
+    name: "Frida Kahlo",
+    role: "painter",
+    email: "frida@example.org",
+    website: "https://www.linkedin.com/frida",
   },
 };

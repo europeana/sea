@@ -68,7 +68,10 @@ const contentfulImageCropPresets = {
       class="person-image"
       @error="imageNotFound"
     />
-    <span v-else class="icon-person-placeholder person-fallback-image" />
+    <span
+      v-else
+      class="icon-person-placeholder person-fallback-image mx-auto"
+    />
     <div
       v-if="email || linkedIn"
       class="btn-overlay position-absolute w-100 mx-auto"
@@ -220,11 +223,16 @@ const contentfulImageCropPresets = {
 .person-fallback-image {
   background: $darkgrey-light;
   color: $middlegrey;
-  font-size: 7.5rem;
+  display: block;
+  width: 7.5rem;
+  height: 7.5rem;
   border-radius: 50%;
+  font-size: 5.5rem;
+  align-content: center;
+  margin-bottom: 0.875rem;
 
   @media (min-width: $bp-4k) {
-    font-size: calc(var(--bp-4k-increment) * 7.5rem);
+    font-size: calc(var(--bp-4k-increment) * 5.5rem);
   }
 }
 </style>
