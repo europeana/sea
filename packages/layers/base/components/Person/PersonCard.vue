@@ -68,34 +68,33 @@ const contentfulImageCropPresets = {
       class="person-image"
       @error="imageNotFound"
     />
-    <!-- TODO: use the new fallback .svg instead of the account icon here. -->
-    <span v-else class="icon-account person-fallback-image" />
+    <span v-else class="icon-person-placeholder person-fallback-image" />
     <div
       v-if="email || linkedIn"
       class="btn-overlay position-absolute w-100 mx-auto"
     >
-      <NuxtLink
+      <SmartLink
         v-if="email"
         class="btn btn-light-flat email-btn"
-        :to="`mailto:${email}`"
-        target="_blank"
+        :destination="`mailto:${email}`"
+        :hide-external-icon="true"
         :aria-label="$t('actions.email')"
       >
         <span
           class="icon-email d-inline-flex align-items-center justify-content-center"
         />
-      </NuxtLink>
-      <NuxtLink
+      </SmartLink>
+      <SmartLink
         v-if="linkedIn"
         class="btn btn-light-flat linkedin-btn"
-        :to="linkedIn"
-        target="_blank"
+        :destination="linkedIn"
+        :hide-external-icon="true"
         :aria-label="$t('actions.linkedIn')"
       >
         <span
           class="icon-linkedin-circle d-inline-flex align-items-center justify-content-center"
         />
-      </NuxtLink>
+      </SmartLink>
     </div>
     <p v-if="name" class="person-name mb-1 mb-4k-2">{{ name }}</p>
     <p v-if="role" class="person-role mb-0">{{ role }}</p>
@@ -219,8 +218,10 @@ const contentfulImageCropPresets = {
 }
 
 .person-fallback-image {
-  color: $mediumgrey;
+  background: $darkgrey-light;
+  color: $middlegrey;
   font-size: 7.5rem;
+  border-radius: 50%;
 
   @media (min-width: $bp-4k) {
     font-size: calc(var(--bp-4k-increment) * 7.5rem);
