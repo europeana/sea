@@ -9,7 +9,7 @@ let contentfulEnvironment;
 let flowProducer;
 
 export const useTranslateRequestQueueWorker = () =>
-  new Worker("translate:request", translateRequestQueueWorker, {
+  new Worker("translate-request", translateRequestQueueWorker, {
     ...useQueueOptions(),
     removeOnComplete: { count: 100 },
     // removeOnFail: { count: 5000 },
@@ -37,7 +37,7 @@ const targetLanguagesFromTags = (tags = []) => {
 };
 
 export const translateRequestQueueWorker = async (job: Job) => {
-  console.log("worker(translate:request)", job.id);
+  console.log("worker(translate-request)", job.id);
 
   if (!contentfulEnvironment) {
     contentfulEnvironment = await useContentfulEnvironment();
@@ -69,7 +69,7 @@ export const translateRequestQueueWorker = async (job: Job) => {
   }
 
   await flowProducer.add({
-    queueName: "translate:store",
+    queueName: "translate-store",
     name: "translation",
     data: { entryId: job.data.entry.sys.id },
     opts: {
@@ -81,7 +81,7 @@ export const translateRequestQueueWorker = async (job: Job) => {
       },
     },
     children: targetLanguages.map((lang) => ({
-      queueName: "translate:receive",
+      queueName: "translate-receive",
       name: "translation",
       data: {
         contentType: job.data.contentType,
