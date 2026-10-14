@@ -36,7 +36,7 @@ The request body sent by eTranslation to this endpoint includes the “external 
 
 ## BullMQ
 
-Three BullMQ queues are used: `translate:request`, `translate:receive` and `translate:store`.
+Three BullMQ queues are used: `translate-request`, `translate-receive` and `translate-store`.
 
 ### Request queue
 
