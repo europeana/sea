@@ -6,7 +6,6 @@ export default defineConfig({
     //       failures in the nuxt-environment test suites
     projects: [
       "packages/apps/cats",
-      "packages/apps/cazis",
       "packages/apps/ctf-apps",
       "packages/apps/ds4ch",
       "packages/components/map",

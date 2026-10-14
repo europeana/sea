@@ -1,4 +1,5 @@
 import contentfulManagement from "contentful-management";
+import { useRuntimeConfig } from "nitropack/runtime";
 
 let contentfulEnvironment;
 

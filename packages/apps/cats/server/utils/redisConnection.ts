@@ -1,4 +1,5 @@
 import Redis from "ioredis";
+import { useRuntimeConfig } from "nitropack/runtime";
 
 let redisConnection;
 

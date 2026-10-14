@@ -259,9 +259,6 @@ catalogs:
       specifier: 7.2.4
       version: 7.2.4
   nitro2:
-    '@types/morgan':
-      specifier: 1.9.10
-      version: 1.9.10
     h3:
       specifier: 1.15.11
       version: 1.15.11
@@ -284,6 +281,13 @@ catalogs:
     nuxt:
       specifier: 3.21.8
       version: 3.21.8
+  types:
+    '@types/morgan':
+      specifier: 1.9.10
+      version: 1.9.10
+    '@types/turndown':
+      specifier: 5.0.6
+      version: 5.0.6
   vite7:
     '@vitejs/plugin-vue':
       specifier: 6.0.7
@@ -395,8 +399,8 @@ importers:
         specifier: catalog:html
         version: 18.0.5
       morgan:
-        specifier: ^1.10.1
-        version: 1.11.0
+        specifier: catalog:nitro2
+        version: 1.12.1
       node-fetch-native:
         specifier: 'catalog:'
         version: 1.6.7
@@ -404,34 +408,12 @@ importers:
         specifier: catalog:html
         version: 7.2.4
     devDependencies:
-      h3:
-        specifier: catalog:nitro2
-        version: 1.15.11
-      nitropack:
-        specifier: catalog:nitro2
-        version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
-
-  packages/apps/cazis:
-    dependencies:
-      bullmq:
-        specifier: ^5.58.5
-        version: 5.79.0
-      contentful-management:
-        specifier: ^11.57.4
-        version: 11.76.0
-      ioredis:
-        specifier: ^5.7.0
-        version: 5.11.1
-      morgan:
-        specifier: catalog:nitro2
-        version: 1.12.1
-      node-fetch-native:
-        specifier: 'catalog:'
-        version: 1.6.7
-    devDependencies:
       '@types/morgan':
-        specifier: catalog:nitro2
+        specifier: catalog:types
         version: 1.9.10
+      '@types/turndown':
+        specifier: catalog:types
+        version: 5.0.6
       h3:
         specifier: catalog:nitro2
         version: 1.15.11
@@ -3643,6 +3625,9 @@ packages:
   '@types/statuses@2.0.6':
     resolution: {integrity: sha512-xMAgYwceFhRA2zY+XbEA7mxYbA093wdiW8Vu6gZPGWy9cmOyU9XesH1tNcEWsKFd5Vzrqx5T3D38PWx1FIIXkA==}
 
+  '@types/turndown@5.0.6':
+    resolution: {integrity: sha512-ru00MoyeeouE5BX4gRL+6m/BsDfbRayOskWqUvh7CLGW+UXxHQItqALa38kKnOiZPqJrtzJUgAC2+F0rL1S4Pg==}
+
   '@types/web-bluetooth@0.0.21':
     resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
 
@@ -6577,10 +6562,6 @@ packages:
   modify-values@1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
     engines: {node: '>=0.10.0'}
-
-  morgan@1.11.0:
-    resolution: {integrity: sha512-zSkVu3t18r39pw4ixfBKvfZi3y2UOqr7d4WYwcj3m8nXpEQK4rPO6GLzs/CExoRgmX3y9EjmmcXqv6jq0SK46g==}
-    engines: {node: '>= 0.8.0'}
 
   morgan@1.12.1:
     resolution: {integrity: sha512-tljKC0ex20AjO58Ob/eZ53JloycbVswbVNCHx6V6VLGzqt/w8dIynVGL0G8qVjNKwiA7sYSogCrN6QtJ82IV+g==}
@@ -11965,6 +11946,8 @@ snapshots:
 
   '@types/statuses@2.0.6': {}
 
+  '@types/turndown@5.0.6': {}
+
   '@types/web-bluetooth@0.0.21': {}
 
   '@types/whatwg-mimetype@3.0.2': {}
@@ -15180,16 +15163,6 @@ snapshots:
   mocked-exports@0.1.1: {}
 
   modify-values@1.0.1: {}
-
-  morgan@1.11.0:
-    dependencies:
-      basic-auth: 2.0.1
-      debug: 2.6.9
-      depd: 2.0.0
-      on-finished: 2.4.1
-      on-headers: 1.1.0
-    transitivePeerDependencies:
-      - supports-color
 
   morgan@1.12.1:
     dependencies:

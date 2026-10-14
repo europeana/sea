@@ -27,5 +27,10 @@ export default defineNitroConfig({
       },
       url: null,
     },
+    zoho: {
+      clientId: null,
+      clientSecret: null,
+      serviceOrgId: null,
+    },
   },
 });

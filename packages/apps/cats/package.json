@@ -1,7 +1,8 @@
 {
   "name": "@europeana/cats",
   "version": "0.1.10-auto-publish.3",
-  "description": "Content(ful) Automated Translation Service (CATS)",
+  "description": "Content(ful) Automated Task Service (CATS)",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/europeana/sea"
@@ -11,6 +12,8 @@
     "dev": "nitro dev"
   },
   "devDependencies": {
+    "@types/morgan": "catalog:types",
+    "@types/turndown": "catalog:types",
     "h3": "catalog:nitro2",
     "nitropack": "catalog:nitro2"
   },
@@ -20,7 +23,7 @@
     "contentful-management": "^11.57.4",
     "ioredis": "^5.7.0",
     "marked": "catalog:html",
-    "morgan": "^1.10.1",
+    "morgan": "catalog:nitro2",
     "node-fetch-native": "catalog:",
     "turndown": "catalog:html"
   }

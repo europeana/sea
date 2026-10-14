@@ -1,4 +1,5 @@
 import { Queue } from "bullmq";
+import { useRedisConnection } from "../redisConnection";
 
 const queues = {};
 
