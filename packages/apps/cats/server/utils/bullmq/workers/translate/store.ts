@@ -1,13 +1,13 @@
 import type { Job } from "bullmq";
 import { Worker } from "bullmq";
-import { useContentfulEnvironment } from "../../contentfulEnvironment";
-import { useQueueOptions } from "../queue";
-import { localeForLang } from "../../i18n/locales";
+import { useContentfulEnvironment } from "../../../contentfulEnvironment";
+import { useQueueOptions } from "../../queue";
+import { localeForLang } from "../../../i18n/locales";
 
 let contentfulEnvironment;
 
-export const useStoreQueueWorker = () =>
-  new Worker("store", storeQueueWorker, {
+export const useTranslateStoreQueueWorker = () =>
+  new Worker("translate:store", storeQueueWorker, {
     ...useQueueOptions(),
     removeOnComplete: { count: 100 },
     // removeOnFail: { count: 5000 },

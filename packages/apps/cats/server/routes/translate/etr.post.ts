@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   const jobId = `${body.externalReference}-${body.targetLanguage}`;
-  const job = await useQueue("receive").getJob(jobId);
+  const job = await useQueue("translate:receive").getJob(jobId);
   await job.updateData({
     ...job.data,
     html: Buffer.from(body.result, "base64").toString("utf8"),

@@ -4,9 +4,7 @@ import { useRedisConnection } from "../redisConnection";
 const queues = {};
 
 export const useQueue = (name) => {
-  if (!queues[name]) {
-    queues[name] = new Queue(name, useQueueOptions());
-  }
+  queues[name] ||= new Queue(name, useQueueOptions());
 
   return queues[name];
 };
