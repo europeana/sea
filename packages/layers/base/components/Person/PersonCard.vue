@@ -55,7 +55,7 @@ const contentfulImageCropPresets = {
 </script>
 
 <template>
-  <div class="person-card text-center">
+  <div class="person-card text-center position-relative">
     <ImageOptimised
       v-if="!imageError && image?.url"
       :src="image?.url"
@@ -70,24 +70,31 @@ const contentfulImageCropPresets = {
     />
     <!-- TODO: use the new fallback .svg instead of the account icon here. -->
     <span v-else class="icon-account person-fallback-image" />
-    <div v-if="email || linkedIn" class="btn-overlay">
+    <div
+      v-if="email || linkedIn"
+      class="btn-overlay position-absolute w-100 mx-auto"
+    >
       <NuxtLink
         v-if="email"
-        class="btn email-btn"
+        class="btn btn-light-flat email-btn"
         :to="`mailto:${email}`"
         target="_blank"
         :aria-label="$t('actions.email')"
       >
-        <span class="icon-email" />
+        <span
+          class="icon-email d-inline-flex align-items-center justify-content-center"
+        />
       </NuxtLink>
       <NuxtLink
         v-if="linkedIn"
-        class="btn linked-in-btn"
+        class="btn btn-light-flat linkedin-btn"
         :to="linkedIn"
         target="_blank"
         :aria-label="$t('actions.linkedIn')"
       >
-        <span class="icon-linkedin" />
+        <span
+          class="icon-linkedin-circle d-inline-flex align-items-center justify-content-center"
+        />
       </NuxtLink>
     </div>
     <p v-if="name" class="person-name mb-1 mb-4k-2">{{ name }}</p>
@@ -130,7 +137,7 @@ const contentfulImageCropPresets = {
 }
 
 .person-image {
-  ::v-deep img {
+  :deep(img) {
     width: 7.5rem;
     height: 7.5rem;
     margin-bottom: 0.875rem;
@@ -144,13 +151,69 @@ const contentfulImageCropPresets = {
 }
 
 .btn-overlay {
-  position: relative;
-  top: -2.375rem;
-  margin-bottom: -2.375rem;
+  top: 6.5rem;
+
+  @media (min-width: $bp-4k) {
+    top: calc(var(--bp-4k-increment) * 6.5rem);
+  }
 
   .btn {
-    &:hover {
-      color: $blue;
+    line-height: 1rem;
+
+    @media (min-width: $bp-4k) {
+      line-height: calc(var(--bp-4k-increment) * 1rem);
+    }
+
+    &.email-btn {
+      font-size: 1.125rem;
+      padding: 0.125rem;
+
+      @media (min-width: $bp-4k) {
+        font-size: calc(var(--bp-4k-increment) * 1.125rem);
+        padding: calc(var(--bp-4k-increment) * 0.125rem);
+      }
+
+      span {
+        border-radius: $border-radius-small;
+        width: 1.125rem;
+        height: 1rem;
+
+        @media (min-width: $bp-4k) {
+          border-radius: calc(var(--bp-4k-increment) * $border-radius-small);
+          width: calc(var(--bp-4k-increment) * 1.125rem);
+          height: calc(var(--bp-4k-increment) * 1rem);
+        }
+      }
+    }
+
+    &.linkedin-btn {
+      font-size: 1.25rem;
+      padding: 0.0625rem;
+
+      @media (min-width: $bp-4k) {
+        font-size: calc(var(--bp-4k-increment) * 1.25rem);
+        padding: calc(var(--bp-4k-increment) * 0.0625rem);
+      }
+
+      span {
+        border-radius: 50%;
+        width: 1.25rem;
+        height: 1.25rem;
+
+        @media (min-width: $bp-4k) {
+          width: calc(var(--bp-4k-increment) * 1.25rem);
+          height: calc(var(--bp-4k-increment) * 1.25rem);
+        }
+      }
+    }
+
+    span {
+      background-color: $white;
+      line-height: 1rem;
+
+      @media (min-width: $bp-4k) {
+        line-height: calc(var(--bp-4k-increment) * 1rem);
+      }
     }
   }
 }
