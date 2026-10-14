@@ -1,5 +1,8 @@
 import type { Job } from "bullmq";
 import { Worker } from "bullmq";
+import { useContentfulEnvironment } from "../../contentfulEnvironment";
+import { useQueueOptions } from "../queue";
+import { localeForLang } from "../../i18n/locales";
 
 let contentfulEnvironment;
 

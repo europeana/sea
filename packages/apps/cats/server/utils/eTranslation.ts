@@ -1,4 +1,5 @@
 import fetch from "node-fetch-native";
+import { useRuntimeConfig } from "nitropack/runtime";
 
 export const requestTranslation = async ({
   externalReference,
