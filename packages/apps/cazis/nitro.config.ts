@@ -2,7 +2,7 @@ import { defineNitroConfig } from "nitropack/config";
 
 // https://nitro.build/config
 export default defineNitroConfig({
-  compatibilityDate: "2025-09-17",
+  compatibilityDate: "2026-10-14",
   srcDir: "server",
   runtimeConfig: {
     contentful: {
