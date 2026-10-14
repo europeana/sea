@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const jobId = getRequestHeader(event, "X-Contentful-Idempotency-Key");
 
-  await useQueue("translate:request").add(
+  await useQueue("translate-request").add(
     "translation",
     { entry },
     {

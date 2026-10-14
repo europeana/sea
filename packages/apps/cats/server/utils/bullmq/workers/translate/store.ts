@@ -7,14 +7,14 @@ import { localeForLang } from "../../../i18n/locales";
 let contentfulEnvironment;
 
 export const useTranslateStoreQueueWorker = () =>
-  new Worker("translate:store", storeQueueWorker, {
+  new Worker("translate-store", storeQueueWorker, {
     ...useQueueOptions(),
     removeOnComplete: { count: 100 },
     // removeOnFail: { count: 5000 },
   });
 
 export const storeQueueWorker = async (job: Job) => {
-  console.log("worker(store)", job.id);
+  console.log("worker(translate-store)", job.id);
 
   if (!contentfulEnvironment) {
     contentfulEnvironment = await useContentfulEnvironment();
