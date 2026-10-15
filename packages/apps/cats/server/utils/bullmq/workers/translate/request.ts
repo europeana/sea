@@ -1,12 +1,9 @@
-import { Job, FlowProducer, Worker } from "bullmq";
+import { Job, Worker } from "bullmq";
 import { useContentfulEnvironment } from "../../../contentfulEnvironment";
 import { supportedLocales } from "../../../i18n/locales";
-import { useQueueOptions } from "../../queue";
+import { useFlowProducer, useQueueOptions } from "../../queue";
 import { markupFields } from "../../../html/markupFields";
 import { requestTranslation } from "../../../eTranslation";
-
-let contentfulEnvironment;
-let flowProducer;
 
 export const useTranslateRequestQueueWorker = () =>
   new Worker("translate-request", translateRequestQueueWorker, {
@@ -39,13 +36,8 @@ const targetLanguagesFromTags = (tags = []) => {
 export const translateRequestQueueWorker = async (job: Job) => {
   console.log("worker(translate-request)", job.id);
 
-  if (!contentfulEnvironment) {
-    contentfulEnvironment = await useContentfulEnvironment();
-  }
-
-  if (!flowProducer) {
-    flowProducer = new FlowProducer(useQueueOptions());
-  }
+  const contentfulEnvironment = await useContentfulEnvironment();
+  const flowProducer = useFlowProducer();
 
   const targetLanguages = targetLanguagesFromTags(
     job.data.entry.metadata?.tags,
