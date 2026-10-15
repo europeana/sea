@@ -55,10 +55,10 @@ const linkedIn = props.website?.startsWith("https://www.linkedin.com")
   ? props.website
   : null;
 
-let imageError = false;
+const imageFound = ref(true);
 
 const imageNotFound = () => {
-  imageError.value = true;
+  imageFound.value = false;
 };
 
 const contentfulImageCropPresets = {
@@ -69,7 +69,7 @@ const contentfulImageCropPresets = {
 <template>
   <div class="person-card text-center position-relative">
     <ImageOptimised
-      v-if="!imageError && image?.url"
+      v-if="imageFound && image?.url"
       :src="image?.url"
       :width="image?.width"
       :height="image?.height"

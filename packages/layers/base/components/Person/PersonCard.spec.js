@@ -1,3 +1,4 @@
+//import { nextTick } from "vue";
 import { describe, it, expect } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
@@ -47,6 +48,43 @@ describe("components/content/PersonCard", () => {
       const wrapper = factory({ image: { ...testProps.image } });
       expect(wrapper.find(".person-name").exists()).toBeFalsy();
       expect(wrapper.find(".person-role").exists()).toBeFalsy();
+    });
+  });
+
+  describe("when there is no image", () => {
+    it("displays a placeholder image", () => {
+      const wrapper = factory({ name: testProps.name, role: testProps.role });
+      expect(wrapper.find(".person-fallback-image").exists()).toBeTruthy();
+    });
+  });
+
+  // describe("when the image throws an error", () => {
+  //   it("displays a placeholder image", async() => {
+  //     const wrapper = factory({ image: { url: 'invalid', width: 0, height: 0 } });
+
+  //     const imageStub = wrapper.find('image-optimised-stub');
+
+  //     expect(imageStub.exists()).toBe(true);
+
+  //     await imageStub.trigger("error");
+  //     await nextTick();
+
+  //     expect(wrapper.find('.person-fallback-image').isVisible()).toBe(true);
+  //     expect(wrapper.find(".placeholder").exists()).toBeTruthy();
+  //   });
+  // });
+
+  describe("when there is an email", () => {
+    it("renders an e-mail button link", () => {
+      const wrapper = factory({ email: "info@example.eu" });
+      expect(wrapper.find(".email-btn").isVisible()).toBe(true);
+    });
+  });
+
+  describe("when there is a LinkedIn url in the website prop", () => {
+    it("renders a LinkedIn button link", () => {
+      const wrapper = factory({ website: "https://www.linkedin.com/profile" });
+      expect(wrapper.find(".linkedin-btn").isVisible()).toBe(true);
     });
   });
 });
