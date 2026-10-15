@@ -45,8 +45,8 @@ export const WithFallbackImage: Story = {
 
 export const WithFallbackImageAndButtons: Story = {
   args: {
-    name: "Frida Kahlo",
-    role: "painter",
+    name: "Mr. E. Persoon",
+    role: "Enigma",
     email: "frida@example.org",
     website: "https://www.linkedin.com/frida",
   },

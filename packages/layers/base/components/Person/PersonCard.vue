@@ -46,9 +46,9 @@ const linkedinRef = useTemplateRef("linkedin");
 
 onMounted(() => {
   // Initialise Bootstrap Tooltips
-  [emailRef.value?.$el, linkedinRef.value?.$el].map(
-    (triggerElement) => new $bs.Tooltip(triggerElement),
-  );
+  [emailRef.value?.$el, linkedinRef.value?.$el]
+    .filter((n) => n)
+    .map((triggerElement) => new $bs.Tooltip(triggerElement));
 });
 
 const linkedIn = props.website?.startsWith("https://www.linkedin.com")
@@ -58,7 +58,7 @@ const linkedIn = props.website?.startsWith("https://www.linkedin.com")
 let imageError = false;
 
 const imageNotFound = () => {
-  imageError.value = false;
+  imageError.value = true;
 };
 
 const contentfulImageCropPresets = {
@@ -86,7 +86,7 @@ const contentfulImageCropPresets = {
     />
     <div
       v-if="email || linkedIn"
-      class="btn-overlay position-absolute w-100 mx-auto"
+      class="buttons-overlay position-absolute w-100 mx-auto"
     >
       <GenericSmartLink
         v-if="email"
@@ -172,7 +172,7 @@ const contentfulImageCropPresets = {
   }
 }
 
-.btn-overlay {
+.buttons-overlay {
   top: 6.5rem;
 
   @media (min-width: $bp-4k) {
