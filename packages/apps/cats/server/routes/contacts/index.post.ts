@@ -15,7 +15,7 @@ const createSyncContactFlow = ({
   const photoJobId = `${contactId}-${modified}-photo`;
 
   return {
-    queueName: "zoho-contacts",
+    queueName: "contacts",
     name: "sync-contact",
     data: { contactId },
     opts: {
@@ -29,7 +29,7 @@ const createSyncContactFlow = ({
     },
     children: [
       {
-        queueName: "zoho-contacts",
+        queueName: "contacts",
         name: "sync-photo",
         data: { contactId },
         opts: {
