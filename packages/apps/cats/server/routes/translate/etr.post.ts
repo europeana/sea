@@ -17,5 +17,7 @@ export default defineEventHandler(async (event) => {
     await job.changeDelay(0);
   }
 
-  return "OK";
+  return {
+    jobId,
+  };
 });

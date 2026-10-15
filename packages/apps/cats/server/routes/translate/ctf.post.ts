@@ -20,5 +20,7 @@ export default defineEventHandler(async (event) => {
     },
   );
 
-  return "OK";
+  return {
+    jobId,
+  };
 });
