@@ -4,8 +4,6 @@ import { useContentfulEnvironment } from "../../../contentfulEnvironment";
 import { useQueueOptions } from "../../queue";
 import { localeForLang } from "../../../i18n/locales";
 
-let contentfulEnvironment;
-
 export const useTranslateStoreQueueWorker = () =>
   new Worker("translate-store", storeQueueWorker, {
     ...useQueueOptions(),
@@ -16,9 +14,7 @@ export const useTranslateStoreQueueWorker = () =>
 export const storeQueueWorker = async (job: Job) => {
   console.log("worker(translate-store)", job.id);
 
-  if (!contentfulEnvironment) {
-    contentfulEnvironment = await useContentfulEnvironment();
-  }
+  const contentfulEnvironment = await useContentfulEnvironment();
 
   // all per-language receipt children jobs are complete; assemble their values
   // into the entry's field localisations

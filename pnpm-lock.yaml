@@ -389,6 +389,9 @@ importers:
       cheerio:
         specifier: catalog:html
         version: 1.2.0
+      content-disposition:
+        specifier: ^3.0.0
+        version: 3.0.0
       contentful-management:
         specifier: ^11.57.4
         version: 11.76.0
@@ -4643,6 +4646,10 @@ packages:
 
   constantinople@4.0.1:
     resolution: {integrity: sha512-vCrqcSIq4//Gx74TXXCGnHpulY1dskqLTFGDmhrGxzeXL8lF8kvXv6mpNWlJj1uD4DW23D4ljAqbY4RRaaUZIw==}
+
+  content-disposition@3.0.0:
+    resolution: {integrity: sha512-ZH/0Xs9rMIFWCOmGdmS9eHBTF62qqQYNz4nVjQhkdIO/a0fCP4UIM3mRz/wiqL0L14YgAz/1xio4OaSY4+ON/A==}
+    engines: {node: '>=22'}
 
   contentful-management@11.76.0:
     resolution: {integrity: sha512-KsqIZ65q1A6IP55sxTfuAMhBTNJfgGxlVZBoV2ghBuR1LaZZyTqway5vj9KHRDl/Z1uOQQsYSiz+FayMxBXXEw==}
@@ -13055,6 +13062,8 @@ snapshots:
     dependencies:
       '@babel/parser': 7.29.7
       '@babel/types': 7.29.7
+
+  content-disposition@3.0.0: {}
 
   contentful-management@11.76.0:
     dependencies:
