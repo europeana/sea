@@ -76,7 +76,7 @@ const contentfulImageCropPresets = {
       v-if="email || linkedIn"
       class="btn-overlay position-absolute w-100 mx-auto"
     >
-      <SmartLink
+      <GenericSmartLink
         v-if="email"
         class="btn btn-light-flat email-btn"
         :destination="`mailto:${email}`"
@@ -86,8 +86,8 @@ const contentfulImageCropPresets = {
         <span
           class="icon-email d-inline-flex align-items-center justify-content-center"
         />
-      </SmartLink>
-      <SmartLink
+      </GenericSmartLink>
+      <GenericSmartLink
         v-if="linkedIn"
         class="btn btn-light-flat linkedin-btn"
         :destination="linkedIn"
@@ -97,7 +97,7 @@ const contentfulImageCropPresets = {
         <span
           class="icon-linkedin-circle d-inline-flex align-items-center justify-content-center"
         />
-      </SmartLink>
+      </GenericSmartLink>
     </div>
     <p v-if="name" class="person-name mb-1 mb-4k-2">{{ name }}</p>
     <p v-if="role" class="person-role mb-0">{{ role }}</p>
