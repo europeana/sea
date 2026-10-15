@@ -1,6 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
+import { mockNuxtImport } from "@nuxt/test-utils/runtime";
 import PersonCard from "./PersonCard.vue";
+
+mockNuxtImport("useNuxtApp", () => {
+  return () => {
+    return {
+      $bs: {
+        Tooltip: class Tooltip {},
+      },
+    };
+  };
+});
 
 const testProps = {
   image: {

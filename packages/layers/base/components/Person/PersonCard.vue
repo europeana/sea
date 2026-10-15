@@ -1,4 +1,6 @@
 <script setup>
+const { $bs } = useNuxtApp();
+
 const props = defineProps({
   /**
    * Image object
@@ -37,6 +39,16 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+});
+
+const emailRef = useTemplateRef("email");
+const linkedinRef = useTemplateRef("linkedin");
+
+onMounted(() => {
+  // Initialise Bootstrap Tooltips
+  [emailRef.value?.$el, linkedinRef.value?.$el].map(
+    (triggerElement) => new $bs.Tooltip(triggerElement),
+  );
 });
 
 const linkedIn = props.website?.startsWith("https://www.linkedin.com")
@@ -78,6 +90,10 @@ const contentfulImageCropPresets = {
     >
       <GenericSmartLink
         v-if="email"
+        ref="email"
+        data-bs-toggle="tooltip"
+        :title="$t('actions.email')"
+        data-bs-placement="top"
         class="btn btn-light-flat email-btn"
         :destination="`mailto:${email}`"
         :hide-external-icon="true"
@@ -89,6 +105,10 @@ const contentfulImageCropPresets = {
       </GenericSmartLink>
       <GenericSmartLink
         v-if="linkedIn"
+        ref="linkedin"
+        data-bs-toggle="tooltip"
+        :title="$t('actions.linkedIn')"
+        data-bs-placement="top"
         class="btn btn-light-flat linkedin-btn"
         :destination="linkedIn"
         :hide-external-icon="true"
