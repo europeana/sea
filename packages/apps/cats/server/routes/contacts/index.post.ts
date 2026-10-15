@@ -1,5 +1,6 @@
-import { defineEventHandler, readBody, setResponseStatus } from "h3";
 import { FlowJob } from "bullmq";
+import { defineEventHandler, readBody, setResponseStatus } from "h3";
+import moment from "moment";
 import { useFlowProducer } from "../../utils/bullmq/queue";
 
 const createSyncContactFlow = ({
@@ -54,7 +55,10 @@ export default defineEventHandler(async (event) => {
     // Zoho CRM Contact ID, e.g. "486281000001030363"
     const contactId: string = body.id;
     // Zoho CRM Contact Modified Time, e.g. "10-15-2026 11:03:15" (for 15th October)
-    const modified: number = Date.parse(body.modified);
+    const modified: number = moment(
+      body.modified,
+      "MM-DD-YYYY hh:mm:ss",
+    ).unix();
 
     // queue BullMQ flow for contact sync job. with photo sync job as child
     const flow = createSyncContactFlow({ contactId, modified });
