@@ -71,7 +71,7 @@ describe("@/server/routes/index.ts", () => {
         expect(flow.queueName).toBe("zoho-contacts");
         expect(flow.name).toBe("sync-contact");
         expect(flow.data.contactId).toBe("486281000001030363");
-        expect(flow.children.length).toBe(1);
+        expect(flow.children).toHaveLength(1);
         expect(flow.children[0].queueName).toBe("zoho-contacts");
         expect(flow.children[0].name).toBe("sync-photo");
         expect(flow.children[0].data.contactId).toBe("486281000001030363");
