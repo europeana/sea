@@ -56,8 +56,8 @@ export default defineEventHandler(async (event) => {
     const contactId: string = body.id;
     // Zoho CRM Contact Modified Time, e.g. "10-15-2026 11:03:15" (for 15th October)
     const modified: number = moment(
-      body.modified,
-      "MM-DD-YYYY hh:mm:ss",
+      `${body.modified}+00:00`,
+      "MM-DD-YYYY hh:mm:ssZ",
     ).unix();
 
     // queue BullMQ flow for contact sync job. with photo sync job as child
