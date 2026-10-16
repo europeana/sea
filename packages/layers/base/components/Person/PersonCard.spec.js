@@ -1,4 +1,3 @@
-//import { nextTick } from "vue";
 import { describe, it, expect } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
@@ -69,7 +68,6 @@ describe("components/content/PersonCard", () => {
       expect(imageStub.exists()).toBe(true);
 
       await imageStub.trigger("error");
-      await nextTick();
 
       expect(wrapper.find(".person-fallback-image").isVisible()).toBe(true);
     });
