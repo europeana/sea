@@ -128,7 +128,14 @@ const syncContact = async (job: Job): Promise<{ entryId: string | null }> => {
 
   const fields = {
     email: { [LOCALE]: zohoContact.Public_email },
-    image: {
+    name: { [LOCALE]: zohoContact.Full_Name },
+    role: { [LOCALE]: roles },
+    title: { [LOCALE]: zohoContact.Title },
+    url: { [LOCALE]: zohoContact.LinkedIn },
+    zohoId: { [LOCALE]: contactId },
+  };
+  if (photoAssetId) {
+    fields.image = {
       [LOCALE]: {
         sys: {
           type: "Link",
@@ -136,12 +143,8 @@ const syncContact = async (job: Job): Promise<{ entryId: string | null }> => {
           id: photoAssetId,
         },
       },
-    },
-    name: { [LOCALE]: zohoContact.Full_Name },
-    role: { [LOCALE]: roles },
-    title: { [LOCALE]: zohoContact.Title },
-    zohoId: { [LOCALE]: contactId },
-  };
+    };
+  }
 
   if (contentfulPerson) {
     contentfulPerson.fields = {
