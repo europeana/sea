@@ -183,6 +183,10 @@ export default {
         height: 1440,
         contentType: "image/jpeg",
       },
+      name: "Frida Kahlo",
+      role: "painter",
+      email: "frida@example.org",
+      website: "https://www.linkedin.com/frida",
     },
   ],
   thumbnails: [

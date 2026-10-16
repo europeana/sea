@@ -13,27 +13,27 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     image: sampleData.person[0].image,
-    name: "Frida Kahlo",
-    role: "painter",
+    name: sampleData.person[0].name,
+    role: sampleData.person[0].role,
   },
 };
 
 export const WithButtons: Story = {
   args: {
     image: sampleData.person[0].image,
-    name: "Frida Kahlo",
-    role: "painter",
-    email: "frida@example.org",
-    website: "https://www.linkedin.com/frida",
+    name: sampleData.person[0].name,
+    role: sampleData.person[0].role,
+    email: sampleData.person[0].email,
+    linkedIn: sampleData.person[0].website,
   },
 };
 
 export const WithOneButton: Story = {
   args: {
     image: sampleData.person[0].image,
-    name: "Frida Kahlo",
-    role: "painter",
-    email: "frida@example.org",
+    name: sampleData.person[0].name,
+    role: sampleData.person[0].role,
+    email: sampleData.person[0].email,
   },
 };
 
@@ -47,7 +47,7 @@ export const WithFallbackImageAndButtons: Story = {
   args: {
     name: "Mr. E. Persoon",
     role: "Enigma",
-    email: "frida@example.org",
-    website: "https://www.linkedin.com/frida",
+    email: "mr.e@example.org",
+    linkedIn: "https://www.linkedin.com/mr.e",
   },
 };
