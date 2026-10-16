@@ -1,14 +1,16 @@
 import { FlowJob } from "bullmq";
 import { defineEventHandler, readBody, setResponseStatus } from "h3";
 import moment from "moment";
-import { useFlowProducer } from "../../utils/bullmq/queue";
+import { useFlowProducer } from "../../../utils/bullmq/queue";
 
-const createSyncContactFlow = ({
+export const createSyncContactFlow = ({
   contactId,
   modified,
+  record,
 }: {
   contactId: string;
   modified: number;
+  record?: object;
 }): FlowJob => {
   // derive job IDs from inputs for idempotency, e.g. "486281000001030363-1792058595000-contact"
   const contactJobId = `${contactId}-${modified}-contact`;
@@ -17,7 +19,7 @@ const createSyncContactFlow = ({
   return {
     queueName: "contacts",
     name: "sync-contact",
-    data: { contactId },
+    data: { contactId, contactRecord: record },
     opts: {
       jobId: contactJobId,
       // TODO: are these good settings for attempts and backoff?
@@ -47,8 +49,8 @@ const createSyncContactFlow = ({
 
 export default defineEventHandler(async (event) => {
   const body: {
-    id: string;
-    modified: string;
+    id?: string;
+    modified?: string;
   } = await readBody(event);
 
   if (body.id && body.modified) {

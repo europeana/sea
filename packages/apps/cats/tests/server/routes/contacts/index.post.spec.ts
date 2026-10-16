@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import route from "../../../../server/routes/contacts/index.post";
+import route from "../../../../server/routes/zoho/contacts/index.post";
 
 const mocks = vi.hoisted(() => {
   return {
