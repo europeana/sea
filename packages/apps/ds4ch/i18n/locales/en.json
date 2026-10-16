@@ -2,6 +2,8 @@
   "actions": {
     "close": "close",
     "downloadFile": "download {file}",
+    "email": "Email",
+    "linkedIn": "LinkedIn profile",
     "selectLanguage": "(Select your language)",
     "share": "Share",
     "shareOn": "Share on {social}"
