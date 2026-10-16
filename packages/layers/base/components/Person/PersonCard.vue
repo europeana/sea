@@ -1,7 +1,7 @@
 <script setup>
 const { $bs } = useNuxtApp();
 
-const props = defineProps({
+defineProps({
   /**
    * Image object
    * Expected props: url, width, height, contentType
@@ -28,7 +28,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  website: {
+  linkedIn: {
     type: String,
     default: null,
   },
@@ -51,14 +51,10 @@ onMounted(() => {
     .map((triggerElement) => new $bs.Tooltip(triggerElement));
 });
 
-const linkedIn = props.website?.startsWith("https://www.linkedin.com")
-  ? props.website
-  : null;
-
-const imageFound = ref(true);
+const imageError = ref(false);
 
 const imageNotFound = () => {
-  imageFound.value = false;
+  imageError.value = true;
 };
 
 const contentfulImageCropPresets = {
@@ -69,7 +65,7 @@ const contentfulImageCropPresets = {
 <template>
   <div class="person-card text-center position-relative">
     <ImageOptimised
-      v-if="imageFound && image?.url"
+      v-if="!imageError && image?.url"
       :src="image?.url"
       :width="image?.width"
       :height="image?.height"

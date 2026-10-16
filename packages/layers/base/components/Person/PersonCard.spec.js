@@ -58,21 +58,22 @@ describe("components/content/PersonCard", () => {
     });
   });
 
-  // describe("when the image throws an error", () => {
-  //   it("displays a placeholder image", async() => {
-  //     const wrapper = factory({ image: { url: 'invalid', width: 0, height: 0 } });
+  describe("when the image throws an error", () => {
+    it("displays a placeholder image", async () => {
+      const wrapper = factory({
+        image: { url: "invalid", width: 0, height: 0 },
+      });
 
-  //     const imageStub = wrapper.find('image-optimised-stub');
+      const imageStub = wrapper.find("image-optimised-stub");
 
-  //     expect(imageStub.exists()).toBe(true);
+      expect(imageStub.exists()).toBe(true);
 
-  //     await imageStub.trigger("error");
-  //     await nextTick();
+      await imageStub.trigger("error");
+      await nextTick();
 
-  //     expect(wrapper.find('.person-fallback-image').isVisible()).toBe(true);
-  //     expect(wrapper.find(".placeholder").exists()).toBeTruthy();
-  //   });
-  // });
+      expect(wrapper.find(".person-fallback-image").isVisible()).toBe(true);
+    });
+  });
 
   describe("when there is an email", () => {
     it("renders an e-mail button link", () => {
@@ -81,9 +82,9 @@ describe("components/content/PersonCard", () => {
     });
   });
 
-  describe("when there is a LinkedIn url in the website prop", () => {
+  describe("when there is a LinkedIn url in the linkedIn prop", () => {
     it("renders a LinkedIn button link", () => {
-      const wrapper = factory({ website: "https://www.linkedin.com/profile" });
+      const wrapper = factory({ linkedIn: "https://www.linkedin.com/profile" });
       expect(wrapper.find(".linkedin-btn").isVisible()).toBe(true);
     });
   });
