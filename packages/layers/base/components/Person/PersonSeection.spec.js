@@ -18,7 +18,7 @@ const testProps = {
     },
   ],
   title: "example title",
-  description: "example description",
+  description: "example description _markup_",
 };
 
 const factory = (props = testProps) =>
@@ -31,7 +31,7 @@ describe("components/content/PersonSection", () => {
     const wrapper = factory();
 
     expect(wrapper.find("h2").text()).toContain("example title");
-    expect(wrapper.find("p").text()).toContain("example description");
+    expect(wrapper.find("p").text()).toContain("example description markup");
   });
 
   it("displays cards for each person", () => {

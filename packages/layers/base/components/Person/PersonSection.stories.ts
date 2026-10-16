@@ -30,7 +30,7 @@ export const Default: Story = {
   args: {
     title: "People Section",
     description:
-      "These are people who are featured in this section. Mutliple people may be featured in a section, they will appear in rows and columns.",
+      "These are _people_ who are featured in this section. Mutliple _people_ may be featured in a section, they will appear in rows and columns.",
     people: people,
   },
 };
