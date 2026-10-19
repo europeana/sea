@@ -47,7 +47,7 @@ const linkedinRef = useTemplateRef("linkedin");
 onMounted(() => {
   // Initialise Bootstrap Tooltips
   [emailRef.value?.$el, linkedinRef.value?.$el]
-    .filter((n) => n)
+    .filter(Boolean)
     .map((triggerElement) => new $bs.Tooltip(triggerElement));
 });
 

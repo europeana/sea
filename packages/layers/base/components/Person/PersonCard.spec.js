@@ -1,4 +1,3 @@
-//import { nextTick } from "vue";
 import { describe, it, expect } from "vitest";
 import { shallowMount, mount } from "@vue/test-utils";
 import { mockNuxtImport } from "@nuxt/test-utils/runtime";
@@ -27,6 +26,9 @@ const testProps = {
 const factory = (props = testProps) =>
   shallowMount(PersonCard, {
     props,
+    global: {
+      stubs: { SmartLink: { template: "<a><slot /></a>" } },
+    },
   });
 
 describe("components/content/PersonCard", () => {
