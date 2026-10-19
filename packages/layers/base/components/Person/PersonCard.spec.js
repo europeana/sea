@@ -96,4 +96,17 @@ describe("components/content/PersonCard", () => {
       expect(wrapper.find(".linkedin-btn").exists()).toBe(false);
     });
   });
+
+  describe("when the showContactButtons prop is set to false", () => {
+    it("does NOT render the email and LinkedIn buttons", () => {
+      const wrapper = factory({
+        email: "info@example.eu",
+        website: "https://www.linkedin.com/profile",
+        showContactButtons: false,
+      });
+
+      expect(wrapper.find(".email-btn").exists()).toBe(false);
+      expect(wrapper.find(".linkedin-btn").exists()).toBe(false);
+    });
+  });
 });

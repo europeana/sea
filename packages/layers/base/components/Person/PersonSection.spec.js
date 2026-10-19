@@ -2,6 +2,9 @@ import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 import PersonSection from "./PersonSection.vue";
 
+const title = "example title";
+const description = "example description _markup_";
+
 const testProps = {
   people: [
     {
@@ -17,8 +20,6 @@ const testProps = {
       name: "Another person",
     },
   ],
-  title: "example title",
-  description: "example description _markup_",
 };
 
 const factory = (props = testProps) =>
@@ -27,11 +28,23 @@ const factory = (props = testProps) =>
   });
 
 describe("components/content/PersonSection", () => {
-  it("displays a title and description when present", () => {
-    const wrapper = factory();
+  it("displays a title when present", () => {
+    const wrapper = factory({ ...testProps, title });
 
     expect(wrapper.find("h2").text()).toContain("example title");
+  });
+
+  it("displays a description when present", () => {
+    const wrapper = factory({ ...testProps, description });
     expect(wrapper.find("p").text()).toContain("example description markup");
+  });
+
+  describe("when the titleTag prop is set", () => {
+    it("render the title in the tag", () => {
+      const wrapper = factory({ ...testProps, title, titleTag: "h3" });
+
+      expect(wrapper.find("h3").text()).toContain("example title");
+    });
   });
 
   it("displays cards for each person", () => {

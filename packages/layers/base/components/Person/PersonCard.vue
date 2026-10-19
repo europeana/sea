@@ -39,6 +39,13 @@ const props = defineProps({
     default: null,
   },
   /**
+   * Show or hide person contact buttons
+   */
+  showContactButtons: {
+    type: Boolean,
+    default: true,
+  },
+  /**
    * If `true`, image will be lazy-loaded
    */
   lazy: {
@@ -70,10 +77,14 @@ const contentfulImageCropPresets = {
 const isLinkedInUrl = (url) => {
   return /^http(s):\/\/www\.linkedin\.com/.test(url);
 };
+const linkedInProfile = computed(() =>
+  isLinkedInUrl(props.website) ? props.website : undefined,
+);
 
-const linkedInProfile = computed(() => {
-  return isLinkedInUrl(props.website) ? props.website : undefined;
-});
+const contactDataExists = computed(() => props.email || linkedInProfile.value);
+const renderButtons = computed(
+  () => props.showContactButtons && contactDataExists.value,
+);
 </script>
 
 <template>
@@ -95,7 +106,7 @@ const linkedInProfile = computed(() => {
       class="icon-person-placeholder person-fallback-image mx-auto"
     />
     <div
-      v-if="email || linkedInProfile"
+      v-if="renderButtons"
       class="buttons-overlay position-absolute w-100 mx-auto"
     >
       <GenericSmartLink

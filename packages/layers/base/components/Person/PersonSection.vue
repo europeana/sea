@@ -10,6 +10,13 @@ defineProps({
     default: null,
   },
   /**
+   * Heading title level to use. Override default for when used in subsection to keep correct heading structure.
+   */
+  titleTag: {
+    type: String,
+    default: "h2",
+  },
+  /**
    * Description, displays under title
    */
   description: {
@@ -23,13 +30,20 @@ defineProps({
     type: Array,
     required: true,
   },
+  /**
+   * Show or hide person contact buttons
+   */
+  showContactButtons: {
+    type: Boolean,
+    default: true,
+  },
 });
 </script>
 
 <template>
   <div class="container">
     <div v-if="title || description" class="row text-center mb-4 mb-4k-5">
-      <h2 v-if="title">{{ title }}</h2>
+      <component :is="titleTag" v-if="title">{{ title }}</component>
       <!-- eslint-disable vue/no-v-html -->
       <p v-if="description" v-html="parseMarkdown(description)" />
       <!-- eslint-enable vue/no-v-html -->
@@ -47,12 +61,9 @@ defineProps({
         :role="person.role"
         :email="person.email"
         :website="person.website"
+        :show-contact-buttons="showContactButtons"
         :lazy="true"
       />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-@import "@europeana/style/scss/variables";
-</style>

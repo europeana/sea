@@ -20,3 +20,23 @@ export const Default: Story = {
     people: people,
   },
 };
+
+export const H4Title: Story = {
+  args: {
+    title: "People Section",
+    titleTag: "h4",
+    description:
+      "These are _people_ who are featured in this section. Mutliple _people_ may be featured in a section, they will appear in rows and columns.",
+    people: people,
+  },
+};
+
+export const HiddenButtons: Story = {
+  args: {
+    title: "People Section",
+    description:
+      "These are _people_ who are featured in this section. Mutliple _people_ may be featured in a section, they will appear in rows and columns.",
+    people: people,
+    showContactButtons: false,
+  },
+};
