@@ -26,6 +26,9 @@ const testProps = {
 const factory = (props = testProps) =>
   shallowMount(PersonCard, {
     props,
+    global: {
+      stubs: { SmartLink: { template: "<a><slot /></a>" } },
+    },
   });
 
 describe("components/content/PersonCard", () => {
