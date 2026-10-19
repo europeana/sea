@@ -184,6 +184,8 @@ const linkedInProfile = computed(() => {
 
 .buttons-overlay {
   top: 6.5rem;
+  left: 0;
+  right: 0;
 
   @media (min-width: $bp-4k) {
     top: calc(var(--bp-4k-increment) * 6.5rem);
@@ -194,6 +196,23 @@ const linkedInProfile = computed(() => {
 
     @media (min-width: $bp-4k) {
       line-height: calc(var(--bp-4k-increment) * 1rem);
+    }
+
+    span {
+      background-color: $white;
+      line-height: 1rem;
+
+      @media (min-width: $bp-4k) {
+        line-height: calc(var(--bp-4k-increment) * 1rem);
+      }
+    }
+
+    &:hover,
+    &:focus {
+      span {
+        background-color: $black;
+        transition: $standard-transition;
+      }
     }
 
     &.email-btn {
@@ -236,15 +255,6 @@ const linkedInProfile = computed(() => {
           width: calc(var(--bp-4k-increment) * 1.25rem);
           height: calc(var(--bp-4k-increment) * 1.25rem);
         }
-      }
-    }
-
-    span {
-      background-color: $white;
-      line-height: 1rem;
-
-      @media (min-width: $bp-4k) {
-        line-height: calc(var(--bp-4k-increment) * 1rem);
       }
     }
   }
