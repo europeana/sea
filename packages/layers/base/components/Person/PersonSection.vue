@@ -46,11 +46,7 @@ defineProps({
         :name="person.name"
         :role="person.role"
         :email="person.email"
-        :linked-in="
-          /^http(s):\/\/www\.linkedin\.com/.test(person.website)
-            ? person.website
-            : null
-        "
+        :website="person.website"
         :lazy="true"
       />
     </div>

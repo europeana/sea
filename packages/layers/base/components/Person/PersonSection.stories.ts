@@ -10,21 +10,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const people = [
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-  sampleData.person[0],
-];
+const people = Array.from({ length: 6 }, () => sampleData.persons[0]);
 
 export const Default: Story = {
   args: {

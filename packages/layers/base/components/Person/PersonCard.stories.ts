@@ -12,42 +12,42 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    image: sampleData.person[0].image,
-    name: sampleData.person[0].name,
-    role: sampleData.person[0].role,
+    image: sampleData.persons[0].image,
+    name: sampleData.persons[0].name,
+    role: sampleData.persons[0].role,
   },
 };
 
 export const WithButtons: Story = {
   args: {
-    image: sampleData.person[0].image,
-    name: sampleData.person[0].name,
-    role: sampleData.person[0].role,
-    email: sampleData.person[0].email,
-    linkedIn: sampleData.person[0].website,
+    image: sampleData.persons[0].image,
+    name: sampleData.persons[0].name,
+    role: sampleData.persons[0].role,
+    email: sampleData.persons[0].email,
+    website: sampleData.persons[0].website,
   },
 };
 
 export const WithOneButton: Story = {
   args: {
-    image: sampleData.person[0].image,
-    name: sampleData.person[0].name,
-    role: sampleData.person[0].role,
-    email: sampleData.person[0].email,
+    image: sampleData.persons[0].image,
+    name: sampleData.persons[0].name,
+    role: sampleData.persons[0].role,
+    email: sampleData.persons[0].email,
   },
 };
 
 export const WithFallbackImage: Story = {
   args: {
-    name: "Mr. E. Persoon",
+    name: sampleData.persons[1].name,
   },
 };
 
 export const WithFallbackImageAndButtons: Story = {
   args: {
-    name: "Mr. E. Persoon",
-    role: "Enigma",
-    email: "mr.e@example.org",
-    linkedIn: "https://www.linkedin.com/mr.e",
+    name: sampleData.persons[1].name,
+    role: sampleData.persons[1].role,
+    email: sampleData.persons[1].email,
+    website: sampleData.persons[1].website,
   },
 };

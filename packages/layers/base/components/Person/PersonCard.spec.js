@@ -76,14 +76,24 @@ describe("components/content/PersonCard", () => {
   describe("when there is an email", () => {
     it("renders an e-mail button link", () => {
       const wrapper = factory({ email: "info@example.eu" });
+
       expect(wrapper.find(".email-btn").isVisible()).toBe(true);
     });
   });
 
-  describe("when there is a LinkedIn url in the linkedIn prop", () => {
+  describe("when there is a LinkedIn url in the website prop", () => {
     it("renders a LinkedIn button link", () => {
-      const wrapper = factory({ linkedIn: "https://www.linkedin.com/profile" });
+      const wrapper = factory({ website: "https://www.linkedin.com/profile" });
+
       expect(wrapper.find(".linkedin-btn").isVisible()).toBe(true);
+    });
+  });
+
+  describe("when there is a different url in the website prop", () => {
+    it("does NOT render a LinkedIn button link", () => {
+      const wrapper = factory({ website: "https://www.social.com/profile" });
+
+      expect(wrapper.find(".linkedin-btn").exists()).toBe(false);
     });
   });
 });

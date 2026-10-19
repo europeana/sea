@@ -1,7 +1,7 @@
 <script setup>
 const { $bs } = useNuxtApp();
 
-defineProps({
+const props = defineProps({
   /**
    * Image object
    * Expected props: url, width, height, contentType
@@ -24,11 +24,17 @@ defineProps({
     type: String,
     default: null,
   },
+  /**
+   * Email address of the person
+   */
   email: {
     type: String,
     default: null,
   },
-  linkedIn: {
+  /**
+   * Website url of the person
+   */
+  website: {
     type: String,
     default: null,
   },
@@ -60,6 +66,14 @@ const imageNotFound = () => {
 const contentfulImageCropPresets = {
   small: { w: 120, h: 120, fit: "fill", f: "face", r: 100 },
 };
+
+const isLinkedInUrl = (url) => {
+  return /^http(s):\/\/www\.linkedin\.com/.test(url);
+};
+
+const linkedInProfile = computed(() => {
+  return isLinkedInUrl(props.website) ? props.website : undefined;
+});
 </script>
 
 <template>
@@ -81,7 +95,7 @@ const contentfulImageCropPresets = {
       class="icon-person-placeholder person-fallback-image mx-auto"
     />
     <div
-      v-if="email || linkedIn"
+      v-if="email || linkedInProfile"
       class="buttons-overlay position-absolute w-100 mx-auto"
     >
       <GenericSmartLink
@@ -100,13 +114,13 @@ const contentfulImageCropPresets = {
         />
       </GenericSmartLink>
       <GenericSmartLink
-        v-if="linkedIn"
+        v-if="linkedInProfile"
         ref="linkedin"
         data-bs-toggle="tooltip"
         :title="$t('actions.linkedIn')"
         data-bs-placement="top"
         class="btn btn-light-flat linkedin-btn"
-        :destination="linkedIn"
+        :destination="linkedInProfile"
         :hide-external-icon="true"
         :aria-label="$t('actions.linkedIn')"
       >
