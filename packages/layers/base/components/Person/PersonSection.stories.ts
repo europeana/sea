@@ -10,7 +10,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const people = Array.from({ length: 6 }, () => sampleData.persons[0]);
+const people = Array.from({ length: 6 }, () => sampleData.people[0]);
 
 export const Default: Story = {
   args: {
