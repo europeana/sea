@@ -1,7 +1,7 @@
 <script setup>
 const { $bs } = useNuxtApp();
 
-defineProps({
+const props = defineProps({
   /**
    * Image object
    * Expected props: url, width, height, contentType
@@ -24,13 +24,26 @@ defineProps({
     type: String,
     default: null,
   },
+  /**
+   * Email address of the person
+   */
   email: {
     type: String,
     default: null,
   },
-  linkedIn: {
+  /**
+   * Website url of the person
+   */
+  website: {
     type: String,
     default: null,
+  },
+  /**
+   * Show or hide person contact buttons
+   */
+  showContactButtons: {
+    type: Boolean,
+    default: true,
   },
   /**
    * If `true`, image will be lazy-loaded
@@ -60,6 +73,18 @@ const imageNotFound = () => {
 const contentfulImageCropPresets = {
   small: { w: 120, h: 120, fit: "fill", f: "face", r: 100 },
 };
+
+const isLinkedInUrl = (url) => {
+  return /^http(s):\/\/www\.linkedin\.com/.test(url);
+};
+const linkedInProfile = computed(() =>
+  isLinkedInUrl(props.website) ? props.website : undefined,
+);
+
+const contactDataExists = computed(() => props.email || linkedInProfile.value);
+const renderButtons = computed(
+  () => props.showContactButtons && contactDataExists.value,
+);
 </script>
 
 <template>
@@ -81,7 +106,7 @@ const contentfulImageCropPresets = {
       class="icon-person-placeholder person-fallback-image mx-auto"
     />
     <div
-      v-if="email || linkedIn"
+      v-if="renderButtons"
       class="buttons-overlay position-absolute w-100 mx-auto"
     >
       <GenericSmartLink
@@ -100,13 +125,13 @@ const contentfulImageCropPresets = {
         />
       </GenericSmartLink>
       <GenericSmartLink
-        v-if="linkedIn"
+        v-if="linkedInProfile"
         ref="linkedin"
         data-bs-toggle="tooltip"
         :title="$t('actions.linkedIn')"
         data-bs-placement="top"
         class="btn btn-light-flat linkedin-btn"
-        :destination="linkedIn"
+        :destination="linkedInProfile"
         :hide-external-icon="true"
         :aria-label="$t('actions.linkedIn')"
       >
@@ -170,6 +195,8 @@ const contentfulImageCropPresets = {
 
 .buttons-overlay {
   top: 6.5rem;
+  left: 0;
+  right: 0;
 
   @media (min-width: $bp-4k) {
     top: calc(var(--bp-4k-increment) * 6.5rem);
@@ -180,6 +207,23 @@ const contentfulImageCropPresets = {
 
     @media (min-width: $bp-4k) {
       line-height: calc(var(--bp-4k-increment) * 1rem);
+    }
+
+    span {
+      background-color: $white;
+      line-height: 1rem;
+
+      @media (min-width: $bp-4k) {
+        line-height: calc(var(--bp-4k-increment) * 1rem);
+      }
+    }
+
+    &:hover,
+    &:focus {
+      span {
+        background-color: $black;
+        transition: $standard-transition;
+      }
     }
 
     &.email-btn {
@@ -222,15 +266,6 @@ const contentfulImageCropPresets = {
           width: calc(var(--bp-4k-increment) * 1.25rem);
           height: calc(var(--bp-4k-increment) * 1.25rem);
         }
-      }
-    }
-
-    span {
-      background-color: $white;
-      line-height: 1rem;
-
-      @media (min-width: $bp-4k) {
-        line-height: calc(var(--bp-4k-increment) * 1rem);
       }
     }
   }

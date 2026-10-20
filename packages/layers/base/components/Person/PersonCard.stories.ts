@@ -12,42 +12,42 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    image: sampleData.person[0].image,
-    name: "Frida Kahlo",
-    role: "painter",
+    image: sampleData.people[0].image,
+    name: sampleData.people[0].name,
+    role: sampleData.people[0].role,
   },
 };
 
 export const WithButtons: Story = {
   args: {
-    image: sampleData.person[0].image,
-    name: "Frida Kahlo",
-    role: "painter",
-    email: "frida@example.org",
-    website: "https://www.linkedin.com/frida",
+    image: sampleData.people[0].image,
+    name: sampleData.people[0].name,
+    role: sampleData.people[0].role,
+    email: sampleData.people[0].email,
+    website: sampleData.people[0].website,
   },
 };
 
 export const WithOneButton: Story = {
   args: {
-    image: sampleData.person[0].image,
-    name: "Frida Kahlo",
-    role: "painter",
-    email: "frida@example.org",
+    image: sampleData.people[0].image,
+    name: sampleData.people[0].name,
+    role: sampleData.people[0].role,
+    email: sampleData.people[0].email,
   },
 };
 
 export const WithFallbackImage: Story = {
   args: {
-    name: "Mr. E. Persoon",
+    name: sampleData.people[1].name,
   },
 };
 
 export const WithFallbackImageAndButtons: Story = {
   args: {
-    name: "Mr. E. Persoon",
-    role: "Enigma",
-    email: "frida@example.org",
-    website: "https://www.linkedin.com/frida",
+    name: sampleData.people[1].name,
+    role: sampleData.people[1].role,
+    email: sampleData.people[1].email,
+    website: sampleData.people[1].website,
   },
 };
