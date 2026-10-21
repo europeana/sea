@@ -41,7 +41,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="container">
+  <div>
     <div v-if="title || description" class="row text-center mb-4 mb-4k-5">
       <component :is="titleTag" v-if="title">{{ title }}</component>
       <!-- eslint-disable vue/no-v-html -->
