@@ -6,6 +6,7 @@ const contentRichText = { __typename: "ContentTypeRichText", text: "" };
 const embed = { __typename: "Embed", embed: "" };
 const imageWithAttribution = { __typename: "ImageWithAttribution" };
 const link = { __typename: "Link", url: "", text: "" };
+const personGroup = { __typename: "PersonGroup", headline: "person group" };
 
 describe("components/Content/ContentSection", () => {
   describe("when the section is of type rich text", () => {
@@ -52,6 +53,17 @@ describe("components/Content/ContentSection", () => {
       const cta = wrapper.find("call-to-action-stub");
 
       expect(cta.exists()).toBe(true);
+    });
+  });
+  describe("when the section is of type PersonGroup", () => {
+    it("renders the section as a person section", () => {
+      const wrapper = shallowMount(ContentSection, {
+        props: { section: personGroup },
+      });
+
+      const personSection = wrapper.find("person-section-stub");
+
+      expect(personSection.exists()).toBe(true);
     });
   });
 });

@@ -1,3 +1,4 @@
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
 #import "../fragments/imageWithAttributionFields.graphql"
 
 query BlogPostPage(
@@ -53,6 +54,24 @@ query BlogPostPage(
           ... on DocumentLinkSection {
             headline
             link
+          }
+          ... on PersonGroup {
+            headline
+            text
+            hasPartCollection {
+              items {
+                ... on Person {
+                  name
+                  url
+                  image {
+                    ...imageFields
+                  }
+                  email
+                  title
+                  role
+                }
+              }
+            }
           }
         }
       }

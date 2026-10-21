@@ -60,7 +60,7 @@ defineProps({
         :name="person.name"
         :role="person.role"
         :email="person.email"
-        :website="person.website"
+        :website="person.url"
         :show-contact-buttons="showContactButtons"
         :lazy="true"
       />
