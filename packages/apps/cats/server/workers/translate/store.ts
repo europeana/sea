@@ -1,24 +1,13 @@
 import type { Job } from "bullmq";
-import { Worker } from "bullmq";
-import { useContentfulEnvironment } from "../../../contentfulEnvironment";
-import { useQueueOptions } from "../../queue";
-import { localeForLang } from "../../../i18n/locales";
+import { useContentfulEnvironment } from "../../services/contentful";
+import { localeForLang } from "../../utils/i18n/locales";
 
-let contentfulEnvironment;
+export { name, processor, opts };
 
-export const useTranslateStoreQueueWorker = () =>
-  new Worker("translate-store", storeQueueWorker, {
-    ...useQueueOptions(),
-    removeOnComplete: { count: 100 },
-    // removeOnFail: { count: 5000 },
-  });
+const name = "translate-store";
 
-export const storeQueueWorker = async (job: Job) => {
-  console.log("worker(translate-store)", job.id);
-
-  if (!contentfulEnvironment) {
-    contentfulEnvironment = await useContentfulEnvironment();
-  }
+const processor = async (job: Job) => {
+  const contentfulEnvironment = await useContentfulEnvironment();
 
   // all per-language receipt children jobs are complete; assemble their values
   // into the entry's field localisations
@@ -49,4 +38,9 @@ export const storeQueueWorker = async (job: Job) => {
   entry = await entry.publish();
 
   return entry;
+};
+
+const opts = {
+  removeOnComplete: { count: 100 },
+  // removeOnFail: { count: 5000 },
 };

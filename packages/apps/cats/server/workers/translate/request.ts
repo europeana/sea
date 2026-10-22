@@ -1,41 +1,19 @@
-import { Job, Worker } from "bullmq";
-import { useContentfulEnvironment } from "../../../contentfulEnvironment";
-import { supportedLocales } from "../../../i18n/locales";
-import { useFlowProducer, useQueueOptions } from "../../queue";
-import { markupFields } from "../../../html/markupFields";
-import { requestTranslation } from "../../../eTranslation";
+import { Job } from "bullmq";
+import { Tag as ContentfulTag } from "contentful-management";
 
-export const useTranslateRequestQueueWorker = () =>
-  new Worker("translate-request", translateRequestQueueWorker, {
-    ...useQueueOptions(),
-    removeOnComplete: { count: 100 },
-    // removeOnFail: { count: 5000 },
-    //
-    // limit to 10 jobs per minute to not overload eTranslation service
-    limiter: {
-      max: 10,
-      duration: 60_000,
-    },
-  });
+import { useContentfulEnvironment } from "../../services/contentful";
+import { supportedLocales } from "../../utils/i18n/locales";
+import { useFlowProducer } from "../../utils/queues";
+import { markupFields } from "../../utils/html/markupFields";
+import { requestTranslation } from "../../services/eTranslation";
+import { name as receiveQueueName } from "./receive";
+import { name as storeQueueName } from "./store";
 
-const targetLanguagesFromTags = (tags = []) => {
-  let locales;
-  if (tags.find((tag) => tag.sys.id === "translate")) {
-    locales = supportedLocales;
-  } else {
-    locales = tags
-      .filter((tag) => tag.sys.id.startsWith("translate."))
-      .map((tag) => tag.sys.id.split(".").pop());
-  }
+export { name, processor, opts };
 
-  return locales
-    .filter((locale) => supportedLocales.includes(locale))
-    .map((locale) => locale.split("-").shift().toUpperCase());
-};
+const name = "translate-request";
 
-export const translateRequestQueueWorker = async (job: Job) => {
-  console.log("worker(translate-request)", job.id);
-
+const processor = async (job: Job) => {
   const contentfulEnvironment = await useContentfulEnvironment();
   const flowProducer = useFlowProducer();
 
@@ -61,7 +39,7 @@ export const translateRequestQueueWorker = async (job: Job) => {
   }
 
   await flowProducer.add({
-    queueName: "translate-store",
+    queueName: storeQueueName,
     name: "translation",
     data: { entryId: job.data.entry.sys.id },
     opts: {
@@ -73,14 +51,14 @@ export const translateRequestQueueWorker = async (job: Job) => {
       },
     },
     children: targetLanguages.map((lang) => ({
-      queueName: "translate-receive",
+      queueName: receiveQueueName,
       name: "translation",
       data: {
         contentType: job.data.contentType,
         lang,
       },
       opts: {
-        jobId: `${job.id}-${lang}`,
+        jobId: `${receiveQueueName}-${job.id}-${lang}`,
         attempts: 5,
         backoff: {
           type: "fixed",
@@ -101,4 +79,30 @@ export const translateRequestQueueWorker = async (job: Job) => {
   }
 
   return targetLanguages;
+};
+
+const opts = {
+  removeOnComplete: { count: 100 },
+  // removeOnFail: { count: 5000 },
+  //
+  // limit to 10 jobs per minute to not overload eTranslation service
+  limiter: {
+    max: 10,
+    duration: 60_000,
+  },
+};
+
+const targetLanguagesFromTags = (tags: Array<ContentfulTag> = []) => {
+  let locales;
+  if (tags.find((tag) => tag.sys.id === "translate")) {
+    locales = supportedLocales;
+  } else {
+    locales = tags
+      .filter((tag) => tag.sys.id.startsWith("translate."))
+      .map((tag) => tag.sys.id.split(".").pop());
+  }
+
+  return locales
+    .filter((locale) => supportedLocales.includes(locale))
+    .map((locale) => locale.split("-").shift().toUpperCase());
 };

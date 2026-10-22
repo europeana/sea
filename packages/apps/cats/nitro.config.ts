@@ -6,6 +6,7 @@ export default defineNitroConfig({
   srcDir: "server",
   runtimeConfig: {
     contentful: {
+      defaultLocale: "en-GB",
       space: null,
       environment: null,
       accessToken: null,
@@ -28,6 +29,7 @@ export default defineNitroConfig({
       url: null,
     },
     zoho: {
+      bulkReadCallbackUrl: null,
       clientId: null,
       clientSecret: null,
       serviceOrgId: null,
