@@ -59,7 +59,7 @@ mocks.bullmq.Queue.mockImplementation(
   },
 );
 
-const fakeDate = new Date(2026, 9, 22, 12); // timestamp: 1792666800000
+const fakeDate = new Date(2026, 9, 22, 12).valueOf(); // timestamp: 1792666800000
 
 describe("@/server/routes/zoho/bulk/index.post", () => {
   beforeAll(() => {
