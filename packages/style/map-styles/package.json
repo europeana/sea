@@ -24,6 +24,6 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "unbuild": "^3.6.1"
+    "unbuild": "3.6.1"
   }
 }
