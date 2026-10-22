@@ -22,13 +22,10 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
     : undefined;
 
   if (!zohoContact) {
-    console.log("fetching zohoContact");
     zohoContact = await fetchZohoContact(contactId);
     if (!zohoContact) {
       throw new Error(`No Zoho contact for ID "${contactId}`);
     }
-  } else {
-    console.log("zohoContact supplied in job data");
   }
 
   if (typeof zohoContact.Contact_Participation === "string") {

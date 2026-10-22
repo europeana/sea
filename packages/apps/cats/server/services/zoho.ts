@@ -24,15 +24,7 @@ const auth = {
   accessToken: null,
 
   async createAccessToken() {
-    console.log("createAccessToken");
     const config = useRuntimeConfig().zoho;
-
-    // TODO: development purposes only
-    if (config.accessToken) {
-      console.log("access token from runtime config");
-      return config.accessToken;
-    }
-    console.log("access token from oauth api");
 
     const url = new URL("/oauth/v2/token", "https://accounts.zoho.eu");
     url.searchParams.set("client_id", config.clientId);
@@ -95,10 +87,8 @@ export const fetchZoho = async (
   });
 
   if (!response.ok) {
-    console.error("Error response", response);
-    if (error.status === 401) {
+    if (response.status === 401) {
       const json = await response.json();
-      console.error("Error body", json);
       if (json.code === "INVALID_TOKEN") {
         accessToken = await auth.refreshAccessToken();
         // TODO: and what if this one fails?
