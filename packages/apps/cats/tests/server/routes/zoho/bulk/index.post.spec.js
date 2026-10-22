@@ -59,13 +59,12 @@ mocks.bullmq.Queue.mockImplementation(
   },
 );
 
-const fakeDate = new Date(2026, 9, 22, 12).valueOf(); // timestamp: 1792666800000
+const fakeDate = new Date("2026-10-22T12:00:00.000+00:00").valueOf(); // timestamp: 1792670400000
 
 describe("@/server/routes/zoho/bulk/index.post", () => {
   beforeAll(() => {
     vi.useFakeTimers();
     vi.setSystemTime(fakeDate);
-    vi.stubEnv("TZ", "UTC");
   });
   afterEach(() => {
     vi.restoreAllMocks();
@@ -73,7 +72,6 @@ describe("@/server/routes/zoho/bulk/index.post", () => {
   afterAll(() => {
     vi.resetAllMocks();
     vi.useRealTimers();
-    vi.unstubAllEnvs();
   });
 
   describe("route handler", () => {
@@ -99,7 +97,7 @@ describe("@/server/routes/zoho/bulk/index.post", () => {
         expect(mockQueueAdd).toHaveBeenCalledWith(
           "create-bulk-read",
           { criteria },
-          { jobId: "zoho-crm-create-bulk-read-1792666800000", attempts: 1 },
+          { jobId: "zoho-crm-create-bulk-read-1792670400000", attempts: 1 },
         );
       });
 
@@ -108,7 +106,7 @@ describe("@/server/routes/zoho/bulk/index.post", () => {
         const response = await routeHandler(event);
 
         expect(response).toEqual({
-          jobId: "zoho-crm-create-bulk-read-1792666800000",
+          jobId: "zoho-crm-create-bulk-read-1792670400000",
         });
       });
     });
