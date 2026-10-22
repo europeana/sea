@@ -6,6 +6,7 @@ export default defineNitroConfig({
   srcDir: "server",
   runtimeConfig: {
     contentful: {
+      defaultLocale: "en-GB",
       space: null,
       environment: null,
       accessToken: null,

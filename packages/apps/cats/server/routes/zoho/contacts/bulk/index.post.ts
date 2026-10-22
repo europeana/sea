@@ -1,8 +1,9 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
 import moment from "moment";
 
-import { useQueue } from "../../../../utils/bullmq/queue";
-import { ZohoBulkReadCriteria } from "../../../../utils/zoho";
+import { name as queueName } from "../../../../workers/zoho/crm/createBulkRead";
+import { useQueue } from "../../../../utils/queues";
+import { ZohoBulkReadCriteria } from "../../../../services/zoho";
 
 export const handleRequestEventZohoContactsBulk = async (event: H3Event) => {
   const body: {
@@ -14,8 +15,8 @@ export const handleRequestEventZohoContactsBulk = async (event: H3Event) => {
     // TODO: review derived job ID
     const jobId = `bulk-create-${timestamp}`;
 
-    const job = await useQueue("contacts").add(
-      "bulk-create",
+    const job = await useQueue(queueName).add(
+      "create-bulk-read",
       { criteria: body.criteria },
       {
         jobId,

@@ -1,5 +1,5 @@
 import { FlowProducer, Queue } from "bullmq";
-import { useRedisConnection } from "../redisConnection";
+import { useRedisConnection } from "../services/redis";
 
 const queues = {};
 let flowProducer;

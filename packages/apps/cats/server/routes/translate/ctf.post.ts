@@ -1,5 +1,6 @@
 import { defineEventHandler, getRequestHeader, readBody } from "h3";
-import { useQueue } from "../../utils/bullmq/queue";
+import { useQueue } from "../../utils/queues";
+import { name as queueName } from "../../workers/translate/request";
 
 // TODO: auth or other abuse prevention
 export default defineEventHandler(async (event) => {
@@ -7,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
   const jobId = getRequestHeader(event, "X-Contentful-Idempotency-Key");
 
-  await useQueue("translate-request").add(
+  await useQueue(queueName).add(
     "translation",
     { entry },
     {

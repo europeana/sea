@@ -68,11 +68,11 @@ describe("@/server/routes/index.ts", () => {
         await route({});
 
         const flow = mockFlowProducerAdd.mock.calls[0][0];
-        expect(flow.queueName).toBe("contacts");
+        expect(flow.queueName).toBe("zoho-crm-sync-contact");
         expect(flow.name).toBe("sync-contact");
         expect(flow.data.contactId).toBe("486281000001030363");
         expect(flow.children).toHaveLength(1);
-        expect(flow.children[0].queueName).toBe("contacts");
+        expect(flow.children[0].queueName).toBe("zoho-crm-sync-photo");
         expect(flow.children[0].name).toBe("sync-photo");
         expect(flow.children[0].data.contactId).toBe("486281000001030363");
       });

@@ -1,6 +1,7 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
 
-import { useQueue } from "../../../../utils/bullmq/queue";
+import { name as queueName } from "../../../../workers/zoho/crm/processBulkRead";
+import { useQueue } from "../../../../utils/queues";
 
 export const handleRequestEventZohoContactsBulkCallback = async (
   event: H3Event,
@@ -15,8 +16,8 @@ export const handleRequestEventZohoContactsBulkCallback = async (
     if (body.state === "COMPLETED") {
       const jobId = `bulk-result-${body["job_id"]}`;
 
-      const job = await useQueue("contacts").add(
-        "bulk-result",
+      const job = await useQueue(queueName).add(
+        "process-bulk-read",
         { zohoBulkReadJobId: body["job_id"] },
         {
           jobId,
