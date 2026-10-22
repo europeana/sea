@@ -65,6 +65,7 @@ describe("@/server/routes/zoho/bulk/index.post", () => {
   beforeAll(() => {
     vi.useFakeTimers();
     vi.setSystemTime(fakeDate);
+    vi.stubEnv("TZ", "UTC");
   });
   afterEach(() => {
     vi.restoreAllMocks();
@@ -72,6 +73,7 @@ describe("@/server/routes/zoho/bulk/index.post", () => {
   afterAll(() => {
     vi.resetAllMocks();
     vi.useRealTimers();
+    vi.unstubAllEnvs();
   });
 
   describe("route handler", () => {
