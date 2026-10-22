@@ -61,6 +61,13 @@ const attributionFields = (fields) => {
     :url="section.link"
     class="mb-4 mb-md-5 pb-4k-5"
   />
+  <PersonSection
+    v-else-if="entryHasContentType(section, 'PersonGroup')"
+    :title="section.headline"
+    :description="section.text"
+    :people="section.hasPartCollection?.items.filter(Boolean)"
+    :show-contact-buttons="false"
+  />
 </template>
 
 <style lang="scss" scoped>

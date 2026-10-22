@@ -41,11 +41,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="container">
+  <div>
     <div v-if="title || description" class="row text-center mb-4 mb-4k-5">
       <component :is="titleTag" v-if="title">{{ title }}</component>
       <!-- eslint-disable vue/no-v-html -->
-      <p v-if="description" v-html="parseMarkdown(description)" />
+      <div v-if="description" v-html="parseMarkdown(description)" />
       <!-- eslint-enable vue/no-v-html -->
     </div>
     <div
@@ -58,9 +58,9 @@ defineProps({
         class="col"
         :image="person.image"
         :name="person.name"
-        :role="person.role"
+        :role="person.title"
         :email="person.email"
-        :website="person.website"
+        :website="person.url"
         :show-contact-buttons="showContactButtons"
         :lazy="true"
       />
