@@ -58,7 +58,7 @@ defineProps({
         class="col"
         :image="person.image"
         :name="person.name"
-        :role="person.role"
+        :role="person.title"
         :email="person.email"
         :website="person.url"
         :show-contact-buttons="showContactButtons"

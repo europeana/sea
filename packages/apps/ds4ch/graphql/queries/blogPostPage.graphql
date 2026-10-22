@@ -68,7 +68,6 @@ query BlogPostPage(
                   }
                   email
                   title
-                  role
                 }
               }
             }
