@@ -1,9 +1,8 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
-import moment from "moment";
 
-import { name as queueName } from "../../../../workers/zoho/crm/createBulkRead";
-import { useQueue } from "../../../../utils/queues";
-import { ZohoBulkReadCriteria } from "../../../../services/zoho";
+import { name as queueName } from "../../../workers/zoho/crm/createBulkRead";
+import { useQueue } from "../../../utils/queues";
+import { ZohoBulkReadCriteria } from "../../../services/zoho";
 
 export const handler = async (event: H3Event) => {
   const body: {
@@ -11,9 +10,9 @@ export const handler = async (event: H3Event) => {
   } = await readBody(event);
 
   if (body.criteria) {
-    const timestamp: number = moment().unix();
+    const timestamp: number = Date.now();
     // TODO: review derived job ID
-    const jobId = `bulk-create-${timestamp}`;
+    const jobId = `${queueName}-${timestamp}`;
 
     const job = await useQueue(queueName).add(
       "create-bulk-read",

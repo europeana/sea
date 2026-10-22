@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
 
-import { name as queueName } from "../../../../workers/zoho/crm/processBulkRead";
-import { useQueue } from "../../../../utils/queues";
+import { name as queueName } from "../../../workers/zoho/crm/processBulkRead";
+import { useQueue } from "../../../utils/queues";
 
 export const handler = async (event: H3Event) => {
   const body: {
@@ -12,7 +12,7 @@ export const handler = async (event: H3Event) => {
   if (body["job_id"] && body.state) {
     // TODO: if not "COMPLETED", then do what? error here? s'thing else?
     if (body.state === "COMPLETED") {
-      const jobId = `bulk-result-${body["job_id"]}`;
+      const jobId = `${queueName}-${body["job_id"]}`;
 
       const job = await useQueue(queueName).add(
         "process-bulk-read",

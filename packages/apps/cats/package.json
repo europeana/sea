@@ -25,7 +25,6 @@
     "csv": "^6.6.4",
     "ioredis": "^5.7.0",
     "marked": "catalog:html",
-    "moment": "^2.31.0",
     "morgan": "catalog:nitro2",
     "node-fetch-native": "catalog:",
     "turndown": "catalog:html",

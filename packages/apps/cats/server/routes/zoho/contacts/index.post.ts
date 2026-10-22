@@ -14,9 +14,9 @@ export const createSyncContactFlow = ({
   modified: string;
   record?: object;
 }): FlowJob => {
-  // derive job IDs from inputs for idempotency, e.g. "486281000001030363-1792058595000-contact"
-  const contactJobId = `${contactId}-${modified}-contact`;
-  const photoJobId = `${contactId}-${modified}-photo`;
+  // derive job IDs from inputs for idempotency
+  const contactJobId = `${syncContactQueueName}-${contactId}-${modified}`;
+  const photoJobId = `${syncPhotoQueueName}-${contactId}-${modified}`;
 
   return {
     queueName: syncContactQueueName,

@@ -6,8 +6,11 @@ import { name as queueName } from "../../workers/translate/receive";
 export const handler = async (event: H3Event) => {
   const body = await readBody(event);
 
-  const jobId = `${body.externalReference}-${body.targetLanguage}`;
+  const jobId = `${queueName}-${body.externalReference}-${body.targetLanguage}`;
   const job = await useQueue(queueName).getJob(jobId);
+  if (!job) {
+    throw new Error(`Job not found: ${jobId}`);
+  }
   await job.updateData({
     ...job.data,
     html: Buffer.from(body.result, "base64").toString("utf8"),

@@ -1,7 +1,6 @@
 import { Job } from "bullmq";
 // TODO: use csv-parse instead
 import * as csv from "csv";
-import moment from "moment";
 import * as unzip from "unzip-stream";
 
 import { useFlowProducer } from "../../../utils/queues";
@@ -58,7 +57,7 @@ const processor = async (job: Job) => {
                 // );
                 const flow = createSyncContactFlow({
                   contactId: contact.id || contact.Id,
-                  modified: moment(contact.Modified_Time).unix(),
+                  modified: Date.parse(contact.Modified_Time),
                   record: contact,
                 });
                 const flowProducer = useFlowProducer();

@@ -5,7 +5,11 @@ import { name as queueName } from "../../workers/translate/request";
 export const handler = async (event: H3Event) => {
   const entry = await readBody(event);
 
-  const jobId = getRequestHeader(event, "X-Contentful-Idempotency-Key");
+  const contentfulIdempotencyKey = getRequestHeader(
+    event,
+    "X-Contentful-Idempotency-Key",
+  );
+  const jobId = `${queueName}-${contentfulIdempotencyKey}`;
 
   await useQueue(queueName).add(
     "translation",

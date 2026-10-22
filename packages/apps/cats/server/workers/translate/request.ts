@@ -1,10 +1,11 @@
 import { Job } from "bullmq";
+import { Tag as ContentfulTag } from "contentful-management";
+
 import { useContentfulEnvironment } from "../../services/contentful";
 import { supportedLocales } from "../../utils/i18n/locales";
 import { useFlowProducer } from "../../utils/queues";
 import { markupFields } from "../../utils/html/markupFields";
 import { requestTranslation } from "../../services/eTranslation";
-
 import { name as receiveQueueName } from "./receive";
 import { name as storeQueueName } from "./store";
 
@@ -57,7 +58,7 @@ const processor = async (job: Job) => {
         lang,
       },
       opts: {
-        jobId: `${job.id}-${lang}`,
+        jobId: `${receiveQueueName}-${job.id}-${lang}`,
         attempts: 5,
         backoff: {
           type: "fixed",
@@ -91,7 +92,7 @@ const opts = {
   },
 };
 
-const targetLanguagesFromTags = (tags = []) => {
+const targetLanguagesFromTags = (tags: Array<ContentfulTag> = []) => {
   let locales;
   if (tags.find((tag) => tag.sys.id === "translate")) {
     locales = supportedLocales;
