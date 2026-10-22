@@ -45,7 +45,7 @@ defineProps({
     <div v-if="title || description" class="row text-center mb-4 mb-4k-5">
       <component :is="titleTag" v-if="title">{{ title }}</component>
       <!-- eslint-disable vue/no-v-html -->
-      <p v-if="description" v-html="parseMarkdown(description)" />
+      <div v-if="description" v-html="parseMarkdown(description)" />
       <!-- eslint-enable vue/no-v-html -->
     </div>
     <div
