@@ -14,7 +14,7 @@ export const handler = async (event: H3Event) => {
     // TODO: review derived job ID
     const jobId = `${queueName}-${timestamp}`;
 
-    const job = await useQueue(queueName).add(
+    await useQueue(queueName).add(
       "create-bulk-read",
       { criteria: body.criteria },
       {
@@ -29,7 +29,7 @@ export const handler = async (event: H3Event) => {
     );
 
     return {
-      jobId: job.id,
+      jobId,
     };
   }
 
