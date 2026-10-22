@@ -13,6 +13,7 @@ export default defineNitroPlugin(() => {
     new Worker(
       worker.name,
       (job: Job) => {
+        // TODO: can we use the nitro logger for this? from logging plugin
         console.log(`worker(${worker.name}): ${job.id}`);
         return worker.processor(job);
       },

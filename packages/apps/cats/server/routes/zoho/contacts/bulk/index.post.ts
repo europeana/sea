@@ -5,7 +5,7 @@ import { name as queueName } from "../../../../workers/zoho/crm/createBulkRead";
 import { useQueue } from "../../../../utils/queues";
 import { ZohoBulkReadCriteria } from "../../../../services/zoho";
 
-export const handleRequestEventZohoContactsBulk = async (event: H3Event) => {
+export const handler = async (event: H3Event) => {
   const body: {
     criteria: ZohoBulkReadCriteria;
   } = await readBody(event);
@@ -40,4 +40,4 @@ export const handleRequestEventZohoContactsBulk = async (event: H3Event) => {
   };
 };
 
-export default defineEventHandler(handleRequestEventZohoContactsBulk);
+export default defineEventHandler(handler);

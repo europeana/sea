@@ -1,10 +1,9 @@
-import { defineEventHandler, readBody } from "h3";
+import { defineEventHandler, readBody, H3Event } from "h3";
 import { useQueue } from "../../utils/queues";
 import { name as queueName } from "../../workers/translate/receive";
 
-// TODO: auth or other abuse prevention
 // TODO: validate format is "html"
-export default defineEventHandler(async (event) => {
+export const handler = async (event: H3Event) => {
   const body = await readBody(event);
 
   const jobId = `${body.externalReference}-${body.targetLanguage}`;
@@ -21,4 +20,6 @@ export default defineEventHandler(async (event) => {
   return {
     jobId,
   };
-});
+};
+
+export default defineEventHandler(handler);

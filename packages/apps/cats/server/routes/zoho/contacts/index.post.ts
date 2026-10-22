@@ -1,6 +1,5 @@
 import { FlowJob } from "bullmq";
-import { defineEventHandler, readBody, setResponseStatus } from "h3";
-import moment from "moment";
+import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
 import { useFlowProducer } from "../../../utils/queues";
 
 import { name as syncContactQueueName } from "../../../workers/zoho/crm/syncContact";
@@ -12,7 +11,7 @@ export const createSyncContactFlow = ({
   record,
 }: {
   contactId: string;
-  modified: number;
+  modified: string;
   record?: object;
 }): FlowJob => {
   // derive job IDs from inputs for idempotency, e.g. "486281000001030363-1792058595000-contact"
@@ -50,7 +49,7 @@ export const createSyncContactFlow = ({
   };
 };
 
-export default defineEventHandler(async (event) => {
+export const handler = async (event: H3Event) => {
   const body: {
     id?: string;
     modified?: string;
@@ -59,11 +58,8 @@ export default defineEventHandler(async (event) => {
   if (body?.id && body?.modified) {
     // Zoho CRM Contact ID, e.g. "486281000001030363"
     const contactId: string = body.id;
-    // Zoho CRM Contact Modified Time, e.g. "10-15-2026 11:03:15" (for 15th October)
-    const modified: number = moment(
-      `${body.modified}+00:00`,
-      "MM-DD-YYYY hh:mm:ssZ",
-    ).unix();
+    // Zoho CRM Contact Modified Time, as UTC timestamp
+    const modified: string = body.modified;
 
     // queue BullMQ flow for contact sync job. with photo sync job as child
     const flow = createSyncContactFlow({ contactId, modified });
@@ -79,4 +75,6 @@ export default defineEventHandler(async (event) => {
   return {
     error: "Bad Request",
   };
-});
+};
+
+export default defineEventHandler(handler);

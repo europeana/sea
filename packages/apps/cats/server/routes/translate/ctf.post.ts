@@ -1,9 +1,8 @@
-import { defineEventHandler, getRequestHeader, readBody } from "h3";
+import { defineEventHandler, getRequestHeader, readBody, H3Event } from "h3";
 import { useQueue } from "../../utils/queues";
 import { name as queueName } from "../../workers/translate/request";
 
-// TODO: auth or other abuse prevention
-export default defineEventHandler(async (event) => {
+export const handler = async (event: H3Event) => {
   const entry = await readBody(event);
 
   const jobId = getRequestHeader(event, "X-Contentful-Idempotency-Key");
@@ -24,4 +23,6 @@ export default defineEventHandler(async (event) => {
   return {
     jobId,
   };
-});
+};
+
+export default defineEventHandler(handler);

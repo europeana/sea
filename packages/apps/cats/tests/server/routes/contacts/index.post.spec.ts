@@ -60,7 +60,7 @@ describe("@/server/routes/index.ts", () => {
       beforeEach(() => {
         mocks.h3.readBody.mockResolvedValue({
           id: "486281000001030363",
-          modified: "10-15-2026 11:03:15",
+          modified: "1792656233000",
         });
       });
 
@@ -81,7 +81,7 @@ describe("@/server/routes/index.ts", () => {
         const response = await route({});
 
         expect(response).toEqual({
-          jobId: "486281000001030363-1792062195-contact",
+          jobId: "486281000001030363-1792656233000-contact",
         });
       });
     });

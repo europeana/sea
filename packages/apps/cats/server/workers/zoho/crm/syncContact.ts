@@ -36,8 +36,8 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
 
   let contentfulPerson = await findContentfulEntry(contactId);
 
-  const roles = zohoContact.Contact_Participation.filter((cp: string) =>
-    CONTACT_PARTICIPATION_LEVELS.includes(cp),
+  const participationLevels = zohoContact.Contact_Participation.filter(
+    (cp: string) => CONTACT_PARTICIPATION_LEVELS.includes(cp),
   );
 
   const locale = useRuntimeConfig().contentful.defaultLocale;
@@ -46,7 +46,7 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
     email: { [locale]: zohoContact.Public_email },
     image: undefined,
     name: { [locale]: zohoContact.Full_Name },
-    role: { [locale]: roles },
+    participationLevel: { [locale]: participationLevels },
     title: { [locale]: zohoContact.Title },
     url: { [locale]: zohoContact.LinkedIn },
     zohoId: { [locale]: contactId },
@@ -69,7 +69,7 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
       ...fields,
     };
     contentfulPerson = await contentfulPerson.update();
-  } else if (roles.length > 0) {
+  } else if (participationLevels.length > 0) {
     const contentfulEnvironment = await useContentfulEnvironment();
     contentfulPerson = await contentfulEnvironment.createEntry("person", {
       fields,
