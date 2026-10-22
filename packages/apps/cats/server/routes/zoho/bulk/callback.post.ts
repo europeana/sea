@@ -14,7 +14,7 @@ export const handler = async (event: H3Event) => {
     if (body.state === "COMPLETED") {
       const jobId = `${queueName}-${body["job_id"]}`;
 
-      const job = await useQueue(queueName).add(
+      await useQueue(queueName).add(
         "process-bulk-read",
         { zohoBulkReadJobId: body["job_id"] },
         {
@@ -29,7 +29,7 @@ export const handler = async (event: H3Event) => {
       );
 
       return {
-        jobId: job.id,
+        jobId,
       };
     }
   }
