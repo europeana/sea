@@ -34,7 +34,7 @@
     "msw-storybook-addon": "3.0.3",
     "nuxt": "catalog:nuxt3",
     "sass-embedded": "1.100.0",
-    "storybook": "10.4.6",
+    "storybook": "10.6.2",
     "swiper": "12.2.0",
     "unplugin-vue-components": "32.1.0",
     "vue": "catalog:vue3",
