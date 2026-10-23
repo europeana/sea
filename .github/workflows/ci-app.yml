@@ -46,7 +46,7 @@ jobs:
   docker-build-app:
     needs: [metadata]
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
+    if: (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') || (needs.metadata.outputs.git-pr-ready == 'true')
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
@@ -111,7 +111,7 @@ jobs:
   docker-build-storybook:
     needs: [metadata]
     runs-on: ubuntu-latest
-    if: inputs.storybook && ((github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true'))
+    if: inputs.storybook && ((github.event_name == 'push') || (github.event_name == 'workflow_dispatch') || (needs.metadata.outputs.git-pr-ready == 'true'))
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
