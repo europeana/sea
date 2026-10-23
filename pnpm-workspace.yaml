@@ -18,7 +18,7 @@ catalogs:
     "@eslint/js": "10.0.1"
     "@eslint/json": "2.0.0"
     "@nuxt/eslint": "1.16.0"
-    eslint: "10.5.0"
+    eslint: "10.13.0"
     "eslint-config-prettier": "10.1.8"
     "eslint-plugin-vue": "10.9.2"
     "typescript-eslint": "8.61.1"
