@@ -253,8 +253,8 @@ catalogs:
       specifier: 1.2.0
       version: 1.2.0
     marked:
-      specifier: 18.0.5
-      version: 18.0.5
+      specifier: 18.1.1
+      version: 18.1.1
     turndown:
       specifier: 7.2.4
       version: 7.2.4
@@ -397,7 +397,7 @@ importers:
         version: 5.11.1
       marked:
         specifier: catalog:html
-        version: 18.0.5
+        version: 18.1.1
       moment:
         specifier: ^2.31.0
         version: 2.31.0
@@ -585,7 +585,7 @@ importers:
         version: 11.0.24
       marked:
         specifier: catalog:html
-        version: 18.0.5
+        version: 18.1.1
       nuxt:
         specifier: catalog:nuxt3
         version: 3.21.8(@parcel/watcher@2.5.6)(@types/node@26.0.0)(@vue/compiler-sfc@3.5.38)(cac@6.7.14)(db0@0.3.4)(eslint@10.13.0(jiti@2.7.0))(ioredis@5.11.1)(magicast@0.5.3)(meow@13.2.0)(optionator@0.9.4)(rollup-plugin-visualizer@7.0.1(rollup@4.62.2))(rollup@4.62.2)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(typescript@5.9.3)(vite@7.3.7(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.1))(yaml@2.9.1)
@@ -6234,8 +6234,8 @@ packages:
   mapbox-to-css-font@3.2.0:
     resolution: {integrity: sha512-kvsEfzvLik34BiFj+S19bv5d70l9qSdkUzrq99dvZ9d5POaLyB4vJMQmq3BoJ5D6lFG1GYnMM7o7cm5Jh8YEEg==}
 
-  marked@18.0.5:
-    resolution: {integrity: sha512-S6GcvALHg6K4ohtu4E7x0a1AqhAjp6cV8KhLSyN9qVapnzJkusVBxZRcIU9AeYsbe6P1hKDusSbEOzGyyuce6w==}
+  marked@18.1.1:
+    resolution: {integrity: sha512-zEGgrtUG8crk+TrMacJSVABU4DYDDkS8uqgU3ohrn/2fW9C2AEfUrO3m6IhpIpQpl7YcVpiXXC9cSMWDANT3dg==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -11366,7 +11366,7 @@ snapshots:
       detect-libc: 2.1.2
       is-glob: 4.0.3
       node-addon-api: 7.1.1
-      picomatch: 4.0.4
+      picomatch: 4.0.7
     optionalDependencies:
       '@parcel/watcher-android-arm64': 2.5.6
       '@parcel/watcher-darwin-arm64': 2.5.6
@@ -11770,7 +11770,7 @@ snapshots:
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
       estraverse: 5.3.0
-      picomatch: 4.0.4
+      picomatch: 4.0.7
 
   '@testing-library/dom@10.4.1':
     dependencies:
@@ -14871,7 +14871,7 @@ snapshots:
 
   mapbox-to-css-font@3.2.0: {}
 
-  marked@18.0.5: {}
+  marked@18.1.1: {}
 
   math-intrinsics@1.1.0: {}
 
@@ -16734,7 +16734,7 @@ snapshots:
   rollup-plugin-visualizer@7.0.1(rollup@4.62.2):
     dependencies:
       open: 11.0.0
-      picomatch: 4.0.4
+      picomatch: 4.0.7
       source-map: 0.7.6
       yargs: 18.0.0
     optionalDependencies:
