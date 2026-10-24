@@ -41,7 +41,7 @@
     "eslint": "catalog:eslint10",
     "eslint-config-prettier": "catalog:eslint10",
     "eslint-plugin-vue": "catalog:eslint10",
-    "globals": "17.6.0",
+    "globals": "17.13.0",
     "husky": "9.1.7",
     "lerna": "9.0.7",
     "lint-staged": "17.0.8",
