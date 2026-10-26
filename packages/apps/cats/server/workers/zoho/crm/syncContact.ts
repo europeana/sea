@@ -36,17 +36,20 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
 
   let contentfulPerson = await findContentfulEntry(contactId);
 
-  const participationLevels = zohoContact.Contact_Participation.filter(
-    (cp: string) => CONTACT_PARTICIPATION_LEVELS.includes(cp),
+  const participationFilter =
+    useRuntimeConfig().zoho?.crm?.participation?.split(",") || [];
+
+  const participation = zohoContact.Contact_Participation.filter((cp: string) =>
+    participationFilter.includes(cp),
   );
 
-  const locale = useRuntimeConfig().contentful.defaultLocale;
+  const locale = useRuntimeConfig().contentful?.defaultLocale;
 
   const fields = {
     email: { [locale]: zohoContact.Public_email },
     image: undefined,
     name: { [locale]: zohoContact.Full_Name },
-    participationLevel: { [locale]: participationLevels },
+    participationLevel: { [locale]: participation },
     title: { [locale]: zohoContact.Title },
     url: { [locale]: zohoContact.LinkedIn },
     zohoId: { [locale]: contactId },
@@ -69,7 +72,7 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
       ...fields,
     };
     contentfulPerson = await contentfulPerson.update();
-  } else if (participationLevels.length > 0) {
+  } else if (participation.length > 0) {
     const contentfulEnvironment = await useContentfulEnvironment();
     contentfulPerson = await contentfulEnvironment.createEntry("person", {
       fields,
@@ -88,17 +91,6 @@ const opts = {
   removeOnComplete: { count: 100 },
   // removeOnFail: { count: 5000 },
 };
-
-// TODO: mv to runtime config?
-const CONTACT_PARTICIPATION_LEVELS = [
-  "Advisory Board",
-  "Aggregators Forum",
-  "Management Board",
-  "Members Council",
-  "Network Association",
-  "Staff",
-  "Supervisory Board",
-];
 
 const findContentfulEntry = async (
   zohoId: string,
