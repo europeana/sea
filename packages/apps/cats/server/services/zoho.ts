@@ -77,30 +77,31 @@ export const fetchZoho = async (
     }
   }
 
-  let response = await fetch(fetchUrl, {
-    method,
-    headers: {
-      authorization: `Zoho-oauthtoken ${accessToken}`,
-      ...headers,
-    },
-    body,
-  });
+  const fetchWithAuth = () =>
+    fetch(fetchUrl, {
+      method,
+      headers: {
+        authorization: `Zoho-oauthtoken ${accessToken}`,
+        ...headers,
+      },
+      body,
+    });
+
+  let response = await fetchWithAuth();
 
   if (!response.ok) {
     if (response.status === 401) {
       const json = await response.json();
       if (json.code === "INVALID_TOKEN") {
         accessToken = await auth.refreshAccessToken();
-        // TODO: and what if this one fails?
-        response = await fetch(fetchUrl, {
-          method,
-          headers: {
-            authorization: `Zoho-oauthtoken ${accessToken}`,
-          },
-        });
+        response = await fetchWithAuth();
       }
     }
-    throw new Error(`Zoho CRM API request error: "${response.status}`);
+
+    // if neither response is ok, error out
+    if (!response.ok) {
+      throw new Error(`Zoho CRM API request error: "${response.status}`);
+    }
   }
 
   return response;
@@ -160,32 +161,13 @@ export const fetchZohoBulkReadJobResult = async (
     return null;
   }
 
-  // const json = await response.json();
-
   return Readable.fromWeb(response.body);
 };
-
-// export const fetchZohoContacts = async ({ pageToken }: { pageToken?: string }) => {
-//   const params = {
-//     fields: "id,Full_Name,Public_email,LinkedIn,Contact_Participation,Title,Modified_Time",
-//   };
-//   if (pageToken) {
-//     params["page_token"] = pageToken;
-//   }
-//   const response = await fetchZoho("/crm/v8/Contacts", { params });
-
-//   if (!response.body) {
-//     return null;
-//   }
-
-//   const json = await response.json();
-
-//   return json;
-// };
 
 export const fetchZohoContact = async (
   id: string,
 ): Promise<ZohoContactRecord | null> => {
+  // TODO: should this go into args?
   const params = {
     fields: "id,Full_Name,Public_email,LinkedIn,Contact_Participation,Title",
   };
@@ -204,8 +186,8 @@ export const fetchZohoPhoto = async (
   id: string,
 ): Promise<{
   file: Readable;
-  contentType: string;
-  fileName: string;
+  contentType?: string;
+  fileName?: string;
 } | null> => {
   const response = await fetchZoho(`/crm/v8/Contacts/${id}/photo`);
 
@@ -216,7 +198,7 @@ export const fetchZohoPhoto = async (
   const file = Readable.fromWeb(response.body);
   const contentType = response.headers.get("content-type")?.split(";")?.[0];
   const fileName = parseContentDisposition(
-    response.headers.get("content-disposition"),
+    response.headers.get("content-disposition") || "",
   )?.parameters?.filename;
 
   return {

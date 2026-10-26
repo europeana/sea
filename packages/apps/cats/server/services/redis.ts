@@ -1,7 +1,7 @@
 import Redis from "ioredis";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-let redisConnection;
+let redisConnection: Redis;
 
 export const useRedisConnection = () => {
   if (!redisConnection) {

@@ -4,5 +4,6 @@ export default defineConfig({
   test: {
     clearMocks: true,
     setupFiles: ["./tests/setup.mocks.ts"],
+    unstubGlobals: true,
   },
 });
