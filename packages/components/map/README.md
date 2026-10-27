@@ -8,12 +8,6 @@ TODO
 
 ## Customisation
 
-### Popover
-
-To use the popover feature pass in the `pinPopover` prop with an existing HTML element.
-
-When single points are clicked a `change:activefeature` event with a `activeFeatureName` prop is dispatched on the map instance. This can be used, for exampe, to set the relevant popover content.
-
 ### Controls
 
 The attributions control is added by default.
@@ -59,6 +53,12 @@ If no value is specified, or the special value "openstreetmap" is supplied, then
 standard [OpenStreetMap](https://www.openstreetmap.org/) tiles will be used.
 
 For pre-built Europeana map styles, see [@europeana/map-styles](../../style/map-styles/README.md).
+
+### Scroll to map
+
+To scroll the map element into view when loaded, set prop `{ scrollTo: true }`.
+
+If the prop is supplied a promise, the map element will be scrolled into view if & when that resolves.
 
 ### Popover
 
