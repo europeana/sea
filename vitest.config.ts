@@ -26,6 +26,7 @@ export default defineConfig({
         "**/*.config.[jt]s",
         "tmp/**",
         "**/storybook-static/**",
+        "**/tests/**",
       ],
     },
   },
