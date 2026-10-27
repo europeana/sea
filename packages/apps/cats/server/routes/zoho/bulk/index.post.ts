@@ -2,7 +2,7 @@ import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
 
 import { name as queueName } from "@/workers/zoho/crm/createBulkRead";
 import { useQueue } from "@/utils/queues";
-import { ZohoBulkReadCriteria } from "@/services/zoho";
+import { ZohoBulkReadCriteria } from "@/services/zoho/crm";
 
 export const handler = async (event: H3Event) => {
   const body: {

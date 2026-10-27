@@ -4,7 +4,7 @@ import * as csv from "csv";
 import * as unzip from "unzip-stream";
 
 import { useFlowProducer } from "@/utils/queues";
-import { fetchZohoBulkReadJobResult } from "@/services/zoho";
+import { fetchZohoBulkReadJobResult } from "@/services/zoho/crm";
 // TODO: mv elsewhere
 import { createSyncContactFlow } from "@/routes/zoho/contacts/index.post";
 
@@ -17,8 +17,6 @@ const processor = async (job: Job) => {
 
   // response is a stream of a zipped csv file
   const response = await fetchZohoBulkReadJobResult(zohoBulkReadJobId);
-
-  // console.log("processBulkResultJob response", response);
 
   if (!response) {
     throw new Error("No Zoho Bulk Read Job result");
@@ -34,11 +32,8 @@ const processor = async (job: Job) => {
   // });
 
   response.pipe(unzip.Parse()).on("entry", function (entry) {
-    // console.log("zip file entry", entry);
     const filePath = entry.path;
     if (filePath === `${zohoBulkReadJobId}.csv`) {
-      // entry.pipe(fs.createWriteStream('output/path'));
-      // entry.autodrain();
       entry
         // TODO: the csv-parse callback API used here loads all
         //       rows into memory. use a stream instead, like
@@ -47,14 +42,9 @@ const processor = async (job: Job) => {
           csv.parse(
             { columns: true },
             async function (err, rows: Array<object>) {
-              // console.log("csv records", rows);
-
               // TODO: validate contact matches participation level criteria?
               // queue a job to sync each contact, w/ record provided
               for (const contact of rows) {
-                // console.log(
-                //   `Creating sync contact flow for ${contact.Full_Name} ${contact.Contact_Participation}`,
-                // );
                 const flow = createSyncContactFlow({
                   contactId: contact.id || contact.Id,
                   modified: Date.parse(contact.Modified_Time),

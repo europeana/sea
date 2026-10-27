@@ -1,6 +1,9 @@
 import { Job } from "bullmq";
 
-import { createZohoBulkReadJob, ZohoBulkReadCriteria } from "@/services/zoho";
+import {
+  createZohoBulkReadJob,
+  ZohoBulkReadCriteria,
+} from "@/services/zoho/crm";
 
 export { name, processor, opts };
 

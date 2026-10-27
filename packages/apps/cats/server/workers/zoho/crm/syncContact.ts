@@ -2,7 +2,7 @@ import { Job } from "bullmq";
 import { Entry as ContentfulEntry } from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { fetchZohoContact } from "@/services/zoho";
+import { fetchZohoContact } from "@/services/zoho/crm";
 import { useContentfulEnvironment } from "@/services/contentful";
 
 export { name, processor, opts };

@@ -2,7 +2,7 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { Asset as ContentfulAsset } from "contentful-management";
 
-import { fetchZohoPhoto } from "@/services/zoho";
+import { fetchZohoPhoto } from "@/services/zoho/crm";
 import { useContentfulEnvironment } from "@/services/contentful";
 
 export { name, processor, opts };
