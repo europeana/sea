@@ -16,7 +16,9 @@ export type ZohoContactRecord = {
   id: string;
   Full_Name: string;
   LinkedIn: string;
+  Communities: Array<string>;
   Contact_Participation: Array<string>;
+  Country_new: string;
   Title: string;
   Public_email: string;
 };
@@ -34,12 +36,15 @@ export const createZohoBulkReadJob = async (criteria: ZohoBulkReadCriteria) => {
       module: {
         api_name: "Contacts",
       },
+      // TODO: should this go into args? or be derived from ZohoContactRecord type?
       fields: [
         "id",
         "Full_Name",
         "Public_email",
         "LinkedIn",
+        "Communities",
         "Contact_Participation",
+        "Country_new",
         "Title",
         "Modified_Time",
       ],
@@ -81,9 +86,10 @@ export const fetchZohoBulkReadJobResult = async (
 export const fetchZohoContact = async (
   id: string,
 ): Promise<ZohoContactRecord | null> => {
-  // TODO: should this go into args?
+  // TODO: should this go into args? or be derived from ZohoContactRecord type?
   const params = {
-    fields: "id,Full_Name,Public_email,LinkedIn,Contact_Participation,Title",
+    fields:
+      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
   };
   const response = await zohoFetch(`/crm/v8/Contacts/${id}`, { params });
 

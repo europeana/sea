@@ -15,7 +15,7 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
 
   const childrenValues = await job.getChildrenValues();
   const photoJobKey: string | undefined = Object.keys(childrenValues).find(
-    (key) => key.endsWith("-photo"),
+    (key) => key.includes("zoho-crm-sync-photo-"),
   );
   const photoAssetId: string | undefined = photoJobKey
     ? childrenValues[photoJobKey]?.assetId
@@ -28,10 +28,13 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
     }
   }
 
-  if (typeof zohoContact.Contact_Participation === "string") {
-    // e.g. from csv export
-    zohoContact.Contact_Participation =
-      zohoContact.Contact_Participation.split(";");
+  for (const arrayField of ["Communities", "Contact_Participation"]) {
+    if (typeof zohoContact[arrayField] === "string") {
+      // e.g. from csv export
+      zohoContact[arrayField] = zohoContact[arrayField]
+        .split(";")
+        .filter(Boolean);
+    }
   }
 
   let contentfulPerson = await findContentfulEntry(contactId);
@@ -49,8 +52,10 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
     email: { [locale]: zohoContact.Public_email },
     image: undefined,
     name: { [locale]: zohoContact.Full_Name },
-    participationLevel: { [locale]: participation },
+    participation: { [locale]: participation },
     title: { [locale]: zohoContact.Title },
+    country: { [locale]: zohoContact.Country_new },
+    communities: { [locale]: zohoContact.Communities },
     url: { [locale]: zohoContact.LinkedIn },
     zohoId: { [locale]: contactId },
   };
