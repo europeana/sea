@@ -1,6 +1,8 @@
 import fetch from "node-fetch-native";
 
-import { zohoAuth } from "./auth";
+import { createZohoAccessToken } from "./auth";
+
+let accessToken: string | null = null;
 
 export const zohoFetch = async (
   url: string,
@@ -11,24 +13,31 @@ export const zohoFetch = async (
     params,
   }: { body?: string; headers?: object; method?: string; params?: object } = {},
 ) => {
-  let accessToken = await zohoAuth.useAccessToken();
-
-  const fetchUrl = new URL(url, "https://www.zohoapis.eu");
+  // TODO: make base URL configurable
+  const resource = new URL(url, "https://www.zohoapis.eu");
   if (params) {
     for (const key in params) {
-      fetchUrl.searchParams.set(key, params[key]);
+      resource.searchParams.set(key, params[key]);
     }
   }
 
-  const fetchWithAuth = () =>
-    fetch(fetchUrl, {
+  const fetchWithAuth = async () => {
+    if (!accessToken) {
+      accessToken = await createZohoAccessToken();
+    }
+    const requestInit: RequestInit = {
       method,
       headers: {
         authorization: `Zoho-oauthtoken ${accessToken}`,
         ...headers,
       },
-      body,
-    });
+    };
+    if (body) {
+      requestInit.body = body;
+    }
+
+    return fetch(resource, requestInit);
+  };
 
   let response = await fetchWithAuth();
 
@@ -36,7 +45,9 @@ export const zohoFetch = async (
     if (response.status === 401) {
       const json = await response.json();
       if (json.code === "INVALID_TOKEN") {
-        accessToken = await zohoAuth.refreshAccessToken();
+        // clear the access token so a new one is requested
+        // TODO: this should be using the refresh token
+        accessToken = null;
         response = await fetchWithAuth();
       }
     }

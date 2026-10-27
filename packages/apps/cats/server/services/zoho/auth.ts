@@ -1,40 +1,28 @@
 import { useRuntimeConfig } from "nitropack/runtime";
+import fetch from "node-fetch-native";
 
-export const zohoAuth = {
-  accessToken: null,
+export const createZohoAccessToken = async (): Promise<string> => {
+  const config = useRuntimeConfig().zoho;
 
-  async createAccessToken() {
-    const config = useRuntimeConfig().zoho;
+  // TODO: mv to config
+  const url = new URL("/oauth/v2/token", "https://accounts.zoho.eu");
+  url.searchParams.set("client_id", config.clientId);
+  url.searchParams.set("client_secret", config.clientSecret);
+  // TODO: mv to params
+  url.searchParams.set("grant_type", "client_credentials");
+  // TODO: mv to params
+  url.searchParams.set("scope", "ZohoCRM.modules.ALL,ZohoCRM.bulk.read");
+  url.searchParams.set("soid", `ZohoCRM.${config.serviceOrgId}`);
 
-    const url = new URL("/oauth/v2/token", "https://accounts.zoho.eu");
-    url.searchParams.set("client_id", config.clientId);
-    url.searchParams.set("client_secret", config.clientSecret);
-    url.searchParams.set("grant_type", "client_credentials");
-    url.searchParams.set("scope", "ZohoCRM.modules.ALL,ZohoCRM.bulk.read");
-    url.searchParams.set("soid", `ZohoCRM.${config.serviceOrgId}`);
+  const response = await fetch(url, {
+    method: "post",
+  });
 
-    const response = await fetch(url, {
-      method: "post",
-    });
+  if (!response.ok) {
+    throw new Error(`Zoho oAuth request error: "${response.statusText}`);
+  }
 
-    if (!response.ok) {
-      throw new Error(`Zoho oAuth request error: "${response.statusText}`);
-    }
+  const json = await response.json();
 
-    const json = await response.json();
-
-    return json["access_token"];
-  },
-
-  async useAccessToken() {
-    if (!this.accessToken) {
-      this.accessToken = await this.createAccessToken();
-    }
-    return this.accessToken;
-  },
-
-  refreshAccessToken() {
-    this.accessToken = null;
-    return this.useAccessToken();
-  },
+  return json["access_token"];
 };
