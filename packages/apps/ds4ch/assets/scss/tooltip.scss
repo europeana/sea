@@ -1,0 +1,26 @@
+.tooltip {
+  .tooltip-inner {
+    font-weight: 400;
+    padding: 0.5rem;
+    border: 1px solid $lightgrey;
+    max-width: min(100vw, pxToRem(200));
+
+    @media (min-width: $bp-4k) {
+      font-size: $font-size-small-4k;
+      border-width: 2px;
+      border-radius: $border-radius-small-4k;
+      padding: 0.75rem;
+      max-width: min(100vw, pxToRem(300));
+    }
+
+    a {
+      color: $white;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+}

@@ -147,11 +147,11 @@
 
     &.btn-light-flat {
       background-color: transparent;
-      color: $white;
+      color: $black;
 
       &:hover,
       &:focus {
-        color: $yellow;
+        color: $white;
         transition: $standard-transition;
       }
     }

@@ -6,7 +6,7 @@ allowBuilds:
   nx: true
   unrs-resolver: true
 catalog:
-  "@europeana/style": "2.39.2"
+  "@europeana/style": "2.39.6"
   bootstrap: "5.3.8"
   lodash-es: "4.18.1"
   node-fetch-native: "1.6.7"
@@ -18,13 +18,13 @@ catalogs:
     "@eslint/js": "10.0.1"
     "@eslint/json": "2.0.0"
     "@nuxt/eslint": "1.16.0"
-    eslint: "10.5.0"
+    eslint: "10.13.0"
     "eslint-config-prettier": "10.1.8"
-    "eslint-plugin-vue": "10.9.2"
+    "eslint-plugin-vue": "10.11.1"
     "typescript-eslint": "8.61.1"
   html:
     cheerio: "1.2.0"
-    marked: "18.0.5"
+    marked: "18.1.1"
     turndown: "7.2.4"
   nitro2:
     h3: "1.15.11"
@@ -40,7 +40,7 @@ catalogs:
     "@types/turndown": "5.0.6"
   vite7:
     "@vitejs/plugin-vue": "6.0.7"
-    vite: "7.3.5"
+    vite: "7.3.7"
   vitest4:
     "@vitest/coverage-v8": "4.1.11"
     vitest: "4.1.11"

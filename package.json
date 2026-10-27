@@ -41,13 +41,13 @@
     "eslint": "catalog:eslint10",
     "eslint-config-prettier": "catalog:eslint10",
     "eslint-plugin-vue": "catalog:eslint10",
-    "globals": "17.6.0",
+    "globals": "17.13.0",
     "husky": "9.1.7",
     "lerna": "9.0.7",
-    "lint-staged": "17.0.8",
-    "prettier": "3.8.4",
+    "lint-staged": "17.6.0",
+    "prettier": "3.9.10",
     "typescript-eslint": "catalog:eslint10",
-    "vite": "7.3.5",
+    "vite": "7.3.7",
     "vitest": "catalog:vitest4"
   },
   "lint-staged": {

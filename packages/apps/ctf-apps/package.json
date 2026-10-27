@@ -19,10 +19,10 @@
     "@europeana/style": "catalog:",
     "@vitejs/plugin-vue": "6.0.7",
     "bootstrap": "catalog:",
-    "happy-dom": "20.10.6",
+    "happy-dom": "20.14.6",
     "lodash-es": "catalog:",
     "nuxt": "catalog:nuxt3",
-    "sass-embedded": "1.100.0",
+    "sass-embedded": "1.106.1",
     "vue": "catalog:vue3",
     "vue-router": "4.6.4"
   },

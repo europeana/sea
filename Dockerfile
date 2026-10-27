@@ -1,4 +1,4 @@
-FROM node:24-alpine@sha256:156b55f92e98ccd5ef49578a8cea0df4679826564bad1c9d4ef04462b9f0ded6 AS build-base
+FROM node:24-alpine@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53 AS build-base
 
 ARG app
 
@@ -37,14 +37,14 @@ ARG app
 RUN pnpm --filter @europeana/${app} run build-storybook
 
 
-FROM nginx:stable@sha256:07fc471b4aa8dc03f312fbd506381b7b84aeb99e48d040aa0593e8c37cdcb154 AS run-storybook
+FROM nginx:stable@sha256:a7675fcee220f59b4a99f7098c06a0d5d999c2c0ee37c0211efb780536e5cb20 AS run-storybook
 ARG app
 
 COPY --from=build-storybook /build/packages/apps/${app}/storybook-static /usr/share/nginx/html
 RUN ls /usr/share/nginx/html/
 
 
-FROM gcr.io/distroless/nodejs24-debian12@sha256:61f4f4341db81820c24ce771b83d202eb6452076f58628cd536cc7d94a10978b AS run-app
+FROM gcr.io/distroless/nodejs24-debian13@sha256:78f07ef1b5ea71ad7c055df15d0dd8997f2d288f9158623c4d4ae3d765b7d50d AS run-app
 ARG app
 
 ENV PORT=8080
