@@ -15,7 +15,8 @@
     "@types/morgan": "catalog:types",
     "@types/turndown": "catalog:types",
     "h3": "catalog:nitro2",
-    "nitropack": "catalog:nitro2"
+    "nitropack": "catalog:nitro2",
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "dependencies": {
     "bullmq": "^5.58.5",

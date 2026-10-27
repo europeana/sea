@@ -10,13 +10,13 @@ import {
 import { FlowProducer } from "bullmq";
 import { readBody, setResponseStatus } from "h3";
 
-import routeHandler from "../../../../../server/routes/zoho/contacts/index.post";
+import routeHandler from "@/routes/zoho/contacts/index.post";
 
 const mockFlowProducer = vi.mocked(FlowProducer);
 const mockReadBody = vi.mocked(readBody);
 const mockSetResponseStatus = vi.mocked(setResponseStatus);
 
-describe("@/server/routes/zoho/contacts/index.post", () => {
+describe("@/routes/zoho/contacts/index.post", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });

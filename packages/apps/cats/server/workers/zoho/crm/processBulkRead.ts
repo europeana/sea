@@ -3,10 +3,10 @@ import { Job } from "bullmq";
 import * as csv from "csv";
 import * as unzip from "unzip-stream";
 
-import { useFlowProducer } from "../../../utils/queues";
-import { fetchZohoBulkReadJobResult } from "../../../services/zoho";
+import { useFlowProducer } from "@/utils/queues";
+import { fetchZohoBulkReadJobResult } from "@/services/zoho";
 // TODO: mv elsewhere
-import { createSyncContactFlow } from "../../../routes/zoho/contacts/index.post";
+import { createSyncContactFlow } from "@/routes/zoho/contacts/index.post";
 
 export { name, processor, opts };
 

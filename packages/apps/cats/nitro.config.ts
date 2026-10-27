@@ -1,7 +1,11 @@
 import { defineNitroConfig } from "nitropack/config";
+import { fileURLToPath } from "node:url";
 
 // https://nitro.build/config
 export default defineNitroConfig({
+  alias: {
+    "@": fileURLToPath(new URL("./server", import.meta.url)),
+  },
   compatibilityDate: "2025-09-17",
   srcDir: "server",
   runtimeConfig: {
@@ -23,7 +27,6 @@ export default defineNitroConfig({
     },
     redis: {
       tls: {
-        // TODO: this will be base64-encoded; can we decode it here?
         ca: null,
       },
       url: null,
@@ -31,7 +34,7 @@ export default defineNitroConfig({
     zoho: {
       bulkReadCallbackUrl: null,
       crm: {
-        participation: [],
+        participation: null,
       },
       clientId: null,
       clientSecret: null,

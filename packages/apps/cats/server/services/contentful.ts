@@ -3,23 +3,19 @@ import contentfulManagement, {
 } from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-let contentfulEnvironment: ContentfulEnvironment;
+let environment: ContentfulEnvironment;
 
 export const useContentfulEnvironment =
   async (): Promise<ContentfulEnvironment> => {
-    if (!contentfulEnvironment) {
-      const runtimeConfig = useRuntimeConfig();
+    if (!environment) {
+      const config = useRuntimeConfig()?.contentful;
 
-      const contentfulClient = contentfulManagement.createClient({
-        accessToken: runtimeConfig.contentful.accessToken,
+      const client = contentfulManagement.createClient({
+        accessToken: config.accessToken,
       });
-      const contentfulSpace = await contentfulClient.getSpace(
-        runtimeConfig.contentful.space,
-      );
-      contentfulEnvironment = await contentfulSpace.getEnvironment(
-        runtimeConfig.contentful.environment,
-      );
+      const space = await client.getSpace(config.space);
+      environment = await space.getEnvironment(config.environment);
     }
 
-    return contentfulEnvironment;
+    return environment;
   };

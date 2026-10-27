@@ -10,13 +10,13 @@ import {
 import { Queue } from "bullmq";
 import { readBody, setResponseStatus } from "h3";
 
-import routeHandler from "../../../../../server/routes/zoho/bulk/callback.post";
+import routeHandler from "@/routes/zoho/bulk/callback.post";
 
 const mockQueue = vi.mocked(Queue);
 const mockReadBody = vi.mocked(readBody);
 const mockSetResponseStatus = vi.mocked(setResponseStatus);
 
-describe("@/server/routes/zoho/bulk/callback.post", () => {
+describe("@/routes/zoho/bulk/callback.post", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });

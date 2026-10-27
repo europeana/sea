@@ -13,14 +13,20 @@ vi.mock("bullmq", () => ({
   ),
 }));
 
+const mockContentfulManagementEnvironment = {
+  createEntry: vi.fn(),
+  createAssetWithId: vi.fn(),
+  createUpload: vi.fn(),
+  getAsset: vi.fn(),
+  getContentType: vi.fn(),
+  getEntries: vi.fn(),
+  getEntry: vi.fn(),
+};
 vi.mock("contentful-management", () => ({
   default: vi.fn(() => ({
     createClient: vi.fn(() => ({
       getSpace: vi.fn(() => ({
-        getEnvironment: vi.fn(() => ({
-          createEntry: vi.fn(),
-          getEntries: vi.fn(),
-        })),
+        getEnvironment: vi.fn(() => mockContentfulManagementEnvironment),
       })),
     })),
   })),

@@ -11,13 +11,13 @@ import {
 import { Queue } from "bullmq";
 import { readBody, setResponseStatus } from "h3";
 
-import routeHandler from "../../../../../server/routes/zoho/bulk/index.post";
+import routeHandler from "@/routes/zoho/bulk/index.post";
 
 const mockQueue = vi.mocked(Queue);
 const mockReadBody = vi.mocked(readBody);
 const mockSetResponseStatus = vi.mocked(setResponseStatus);
 
-describe("@/server/routes/zoho/bulk/index.post", () => {
+describe("@/routes/zoho/bulk/index.post", () => {
   beforeAll(() => {
     vi.useFakeTimers();
     const fakeDate = new Date("2026-10-22T12:00:00.000+00:00").valueOf(); // timestamp: 1792670400000

@@ -1,6 +1,6 @@
 import type { Job } from "bullmq";
-import { useContentfulEnvironment } from "../../services/contentful";
-import { localeForLang } from "../../utils/i18n/locales";
+import { useContentfulEnvironment } from "@/services/contentful";
+import { localeForLang } from "@/utils/i18n/locales";
 
 export { name, processor, opts };
 

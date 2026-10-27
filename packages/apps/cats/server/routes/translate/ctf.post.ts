@@ -1,6 +1,6 @@
 import { defineEventHandler, getRequestHeader, readBody, H3Event } from "h3";
-import { useQueue } from "../../utils/queues";
-import { name as queueName } from "../../workers/translate/request";
+import { useQueue } from "@/utils/queues";
+import { name as queueName } from "@/workers/translate/request";
 
 export const handler = async (event: H3Event) => {
   const entry = await readBody(event);

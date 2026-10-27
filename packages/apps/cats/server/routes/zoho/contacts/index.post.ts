@@ -1,9 +1,9 @@
 import { FlowJob } from "bullmq";
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
-import { useFlowProducer } from "../../../utils/queues";
+import { useFlowProducer } from "@/utils/queues";
 
-import { name as syncContactQueueName } from "../../../workers/zoho/crm/syncContact";
-import { name as syncPhotoQueueName } from "../../../workers/zoho/crm/syncPhoto";
+import { name as syncContactQueueName } from "@/workers/zoho/crm/syncContact";
+import { name as syncPhotoQueueName } from "@/workers/zoho/crm/syncPhoto";
 
 export const createSyncContactFlow = ({
   contactId,

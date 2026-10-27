@@ -1,5 +1,5 @@
 import { Job } from "bullmq";
-import { extractFields } from "../../utils/html/extractFields";
+import { extractFields } from "@/utils/html/extractFields";
 
 export { name, processor, opts };
 
