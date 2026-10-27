@@ -53,5 +53,10 @@ vi.mock("nitropack/runtime", () => ({
 }));
 
 vi.mock("node-fetch-native", () => ({
-  default: vi.fn(),
+  default: vi.fn().mockResolvedValue({
+    body: null,
+    json: vi.fn().mockResolvedValue(null),
+    ok: true,
+    status: 200,
+  }),
 }));

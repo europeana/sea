@@ -54,7 +54,7 @@ export const zohoFetch = async (
 
     // if neither response is ok, error out
     if (!response.ok) {
-      throw new Error(`Zoho CRM API request error: "${response.status}`);
+      throw new Error(`Zoho CRM API request error: ${response.status}`);
     }
   }
 
