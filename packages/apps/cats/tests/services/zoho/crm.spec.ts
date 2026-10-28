@@ -30,9 +30,9 @@ describe("@/services/zoho/crm", () => {
       };
 
       beforeEach(() => {
-        mockAPI.request.mockResolvedValue({
-          json: () => Promise.resolve(apiResponse),
-        });
+        mockAPI.request.mockResolvedValue(
+          new Response(JSON.stringify(apiResponse)),
+        );
       });
 
       it("sends a request to Zoho CRM API", async () => {
@@ -86,10 +86,9 @@ describe("@/services/zoho/crm", () => {
       const apiResponse = { data: [contactRecord] };
 
       beforeEach(() => {
-        mockAPI.request.mockResolvedValue({
-          body: true,
-          json: () => Promise.resolve(apiResponse),
-        });
+        mockAPI.request.mockResolvedValue(
+          new Response(JSON.stringify(apiResponse)),
+        );
       });
 
       it("sends a request to Zoho CRM API", async () => {
