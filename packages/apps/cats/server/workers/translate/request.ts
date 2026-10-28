@@ -1,7 +1,7 @@
 import { Job } from "bullmq";
 import { Tag as ContentfulTag } from "contentful-management";
 
-import { useContentfulEnvironment } from "@/services/contentful";
+import { useContentfulEnvironment } from "@/utils/contentful";
 import { supportedLocales } from "@/utils/i18n/locales";
 import { useFlowProducer } from "@/utils/queues";
 import { markupFields } from "@/utils/html/markupFields";

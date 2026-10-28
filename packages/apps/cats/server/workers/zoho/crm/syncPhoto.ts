@@ -2,8 +2,8 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { Asset as ContentfulAsset } from "contentful-management";
 
-import { fetchZohoPhoto } from "@/services/zoho/crm";
-import { useContentfulEnvironment } from "@/services/contentful";
+import { useContentfulEnvironment } from "@/utils/contentful";
+import { useZoho } from "@/utils/zoho";
 
 export { name, processor, opts };
 
@@ -11,7 +11,7 @@ const name = "zoho-crm-sync-photo";
 
 const processor = async (job: Job): Promise<{ assetId: string | null }> => {
   const contactId = job.data.contactId;
-  const zohoPhoto = await fetchZohoPhoto(contactId);
+  const zohoPhoto = await useZoho().crm.fetchZohoPhoto(contactId);
 
   if (!zohoPhoto) {
     return { assetId: null };

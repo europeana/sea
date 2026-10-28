@@ -2,8 +2,8 @@ import { Job } from "bullmq";
 import { Entry as ContentfulEntry } from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { fetchZohoContact } from "@/services/zoho/crm";
-import { useContentfulEnvironment } from "@/services/contentful";
+import { useContentfulEnvironment } from "@/utils/contentful";
+import { useZoho } from "@/utils/zoho";
 
 export { name, processor, opts };
 
@@ -22,7 +22,7 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
     : undefined;
 
   if (!zohoContact) {
-    zohoContact = await fetchZohoContact(contactId);
+    zohoContact = await useZoho().crm.fetchZohoContact(contactId);
     if (!zohoContact) {
       throw new Error(`No Zoho contact for ID "${contactId}`);
     }

@@ -2,7 +2,7 @@ import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import contentfulManagement from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { useContentfulEnvironment } from "@/services/contentful";
+import { useContentfulEnvironment } from "@/utils/contentful";
 
 const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
 

@@ -4,7 +4,7 @@ import * as csv from "csv";
 import * as unzip from "unzip-stream";
 
 import { useFlowProducer } from "@/utils/queues";
-import { fetchZohoBulkReadJobResult } from "@/services/zoho/crm";
+import { useZoho } from "@/utils/zoho";
 // TODO: mv elsewhere
 import { createSyncContactFlow } from "@/routes/zoho/contacts/index.post";
 
@@ -16,7 +16,8 @@ const processor = async (job: Job) => {
   const zohoBulkReadJobId: string = job.data.zohoBulkReadJobId;
 
   // response is a stream of a zipped csv file
-  const response = await fetchZohoBulkReadJobResult(zohoBulkReadJobId);
+  const response =
+    await useZoho().crm.fetchZohoBulkReadJobResult(zohoBulkReadJobId);
 
   if (!response) {
     throw new Error("No Zoho Bulk Read Job result");

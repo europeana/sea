@@ -1,18 +1,17 @@
 import {
-  afterAll,
   afterEach,
   beforeAll,
+  beforeEach,
   describe,
   expect,
   it,
-  test,
   vi,
 } from "vitest";
 
 import fetch from "node-fetch-native";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { zohoFetch } from "@/services/zoho/api";
+import { createZohoAPIClient } from "@/services/zoho/api";
 import { createZohoAccessToken } from "@/services/zoho/auth";
 
 vi.mock("@/services/zoho/auth", () => ({
@@ -32,89 +31,115 @@ describe("@/services/zoho/api", () => {
   };
   const url = "/crm/v8/Contacts";
 
-  beforeAll(() => {
-    mockFetch.mockResolvedValue({
-      body: null,
-      json: vi.fn().mockResolvedValue({}),
+  const responses = {
+    ok: {
+      json: vi.fn().mockResolvedValue({ id: "1234" }),
       ok: true,
       status: 200,
-    });
+    },
+    internalServerError: {
+      json: vi.fn().mockResolvedValue(null),
+      ok: false,
+      status: 500,
+    },
+    unauthorized: {
+      // TODO: why does this not work here?
+      // json: vi.fn().mockResolvedValue({ code: "INVALID_TOKEN" }),
+      json: () => Promise.resolve({ code: "INVALID_TOKEN" }),
+      ok: false,
+      status: 401,
+    },
+  };
+
+  beforeEach(() => {
+    let accessTokenCount = 0;
 
     mockUseRuntimeConfig.mockReturnValue({
       zoho: config,
     });
 
-    mockCreateZohoAccessToken.mockResolvedValue(accessToken);
+    mockCreateZohoAccessToken.mockImplementation(() => {
+      accessTokenCount = accessTokenCount + 1;
+      return Promise.resolve(`${accessToken}_${accessTokenCount}`);
+    });
   });
   afterEach(() => {
-    vi.restoreAllMocks();
-  });
-  afterAll(() => {
     vi.resetAllMocks();
   });
 
-  describe("zohoFetch", () => {
-    it("sends an authenticated request to Zoho API", async () => {
-      await zohoFetch(url);
-
-      expect(mockFetch).toHaveBeenCalledWith(
-        new URL("https://www.zohoapis.eu/crm/v8/Contacts"),
-        {
-          method: "get",
-          headers: {
-            authorization: "Zoho-oauthtoken ZOHO_ACCESS_TOKEN",
-          },
-        },
-      );
-    });
-
-    describe("when the response is ok", () => {
-      const bodyContent = {
-        id: "1234",
-      };
-      const fetchResponse = {
-        json: vi.fn().mockResolvedValue(bodyContent),
-        ok: true,
-        status: 200,
-      };
-
-      beforeAll(() => {
-        mockFetch.mockResolvedValue(fetchResponse);
-      });
-
-      it("returns the response", async () => {
-        const zohoFetchResponse = await zohoFetch(url);
-
-        expect(zohoFetchResponse).toEqual(fetchResponse);
-      });
-    });
-
-    describe("when the response is not ok", () => {
-      describe("and is due to access token expiry", () => {
-        test.todo("refreshes the access token and tries again");
-      });
-
-      describe("and is not due to access token expiry", () => {
-        const fetchResponse = {
-          json: vi.fn().mockResolvedValue(null),
-          ok: false,
-          status: 500,
-        };
-
-        beforeAll(() => {
-          mockFetch.mockResolvedValue(fetchResponse);
+  describe("createZohoAPIClient", () => {
+    describe("request", () => {
+      it("sends an authenticated request to Zoho API", async () => {
+        await createZohoAPIClient().request(url, {
+          params: { query: "smith" },
         });
 
-        it("throws an error", async () => {
-          let err;
+        expect(mockFetch).toHaveBeenCalledWith(
+          new URL("https://www.zohoapis.eu/crm/v8/Contacts?query=smith"),
+          {
+            method: "get",
+            headers: {
+              authorization: "Zoho-oauthtoken ZOHO_ACCESS_TOKEN_1",
+            },
+          },
+        );
+      });
 
-          try {
-            await zohoFetch(url);
-          } catch (e) {
-            err = e;
-          }
+      describe("when the response is ok", () => {
+        beforeAll(() => {
+          mockFetch.mockResolvedValue(responses.ok);
+        });
 
-          expect(err?.message).toBe("Zoho CRM API request error: 500");
+        it("returns the response", async () => {
+          const zohoFetchResponse = await createZohoAPIClient().request(url);
+
+          expect(zohoFetchResponse).toEqual(responses.ok);
+        });
+      });
+
+      describe("when the response is not ok", () => {
+        describe("and is due to access token expiry", () => {
+          beforeAll(() => {
+            mockFetch.mockImplementation((resource, { headers }) => {
+              if (headers.authorization.endsWith("_1")) {
+                return Promise.resolve(responses.unauthorized);
+              } else {
+                return Promise.resolve(responses.ok);
+              }
+            });
+          });
+
+          it("refreshes the access token and tries again", async () => {
+            const response = await createZohoAPIClient().request(url);
+
+            expect(mockCreateZohoAccessToken.mock.calls).toHaveLength(2);
+            expect(mockFetch.mock.calls).toHaveLength(2);
+            expect(mockFetch.mock.calls[0][1].headers.authorization).toBe(
+              "Zoho-oauthtoken ZOHO_ACCESS_TOKEN_1",
+            );
+            expect(mockFetch.mock.calls[1][1].headers.authorization).toBe(
+              "Zoho-oauthtoken ZOHO_ACCESS_TOKEN_2",
+            );
+            expect(response).toEqual(responses.ok);
+          });
+        });
+
+        describe("and is not due to access token expiry", () => {
+          beforeEach(() => {
+            mockFetch.mockResolvedValue(responses.internalServerError);
+          });
+
+          it("throws an error", async () => {
+            let err;
+
+            try {
+              await createZohoAPIClient().request(url);
+            } catch (e) {
+              err = e;
+            }
+
+            expect(err?.message).toBe("Zoho CRM API request error: 500");
+          });
         });
       });
     });
