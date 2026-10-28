@@ -3,9 +3,16 @@ import { parse as parseContentDisposition } from "content-disposition";
 import { Readable } from "node:stream";
 
 import { ZohoBulkReadCriteria, ZohoContactRecord } from "./types";
+import { ZohoAPIClient } from "./api";
 
-export const createZohoCRMClient = (api) => ({
-  createZohoBulkReadJob: async (criteria: ZohoBulkReadCriteria) => {
+export class ZohoCRMClient {
+  api: ZohoAPIClient;
+
+  constructor(api: ZohoAPIClient) {
+    this.api = api;
+  }
+
+  async createZohoBulkReadJob(criteria: ZohoBulkReadCriteria) {
     const config = useRuntimeConfig().zoho;
 
     const method = "post";
@@ -40,7 +47,7 @@ export const createZohoCRMClient = (api) => ({
       };
     }
 
-    const response = await api.request(url, {
+    const response = await this.api.request(url, {
       method,
       headers,
       body: JSON.stringify(body),
@@ -49,27 +56,29 @@ export const createZohoCRMClient = (api) => ({
     const json = await response.json();
 
     return json;
-  },
+  }
 
-  fetchZohoBulkReadJobResult: async (id: string): Promise<Readable | null> => {
+  async fetchZohoBulkReadJobResult(id: string): Promise<Readable | null> {
     const url = `/crm/bulk/v8/read/${id}/result`;
 
-    const response = await api.request(url);
+    const response = await this.api.request(url);
 
     if (!response.body) {
       return null;
     }
 
     return Readable.fromWeb(response.body);
-  },
+  }
 
-  fetchZohoContact: async (id: string): Promise<ZohoContactRecord | null> => {
+  async fetchZohoContact(id: string): Promise<ZohoContactRecord | null> {
     // TODO: should this go into args? or be derived from ZohoContactRecord type?
     const params = {
       fields:
         "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
     };
-    const response = await api.request(`/crm/v8/Contacts/${id}`, { params });
+    const response = await this.api.request(`/crm/v8/Contacts/${id}`, {
+      params,
+    });
 
     if (!response.body) {
       return null;
@@ -78,16 +87,14 @@ export const createZohoCRMClient = (api) => ({
     const json = await response.json();
 
     return json.data[0];
-  },
+  }
 
-  fetchZohoPhoto: async (
-    id: string,
-  ): Promise<{
+  async fetchZohoPhoto(id: string): Promise<{
     file: Readable;
     contentType?: string;
     fileName?: string;
-  } | null> => {
-    const response = await api.request(`/crm/v8/Contacts/${id}/photo`);
+  } | null> {
+    const response = await this.api.request(`/crm/v8/Contacts/${id}/photo`);
 
     if (!response.body) {
       return null;
@@ -104,5 +111,8 @@ export const createZohoCRMClient = (api) => ({
       contentType,
       fileName,
     };
-  },
-});
+  }
+}
+
+export const createZohoCRMClient = (api: ZohoAPIClient) =>
+  new ZohoCRMClient(api);
