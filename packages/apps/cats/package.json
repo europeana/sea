@@ -15,17 +15,20 @@
     "@types/morgan": "catalog:types",
     "@types/turndown": "catalog:types",
     "h3": "catalog:nitro2",
-    "nitropack": "catalog:nitro2"
+    "nitropack": "catalog:nitro2",
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "dependencies": {
     "bullmq": "^5.58.5",
     "cheerio": "catalog:html",
+    "content-disposition": "^3.0.0",
     "contentful-management": "^11.57.4",
+    "csv": "^6.6.4",
     "ioredis": "^5.7.0",
     "marked": "catalog:html",
-    "moment": "^2.31.0",
     "morgan": "catalog:nitro2",
     "node-fetch-native": "catalog:",
-    "turndown": "catalog:html"
+    "turndown": "catalog:html",
+    "unzip-stream": "^0.3.4"
   }
 }

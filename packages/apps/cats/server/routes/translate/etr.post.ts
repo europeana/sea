@@ -1,13 +1,16 @@
-import { defineEventHandler, readBody } from "h3";
-import { useQueue } from "../../utils/bullmq/queue";
+import { defineEventHandler, readBody, H3Event } from "h3";
+import { useQueue } from "@/utils/queues";
+import { name as queueName } from "@/workers/translate/receive";
 
-// TODO: auth or other abuse prevention
 // TODO: validate format is "html"
-export default defineEventHandler(async (event) => {
+export const handler = async (event: H3Event) => {
   const body = await readBody(event);
 
-  const jobId = `${body.externalReference}-${body.targetLanguage}`;
-  const job = await useQueue("translate-receive").getJob(jobId);
+  const jobId = `${queueName}-${body.externalReference}-${body.targetLanguage}`;
+  const job = await useQueue(queueName).getJob(jobId);
+  if (!job) {
+    throw new Error(`Job not found: ${jobId}`);
+  }
   await job.updateData({
     ...job.data,
     html: Buffer.from(body.result, "base64").toString("utf8"),
@@ -20,4 +23,6 @@ export default defineEventHandler(async (event) => {
   return {
     jobId,
   };
-});
+};
+
+export default defineEventHandler(handler);
