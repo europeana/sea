@@ -6,6 +6,7 @@ vi.mock("bullmq", () => ({
       add = vi.fn();
     },
   ),
+  Job: vi.fn(class {}),
   Queue: vi.fn(
     class {
       add = vi.fn();
