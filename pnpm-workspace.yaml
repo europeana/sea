@@ -34,7 +34,7 @@ catalogs:
     "@nuxt/test-utils": 3.23.0
     "@nuxtjs/i18n": 9.5.6
     "@nuxtjs/storybook": 9.0.1
-    nuxt: 3.21.8
+    nuxt: 4.6.3
   types:
     "@types/morgan": "1.9.10"
     "@types/turndown": "5.0.6"
