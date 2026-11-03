@@ -2,7 +2,8 @@ import { useRuntimeConfig } from "nitropack/runtime";
 import { parse as parseContentDisposition } from "content-disposition";
 import { Readable } from "node:stream";
 
-import { ZohoBulkReadCriteria, ZohoContactRecord } from "./types";
+import { ZohoContact } from "@/models/zoho/crm/contact";
+import { ZohoBulkReadCriteria } from "@/types/zoho";
 import { ZohoAPIClient } from "./api";
 
 export class ZohoCRMClient {
@@ -70,7 +71,7 @@ export class ZohoCRMClient {
     return Readable.fromWeb(response.body);
   }
 
-  async fetchZohoContact(id: string): Promise<ZohoContactRecord | null> {
+  async fetchZohoContact(id: string): Promise<ZohoContact | null> {
     // TODO: should this go into args? or be derived from ZohoContactRecord type?
     const params = {
       fields:
@@ -86,7 +87,7 @@ export class ZohoCRMClient {
 
     const json = await response.json();
 
-    return json.data[0];
+    return new ZohoContact(json.data[0]);
   }
 
   async fetchZohoPhoto(id: string): Promise<{

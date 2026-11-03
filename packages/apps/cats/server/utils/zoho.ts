@@ -1,6 +1,6 @@
-import { createZohoAPIClient } from "@/services/zoho/api";
+import { createZohoAPIClient, ZohoAPIClient } from "@/services/zoho/api";
 
-let zohoClient;
+let zohoClient: ZohoAPIClient;
 
 export const useZoho = () => {
   if (!zohoClient) {

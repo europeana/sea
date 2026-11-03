@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { Readable } from "node:stream";
 
+import { ZohoContact } from "@/models/zoho/crm/contact";
 import { createZohoCRMClient } from "@/services/zoho/crm";
 
 const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
@@ -106,10 +107,16 @@ describe("@/services/zoho/crm", () => {
       });
 
       it("returns the first data item from the response", async () => {
+        const contact: ZohoContact = {
+          record: {
+            Full_Name: "Test Contact",
+          },
+        };
+
         const response =
           await createZohoCRMClient(mockAPI).fetchZohoContact(id);
 
-        expect(response).toEqual(contactRecord);
+        expect(response).toEqual(contact);
       });
     });
 
