@@ -2,7 +2,7 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { Asset as ContentfulAsset } from "contentful-management";
 
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useEnvironment } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
 export { name, processor, opts };
@@ -17,7 +17,7 @@ const processor = async (job: Job): Promise<{ assetId: string | null }> => {
     return { assetId: null };
   }
 
-  const contentfulEnvironment = await useContentfulEnvironment();
+  const contentfulEnvironment = await useEnvironment();
 
   const contentfulAssetId = `zoho-contact-photo-${contactId}`;
   let contentfulAsset: ContentfulAsset;

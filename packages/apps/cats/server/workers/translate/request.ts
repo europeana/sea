@@ -1,7 +1,7 @@
 import { Job } from "bullmq";
 import { Tag as ContentfulTag } from "contentful-management";
 
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useEnvironment } from "@/utils/contentful";
 import { supportedLocales } from "@/utils/i18n/locales";
 import { useFlowProducer } from "@/utils/queues";
 import { markupFields } from "@/utils/html/markupFields";
@@ -14,7 +14,7 @@ export { name, processor, opts };
 const name = "translate-request";
 
 const processor = async (job: Job) => {
-  const contentfulEnvironment = await useContentfulEnvironment();
+  const contentfulEnvironment = await useEnvironment();
   const flowProducer = useFlowProducer();
 
   const targetLanguages = targetLanguagesFromTags(
