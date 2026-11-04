@@ -1,8 +1,7 @@
 import { beforeEach, describe, it, expect } from "vitest";
 
-import { ZohoContact } from "@/models/zoho/crm/contact";
-import { ZohoContactRecord } from "@/types/zoho";
-import { PersonEntryFields } from "@/types/contentful";
+import { ZohoContact } from "../../../src/models/crm/contact.js";
+import { ZohoContactRecord } from "../../../src/types.js";
 
 describe("ZohoContact", () => {
   let record: ZohoContactRecord;
@@ -57,23 +56,5 @@ describe("ZohoContact", () => {
 
   it("should return the correct participation", () => {
     expect(zohoContact.participation).toEqual(["Staff", "Network Association"]);
-  });
-
-  it("should convert to ContentfulPersonEntryFields correctly", () => {
-    const locale = "en-US";
-    const expectedFields: PersonEntryFields = {
-      name: { [locale]: "John Doe" },
-      email: { [locale]: "john.doe@example.com" },
-      participation: { [locale]: ["Staff", "Network Association"] },
-      title: { [locale]: "Software Engineer" },
-      country: { [locale]: "USA" },
-      communities: { [locale]: ["Communicators", "Copyright"] },
-      url: { [locale]: "https://www.linkedin.com/in/johndoe" },
-      zohoId: { [locale]: "12345" },
-    };
-
-    expect(zohoContact.toContentfulPersonEntryFields(locale)).toEqual(
-      expectedFields,
-    );
   });
 });

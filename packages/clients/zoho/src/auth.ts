@@ -1,11 +1,12 @@
-import { useRuntimeConfig } from "nitropack/runtime";
-import fetch from "node-fetch-native";
+import { ZohoAuthConfig, ZohoOAuthTokenResponse } from "./types.js";
 
-export const createZohoAccessToken = async (): Promise<string> => {
-  const config = useRuntimeConfig().zoho;
-
-  // TODO: mv to config
-  const url = new URL("/oauth/v2/token", "https://accounts.zoho.eu");
+export const createZohoAccessToken = async (
+  config: ZohoAuthConfig,
+): Promise<string> => {
+  const url = new URL(
+    "/oauth/v2/token",
+    config.url || "https://accounts.zoho.eu",
+  );
   url.searchParams.set("client_id", config.clientId);
   url.searchParams.set("client_secret", config.clientSecret);
   // TODO: mv to params
@@ -22,7 +23,7 @@ export const createZohoAccessToken = async (): Promise<string> => {
     throw new Error(`Zoho oAuth request error: "${response.statusText}`);
   }
 
-  const json = await response.json();
+  const json = (await response.json()) as ZohoOAuthTokenResponse;
 
   return json["access_token"];
 };

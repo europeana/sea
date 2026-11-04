@@ -1,47 +1,25 @@
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  vi,
-} from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import fetch from "node-fetch-native";
-import { useRuntimeConfig } from "nitropack/runtime";
+import { createZohoAccessToken } from "../src/auth.js";
+import { ZohoAuthConfig } from "../src/types.js";
 
-import { createZohoAccessToken } from "@/services/zoho/auth";
-
-const mockFetch = vi.mocked(fetch);
-const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
+const mockFetch = vi.mocked(global.fetch);
 
 describe("@/services/zoho/auth", () => {
   const oauthResponse = {
     access_token: "ZOHO_ACCESS_TOKEN",
   };
-  const config = {
+  const config: ZohoAuthConfig = {
     clientId: "ZOHO_CLIENT_ID",
     clientSecret: "ZOHO_CLIENT_SECRET",
     serviceOrgId: "ZOHO_SERVICE_ORG_ID",
   };
 
-  beforeAll(() => {
-    mockFetch.mockResolvedValue({
-      body: null,
-      json: vi.fn().mockResolvedValue(oauthResponse),
-      ok: true,
-      status: 200,
-    });
+  beforeEach(() => {
+    mockFetch.mockResolvedValue(new Response(JSON.stringify(oauthResponse)));
+  });
 
-    mockUseRuntimeConfig.mockReturnValue({
-      zoho: config,
-    });
-  });
   afterEach(() => {
-    vi.restoreAllMocks();
-  });
-  afterAll(() => {
     vi.resetAllMocks();
   });
 
@@ -50,7 +28,7 @@ describe("@/services/zoho/auth", () => {
       const url = new URL(
         "https://accounts.zoho.eu/oauth/v2/token?client_id=ZOHO_CLIENT_ID&client_secret=ZOHO_CLIENT_SECRET&grant_type=client_credentials&scope=ZohoCRM.modules.ALL%2CZohoCRM.bulk.read&soid=ZohoCRM.ZOHO_SERVICE_ORG_ID",
       );
-      await createZohoAccessToken();
+      await createZohoAccessToken(config);
 
       expect(mockFetch).toHaveBeenCalledWith(url, {
         method: "post",
@@ -58,7 +36,7 @@ describe("@/services/zoho/auth", () => {
     });
 
     it("returns the access token from the response", async () => {
-      const accessToken = await createZohoAccessToken();
+      const accessToken = await createZohoAccessToken(config);
 
       expect(accessToken).toBe(oauthResponse["access_token"]);
     });

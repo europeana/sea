@@ -8,23 +8,20 @@ import {
   vi,
 } from "vitest";
 
-import fetch from "node-fetch-native";
-import { useRuntimeConfig } from "nitropack/runtime";
+import { createZohoAPIClient } from "../src/api.js";
+import { createZohoAccessToken } from "../src/auth.js";
+import { ZohoAuthConfig } from "../src/types.js";
 
-import { createZohoAPIClient } from "@/services/zoho/api";
-import { createZohoAccessToken } from "@/services/zoho/auth";
-
-vi.mock("@/services/zoho/auth", () => ({
+vi.mock("../src/auth.js", () => ({
   createZohoAccessToken: vi.fn(),
 }));
 
-const mockFetch = vi.mocked(fetch);
-const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
+const mockFetch = vi.mocked(global.fetch);
 const mockCreateZohoAccessToken = vi.mocked(createZohoAccessToken);
 
 describe("@/services/zoho/api", () => {
   const accessToken = "ZOHO_ACCESS_TOKEN";
-  const config = {
+  const config: ZohoAuthConfig = {
     clientId: "ZOHO_CLIENT_ID",
     clientSecret: "ZOHO_CLIENT_SECRET",
     serviceOrgId: "ZOHO_SERVICE_ORG_ID",
@@ -54,10 +51,6 @@ describe("@/services/zoho/api", () => {
   beforeEach(() => {
     let accessTokenCount = 0;
 
-    mockUseRuntimeConfig.mockReturnValue({
-      zoho: config,
-    });
-
     mockCreateZohoAccessToken.mockImplementation(() => {
       accessTokenCount = accessTokenCount + 1;
       return Promise.resolve(`${accessToken}_${accessTokenCount}`);
@@ -70,7 +63,7 @@ describe("@/services/zoho/api", () => {
   describe("createZohoAPIClient", () => {
     describe("request", () => {
       it("sends an authenticated request to Zoho API", async () => {
-        await createZohoAPIClient().request(url, {
+        await createZohoAPIClient(config).request(url, {
           params: { query: "smith" },
         });
 
@@ -91,7 +84,8 @@ describe("@/services/zoho/api", () => {
         });
 
         it("returns the response", async () => {
-          const zohoFetchResponse = await createZohoAPIClient().request(url);
+          const zohoFetchResponse =
+            await createZohoAPIClient(config).request(url);
 
           expect(zohoFetchResponse).toEqual(responses.ok);
         });
@@ -110,7 +104,7 @@ describe("@/services/zoho/api", () => {
           });
 
           it("refreshes the access token and tries again", async () => {
-            const response = await createZohoAPIClient().request(url);
+            const response = await createZohoAPIClient(config).request(url);
 
             expect(mockCreateZohoAccessToken.mock.calls).toHaveLength(2);
             expect(mockFetch.mock.calls).toHaveLength(2);
@@ -133,7 +127,7 @@ describe("@/services/zoho/api", () => {
             let err;
 
             try {
-              await createZohoAPIClient().request(url);
+              await createZohoAPIClient(config).request(url);
             } catch (e) {
               err = e;
             }

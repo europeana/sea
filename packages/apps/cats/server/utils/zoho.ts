@@ -1,4 +1,4 @@
-import { createZohoAPIClient, ZohoAPIClient } from "@/services/zoho/api";
+import { createZohoAPIClient, ZohoAPIClient } from "@europeana/zoho-client";
 
 let zohoClient: ZohoAPIClient;
 

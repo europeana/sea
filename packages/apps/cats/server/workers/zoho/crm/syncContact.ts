@@ -2,8 +2,7 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 
 import { PersonEntry, PersonEntryFields } from "@/types/contentful";
-import { ZohoContact } from "@/models/zoho/crm/contact";
-import { ZohoContactRecord } from "@/types/zoho";
+import { ZohoContact, ZohoContactRecord } from "@europeana/zoho-client";
 import { createOrUpdateEntry } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
@@ -17,7 +16,10 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
 
   const zohoContact = await findZohoContact(job);
 
-  const fields = zohoContact.toContentfulPersonEntryFields(contentfulLocale);
+  const fields = mapZohoContactToContentfulPersonEntryFields(
+    zohoContact,
+    contentfulLocale,
+  );
 
   const photoAssetId = await getPhotoAssetId(job);
   if (photoAssetId) {
@@ -44,6 +46,22 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
 const opts = {
   removeOnComplete: { count: 100 },
   // removeOnFail: { count: 5000 },
+};
+
+const mapZohoContactToContentfulPersonEntryFields = (
+  zohoContact: ZohoContact,
+  locale: string,
+): PersonEntryFields => {
+  return {
+    name: { [locale]: zohoContact.name },
+    email: { [locale]: zohoContact.email },
+    participation: { [locale]: zohoContact.participation },
+    title: { [locale]: zohoContact.jobTitle },
+    country: { [locale]: zohoContact.country },
+    communities: { [locale]: zohoContact.communities },
+    url: { [locale]: zohoContact.linkedIn },
+    zohoId: { [locale]: zohoContact.id },
+  };
 };
 
 const findZohoContact = async (job: Job): Promise<ZohoContact> => {

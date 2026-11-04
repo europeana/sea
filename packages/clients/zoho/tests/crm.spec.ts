@@ -1,22 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { useRuntimeConfig } from "nitropack/runtime";
 import { Readable } from "node:stream";
 
-import { ZohoContact } from "@/models/zoho/crm/contact";
-import { createZohoCRMClient } from "@/services/zoho/crm";
+import { ZohoContact } from "../src/models/crm/contact.js";
+import { createZohoCRMClient } from "../src/crm.js";
 
-const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
+// const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
 const mockAPI = { request: vi.fn() };
 
-describe("@/services/zoho/crm", () => {
-  beforeEach(() => {
-    mockUseRuntimeConfig.mockReturnValue({
-      zoho: {
-        bulkReadCallbackUrl: "https://example.org/zoho/bulk/callback",
-      },
-    });
-  });
+describe("crm", () => {
   afterEach(() => {
     vi.resetAllMocks();
   });
@@ -37,13 +29,18 @@ describe("@/services/zoho/crm", () => {
       });
 
       it("sends a request to Zoho CRM API", async () => {
-        await createZohoCRMClient(mockAPI).createZohoBulkReadJob(criteria);
+        const callbackUrl = "https://example.org/zoho/bulk/callback";
+
+        await createZohoCRMClient(mockAPI).createZohoBulkReadJob(
+          criteria,
+          callbackUrl,
+        );
 
         expect(mockAPI.request).toHaveBeenCalledWith("/crm/bulk/v8/read", {
           method: "post",
-          headers: {
+          headers: new Headers({
             "content-type": "application/json",
-          },
+          }),
           body: '{"query":{"module":{"api_name":"Contacts"},"fields":["id","Full_Name","Public_email","LinkedIn","Communities","Contact_Participation","Country_new","Title","Modified_Time"],"criteria":{"field":{"api_name":"Contact_Participation"},"comparator":"contains","value":["Staff"]}},"callback":{"method":"post","url":"https://example.org/zoho/bulk/callback"}}',
         });
       });

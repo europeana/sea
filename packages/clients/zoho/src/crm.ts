@@ -1,10 +1,13 @@
-import { useRuntimeConfig } from "nitropack/runtime";
 import { parse as parseContentDisposition } from "content-disposition";
 import { Readable } from "node:stream";
 
-import { ZohoContact } from "@/models/zoho/crm/contact";
-import { ZohoBulkReadCriteria } from "@/types/zoho";
-import { ZohoAPIClient } from "./api";
+import { ZohoContact } from "./models/crm/contact.js";
+import {
+  ZohoBulkReadCriteria,
+  ZohoBulkReadRequestBody,
+  ZohoContactRecord,
+} from "./types.js";
+import { ZohoAPIClient } from "./api.js";
 
 export class ZohoCRMClient {
   api: ZohoAPIClient;
@@ -13,15 +16,16 @@ export class ZohoCRMClient {
     this.api = api;
   }
 
-  async createZohoBulkReadJob(criteria: ZohoBulkReadCriteria) {
-    const config = useRuntimeConfig().zoho;
-
+  async createZohoBulkReadJob(
+    criteria: ZohoBulkReadCriteria,
+    callbackUrl?: string,
+  ) {
     const method = "post";
     const url = "/crm/bulk/v8/read";
-    const headers = {
+    const headers = new Headers({
       "content-type": "application/json",
-    };
-    const body = {
+    });
+    const body: ZohoBulkReadRequestBody = {
       query: {
         module: {
           api_name: "Contacts",
@@ -41,10 +45,10 @@ export class ZohoCRMClient {
         criteria,
       },
     };
-    if (config.bulkReadCallbackUrl) {
+    if (callbackUrl) {
       body.callback = {
         method: "post",
-        url: config.bulkReadCallbackUrl,
+        url: callbackUrl,
       };
     }
 
@@ -72,7 +76,6 @@ export class ZohoCRMClient {
   }
 
   async fetchZohoContact(id: string): Promise<ZohoContact | null> {
-    // TODO: should this go into args? or be derived from ZohoContactRecord type?
     const params = {
       fields:
         "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
@@ -85,7 +88,7 @@ export class ZohoCRMClient {
       return null;
     }
 
-    const json = await response.json();
+    const json = (await response.json()) as { data: ZohoContactRecord[] };
 
     return new ZohoContact(json.data[0]);
   }

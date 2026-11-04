@@ -1,14 +1,16 @@
-// TODO: move to own workspace package @europeana/zoho
-
-import fetch from "node-fetch-native";
-
-import { createZohoAccessToken } from "./auth";
-import { ZohoCRMClient } from "./crm";
+import { createZohoAccessToken } from "./auth.js";
+import { ZohoCRMClient } from "./crm.js";
+import { ZohoAPIErrorResponse, ZohoAuthConfig } from "./types.js";
 
 // TODO: supply config to constructor, i.e. rm use of useRuntimeConfig from service impl
 export class ZohoAPIClient {
   private _accessToken: string | null = null;
   private _crm: ZohoCRMClient | null = null;
+  private _config: ZohoAuthConfig;
+
+  constructor(config: ZohoAuthConfig) {
+    this._config = config;
+  }
 
   get accessToken() {
     return this._accessToken;
@@ -20,7 +22,7 @@ export class ZohoAPIClient {
 
   async authenticate() {
     if (!this.authenticated) {
-      this.accessToken = await createZohoAccessToken();
+      this.accessToken = await createZohoAccessToken(this._config);
     }
   }
 
@@ -57,9 +59,9 @@ export class ZohoAPIClient {
       params,
     }: {
       body?: string;
-      headers?: HeadersInit;
+      headers?: Headers;
       method?: string;
-      params?: object;
+      params?: { [key: string]: string };
     } = {},
   ): Promise<Response> {
     // TODO: make base URL configurable
@@ -82,7 +84,7 @@ export class ZohoAPIClient {
 
     if (!response.ok) {
       if (response.status === 401) {
-        const json = await response.json();
+        const json = (await response.json()) as ZohoAPIErrorResponse;
         if (json.code === "INVALID_TOKEN") {
           // clear the access token so a new one is requested
           // TODO: this should be using the refresh token
@@ -101,4 +103,5 @@ export class ZohoAPIClient {
   }
 }
 
-export const createZohoAPIClient = () => new ZohoAPIClient();
+export const createZohoAPIClient = (config: ZohoAuthConfig) =>
+  new ZohoAPIClient(config);

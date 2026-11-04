@@ -1,5 +1,4 @@
-import { ZohoContactRecord } from "@/types/zoho";
-import { PersonEntryFields } from "@/types/contentful";
+import { ZohoContactRecord } from "../../types.js";
 
 export class ZohoContact {
   private record: ZohoContactRecord;
@@ -43,21 +42,9 @@ export class ZohoContact {
   get participation(): string[] {
     return listValueAsArray(this.record.Contact_Participation);
   }
-
-  toContentfulPersonEntryFields(locale: string): PersonEntryFields {
-    return {
-      name: { [locale]: this.name },
-      email: { [locale]: this.email },
-      participation: { [locale]: this.participation },
-      title: { [locale]: this.jobTitle },
-      country: { [locale]: this.country },
-      communities: { [locale]: this.communities },
-      url: { [locale]: this.linkedIn },
-      zohoId: { [locale]: this.id },
-    };
-  }
 }
 
+// TODO: mv to utils
 const listValueAsArray = (
   value: string | Array<string>,
   splitter: string = ";",
