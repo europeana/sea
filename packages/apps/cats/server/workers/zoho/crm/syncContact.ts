@@ -12,22 +12,22 @@ export { name, processor, opts };
 const name = "zoho-crm-sync-contact";
 
 const processor = async (job: Job): Promise<{ entryId: string | null }> => {
-  const zohoContact = await findZohoContact(job);
-  const locale = useRuntimeConfig().contentful?.defaultLocale;
+  const contentfulLocale = useRuntimeConfig().contentful?.defaultLocale;
+  const contentfulContentTypeId = "person";
 
-  const fields = zohoContact.toContentfulPersonEntryFields(locale);
+  const zohoContact = await findZohoContact(job);
+
+  const fields = zohoContact.toContentfulPersonEntryFields(contentfulLocale);
 
   const photoAssetId = await getPhotoAssetId(job);
   if (photoAssetId) {
     addImageToPersonEntryFields(fields, photoAssetId);
   }
 
-  const contentType = "person";
-
   const contentfulPersonEntry: PersonEntry | null = (await createOrUpdateEntry(
-    contentType,
+    contentfulContentTypeId,
     {
-      content_type: contentType,
+      content_type: contentfulContentTypeId,
       "fields.zohoId": zohoContact.id,
     },
     fields,
@@ -76,9 +76,9 @@ const addImageToPersonEntryFields = (
   fields: PersonEntryFields,
   imageAssetId: string,
 ) => {
-  const locale = useRuntimeConfig().contentful?.defaultLocale;
+  const contentfulLocale = useRuntimeConfig().contentful?.defaultLocale;
   fields.image = {
-    [locale]: {
+    [contentfulLocale]: {
       sys: {
         type: "Link",
         linkType: "Asset",

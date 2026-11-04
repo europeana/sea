@@ -2,7 +2,7 @@ import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import contentfulManagement from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { useEnvironment } from "@/utils/contentful";
+import { useContentfulEnvironment } from "@/utils/contentful";
 
 const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
 
@@ -14,7 +14,7 @@ describe("@/utils/contentful", () => {
     vi.resetAllMocks();
   });
 
-  describe("useEnvironment", () => {
+  describe("useContentfulEnvironment", () => {
     it("uses the SDK to get the Contentful environment for the runtime config", async () => {
       const config = {
         accessToken: "CTF_ACCESS_TOKEN",
@@ -29,7 +29,7 @@ describe("@/utils/contentful", () => {
       const mockGetSpace = vi.mocked(mockCreateClient().getSpace);
       const mockGetEnvironment = vi.mocked(mockGetSpace().getEnvironment);
 
-      await useEnvironment();
+      await useContentfulEnvironment();
 
       expect(mockCreateClient).toHaveBeenCalledWith({
         accessToken: config.accessToken,

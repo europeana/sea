@@ -8,7 +8,7 @@ import { useRuntimeConfig } from "nitropack/runtime";
 
 let environment: Environment;
 
-export const useEnvironment = async (): Promise<Environment> => {
+export const useContentfulEnvironment = async (): Promise<Environment> => {
   if (!environment) {
     const config = useRuntimeConfig()?.contentful;
 
@@ -23,12 +23,14 @@ export const useEnvironment = async (): Promise<Environment> => {
 };
 
 export const createOrUpdateEntry = async (
-  contentType: string,
+  contentTypeId: string,
   query: QueryOptions,
   fields: KeyValueMap,
   publish: boolean = true,
 ): Promise<Entry | null> => {
   let entry = await findEntry(query);
+
+  fields = await omitInvalidArrayFieldValues(contentTypeId, fields);
 
   if (entry) {
     entry.fields = {
@@ -37,8 +39,7 @@ export const createOrUpdateEntry = async (
     };
     entry = await entry.update();
   } else {
-    const contentfulEnvironment = await useEnvironment();
-    entry = await contentfulEnvironment.createEntry(contentType, {
+    entry = await environment.createEntry(contentTypeId, {
       fields,
     });
   }
@@ -54,8 +55,8 @@ export const createOrUpdateEntry = async (
 };
 
 export const findEntry = async (query: QueryOptions): Promise<Entry | null> => {
-  const contentfulEnvironment = await useEnvironment();
-  const response = await contentfulEnvironment.getEntries(query);
+  const environment = await useContentfulEnvironment();
+  const response = await environment.getEntries(query);
 
   // TODO: handle more than 1? i.e. update all?
   if (response.total === 1) {
@@ -63,4 +64,28 @@ export const findEntry = async (query: QueryOptions): Promise<Entry | null> => {
   }
 
   return null;
+};
+
+export const omitInvalidArrayFieldValues = async (
+  contentTypeId: string,
+  fields: KeyValueMap,
+): Promise<KeyValueMap> => {
+  const environment = await useContentfulEnvironment();
+  const contentType = await environment.getContentType(contentTypeId);
+  const locale = useRuntimeConfig().contentful?.defaultLocale;
+
+  for (const contentTypeField of contentType.fields) {
+    if (fields[contentTypeField.id] && contentTypeField.type === "Array") {
+      const inValidation = contentTypeField.items?.validations?.find(
+        (validation) => validation.in,
+      );
+      if (inValidation) {
+        fields[contentTypeField.id][locale] = fields[contentTypeField.id][
+          locale
+        ].filter((value) => inValidation.in.includes(value));
+      }
+    }
+  }
+
+  return fields;
 };

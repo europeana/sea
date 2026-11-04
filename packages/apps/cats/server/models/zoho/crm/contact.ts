@@ -1,8 +1,4 @@
-import {
-  ZohoContactRecord,
-  ZohoContactCommunity,
-  ZohoContactParticipation,
-} from "@/types/zoho";
+import { ZohoContactRecord } from "@/types/zoho";
 import { PersonEntryFields } from "@/types/contentful";
 
 export class ZohoContact {
@@ -40,14 +36,12 @@ export class ZohoContact {
     return this.record.Title;
   }
 
-  get communities(): ZohoContactCommunity[] {
-    return listValueAsArray(this.record.Communities) as ZohoContactCommunity[];
+  get communities(): string[] {
+    return listValueAsArray(this.record.Communities);
   }
 
-  get participation(): ZohoContactParticipation[] {
-    return listValueAsArray(
-      this.record.Contact_Participation,
-    ) as ZohoContactParticipation[];
+  get participation(): string[] {
+    return listValueAsArray(this.record.Contact_Participation);
   }
 
   toContentfulPersonEntryFields(locale: string): PersonEntryFields {

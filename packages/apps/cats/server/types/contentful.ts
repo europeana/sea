@@ -1,7 +1,5 @@
 import { Asset, Entry } from "contentful-management";
 
-import { ZohoContactCommunity, ZohoContactParticipation } from "./zoho";
-
 export type PersonEntryFields = {
   name: { [locale: string]: string };
   affiliation?: { [locale: string]: string };
@@ -10,8 +8,8 @@ export type PersonEntryFields = {
   email?: { [locale: string]: string };
   title?: { [locale: string]: string };
   country?: { [locale: string]: string };
-  communities?: { [locale: string]: Array<ZohoContactCommunity> };
-  participation?: { [locale: string]: Array<ZohoContactParticipation> };
+  communities?: { [locale: string]: Array<string> };
+  participation?: { [locale: string]: Array<string> };
   role?: { [locale: string]: string };
   zohoId?: { [locale: string]: string };
 };

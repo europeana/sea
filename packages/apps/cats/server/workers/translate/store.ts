@@ -1,5 +1,5 @@
 import type { Job } from "bullmq";
-import { useEnvironment } from "@/utils/contentful";
+import { useContentfulEnvironment } from "@/utils/contentful";
 import { localeForLang } from "@/utils/i18n/locales";
 
 export { name, processor, opts };
@@ -7,7 +7,7 @@ export { name, processor, opts };
 const name = "translate-store";
 
 const processor = async (job: Job) => {
-  const contentfulEnvironment = await useEnvironment();
+  const contentfulEnvironment = await useContentfulEnvironment();
 
   // all per-language receipt children jobs are complete; assemble their values
   // into the entry's field localisations

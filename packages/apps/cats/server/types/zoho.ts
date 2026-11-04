@@ -6,29 +6,33 @@ export type ZohoBulkReadCriteria = {
   value: Array<string> | string;
 };
 
-export type ZohoContactCommunity =
-  | "Communicators"
-  | "Copyright"
-  | "Climate"
-  | "Education"
-  | "EuropeanaTech"
-  | "Impact"
-  | "Research";
+// export const ZohoContactCommunityValues = [
+//   "Climate",
+//   "Communicators",
+//   "Copyright",
+//   "Education",
+//   "EuropeanaTech",
+//   "Impact",
+//   "Research",
+// ];
+// export type ZohoContactCommunity = typeof ZohoContactCommunityValues[number];
 
-export type ZohoContactParticipation =
-  | "Staff"
-  | "Network Association"
-  | "Members Council"
-  | "Management Board"
-  | "Advisory Board"
-  | "Supervisory Board"
-  | "Aggregators Forum";
+// export const ZohoContactParticipationValues = [
+//   "Advisory Board",
+//   "Aggregators Forum",
+//   "Management Board",
+//   "Members Council",
+//   "Network Association",
+//   "Staff",
+//   "Supervisory Board",
+// ];
+// export type ZohoContactParticipation = typeof ZohoContactParticipationValues[number];
 
 // TODO: add role field when decided how to model it in Zoho CRM
 export type ZohoContactRecord = {
   id: string;
-  Communities: Array<ZohoContactCommunity>;
-  Contact_Participation: Array<ZohoContactParticipation>;
+  Communities: Array<string>;
+  Contact_Participation: Array<string>;
   Country_new: string;
   Full_Name: string;
   LinkedIn: string;
