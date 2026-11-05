@@ -74,7 +74,7 @@ describe("crm", () => {
         const response =
           await createZohoCRMClient(mockAPI).fetchZohoBulkReadJobResult(id);
 
-        expect(response instanceof Readable).toBe(true);
+        expect(response).toBeInstanceOf(Readable);
       });
     });
 
@@ -144,7 +144,7 @@ describe("crm", () => {
       it("returns the photo file, content type and file name", async () => {
         const response = await createZohoCRMClient(mockAPI).fetchZohoPhoto(id);
 
-        expect(response?.file instanceof Readable).toBe(true);
+        expect(response?.file).toBeInstanceOf(Readable);
         expect(response?.contentType).toBe(contentType);
         expect(response?.fileName).toBe(fileName);
       });
