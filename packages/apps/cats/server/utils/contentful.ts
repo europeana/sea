@@ -66,7 +66,7 @@ export const findEntry = async (query: QueryOptions): Promise<Entry | null> => {
   return null;
 };
 
-export const omitInvalidArrayFieldValues = async (
+const omitInvalidArrayFieldValues = async (
   contentTypeId: string,
   fields: KeyValueMap,
 ): Promise<KeyValueMap> => {
@@ -79,10 +79,11 @@ export const omitInvalidArrayFieldValues = async (
       const inValidation = contentTypeField.items?.validations?.find(
         (validation) => validation.in,
       );
+
       if (inValidation) {
         fields[contentTypeField.id][locale] = fields[contentTypeField.id][
           locale
-        ].filter((value) => inValidation.in.includes(value));
+        ]?.filter((value) => inValidation.in.includes(value));
       }
     }
   }
