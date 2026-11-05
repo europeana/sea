@@ -36,23 +36,10 @@ export class ZohoContact {
   }
 
   get communities(): string[] {
-    return listValueAsArray(this.record.Communities);
+    return this.record.Communities;
   }
 
   get participation(): string[] {
-    return listValueAsArray(this.record.Contact_Participation);
+    return this.record.Contact_Participation;
   }
 }
-
-// TODO: mv to utils
-const listValueAsArray = (
-  value: string | Array<string>,
-  splitter: string = ";",
-): Array<string> => {
-  if (typeof value === "string") {
-    // e.g. from csv export
-    return value.split(splitter).filter(Boolean);
-  } else {
-    return value;
-  }
-};
