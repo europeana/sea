@@ -30,7 +30,7 @@ export class ZohoCRMClient {
         module: {
           api_name: "Contacts",
         },
-        // TODO: should this go into args? or be derived from ZohoContactRecord type?
+        // TODO: should this go into args?
         fields: [
           "id",
           "Full_Name",

@@ -2,7 +2,6 @@ import { createZohoAccessToken } from "./auth.js";
 import { ZohoCRMClient } from "./crm.js";
 import { ZohoAPIErrorResponse, ZohoAuthConfig } from "./types.js";
 
-// TODO: supply config to constructor, i.e. rm use of useRuntimeConfig from service impl
 export class ZohoAPIClient {
   private _accessToken: string | null = null;
   private _crm: ZohoCRMClient | null = null;
