@@ -10,6 +10,7 @@ import {
 
 import { createZohoAPIClient } from "../src/api.js";
 import { createZohoAccessToken } from "../src/auth.js";
+import { ZohoCRMClient } from "../src/crm.js";
 import { ZohoAuthConfig } from "../src/types.js";
 
 vi.mock("../src/auth.js", () => ({
@@ -64,13 +65,16 @@ describe("@/services/zoho/api", () => {
     describe("request", () => {
       it("sends an authenticated request to Zoho API", async () => {
         await createZohoAPIClient(config).request(url, {
+          method: "post",
+          body: JSON.stringify({ criteria: true }),
           params: { query: "smith" },
         });
 
         expect(mockFetch).toHaveBeenCalledWith(
           new URL("https://www.zohoapis.eu/crm/v8/Contacts?query=smith"),
           {
-            method: "get",
+            method: "post",
+            body: JSON.stringify({ criteria: true }),
             headers: {
               authorization: "Zoho-oauthtoken ZOHO_ACCESS_TOKEN_1",
             },
@@ -135,6 +139,14 @@ describe("@/services/zoho/api", () => {
             expect(err?.message).toBe("Zoho CRM API request error: 500");
           });
         });
+      });
+    });
+
+    describe("crm", () => {
+      it("is an instance of ZohoCRMClient", () => {
+        const crm = createZohoAPIClient(config).crm;
+
+        expect(crm).toBeInstanceOf(ZohoCRMClient);
       });
     });
   });

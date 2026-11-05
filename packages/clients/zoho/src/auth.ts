@@ -20,7 +20,7 @@ export const createZohoAccessToken = async (
   });
 
   if (!response.ok) {
-    throw new Error(`Zoho oAuth request error: "${response.statusText}`);
+    throw new Error(`Zoho oAuth request error: ${response.statusText}`);
   }
 
   const json = (await response.json()) as ZohoOAuthTokenResponse;

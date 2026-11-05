@@ -35,10 +35,26 @@ describe("@/services/zoho/auth", () => {
       });
     });
 
-    it("returns the access token from the response", async () => {
-      const accessToken = await createZohoAccessToken(config);
+    describe("when response is ok", () => {
+      it("returns the access token from the response", async () => {
+        const accessToken = await createZohoAccessToken(config);
 
-      expect(accessToken).toBe(oauthResponse["access_token"]);
+        expect(accessToken).toBe(oauthResponse["access_token"]);
+      });
+    });
+
+    describe("when response is not ok", () => {
+      beforeEach(() => {
+        mockFetch.mockResolvedValue(
+          new Response(null, { status: 400, statusText: "FAIL" }),
+        );
+      });
+
+      it("throws an error", async () => {
+        await expect(createZohoAccessToken(config)).rejects.toThrow(
+          "Zoho oAuth request error: FAIL",
+        );
+      });
     });
   });
 });
