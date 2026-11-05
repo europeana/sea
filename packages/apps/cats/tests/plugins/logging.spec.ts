@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import plugin from "../../../server/plugins/logging.ts";
+import plugin from "@/plugins/logging";
 
 vi.mock("nitropack/runtime", () => {
   return {
@@ -22,7 +22,7 @@ vi.mock("morgan", () => {
 
 mocks.morgan.mockImplementation(() => mocks.logger);
 
-describe("@/server/plugins/logging.ts", () => {
+describe("@/plugins/logging", () => {
   describe("plugin", () => {
     it("registers beforeResponse hook for combined-format logging with morgan", () => {
       let hookName;
