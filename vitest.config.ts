@@ -8,7 +8,6 @@ export default defineConfig({
       "packages/apps/cats",
       "packages/apps/ctf-apps",
       "packages/apps/ds4ch",
-      "packages/clients/zoho",
       "packages/components/map",
       "packages/directives/vue-visible-on-scroll",
       "packages/layers/base",
