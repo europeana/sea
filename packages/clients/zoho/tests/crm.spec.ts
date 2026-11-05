@@ -45,11 +45,28 @@ describe("crm", () => {
         });
       });
 
-      it("returns response", async () => {
-        const response =
-          await createZohoCRMClient(mockAPI).createZohoBulkReadJob(criteria);
+      describe("when there is a response body", () => {
+        it("returns the API response", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).createZohoBulkReadJob(criteria);
 
-        expect(response).toBe(apiResponse);
+          expect(response).toBe(apiResponse);
+        });
+      });
+
+      describe("when there is no response body", () => {
+        beforeEach(() => {
+          const apiResponse = new Response(null);
+
+          mockAPI.request.mockResolvedValue(apiResponse);
+        });
+
+        it("returns null", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).createZohoBulkReadJob(criteria);
+
+          expect(response).toBeNull();
+        });
       });
     });
 
@@ -70,11 +87,28 @@ describe("crm", () => {
         );
       });
 
-      it("returns the file", async () => {
-        const response =
-          await createZohoCRMClient(mockAPI).fetchZohoBulkReadJobResult(id);
+      describe("when there is a response body", () => {
+        it("returns the file as a readable stream", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).fetchZohoBulkReadJobResult(id);
 
-        expect(response).toBeInstanceOf(Readable);
+          expect(response).toBeInstanceOf(Readable);
+        });
+      });
+
+      describe("when there is no response body", () => {
+        beforeEach(() => {
+          const apiResponse = new Response(null);
+
+          mockAPI.request.mockResolvedValue(apiResponse);
+        });
+
+        it("returns null", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).fetchZohoBulkReadJobResult(id);
+
+          expect(response).toBeNull();
+        });
       });
     });
 
@@ -103,17 +137,34 @@ describe("crm", () => {
         );
       });
 
-      it("returns the first data item from the response", async () => {
-        const contact: ZohoContact = {
-          record: {
-            Full_Name: "Test Contact",
-          },
-        };
+      describe("when there is a response body", () => {
+        it("returns the first data item from the response", async () => {
+          const contact: ZohoContact = {
+            record: {
+              Full_Name: "Test Contact",
+            },
+          };
 
-        const response =
-          await createZohoCRMClient(mockAPI).fetchZohoContact(id);
+          const response =
+            await createZohoCRMClient(mockAPI).fetchZohoContact(id);
 
-        expect(response).toEqual(contact);
+          expect(response).toEqual(contact);
+        });
+      });
+
+      describe("when there is no response body", () => {
+        beforeEach(() => {
+          const apiResponse = new Response(null);
+
+          mockAPI.request.mockResolvedValue(apiResponse);
+        });
+
+        it("returns null", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).fetchZohoContact(id);
+
+          expect(response).toBeNull();
+        });
       });
     });
 
@@ -141,12 +192,30 @@ describe("crm", () => {
         );
       });
 
-      it("returns the photo file, content type and file name", async () => {
-        const response = await createZohoCRMClient(mockAPI).fetchZohoPhoto(id);
+      describe("when there is a response body", () => {
+        it("returns the photo file, content type and file name", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).fetchZohoPhoto(id);
 
-        expect(response?.file).toBeInstanceOf(Readable);
-        expect(response?.contentType).toBe(contentType);
-        expect(response?.fileName).toBe(fileName);
+          expect(response?.file).toBeInstanceOf(Readable);
+          expect(response?.contentType).toBe(contentType);
+          expect(response?.fileName).toBe(fileName);
+        });
+      });
+
+      describe("when there is no response body", () => {
+        beforeEach(() => {
+          const apiResponse = new Response(null);
+
+          mockAPI.request.mockResolvedValue(apiResponse);
+        });
+
+        it("returns null", async () => {
+          const response =
+            await createZohoCRMClient(mockAPI).fetchZohoPhoto(id);
+
+          expect(response).toBeNull();
+        });
       });
     });
   });

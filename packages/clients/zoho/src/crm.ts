@@ -58,6 +58,10 @@ export class ZohoCRMClient {
       body: JSON.stringify(body),
     });
 
+    if (!response.body) {
+      return null;
+    }
+
     const json = await response.json();
 
     return json;
