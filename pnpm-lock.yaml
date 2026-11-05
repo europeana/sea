@@ -452,6 +452,9 @@ importers:
       nitropack:
         specifier: catalog:nitro2
         version: 2.13.4(encoding@0.1.13)(oxc-parser@0.132.0)
+      vite-tsconfig-paths:
+        specifier: catalog:vite7
+        version: 6.1.1(typescript@5.9.3)(vite@7.3.7(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.106.1)(sass@1.106.1)(terser@5.51.2)(yaml@2.9.1))
 
   packages/apps/ctf-apps:
     dependencies:
