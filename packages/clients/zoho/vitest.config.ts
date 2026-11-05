@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     clearMocks: true,
-    setupFiles: ["./vitest.setup.ts"],
+    setupFiles: ["./tests/vitest.setup.ts"],
     unstubGlobals: true,
   },
 });
