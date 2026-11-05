@@ -1,16 +1,7 @@
 import * as cheerio from "cheerio";
 import { marked } from "marked";
-import { Entry, ContentType } from "contentful-management";
 
-export const markupFields = ({
-  entry,
-  contentType,
-  locale = "en-GB",
-}: {
-  entry: Entry;
-  contentType: ContentType;
-  locale: string;
-}) => {
+export const markupFields = ({ entry, contentType, locale = "en-GB" }) => {
   const translatableFields = contentType.fields.filter(
     (field) =>
       Object.keys(entry.fields).includes(field.id) &&
