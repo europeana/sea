@@ -8,9 +8,12 @@ allowBuilds:
 catalog:
   "@europeana/style": "2.39.6"
   bootstrap: "5.3.8"
+  content-disposition: "3.0.0"
   lodash-es: "4.18.1"
   node-fetch-native: "1.6.7"
   ol: "10.9.0"
+  readable-stream: 4.7.0
+  rimraf: 6.1.4
 catalogs:
   eslint10:
     "@eslint/compat": "2.1.0"
@@ -35,12 +38,22 @@ catalogs:
     "@nuxtjs/i18n": 9.5.6
     "@nuxtjs/storybook": 9.0.1
     nuxt: 3.21.8
+  rollup4:
+    "@rollup/plugin-node-resolve": 16.0.3
+    "@rollup/plugin-terser": "1.0.2"
+    "@rollup/plugin-typescript": "12.3.1"
+    rollup: 4.62.2
+  typescript5:
+    typescript: 5.9.3
   types:
     "@types/morgan": "1.9.10"
+    "@types/node": 26.0.0
+    "@types/readable-stream": 4.0.25
     "@types/turndown": "5.0.6"
   vite7:
     "@vitejs/plugin-vue": "6.0.7"
     vite: "7.3.7"
+    "vite-tsconfig-paths": "6.1.1"
   vitest4:
     "@vitest/coverage-v8": "4.1.11"
     vitest: "4.1.11"
@@ -51,5 +64,6 @@ catalogs:
 minimumReleaseAgeExclude:
   - "@europeana/style"
   - "@europeana/feedback-widget@0.5.6"
+  - rimraf@6.1.4
 packages:
   - packages/**

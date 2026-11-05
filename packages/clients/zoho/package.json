@@ -1,0 +1,31 @@
+{
+  "name": "@europeana/zoho-client",
+  "version": "0.0.1",
+  "description": "Europeana Zoho client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
+  "license": "EUPL-1.2",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "test": "vitest"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "content-disposition": "catalog:"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "catalog:rollup4",
+    "@rollup/plugin-terser": "catalog:rollup4",
+    "@rollup/plugin-typescript": "catalog:rollup4",
+    "@types/node": "catalog:types",
+    "rimraf": "catalog:",
+    "rollup": "catalog:rollup4",
+    "typescript": "catalog:typescript5",
+    "vite-tsconfig-paths": "catalog:vite7"
+  }
+}
