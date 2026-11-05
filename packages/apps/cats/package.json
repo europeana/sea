@@ -19,6 +19,7 @@
     "vite-tsconfig-paths": "catalog:vite7"
   },
   "dependencies": {
+    "@europeana/zoho-client": "workspace:*",
     "bullmq": "^5.58.5",
     "cheerio": "catalog:html",
     "contentful-management": "^11.57.4",

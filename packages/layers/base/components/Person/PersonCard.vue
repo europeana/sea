@@ -149,14 +149,14 @@ const renderButtons = computed(
 @import "@europeana/style/scss/variables";
 
 .person-card {
-  width: 10.25rem;
+  min-width: 10.25rem;
 
   @media (min-width: $bp-extralarge) {
-    width: 14.375rem;
+    min-width: 14.375rem;
   }
 
   @media (min-width: $bp-4k) {
-    width: calc(var(--bp-4k-increment) * 14.375rem);
+    min-width: calc(var(--bp-4k-increment) * 14.375rem);
   }
 }
 

@@ -49,11 +49,10 @@ defineProps({
       <!-- eslint-enable vue/no-v-html -->
     </div>
     <div
-      class="row justify-content-center mt-4 mt-4k-5 g-4 g-4k-5 row-cols-1 row-cols-md-2 row-cols-lg-4"
+      class="row justify-content-center g-4 g-4k-5 row-cols-2 row-cols-md-3 row-cols-lg-5"
     >
       <PersonCard
         v-for="(person, index) in people"
-        :id="`person-${index}`"
         :key="index"
         class="col"
         :image="person.image"
