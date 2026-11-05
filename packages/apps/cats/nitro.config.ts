@@ -1,5 +1,5 @@
-import { defineNitroConfig } from "nitropack/config";
 import { fileURLToPath } from "node:url";
+import { defineNitroConfig } from "nitropack/config";
 
 // https://nitro.build/config
 export default defineNitroConfig({
