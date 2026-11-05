@@ -1,11 +1,11 @@
 import { Job } from "bullmq";
 import { Tag as ContentfulTag } from "contentful-management";
 
-import { useContentfulEnvironment } from "../../utils/contentful";
-import { supportedLocales } from "../../utils/i18n/locales";
-import { useFlowProducer } from "../../utils/bullmq/queue";
-import { markupFields } from "../../utils/html/markupFields";
-import { requestTranslation } from "../../utils/eTranslation";
+import { useContentfulEnvironment } from "@/utils/contentful";
+import { supportedLocales } from "@/utils/i18n/locales";
+import { useFlowProducer } from "@/utils/bullmq/queue";
+import { markupFields } from "@/utils/html/markupFields";
+import { requestTranslation } from "@/utils/eTranslation";
 import { name as receiveQueueName } from "./receive";
 import { name as storeQueueName } from "./store";
 

@@ -1,7 +1,11 @@
+import { fileURLToPath } from "node:url";
 import { defineNitroConfig } from "nitropack/config";
 
 // https://nitro.build/config
 export default defineNitroConfig({
+  alias: {
+    "@": fileURLToPath(new URL("./server", import.meta.url)),
+  },
   compatibilityDate: "2025-09-17",
   srcDir: "server",
   runtimeConfig: {
