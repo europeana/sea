@@ -6,7 +6,7 @@ import { ZohoAPIErrorResponse, ZohoAuthConfig } from "./types.js";
 export class ZohoAPIClient {
   private _accessToken: string | null = null;
   private _crm: ZohoCRMClient | null = null;
-  private _config: ZohoAuthConfig;
+  private readonly _config: ZohoAuthConfig;
 
   constructor(config: ZohoAuthConfig) {
     this._config = config;

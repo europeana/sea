@@ -1,7 +1,7 @@
 import { ZohoContactRecord } from "../../types.js";
 
 export class ZohoContact {
-  private record: ZohoContactRecord;
+  private readonly record: ZohoContactRecord;
 
   constructor(record: ZohoContactRecord) {
     this.record = record;
