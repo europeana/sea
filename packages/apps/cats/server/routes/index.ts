@@ -1,5 +1,7 @@
 import { defineEventHandler } from "h3";
 
-export default defineEventHandler(() => {
+const handler = () => {
   return "OK";
-});
+};
+
+export default defineEventHandler(handler);

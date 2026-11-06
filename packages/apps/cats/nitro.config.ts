@@ -10,6 +10,7 @@ export default defineNitroConfig({
   srcDir: "server",
   runtimeConfig: {
     contentful: {
+      defaultLocale: "en-GB",
       space: null,
       environment: null,
       accessToken: null,
@@ -26,12 +27,12 @@ export default defineNitroConfig({
     },
     redis: {
       tls: {
-        // TODO: this will be base64-encoded; can we decode it here?
         ca: null,
       },
       url: null,
     },
     zoho: {
+      bulkReadCallbackUrl: null,
       clientId: null,
       clientSecret: null,
       serviceOrgId: null,

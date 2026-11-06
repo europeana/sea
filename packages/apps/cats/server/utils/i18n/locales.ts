@@ -24,11 +24,7 @@ export const supportedLocales = [
   "sv-SE",
 ];
 
-// export const targetLanguages = (locales) => locales.map((locale) => {
-//   return locale.split("-").shift().toUpperCase();
-// });
-
-export const localeForLang = (lang) =>
+export const localeForLang = (lang: string): string | undefined =>
   supportedLocales.find((locale) =>
     locale.startsWith(`${lang.toLowerCase()}-`),
   );
