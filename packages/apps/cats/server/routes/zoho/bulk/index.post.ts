@@ -1,6 +1,6 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
+import { ZohoBulkReadCriteria } from "@europeana/zoho-client";
 
-import { ZohoBulkReadCriteria } from "@/types/zoho";
 import { useQueue } from "@/utils/queues";
 import { name as queueName } from "@/workers/zoho/crm/createBulkRead";
 

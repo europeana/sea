@@ -2,6 +2,7 @@ import { Job } from "bullmq";
 // TODO: use csv-parse instead
 import * as csv from "csv";
 import * as unzip from "unzip-stream";
+import { ZohoContactRecord } from "@europeana/zoho-client";
 
 import { useFlowProducer } from "@/utils/queues";
 import { useZoho } from "@/utils/zoho";
@@ -42,14 +43,21 @@ const processor = async (job: Job) => {
         .pipe(
           csv.parse(
             { columns: true },
-            async function (err, rows: Array<object>) {
-              // TODO: validate contact matches participation level criteria?
+            async function (err, rows: ZohoContactCSVRecord[]) {
               // queue a job to sync each contact, w/ record provided
+              // TODO: validate contact matches participation level criteria?
               for (const contact of rows) {
                 const flow = createSyncContactFlow({
-                  contactId: contact.id || contact.Id,
+                  contactId: contact.Id,
                   modified: Date.parse(contact.Modified_Time),
-                  record: contact,
+                  record: {
+                    ...contact,
+                    id: contact.Id,
+                    Communities: listValueAsArray(contact.Communities),
+                    Contact_Participation: listValueAsArray(
+                      contact.Contact_Participation,
+                    ),
+                  } as ZohoContactRecord,
                 });
                 const flowProducer = useFlowProducer();
                 await flowProducer.add(flow);
@@ -68,6 +76,30 @@ const processor = async (job: Job) => {
 };
 
 const opts = {
-  removeOnComplete: { count: 100 },
+  removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
+};
+
+const listValueAsArray = (
+  value: string | Array<string>,
+  splitter: string = ";",
+): Array<string> => {
+  if (typeof value === "string") {
+    // e.g. from csv export
+    return value.split(splitter).filter(Boolean);
+  } else {
+    return value;
+  }
+};
+
+type ZohoContactCSVRecord = {
+  Id: string;
+  Communities: string;
+  Contact_Participation: string;
+  Country_new: string;
+  Full_Name: string;
+  LinkedIn: string;
+  Modified_Time: string;
+  Public_email: string;
+  Title: string;
 };

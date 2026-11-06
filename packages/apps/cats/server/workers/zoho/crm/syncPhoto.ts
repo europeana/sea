@@ -75,6 +75,6 @@ const processor = async (job: Job): Promise<{ assetId: string | null }> => {
 };
 
 const opts = {
-  removeOnComplete: { count: 100 },
+  removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
 };

@@ -11,7 +11,7 @@ export const createSyncContactFlow = ({
   record,
 }: {
   contactId: string;
-  modified: string;
+  modified: string | number;
   record?: object;
 }): FlowJob => {
   // derive job IDs from inputs for idempotency

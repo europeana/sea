@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { useRuntimeConfig } from "nitropack/runtime";
 
 import { useZoho } from "@/utils/zoho";
 import { processor } from "@/workers/zoho/crm/createBulkRead";
@@ -7,10 +8,15 @@ vi.mock("@/utils/zoho", () => ({
   useZoho: vi.fn(),
 }));
 
+const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
 const mockUseZoho = vi.mocked(useZoho);
 const mockCreateZohoBulkReadJob = vi.fn();
 
 describe("@/workers/zoho/crm/createBulkRead", () => {
+  const config = {
+    bulkReadCallbackUrl: "https://example.org/callback",
+  };
+
   const zohoBulkReadJobId = "789";
   const criteria = {
     field: { api_name: "Contact_Participation" },
@@ -20,6 +26,9 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
   const job = { data: { criteria } };
 
   beforeEach(() => {
+    mockUseRuntimeConfig.mockReturnValue({
+      zoho: config,
+    });
     mockUseZoho.mockReturnValue({
       crm: {
         createZohoBulkReadJob: mockCreateZohoBulkReadJob,
@@ -40,7 +49,10 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
     it("calls Zoho CRM API to create a bulk read job with criteria from data", async () => {
       await processor(job);
 
-      expect(mockCreateZohoBulkReadJob).toHaveBeenCalledWith(criteria);
+      expect(mockCreateZohoBulkReadJob).toHaveBeenCalledWith(
+        criteria,
+        config.bulkReadCallbackUrl,
+      );
     });
 
     it("returns the Zoho CRM bulk read job ID", async () => {
