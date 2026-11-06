@@ -22,9 +22,9 @@ export class ZohoCRMClient {
   ) {
     const method = "post";
     const url = "/crm/bulk/v8/read";
-    const headers = new Headers({
+    const headers = {
       "content-type": "application/json",
-    });
+    };
     const body: ZohoBulkReadRequestBody = {
       query: {
         module: {
