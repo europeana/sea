@@ -1,2 +1,2 @@
-pnpm dlx lint-staged
+pnpx lint-staged
 pnpm test
