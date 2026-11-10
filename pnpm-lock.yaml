@@ -406,9 +406,6 @@ importers:
       typescript-eslint:
         specifier: catalog:eslint10
         version: 8.61.1(eslint@10.13.0(jiti@2.7.0))(typescript@5.9.3)
-      vite:
-        specifier: 7.3.7
-        version: 7.3.7(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.106.1)(sass@1.106.1)(terser@5.48.0)(yaml@2.9.0)
       vitest:
         specifier: catalog:vitest4
         version: 4.1.11(@types/node@26.0.0)(@vitest/coverage-v8@4.1.11)(happy-dom@21.0.4)(msw@2.15.0(@types/node@26.0.0)(typescript@5.9.3))(vite@7.3.7(@types/node@26.0.0)(jiti@2.7.0)(sass-embedded@1.106.1)(sass@1.106.1)(terser@5.48.0)(yaml@2.9.0))
