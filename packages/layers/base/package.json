@@ -8,7 +8,10 @@
   "version": "0.1.25",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
   },
   "devDependencies": {
     "@elastic/apm-rum-vue": "2.1.14",
@@ -20,6 +23,7 @@
     "filesize": "11.0.24",
     "marked": "catalog:html",
     "nuxt": "catalog:nuxt3",
+    "vitest": "catalog:vitest4",
     "vue": "catalog:vue3",
     "vue-matomo": "4.2.0"
   }

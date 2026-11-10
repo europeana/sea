@@ -12,6 +12,11 @@
     ".": "./src/index.js",
     "./query": "./src/query.js"
   },
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
+  },
   "dependencies": {
     "graphql": "^17.0.0",
     "http-errors": "^2.0.1",
@@ -19,6 +24,7 @@
     "qs": "^6.14.1"
   },
   "devDependencies": {
-    "graphql-tag": "2.12.7"
+    "graphql-tag": "2.12.7",
+    "vitest": "catalog:vitest4"
   }
 }

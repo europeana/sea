@@ -21,9 +21,12 @@
     "generate": "pnpm generate:protomaps && pnpm generate:versatiles",
     "generate:protomaps": "node bin/generate.js protomaps",
     "generate:versatiles": "node bin/generate.js versatiles",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
   },
   "devDependencies": {
-    "unbuild": "3.6.1"
+    "unbuild": "3.6.1",
+    "vitest": "catalog:vitest4"
   }
 }

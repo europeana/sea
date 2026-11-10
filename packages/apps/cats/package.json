@@ -9,14 +9,18 @@
   },
   "scripts": {
     "build": "nitro build",
-    "dev": "nitro dev"
+    "dev": "nitro dev",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
   },
   "devDependencies": {
     "@types/morgan": "catalog:types",
     "@types/turndown": "catalog:types",
     "h3": "catalog:nitro2",
     "nitropack": "catalog:nitro2",
-    "vite-tsconfig-paths": "catalog:vite7"
+    "vite-tsconfig-paths": "catalog:vite7",
+    "vitest": "catalog:vitest4"
   },
   "dependencies": {
     "bullmq": "^5.58.5",

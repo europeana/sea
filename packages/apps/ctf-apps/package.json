@@ -12,7 +12,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
   },
   "devDependencies": {
     "@europeana/sea-base-layer": "workspace:*",
@@ -23,6 +26,7 @@
     "lodash-es": "catalog:",
     "nuxt": "catalog:nuxt3",
     "sass-embedded": "1.106.1",
+    "vitest": "catalog:vitest4",
     "vue": "catalog:vue3",
     "vue-router": "4.6.4"
   },

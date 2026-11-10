@@ -11,7 +11,9 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "dev": "rimraf dist && rollup -c --watch",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -27,6 +29,7 @@
     "rimraf": "catalog:",
     "rollup": "catalog:rollup4",
     "typescript": "catalog:typescript5",
-    "vite-tsconfig-paths": "catalog:vite7"
+    "vite-tsconfig-paths": "catalog:vite7",
+    "vitest": "catalog:vitest4"
   }
 }

@@ -8,13 +8,16 @@
   "version": "0.1.25",
   "main": "./nuxt.config.ts",
   "scripts": {
+    "build-storybook": "storybook build",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "preview": "nuxt preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest run --watch"
   },
   "devDependencies": {
     "@europeana/sea-base-layer": "workspace:*",
@@ -37,6 +40,7 @@
     "storybook": "10.6.2",
     "swiper": "12.2.0",
     "unplugin-vue-components": "32.1.0",
+    "vitest": "catalog:vitest4",
     "vue": "catalog:vue3",
     "vue-router": "4.6.4"
   },
