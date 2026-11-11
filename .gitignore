@@ -1,4 +1,4 @@
-# Nuxt/Nitro/Rollup dev/build outputs
+# Nuxt dev/build outputs
 .output
 .data
 .nuxt
@@ -33,6 +33,3 @@ coverage
 
 # Temporary files
 tmp/
-
-# Turbo files
-.turbo

@@ -8,11 +8,8 @@
   },
   "type": "module",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "test": "vitest run",
+    "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest",
     "prepare": "husky"
   },
   "keywords": [],
@@ -49,7 +46,6 @@
     "lerna": "9.0.7",
     "lint-staged": "17.6.0",
     "prettier": "3.9.10",
-    "turbo": "2.11.10",
     "typescript-eslint": "catalog:eslint10",
     "vite": "7.3.7",
     "vitest": "catalog:vitest4"
