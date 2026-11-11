@@ -10,7 +10,6 @@
   "type": "module",
   "scripts": {
     "build": "rimraf dist && rollup -c",
-    "dev": "rimraf dist && rollup -c --watch",
     "test": "vitest"
   },
   "main": "dist/index.cjs",
