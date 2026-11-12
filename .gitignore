@@ -1,35 +1,48 @@
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
-
 # Node dependencies
-node_modules
-package-lock.json
+**/node_modules
+**/package-lock.json
 
 # Logs
-logs
-*.log
+**/logs
+**/*.log
 
 # Misc
-.DS_Store
-.fleet
-.idea
+**/.DS_Store
+**/.fleet
+**/.idea
 
 # Local env files
-.env
-.env.*
-!.env.example
+**/.env
+**/.env.*
+**/!.env.example
+
+# Nuxt/Nitro
+**/.output
+**/.data
+**/.nuxt
+**/.nitro
+**/.cache
+**/dist
 
 # Storybook
-storybook-static
-*storybook.log
+**/storybook-static
+**/*storybook.log
 
 # Test coverage
-coverage
+**/coverage
 
 # Temporary files
-tmp/
+**/tmp
+
+# Turborepo
+**/.turbo
+
+# TypeScript
+**/*.tsbuildinfo
+
+# Rollup
+**/.rollup.cache
+
+# Git
+**/.github
+**/.gitignore
