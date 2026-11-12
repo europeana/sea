@@ -8,7 +8,7 @@
 ## Docker
 
 A multi-purpose [Dockerfile](./Dockerfile) is included to build any of the
-[apps](./packages/apps/).
+[apps](./apps/).
 
 Usage:
 
@@ -28,7 +28,7 @@ The app will now be available at http://localhost:8080/
 
 ## Versioning
 
-Versioning of the monorepo [packages](./packages/) is managed using
+Versioning of the monorepo apps and libs is managed using
 [Lerna](https://lerna.js.org/).
 
 ```shell

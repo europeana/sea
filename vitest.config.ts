@@ -2,18 +2,18 @@ import { defineConfig, coverageConfigDefaults } from "vitest/config";
 
 export default defineConfig({
   test: {
-    // NOTE: do not rely on globs like "packages/*/*" as it causes
+    // NOTE: do not rely on globs like "apps/*" as it causes
     //       failures in the nuxt-environment test suites
     projects: [
-      "packages/apps/cats",
-      "packages/apps/ctf-apps",
-      "packages/apps/ds4ch",
-      "packages/clients/zoho",
-      "packages/components/map",
-      "packages/directives/vue-visible-on-scroll",
-      "packages/layers/base",
-      "packages/plugins/vue-contentful-graphql",
-      "packages/style/map-styles",
+      "apps/cats",
+      "apps/ctf-apps",
+      "apps/ds4ch",
+      "libs/map-styles",
+      "libs/map",
+      "libs/sea-base-layer",
+      "libs/vue-contentful-graphql",
+      "libs/vue-visible-on-scroll",
+      "libs/zoho-client",
     ],
     coverage: {
       reporter: ["text", "html", "lcov"],
