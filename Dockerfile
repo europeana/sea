@@ -42,7 +42,7 @@ COPY --from=build-storybook /build/apps/${app}/storybook-static /usr/share/nginx
 RUN ls /usr/share/nginx/html/
 
 
-FROM gcr.io/distroless/nodejs24-debian13@sha256:78f07ef1b5ea71ad7c055df15d0dd8997f2d288f9158623c4d4ae3d765b7d50d AS run-app
+FROM gcr.io/distroless/nodejs24-debian13@sha256:24bc0fe0225c7518f202a822587dad74fe143b96326b81fe5cc08c1df8bed03e AS run-app
 ARG app
 
 ENV PORT=8080
