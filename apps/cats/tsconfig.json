@@ -33,5 +33,5 @@
     }
   },
   "include": ["server/**/*"],
-  "references": [{ "path": "../../clients/zoho" }]
+  "references": [{ "path": "../../libs/zoho-client" }]
 }

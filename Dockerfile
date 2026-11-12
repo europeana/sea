@@ -12,11 +12,13 @@ RUN test -n "$app"
 
 WORKDIR /build
 
-RUN mkdir -p packages/apps/${app}
+RUN mkdir -p apps/${app}
 
 COPY package.json pnpm-* ./
-COPY packages/clients packages/directives packages/layers packages/plugins packages/
-COPY packages/apps/${app}/ packages/apps/${app}/
+RUN pnpm install
+
+COPY libs/ libs/
+COPY apps/${app}/ apps/${app}/
 
 
 FROM build-base AS build-app
@@ -36,7 +38,7 @@ RUN pnpm --filter @europeana/${app} run build-storybook
 FROM nginx:stable@sha256:a7675fcee220f59b4a99f7098c06a0d5d999c2c0ee37c0211efb780536e5cb20 AS run-storybook
 ARG app
 
-COPY --from=build-storybook /build/packages/apps/${app}/storybook-static /usr/share/nginx/html
+COPY --from=build-storybook /build/apps/${app}/storybook-static /usr/share/nginx/html
 RUN ls /usr/share/nginx/html/
 
 
@@ -49,7 +51,7 @@ EXPOSE ${PORT}
 
 WORKDIR /app
 
-COPY --from=build-app /build/packages/apps/${app}/.output .
+COPY --from=build-app /build/apps/${app}/.output .
 
 USER 1000
 

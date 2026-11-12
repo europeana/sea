@@ -8,7 +8,7 @@ import prettier from "eslint-config-prettier/flat";
 import { defineConfig } from "eslint/config";
 import { includeIgnoreFile } from "@eslint/compat";
 import { fileURLToPath } from "node:url";
-import withNuxt from "./packages/apps/ds4ch/.nuxt/eslint.config.mjs";
+import withNuxt from "./apps/ds4ch/.nuxt/eslint.config.mjs";
 
 const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
@@ -43,9 +43,9 @@ export default withNuxt(
     },
     {
       files: [
-        "packages/apps/*/pages/**/*.vue",
-        "packages/apps/*/error.vue",
-        "packages/apps/*/layouts/default.vue",
+        "apps/*/pages/**/*.vue",
+        "apps/*/error.vue",
+        "apps/*/layouts/default.vue",
       ],
       rules: { "vue/multi-word-component-names": "off" },
     },
