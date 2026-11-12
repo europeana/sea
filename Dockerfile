@@ -15,11 +15,7 @@ WORKDIR /build
 RUN mkdir -p packages/apps/${app}
 
 COPY package.json pnpm-* ./
-COPY packages/apps/${app}/package.json ./packages/apps/${app}/
-COPY packages/directives packages/layers packages/plugins packages/
-
-RUN pnpm install
-
+COPY packages/clients packages/directives packages/layers packages/plugins packages/
 COPY packages/apps/${app}/ packages/apps/${app}/
 
 
