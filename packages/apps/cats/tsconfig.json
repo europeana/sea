@@ -31,5 +31,7 @@
     "paths": {
       "@/*": ["./server/*"]
     }
-  }
+  },
+  "include": ["server/**/*"],
+  "references": [{ "path": "../../clients/zoho" }]
 }

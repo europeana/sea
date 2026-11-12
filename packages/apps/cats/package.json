@@ -9,13 +9,15 @@
   },
   "scripts": {
     "build": "nitro build",
-    "dev": "nitro dev"
+    "dev": "nitro dev",
+    "preview": "node .output/server/index.mjs"
   },
   "devDependencies": {
     "@types/morgan": "catalog:types",
     "@types/turndown": "catalog:types",
     "h3": "catalog:nitro2",
     "nitropack": "catalog:nitro2",
+    "typescript": "catalog:typescript5",
     "vite-tsconfig-paths": "catalog:vite7"
   },
   "dependencies": {
