@@ -1,12 +1,53 @@
-**/.DS_Store
-**/.env
-**/.env.*
-**/.fleet
-**/.idea
-**/*.log
-**/coverage
-**/logs
+#
+# WARNING: A pattern like ".env" will only match env files in the root, not in subdirectories.
+#          As this is a monorepo, always use patterns like "**/.env".
+#
+
+# Node dependencies
 **/node_modules
 **/package-lock.json
+
+# Logs
+**/logs
+**/*.log
+
+# Misc
+**/.DS_Store
+**/.fleet
+**/.idea
+
+# Local env files
+**/.env
+**/.env.*
+**/!.env.example
+
+# Nuxt/Nitro
+**/.output
+**/.data
+**/.nuxt
+**/.nitro
+**/.cache
+**/dist
+
+# Storybook
 **/storybook-static
-**/tmp/
+**/*storybook.log
+
+# Test coverage
+**/coverage
+
+# Temporary files
+**/tmp
+
+# Turborepo
+**/.turbo
+
+# TypeScript
+**/*.tsbuildinfo
+
+# Rollup
+**/.rollup.cache
+
+# Git
+**/.github
+**/.gitignore
