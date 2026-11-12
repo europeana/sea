@@ -18,8 +18,6 @@ COPY package.json pnpm-* ./
 COPY packages/clients packages/directives packages/layers packages/plugins packages/
 COPY packages/apps/${app}/ packages/apps/${app}/
 
-RUN ls -al packages/apps/${app}/
-
 
 FROM build-base AS build-app
 
