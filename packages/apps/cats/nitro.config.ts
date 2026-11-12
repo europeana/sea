@@ -12,10 +12,16 @@ export default defineNitroConfig({
   compatibilityDate: "2025-09-17",
   srcDir: "server",
   externals: {
-    inline: ["tslib", "@europeana/zoho-client"],
+    // required when overriding exportConditions
     traceInclude: [require.resolve("tslib")],
   },
-  exportConditions: ["@europeana/source", "import", "module", "default"],
+  exportConditions: [
+    "@europeana/source",
+    "node",
+    "import",
+    "require",
+    "default",
+  ],
   runtimeConfig: {
     contentful: {
       defaultLocale: "en-GB",
