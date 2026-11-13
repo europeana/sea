@@ -424,9 +424,9 @@ importers:
       contentful-management:
         specifier: ^11.57.4
         version: 11.76.0
-      csv:
-        specifier: ^6.6.4
-        version: 6.6.4
+      csv-parse:
+        specifier: ^7.0.3
+        version: 7.0.3
       ioredis:
         specifier: ^5.7.0
         version: 5.11.1
@@ -4801,18 +4801,8 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
-  csv-generate@4.6.2:
-    resolution: {integrity: sha512-1G69uT4HKxLRL3dH5UlwlEBpHFOh7A9T86XZn6IkCXkb2k5cnk3xhxNpLcYZvoBFpC1SIZTXBPHzNGd16cIp/A==}
-
   csv-parse@7.0.3:
     resolution: {integrity: sha512-YFd3QM/yo17vH91L1IOZuvl09zM0zEEtdfTcOCKWcMdM++MNaQSyp09slXyFCLaPXvHstQFx/xC8myiFHSMUvw==}
-
-  csv-stringify@6.9.0:
-    resolution: {integrity: sha512-6b3e29CILFfSQ2nDRuZMRROzQOpPuJ+s8zPB5H7eK5ncXBbFOyVuRLU5Sx/zAUmVri3Ly49GyC8NEme4SVSAbA==}
-
-  csv@6.6.4:
-    resolution: {integrity: sha512-HeLcw5VphIwHTNKljvINW9IT0stYqgZ/2AIcx5ur8DcArOvRxb4INpgDs008UStv8l7dVVJaCB3twWi59SSouA==}
-    engines: {node: '>= 0.1.90'}
 
   dargs@7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
@@ -8255,9 +8245,6 @@ packages:
         optional: true
       vite-plus:
         optional: true
-
-  stream-transform@3.6.0:
-    resolution: {integrity: sha512-iDtH6HV1MOQ3Ipva+9g/kke1uVLubZlEbGCxbWWlI+Ak++sDRQRxmPZ1iXlmXdLK6kP5fIziUf79GBB7erbppQ==}
 
   streamx@2.28.0:
     resolution: {integrity: sha512-1Yowhzjf0ivGMrTIkY9hav5TxobO9qIVqUE41fiCGMGgc3CLlf4MY+9AHmZqBWgDTue0fY9zWjYFVyf6Diuobw==}
@@ -13543,18 +13530,7 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  csv-generate@4.6.2: {}
-
   csv-parse@7.0.3: {}
-
-  csv-stringify@6.9.0: {}
-
-  csv@6.6.4:
-    dependencies:
-      csv-generate: 4.6.2
-      csv-parse: 7.0.3
-      csv-stringify: 6.9.0
-      stream-transform: 3.6.0
 
   dargs@7.0.0: {}
 
@@ -17714,8 +17690,6 @@ snapshots:
       - react
       - react-dom
       - utf-8-validate
-
-  stream-transform@3.6.0: {}
 
   streamx@2.28.0:
     dependencies:
