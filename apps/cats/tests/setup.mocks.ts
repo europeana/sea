@@ -46,6 +46,7 @@ vi.mock("contentful-management", () => {
 
 vi.mock("h3", () => ({
   defineEventHandler: vi.fn((callback) => callback),
+  getRequestHeader: vi.fn(),
   readBody: vi.fn(),
   setResponseStatus: vi.fn(),
 }));
