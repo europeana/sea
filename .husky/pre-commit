@@ -1,2 +1,2 @@
-pnpm dlx lint-staged
+pnpm exec lint-staged
 pnpm exec vitest run --changed --passWithNoTests
