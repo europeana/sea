@@ -52,12 +52,19 @@ const mapZohoContactToContentfulPersonEntryFields = (
   zohoContact: ZohoContact,
   locale: string,
 ): PersonEntryFields => {
+  // temporary workaround to clean malformed country value from Zoho CRM contact records
+  // TODO: remove when fixed at source
+  let country = zohoContact.country;
+  if (country === "TÃ¼rkiye") {
+    country = "Türkiye";
+  }
+
   return {
     name: { [locale]: zohoContact.name },
     email: { [locale]: zohoContact.email },
     participation: { [locale]: zohoContact.participation },
     title: { [locale]: zohoContact.jobTitle },
-    country: { [locale]: zohoContact.country },
+    country: { [locale]: country },
     communities: { [locale]: zohoContact.communities },
     url: { [locale]: zohoContact.linkedIn },
     zohoId: { [locale]: zohoContact.id },

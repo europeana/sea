@@ -6,7 +6,7 @@ import {
   createOrUpdateEntry,
   findEntry,
   useContentfulEnvironment,
-} from "../../server/utils/contentful";
+} from "@/utils/contentful";
 
 describe("@/utils/contentful", () => {
   const config = {
