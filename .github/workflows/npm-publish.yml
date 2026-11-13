@@ -1,5 +1,8 @@
 name: "NPM: publish"
 
+env:
+  HUSKY: "0"
+
 on:
   release:
     types: [published]
