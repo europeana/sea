@@ -1,6 +1,6 @@
 import { PassThrough } from "node:stream";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { Job } from "bullmq";
+import type { FlowJob, Job } from "bullmq";
 import * as unzip from "unzip-stream";
 import { useFlowProducer } from "@/utils/queues";
 import { useZoho } from "@/utils/zoho";
@@ -85,14 +85,14 @@ describe("@/workers/zoho/crm/processBulkRead", () => {
       addBulk: mockFlowProducerAddBulk.mockResolvedValue([]),
     } as unknown as ReturnType<typeof useFlowProducer>);
 
-    vi.mocked(createSyncContactFlow).mockImplementation(
-      (payload) =>
-        ({
-          name: "zoho-crm-sync-contact",
-          queueName: "zoho-crm-sync-contact",
-          data: payload,
-        }) as never,
-    );
+    vi.mocked(createSyncContactFlow).mockImplementation((payload): FlowJob => ({
+      name: "sync-contact",
+      queueName: "zoho-crm-sync-contact",
+      data: {
+        contactId: payload.contactId,
+        contactRecord: payload.record,
+      },
+    }));
   });
 
   it("exports expected worker metadata and options", () => {
