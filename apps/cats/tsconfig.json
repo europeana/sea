@@ -32,6 +32,6 @@
       "@/*": ["./server/*"]
     }
   },
-  "include": ["server/**/*"],
+  "include": ["server/**/*", "tests/**/*"],
   "references": [{ "path": "../../libs/zoho-client" }]
 }
