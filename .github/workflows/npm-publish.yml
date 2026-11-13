@@ -28,7 +28,7 @@ jobs:
           node-version: 24
           cache: "pnpm"
       - name: Install dependencies
-        run: pnpm pnpm --filter @europeana/${{ matrix.package }} install
+        run: pnpm --filter @europeana/${{ matrix.package }} install --frozen-lockfile
       - name: Build
         run: pnpm --filter @europeana/${{ matrix.package }} build
       - name: Publish
