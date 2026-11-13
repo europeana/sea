@@ -1,24 +1,26 @@
 FROM node:24-alpine@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53 AS build-base
 
 ARG app
-
-# TODO: use the official installer script instead
-#       @see https://pnpm.io/installation#in-a-docker-container
-RUN wget -q "https://github.com/pnpm/pnpm/releases/download/v11.8.0/pnpm-linux-x64-musl.tar.gz"
-RUN tar -xf pnpm-linux-x64-musl.tar.gz
-RUN mv pnpm dist /bin/
-
 RUN test -n "$app"
+
+# Prevent husky from failing when .git is absent in the Docker build context
+ENV HUSKY=0
+
+RUN corepack enable
 
 WORKDIR /build
 
-RUN mkdir -p apps/${app}
-
 COPY package.json pnpm-* ./
-RUN pnpm install
-
+COPY apps/${app}/package.json apps/${app}/package.json
 COPY libs/ libs/
+
+RUN pnpm install --frozen-lockfile
+
 COPY apps/${app}/ apps/${app}/
+
+# Re-run lifecycle/prepare scripts now that full app source (e.g. nuxt.config.ts) is present
+RUN pnpm --filter @europeana/${app} run --if-present postinstall && \
+    pnpm --filter @europeana/${app} run --if-present prepare
 
 
 FROM build-base AS build-app
