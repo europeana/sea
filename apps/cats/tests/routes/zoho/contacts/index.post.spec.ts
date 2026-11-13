@@ -7,11 +7,17 @@ import {
   it,
   vi,
 } from "vitest";
-import { FlowProducer } from "bullmq";
-import { readBody, setResponseStatus } from "h3";
+import { FlowJob, FlowProducer } from "bullmq";
+import { H3Event, readBody, setResponseStatus } from "h3";
 
+import { createSyncContactFlow } from "@/flows/zoho";
 import routeHandler from "@/routes/zoho/contacts/index.post";
 
+vi.mock("@/flows/zoho", () => ({
+  createSyncContactFlow: vi.fn(),
+}));
+
+const mockCreateSyncContactFlow = vi.mocked(createSyncContactFlow);
 const mockFlowProducer = vi.mocked(FlowProducer);
 const mockReadBody = vi.mocked(readBody);
 const mockSetResponseStatus = vi.mocked(setResponseStatus);
@@ -20,6 +26,7 @@ describe("@/routes/zoho/contacts/index.post", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
+
   afterAll(() => {
     vi.resetAllMocks();
   });
@@ -27,34 +34,40 @@ describe("@/routes/zoho/contacts/index.post", () => {
   describe("route handler", () => {
     describe("when body includes id and modified", () => {
       const mockFlowProducerAdd = vi.fn();
+      const mockFlow: FlowJob = {
+        queueName: "zoho-crm-sync-contact",
+        name: "sync-contact",
+        data: { contactId: "486281000001030363" },
+        opts: {
+          jobId: "zoho-crm-sync-contact-486281000001030363-1792656233000",
+        },
+      };
 
       beforeEach(() => {
         mockFlowProducer.mockImplementation(
           class {
             add = mockFlowProducerAdd;
-          },
+          } as unknown as typeof FlowProducer,
         );
+        mockCreateSyncContactFlow.mockReturnValue(mockFlow);
         mockReadBody.mockResolvedValue({
           id: "486281000001030363",
           modified: "1792656233000",
         });
       });
 
-      it("queues a BullMQ flow with contact sync job, and child photo sync job", async () => {
-        await routeHandler({});
+      it("creates a sync contact flow and adds it to FlowProducer", async () => {
+        await routeHandler({} as H3Event);
 
-        const flow = mockFlowProducerAdd.mock.calls[0][0];
-        expect(flow.queueName).toBe("zoho-crm-sync-contact");
-        expect(flow.name).toBe("sync-contact");
-        expect(flow.data.contactId).toBe("486281000001030363");
-        expect(flow.children).toHaveLength(1);
-        expect(flow.children[0].queueName).toBe("zoho-crm-sync-photo");
-        expect(flow.children[0].name).toBe("sync-photo");
-        expect(flow.children[0].data.contactId).toBe("486281000001030363");
+        expect(mockCreateSyncContactFlow).toHaveBeenCalledWith({
+          contactId: "486281000001030363",
+          modified: "1792656233000",
+        });
+        expect(mockFlowProducerAdd).toHaveBeenCalledWith(mockFlow);
       });
 
-      it("returns job ID derived from id and modified in body", async () => {
-        const response = await routeHandler({});
+      it("returns the job ID from the created flow", async () => {
+        const response = await routeHandler({} as H3Event);
 
         expect(response).toEqual({
           jobId: "zoho-crm-sync-contact-486281000001030363-1792656233000",
@@ -67,15 +80,15 @@ describe("@/routes/zoho/contacts/index.post", () => {
         mockReadBody.mockResolvedValue({});
       });
 
-      it("send 400 response code", async () => {
-        const event = {};
+      it("sends 400 response code", async () => {
+        const event = {} as H3Event;
         await routeHandler(event);
 
         expect(mockSetResponseStatus).toHaveBeenCalledWith(event, 400);
       });
 
-      it("returns error msg", async () => {
-        const event = {};
+      it("returns error message", async () => {
+        const event = {} as H3Event;
         const response = await routeHandler(event);
 
         expect(response).toEqual({ error: "Bad Request" });

@@ -6,8 +6,7 @@ import { ZohoContactRecord } from "@europeana/zoho-client";
 
 import { useFlowProducer } from "@/utils/queues";
 import { useZoho } from "@/utils/zoho";
-// TODO: mv elsewhere
-import { createSyncContactFlow } from "@/routes/zoho/contacts/index.post";
+import { createSyncContactFlow } from "@/flows/zoho";
 
 export { name, processor, opts };
 

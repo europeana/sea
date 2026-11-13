@@ -4,7 +4,7 @@ import type { Job } from "bullmq";
 import * as unzip from "unzip-stream";
 import { useFlowProducer } from "@/utils/queues";
 import { useZoho } from "@/utils/zoho";
-import { createSyncContactFlow } from "@/routes/zoho/contacts/index.post";
+import { createSyncContactFlow } from "@/flows/zoho";
 import { name, processor, opts } from "@/workers/zoho/crm/processBulkRead";
 
 vi.mock("unzip-stream", () => ({
@@ -19,7 +19,7 @@ vi.mock("@/utils/zoho", () => ({
   useZoho: vi.fn(),
 }));
 
-vi.mock("@/routes/zoho/contacts/index.post", () => ({
+vi.mock("@/flows/zoho", () => ({
   createSyncContactFlow: vi.fn(),
 }));
 
