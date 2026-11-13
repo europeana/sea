@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { ContentType } from "contentful-management";
 
-import { extractFields } from "../../../server/utils/html/extractFields";
+import { extractFields } from "@/utils/html/extractFields";
 
 describe("extractFields", () => {
   const mockContentType: ContentType = {
