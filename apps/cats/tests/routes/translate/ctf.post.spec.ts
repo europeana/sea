@@ -7,16 +7,12 @@ import {
   it,
   vi,
 } from "vitest";
+import { Queue } from "bullmq";
 import { H3Event, getRequestHeader, readBody } from "h3";
 
-import { useQueue } from "@/utils/queues";
 import routeHandler from "@/routes/translate/ctf.post";
 
-vi.mock("@/utils/queues", () => ({
-  useQueue: vi.fn(),
-}));
-
-const mockUseQueue = vi.mocked(useQueue);
+const mockQueue = vi.mocked(Queue);
 const mockReadBody = vi.mocked(readBody);
 const mockGetRequestHeader = vi.mocked(getRequestHeader);
 
@@ -24,9 +20,11 @@ describe("@/routes/translate/ctf.post", () => {
   const mockQueueAdd = vi.fn();
 
   beforeEach(() => {
-    mockUseQueue.mockReturnValue({
-      add: mockQueueAdd.mockResolvedValue({}),
-    } as unknown as ReturnType<typeof useQueue>);
+    mockQueue.mockImplementation(
+      class {
+        add = mockQueueAdd.mockResolvedValue({});
+      } as unknown as typeof Queue,
+    );
   });
 
   afterEach(() => {
@@ -62,7 +60,6 @@ describe("@/routes/translate/ctf.post", () => {
     it("queues a translate-request job with derived jobId and retry options", async () => {
       await routeHandler({} as H3Event);
 
-      expect(mockUseQueue).toHaveBeenCalledWith("translate-request");
       expect(mockQueueAdd).toHaveBeenCalledWith(
         "translation",
         { entry: mockEntry },

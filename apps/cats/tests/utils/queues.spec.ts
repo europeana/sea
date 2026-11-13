@@ -2,11 +2,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { FlowProducer, Queue } from "bullmq";
 import { useRedisConnection } from "@/utils/redis";
 
-vi.mock("bullmq", () => ({
-  Queue: vi.fn(function () {}),
-  FlowProducer: vi.fn(function () {}),
-}));
-
 vi.mock("@/utils/redis", () => ({
   useRedisConnection: vi.fn(),
 }));

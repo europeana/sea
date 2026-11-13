@@ -16,14 +16,6 @@ const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("nitropack/runtime", () => ({
-  defineNitroPlugin: vi.fn((fn) => fn),
-}));
-
-vi.mock("bullmq", () => ({
-  Worker: vi.fn(),
-}));
-
 vi.mock("@/utils/queues", () => ({
   useQueueOptions: vi.fn(),
 }));

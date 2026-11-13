@@ -1,18 +1,13 @@
 import { PassThrough } from "node:stream";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { FlowJob, Job } from "bullmq";
+import { FlowProducer, type FlowJob, type Job } from "bullmq";
 import * as unzip from "unzip-stream";
-import { useFlowProducer } from "@/utils/queues";
 import { useZoho } from "@/utils/zoho";
 import { createSyncContactFlow } from "@/flows/zoho";
 import { name, processor, opts } from "@/workers/zoho/crm/processBulkRead";
 
 vi.mock("unzip-stream", () => ({
   Parse: vi.fn(),
-}));
-
-vi.mock("@/utils/queues", () => ({
-  useFlowProducer: vi.fn(),
 }));
 
 vi.mock("@/utils/zoho", () => ({
@@ -81,9 +76,11 @@ describe("@/workers/zoho/crm/processBulkRead", () => {
       },
     } as unknown as ReturnType<typeof useZoho>);
 
-    vi.mocked(useFlowProducer).mockReturnValue({
-      addBulk: mockFlowProducerAddBulk.mockResolvedValue([]),
-    } as unknown as ReturnType<typeof useFlowProducer>);
+    vi.mocked(FlowProducer).mockImplementation(
+      class {
+        addBulk = mockFlowProducerAddBulk.mockResolvedValue([]);
+      } as unknown as typeof FlowProducer,
+    );
 
     vi.mocked(createSyncContactFlow).mockImplementation((payload): FlowJob => ({
       name: "sync-contact",

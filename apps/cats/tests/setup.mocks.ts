@@ -4,14 +4,17 @@ vi.mock("bullmq", () => ({
   FlowProducer: vi.fn(
     class {
       add = vi.fn();
+      addBulk = vi.fn();
     },
   ),
   Job: vi.fn(class {}),
   Queue: vi.fn(
     class {
       add = vi.fn();
+      getJob = vi.fn();
     },
   ),
+  Worker: vi.fn(),
 }));
 
 vi.mock("contentful-management", () => {
@@ -56,6 +59,7 @@ vi.mock("ioredis", () => ({
 }));
 
 vi.mock("nitropack/runtime", () => ({
+  defineNitroPlugin: vi.fn((callback) => callback),
   useRuntimeConfig: vi.fn().mockReturnValue({ redis: {} }),
 }));
 

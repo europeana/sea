@@ -7,25 +7,23 @@ import {
   it,
   vi,
 } from "vitest";
+import { Queue } from "bullmq";
 import { H3Event, readBody } from "h3";
 
-import { useQueue } from "@/utils/queues";
 import routeHandler from "@/routes/translate/etr.post";
 
-vi.mock("@/utils/queues", () => ({
-  useQueue: vi.fn(),
-}));
-
-const mockUseQueue = vi.mocked(useQueue);
+const mockQueue = vi.mocked(Queue);
 const mockReadBody = vi.mocked(readBody);
 
 describe("@/routes/translate/etr.post", () => {
   const mockGetJob = vi.fn();
 
   beforeEach(() => {
-    mockUseQueue.mockReturnValue({
-      getJob: mockGetJob,
-    } as unknown as ReturnType<typeof useQueue>);
+    mockQueue.mockImplementation(
+      class {
+        getJob = mockGetJob;
+      } as unknown as typeof Queue,
+    );
   });
 
   afterEach(() => {
@@ -70,7 +68,10 @@ describe("@/routes/translate/etr.post", () => {
       it("looks up the job using externalReference and targetLanguage", async () => {
         await routeHandler({} as H3Event);
 
-        expect(mockUseQueue).toHaveBeenCalledWith("translate-receive");
+        expect(mockQueue).toHaveBeenCalledWith(
+          "translate-receive",
+          expect.any(Object),
+        );
         expect(mockGetJob).toHaveBeenCalledWith(
           "translate-receive-translate-request-ctf-idem-key-987-FR",
         );

@@ -1,12 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import plugin from "@/plugins/logging";
 
-vi.mock("nitropack/runtime", () => {
-  return {
-    defineNitroPlugin: vi.fn().mockImplementation((callback) => callback),
-  };
-});
-
 const mocks = vi.hoisted(() => {
   return {
     morgan: vi.fn(),
