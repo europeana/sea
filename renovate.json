@@ -6,5 +6,12 @@
     "security:minimumReleaseAgeNpm"
   ],
   "prConcurrentLimit": 5,
-  "lockFileMaintenance": { "enabled": true }
+  "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "matchDepNames": ["pnpm"],
+      "groupName": "pnpm"
+    }
+  ]
 }
