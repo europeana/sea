@@ -93,7 +93,7 @@ jobs:
           pull: true
           load: true
           tags: ${{ steps.docker-image.outputs.full-tag }}
-          cache-from: type=gha,scope=${{ github.ref_name }}-app
+          cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-app
       - # TODO: this should run before the image is pushed
         name: Check image size
         env:

@@ -44,5 +44,4 @@
 **/.rollup.cache
 
 # Git
-**/.github
 **/.gitignore
