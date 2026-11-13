@@ -2,14 +2,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import Redis from "ioredis";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-vi.mock("ioredis", () => ({
-  default: vi.fn(),
-}));
-
-vi.mock("nitropack/runtime", () => ({
-  useRuntimeConfig: vi.fn(),
-}));
-
 describe("@/utils/redis", () => {
   const mockRedisInstance = {
     status: "ready",

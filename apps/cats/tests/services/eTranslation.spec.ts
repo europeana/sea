@@ -3,14 +3,6 @@ import fetch from "node-fetch-native";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { requestTranslation } from "@/services/eTranslation";
 
-vi.mock("node-fetch-native", () => ({
-  default: vi.fn(),
-}));
-
-vi.mock("nitropack/runtime", () => ({
-  useRuntimeConfig: vi.fn(),
-}));
-
 describe("eTranslation service", () => {
   const mockJson = vi.fn();
 

@@ -6,10 +6,6 @@ import { createOrUpdateEntry } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 import { name, processor, opts } from "@/workers/zoho/crm/syncContact";
 
-vi.mock("nitropack/runtime", () => ({
-  useRuntimeConfig: vi.fn(),
-}));
-
 vi.mock("@/utils/contentful", () => ({
   createOrUpdateEntry: vi.fn(),
 }));

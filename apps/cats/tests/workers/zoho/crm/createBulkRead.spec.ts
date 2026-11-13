@@ -5,10 +5,6 @@ import type { ZohoBulkReadCriteria } from "@europeana/zoho-client";
 import { useZoho } from "@/utils/zoho";
 import { name, processor, opts } from "@/workers/zoho/crm/createBulkRead";
 
-vi.mock("nitropack/runtime", () => ({
-  useRuntimeConfig: vi.fn(),
-}));
-
 vi.mock("@/utils/zoho", () => ({
   useZoho: vi.fn(),
 }));

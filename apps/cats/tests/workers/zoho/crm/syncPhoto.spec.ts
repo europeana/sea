@@ -5,10 +5,6 @@ import { useContentfulEnvironment } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 import { name, processor, opts } from "@/workers/zoho/crm/syncPhoto";
 
-vi.mock("nitropack/runtime", () => ({
-  useRuntimeConfig: vi.fn(),
-}));
-
 vi.mock("@/utils/contentful", () => ({
   useContentfulEnvironment: vi.fn(),
 }));

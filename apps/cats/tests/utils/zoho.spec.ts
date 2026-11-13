@@ -5,10 +5,6 @@ import {
   type ZohoAPIClient,
 } from "@europeana/zoho-client";
 
-vi.mock("nitropack/runtime", () => ({
-  useRuntimeConfig: vi.fn(),
-}));
-
 vi.mock("@europeana/zoho-client", () => ({
   createZohoAPIClient: vi.fn(),
 }));
