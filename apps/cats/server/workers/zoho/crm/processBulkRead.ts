@@ -4,7 +4,7 @@ import { parse } from "csv-parse";
 import * as unzip from "unzip-stream";
 import { ZohoContactRecord } from "@europeana/zoho-client";
 
-import { useFlowProducer } from "@/utils/queues";
+import { useFlowProducer } from "@/utils/bullmq";
 import { useZoho } from "@/utils/zoho";
 import { createSyncContactFlow } from "@/flows/zoho";
 

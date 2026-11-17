@@ -1,7 +1,7 @@
 import { defineNitroPlugin } from "nitropack/runtime";
 import { Job, Worker } from "bullmq";
 
-import { useWorkerOptions } from "@/utils/queues";
+import { useWorkerOptions } from "@/utils/bullmq";
 
 import translateWorkers from "@/workers/translate/index";
 import zohoCRMWorkers from "@/workers/zoho/crm/index";

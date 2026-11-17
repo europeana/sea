@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
 
 import { name as queueName } from "@/workers/zoho/crm/processBulkRead";
-import { useQueue } from "@/utils/queues";
+import { useQueue } from "@/utils/bullmq";
 
 export const handler = async (event: H3Event) => {
   const body: {

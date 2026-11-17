@@ -7,7 +7,7 @@ vi.mock("@/utils/redis", () => ({
   useRedisConnection: vi.fn(),
 }));
 
-describe("@/utils/queues", () => {
+describe("@/utils/bullmq", () => {
   const mockSharedConnection = { status: "ready", shared: true };
 
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe("@/utils/queues", () => {
 
   describe("useQueueOptions", () => {
     it("returns BullMQ options with the shared Redis connection and prefix", async () => {
-      const { useQueueOptions } = await import("@/utils/queues");
+      const { useQueueOptions } = await import("@/utils/bullmq");
 
       const options = useQueueOptions();
 
@@ -41,7 +41,7 @@ describe("@/utils/queues", () => {
 
   describe("useWorkerOptions", () => {
     it("returns BullMQ options with a dedicated Redis connection and prefix", async () => {
-      const { useWorkerOptions } = await import("@/utils/queues");
+      const { useWorkerOptions } = await import("@/utils/bullmq");
 
       const first = useWorkerOptions();
       const second = useWorkerOptions();
@@ -63,7 +63,7 @@ describe("@/utils/queues", () => {
         return mockQueueInstance;
       });
 
-      const { useQueue } = await import("@/utils/queues");
+      const { useQueue } = await import("@/utils/bullmq");
 
       const queue = useQueue("translate-request");
 
@@ -80,7 +80,7 @@ describe("@/utils/queues", () => {
         return { name } as Queue;
       });
 
-      const { useQueue } = await import("@/utils/queues");
+      const { useQueue } = await import("@/utils/bullmq");
 
       const firstTranslateQueue = useQueue("translate-request");
       const secondTranslateQueue = useQueue("translate-request");
@@ -101,7 +101,7 @@ describe("@/utils/queues", () => {
         return mockFlowProducerInstance;
       });
 
-      const { useFlowProducer } = await import("@/utils/queues");
+      const { useFlowProducer } = await import("@/utils/bullmq");
 
       const first = useFlowProducer();
       const second = useFlowProducer();

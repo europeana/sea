@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Worker, type Job } from "bullmq";
-import { useWorkerOptions } from "@/utils/queues";
+import { useWorkerOptions } from "@/utils/bullmq";
 import workersPlugin from "@/plugins/workers";
 
 const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
@@ -16,7 +16,7 @@ const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("@/utils/queues", () => ({
+vi.mock("@/utils/bullmq", () => ({
   useWorkerOptions: vi.fn(),
 }));
 
