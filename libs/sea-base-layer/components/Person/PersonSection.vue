@@ -66,3 +66,13 @@ defineProps({
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.authored-section {
+  text-align: center;
+
+  .col {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+</style>
