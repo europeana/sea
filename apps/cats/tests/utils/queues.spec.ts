@@ -1,20 +1,27 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { FlowProducer, Queue } from "bullmq";
-import { useRedisConnection } from "@/utils/redis";
+import { createRedisConnection, useRedisConnection } from "@/utils/redis";
 
 vi.mock("@/utils/redis", () => ({
+  createRedisConnection: vi.fn(),
   useRedisConnection: vi.fn(),
 }));
 
 describe("@/utils/queues", () => {
-  const mockConnection = { status: "ready" };
+  const mockSharedConnection = { status: "ready", shared: true };
 
   beforeEach(() => {
     vi.clearAllMocks();
     vi.resetModules();
 
     vi.mocked(useRedisConnection).mockReturnValue(
-      mockConnection as unknown as ReturnType<typeof useRedisConnection>,
+      mockSharedConnection as unknown as ReturnType<typeof useRedisConnection>,
+    );
+    vi.mocked(createRedisConnection).mockImplementation(
+      () =>
+        ({ status: "ready", dedicated: true }) as unknown as ReturnType<
+          typeof createRedisConnection
+        >,
     );
   });
 
@@ -26,9 +33,26 @@ describe("@/utils/queues", () => {
 
       expect(useRedisConnection).toHaveBeenCalledTimes(1);
       expect(options).toEqual({
-        connection: mockConnection,
+        connection: mockSharedConnection,
         prefix: "@europeana:sea:cats",
       });
+    });
+  });
+
+  describe("useWorkerOptions", () => {
+    it("returns BullMQ options with a dedicated Redis connection and prefix", async () => {
+      const { useWorkerOptions } = await import("@/utils/queues");
+
+      const first = useWorkerOptions();
+      const second = useWorkerOptions();
+
+      expect(createRedisConnection).toHaveBeenCalledTimes(2);
+      expect(useRedisConnection).not.toHaveBeenCalled();
+      expect(first).toEqual({
+        connection: { status: "ready", dedicated: true },
+        prefix: "@europeana:sea:cats",
+      });
+      expect(first.connection).not.toBe(second.connection);
     });
   });
 
@@ -45,7 +69,7 @@ describe("@/utils/queues", () => {
 
       expect(Queue).toHaveBeenCalledTimes(1);
       expect(Queue).toHaveBeenCalledWith("translate-request", {
-        connection: mockConnection,
+        connection: mockSharedConnection,
         prefix: "@europeana:sea:cats",
       });
       expect(queue).toBe(mockQueueInstance);
@@ -84,7 +108,7 @@ describe("@/utils/queues", () => {
 
       expect(FlowProducer).toHaveBeenCalledTimes(1);
       expect(FlowProducer).toHaveBeenCalledWith({
-        connection: mockConnection,
+        connection: mockSharedConnection,
         prefix: "@europeana:sea:cats",
       });
       expect(first).toBe(mockFlowProducerInstance);

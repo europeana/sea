@@ -1,8 +1,16 @@
-import { FlowProducer, Queue } from "bullmq";
-import { useRedisConnection } from "@/utils/redis";
+import {
+  ConnectionOptions,
+  FlowProducer,
+  Queue,
+  QueueOptions,
+  WorkerOptions,
+} from "bullmq";
+import { createRedisConnection, useRedisConnection } from "@/utils/redis";
 
-const queues = {};
-let flowProducer;
+const queues: Record<string, Queue> = {};
+let flowProducer: FlowProducer | undefined;
+
+const prefix = "@europeana:sea:cats";
 
 export const useQueue = (name: string): Queue => {
   queues[name] ||= new Queue(name, useQueueOptions());
@@ -10,14 +18,25 @@ export const useQueue = (name: string): Queue => {
   return queues[name];
 };
 
-export const useQueueOptions = () => {
+export const useQueueOptions = (): QueueOptions => {
   return {
-    connection: useRedisConnection(),
-    prefix: "@europeana:sea:cats",
+    // Queues and FlowProducers run non-blocking commands and can safely share one Redis connection:
+    // https://bullmq.io
+    connection: useRedisConnection() as unknown as ConnectionOptions,
+    prefix,
   };
 };
 
-export const useFlowProducer = () => {
+export const useWorkerOptions = (): WorkerOptions => {
+  return {
+    // Workers use blocking Redis commands and require dedicated connections:
+    // https://bullmq.io
+    connection: createRedisConnection() as unknown as ConnectionOptions,
+    prefix,
+  };
+};
+
+export const useFlowProducer = (): FlowProducer => {
   flowProducer ||= new FlowProducer(useQueueOptions());
   return flowProducer;
 };
