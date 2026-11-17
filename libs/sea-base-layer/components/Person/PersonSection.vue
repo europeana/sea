@@ -54,6 +54,7 @@ defineProps({
       <PersonCard
         v-for="(person, index) in people"
         :key="index"
+        class="col"
         :image="person.image"
         :name="person.name"
         :role="person.title"
@@ -65,3 +66,13 @@ defineProps({
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.authored-section {
+  text-align: center;
+
+  .col {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+</style>
