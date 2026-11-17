@@ -3,7 +3,7 @@ import { Tag as ContentfulTag } from "contentful-management";
 
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { supportedLocales } from "@/utils/i18n/locales";
-import { useFlowProducer } from "@/utils/queues";
+import { useFlowProducer } from "@/utils/bullmq";
 import { markupFields } from "@/utils/html/markupFields";
 import { requestTranslation } from "@/services/eTranslation";
 import { name as receiveQueueName } from "./receive";

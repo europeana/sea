@@ -55,7 +55,11 @@ vi.mock("h3", () => ({
 }));
 
 vi.mock("ioredis", () => ({
-  default: vi.fn(class {}),
+  default: vi.fn(
+    class {
+      setMaxListeners = vi.fn();
+    },
+  ),
 }));
 
 vi.mock("nitropack/runtime", () => ({

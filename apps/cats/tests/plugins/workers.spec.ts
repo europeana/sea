@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Worker, type Job } from "bullmq";
-import { useQueueOptions } from "@/utils/queues";
+import { useWorkerOptions } from "@/utils/bullmq";
 import workersPlugin from "@/plugins/workers";
 
 const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
@@ -16,8 +16,8 @@ const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("@/utils/queues", () => ({
-  useQueueOptions: vi.fn(),
+vi.mock("@/utils/bullmq", () => ({
+  useWorkerOptions: vi.fn(),
 }));
 
 vi.mock("@/workers/translate/index", () => ({
@@ -29,20 +29,41 @@ vi.mock("@/workers/zoho/crm/index", () => ({
 }));
 
 describe("@/plugins/workers", () => {
-  const defaultQueueOptions = {
+  const defaultWorkerOptions = {
     connection: { host: "localhost", port: 6379 },
+    prefix: "@europeana:sea:cats",
   };
+
+  let closeHookHandler: (() => Promise<void>) | undefined;
+  const mockNitroApp = {
+    hooks: {
+      hook: vi.fn((event: string, cb: () => Promise<void>) => {
+        if (event === "close") {
+          closeHookHandler = cb;
+        }
+      }),
+    },
+  };
+
+  const mockWorkerClose = vi.fn().mockResolvedValue(undefined);
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useQueueOptions).mockReturnValue(
-      defaultQueueOptions as ReturnType<typeof useQueueOptions>,
+    closeHookHandler = undefined;
+
+    vi.mocked(useWorkerOptions).mockReturnValue(
+      defaultWorkerOptions as ReturnType<typeof useWorkerOptions>,
     );
+
+    vi.mocked(Worker).mockImplementation(function () {
+      return { close: mockWorkerClose } as unknown as Worker;
+    });
   });
 
-  it("instantiates a single BullMQ Worker per worker definition with merged options", () => {
-    workersPlugin({} as never);
+  it("instantiates a single BullMQ Worker per worker definition with merged worker options", () => {
+    workersPlugin(mockNitroApp as never);
 
+    expect(useWorkerOptions).toHaveBeenCalledTimes(2);
     expect(Worker).toHaveBeenCalledTimes(2);
 
     expect(Worker).toHaveBeenNthCalledWith(
@@ -50,7 +71,7 @@ describe("@/plugins/workers", () => {
       "translate-worker",
       expect.any(Function),
       {
-        ...defaultQueueOptions,
+        ...defaultWorkerOptions,
         concurrency: 2,
       },
     );
@@ -60,7 +81,7 @@ describe("@/plugins/workers", () => {
       "zoho-crm-sync-contact",
       expect.any(Function),
       {
-        ...defaultQueueOptions,
+        ...defaultWorkerOptions,
         removeOnComplete: { count: 0 },
       },
     );
@@ -70,7 +91,7 @@ describe("@/plugins/workers", () => {
     const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     mockZohoWorker.processor.mockResolvedValue({ entryId: "cf-123" });
 
-    workersPlugin({} as never);
+    workersPlugin(mockNitroApp as never);
 
     const registeredHandler = vi.mocked(Worker).mock.calls[1][1] as (
       job: Job,
@@ -88,13 +109,13 @@ describe("@/plugins/workers", () => {
     consoleSpy.mockRestore();
   });
 
-  it("allows worker.opts to override defaults from useQueueOptions", () => {
-    vi.mocked(useQueueOptions).mockReturnValue({
+  it("allows worker.opts to override defaults from useWorkerOptions", () => {
+    vi.mocked(useWorkerOptions).mockReturnValue({
       connection: { host: "localhost", port: 6379 },
       concurrency: 1,
-    } as ReturnType<typeof useQueueOptions>);
+    } as ReturnType<typeof useWorkerOptions>);
 
-    workersPlugin({} as never);
+    workersPlugin(mockNitroApp as never);
 
     expect(Worker).toHaveBeenNthCalledWith(
       1,
@@ -105,5 +126,19 @@ describe("@/plugins/workers", () => {
         concurrency: 2,
       },
     );
+  });
+
+  it("closes all active workers when Nitro triggers the close hook", async () => {
+    workersPlugin(mockNitroApp as never);
+
+    expect(mockNitroApp.hooks.hook).toHaveBeenCalledWith(
+      "close",
+      expect.any(Function),
+    );
+    expect(closeHookHandler).toBeDefined();
+
+    await closeHookHandler!();
+
+    expect(mockWorkerClose).toHaveBeenCalledTimes(2);
   });
 });

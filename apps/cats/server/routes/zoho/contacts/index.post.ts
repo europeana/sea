@@ -1,5 +1,5 @@
 import { defineEventHandler, readBody, setResponseStatus, H3Event } from "h3";
-import { useFlowProducer } from "@/utils/queues";
+import { useFlowProducer } from "@/utils/bullmq";
 import { createSyncContactFlow } from "@/flows/zoho";
 
 export const handler = async (event: H3Event) => {

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
 import { useContentfulEnvironment } from "@/utils/contentful";
-import { useFlowProducer } from "@/utils/queues";
+import { useFlowProducer } from "@/utils/bullmq";
 import { markupFields } from "@/utils/html/markupFields";
 import { requestTranslation } from "@/services/eTranslation";
 import { name, processor, opts } from "@/workers/translate/request";
@@ -14,7 +14,7 @@ vi.mock("@/utils/i18n/locales", () => ({
   supportedLocales: ["fr-FR", "de-DE", "nl-NL"],
 }));
 
-vi.mock("@/utils/queues", () => ({
+vi.mock("@/utils/bullmq", () => ({
   useFlowProducer: vi.fn(),
 }));
 
