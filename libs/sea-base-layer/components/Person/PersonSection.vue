@@ -54,7 +54,6 @@ defineProps({
       <PersonCard
         v-for="(person, index) in people"
         :key="index"
-        class="col"
         :image="person.image"
         :name="person.name"
         :role="person.title"
