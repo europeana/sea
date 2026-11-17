@@ -75,7 +75,10 @@ const omitInvalidArrayFieldValues = async (
   const locale = useRuntimeConfig().contentful?.defaultLocale;
 
   for (const contentTypeField of contentType.fields) {
-    if (fields[contentTypeField.id] && contentTypeField.type === "Array") {
+    if (
+      Array.isArray(fields[contentTypeField.id]?.[locale]) &&
+      contentTypeField.type === "Array"
+    ) {
       const inValidation = contentTypeField.items?.validations?.find(
         (validation) => validation.in,
       );
@@ -83,7 +86,7 @@ const omitInvalidArrayFieldValues = async (
       if (inValidation) {
         fields[contentTypeField.id][locale] = fields[contentTypeField.id][
           locale
-        ]?.filter((value) => inValidation.in.includes(value));
+        ].filter((value) => inValidation.in.includes(value));
       }
     }
   }

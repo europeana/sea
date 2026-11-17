@@ -14,9 +14,9 @@ When translations for all requested target languages have been received, then th
 
 ## Endpoints
 
-Natural language translation uses two endpoint: the first to receive data from Contentful potentially with updated English text, the second to receive the translated text back from eTranslation.
+Natural language translation uses two endpoints: the first to receive data from Contentful potentially with updated English text, the second to receive the translated text back from eTranslation.
 
-### `POST /hooks/ctf`
+### `POST /translate/ctf`
 
 This endpoint is responsible for receiving an updated Contentful entry and queuing a BullMQ job in the “request” queue.
 
@@ -26,7 +26,7 @@ The request body sent by Contentful to this endpoint includes the entry fields a
 
 The resultant request job will have the idempotency key from Contentful as the job ID and store the request body as the job’s data.
 
-### `POST /hooks/etr`
+### `POST /translate/etr`
 
 This endpoint is responsible for receiving a translation payload for one content entry in one target language, from eTranslation.
 

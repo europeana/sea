@@ -58,7 +58,7 @@ export class ZohoAPIClient {
       params,
     }: {
       body?: RequestInit["body"];
-      headers?: Headers;
+      headers?: { [key: string]: string };
       method?: string;
       params?: { [key: string]: string };
     } = {},

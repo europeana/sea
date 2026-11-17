@@ -1,11 +1,12 @@
 import { defineNitroPlugin } from "nitropack/runtime";
 import { Job, Worker } from "bullmq";
 
-import { useQueueOptions } from "../utils/bullmq/queue";
+import { useQueueOptions } from "@/utils/queues";
 
-import translateWorkers from "../workers/translate/index";
+import translateWorkers from "@/workers/translate/index";
+import zohoCRMWorkers from "@/workers/zoho/crm/index";
 
-const workers = [translateWorkers].flat();
+const workers = [translateWorkers, zohoCRMWorkers].flat();
 
 export default defineNitroPlugin(() => {
   for (const worker of workers) {

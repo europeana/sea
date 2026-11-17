@@ -1,5 +1,22 @@
 import { vi } from "vitest";
 
+vi.mock("bullmq", () => ({
+  FlowProducer: vi.fn(
+    class {
+      add = vi.fn();
+      addBulk = vi.fn();
+    },
+  ),
+  Job: vi.fn(class {}),
+  Queue: vi.fn(
+    class {
+      add = vi.fn();
+      getJob = vi.fn();
+    },
+  ),
+  Worker: vi.fn(),
+}));
+
 vi.mock("contentful-management", () => {
   const mockEntry = {
     fields: {},
@@ -30,6 +47,29 @@ vi.mock("contentful-management", () => {
   };
 });
 
+vi.mock("h3", () => ({
+  defineEventHandler: vi.fn((callback) => callback),
+  getRequestHeader: vi.fn(),
+  readBody: vi.fn(),
+  setResponseStatus: vi.fn(),
+}));
+
+vi.mock("ioredis", () => ({
+  default: vi.fn(class {}),
+}));
+
 vi.mock("nitropack/runtime", () => ({
+  defineNitroPlugin: vi.fn((callback) => callback),
   useRuntimeConfig: vi.fn().mockReturnValue({ redis: {} }),
+}));
+
+vi.mock("node-fetch-native", () => ({
+  default: vi.fn().mockImplementation(() => {
+    return Promise.resolve({
+      body: null,
+      json: () => Promise.resolve(null),
+      ok: true,
+      status: 200,
+    });
+  }),
 }));

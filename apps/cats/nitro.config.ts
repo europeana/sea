@@ -1,5 +1,8 @@
 import { fileURLToPath } from "node:url";
 import { defineNitroConfig } from "nitropack/config";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
 
 // https://nitro.build/config
 export default defineNitroConfig({
@@ -8,8 +11,20 @@ export default defineNitroConfig({
   },
   compatibilityDate: "2025-09-17",
   srcDir: "server",
+  externals: {
+    // required when overriding exportConditions
+    traceInclude: [require.resolve("tslib")],
+  },
+  exportConditions: [
+    "@europeana/source",
+    "node",
+    "import",
+    "require",
+    "default",
+  ],
   runtimeConfig: {
     contentful: {
+      defaultLocale: "en-GB",
       space: null,
       environment: null,
       accessToken: null,
@@ -26,12 +41,12 @@ export default defineNitroConfig({
     },
     redis: {
       tls: {
-        // TODO: this will be base64-encoded; can we decode it here?
         ca: null,
       },
       url: null,
     },
     zoho: {
+      bulkReadCallbackUrl: null,
       clientId: null,
       clientSecret: null,
       serviceOrgId: null,

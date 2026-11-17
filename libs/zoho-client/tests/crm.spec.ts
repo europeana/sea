@@ -38,9 +38,9 @@ describe("crm", () => {
 
         expect(mockAPI.request).toHaveBeenCalledWith("/crm/bulk/v8/read", {
           method: "post",
-          headers: new Headers({
+          headers: {
             "content-type": "application/json",
-          }),
+          },
           body: '{"query":{"module":{"api_name":"Contacts"},"fields":["id","Full_Name","Public_email","LinkedIn","Communities","Contact_Participation","Country_new","Title","Modified_Time"],"criteria":{"field":{"api_name":"Contact_Participation"},"comparator":"contains","value":["Staff"]}},"callback":{"method":"post","url":"https://example.org/zoho/bulk/callback"}}',
         });
       });

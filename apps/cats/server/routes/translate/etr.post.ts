@@ -1,5 +1,5 @@
 import { defineEventHandler, readBody, H3Event } from "h3";
-import { useQueue } from "@/utils/bullmq/queue";
+import { useQueue } from "@/utils/queues";
 import { name as queueName } from "@/workers/translate/receive";
 
 // TODO: validate format is "html"

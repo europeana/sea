@@ -31,5 +31,7 @@
     "paths": {
       "@/*": ["./server/*"]
     }
-  }
+  },
+  "include": ["server/**/*", "tests/**/*"],
+  "references": [{ "path": "../../libs/zoho-client" }]
 }

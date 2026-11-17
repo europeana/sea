@@ -9,24 +9,28 @@
   },
   "scripts": {
     "build": "nitro build",
-    "dev": "nitro dev"
+    "dev": "nitro dev",
+    "preview": "node .output/server/index.mjs"
   },
   "devDependencies": {
     "@types/morgan": "catalog:types",
     "@types/turndown": "catalog:types",
     "h3": "catalog:nitro2",
     "nitropack": "catalog:nitro2",
+    "typescript": "catalog:typescript5",
     "vite-tsconfig-paths": "catalog:vite7"
   },
   "dependencies": {
+    "@europeana/zoho-client": "workspace:*",
     "bullmq": "^5.58.5",
     "cheerio": "catalog:html",
     "contentful-management": "^11.57.4",
+    "csv-parse": "^7.0.3",
     "ioredis": "^5.7.0",
     "marked": "catalog:html",
-    "moment": "^2.31.0",
     "morgan": "catalog:nitro2",
     "node-fetch-native": "catalog:",
-    "turndown": "catalog:html"
+    "turndown": "catalog:html",
+    "unzip-stream": "^0.3.4"
   }
 }

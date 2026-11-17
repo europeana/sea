@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { Entry, ContentType } from "contentful-management";
 
-import { markupFields } from "../../../server/utils/html/markupFields";
+import { markupFields } from "@/utils/html/markupFields";
 
 const stripSpaceFromHtml = (html) =>
   html.replace(/>\s+/g, ">").replace(/\s+</g, "<");
