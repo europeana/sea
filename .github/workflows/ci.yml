@@ -109,6 +109,8 @@ jobs:
             */*/node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           fail-on-cache-miss: true
+      - name: Prepare
+        run: pnpm -r prepare
       - name: Run eslint
         run: pnpm exec eslint .
 
