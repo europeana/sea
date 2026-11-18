@@ -3,10 +3,7 @@ import { Job, Worker } from "bullmq";
 
 import { useWorkerOptions } from "@/utils/bullmq";
 
-import translateWorkers from "@/workers/translate/index";
-import zohoCRMWorkers from "@/workers/zoho/crm/index";
-
-const workers = [translateWorkers, zohoCRMWorkers].flat();
+import workers from "@/workers/index";
 
 export default defineNitroPlugin((nitroApp) => {
   const activeWorkers: Worker[] = [];
