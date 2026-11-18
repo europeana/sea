@@ -5,7 +5,7 @@ export { name as queueName } from "@/queues/translate/receive";
 
 // TODO: handle situation where this has run due to delay expiring, but no webhook
 //       yet called, i.e. check for job.data.html and if absent, re-delay job
-export const processor = async (job: Job) => {
+export const processor = (job: Job) => {
   const fields = extractFields(job.data);
 
   return {

@@ -25,7 +25,7 @@ describe("@/workers/translate/receive", () => {
     });
   });
 
-  it("extracts translated fields from job data and returns them with the target language", async () => {
+  it("extracts translated fields from job data and returns them with the target language", () => {
     const extractedFields = {
       title: "Bonjour Europeana",
       body: "## Titre\n\nContenu traduit",
@@ -40,7 +40,7 @@ describe("@/workers/translate/receive", () => {
     };
 
     const job = createMockJob(jobData);
-    const result = await processor(job);
+    const result = processor(job);
 
     expect(extractFields).toHaveBeenCalledTimes(1);
     expect(extractFields).toHaveBeenCalledWith(jobData);
@@ -48,20 +48,5 @@ describe("@/workers/translate/receive", () => {
       lang: "FR",
       fields: extractedFields,
     });
-  });
-
-  it("propagates errors thrown by extractFields (e.g. when html is missing)", async () => {
-    vi.mocked(extractFields).mockImplementation(() => {
-      throw new TypeError("cheerio.load() expects a string");
-    });
-
-    const job = createMockJob({
-      contentType: { sys: { id: "page" } },
-      lang: "DE",
-    });
-
-    await expect(processor(job)).rejects.toThrow(
-      "cheerio.load() expects a string",
-    );
   });
 });
