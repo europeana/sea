@@ -29,7 +29,6 @@
     "cheerio": "catalog:html",
     "contentful-management": "^11.57.4",
     "csv-parse": "^7.0.3",
-    "ioredis": "^5.7.0",
     "marked": "catalog:html",
     "morgan": "catalog:nitro2",
     "node-fetch-native": "catalog:",

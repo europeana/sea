@@ -436,9 +436,6 @@ importers:
       csv-parse:
         specifier: ^7.0.3
         version: 7.0.3
-      ioredis:
-        specifier: ^5.7.0
-        version: 5.11.1
       marked:
         specifier: catalog:html
         version: 18.1.1
