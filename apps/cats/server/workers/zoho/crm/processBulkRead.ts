@@ -111,10 +111,7 @@ const processCsvEntry = async (
   return totalQueued;
 };
 
-export const opts = {
-  removeOnComplete: { count: 0 },
-  // removeOnFail: { count: 5000 },
-};
+export const opts = {};
 
 const listValueAsArray = (
   value: string | Array<string>,

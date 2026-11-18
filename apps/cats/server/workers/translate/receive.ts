@@ -14,7 +14,4 @@ export const processor = (job: Job) => {
   };
 };
 
-export const opts = {
-  removeOnComplete: { count: 100 },
-  // removeOnFail: { count: 5000 },
-};
+export const opts = {};

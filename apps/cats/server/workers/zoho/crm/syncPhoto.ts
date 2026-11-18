@@ -74,7 +74,4 @@ export const processor = async (
   return { assetId: contentfulAsset.sys.id };
 };
 
-export const opts = {
-  removeOnComplete: { count: 0 },
-  // removeOnFail: { count: 5000 },
-};
+export const opts = {};

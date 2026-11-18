@@ -92,9 +92,7 @@ describe("@/workers/zoho/crm/processBulkRead", () => {
   });
 
   it("exports expected worker options", () => {
-    expect(opts).toEqual({
-      removeOnComplete: { count: 0 },
-    });
+    expect(opts).toEqual({});
   });
 
   it("throws an error when Zoho bulk read result stream is missing", async () => {
