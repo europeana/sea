@@ -20,9 +20,7 @@ describe("@/workers/translate/receive", () => {
   });
 
   it("exports expected worker options", () => {
-    expect(opts).toEqual({
-      removeOnComplete: { count: 100 },
-    });
+    expect(opts).toEqual({});
   });
 
   it("extracts translated fields from job data and returns them with the target language", () => {

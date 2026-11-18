@@ -24,7 +24,4 @@ export const processor = async (
   };
 };
 
-export const opts = {
-  removeOnComplete: { count: 0 },
-  // removeOnFail: { count: 5000 },
-};
+export const opts = {};

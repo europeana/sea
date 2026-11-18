@@ -32,9 +32,7 @@ describe("@/workers/translate/store", () => {
   });
 
   it("exports expected worker options", () => {
-    expect(opts).toEqual({
-      removeOnComplete: { count: 100 },
-    });
+    expect(opts).toEqual({});
   });
 
   it("merges translated child job fields into Contentful entry locales, updates, and publishes", async () => {

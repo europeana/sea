@@ -47,9 +47,7 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
   });
 
   it("exports expected worker options", () => {
-    expect(opts).toEqual({
-      removeOnComplete: { count: 0 },
-    });
+    expect(opts).toEqual({});
   });
 
   it("creates a Zoho bulk read job with criteria and callback URL and returns the job ID", async () => {

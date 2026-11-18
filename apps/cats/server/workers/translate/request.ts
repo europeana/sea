@@ -81,9 +81,6 @@ export const processor = async (job: Job) => {
 };
 
 export const opts = {
-  removeOnComplete: { count: 100 },
-  // removeOnFail: { count: 5000 },
-  //
   // limit to 10 jobs per minute to not overload eTranslation service
   limiter: {
     max: 10,

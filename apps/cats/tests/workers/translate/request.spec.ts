@@ -66,7 +66,6 @@ describe("@/workers/translate/request", () => {
 
   it("exports expected worker options and rate limiter", () => {
     expect(opts).toEqual({
-      removeOnComplete: { count: 100 },
       limiter: {
         max: 10,
         duration: 60_000,
