@@ -3,16 +3,15 @@ import { Tag as ContentfulTag } from "contentful-management";
 
 import { name as receiveQueueName } from "@/queues/translate/receive";
 import { name as storeQueueName } from "@/queues/translate/store";
-import { name as requestQueueName } from "@/queues/translate/request";
 import { requestTranslation } from "@/services/eTranslation";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { supportedLocales } from "@/utils/i18n/locales";
 import { useFlowProducer } from "@/utils/bullmq";
 import { markupFields } from "@/utils/html/markupFields";
 
-export { requestQueueName as queueName, processor, opts };
+export { name as queueName } from "@/queues/translate/request";
 
-const processor = async (job: Job) => {
+export const processor = async (job: Job) => {
   const contentfulEnvironment = await useContentfulEnvironment();
   const flowProducer = useFlowProducer();
 
@@ -81,7 +80,7 @@ const processor = async (job: Job) => {
   return targetLanguages;
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 100 },
   // removeOnFail: { count: 5000 },
   //

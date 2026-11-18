@@ -1,11 +1,10 @@
 import type { Job } from "bullmq";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { localeForLang } from "@/utils/i18n/locales";
-import { name as queueName } from "@/queues/translate/store";
 
-export { queueName, processor, opts };
+export { name as queueName } from "@/queues/translate/store";
 
-const processor = async (job: Job) => {
+export const processor = async (job: Job) => {
   const contentfulEnvironment = await useContentfulEnvironment();
 
   // all per-language receipt children jobs are complete; assemble their values
@@ -39,7 +38,7 @@ const processor = async (job: Job) => {
   return entry;
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 100 },
   // removeOnFail: { count: 5000 },
 };

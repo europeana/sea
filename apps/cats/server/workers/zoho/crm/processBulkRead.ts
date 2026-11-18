@@ -5,13 +5,12 @@ import * as unzip from "unzip-stream";
 import { ZohoContactRecord } from "@europeana/zoho-client";
 
 import { createSyncContactFlow } from "@/flows/zoho";
-import { name as queueName } from "@/queues/zoho/crm/processBulkRead";
 import { useFlowProducer } from "@/utils/bullmq";
 import { useZoho } from "@/utils/zoho";
 
-export { queueName, processor, opts };
+export { name as queueName } from "@/queues/zoho/crm/processBulkRead";
 
-const processor = async (
+export const processor = async (
   job: Job,
 ): Promise<{ zohoBulkReadJobId: string; queuedCount: number }> => {
   const zohoBulkReadJobId: string = job.data.zohoBulkReadJobId;
@@ -112,7 +111,7 @@ const processCsvEntry = async (
   return totalQueued;
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
 };

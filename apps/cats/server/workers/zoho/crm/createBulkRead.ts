@@ -2,12 +2,13 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { ZohoBulkReadCriteria } from "@europeana/zoho-client";
 
-import { name as queueName } from "@/queues/zoho/crm/createBulkRead";
 import { useZoho } from "@/utils/zoho";
 
-export { queueName, processor, opts };
+export { name as queueName } from "@/queues/zoho/crm/createBulkRead";
 
-const processor = async (job: Job): Promise<{ zohoBulkReadJobId: string }> => {
+export const processor = async (
+  job: Job,
+): Promise<{ zohoBulkReadJobId: string }> => {
   const criteria: ZohoBulkReadCriteria = job.data.criteria;
   const config = useRuntimeConfig()?.zoho;
 
@@ -23,7 +24,7 @@ const processor = async (job: Job): Promise<{ zohoBulkReadJobId: string }> => {
   };
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
 };

@@ -2,13 +2,14 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { Asset as ContentfulAsset } from "contentful-management";
 
-import { name as queueName } from "@/queues/zoho/crm/syncPhoto";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
-export { queueName, processor, opts };
+export { name as queueName } from "@/queues/zoho/crm/syncPhoto";
 
-const processor = async (job: Job): Promise<{ assetId: string | null }> => {
+export const processor = async (
+  job: Job,
+): Promise<{ assetId: string | null }> => {
   const contactId = job.data.contactId;
   const zohoPhoto = await useZoho().crm.fetchZohoPhoto(contactId);
 
@@ -73,7 +74,7 @@ const processor = async (job: Job): Promise<{ assetId: string | null }> => {
   return { assetId: contentfulAsset.sys.id };
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
 };
