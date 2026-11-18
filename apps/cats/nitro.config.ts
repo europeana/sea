@@ -12,6 +12,7 @@ export default defineNitroConfig({
   compatibilityDate: "2025-09-17",
   srcDir: "server",
   externals: {
+    inline: ["@bull-board/api", "@bull-board/h3", "@bull-board/ui"],
     // required when overriding exportConditions
     traceInclude: [require.resolve("tslib")],
   },
