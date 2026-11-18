@@ -1,9 +1,9 @@
 import { Job } from "bullmq";
+
 import { extractFields } from "@/utils/html/extractFields";
+import { name as queueName } from "@/queues/translate/receive";
 
-export { name, processor, opts };
-
-const name = "translate-receive";
+export { queueName, processor, opts };
 
 // TODO: handle situation where this has run due to delay expiring, but no webhook
 //       yet called, i.e. check for job.data.html and if absent, re-delay job

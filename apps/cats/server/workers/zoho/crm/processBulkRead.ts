@@ -4,13 +4,12 @@ import { parse } from "csv-parse";
 import * as unzip from "unzip-stream";
 import { ZohoContactRecord } from "@europeana/zoho-client";
 
+import { createSyncContactFlow } from "@/flows/zoho";
+import { name as queueName } from "@/queues/zoho/crm/processBulkRead";
 import { useFlowProducer } from "@/utils/bullmq";
 import { useZoho } from "@/utils/zoho";
-import { createSyncContactFlow } from "@/flows/zoho";
 
-export { name, processor, opts };
-
-const name = "zoho-crm-process-bulk-read";
+export { queueName, processor, opts };
 
 const processor = async (
   job: Job,

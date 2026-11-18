@@ -4,7 +4,7 @@ import { useRuntimeConfig } from "nitropack/runtime";
 import { ZohoContact, type ZohoContactRecord } from "@europeana/zoho-client";
 import { createOrUpdateEntry } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
-import { name, processor, opts } from "@/workers/zoho/crm/syncContact";
+import { processor, opts } from "@/workers/zoho/crm/syncContact";
 
 vi.mock("@/utils/contentful", () => ({
   createOrUpdateEntry: vi.fn(),
@@ -20,7 +20,6 @@ function createMockJob(
 ): Job {
   return {
     id: "job-1",
-    name,
     data,
     getChildrenValues: vi.fn().mockResolvedValue(childrenValues),
   } as unknown as Job;
@@ -55,8 +54,7 @@ describe("@/workers/zoho/crm/syncContact", () => {
     } as unknown as ReturnType<typeof useZoho>);
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("zoho-crm-sync-contact");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 0 },
     });

@@ -1,10 +1,9 @@
 import type { Job } from "bullmq";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { localeForLang } from "@/utils/i18n/locales";
+import { name as queueName } from "@/queues/translate/store";
 
-export { name, processor, opts };
-
-const name = "translate-store";
+export { queueName, processor, opts };
 
 const processor = async (job: Job) => {
   const contentfulEnvironment = await useContentfulEnvironment();

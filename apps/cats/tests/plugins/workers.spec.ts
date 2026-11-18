@@ -5,12 +5,12 @@ import workersPlugin from "@/plugins/workers";
 
 const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
   mockTranslateWorker: {
-    name: "translate-worker",
+    queueName: "translate-worker",
     processor: vi.fn(),
     opts: { concurrency: 2 },
   },
   mockZohoWorker: {
-    name: "zoho-crm-sync-contact",
+    queueName: "zoho-crm-sync-contact",
     processor: vi.fn(),
     opts: { removeOnComplete: { count: 0 } },
   },

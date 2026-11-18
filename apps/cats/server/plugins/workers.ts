@@ -14,10 +14,10 @@ export default defineNitroPlugin((nitroApp) => {
   for (const worker of workers) {
     activeWorkers.push(
       new Worker(
-        worker.name,
+        worker.queueName,
         (job: Job) => {
           // TODO: can we use the nitro logger for this? from logging plugin
-          console.log(`worker(${worker.name}): ${job.id}`);
+          console.log(`worker(${worker.queueName}): ${job.id}`);
           return worker.processor(job);
         },
         {

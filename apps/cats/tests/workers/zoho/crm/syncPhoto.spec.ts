@@ -3,7 +3,7 @@ import type { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
-import { name, processor, opts } from "@/workers/zoho/crm/syncPhoto";
+import { processor, opts } from "@/workers/zoho/crm/syncPhoto";
 
 vi.mock("@/utils/contentful", () => ({
   useContentfulEnvironment: vi.fn(),
@@ -16,7 +16,6 @@ vi.mock("@/utils/zoho", () => ({
 function createMockJob(data: Record<string, unknown> = {}): Job {
   return {
     id: "job-1",
-    name,
     data,
   } as unknown as Job;
 }
@@ -67,8 +66,7 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
     mockProcessForAllLocales.mockResolvedValue(processedAsset);
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("zoho-crm-sync-photo");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 0 },
     });

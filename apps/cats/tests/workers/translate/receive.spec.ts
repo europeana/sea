@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
 import { extractFields } from "@/utils/html/extractFields";
-import { name, processor, opts } from "@/workers/translate/receive";
+import { processor, opts } from "@/workers/translate/receive";
 
 vi.mock("@/utils/html/extractFields", () => ({
   extractFields: vi.fn(),
@@ -10,7 +10,6 @@ vi.mock("@/utils/html/extractFields", () => ({
 function createMockJob(data: Record<string, unknown> = {}): Job {
   return {
     id: "translate-receive-job-101-FR",
-    name,
     data,
   } as unknown as Job;
 }
@@ -20,8 +19,7 @@ describe("@/workers/translate/receive", () => {
     vi.clearAllMocks();
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("translate-receive");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 100 },
     });

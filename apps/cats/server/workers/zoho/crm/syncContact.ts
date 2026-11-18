@@ -1,14 +1,13 @@
 import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { PersonEntry, PersonEntryFields } from "@/types/contentful";
 import { ZohoContact, ZohoContactRecord } from "@europeana/zoho-client";
+import { name as queueName } from "@/queues/zoho/crm/syncContact";
+import { PersonEntry, PersonEntryFields } from "@/types/contentful";
 import { createOrUpdateEntry } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
-export { name, processor, opts };
-
-const name = "zoho-crm-sync-contact";
+export { queueName, processor, opts };
 
 const processor = async (job: Job): Promise<{ entryId: string | null }> => {
   const contentfulLocale = useRuntimeConfig().contentful?.defaultLocale;

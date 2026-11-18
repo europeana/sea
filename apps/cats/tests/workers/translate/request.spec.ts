@@ -4,7 +4,7 @@ import { useContentfulEnvironment } from "@/utils/contentful";
 import { useFlowProducer } from "@/utils/bullmq";
 import { markupFields } from "@/utils/html/markupFields";
 import { requestTranslation } from "@/services/eTranslation";
-import { name, processor, opts } from "@/workers/translate/request";
+import { processor, opts } from "@/workers/translate/request";
 
 vi.mock("@/utils/contentful", () => ({
   useContentfulEnvironment: vi.fn(),
@@ -26,18 +26,9 @@ vi.mock("@/services/eTranslation", () => ({
   requestTranslation: vi.fn(),
 }));
 
-vi.mock("@/workers/translate/receive", () => ({
-  name: "translate-receive",
-}));
-
-vi.mock("@/workers/translate/store", () => ({
-  name: "translate-store",
-}));
-
 function createMockJob(data: Record<string, unknown> = {}): Job {
   const job = {
     id: "job-101",
-    name,
     data: { ...data },
     updateData: vi.fn(async (nextData: Record<string, unknown>) => {
       job.data = nextData;
@@ -73,8 +64,7 @@ describe("@/workers/translate/request", () => {
     vi.mocked(requestTranslation).mockResolvedValue({ requestId: 98765 });
   });
 
-  it("exports expected worker metadata, options, and rate limiter", () => {
-    expect(name).toBe("translate-request");
+  it("exports expected worker options and rate limiter", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 100 },
       limiter: {

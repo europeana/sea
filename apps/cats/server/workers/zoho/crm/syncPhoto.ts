@@ -2,12 +2,11 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import { Asset as ContentfulAsset } from "contentful-management";
 
+import { name as queueName } from "@/queues/zoho/crm/syncPhoto";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
-export { name, processor, opts };
-
-const name = "zoho-crm-sync-photo";
+export { queueName, processor, opts };
 
 const processor = async (job: Job): Promise<{ assetId: string | null }> => {
   const contactId = job.data.contactId;

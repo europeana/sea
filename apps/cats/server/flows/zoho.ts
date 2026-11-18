@@ -1,8 +1,8 @@
 import { FlowJob } from "bullmq";
 import { ZohoContactRecord } from "@europeana/zoho-client";
 
-import { name as syncContactQueueName } from "@/workers/zoho/crm/syncContact";
-import { name as syncPhotoQueueName } from "@/workers/zoho/crm/syncPhoto";
+import { name as syncContactQueueName } from "@/queues/zoho/crm/syncContact";
+import { name as syncPhotoQueueName } from "@/queues/zoho/crm/syncPhoto";
 
 export interface SyncContactFlowInput {
   contactId: string;

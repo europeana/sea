@@ -1,6 +1,6 @@
 import { defineEventHandler, readBody, H3Event } from "h3";
 import { useQueue } from "@/utils/bullmq";
-import { name as queueName } from "@/workers/translate/receive";
+import { name as queueName } from "@/queues/translate/receive";
 
 // TODO: validate format is "html"
 export const handler = async (event: H3Event) => {
