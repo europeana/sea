@@ -14,6 +14,7 @@ CATS is a micro-service implemented as a [Nitro](https://nitro.build) app. The a
 The micro-service has various HTTP endpoints which may be used as webhook targets, or requested by other means:
 
 - `GET /` — Health check endpoint returning `OK`.
+- `GET /admin` — [Bull-Board](https://github.com/felixmosh/bull-board) UI for administration.
 - `POST /translate/ctf` — Receives Contentful entry publish webhooks to queue translation requests.
 - `POST /translate/etr` — Receives translated HTML payloads from eTranslation.
 - `POST /zoho/contacts` — Receives single contact update webhooks from Zoho CRM.
