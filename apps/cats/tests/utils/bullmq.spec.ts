@@ -1,60 +1,51 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { FlowProducer, Queue } from "bullmq";
-import { createRedisConnection, useRedisConnection } from "@/utils/redis";
+import { useRedisConnectionOptions } from "@/utils/redis";
 
 vi.mock("@/utils/redis", () => ({
-  createRedisConnection: vi.fn(),
-  useRedisConnection: vi.fn(),
+  useRedisConnectionOptions: vi.fn(),
 }));
 
 describe("@/utils/bullmq", () => {
-  const mockSharedConnection = { status: "ready", shared: true };
+  const mockConnectionOptions = {
+    url: "redis://localhost:6379",
+    maxRetriesPerRequest: null,
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
     vi.resetModules();
 
-    vi.mocked(useRedisConnection).mockReturnValue(
-      mockSharedConnection as unknown as ReturnType<typeof useRedisConnection>,
-    );
-    vi.mocked(createRedisConnection).mockImplementation(
-      () =>
-        ({ status: "ready", dedicated: true }) as unknown as ReturnType<
-          typeof createRedisConnection
-        >,
-    );
+    vi.mocked(useRedisConnectionOptions).mockReturnValue(mockConnectionOptions);
   });
 
   describe("useQueueOptions", () => {
-    it("returns BullMQ options with the shared Redis connection and prefix", async () => {
+    it("returns BullMQ options with Redis connection options and prefix", async () => {
       const { useQueueOptions } = await import("@/utils/bullmq");
 
       const options = useQueueOptions();
 
-      expect(useRedisConnection).toHaveBeenCalledTimes(1);
+      expect(useRedisConnectionOptions).toHaveBeenCalledTimes(1);
       expect(options).toEqual({
-        connection: mockSharedConnection,
+        connection: mockConnectionOptions,
         prefix: "@europeana:sea:cats",
       });
     });
   });
 
   describe("useWorkerOptions", () => {
-    it("returns BullMQ options with a dedicated Redis connection and prefix", async () => {
+    it("returns BullMQ options with Redis connection options and prefix", async () => {
       const { useWorkerOptions } = await import("@/utils/bullmq");
 
-      const first = useWorkerOptions();
-      const second = useWorkerOptions();
+      const options = useWorkerOptions();
 
-      expect(createRedisConnection).toHaveBeenCalledTimes(2);
-      expect(useRedisConnection).not.toHaveBeenCalled();
-      expect(first).toEqual({
-        connection: { status: "ready", dedicated: true },
+      expect(useRedisConnectionOptions).toHaveBeenCalledTimes(1);
+      expect(options).toEqual({
+        connection: mockConnectionOptions,
         prefix: "@europeana:sea:cats",
         removeOnComplete: { count: 100 },
         removeOnFail: { count: 1000 },
       });
-      expect(first.connection).not.toBe(second.connection);
     });
   });
 
@@ -71,7 +62,7 @@ describe("@/utils/bullmq", () => {
 
       expect(Queue).toHaveBeenCalledTimes(1);
       expect(Queue).toHaveBeenCalledWith("translate-request", {
-        connection: mockSharedConnection,
+        connection: mockConnectionOptions,
         prefix: "@europeana:sea:cats",
       });
       expect(queue).toBe(mockQueueInstance);
@@ -110,7 +101,7 @@ describe("@/utils/bullmq", () => {
 
       expect(FlowProducer).toHaveBeenCalledTimes(1);
       expect(FlowProducer).toHaveBeenCalledWith({
-        connection: mockSharedConnection,
+        connection: mockConnectionOptions,
         prefix: "@europeana:sea:cats",
       });
       expect(first).toBe(mockFlowProducerInstance);

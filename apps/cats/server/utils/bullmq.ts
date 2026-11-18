@@ -1,11 +1,5 @@
-import {
-  ConnectionOptions,
-  FlowProducer,
-  Queue,
-  QueueOptions,
-  WorkerOptions,
-} from "bullmq";
-import { createRedisConnection, useRedisConnection } from "@/utils/redis";
+import { FlowProducer, Queue, QueueOptions, WorkerOptions } from "bullmq";
+import { useRedisConnectionOptions } from "@/utils/redis";
 
 const queues: Record<string, Queue> = {};
 let flowProducer: FlowProducer | undefined;
@@ -20,16 +14,14 @@ export const useQueue = (name: string): Queue => {
 
 export const useQueueOptions = (): QueueOptions => {
   return {
-    // Queues and FlowProducers run non-blocking commands and can safely share one Redis connection
-    connection: useRedisConnection() as unknown as ConnectionOptions,
+    connection: useRedisConnectionOptions(),
     prefix,
   };
 };
 
 export const useWorkerOptions = (): WorkerOptions => {
   return {
-    // Workers use blocking Redis commands and require dedicated connections
-    connection: createRedisConnection() as unknown as ConnectionOptions,
+    connection: useRedisConnectionOptions(),
     prefix,
     removeOnComplete: { count: 100 },
     removeOnFail: { count: 1000 },

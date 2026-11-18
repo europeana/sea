@@ -54,14 +54,6 @@ vi.mock("h3", () => ({
   setResponseStatus: vi.fn(),
 }));
 
-vi.mock("ioredis", () => ({
-  default: vi.fn(
-    class {
-      setMaxListeners = vi.fn();
-    },
-  ),
-}));
-
 vi.mock("nitropack/runtime", () => ({
   defineNitroPlugin: vi.fn((callback) => callback),
   useRuntimeConfig: vi.fn().mockReturnValue({ redis: {} }),
