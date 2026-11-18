@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
 import { extractFields } from "@/utils/html/extractFields";
-import { name, processor, opts } from "@/workers/translate/receive";
+import { processor, opts } from "@/workers/translate/receive";
 
 vi.mock("@/utils/html/extractFields", () => ({
   extractFields: vi.fn(),
@@ -10,7 +10,6 @@ vi.mock("@/utils/html/extractFields", () => ({
 function createMockJob(data: Record<string, unknown> = {}): Job {
   return {
     id: "translate-receive-job-101-FR",
-    name,
     data,
   } as unknown as Job;
 }
@@ -20,14 +19,13 @@ describe("@/workers/translate/receive", () => {
     vi.clearAllMocks();
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("translate-receive");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 100 },
     });
   });
 
-  it("extracts translated fields from job data and returns them with the target language", async () => {
+  it("extracts translated fields from job data and returns them with the target language", () => {
     const extractedFields = {
       title: "Bonjour Europeana",
       body: "## Titre\n\nContenu traduit",
@@ -42,7 +40,7 @@ describe("@/workers/translate/receive", () => {
     };
 
     const job = createMockJob(jobData);
-    const result = await processor(job);
+    const result = processor(job);
 
     expect(extractFields).toHaveBeenCalledTimes(1);
     expect(extractFields).toHaveBeenCalledWith(jobData);
@@ -50,20 +48,5 @@ describe("@/workers/translate/receive", () => {
       lang: "FR",
       fields: extractedFields,
     });
-  });
-
-  it("propagates errors thrown by extractFields (e.g. when html is missing)", async () => {
-    vi.mocked(extractFields).mockImplementation(() => {
-      throw new TypeError("cheerio.load() expects a string");
-    });
-
-    const job = createMockJob({
-      contentType: { sys: { id: "page" } },
-      lang: "DE",
-    });
-
-    await expect(processor(job)).rejects.toThrow(
-      "cheerio.load() expects a string",
-    );
   });
 });

@@ -1,16 +1,16 @@
 import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-import { PersonEntry, PersonEntryFields } from "@/types/contentful";
 import { ZohoContact, ZohoContactRecord } from "@europeana/zoho-client";
+import { PersonEntry, PersonEntryFields } from "@/types/contentful";
 import { createOrUpdateEntry } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
-export { name, processor, opts };
+export { name as queueName } from "@/queues/zoho/crm/syncContact";
 
-const name = "zoho-crm-sync-contact";
-
-const processor = async (job: Job): Promise<{ entryId: string | null }> => {
+export const processor = async (
+  job: Job,
+): Promise<{ entryId: string | null }> => {
   const contentfulLocale = useRuntimeConfig().contentful?.defaultLocale;
   const contentfulContentTypeId = "person";
 
@@ -43,7 +43,7 @@ const processor = async (job: Job): Promise<{ entryId: string | null }> => {
   }
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
 };

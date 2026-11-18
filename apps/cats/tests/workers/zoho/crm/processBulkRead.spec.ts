@@ -4,7 +4,7 @@ import { FlowProducer, type FlowJob, type Job } from "bullmq";
 import * as unzip from "unzip-stream";
 import { useZoho } from "@/utils/zoho";
 import { createSyncContactFlow } from "@/flows/zoho";
-import { name, processor, opts } from "@/workers/zoho/crm/processBulkRead";
+import { processor, opts } from "@/workers/zoho/crm/processBulkRead";
 
 vi.mock("unzip-stream", () => ({
   Parse: vi.fn(),
@@ -21,7 +21,6 @@ vi.mock("@/flows/zoho", () => ({
 function createMockJob(data: Record<string, unknown> = {}): Job {
   return {
     id: "job-1",
-    name,
     data,
   } as unknown as Job;
 }
@@ -92,8 +91,7 @@ describe("@/workers/zoho/crm/processBulkRead", () => {
     }));
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("zoho-crm-process-bulk-read");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 0 },
     });

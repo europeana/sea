@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
 import { useContentfulEnvironment } from "@/utils/contentful";
-import { name, processor, opts } from "@/workers/translate/store";
+import { processor, opts } from "@/workers/translate/store";
 
 vi.mock("@/utils/contentful", () => ({
   useContentfulEnvironment: vi.fn(),
@@ -13,7 +13,6 @@ function createMockJob(
 ): Job {
   return {
     id: "job-101",
-    name,
     data,
     getChildrenValues: vi.fn().mockResolvedValue(childrenValues),
   } as unknown as Job;
@@ -32,8 +31,7 @@ describe("@/workers/translate/store", () => {
     } as unknown as Awaited<ReturnType<typeof useContentfulEnvironment>>);
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("translate-store");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 100 },
     });

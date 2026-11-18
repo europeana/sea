@@ -3,10 +3,7 @@ import { Job, Worker } from "bullmq";
 
 import { useWorkerOptions } from "@/utils/bullmq";
 
-import translateWorkers from "@/workers/translate/index";
-import zohoCRMWorkers from "@/workers/zoho/crm/index";
-
-const workers = [translateWorkers, zohoCRMWorkers].flat();
+import workers from "@/workers/index";
 
 export default defineNitroPlugin((nitroApp) => {
   const activeWorkers: Worker[] = [];
@@ -14,10 +11,10 @@ export default defineNitroPlugin((nitroApp) => {
   for (const worker of workers) {
     activeWorkers.push(
       new Worker(
-        worker.name,
+        worker.queueName,
         (job: Job) => {
           // TODO: can we use the nitro logger for this? from logging plugin
-          console.log(`worker(${worker.name}): ${job.id}`);
+          console.log(`worker(${worker.queueName}): ${job.id}`);
           return worker.processor(job);
         },
         {

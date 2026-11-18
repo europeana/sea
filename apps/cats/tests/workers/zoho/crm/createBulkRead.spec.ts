@@ -3,7 +3,7 @@ import type { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 import type { ZohoBulkReadCriteria } from "@europeana/zoho-client";
 import { useZoho } from "@/utils/zoho";
-import { name, processor, opts } from "@/workers/zoho/crm/createBulkRead";
+import { processor, opts } from "@/workers/zoho/crm/createBulkRead";
 
 vi.mock("@/utils/zoho", () => ({
   useZoho: vi.fn(),
@@ -12,7 +12,6 @@ vi.mock("@/utils/zoho", () => ({
 function createMockJob(data: Record<string, unknown> = {}): Job {
   return {
     id: "job-1",
-    name,
     data,
   } as unknown as Job;
 }
@@ -47,8 +46,7 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
     } as unknown as ReturnType<typeof useZoho>);
   });
 
-  it("exports expected worker metadata and options", () => {
-    expect(name).toBe("zoho-crm-create-bulk-read");
+  it("exports expected worker options", () => {
     expect(opts).toEqual({
       removeOnComplete: { count: 0 },
     });

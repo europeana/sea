@@ -20,8 +20,7 @@ export const useQueue = (name: string): Queue => {
 
 export const useQueueOptions = (): QueueOptions => {
   return {
-    // Queues and FlowProducers run non-blocking commands and can safely share one Redis connection:
-    // https://bullmq.io
+    // Queues and FlowProducers run non-blocking commands and can safely share one Redis connection
     connection: useRedisConnection() as unknown as ConnectionOptions,
     prefix,
   };
@@ -29,8 +28,7 @@ export const useQueueOptions = (): QueueOptions => {
 
 export const useWorkerOptions = (): WorkerOptions => {
   return {
-    // Workers use blocking Redis commands and require dedicated connections:
-    // https://bullmq.io
+    // Workers use blocking Redis commands and require dedicated connections
     connection: createRedisConnection() as unknown as ConnectionOptions,
     prefix,
   };
@@ -38,5 +36,6 @@ export const useWorkerOptions = (): WorkerOptions => {
 
 export const useFlowProducer = (): FlowProducer => {
   flowProducer ||= new FlowProducer(useQueueOptions());
+
   return flowProducer;
 };

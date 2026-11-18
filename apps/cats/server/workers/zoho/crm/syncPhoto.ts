@@ -5,11 +5,11 @@ import { Asset as ContentfulAsset } from "contentful-management";
 import { useContentfulEnvironment } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
-export { name, processor, opts };
+export { name as queueName } from "@/queues/zoho/crm/syncPhoto";
 
-const name = "zoho-crm-sync-photo";
-
-const processor = async (job: Job): Promise<{ assetId: string | null }> => {
+export const processor = async (
+  job: Job,
+): Promise<{ assetId: string | null }> => {
   const contactId = job.data.contactId;
   const zohoPhoto = await useZoho().crm.fetchZohoPhoto(contactId);
 
@@ -74,7 +74,7 @@ const processor = async (job: Job): Promise<{ assetId: string | null }> => {
   return { assetId: contentfulAsset.sys.id };
 };
 
-const opts = {
+export const opts = {
   removeOnComplete: { count: 0 },
   // removeOnFail: { count: 5000 },
 };
