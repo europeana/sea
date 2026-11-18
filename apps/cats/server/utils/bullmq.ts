@@ -31,6 +31,8 @@ export const useWorkerOptions = (): WorkerOptions => {
     // Workers use blocking Redis commands and require dedicated connections
     connection: createRedisConnection() as unknown as ConnectionOptions,
     prefix,
+    removeOnComplete: { count: 100 },
+    removeOnFail: { count: 1000 },
   };
 };
 

@@ -38,7 +38,4 @@ export const processor = async (job: Job) => {
   return entry;
 };
 
-export const opts = {
-  removeOnComplete: { count: 100 },
-  // removeOnFail: { count: 5000 },
-};
+export const opts = {};

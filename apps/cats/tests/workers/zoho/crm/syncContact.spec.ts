@@ -55,9 +55,7 @@ describe("@/workers/zoho/crm/syncContact", () => {
   });
 
   it("exports expected worker options", () => {
-    expect(opts).toEqual({
-      removeOnComplete: { count: 0 },
-    });
+    expect(opts).toEqual({});
   });
 
   it("fetches contact from Zoho CRM when contactRecord is not provided", async () => {

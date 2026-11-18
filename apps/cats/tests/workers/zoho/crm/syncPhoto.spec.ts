@@ -67,9 +67,7 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
   });
 
   it("exports expected worker options", () => {
-    expect(opts).toEqual({
-      removeOnComplete: { count: 0 },
-    });
+    expect(opts).toEqual({});
   });
 
   it("returns { assetId: null } when no Zoho photo exists for the contact", async () => {

@@ -51,6 +51,8 @@ describe("@/utils/bullmq", () => {
       expect(first).toEqual({
         connection: { status: "ready", dedicated: true },
         prefix: "@europeana:sea:cats",
+        removeOnComplete: { count: 100 },
+        removeOnFail: { count: 1000 },
       });
       expect(first.connection).not.toBe(second.connection);
     });
