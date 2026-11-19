@@ -10,51 +10,48 @@ describe("ZohoContact", () => {
   beforeEach(() => {
     record = {
       id: "12345",
-      Country_new: "USA",
+      Country_new: "Netherlands",
       Full_Name: "John Doe",
-      LinkedIn: "https://www.linkedin.com/in/johndoe",
+      LinkedIn: "https://linkedin.com",
       Modified_Time: "2023-10-01T00:00:00Z",
       Public_email: "john.doe@example.com",
       Title: "Software Engineer",
-      Communities: ["Communicators", "Copyright"], // Use valid community values
-      Contact_Participation: ["Staff", "Network Association"], // Use valid participation values
+      Communities: ["Communicators", "Copyright"],
+      Contact_Participation: ["Staff", "Network Association"],
+      Europeana_Initiative_role_chair: ["Capacity Building Working Group"],
+      Europeana_Initiative_role_vice_chair: [
+        "Europeana Network Association Management Board",
+      ],
+      Europeana_Initiative_role_treasurer: ["Europeana Aggregators' Forum"],
+      Europeana_Initiative_role_member: [
+        "Article 14 Task Force",
+        "Data Quality Committee Working Group",
+      ],
     };
     zohoContact = new ZohoContact(record);
   });
 
-  it("should return the correct id", () => {
-    expect(zohoContact.id).toBe("12345");
-  });
+  const propertyMappings: Array<[keyof ZohoContact, keyof ZohoContactRecord]> =
+    [
+      ["id", "id"],
+      ["country", "Country_new"],
+      ["name", "Full_Name"],
+      ["linkedIn", "LinkedIn"],
+      ["modifiedTime", "Modified_Time"],
+      ["email", "Public_email"],
+      ["jobTitle", "Title"],
+      ["communities", "Communities"],
+      ["participation", "Contact_Participation"],
+      ["roleChair", "Europeana_Initiative_role_chair"],
+      ["roleViceChair", "Europeana_Initiative_role_vice_chair"],
+      ["roleTreasurer", "Europeana_Initiative_role_treasurer"],
+      ["roleMember", "Europeana_Initiative_role_member"],
+    ];
 
-  it("should return the correct country", () => {
-    expect(zohoContact.country).toBe("USA");
-  });
-
-  it("should return the correct name", () => {
-    expect(zohoContact.name).toBe("John Doe");
-  });
-
-  it("should return the correct LinkedIn URL", () => {
-    expect(zohoContact.linkedIn).toBe("https://www.linkedin.com/in/johndoe");
-  });
-
-  it("should return the correct modified time", () => {
-    expect(zohoContact.modifiedTime).toBe("2023-10-01T00:00:00Z");
-  });
-
-  it("should return the correct email", () => {
-    expect(zohoContact.email).toBe("john.doe@example.com");
-  });
-
-  it("should return the correct job title", () => {
-    expect(zohoContact.jobTitle).toBe("Software Engineer");
-  });
-
-  it("should return the correct communities", () => {
-    expect(zohoContact.communities).toEqual(["Communicators", "Copyright"]);
-  });
-
-  it("should return the correct participation", () => {
-    expect(zohoContact.participation).toEqual(["Staff", "Network Association"]);
-  });
+  it.each(propertyMappings)(
+    "should map %s to record.%s",
+    (contactProp, recordProp) => {
+      expect(zohoContact[contactProp]).toEqual(record[recordProp]);
+    },
+  );
 });
