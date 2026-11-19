@@ -76,7 +76,9 @@ const findZohoContact = async (job: Job): Promise<ZohoContact> => {
   if (zohoContactRecord) {
     zohoContact = new ZohoContact(zohoContactRecord);
   } else {
-    zohoContact = await useZoho().crm.fetchZohoContact(contactId);
+    const fields =
+      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title";
+    zohoContact = await useZoho().crm.fetchZohoContact(contactId, fields);
   }
 
   if (!zohoContact) {

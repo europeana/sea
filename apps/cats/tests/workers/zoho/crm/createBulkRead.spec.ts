@@ -16,6 +16,18 @@ function createMockJob(data: Record<string, unknown> = {}): Job {
   } as unknown as Job;
 }
 
+const EXPECTED_FIELDS = [
+  "id",
+  "Full_Name",
+  "Public_email",
+  "LinkedIn",
+  "Communities",
+  "Contact_Participation",
+  "Country_new",
+  "Title",
+  "Modified_Time",
+];
+
 describe("@/workers/zoho/crm/createBulkRead", () => {
   const mockCreateZohoBulkReadJob = vi.fn();
 
@@ -50,7 +62,7 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
     expect(opts).toEqual({});
   });
 
-  it("creates a Zoho bulk read job with criteria and callback URL and returns the job ID", async () => {
+  it("creates a Zoho bulk read job with criteria, callback URL, and fields and returns the job ID", async () => {
     mockCreateZohoBulkReadJob.mockResolvedValue({
       data: [
         {
@@ -69,6 +81,7 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
     expect(mockCreateZohoBulkReadJob).toHaveBeenCalledWith(
       sampleCriteria,
       "https://example.org",
+      EXPECTED_FIELDS,
     );
     expect(result).toEqual({ zohoBulkReadJobId: "bulk-job-456" });
   });
@@ -94,6 +107,7 @@ describe("@/workers/zoho/crm/createBulkRead", () => {
     expect(mockCreateZohoBulkReadJob).toHaveBeenCalledWith(
       undefined,
       undefined,
+      EXPECTED_FIELDS,
     );
     expect(result).toEqual({ zohoBulkReadJobId: "bulk-job-789" });
   });
