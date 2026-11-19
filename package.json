@@ -36,7 +36,7 @@
     "@nuxt/eslint": "catalog:eslint10",
     "@nuxt/test-utils": "catalog:nuxt3",
     "@vitest/coverage-v8": "catalog:vitest4",
-    "@vue/test-utils": "2.4.11",
+    "@vue/test-utils": "2.6.0",
     "eslint": "catalog:eslint10",
     "eslint-config-prettier": "catalog:eslint10",
     "eslint-plugin-vue": "catalog:eslint10",
