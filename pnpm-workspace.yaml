@@ -28,7 +28,7 @@ catalogs:
   html:
     cheerio: "1.2.0"
     marked: "18.1.1"
-    turndown: "7.2.4"
+    turndown: "7.2.5"
   nitro2:
     h3: "1.15.11"
     morgan: "1.12.1"
