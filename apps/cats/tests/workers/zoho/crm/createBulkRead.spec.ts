@@ -26,6 +26,10 @@ const EXPECTED_FIELDS = [
   "Country_new",
   "Title",
   "Modified_Time",
+  "Europeana_Initiative_role_chair",
+  "Europeana_Initiative_role_vice_chair",
+  "Europeana_Initiative_role_treasurer",
+  "Europeana_Initiative_role_member",
 ];
 
 describe("@/workers/zoho/crm/createBulkRead", () => {

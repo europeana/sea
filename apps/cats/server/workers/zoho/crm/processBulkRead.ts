@@ -91,6 +91,18 @@ const processCsvEntry = async (
         id: contact.Id,
         Communities: listValueAsArray(contact.Communities),
         Contact_Participation: listValueAsArray(contact.Contact_Participation),
+        Europeana_Initiative_role_chair: listValueAsArray(
+          contact.Europeana_Initiative_role_chair,
+        ),
+        Europeana_Initiative_role_vice_chair: listValueAsArray(
+          contact.Europeana_Initiative_role_vice_chair,
+        ),
+        Europeana_Initiative_role_treasurer: listValueAsArray(
+          contact.Europeana_Initiative_role_treasurer,
+        ),
+        Europeana_Initiative_role_member: listValueAsArray(
+          contact.Europeana_Initiative_role_member,
+        ),
       } as ZohoContactRecord,
     });
 
@@ -133,4 +145,8 @@ type ZohoContactCSVRecord = {
   Modified_Time: string;
   Public_email: string;
   Title: string;
+  Europeana_Initiative_role_chair: string;
+  Europeana_Initiative_role_vice_chair: string;
+  Europeana_Initiative_role_treasurer: string;
+  Europeana_Initiative_role_member: string;
 };

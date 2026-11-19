@@ -69,7 +69,7 @@ describe("@/workers/zoho/crm/syncContact", () => {
 
     expect(mockFetchZohoContact).toHaveBeenCalledWith(
       "zoho-123",
-      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
+      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title,Europeana_Initiative_role_chair,Europeana_Initiative_role_vice_chair,Europeana_Initiative_role_treasurer,Europeana_Initiative_role_member",
     );
     expect(createOrUpdateEntry).toHaveBeenCalledWith(
       "person",
