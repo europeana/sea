@@ -26,7 +26,7 @@
     "@nuxtjs/storybook": "catalog:nuxt3",
     "@storybook/addon-docs": "10.4.6",
     "@storybook/addon-links": "10.4.6",
-    "@vitejs/plugin-vue": "6.0.7",
+    "@vitejs/plugin-vue": "6.0.11",
     "bootstrap": "catalog:",
     "happy-dom": "21.0.4",
     "lodash-es": "catalog:",

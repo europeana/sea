@@ -51,7 +51,7 @@ catalogs:
     "@types/readable-stream": 4.0.25
     "@types/turndown": "5.0.6"
   vite7:
-    "@vitejs/plugin-vue": "6.0.7"
+    "@vitejs/plugin-vue": "6.0.11"
     vite: "7.3.8"
     "vite-tsconfig-paths": "6.1.1"
   vitest4:
