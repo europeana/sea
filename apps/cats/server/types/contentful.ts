@@ -8,9 +8,12 @@ export type PersonEntryFields = {
   email?: { [locale: string]: string };
   title?: { [locale: string]: string };
   country?: { [locale: string]: string };
-  communities?: { [locale: string]: Array<string> };
-  participation?: { [locale: string]: Array<string> };
-  role?: { [locale: string]: string };
+  communities?: { [locale: string]: string[] };
+  participation?: { [locale: string]: string[] };
+  roleChair?: { [locale: string]: string[] };
+  roleMember?: { [locale: string]: string[] };
+  roleTreasurer?: { [locale: string]: string[] };
+  roleViceChair?: { [locale: string]: string[] };
   zohoId?: { [locale: string]: string };
 };
 

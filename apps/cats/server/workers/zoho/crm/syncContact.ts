@@ -78,6 +78,10 @@ const mapZohoContactToContentfulPersonEntryFields = (
     title: { [locale]: zohoContact.jobTitle },
     country: { [locale]: country },
     communities: { [locale]: zohoContact.communities },
+    roleChair: { [locale]: zohoContact.roleChair },
+    roleMember: { [locale]: zohoContact.roleMember },
+    roleTreasurer: { [locale]: zohoContact.roleTreasurer },
+    roleViceChair: { [locale]: zohoContact.roleViceChair },
     url: { [locale]: zohoContact.linkedIn },
     zohoId: { [locale]: zohoContact.id },
   };
