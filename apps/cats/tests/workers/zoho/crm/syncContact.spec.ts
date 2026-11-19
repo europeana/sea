@@ -27,6 +27,7 @@ function createMockJob(
 
 describe("@/workers/zoho/crm/syncContact", () => {
   const mockFetchZohoContact = vi.fn();
+  const locale = "en-GB";
 
   const baseRecord: ZohoContactRecord = {
     id: "zoho-123",
@@ -38,13 +39,17 @@ describe("@/workers/zoho/crm/syncContact", () => {
     Communities: ["Tech", "History"],
     LinkedIn: "https://linkedin.com",
     Modified_Time: "2026-01-01T00:00:00Z",
+    Europeana_Initiative_role_chair: [],
+    Europeana_Initiative_role_member: [],
+    Europeana_Initiative_role_vice_chair: [],
+    Europeana_Initiative_role_treasurer: [],
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
 
     vi.mocked(useRuntimeConfig).mockReturnValue({
-      contentful: { defaultLocale: "en-US" },
+      contentful: { defaultLocale: "en-GB" },
     } as ReturnType<typeof useRuntimeConfig>);
 
     vi.mocked(useZoho).mockReturnValue({
@@ -69,7 +74,7 @@ describe("@/workers/zoho/crm/syncContact", () => {
 
     expect(mockFetchZohoContact).toHaveBeenCalledWith(
       "zoho-123",
-      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
+      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title,Europeana_Initiative_role_chair,Europeana_Initiative_role_vice_chair,Europeana_Initiative_role_treasurer,Europeana_Initiative_role_member",
     );
     expect(createOrUpdateEntry).toHaveBeenCalledWith(
       "person",
@@ -78,14 +83,18 @@ describe("@/workers/zoho/crm/syncContact", () => {
         "fields.zohoId": "zoho-123",
       },
       {
-        name: { "en-US": "Ada Lovelace" },
-        email: { "en-US": "ada@example.org" },
-        participation: { "en-US": ["Speaker"] },
-        title: { "en-US": "Mathematician" },
-        country: { "en-US": "United Kingdom" },
-        communities: { "en-US": ["Tech", "History"] },
-        url: { "en-US": "https://linkedin.com" },
-        zohoId: { "en-US": "zoho-123" },
+        name: { [locale]: "Ada Lovelace" },
+        email: { [locale]: "ada@example.org" },
+        participation: { [locale]: ["Speaker"] },
+        title: { [locale]: "Mathematician" },
+        country: { [locale]: "United Kingdom" },
+        communities: { [locale]: ["Tech", "History"] },
+        url: { [locale]: "https://linkedin.com" },
+        roleChair: { [locale]: [] },
+        roleMember: { [locale]: [] },
+        roleTreasurer: { [locale]: [] },
+        roleViceChair: { [locale]: [] },
+        zohoId: { [locale]: "zoho-123" },
       },
       true,
     );
@@ -111,8 +120,8 @@ describe("@/workers/zoho/crm/syncContact", () => {
         "fields.zohoId": "zoho-123",
       },
       expect.objectContaining({
-        name: { "en-US": "Ada Lovelace" },
-        zohoId: { "en-US": "zoho-123" },
+        name: { [locale]: "Ada Lovelace" },
+        zohoId: { [locale]: "zoho-123" },
       }),
       true,
     );
@@ -139,7 +148,7 @@ describe("@/workers/zoho/crm/syncContact", () => {
       expect.any(Object),
       expect.objectContaining({
         image: {
-          "en-US": {
+          [locale]: {
             sys: {
               type: "Link",
               linkType: "Asset",
@@ -188,7 +197,7 @@ describe("@/workers/zoho/crm/syncContact", () => {
       "person",
       expect.any(Object),
       expect.objectContaining({
-        country: { "en-US": "Türkiye" },
+        country: { [locale]: "Türkiye" },
       }),
       true,
     );

@@ -8,6 +8,21 @@ import { useZoho } from "@/utils/zoho";
 
 export { name as queueName } from "@/queues/zoho/crm/syncContact";
 
+const CONTACT_SYNC_FIELDS = [
+  "id",
+  "Full_Name",
+  "Public_email",
+  "LinkedIn",
+  "Communities",
+  "Contact_Participation",
+  "Country_new",
+  "Title",
+  "Europeana_Initiative_role_chair",
+  "Europeana_Initiative_role_vice_chair",
+  "Europeana_Initiative_role_treasurer",
+  "Europeana_Initiative_role_member",
+];
+
 export const processor = async (
   job: Job,
 ): Promise<{ entryId: string | null }> => {
@@ -63,6 +78,10 @@ const mapZohoContactToContentfulPersonEntryFields = (
     title: { [locale]: zohoContact.jobTitle },
     country: { [locale]: country },
     communities: { [locale]: zohoContact.communities },
+    roleChair: { [locale]: zohoContact.roleChair },
+    roleMember: { [locale]: zohoContact.roleMember },
+    roleTreasurer: { [locale]: zohoContact.roleTreasurer },
+    roleViceChair: { [locale]: zohoContact.roleViceChair },
     url: { [locale]: zohoContact.linkedIn },
     zohoId: { [locale]: zohoContact.id },
   };
@@ -76,9 +95,10 @@ const findZohoContact = async (job: Job): Promise<ZohoContact> => {
   if (zohoContactRecord) {
     zohoContact = new ZohoContact(zohoContactRecord);
   } else {
-    const fields =
-      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title";
-    zohoContact = await useZoho().crm.fetchZohoContact(contactId, fields);
+    zohoContact = await useZoho().crm.fetchZohoContact(
+      contactId,
+      CONTACT_SYNC_FIELDS.join(","),
+    );
   }
 
   if (!zohoContact) {
