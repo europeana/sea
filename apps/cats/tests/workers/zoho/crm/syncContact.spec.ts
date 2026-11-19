@@ -67,7 +67,10 @@ describe("@/workers/zoho/crm/syncContact", () => {
     const job = createMockJob({ contactId: "zoho-123" });
     const result = await processor(job);
 
-    expect(mockFetchZohoContact).toHaveBeenCalledWith("zoho-123");
+    expect(mockFetchZohoContact).toHaveBeenCalledWith(
+      "zoho-123",
+      "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
+    );
     expect(createOrUpdateEntry).toHaveBeenCalledWith(
       "person",
       {

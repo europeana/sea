@@ -6,6 +6,18 @@ import { useZoho } from "@/utils/zoho";
 
 export { name as queueName } from "@/queues/zoho/crm/createBulkRead";
 
+const CONTACT_BULK_READ_FIELDS = [
+  "id",
+  "Full_Name",
+  "Public_email",
+  "LinkedIn",
+  "Communities",
+  "Contact_Participation",
+  "Country_new",
+  "Title",
+  "Modified_Time",
+];
+
 export const processor = async (
   job: Job,
 ): Promise<{ zohoBulkReadJobId: string }> => {
@@ -15,6 +27,7 @@ export const processor = async (
   const response = await useZoho().crm.createZohoBulkReadJob(
     criteria,
     config?.bulkReadCallbackUrl,
+    CONTACT_BULK_READ_FIELDS,
   );
 
   const zohoBulkReadJobId = response.data[0].details.id;

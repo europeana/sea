@@ -5,7 +5,6 @@ import { Readable } from "node:stream";
 import { ZohoContact } from "../src/models/crm/contact.js";
 import { createZohoCRMClient } from "../src/crm.js";
 
-// const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
 const mockAPI = { request: vi.fn() };
 
 describe("crm", () => {
@@ -29,7 +28,7 @@ describe("crm", () => {
       });
 
       it("sends a request to Zoho CRM API", async () => {
-        const callbackUrl = "https://example.org/zoho/bulk/callback";
+        const callbackUrl = "https://example.org";
 
         await createZohoCRMClient(mockAPI).createZohoBulkReadJob(
           criteria,
@@ -41,31 +40,38 @@ describe("crm", () => {
           headers: {
             "content-type": "application/json",
           },
-          body: '{"query":{"module":{"api_name":"Contacts"},"fields":["id","Full_Name","Public_email","LinkedIn","Communities","Contact_Participation","Country_new","Title","Modified_Time"],"criteria":{"field":{"api_name":"Contact_Participation"},"comparator":"contains","value":["Staff"]}},"callback":{"method":"post","url":"https://example.org/zoho/bulk/callback"}}',
+          body: '{"query":{"module":{"api_name":"Contacts"},"criteria":{"field":{"api_name":"Contact_Participation"},"comparator":"contains","value":["Staff"]}},"callback":{"method":"post","url":"https://example.org"}}',
         });
       });
 
-      describe("when there is a response body", () => {
-        it("returns the API response", async () => {
-          const response =
-            await createZohoCRMClient(mockAPI).createZohoBulkReadJob(criteria);
+      describe("when fields argument is provided", () => {
+        it("includes fields in the request body query", async () => {
+          const callbackUrl = "https://example.org";
+          const fields = [
+            "id",
+            "Full_Name",
+            "Public_email",
+            "LinkedIn",
+            "Communities",
+            "Contact_Participation",
+            "Country_new",
+            "Title",
+            "Modified_Time",
+          ];
 
-          expect(response).toBe(apiResponse);
-        });
-      });
+          await createZohoCRMClient(mockAPI).createZohoBulkReadJob(
+            criteria,
+            callbackUrl,
+            fields,
+          );
 
-      describe("when there is no response body", () => {
-        beforeEach(() => {
-          const apiResponse = new Response(null);
-
-          mockAPI.request.mockResolvedValue(apiResponse);
-        });
-
-        it("returns null", async () => {
-          const response =
-            await createZohoCRMClient(mockAPI).createZohoBulkReadJob(criteria);
-
-          expect(response).toBeNull();
+          expect(mockAPI.request).toHaveBeenCalledWith("/crm/bulk/v8/read", {
+            method: "post",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: '{"query":{"module":{"api_name":"Contacts"},"fields":["id","Full_Name","Public_email","LinkedIn","Communities","Contact_Participation","Country_new","Title","Modified_Time"],"criteria":{"field":{"api_name":"Contact_Participation"},"comparator":"contains","value":["Staff"]}},"callback":{"method":"post","url":"https://example.org"}}',
+          });
         });
       });
     });
@@ -128,13 +134,26 @@ describe("crm", () => {
 
         expect(mockAPI.request).toHaveBeenCalledWith(
           "/crm/v8/Contacts/123456",
-          {
-            params: {
-              fields:
-                "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
-            },
-          },
+          {},
         );
+      });
+
+      describe("when fields argument is provided", () => {
+        it("includes fields in the request params", async () => {
+          const fields =
+            "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title";
+
+          await createZohoCRMClient(mockAPI).fetchZohoContact(id, fields);
+
+          expect(mockAPI.request).toHaveBeenCalledWith(
+            "/crm/v8/Contacts/123456",
+            {
+              params: {
+                fields,
+              },
+            },
+          );
+        });
       });
 
       describe("when there is a response body", () => {

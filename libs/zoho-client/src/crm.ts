@@ -19,6 +19,7 @@ export class ZohoCRMClient {
   async createZohoBulkReadJob(
     criteria: ZohoBulkReadCriteria,
     callbackUrl?: string,
+    fields?: string[],
   ) {
     const method = "post";
     const url = "/crm/bulk/v8/read";
@@ -30,18 +31,7 @@ export class ZohoCRMClient {
         module: {
           api_name: "Contacts",
         },
-        // TODO: should this go into args?
-        fields: [
-          "id",
-          "Full_Name",
-          "Public_email",
-          "LinkedIn",
-          "Communities",
-          "Contact_Participation",
-          "Country_new",
-          "Title",
-          "Modified_Time",
-        ],
+        ...(fields ? { fields } : {}),
         criteria,
       },
     };
@@ -79,14 +69,18 @@ export class ZohoCRMClient {
     return Readable.fromWeb(response.body);
   }
 
-  async fetchZohoContact(id: string): Promise<ZohoContact | null> {
-    const params = {
-      fields:
-        "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title",
-    };
-    const response = await this.api.request(`/crm/v8/Contacts/${id}`, {
-      params,
-    });
+  async fetchZohoContact(
+    id: string,
+    fields?: string,
+  ): Promise<ZohoContact | null> {
+    const response = await this.api.request(
+      `/crm/v8/Contacts/${id}`,
+      fields
+        ? {
+            params: { fields },
+          }
+        : {},
+    );
 
     if (!response.body) {
       return null;
