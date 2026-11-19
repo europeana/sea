@@ -262,8 +262,8 @@ catalogs:
       specifier: 18.1.1
       version: 18.1.1
     turndown:
-      specifier: 7.2.4
-      version: 7.2.4
+      specifier: 7.2.5
+      version: 7.2.5
   nitro2:
     h3:
       specifier: 1.15.11
@@ -447,7 +447,7 @@ importers:
         version: 1.6.7
       turndown:
         specifier: catalog:html
-        version: 7.2.4
+        version: 7.2.5
       unzip-stream:
         specifier: ^0.3.4
         version: 0.3.4
@@ -8572,8 +8572,8 @@ packages:
     resolution: {integrity: sha512-50QV99kCKH5P/Vs4E2Gzp7BopNV+KzTXqWeaxrfu5IQJBOULRsTIS9seSsOVT8ZnGXzCyx55nYWAi4qJzpZKEQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  turndown@7.2.4:
-    resolution: {integrity: sha512-I8yFsfRzmzK0WV1pNNOA4A7y4RDfFxPRxb3t+e3ui14qSGOxGtiSP6GjeX+Y6CHb7HYaFj7ECUD7VE5kQMZWGQ==}
+  turndown@7.2.5:
+    resolution: {integrity: sha512-EKZvCCFHh8sWttpAMs10U6niZFJ2cpz8LkCPlylxoG4JcHF50J7EHnnBW3AY1qXtUMu7kDjCp7dnggB1sIbqEQ==}
     engines: {node: '>=18', npm: '>=9'}
 
   type-check@0.4.0:
@@ -18058,7 +18058,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  turndown@7.2.4:
+  turndown@7.2.5:
     dependencies:
       '@mixmark-io/domino': 2.2.0
 
