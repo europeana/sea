@@ -42,7 +42,7 @@ catalogs:
     "@rollup/plugin-node-resolve": 16.0.3
     "@rollup/plugin-terser": "1.0.2"
     "@rollup/plugin-typescript": "12.3.1"
-    rollup: 4.62.2
+    rollup: 4.68.4
   typescript5:
     typescript: 5.9.3
   types:
