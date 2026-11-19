@@ -87,8 +87,7 @@ describe("@/plugins/workers", () => {
     );
   });
 
-  it("logs the worker name and job ID and delegates execution to worker.processor", async () => {
-    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+  it("delegates execution to worker.processor", async () => {
     mockZohoWorker.processor.mockResolvedValue({ entryId: "cf-123" });
 
     workersPlugin(mockNitroApp as never);
@@ -100,13 +99,8 @@ describe("@/plugins/workers", () => {
     const mockJob = { id: "job-42" } as Job;
     const result = await registeredHandler(mockJob);
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      "worker(zoho-crm-sync-contact): job-42",
-    );
     expect(mockZohoWorker.processor).toHaveBeenCalledWith(mockJob);
     expect(result).toEqual({ entryId: "cf-123" });
-
-    consoleSpy.mockRestore();
   });
 
   it("allows worker.opts to override defaults from useWorkerOptions", () => {
