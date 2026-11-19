@@ -43,7 +43,7 @@
     "globals": "17.13.0",
     "husky": "9.1.7",
     "lerna": "10.1.1",
-    "lint-staged": "17.6.0",
+    "lint-staged": "17.6.1",
     "prettier": "3.10.1",
     "typescript-eslint": "catalog:eslint10",
     "vite": "7.3.7",
