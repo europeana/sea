@@ -42,4 +42,20 @@ export class ZohoContact {
   get participation(): string[] {
     return this.record.Contact_Participation;
   }
+
+  get roleChair(): string[] {
+    return this.record.Europeana_Initiative_role_chair;
+  }
+
+  get roleViceChair(): string[] {
+    return this.record.Europeana_Initiative_role_vice_chair;
+  }
+
+  get roleTreasurer(): string[] {
+    return this.record.Europeana_Initiative_role_treasurer;
+  }
+
+  get roleMember(): string[] {
+    return this.record.Europeana_Initiative_role_member;
+  }
 }

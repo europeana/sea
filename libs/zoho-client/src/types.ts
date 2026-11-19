@@ -46,17 +46,20 @@ export type ZohoBulkReadRequestBody = {
   file_type?: "ics";
 };
 
-// TODO: add role field when decided how to model it in Zoho CRM
 export type ZohoContactRecord = {
   id: string;
-  Communities: Array<string>;
-  Contact_Participation: Array<string>;
+  Communities: string[];
+  Contact_Participation: string[];
   Country_new: string;
   Full_Name: string;
   LinkedIn: string;
   Modified_Time: string;
   Public_email: string;
   Title: string;
+  Europeana_Initiative_role_chair: string[];
+  Europeana_Initiative_role_vice_chair: string[];
+  Europeana_Initiative_role_treasurer: string[];
+  Europeana_Initiative_role_member: string[];
 };
 
 export type ZohoOAuthTokenResponse = {
