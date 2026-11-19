@@ -16,7 +16,7 @@ catalog:
   rimraf: 6.1.4
 catalogs:
   eslint10:
-    "@eslint/compat": "2.1.0"
+    "@eslint/compat": "2.1.1"
     "@eslint/css": "1.3.0"
     "@eslint/js": "10.0.1"
     "@eslint/json": "2.0.0"
