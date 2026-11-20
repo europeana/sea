@@ -587,7 +587,7 @@ importers:
         version: 10.11.0
       ol-mapbox-style:
         specifier: ^13.4.1
-        version: 13.4.1(ol@10.11.0)
+        version: 13.9.0(ol@10.11.0)
       vue:
         specifier: catalog:vue3
         version: 3.5.45(typescript@5.9.3)
@@ -1811,9 +1811,9 @@ packages:
     resolution: {integrity: sha512-MMI4RVcFtB5Vjv9mwbP8oWsSqy4N7GO2P+jwHVLo4GjbYAdR4Z7seK3rR7YefpcfayWrsQogaORMBzv6YFWntQ==}
     engines: {node: '>=18.17.0', npm: '>=9.5.0'}
 
-  '@mapbox/jsonlint-lines-primitives@2.0.2':
-    resolution: {integrity: sha512-rY0o9A5ECsTQRVhv7tL/OyDpGAoUB4tTvLiW1DSzQGq4bvTPhNw1VpSNjDJc5GFZ2XuyOtSWSVN05qOtcD71qQ==}
-    engines: {node: '>= 0.6'}
+  '@mapbox/jsonlint-lines-primitives@2.0.3':
+    resolution: {integrity: sha512-0SElaV0uMxEnxzBhhX9WTuPyUeMsAN/SS0i16tjuba4/mio63MG9khjC1a0JAiPGXAwvwm4UfHJURCN7nyudQg==}
+    engines: {node: '>= 22'}
 
   '@mapbox/node-pre-gyp@2.0.3':
     resolution: {integrity: sha512-uwPAhccfFJlsfCxMYTwOdVfOz3xqyj8xYL3zJj8f0pb30tLohnnFPhLuqp4/qoEz8sNxe4SESZedcBojRefIzg==}
@@ -1823,8 +1823,8 @@ packages:
   '@mapbox/unitbezier@1.0.0':
     resolution: {integrity: sha512-fqd515fjBmANKGGsQ286E2Wvj/XvDFpGzwJxq4CI6jMQue6Oy04uCKp+JWKF00xRTmk6cEu1jPJ9p3xqH8YWqQ==}
 
-  '@maplibre/maplibre-gl-style-spec@24.10.0':
-    resolution: {integrity: sha512-lichxSiagMEBBrqHF0trtMQH9RKh+9jUlIJl0qW0QHvt2H/tbvUWdE+ZzI2Jd0/pT7j/iavLonlPu7EQ/ixTOw==}
+  '@maplibre/maplibre-gl-style-spec@26.8.0':
+    resolution: {integrity: sha512-EClj+0m624zGw5gdCOsI5f88bYzkXfgoP2Sj5VGs2AYg9hZaPxvCumX5KDDs6aKFwl2ut+3jAeLhvrSz7hEsBQ==}
     hasBin: true
 
   '@mdx-js/react@3.1.1':
@@ -7428,8 +7428,8 @@ packages:
   ohash@2.0.12:
     resolution: {integrity: sha512-65S/5gk9YSsaRjcyf7Nfa6h/d3E8/1gslpXfI4W7Dxn/oap8IKRuNT5VXkLQ1YFKIEg4apRY4Pj6aiwFzrDdmw==}
 
-  ol-mapbox-style@13.4.1:
-    resolution: {integrity: sha512-da4FKZUXoXMzK5ADeRHAXzd3bTeiKg/Y9LBOTB6qNTP62MQm93y6ISrIXzOS9atfGgQMEHJ2pCgP272IMeZCXA==}
+  ol-mapbox-style@13.9.0:
+    resolution: {integrity: sha512-hrutLPG/XjKdB2BFg/BvthIaidPNsYLMC3v2UGjNKikGieyVJlFsCRkt7rTP5ES13Qc/yosAEg4IUjuOfbejFQ==}
     peerDependencies:
       ol: '*'
 
@@ -10894,7 +10894,7 @@ snapshots:
 
   '@lottiefiles/dotlottie-web@0.83.2': {}
 
-  '@mapbox/jsonlint-lines-primitives@2.0.2': {}
+  '@mapbox/jsonlint-lines-primitives@2.0.3': {}
 
   '@mapbox/node-pre-gyp@2.0.3(encoding@0.1.13)(supports-color@10.2.2)':
     dependencies:
@@ -10911,9 +10911,9 @@ snapshots:
 
   '@mapbox/unitbezier@1.0.0': {}
 
-  '@maplibre/maplibre-gl-style-spec@24.10.0':
+  '@maplibre/maplibre-gl-style-spec@26.8.0':
     dependencies:
-      '@mapbox/jsonlint-lines-primitives': 2.0.2
+      '@mapbox/jsonlint-lines-primitives': 2.0.3
       '@mapbox/unitbezier': 1.0.0
       json-stringify-pretty-compact: 4.0.0
       minimist: 1.2.8
@@ -17260,9 +17260,9 @@ snapshots:
 
   ohash@2.0.12: {}
 
-  ol-mapbox-style@13.4.1(ol@10.11.0):
+  ol-mapbox-style@13.9.0(ol@10.11.0):
     dependencies:
-      '@maplibre/maplibre-gl-style-spec': 24.10.0
+      '@maplibre/maplibre-gl-style-spec': 26.8.0
       mapbox-to-css-font: 3.2.0
       ol: 10.11.0
 
