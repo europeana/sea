@@ -30,7 +30,7 @@ catalogs:
     "typescript-eslint": "8.61.1"
   html:
     cheerio: "1.2.0"
-    marked: "18.1.1"
+    marked: "18.2.1"
     turndown: "7.2.5"
   nitro2:
     h3: "1.15.11"
