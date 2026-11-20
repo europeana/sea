@@ -41,7 +41,7 @@ jobs:
       git-pr-draft: ${{ steps.git-pr-draft.outputs.status }}
       git-pr-ready: ${{ steps.git-pr-ready.outputs.status }}
 
-    # Build, validate image size, and push to Docker Hub the final-stage
+  # Build, validate image size, and push to Docker Hub the final-stage
   # production-ready Docker image.
   docker-build-app:
     needs: [metadata]
@@ -90,6 +90,29 @@ jobs:
           else
             echo "::notice ::Image size $(numfmt --to=si ${docker_image_size}) within limit ${DOCKER_IMAGE_SIZE_LIMIT}"
           fi
+      - name: Smoke test app image
+        run: |
+          container_id=$(docker run -d -p 8080:8080 "${{ steps.docker-image.outputs.full-tag }}")
+          trap 'docker rm -f "$container_id" >/dev/null 2>&1 || true' EXIT
+
+          for i in $(seq 1 15); do
+            if [ "$(docker inspect -f '{{.State.Running}}' "$container_id")" != "true" ]; then
+              echo "::error ::Container exited prematurely"
+              docker logs "$container_id"
+              exit 1
+            fi
+
+            if curl -sf http://localhost:8080/ >/dev/null 2>&1; then
+              echo "::notice ::App container started and responded successfully"
+              exit 0
+            fi
+
+            sleep 1
+          done
+
+          echo "::error ::App container failed to respond within 15 seconds"
+          docker logs "$container_id"
+          exit 1
       - name: Login to DockerHub
         if: github.actor != 'dependabot[bot]'
         uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4
