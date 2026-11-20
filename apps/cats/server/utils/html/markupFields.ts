@@ -1,4 +1,4 @@
-import * as cheerio from "cheerio";
+import { HTMLElement } from "node-html-parser";
 import { marked } from "marked";
 import { Entry, ContentType } from "contentful-management";
 
@@ -9,7 +9,7 @@ export const markupFields = ({
 }: {
   entry: Entry;
   contentType: ContentType;
-  locale: string;
+  locale?: string;
 }) => {
   const translatableFields = contentType.fields.filter(
     (field) =>
@@ -20,28 +20,25 @@ export const markupFields = ({
       ["Symbol", "Text"].includes(field.items?.type || field.type),
   );
 
-  const doc = cheerio.load("");
-  const article = doc("<article></article>");
+  const article = new HTMLElement("article", {});
 
   for (const field of translatableFields) {
     for (const fieldValue of [].concat(
       entry.fields[field.id]?.[locale] || "",
     )) {
-      const section = doc("<section></section>");
-      section.attr("data-ctf-field-id", field.id);
+      const section = new HTMLElement("section", {});
+      section.setAttribute("data-ctf-field-id", field.id);
 
       if ((field.items?.type || field.type) === "Text") {
         // assume markdown, and convert to html
-        section.html(marked.parse(fieldValue));
+        section.innerHTML = marked.parse(fieldValue, { async: false });
       } else {
-        section.text(fieldValue);
+        section.textContent = fieldValue;
       }
 
-      article.append(section);
+      article.appendChild(section);
     }
   }
 
-  doc("body").append(article);
-
-  return doc.html();
+  return `<html><head></head><body>${article.toString()}</body></html>`;
 };

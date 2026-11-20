@@ -1,4 +1,4 @@
-import * as cheerio from "cheerio";
+import { parse } from "node-html-parser";
 import { ContentType } from "contentful-management";
 import TurndownService from "turndown";
 
@@ -11,18 +11,23 @@ export const extractFields = ({
   contentType: ContentType;
   html: string;
 }) => {
-  const doc = cheerio.load(html);
-  const article = doc("article").first();
+  const root = parse(html);
+  const article = root.querySelector("article");
 
-  const fields = {};
+  const fields: Record<string, string | string[]> = {};
 
-  for (const element of article.children("section")) {
-    const section = doc(element);
-    const fieldId = section.attr("data-ctf-field-id");
+  if (!article) {
+    return fields;
+  }
+
+  const sections = article.querySelectorAll(":scope > section");
+
+  for (const section of sections) {
+    const fieldId = section.getAttribute("data-ctf-field-id");
     const field = contentType.fields.find((field) => field.id === fieldId);
 
-    if (field) {
-      let fieldMaxLength = null;
+    if (field && fieldId) {
+      let fieldMaxLength: number | null = null;
       if ((field.items?.type || field.type) === "Symbol") {
         fieldMaxLength = 255;
       }
@@ -33,12 +38,12 @@ export const extractFields = ({
         fieldMaxLength = fieldSizeValidation?.size?.max;
       }
 
-      let fieldValue;
+      let fieldValue: string;
 
       if ((field.items?.type || field.type) === "Text") {
-        fieldValue = turndownService.turndown(section.html());
+        fieldValue = turndownService.turndown(section.innerHTML);
       } else {
-        fieldValue = section.text();
+        fieldValue = section.text;
       }
 
       if (fieldMaxLength && fieldValue.length > fieldMaxLength) {
@@ -46,10 +51,12 @@ export const extractFields = ({
       }
 
       if (field.type === "Array") {
-        if (!fields[fieldId]) {
-          fields[fieldId] = [];
+        const existing = fields[fieldId];
+        if (Array.isArray(existing)) {
+          existing.push(fieldValue);
+        } else {
+          fields[fieldId] = [fieldValue];
         }
-        fields[fieldId].push(fieldValue);
       } else {
         fields[fieldId] = fieldValue;
       }

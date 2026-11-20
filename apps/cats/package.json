@@ -26,12 +26,12 @@
     "@bull-board/ui": "^9.13.2",
     "@europeana/zoho-client": "workspace:*",
     "bullmq": "^5.79.0",
-    "cheerio": "catalog:html",
     "contentful-management": "catalog:contentful",
     "csv-parse": "^7.0.3",
     "marked": "catalog:html",
     "morgan": "catalog:nitro2",
     "node-fetch-native": "catalog:",
+    "node-html-parser": "catalog:html",
     "turndown": "catalog:html",
     "unzip-stream": "^0.3.4"
   }

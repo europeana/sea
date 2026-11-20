@@ -3,12 +3,12 @@ import { Entry, ContentType } from "contentful-management";
 
 import { markupFields } from "@/utils/html/markupFields";
 
-const stripSpaceFromHtml = (html) =>
+const stripSpaceFromHtml = (html: string) =>
   html.replace(/>\s+/g, ">").replace(/\s+</g, "<");
 
 describe("markupFields", () => {
-  it("should return an HTML string with marked fields", async () => {
-    const contentType: ContentType = {
+  it("should return an HTML string with marked fields", () => {
+    const contentType = {
       fields: [
         {
           id: "field1",
@@ -26,9 +26,9 @@ describe("markupFields", () => {
           type: "Text",
         },
       ],
-    };
+    } as unknown as ContentType;
 
-    const entry: Entry = {
+    const entry = {
       fields: {
         field1: {
           "en-GB": "# Hello, World!",
@@ -40,7 +40,7 @@ describe("markupFields", () => {
           "en-GB": "Another text field",
         },
       },
-    };
+    } as unknown as Entry;
 
     const locale = "en-GB";
 
@@ -70,7 +70,7 @@ describe("markupFields", () => {
   });
 
   it("should ignore non-localised fields", () => {
-    const contentType: ContentType = {
+    const contentType = {
       fields: [
         {
           id: "field1",
@@ -83,9 +83,9 @@ describe("markupFields", () => {
           type: "Symbol",
         },
       ],
-    };
+    } as unknown as ContentType;
 
-    const entry: Entry = {
+    const entry = {
       fields: {
         field1: {
           "en-GB": "Just a text field",
@@ -94,7 +94,7 @@ describe("markupFields", () => {
           "en-GB": "Not localised",
         },
       },
-    };
+    } as unknown as Entry;
 
     const locale = "en-GB";
 
@@ -119,7 +119,7 @@ describe("markupFields", () => {
   });
 
   it("should ignore non-text, non-symbol fields", () => {
-    const contentType: ContentType = {
+    const contentType = {
       fields: [
         {
           id: "field1",
@@ -132,9 +132,9 @@ describe("markupFields", () => {
           type: "Other",
         },
       ],
-    };
+    } as unknown as ContentType;
 
-    const entry: Entry = {
+    const entry = {
       fields: {
         field1: {
           "en-GB": "Just a text field",
@@ -143,7 +143,7 @@ describe("markupFields", () => {
           "en-GB": "Who knows",
         },
       },
-    };
+    } as unknown as Entry;
 
     const locale = "en-GB";
 
@@ -159,6 +159,71 @@ describe("markupFields", () => {
     `;
 
     const result = markupFields({ entry, contentType, locale });
+
+    expect(stripSpaceFromHtml(result.trim())).toBe(
+      stripSpaceFromHtml(expectedOutput.trim()),
+    );
+  });
+
+  it("should escape HTML characters in Symbol fields", () => {
+    const contentType = {
+      fields: [
+        {
+          id: "title",
+          localized: true,
+          type: "Symbol",
+        },
+      ],
+    } as unknown as ContentType;
+
+    const entry = {
+      fields: {
+        title: {
+          "en-GB": "Tom & Jerry <3",
+        },
+      },
+    } as unknown as Entry;
+
+    const result = markupFields({ entry, contentType, locale: "en-GB" });
+
+    expect(result).toContain(
+      '<section data-ctf-field-id="title">Tom &amp; Jerry &lt;3</section>',
+    );
+  });
+
+  it("should render Array of Symbol fields as multiple sections", () => {
+    const contentType = {
+      fields: [
+        {
+          id: "tags",
+          localized: true,
+          type: "Array",
+          items: { type: "Symbol" },
+        },
+      ],
+    } as unknown as ContentType;
+
+    const entry = {
+      fields: {
+        tags: {
+          "en-GB": ["tag1", "tag2"],
+        },
+      },
+    } as unknown as Entry;
+
+    const expectedOutput = `
+      <html>
+        <head></head>
+        <body>
+          <article>
+            <section data-ctf-field-id="tags">tag1</section>
+            <section data-ctf-field-id="tags">tag2</section>
+          </article>
+        </body>
+      </html>
+    `;
+
+    const result = markupFields({ entry, contentType, locale: "en-GB" });
 
     expect(stripSpaceFromHtml(result.trim())).toBe(
       stripSpaceFromHtml(expectedOutput.trim()),

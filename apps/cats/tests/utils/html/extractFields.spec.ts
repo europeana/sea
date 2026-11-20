@@ -33,7 +33,7 @@ describe("extractFields", () => {
         <section data-ctf-field-id="tags">tag1</section>
         <section data-ctf-field-id="tags">tag2</section>
         <section data-ctf-field-id="tags">tag3</section>
-        <section data-ctf-field-id="imageUrl">https://example.com/image.jpg</section>
+        <section data-ctf-field-id="imageUrl">https://example.com</section>
       </article>
     `;
 
@@ -42,20 +42,21 @@ describe("extractFields", () => {
       title: "Cat Title",
       content: "This is the content of the article.",
       tags: ["tag1", "tag2", "tag3"],
-      imageUrl: "https://example.com/image.jpg",
+      imageUrl: "https://example.com",
     });
   });
 
   it("should truncate Symbol field if it exceeds maxLength", () => {
+    const longTitle = "A".repeat(260);
     const html = `
       <article>
-        <section data-ctf-field-id="title">This title is way too long to fit in a Symbol field…</section>
+        <section data-ctf-field-id="title">${longTitle}</section>
       </article>
     `;
 
     const result = extractFields({ contentType: mockContentType, html });
     expect(result).toEqual({
-      title: "This title is way too long to fit in a Symbol field…",
+      title: `${"A".repeat(254)}…`,
     });
   });
 
@@ -112,5 +113,27 @@ describe("extractFields", () => {
 
     const result = extractFields({ contentType, html });
     expect(result).toEqual({});
+  });
+
+  it("should return an empty object if no <article> element is present", () => {
+    const html = `<div><section data-ctf-field-id="title">Cat Title</section></div>`;
+
+    const result = extractFields({ contentType: mockContentType, html });
+    expect(result).toEqual({});
+  });
+
+  it("should ignore nested <section> elements", () => {
+    const html = `
+      <article>
+        <section data-ctf-field-id="content">
+          <p>Outer content</p>
+          <section data-ctf-field-id="title">Nested title to ignore</section>
+        </section>
+      </article>
+    `;
+
+    const result = extractFields({ contentType: mockContentType, html });
+    expect(result.title).toBeUndefined();
+    expect(result.content).toContain("Outer content");
   });
 });
