@@ -1,11 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import contentfulManagement from "contentful-management";
+import {
+  createClient,
+  type CollectionProp,
+  type ContentTypeProps,
+  type EntryProps,
+  type KeyValueMap,
+} from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
 import {
   createOrUpdateEntry,
   findEntry,
-  useContentfulEnvironment,
+  useContentfulClient,
 } from "@/utils/contentful";
 
 describe("@/utils/contentful", () => {
@@ -17,17 +23,20 @@ describe("@/utils/contentful", () => {
   };
 
   const mockUseRuntimeConfig = vi.mocked(useRuntimeConfig);
-  const mockCreateClient = vi.mocked(contentfulManagement.createClient);
-  const mockGetSpace = vi.mocked(mockCreateClient().getSpace);
-  const mockGetEnvironment = vi.mocked(mockGetSpace().getEnvironment);
-  const mockGetEntries = vi.mocked(mockGetEnvironment().getEntries);
-  const mockGetContentType = vi.mocked(mockGetEnvironment().getContentType);
-  const mockCreateEntry = vi.mocked(mockGetEnvironment().createEntry);
+  const mockCreateClient = vi.mocked(createClient);
+  const mockClient = mockCreateClient({ accessToken: "" });
+
+  const mockGetManyEntries = vi.mocked(mockClient.entry.getMany);
+  const mockCreateEntry = vi.mocked(mockClient.entry.create);
+  const mockUpdateEntry = vi.mocked(mockClient.entry.update);
+  const mockPublishEntry = vi.mocked(mockClient.entry.publish);
+  const mockGetContentType = vi.mocked(mockClient.contentType.get);
 
   beforeEach(() => {
     mockUseRuntimeConfig.mockReturnValue({
       contentful: config,
-    });
+    } as unknown as ReturnType<typeof useRuntimeConfig>);
+
     mockGetContentType.mockResolvedValue({
       fields: [
         { id: "slug", type: "Symbol" },
@@ -38,22 +47,28 @@ describe("@/utils/contentful", () => {
           items: { validations: [{ in: ["good category"] }] },
         },
       ],
-    });
+    } as unknown as ContentTypeProps);
   });
 
   afterEach(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
-  describe("useContentfulEnvironment", () => {
-    it("uses the SDK to get the Contentful environment for the runtime config", async () => {
-      await useContentfulEnvironment();
+  describe("useContentfulClient", () => {
+    it("uses the SDK to create the Contentful client for the runtime config", () => {
+      useContentfulClient();
 
-      expect(mockCreateClient).toHaveBeenCalledWith({
-        accessToken: config.accessToken,
-      });
-      expect(mockGetSpace).toHaveBeenCalledWith(config.space);
-      expect(mockGetEnvironment).toHaveBeenCalledWith(config.environment);
+      expect(mockCreateClient).toHaveBeenCalledWith(
+        {
+          accessToken: config.accessToken,
+        },
+        {
+          defaults: {
+            spaceId: config.space,
+            environmentId: config.environment,
+          },
+        },
+      );
     });
   });
 
@@ -62,24 +77,31 @@ describe("@/utils/contentful", () => {
     const query = {
       content_type: "page",
     };
-    const fields = {
-      title: { "en-GB": "About" },
-      categories: { "en-GB": ["good category", "bad category"] },
-    };
-    const entry = {
-      sys: { id: "entryid" },
-      fields: {
-        slug: { "en-GB": "about" },
-        title: { "en-GB": "about" },
-      },
-      publish: vi.fn(),
-      update: vi.fn(),
-    };
+
+    let fields: KeyValueMap;
+    let entry: EntryProps<KeyValueMap>;
+
+    beforeEach(() => {
+      fields = {
+        title: { "en-GB": "About" },
+        categories: { "en-GB": ["good category", "bad category"] },
+      };
+      entry = {
+        sys: { id: "entryid" },
+        fields: {
+          slug: { "en-GB": "about" },
+          title: { "en-GB": "about" },
+        },
+      } as unknown as EntryProps<KeyValueMap>;
+    });
 
     describe("when entry already exists", () => {
       beforeEach(() => {
-        mockGetEntries.mockResolvedValue({ total: 1, items: [entry] });
-        entry.update.mockResolvedValue(entry);
+        mockGetManyEntries.mockResolvedValue({
+          total: 1,
+          items: [entry],
+        } as unknown as CollectionProp<EntryProps<KeyValueMap>>);
+        mockUpdateEntry.mockResolvedValue(entry);
       });
 
       it("gets the updated fields", async () => {
@@ -91,56 +113,73 @@ describe("@/utils/contentful", () => {
       it("omits invalid array field values, per the content type validation", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields);
 
-        expect(entry.fields.categories).toEqual({ "en-GB": ["good category"] });
+        expect(entry.fields.categories).toEqual({
+          "en-GB": ["good category"],
+        });
       });
 
       it("updated via the SDK", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields);
 
-        expect(entry.update).toHaveBeenCalledWith();
+        expect(mockUpdateEntry).toHaveBeenCalledWith(
+          { entryId: "entryid" },
+          entry,
+        );
       });
 
       it("is published by default", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields);
 
-        expect(entry.publish).toHaveBeenCalledWith();
+        expect(mockPublishEntry).toHaveBeenCalledWith(
+          { entryId: "entryid" },
+          entry,
+        );
       });
 
       it("is optionally not published", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields, false);
 
-        expect(entry.publish).not.toHaveBeenCalled();
+        expect(mockPublishEntry).not.toHaveBeenCalled();
       });
     });
 
     describe("when entry does not already exist", () => {
       beforeEach(() => {
-        mockGetEntries.mockResolvedValue({ total: 0 });
+        mockGetManyEntries.mockResolvedValue({
+          total: 0,
+          items: [],
+        } as unknown as CollectionProp<EntryProps<KeyValueMap>>);
         mockCreateEntry.mockResolvedValue(entry);
       });
 
       it("created via the SDK", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields);
 
-        expect(mockCreateEntry).toHaveBeenCalledWith(contentTypeId, { fields });
+        expect(mockCreateEntry).toHaveBeenCalledWith(
+          { contentTypeId },
+          { fields },
+        );
       });
 
       it("omits invalid array field values, per the content type validation", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields);
 
-        expect(entry.fields.categories).toEqual({ "en-GB": ["good category"] });
+        expect(fields.categories).toEqual({ "en-GB": ["good category"] });
       });
 
       it("is published by default", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields);
 
-        expect(entry.publish).toHaveBeenCalledWith();
+        expect(mockPublishEntry).toHaveBeenCalledWith(
+          { entryId: "entryid" },
+          entry,
+        );
       });
 
       it("is optionally not published", async () => {
         await createOrUpdateEntry(contentTypeId, query, fields, false);
 
-        expect(entry.publish).not.toHaveBeenCalled();
+        expect(mockPublishEntry).not.toHaveBeenCalled();
       });
     });
   });
@@ -149,35 +188,33 @@ describe("@/utils/contentful", () => {
     const query = {
       content_type: "page",
     };
-    const entry = { sys: { id: "entryid" } };
+    const entry = {
+      sys: { id: "entryid" },
+    } as unknown as EntryProps<KeyValueMap>;
 
     beforeEach(() => {
-      mockGetEntries.mockResolvedValue({ total: 0 });
+      mockGetManyEntries.mockResolvedValue({
+        total: 0,
+        items: [],
+      } as unknown as CollectionProp<EntryProps<KeyValueMap>>);
     });
 
     it("gets entries for query from contentful SDK", async () => {
       await findEntry(query);
 
-      expect(mockGetEntries).toHaveBeenCalledWith(query);
+      expect(mockGetManyEntries).toHaveBeenCalledWith({ query });
     });
 
-    describe("when 1 entry is found", () => {
-      it("returns the entry", async () => {
-        mockGetEntries.mockResolvedValue({ total: 1, items: [entry] });
+    describe("when an entry is found", () => {
+      it("returns the first entry", async () => {
+        mockGetManyEntries.mockResolvedValue({
+          total: 1,
+          items: [entry],
+        } as unknown as CollectionProp<EntryProps<KeyValueMap>>);
 
         const response = await findEntry(query);
 
         expect(response).toEqual(entry);
-      });
-    });
-
-    describe("when > 1 entry is found", () => {
-      it("returns null", async () => {
-        mockGetEntries.mockResolvedValue({ total: 2, items: [entry, entry] });
-
-        const response = await findEntry(query);
-
-        expect(response).toBeNull();
       });
     });
 

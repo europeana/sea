@@ -1,10 +1,10 @@
 import { Job } from "bullmq";
-import { Tag as ContentfulTag } from "contentful-management";
+import { TagProps } from "contentful-management";
 
 import { name as receiveQueueName } from "@/queues/translate/receive";
 import { name as storeQueueName } from "@/queues/translate/store";
 import { requestTranslation } from "@/services/eTranslation";
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useContentfulClient } from "@/utils/contentful";
 import { supportedLocales } from "@/utils/i18n/locales";
 import { useFlowProducer } from "@/utils/bullmq";
 import { markupFields } from "@/utils/html/markupFields";
@@ -12,7 +12,7 @@ import { markupFields } from "@/utils/html/markupFields";
 export { name as queueName } from "@/queues/translate/request";
 
 export const processor = async (job: Job) => {
-  const contentfulEnvironment = await useContentfulEnvironment();
+  const contentfulClient = useContentfulClient();
   const flowProducer = useFlowProducer();
 
   const targetLanguages = targetLanguagesFromTags(
@@ -26,8 +26,9 @@ export const processor = async (job: Job) => {
 
   if (!job.data.contentType) {
     const contentTypeId = job.data.entry.sys?.contentType?.sys?.id;
-    const contentType =
-      await contentfulEnvironment.getContentType(contentTypeId);
+    const contentType = await contentfulClient.contentType.get({
+      contentTypeId,
+    });
     await job.updateData({ ...job.data, contentType });
   }
 
@@ -88,7 +89,7 @@ export const opts = {
   },
 };
 
-const targetLanguagesFromTags = (tags: Array<ContentfulTag> = []) => {
+const targetLanguagesFromTags = (tags: Array<TagProps> = []) => {
   let locales;
   if (tags.find((tag) => tag.sys.id === "translate")) {
     locales = supportedLocales;

@@ -1,8 +1,8 @@
 import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
-import { Asset as ContentfulAsset } from "contentful-management";
+import { AssetProps } from "contentful-management";
 
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useContentfulClient } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
 export { name as queueName } from "@/queues/zoho/crm/syncPhoto";
@@ -17,14 +17,17 @@ export const processor = async (
     return { assetId: null };
   }
 
-  const contentfulEnvironment = await useContentfulEnvironment();
+  const contentfulClient = useContentfulClient();
 
   const contentfulAssetId = `zoho-contact-photo-${contactId}`;
-  let contentfulAsset: ContentfulAsset;
+  let contentfulAsset: AssetProps;
 
-  const contentfulUpload = await contentfulEnvironment.createUpload({
-    file: zohoPhoto.file,
-  });
+  const contentfulUpload = await contentfulClient.upload.create(
+    {},
+    {
+      file: zohoPhoto.file,
+    },
+  );
 
   const locale = useRuntimeConfig().contentful.defaultLocale;
 
@@ -41,8 +44,8 @@ export const processor = async (
         fileName: zohoPhoto.fileName,
         uploadFrom: {
           sys: {
-            type: "Link",
-            linkType: "Upload",
+            type: "Link" as const,
+            linkType: "Upload" as const,
             id: contentfulUpload.sys.id,
           },
         },
@@ -51,14 +54,19 @@ export const processor = async (
   };
 
   try {
-    contentfulAsset = await contentfulEnvironment.getAsset(contentfulAssetId);
+    contentfulAsset = await contentfulClient.asset.get({
+      assetId: contentfulAssetId,
+    });
     contentfulAsset.fields = fields;
-    await contentfulAsset.update();
+    contentfulAsset = await contentfulClient.asset.update(
+      { assetId: contentfulAsset.sys.id },
+      contentfulAsset,
+    );
   } catch (err: unknown) {
     if (err instanceof Error && err.name === "NotFound") {
       // asset not found, so let's create one
-      contentfulAsset = await contentfulEnvironment.createAssetWithId(
-        contentfulAssetId,
+      contentfulAsset = await contentfulClient.asset.createWithId(
+        { assetId: contentfulAssetId },
         {
           fields,
         },
@@ -68,8 +76,14 @@ export const processor = async (
     }
   }
 
-  contentfulAsset = await contentfulAsset.processForAllLocales();
-  await contentfulAsset.publish();
+  contentfulAsset = await contentfulClient.asset.processForAllLocales(
+    {},
+    contentfulAsset,
+  );
+  await contentfulClient.asset.publish(
+    { assetId: contentfulAsset.sys.id },
+    contentfulAsset,
+  );
 
   return { assetId: contentfulAsset.sys.id };
 };

@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useContentfulClient } from "@/utils/contentful";
 import { useFlowProducer } from "@/utils/bullmq";
 import { markupFields } from "@/utils/html/markupFields";
 import { requestTranslation } from "@/services/eTranslation";
 import { processor, opts } from "@/workers/translate/request";
 
 vi.mock("@/utils/contentful", () => ({
-  useContentfulEnvironment: vi.fn(),
+  useContentfulClient: vi.fn(),
 }));
 
 vi.mock("@/utils/i18n/locales", () => ({
@@ -49,9 +49,11 @@ describe("@/workers/translate/request", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    vi.mocked(useContentfulEnvironment).mockResolvedValue({
-      getContentType: mockGetContentType,
-    } as unknown as Awaited<ReturnType<typeof useContentfulEnvironment>>);
+    vi.mocked(useContentfulClient).mockReturnValue({
+      contentType: {
+        get: mockGetContentType,
+      },
+    } as unknown as ReturnType<typeof useContentfulClient>);
 
     vi.mocked(useFlowProducer).mockReturnValue({
       add: mockFlowProducerAdd.mockResolvedValue({}),
@@ -107,7 +109,7 @@ describe("@/workers/translate/request", () => {
     const result = await processor(job);
 
     expect(result).toEqual(["FR", "DE", "NL"]);
-    expect(mockGetContentType).toHaveBeenCalledWith("page");
+    expect(mockGetContentType).toHaveBeenCalledWith({ contentTypeId: "page" });
     expect(markupFields).toHaveBeenCalledWith(
       expect.objectContaining({ contentType: mockContentType }),
     );

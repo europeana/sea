@@ -27,6 +27,6 @@
     "vue-router": "5.5.1"
   },
   "dependencies": {
-    "@contentful/app-sdk": "^4.70.0"
+    "@contentful/app-sdk": "catalog:contentful"
   }
 }

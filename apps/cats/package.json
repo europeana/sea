@@ -27,7 +27,7 @@
     "@europeana/zoho-client": "workspace:*",
     "bullmq": "^5.79.0",
     "cheerio": "catalog:html",
-    "contentful-management": "^11.57.4",
+    "contentful-management": "catalog:contentful",
     "csv-parse": "^7.0.3",
     "marked": "catalog:html",
     "morgan": "catalog:nitro2",
