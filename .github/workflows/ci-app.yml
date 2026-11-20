@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJSON(inputs.storybook && '[{"variant":"app","image_suffix":"","target":"","check_size":true},{"variant":"storybook","image_suffix":"-storybook","target":"run-storybook","check_size":false}]' || '[{"variant":"app","image_suffix":"","target":"","check_size":true}]') }}
+        include: ${{ fromJSON(inputs.storybook && '[{"variant":"app","image_suffix":"","target":"","check_size":true,"port":8080},{"variant":"storybook","image_suffix":"-storybook","target":"run-storybook","check_size":false,"port":80}]' || '[{"variant":"app","image_suffix":"","target":"","check_size":true,"port":8080}]') }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -104,7 +104,7 @@ jobs:
 
       - name: Smoke test ${{ matrix.variant }} image
         run: |
-          container_id=$(docker run -d -p 8080:8080 "${{ steps.docker-image.outputs.full-tag }}")
+          container_id=$(docker run -d -p 8080:${{ matrix.port }} "${{ steps.docker-image.outputs.full-tag }}")
           trap 'docker rm -f "$container_id" >/dev/null 2>&1 || true' EXIT
 
           for i in $(seq 1 15); do
