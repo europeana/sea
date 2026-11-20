@@ -1,9 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { inject } from "vue";
 
+import { i18nInjectionKey } from "../utils/injectionKeys";
 import FeedbackForm from "./FeedbackForm.vue";
 
-const i18n = inject("i18n");
+const i18n = inject(i18nInjectionKey)!;
 </script>
 
 <template>

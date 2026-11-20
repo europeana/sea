@@ -1,26 +1,35 @@
-<script setup>
+<script setup lang="ts">
 import { computed, inject, ref, nextTick, onMounted } from "vue";
 import TextInterpolation from "./TextInterpolation.vue";
+import { configInjectionKey, i18nInjectionKey } from "../utils/injectionKeys";
 
 import CancelCircleIcon from "@europeana/style/img/icons/cancel_circle.svg";
 import CheckCircleIcon from "@europeana/style/img/icons/check_circle.svg";
 import ExternalLinkIcon from "@europeana/style/img/icons/external-link.svg";
 
-const config = inject("config");
-const i18n = inject("i18n");
+defineEmits<{
+  (e: "hide"): void;
+}>();
+
+const config = inject(configInjectionKey)!;
+const i18n = inject(i18nInjectionKey)!;
 
 const currentStep = ref(1);
-const feedbackForm = ref(null);
+const feedbackForm = ref<HTMLFormElement | null>(null);
 const email = ref("");
-const emailInput = ref(null);
+const emailInput = ref<HTMLInputElement | null>(null);
 const feedback = ref("");
-const feedbackTextarea = ref(null);
-const requestSuccess = ref(null);
+const feedbackTextarea = ref<HTMLTextAreaElement | null>(null);
+const requestSuccess = ref<boolean | null>(null);
 const sending = ref(false);
-const invalid = ref({});
+const invalid = ref<{ feedback?: boolean; email?: boolean }>({});
+
+defineExpose({
+  currentStep,
+});
 
 onMounted(() => {
-  feedbackTextarea.value.focus();
+  feedbackTextarea.value?.focus();
 });
 
 const disableNextButton = computed(
@@ -42,14 +51,17 @@ const showSendButton = computed(
 );
 const showSkipButton = computed(() => currentStep.value === 2);
 
-const docsUrl = (path) =>
+const docsUrl = (path: string) =>
   `https://www.europeana.eu/${i18n.value.locale}${path}`;
 
-const wordLength = (text) => text?.trim()?.match(/\w+/g)?.length || 0;
+const wordLength = (text: string) => text?.trim()?.match(/\w+/g)?.length || 0;
 
-const goToStep = (step) => (currentStep.value = step);
+const goToStep = (step: number) => {
+  currentStep.value = step;
+};
 
 const handleInputFeedback = () => {
+  if (!feedbackTextarea.value) return;
   if (wordLength(feedback.value) < 5) {
     feedbackTextarea.value.setCustomValidity(i18n.value.t("validFeedback"));
   } else {
@@ -57,8 +69,16 @@ const handleInputFeedback = () => {
   }
 };
 
+interface FeedbackPayload {
+  feedback: string;
+  pageUrl: string;
+  browser: string;
+  screensize: string;
+  email?: string;
+}
+
 const postFeedbackMessage = () => {
-  const postData = {
+  const postData: FeedbackPayload = {
     feedback: feedback.value,
     pageUrl: window.location.href,
     browser: navigator.userAgent,
@@ -76,7 +96,6 @@ const postFeedbackMessage = () => {
     body: JSON.stringify(postData),
   });
 };
-
 const sendFeedback = async () => {
   sending.value = true;
 
@@ -98,12 +117,16 @@ const sendFeedback = async () => {
 
 const submitForm = async () => {
   invalid.value = {};
+  if (!feedbackForm.value) return;
+
   const valid = feedbackForm.value.checkValidity();
 
   if (!valid) {
-    Array.from(feedbackForm.value.elements)
-      .find((el) => !el.valid)
-      ?.focus();
+    const firstInvalid = Array.from(feedbackForm.value.elements).find(
+      (el): el is HTMLElement & { validity: ValidityState } =>
+        "validity" in el && !(el as HTMLInputElement).validity.valid,
+    );
+    firstInvalid?.focus();
     return;
   }
 
@@ -115,13 +138,13 @@ const submitForm = async () => {
 
     if (currentStep.value === 2) {
       nextTick(() => {
-        emailInput.value.focus();
+        emailInput.value?.focus();
       });
     }
   }
 };
 
-const handleInvalidField = (field) => {
+const handleInvalidField = (field: "feedback" | "email") => {
   invalid.value[field] = true;
 };
 
@@ -148,7 +171,7 @@ const skipEmail = () => {
               data-qa="feedback invalid hidden label"
               class="visually-hidden"
             >
-              {{ feedbackTextarea.validationMessage }}
+              {{ feedbackTextarea?.validationMessage }}
             </span>
           </label>
           <textarea
@@ -172,7 +195,7 @@ const skipEmail = () => {
             data-qa="feedback invalid text"
             class="invalid-feedback"
           >
-            {{ feedbackTextarea.validationMessage }}
+            {{ feedbackTextarea?.validationMessage }}
           </div>
         </div>
         <div v-if="currentStep === 2">
@@ -183,7 +206,7 @@ const skipEmail = () => {
               data-qa="email invalid hidden label"
               class="visually-hidden"
             >
-              {{ emailInput.validationMessage }}
+              {{ emailInput?.validationMessage }}
             </span>
           </label>
           <input
@@ -206,7 +229,7 @@ const skipEmail = () => {
             data-qa="email invalid text"
             class="invalid-feedback"
           >
-            {{ emailInput.validationMessage }}
+            {{ emailInput?.validationMessage }}
           </div>
           <div
             id="efw-input-live-feedback"

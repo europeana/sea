@@ -1,8 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, ref } from "vue";
 import FeedbackIcon from "@europeana/style/img/icons/feedback.svg";
 
-const i18n = inject("i18n");
+import { i18nInjectionKey } from "../utils/injectionKeys";
+
+const i18n = inject(i18nInjectionKey)!;
 
 const props = defineProps({
   buttonFocus: {
@@ -11,14 +13,14 @@ const props = defineProps({
   },
 });
 
-const button = ref("button");
+const button = ref<HTMLButtonElement | null>(null);
 const bigButton = ref(true);
 
 onMounted(() => {
   window.addEventListener("scroll", shrinkButton, { once: true });
 
   if (props.buttonFocus === true) {
-    button.value.focus();
+    button.value?.focus();
   }
 });
 

@@ -10,7 +10,7 @@ websites.
 Install the package:
 
 ```shell
-npm install --save @europeana/feedback-widget
+pnpm install --save @europeana/feedback-widget
 ```
 
 Import into your Vue component:
@@ -28,10 +28,9 @@ Render:
 <template>
   <EuropeanaFeedbackWidget />
 </template>
-
-### Elsewhere To embed the feedback widget in your web page, add the stylesheet
-link, JS script, and a target element with id `europeana-feedback-widget`:
-```html
+``` ### Elsewhere To embed the feedback widget in your web page, add the
+stylesheet link, JS script, and a target element with id
+`europeana-feedback-widget`: ```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -50,7 +49,7 @@ link, JS script, and a target element with id `europeana-feedback-widget`:
   </body>
 </html>
 ``` ## Development - Install: `pnpm install` - Run development server: `pnpm
-dev` - Test: `pnpm test:unit` - Build library: `pnpm build` - Version library:
-`pnpm version patch` - Publish library to NPM: `pnpm publish --access public` ##
-License Licensed under the [EUPL v1.2](../../../LICENSE.md).
+dev` - Test: `pnpm test` - Build library: `pnpm build` - Version library: `pnpm
+version patch` - Publish library to NPM: `pnpm publish --access public` ##
+License Licensed under the [EUPL v1.2](../../LICENSE.md).
 ````
