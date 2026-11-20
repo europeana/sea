@@ -1,0 +1,19 @@
+{
+  "cancel": "Utzi",
+  "close": "Itxi",
+  "emailAddress": "Helbide elektronikoa",
+  "emailOptional": "Baliteke jarraipena egitea nahi izatea. Idatzi zure posta elektronikoa gu zurekin harremanetan jartzeko pozik bazaude.",
+  "failed": "Eskaerak huts egin du. Saiatu berriro mesedez.",
+  "faq": "Joan maiz egindako galderak",
+  "feedback": "Iritzia",
+  "next": "Hurrengoa",
+  "policies": "Jarraituz gero, gure {termsAndPolicies} onartzen duzu eta gure {privacyStatement} onartzen duzu.",
+  "privacyPolicy": "Pribatutasun-adierazpena",
+  "send": "Bidali",
+  "skipSend": "Saltatu eta bidali",
+  "success": "Zure iritzia bidali da.",
+  "termsAndPolicies": "Baldintzak eta politikak",
+  "thankYou": "Eskerrik asko!",
+  "title": "Bidali iritzia",
+  "validFeedback": "Zure iritziak gutxienez 5 hitz izan behar ditu."
+}

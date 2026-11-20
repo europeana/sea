@@ -1,0 +1,19 @@
+{
+  "cancel": "Annulla",
+  "close": "Chiudi",
+  "emailAddress": "Indirizzo email",
+  "emailOptional": "Potremmo voler dare seguito al tuo feedback. Inserisci la tua email se desideri essere contattato.",
+  "failed": "La richiesta è fallita. Per favore riprova.",
+  "faq": "Vai alle domande frequenti",
+  "feedback": "Feedback",
+  "next": "Avanti",
+  "policies": "Continuando, accetti i nostri {termsAndPolicies} e riconosci la nostra {privacyStatement}.",
+  "privacyPolicy": "Dichiarazione sulla privacy",
+  "send": "Invia",
+  "skipSend": "Salta e invia",
+  "success": "Il tuo feedback è stato inviato.",
+  "termsAndPolicies": "Termini e politiche",
+  "thankYou": "Grazie!",
+  "title": "Invia feedback",
+  "validFeedback": "Il vostro feedback deve contenere un minimo di 5 parole."
+}

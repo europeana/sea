@@ -1,0 +1,19 @@
+{
+  "cancel": "Annuller",
+  "close": "Luk",
+  "emailAddress": "E-mailadresse",
+  "emailOptional": "Vi ønsker måske at følge op. Indtast din e-mail, hvis du er glad for, at vi kontakter dig.",
+  "failed": "Anmodningen mislykkedes. Prøv igen.",
+  "faq": "Gå til ofte stillede spørgsmål",
+  "feedback": "Feedback",
+  "next": "Næste",
+  "policies": "Ved at fortsætte accepterer du vores {termsAndPolicies} og anerkender vores {privacyStatement}.",
+  "privacyPolicy": "Erklæring om beskyttelse af personlige oplysninger",
+  "send": "Sende",
+  "skipSend": "Spring over og send",
+  "success": "Din feedback er sendt.",
+  "termsAndPolicies": "Vilkår og politikker",
+  "thankYou": "Tak!",
+  "title": "Send feedback",
+  "validFeedback": "Din feedback skal indeholde minimum 5 ord."
+}

@@ -1,0 +1,19 @@
+{
+  "cancel": "Otkazati",
+  "close": "Zatvori",
+  "emailAddress": "Adresa e-pošte",
+  "emailOptional": "Možda bismo željeli pratiti. Unesite svoju e-poštu ako ste sretni da vas kontaktiramo.",
+  "failed": "Zahtjev nije uspio. Pokušajte ponovo.",
+  "faq": "Idi na često postavljana pitanja",
+  "feedback": "Povratna informacija",
+  "next": "Sljedeći",
+  "policies": "Nastavljajući, slažete se s našim {termsAndPolicies} i priznajete našu {privacyStatement}.",
+  "privacyPolicy": "Izjava o privatnosti",
+  "send": "Slati",
+  "skipSend": "Preskoči i pošalji",
+  "success": "Poslane su vaše povratne informacije.",
+  "termsAndPolicies": "Uvjeti i politike",
+  "thankYou": "Hvala!",
+  "title": "Slanje povratnih informacija",
+  "validFeedback": "Vaša povratna informacija mora sadržavati najmanje 5 riječi."
+}

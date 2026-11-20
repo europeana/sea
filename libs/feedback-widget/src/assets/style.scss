@@ -1,0 +1,315 @@
+// Nest all styles inside container class to inherit bootstrap and prevent leaking to page
+.europeana-feedback-container {
+  @import "@europeana/style/scss/variables";
+
+  // Define neccessary bootstrap root.scss variables here:
+  --bs-border-width: 1px;
+  --bs-border-radius: 0.25rem;
+  --bs-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  @import "./bootstrap";
+
+  @import "@europeana/style/scss/buttons-links";
+  @import "@europeana/style/scss/default";
+  @import "@europeana/style/scss/form";
+
+  color: $textcolor;
+  font-family: $font-family-sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: normal;
+
+  @media (min-width: $bp-small) {
+    left: auto;
+  }
+
+  .europeana-feedback-widget {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1050;
+  }
+
+  .btn-primary {
+    background: $black;
+    border-color: $black;
+
+    &:hover {
+      background: $greyblack;
+      border-color: $greyblack;
+    }
+
+    &:focus,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      background: $black;
+      border-color: $black;
+    }
+
+    &:disabled {
+      background: $black;
+      border-color: $black;
+      opacity: 0.535;
+    }
+  }
+
+  .btn-outline-primary {
+    border-color: $black;
+    color: $black;
+
+    &:hover:not([disabled]) {
+      background-color: $black;
+      border-color: $black;
+      color: $white;
+    }
+
+    &:focus,
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      color: $white;
+      border-color: $black;
+      background-color: $black;
+    }
+  }
+
+  .europeana-feedback-button {
+    position: fixed;
+    background-color: $black;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1000;
+    text-transform: capitalize;
+    padding: 0.875rem;
+    overflow: hidden;
+    border-color: $white;
+    border-radius: 50%;
+    transition: border-radius 0.3s ease-out;
+    box-shadow: 0 2px 8px rgb(26 26 26 / 25%);
+    line-height: 1;
+    border-width: 2px;
+
+    .europeana-feedback-button-text {
+      display: inline-block;
+      max-width: 0;
+      transition:
+        max-width 0.35s ease-out,
+        opacity 0.2s ease-out;
+      opacity: 0;
+    }
+
+    &:hover,
+    &:focus {
+      background: $black;
+      border-color: $white;
+      color: $white;
+    }
+
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+      background: $black;
+      border-color: $white;
+      color: $white;
+    }
+
+    &.big {
+      @media (min-width: $bp-small) {
+        border-radius: 0.3rem;
+        transition: border-radius 0.25s ease-out;
+
+        .europeana-feedback-button-text {
+          max-width: 220px;
+          opacity: 1;
+          transition:
+            max-width 0.75s ease-out,
+            opacity 0.65s ease-out;
+        }
+
+        .icon-ic-feedback {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .europeana-feedback-dialog {
+    border-radius: 0.3rem;
+    background-color: $white;
+    color: $darkgrey;
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    margin: 0;
+    overflow: auto;
+    max-height: 100vh;
+    animation:
+      transform 300ms ease-out,
+      appear 150ms linear;
+
+    @keyframes transform {
+      from {
+        transform: translate(0, 50px);
+      }
+
+      to {
+        transform: none;
+      }
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (min-width: $bp-small) {
+      left: auto;
+      width: 540px;
+    }
+
+    .feedback-header {
+      padding: 1.5rem 1rem 0;
+
+      h2 {
+        color: $greyblack;
+        font-size: $font-size-large;
+        line-height: 1.5;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    .europeana-feedback-form {
+      padding: 1rem;
+
+      label {
+        color: $black;
+        font-size: $font-size-small;
+        margin-bottom: 0;
+      }
+
+      .form-fields {
+        flex: 0 1 100%;
+        width: 0; // width will grow to space available in flexbox
+
+        p,
+        .invalid-feedback {
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+
+        :invalid.is-invalid ~ .invalid-feedback {
+          display: block;
+        }
+      }
+
+      .form-buttons {
+        flex: 0 1 100%;
+
+        @media (max-width: $bp-small) {
+          flex-wrap: wrap;
+        }
+
+        .button-group-right {
+          @media (max-width: $bp-small) {
+            width: 100%;
+          }
+
+          .btn-primary {
+            margin-left: 0.75rem;
+          }
+        }
+
+        button {
+          @media (max-width: $bp-small) {
+            width: 100%;
+            margin: 0.5rem 0 0 !important;
+          }
+        }
+      }
+
+      .form-control {
+        padding: 0.75rem;
+        background: $white;
+        border: 1px solid $middlegrey;
+        border-radius: 0.375rem;
+        font-size: $font-size-base;
+        height: 3rem;
+        color: $greyblack;
+
+        &:focus {
+          border-color: $black;
+        }
+
+        &.is-invalid:focus {
+          box-shadow: none;
+        }
+
+        &:invalid.is-invalid {
+          border-color: $red;
+
+          &:focus {
+            box-shadow: 0 0 0 0.25rem rgba(224, 32, 32, 0.25);
+          }
+        }
+      }
+
+      textarea.form-control {
+        height: auto;
+      }
+
+      .form-group {
+        margin-bottom: 0;
+      }
+
+      .form-text {
+        font-size: 0.875rem;
+        margin: 0.75rem 0 0;
+        line-height: 1.571;
+
+        a {
+          color: $darkgrey;
+        }
+      }
+    }
+
+    .feedback-success {
+      color: $greyblack;
+    }
+
+    .icon-cancel-circle {
+      fill: $red;
+      flex-shrink: 0;
+    }
+
+    .icon-check-circle {
+      flex-shrink: 0;
+    }
+  }
+
+  .faq-link {
+    transition: $standard-transition;
+
+    svg path {
+      transition: $standard-transition;
+    }
+
+    &:hover {
+      color: $black;
+      transition: $standard-transition;
+
+      svg path {
+        fill: $black;
+        transition: $standard-transition;
+      }
+    }
+
+    .icon-external-link {
+      vertical-align: baseline;
+    }
+  }
+}

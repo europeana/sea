@@ -8,6 +8,7 @@ export default defineConfig({
       "apps/cats",
       "apps/ctf-apps",
       "apps/ds4ch",
+      "libs/feedback-widget",
       "libs/map-styles",
       "libs/map",
       "libs/sea-base-layer",

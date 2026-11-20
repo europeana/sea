@@ -1,0 +1,19 @@
+{
+  "cancel": "Ikkanċella",
+  "close": "Agħlaq",
+  "emailAddress": "Indirizz elettroniku",
+  "emailOptional": "Aħna jista 'jkun li nixtiequ nsegwu. Daħħal l-email tiegħek jekk int kuntent li aħna nikkuntattjawk.",
+  "failed": "It-talba falliet. Jekk jogħġbok erġa pprova.",
+  "faq": "Mur għall-mistoqsijiet frekwenti",
+  "feedback": "Feedback",
+  "next": "Li jmiss",
+  "policies": "Billi tkompli, taqbel ma ' {termsAndPolicies} tagħna u tirrikonoxxi lil {privacyStatement} tagħna.",
+  "privacyPolicy": "Dikjarazzjoni ta' Privatezza",
+  "send": "Tibgħat",
+  "skipSend": "Aqbeż u ibgħat",
+  "success": "Il-feedback tiegħek intbagħat.",
+  "termsAndPolicies": "Termini u Politiki",
+  "thankYou": "Grazzi!",
+  "title": "Ibgħat feedback",
+  "validFeedback": "Ir-rispons tiegħek għandu jkun fih minimu ta' 5 kelmiet."
+}

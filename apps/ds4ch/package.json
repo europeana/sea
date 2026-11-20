@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@europeana/sea-base-layer": "workspace:*",
-    "@europeana/style": "catalog:",
+    "@europeana/style": "catalog:frontend",
     "@europeana/vue-contentful-graphql": "workspace:*",
     "@europeana/vue-visible-on-scroll": "workspace:*",
     "@lottiefiles/dotlottie-vue": "0.13.2",
@@ -27,7 +27,7 @@
     "@storybook/addon-docs": "10.6.7",
     "@storybook/addon-links": "10.6.7",
     "@vitejs/plugin-vue": "6.0.11",
-    "bootstrap": "catalog:",
+    "bootstrap": "catalog:frontend",
     "happy-dom": "21.0.4",
     "lodash-es": "catalog:",
     "msw": "2.15.0",

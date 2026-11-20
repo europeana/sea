@@ -1,0 +1,87 @@
+{
+  "name": "@europeana/feedback-widget",
+  "version": "0.5.5",
+  "description": "Europeana feedback widget",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  },
+  "license": "EUPL-1.2",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/europeana-feedback-widget.component.js",
+  "module": "./dist/europeana-feedback-widget.component.js",
+  "types": "./dist/components/FeedbackWidget.vue.d.ts",
+  "exports": {
+    ".": {
+      "@europeana/source": "./src/components/FeedbackWidget.vue",
+      "types": "./dist/components/FeedbackWidget.vue.d.ts",
+      "import": "./dist/europeana-feedback-widget.component.js"
+    },
+    "./app": {
+      "@europeana/source": "./src/main.ts",
+      "import": "./dist/europeana-feedback-widget.app.js"
+    },
+    "./component": {
+      "@europeana/source": "./src/components/FeedbackWidget.vue",
+      "types": "./dist/components/FeedbackWidget.vue.d.ts",
+      "import": "./dist/europeana-feedback-widget.component.js"
+    },
+    "./css": {
+      "@europeana/source": "./src/assets/style.scss",
+      "import": "./dist/europeana-feedback-widget.css"
+    }
+  },
+  "scripts": {
+    "dev": "concurrently \"pnpm:dev:backend\" \"pnpm:dev:frontend\"",
+    "dev:backend": "nodemon -w dev/server.js dev/server.js",
+    "dev:frontend": "vite",
+    "build": "rimraf dist && pnpm build:component && pnpm build:app",
+    "build:app": "vite build --config vite.build.app.ts",
+    "build:component": "vite build --config vite.build.component.ts && vue-tsc --declaration --emitDeclarationOnly",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "preversion": "pnpm build",
+    "version": "node ./bin/version.js && git add README.md"
+  },
+  "dependencies": {
+    "@europeana/style": "catalog:frontend",
+    "bootstrap": "catalog:frontend"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:types",
+    "@vitejs/plugin-vue": "catalog:vite7",
+    "@vue/test-utils": "catalog:vue3",
+    "body-parser": "2.3.0",
+    "concurrently": "8.2.2",
+    "cors": "2.8.5",
+    "express": "4.22.1",
+    "jsdom": "23.2.0",
+    "morgan": "1.11.0",
+    "msw": "2.12.4",
+    "nodemon": "3.1.10",
+    "rimraf": "catalog:",
+    "sass": "1.93.2",
+    "ssri": "10.0.6",
+    "typescript": "catalog:typescript5",
+    "vite": "catalog:vite7",
+    "vite-svg-loader": "catalog:vite7",
+    "vue-tsc": "catalog:vue3"
+  },
+  "peerDependencies": {
+    "vue": "catalog:vue3"
+  },
+  "contributors": [
+    "Richard Doe <richard.doe@europeana.eu>",
+    "Leonie Peters <leonie.peters@europeana.eu>",
+    "Lutz Biedinger <lutz.biedinger@europeana.eu>"
+  ],
+  "keywords": [
+    "europeana",
+    "feedback",
+    "vue"
+  ]
+}

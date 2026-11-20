@@ -1,0 +1,19 @@
+{
+  "cancel": "Atcelt",
+  "close": "Aizvērt",
+  "emailAddress": "E-pasta adrese",
+  "emailOptional": "Mēs varētu vēlēties sekot. Ievadiet savu e-pasta adresi, ja esat priecīgs, ka mēs ar jums sazināsimies.",
+  "failed": "Pieprasījums neizdevās. Lūdzu mēģiniet vēlreiz.",
+  "faq": "Dodieties uz bieži uzdotajiem jautājumiem",
+  "feedback": "Atsauksmes",
+  "next": "Nākamais",
+  "policies": "Turpinot jūs piekrītat mūsu {termsAndPolicies} un atzīstat mūsu {privacyStatement}.",
+  "privacyPolicy": "Paziņojums par konfidencialitāti",
+  "send": "Sūtīt",
+  "skipSend": "Izlaist un nosūtīt",
+  "success": "Jūsu atsauksmes ir nosūtītas.",
+  "termsAndPolicies": "Noteikumi un politikas",
+  "thankYou": "Paldies!",
+  "title": "Sūtīt atsauksmes",
+  "validFeedback": "Jūsu atsauksmēs jābūt vismaz 5 vārdiem."
+}
