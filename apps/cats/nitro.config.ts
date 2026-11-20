@@ -1,4 +1,3 @@
-// nitro.config.ts
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,7 +9,6 @@ const bullBoardUiDir = path.dirname(
   require.resolve("@bull-board/ui/package.json"),
 );
 
-// https://nitro.build
 export default defineNitroConfig({
   alias: {
     "@": fileURLToPath(new URL("./server", import.meta.url)),
@@ -19,7 +17,10 @@ export default defineNitroConfig({
   srcDir: "server",
   externals: {
     external: ["@bull-board/api", "@bull-board/h3", "@bull-board/ui"],
-    traceInclude: [require.resolve("tslib")],
+    traceInclude: [
+      fileURLToPath(import.meta.resolve("tslib")),
+      fileURLToPath(import.meta.resolve("contentful-management")),
+    ],
   },
   hooks: {
     compiled(nitro) {
