@@ -1,3 +1,7 @@
+###
+# Stage: Build base
+#
+
 FROM node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5 AS build-base
 
 ARG app
@@ -22,13 +26,13 @@ COPY apps/${app}/ apps/${app}/
 RUN pnpm --filter @europeana/${app} run --if-present postinstall && \
     pnpm --filter @europeana/${app} run --if-present prepare
 
+#
+###
 
-FROM build-base AS build-app
 
-ARG app
-
-RUN pnpm --filter @europeana/${app} run build
-
+###
+# Stage: Build storybook
+#
 
 FROM build-base AS build-storybook
 
@@ -36,13 +40,43 @@ ARG app
 
 RUN pnpm --filter @europeana/${app} run build-storybook
 
+#
+###
+
+
+###
+# Stage: Run storybook
+#
 
 FROM nginx:stable@sha256:7fad6c0dff97965adbddf28027d934b111fc0221a554315dc274712f3fba24d3 AS run-storybook
+
 ARG app
 
 COPY --from=build-storybook /build/apps/${app}/storybook-static /usr/share/nginx/html
-RUN ls /usr/share/nginx/html/
 
+#
+###
+
+
+
+###
+# Stage: Build app
+#
+
+FROM build-base AS build-app
+
+ARG app
+
+RUN pnpm --filter @europeana/${app} run build
+
+#
+###
+
+
+
+###
+# Stage: Run app
+#
 
 FROM gcr.io/distroless/nodejs24-debian13@sha256:24bc0fe0225c7518f202a822587dad74fe143b96326b81fe5cc08c1df8bed03e AS run-app
 ARG app
@@ -58,3 +92,6 @@ COPY --from=build-app /build/apps/${app}/.output .
 USER 1000
 
 CMD ["./server/index.mjs"]
+
+#
+###
