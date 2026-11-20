@@ -218,8 +218,8 @@ catalogs:
       specifier: 1.6.7
       version: 1.6.7
     ol:
-      specifier: 10.9.0
-      version: 10.9.0
+      specifier: 10.11.0
+      version: 10.11.0
     rimraf:
       specifier: 6.1.4
       version: 6.1.4
@@ -584,10 +584,10 @@ importers:
         version: 4.18.1
       ol:
         specifier: 'catalog:'
-        version: 10.9.0
+        version: 10.11.0
       ol-mapbox-style:
         specifier: ^13.4.1
-        version: 13.4.1(ol@10.9.0)
+        version: 13.4.1(ol@10.11.0)
       vue:
         specifier: catalog:vue3
         version: 3.5.45(typescript@5.9.3)
@@ -6092,8 +6092,8 @@ packages:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
 
-  geotiff@3.0.5:
-    resolution: {integrity: sha512-OWcL9S9+yDZ6iAlXMt32T1iwUApJM8UiD47xbm6ZP1h33d10fqkPs14EG/ttT5EnefpZSx3G15iDFC5FxUNUwA==}
+  geotiff@3.1.0-beta.0:
+    resolution: {integrity: sha512-wbVwOaQYuN+ywly5NoMXn37nHslwkQg5EFHqMeUTtjDACrSag0EEVlFsc+2DK3Pzmmp6XzJW2RTZOamPsBM6ng==}
     engines: {node: '>=10.19'}
 
   get-caller-file@2.0.5:
@@ -7443,8 +7443,8 @@ packages:
     peerDependencies:
       ol: '*'
 
-  ol@10.9.0:
-    resolution: {integrity: sha512-svbbgVQUmEHaKpLQ8kRySojs59Brvgl2zYIrqG9eQNXGfsbi55rQasZIDpwpQzDL6OlzrUb0H4hQaiX9wDoGmA==}
+  ol@10.11.0:
+    resolution: {integrity: sha512-OJ+lrx7kx/1O7Xx18Ff9QkVnwZIEL0OuhJQSy2sYgzzDvyZ2qHvuZEGAajbSstUyBwaS1OtQ4RWnY84tRMDdqg==}
 
   on-change@6.0.2:
     resolution: {integrity: sha512-08+12qcOVEA0fS9g/VxKS27HaT94nRutUT77J2dr8zv/unzXopvhBuF8tNLWsoLQ5IgrQ6eptGeGqUYat82U1w==}
@@ -7682,8 +7682,8 @@ packages:
     resolution: {integrity: sha512-//nshmD55c46FuFw26xV/xFAaB5HF9Xdap7HJBBnrKdAd6/GxDBaNA1870O79+9ueg61cZLSVc+OaFlfmObYVQ==}
     engines: {node: '>= 14.16'}
 
-  pbf@4.0.1:
-    resolution: {integrity: sha512-SuLdBvS42z33m8ejRbInMapQe8n0D3vN/Xd5fmWM3tufNgRQFBpaW2YVJxQZV4iPNqb0vEFvssMEo5w9c6BTIA==}
+  pbf@5.1.2:
+    resolution: {integrity: sha512-mnvGdvOrIvJOBGUEdGkrVXjN8E/VkIJCkf2eS1DH2yv82ORUlLttmDt0rWY38yYZmVwciZwBUvHM20qxBZf40w==}
     hasBin: true
 
   perfect-debounce@2.1.0:
@@ -15574,7 +15574,7 @@ snapshots:
 
   gensync@1.0.0-beta.2: {}
 
-  geotiff@3.0.5:
+  geotiff@3.1.0-beta.0:
     dependencies:
       '@petamoriken/float16': 3.9.3
       lerc: 3.0.0
@@ -17321,18 +17321,18 @@ snapshots:
 
   ohash@2.0.12: {}
 
-  ol-mapbox-style@13.4.1(ol@10.9.0):
+  ol-mapbox-style@13.4.1(ol@10.11.0):
     dependencies:
       '@maplibre/maplibre-gl-style-spec': 24.10.0
       mapbox-to-css-font: 3.2.0
-      ol: 10.9.0
+      ol: 10.11.0
 
-  ol@10.9.0:
+  ol@10.11.0:
     dependencies:
       '@types/rbush': 4.0.0
       earcut: 3.0.2
-      geotiff: 3.0.5
-      pbf: 4.0.1
+      geotiff: 3.1.0-beta.0
+      pbf: 5.1.2
       rbush: 4.0.1
       zarrita: 0.7.3
 
@@ -17721,7 +17721,7 @@ snapshots:
 
   pathval@2.0.1: {}
 
-  pbf@4.0.1:
+  pbf@5.1.2:
     dependencies:
       resolve-protobuf-schema: 2.1.0
 
