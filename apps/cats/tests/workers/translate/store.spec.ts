@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useContentfulClient } from "@/utils/contentful";
 import { processor, opts } from "@/workers/translate/store";
 
 vi.mock("@/utils/contentful", () => ({
-  useContentfulEnvironment: vi.fn(),
+  useContentfulClient: vi.fn(),
 }));
 
 function createMockJob(
@@ -20,15 +20,19 @@ function createMockJob(
 
 describe("@/workers/translate/store", () => {
   const mockGetEntry = vi.fn();
-  const mockUpdate = vi.fn();
-  const mockPublish = vi.fn();
+  const mockUpdateEntry = vi.fn();
+  const mockPublishEntry = vi.fn();
 
   beforeEach(() => {
     vi.clearAllMocks();
 
-    vi.mocked(useContentfulEnvironment).mockResolvedValue({
-      getEntry: mockGetEntry,
-    } as unknown as Awaited<ReturnType<typeof useContentfulEnvironment>>);
+    vi.mocked(useContentfulClient).mockReturnValue({
+      entry: {
+        get: mockGetEntry,
+        update: mockUpdateEntry,
+        publish: mockPublishEntry,
+      },
+    } as unknown as ReturnType<typeof useContentfulClient>);
   });
 
   it("exports expected worker options", () => {
@@ -37,13 +41,11 @@ describe("@/workers/translate/store", () => {
 
   it("merges translated child job fields into Contentful entry locales, updates, and publishes", async () => {
     const entry = {
-      sys: { id: "entry-1" },
+      sys: { id: "entry-1", version: 1 },
       fields: {
         title: { "en-GB": "Hello Europeana" },
         body: { "en-GB": "Original English body" },
       },
-      update: mockUpdate,
-      publish: mockPublish,
     };
 
     const updatedEntry = { ...entry, sys: { id: "entry-1", version: 2 } };
@@ -53,8 +55,8 @@ describe("@/workers/translate/store", () => {
     };
 
     mockGetEntry.mockResolvedValue(entry);
-    mockUpdate.mockResolvedValue(updatedEntry);
-    mockPublish.mockResolvedValue(publishedEntry);
+    mockUpdateEntry.mockResolvedValue(updatedEntry);
+    mockPublishEntry.mockResolvedValue(publishedEntry);
 
     const job = createMockJob(
       { entryId: "entry-1" },
@@ -78,7 +80,7 @@ describe("@/workers/translate/store", () => {
 
     const result = await processor(job);
 
-    expect(mockGetEntry).toHaveBeenCalledWith("entry-1");
+    expect(mockGetEntry).toHaveBeenCalledWith({ entryId: "entry-1" });
 
     expect(entry.fields).toEqual({
       title: {
@@ -93,8 +95,11 @@ describe("@/workers/translate/store", () => {
       },
     });
 
-    expect(mockUpdate).toHaveBeenCalledTimes(1);
-    expect(mockPublish).toHaveBeenCalledTimes(1);
+    expect(mockUpdateEntry).toHaveBeenCalledWith({ entryId: "entry-1" }, entry);
+    expect(mockPublishEntry).toHaveBeenCalledWith(
+      { entryId: "entry-1" },
+      updatedEntry,
+    );
     expect(result).toBe(publishedEntry);
   });
 
@@ -106,13 +111,11 @@ describe("@/workers/translate/store", () => {
         slug: { "en-US": "non-localized-or-other-locale-slug" },
         internalRef: {},
       },
-      update: mockUpdate,
-      publish: mockPublish,
     };
 
     mockGetEntry.mockResolvedValue(entry);
-    mockUpdate.mockResolvedValue(entry);
-    mockPublish.mockResolvedValue(entry);
+    mockUpdateEntry.mockResolvedValue(entry);
+    mockPublishEntry.mockResolvedValue(entry);
 
     const job = createMockJob(
       { entryId: "entry-2" },
@@ -147,16 +150,14 @@ describe("@/workers/translate/store", () => {
       fields: {
         title: { "en-GB": "Title" },
       },
-      update: mockUpdate,
-      publish: mockPublish,
     };
 
     mockGetEntry.mockResolvedValue(entry);
-    mockUpdate.mockRejectedValue(new Error("Contentful version conflict"));
+    mockUpdateEntry.mockRejectedValue(new Error("Contentful version conflict"));
 
     const job = createMockJob({ entryId: "entry-3" }, {});
 
     await expect(processor(job)).rejects.toThrow("Contentful version conflict");
-    expect(mockPublish).not.toHaveBeenCalled();
+    expect(mockPublishEntry).not.toHaveBeenCalled();
   });
 });

@@ -1,17 +1,17 @@
 import type { Job } from "bullmq";
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useContentfulClient } from "@/utils/contentful";
 import { localeForLang } from "@/utils/i18n/locales";
 
 export { name as queueName } from "@/queues/translate/store";
 
 export const processor = async (job: Job) => {
-  const contentfulEnvironment = await useContentfulEnvironment();
+  const contentfulClient = useContentfulClient();
 
   // all per-language receipt children jobs are complete; assemble their values
   // into the entry's field localisations
   const childrenValues = await job.getChildrenValues();
 
-  let entry = await contentfulEnvironment.getEntry(job.data.entryId);
+  let entry = await contentfulClient.entry.get({ entryId: job.data.entryId });
 
   entry.fields = Object.keys(entry.fields).reduce((memo, fieldId) => {
     // discard any field not having the source language (English), which
@@ -32,8 +32,11 @@ export const processor = async (job: Job) => {
   }
 
   // write to Contentful
-  entry = await entry.update();
-  entry = await entry.publish();
+  entry = await contentfulClient.entry.update({ entryId: entry.sys.id }, entry);
+  entry = await contentfulClient.entry.publish(
+    { entryId: entry.sys.id },
+    entry,
+  );
 
   return entry;
 };

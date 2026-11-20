@@ -1,25 +1,32 @@
-import contentfulManagement, {
-  Entry,
-  Environment,
+import {
+  createClient,
+  EntryProps,
+  PlainClientAPI,
   QueryOptions,
   KeyValueMap,
 } from "contentful-management";
 import { useRuntimeConfig } from "nitropack/runtime";
 
-let environment: Environment;
+let client: PlainClientAPI;
 
-export const useContentfulEnvironment = async (): Promise<Environment> => {
-  if (!environment) {
+export const useContentfulClient = (): PlainClientAPI => {
+  if (!client) {
     const config = useRuntimeConfig()?.contentful;
 
-    const client = contentfulManagement.createClient({
-      accessToken: config.accessToken,
-    });
-    const space = await client.getSpace(config.space);
-    environment = await space.getEnvironment(config.environment);
+    client = createClient(
+      {
+        accessToken: config.accessToken,
+      },
+      {
+        defaults: {
+          spaceId: config.space,
+          environmentId: config.environment,
+        },
+      },
+    );
   }
 
-  return environment;
+  return client;
 };
 
 export const createOrUpdateEntry = async (
@@ -27,7 +34,8 @@ export const createOrUpdateEntry = async (
   query: QueryOptions,
   fields: KeyValueMap,
   publish: boolean = true,
-): Promise<Entry | null> => {
+): Promise<EntryProps<KeyValueMap> | null> => {
+  const client = useContentfulClient();
   let entry = await findEntry(query);
 
   fields = await omitInvalidArrayFieldValues(contentTypeId, fields);
@@ -37,16 +45,14 @@ export const createOrUpdateEntry = async (
       ...entry.fields,
       ...fields,
     };
-    entry = await entry.update();
+    entry = await client.entry.update({ entryId: entry.sys.id }, entry);
   } else {
-    entry = await environment.createEntry(contentTypeId, {
-      fields,
-    });
+    entry = await client.entry.create({ contentTypeId }, { fields });
   }
 
   if (entry) {
     if (publish) {
-      await entry.publish();
+      await client.entry.publish({ entryId: entry.sys.id }, entry);
     }
     return entry;
   }
@@ -54,24 +60,22 @@ export const createOrUpdateEntry = async (
   return null;
 };
 
-export const findEntry = async (query: QueryOptions): Promise<Entry | null> => {
-  const environment = await useContentfulEnvironment();
-  const response = await environment.getEntries(query);
+export const findEntry = async (
+  query: QueryOptions,
+): Promise<EntryProps<KeyValueMap> | null> => {
+  const client = useContentfulClient();
 
-  // TODO: handle more than 1? i.e. update all?
-  if (response.total === 1) {
-    return response.items[0];
-  }
+  const response = await client.entry.getMany({ query });
 
-  return null;
+  return response.items?.[0] || null;
 };
 
 const omitInvalidArrayFieldValues = async (
   contentTypeId: string,
   fields: KeyValueMap,
 ): Promise<KeyValueMap> => {
-  const environment = await useContentfulEnvironment();
-  const contentType = await environment.getContentType(contentTypeId);
+  const client = useContentfulClient();
+  const contentType = await client.contentType.get({ contentTypeId });
   const locale = useRuntimeConfig().contentful?.defaultLocale;
 
   for (const contentTypeField of contentType.fields) {
@@ -86,7 +90,7 @@ const omitInvalidArrayFieldValues = async (
       if (inValidation) {
         fields[contentTypeField.id][locale] = fields[contentTypeField.id][
           locale
-        ].filter((value) => inValidation.in.includes(value));
+        ].filter((value) => inValidation.in?.includes(value));
       }
     }
   }

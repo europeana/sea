@@ -19,28 +19,37 @@ vi.mock("bullmq", () => ({
 
 vi.mock("contentful-management", () => {
   const mockEntry = {
+    sys: { id: "entryid" },
     fields: {},
-    update: vi.fn(),
-    publish: vi.fn(),
   };
-  const mockEnvironment = {
-    createEntry: vi.fn().mockResolvedValue(mockEntry),
-    createAssetWithId: vi.fn(),
-    createUpload: vi.fn(),
-    getAsset: vi.fn(),
-    getContentType: vi.fn(),
-    getEntries: vi.fn(),
-    getEntry: vi.fn().mockResolvedValue(mockEntry),
+
+  const mockClient = {
+    asset: {
+      create: vi.fn(),
+      createWithId: vi.fn(),
+      get: vi.fn(),
+      processForAllLocales: vi.fn(),
+      publish: vi.fn(),
+    },
+    contentType: {
+      get: vi.fn(),
+    },
+    entry: {
+      create: vi.fn().mockResolvedValue(mockEntry),
+      get: vi.fn().mockResolvedValue(mockEntry),
+      getMany: vi.fn(),
+      publish: vi.fn(),
+      update: vi.fn(),
+    },
+    upload: {
+      create: vi.fn(),
+    },
   };
-  const mockGetEnvironment = vi.fn(() => mockEnvironment);
-  const mockGetSpace = vi.fn(() => ({
-    getEnvironment: mockGetEnvironment,
-  }));
-  const mockCreateClient = vi.fn(() => ({
-    getSpace: mockGetSpace,
-  }));
+
+  const mockCreateClient = vi.fn(() => mockClient);
 
   return {
+    createClient: mockCreateClient,
     default: {
       createClient: mockCreateClient,
     },

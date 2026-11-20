@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
-import { useContentfulEnvironment } from "@/utils/contentful";
+import { useContentfulClient } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 import { processor, opts } from "@/workers/zoho/crm/syncPhoto";
 
 vi.mock("@/utils/contentful", () => ({
-  useContentfulEnvironment: vi.fn(),
+  useContentfulClient: vi.fn(),
 }));
 
 vi.mock("@/utils/zoho", () => ({
@@ -25,9 +25,9 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
   const mockCreateUpload = vi.fn();
   const mockGetAsset = vi.fn();
   const mockCreateAssetWithId = vi.fn();
-  const mockUpdate = vi.fn();
+  const mockUpdateAsset = vi.fn();
   const mockProcessForAllLocales = vi.fn();
-  const mockPublish = vi.fn();
+  const mockPublishAsset = vi.fn();
 
   const mockPhoto = {
     file: Buffer.from("fake-image-bytes"),
@@ -48,22 +48,29 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
       },
     } as unknown as ReturnType<typeof useZoho>);
 
-    vi.mocked(useContentfulEnvironment).mockResolvedValue({
-      createUpload: mockCreateUpload,
-      getAsset: mockGetAsset,
-      createAssetWithId: mockCreateAssetWithId,
-    } as unknown as Awaited<ReturnType<typeof useContentfulEnvironment>>);
+    vi.mocked(useContentfulClient).mockReturnValue({
+      upload: {
+        create: mockCreateUpload,
+      },
+      asset: {
+        get: mockGetAsset,
+        createWithId: mockCreateAssetWithId,
+        update: mockUpdateAsset,
+        processForAllLocales: mockProcessForAllLocales,
+        publish: mockPublishAsset,
+      },
+    } as unknown as ReturnType<typeof useContentfulClient>);
 
     mockCreateUpload.mockResolvedValue({
       sys: { id: "upload-111" },
     });
 
     const processedAsset = {
-      sys: { id: "zoho-contact-photo-zoho-123" },
-      publish: mockPublish.mockResolvedValue(undefined),
+      sys: { id: "zoho-contact-photo-zoho-123", version: 3 },
     };
 
     mockProcessForAllLocales.mockResolvedValue(processedAsset);
+    mockPublishAsset.mockResolvedValue(processedAsset);
   });
 
   it("exports expected worker options", () => {
@@ -77,7 +84,7 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
     const result = await processor(job);
 
     expect(mockFetchZohoPhoto).toHaveBeenCalledWith("zoho-123");
-    expect(useContentfulEnvironment).not.toHaveBeenCalled();
+    expect(useContentfulClient).not.toHaveBeenCalled();
     expect(result).toEqual({ assetId: null });
   });
 
@@ -85,12 +92,16 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
     mockFetchZohoPhoto.mockResolvedValue(mockPhoto);
 
     const existingAsset = {
-      sys: { id: "zoho-contact-photo-zoho-123" },
+      sys: { id: "zoho-contact-photo-zoho-123", version: 1 },
       fields: {},
-      update: mockUpdate.mockResolvedValue(undefined),
-      processForAllLocales: mockProcessForAllLocales,
     };
+    const updatedAsset = {
+      sys: { id: "zoho-contact-photo-zoho-123", version: 2 },
+      fields: {},
+    };
+
     mockGetAsset.mockResolvedValue(existingAsset);
+    mockUpdateAsset.mockResolvedValue(updatedAsset);
 
     const job = createMockJob({ contactId: "zoho-123" });
     const result = await processor(job);
@@ -117,13 +128,21 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
       },
     };
 
-    expect(mockCreateUpload).toHaveBeenCalledWith({ file: mockPhoto.file });
-    expect(mockGetAsset).toHaveBeenCalledWith("zoho-contact-photo-zoho-123");
+    expect(mockCreateUpload).toHaveBeenCalledWith({}, { file: mockPhoto.file });
+    expect(mockGetAsset).toHaveBeenCalledWith({
+      assetId: "zoho-contact-photo-zoho-123",
+    });
     expect(existingAsset.fields).toEqual(expectedFields);
-    expect(mockUpdate).toHaveBeenCalledTimes(1);
+    expect(mockUpdateAsset).toHaveBeenCalledWith(
+      { assetId: "zoho-contact-photo-zoho-123" },
+      existingAsset,
+    );
     expect(mockCreateAssetWithId).not.toHaveBeenCalled();
-    expect(mockProcessForAllLocales).toHaveBeenCalledTimes(1);
-    expect(mockPublish).toHaveBeenCalledTimes(1);
+    expect(mockProcessForAllLocales).toHaveBeenCalledWith({}, updatedAsset);
+    expect(mockPublishAsset).toHaveBeenCalledWith(
+      { assetId: "zoho-contact-photo-zoho-123" },
+      { sys: { id: "zoho-contact-photo-zoho-123", version: 3 } },
+    );
     expect(result).toEqual({ assetId: "zoho-contact-photo-zoho-123" });
   });
 
@@ -135,8 +154,7 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
     mockGetAsset.mockRejectedValue(notFoundError);
 
     const createdAsset = {
-      sys: { id: "zoho-contact-photo-zoho-123" },
-      processForAllLocales: mockProcessForAllLocales,
+      sys: { id: "zoho-contact-photo-zoho-123", version: 1 },
     };
     mockCreateAssetWithId.mockResolvedValue(createdAsset);
 
@@ -144,7 +162,7 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
     const result = await processor(job);
 
     expect(mockCreateAssetWithId).toHaveBeenCalledWith(
-      "zoho-contact-photo-zoho-123",
+      { assetId: "zoho-contact-photo-zoho-123" },
       {
         fields: {
           title: {
@@ -169,9 +187,12 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
         },
       },
     );
-    expect(mockUpdate).not.toHaveBeenCalled();
-    expect(mockProcessForAllLocales).toHaveBeenCalledTimes(1);
-    expect(mockPublish).toHaveBeenCalledTimes(1);
+    expect(mockUpdateAsset).not.toHaveBeenCalled();
+    expect(mockProcessForAllLocales).toHaveBeenCalledWith({}, createdAsset);
+    expect(mockPublishAsset).toHaveBeenCalledWith(
+      { assetId: "zoho-contact-photo-zoho-123" },
+      { sys: { id: "zoho-contact-photo-zoho-123", version: 3 } },
+    );
     expect(result).toEqual({ assetId: "zoho-contact-photo-zoho-123" });
   });
 
@@ -187,6 +208,6 @@ describe("@/workers/zoho/crm/syncPhoto", () => {
     await expect(processor(job)).rejects.toThrow("Rate limit exceeded");
     expect(mockCreateAssetWithId).not.toHaveBeenCalled();
     expect(mockProcessForAllLocales).not.toHaveBeenCalled();
-    expect(mockPublish).not.toHaveBeenCalled();
+    expect(mockPublishAsset).not.toHaveBeenCalled();
   });
 });
