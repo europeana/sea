@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Git metadata, main dispatch
         id: git-main-dispatch
         if: github.event_name == 'workflow_dispatch' && github.event.ref == 'refs/heads/main'
@@ -41,61 +41,56 @@ jobs:
       git-pr-draft: ${{ steps.git-pr-draft.outputs.status }}
       git-pr-ready: ${{ steps.git-pr-ready.outputs.status }}
 
-  # Build, and push to Docker Hub, the final-stage production-ready Docker image,
-  # for use throughout other jobs, and for deployment.
-  docker-build-app:
+  # Build, validate, smoke test, and push Docker images (app and optional Storybook).
+  docker-build:
+    name: Docker build (${{ matrix.variant }})
     needs: [metadata]
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true')
+    if: (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') || (needs.metadata.outputs.git-pr-ready == 'true')
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(inputs.storybook && '[{"variant":"app","image_suffix":"","target":"","check_size":true,"port":8080},{"variant":"storybook","image_suffix":"-storybook","target":"run-storybook","check_size":false,"port":80}]' || '[{"variant":"app","image_suffix":"","target":"","check_size":true,"port":8080}]') }}
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
       - name: Docker metadata
         id: docker-metadata
-        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6
         with:
-          images: ${{ env.DOCKER_REPOSITORY }}
+          images: ${{ env.DOCKER_REPOSITORY }}${{ matrix.image_suffix }}
           tags: |
             type=ref,event=pr
             type=ref,event=branch
             type=ref,event=tag
             type=semver,pattern={{version}}
+
       - name: Output Docker image full tag
         id: docker-image
         run: |
-          echo "full-tag=${{ env.DOCKER_REPOSITORY }}:${{ steps.docker-metadata.outputs.version }}" >> $GITHUB_OUTPUT
+          echo "full-tag=${{ env.DOCKER_REPOSITORY }}${{ matrix.image_suffix }}:${{ steps.docker-metadata.outputs.version }}" >> $GITHUB_OUTPUT
+
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4
-      - if: github.actor != 'dependabot[bot]'
-        name: Login to DockerHub
-        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
+
+      - name: Build and load ${{ matrix.variant }} image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
         with:
           context: .
           file: ./Dockerfile
           build-args: app=${{ inputs.app }}
-          pull: true
-          push: ${{ github.actor != 'dependabot[bot]' }}
-          cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-app
-          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-app
-          tags: ${{ steps.docker-metadata.outputs.tags }}
-          labels: ${{ steps.docker-metadata.outputs.labels }}
-      - name: Build (from cache) and load app image
-        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7
-        with:
-          context: .
-          file: ./Dockerfile
-          build-args: app=${{ inputs.app }}
+          target: ${{ matrix.target }}
           pull: true
           load: true
-          tags: ${{ steps.docker-image.outputs.full-tag }}
-          cache-from: type=gha,scope=${{ github.ref_name }}-app
-      - # TODO: this should run before the image is pushed
-        name: Check image size
+          push: false
+          cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-${{ matrix.variant }}
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-${{ matrix.variant }}
+          tags: ${{ steps.docker-metadata.outputs.tags }}
+          labels: ${{ steps.docker-metadata.outputs.labels }}
+
+      - name: Check image size
+        if: matrix.check_size
         env:
           DOCKER_IMAGE_SIZE_LIMIT: ${{ vars.DOCKER_IMAGE_SIZE_LIMIT }}
         run: |
@@ -107,42 +102,40 @@ jobs:
             echo "::notice ::Image size $(numfmt --to=si ${docker_image_size}) within limit ${DOCKER_IMAGE_SIZE_LIMIT}"
           fi
 
-  # Build, and push to Docker Hub, the app's Storybook.
-  docker-build-storybook:
-    needs: [metadata]
-    runs-on: ubuntu-latest
-    if: inputs.storybook && ((github.event_name == 'push') || (needs.metadata.outputs.git-pr-ready == 'true'))
-    steps:
-      - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
-      - name: Docker metadata
-        id: docker-metadata
-        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6
-        with:
-          images: ${{ env.DOCKER_REPOSITORY }}-storybook
-          tags: |
-            type=ref,event=pr
-            type=ref,event=branch
-            type=ref,event=tag
-            type=semver,pattern={{version}}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4
-      - if: github.actor != 'dependabot[bot]'
-        name: Login to DockerHub
-        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4
+      - name: Smoke test ${{ matrix.variant }} image
+        run: |
+          container_id=$(docker run -d -p 8080:${{ matrix.port }} "${{ steps.docker-image.outputs.full-tag }}")
+          trap 'docker rm -f "$container_id" >/dev/null 2>&1 || true' EXIT
+
+          for i in $(seq 1 15); do
+            if [ "$(docker inspect -f '{{.State.Running}}' "$container_id")" != "true" ]; then
+              echo "::error ::Container exited prematurely"
+              docker logs "$container_id"
+              exit 1
+            fi
+
+            if curl -sf http://localhost:8080/ >/dev/null 2>&1; then
+              echo "::notice ::${{ matrix.variant }} container started and responded successfully"
+              exit 0
+            fi
+
+            sleep 1
+          done
+
+          echo "::error ::${{ matrix.variant }} container failed to respond within 15 seconds"
+          docker logs "$container_id"
+          exit 1
+
+      - name: Login to DockerHub
+        if: github.actor != 'dependabot[bot]'
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7
-        with:
-          context: .
-          file: ./Dockerfile
-          build-args: app=${{ inputs.app }}
-          target: run-storybook
-          pull: true
-          push: ${{ github.actor != 'dependabot[bot]' }}
-          cache-from: type=gha,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
-          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-${{ inputs.app }}-storybook
-          tags: ${{ steps.docker-metadata.outputs.tags }}
-          labels: ${{ steps.docker-metadata.outputs.labels }}
+
+      - name: Push ${{ matrix.variant }} image tags
+        if: github.actor != 'dependabot[bot]'
+        run: |
+          while IFS= read -r tag; do
+            docker push "$tag"
+          done <<< "${{ steps.docker-metadata.outputs.tags }}"

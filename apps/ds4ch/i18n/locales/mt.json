@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "agħlaq",
+    "downloadFile": "niżżel {file}",
+    "selectLanguage": "(Agħżel il-lingwa tiegħek)",
+    "share": "Ixxerja",
+    "shareOn": "Ixxerja fuq {social}"
+  },
+  "added": "Miżjud {date}",
+  "attribution": {
+    "creator": "Kreatur:",
+    "institution": "Istituzzjoni:",
+    "show": "Uri l-attribuzzjoni",
+    "title": "Titlu:"
+  },
+  "authored": {
+    "by": "minn",
+    "publishedDate": "Ippubblikat {date}"
+  },
+  "content": {
+    "discoverRelated": "Skopri kontenut relatat",
+    "filter": {
+      "events": "Avvenimenti",
+      "news": "Aħbarijiet",
+      "projects": "Proġetti",
+      "training": "Taħriġ",
+      "viewAll": "Ara kollha"
+    },
+    "filterContentType": "Iffiltra l-kontenut skont it-tip",
+    "resultsHaveLoaded": "{0} riżultati misjuba",
+    "seeAll": "Ara kollox {content}",
+    "seeMore": "Ara aktar {content}",
+    "topics": {
+      "featuredTopics": "Suġġetti dehru",
+      "label": "Esplora aktar suġġetti",
+      "noOptions": "M'hemmx aktar suġġetti biex tagħżel"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Aċċetta kollox",
+    "acceptSelected": "Aċċetta magħżula",
+    "consentModal": {
+      "alwaysRequired": "(Dejjem meħtieġ)",
+      "privacyStatement": "Dikjarazzjoni tal-privatezza",
+      "servicesCount": "{count} servizz | {count} servizzi",
+      "text": "Hawnhekk tista’ tara u tippersonalizza s-servizzi li nixtiequ nużaw fuq dan il-websajt. Biex titgħallem aktar aqra l-{privacyStatement}.",
+      "title": "Servizzi li nixtiequ nużaw."
+    },
+    "consentNotice": {
+      "learnMore": "Immaniġġja s-settings tal-cookies",
+      "text": "Nistgħu jekk jogħġbok inħaddmu s-servizzi għas-sigurtà, l-analitiċi u l-kontenut ta’ partijiet terzi?",
+      "textUpdated": "Kien hemm xi bidliet fis-servizzi mill-aħħar żjara tiegħek. Nistgħu jekk jogħġbok nattivaw servizzi addizzjonali?"
+    },
+    "decline": "Irrifjuta",
+    "purposes": {
+      "2D": {
+        "title": "Midja 2D"
+      },
+      "3D": {
+        "title": "Midja 3D"
+      },
+      "audio": {
+        "title": "Awdjo"
+      },
+      "essential": {
+        "description": "Dawn is-servizzi huma essenzjali għall-funzjonament korrett ta’ dan il-websajt. Dawn jinkludu l-preferenzi tal-lingwa u jżommu ż-żjara tiegħek sigura. Ma tistax tiddiżattivahom għax mod ieħor il-websajt ma taħdimx kif suppost.",
+        "title": "Servizzi essenzjali għas-sigurtà u l-personalizzazzjoni"
+      },
+      "hotjar": {
+        "description": "Jikkolletta data dwar l-użu biex jgħinna nanalizzaw l-interazzjonijiet tal-utenti. Jattiva widget ta' stħarriġ li jagħtik l-għażla li twieġeb għall-istħarriġiet ta' sodisfazzjon tal-viżitaturi tagħna.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Dawn is-servizzi jgħabbu immaġni (2D), 3D, awdjo, u oġġetti tal-vidjow għall-wiri.",
+        "title": "Servizzi ta' wiri tal-midja"
+      },
+      "other": {
+        "title": "Servizzi oħra ta' inkorporazzjoni"
+      },
+      "socialMedia": {
+        "description": "Dawn is-servizzi jgħabbu kontenut minn pjattaformi tal-midja soċjali.",
+        "title": "Servizzi ta' inkorporazzjoni tal-midja soċjali"
+      },
+      "thirdPartyContent": {
+        "description": "Dawn is-servizzi jgħabbu kontenut ospitat minn partijiet terzi. L-użu tiegħu huwa suġġett għat-termini, il-kundizzjonijiet u d-dikjarazzjoni tal-privatezza ta’ dawn il-partijiet terzi.",
+        "title": "Kontenut ta' parti terza"
+      },
+      "usage": {
+        "description": "Dawn is-servizzi jiġbru l-informazzjoni biex jgħinuna nifhmu aħjar kif tintuża l-websajt u fejn huma l-punti tal-uġigħ, u jagħtuna s-setgħa li nagħmlu għażliet infurmati biex intejbu l-esperjenza tiegħek.",
+        "title": "Servizzi biex taqbad l-użu u l-feedback tal-websajt"
+      },
+      "video": {
+        "title": "Vidjo"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Uża dan is-swiċċ biex tippermetti jew tiddiżattiva s-servizzi fakultattivi kollha.",
+        "title": "Jippermetti jew itfi s-servizzi kollha"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Jiftakar li l-isfida tas-sigurtà ntemmet b’suċċess.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Jikkolletta data dwar l-użu biex jgħinna nanalizzaw l-interazzjonijiet tal-utenti. Jattiva widget ta' stħarriġ li jagħtik l-għażla li twieġeb għall-istħarriġiet ta' sodisfazzjon tal-viżitaturi tagħna.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Tiftakar il-lingwa tal-interface preferuta tiegħek għal aċċess futur.",
+        "title": "Kodiċi tal-lingwa"
+      },
+      "matomo": {
+        "description": "Jġemma’ statistika anonima dwar kif il-viżitaturi jinteraġixxu mal-websajt.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Fornitur mhux magħruf"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Dan il-folder huwa vojt"
+  },
+  "embedNotification": {
+    "ifNotAll": "Jekk ma tridx tagħbija l-midja inkorporata kollha, tista' {0}.",
+    "loadAllEmbeddedContent": "Tagħbija l-kontenut kollu inkorporat",
+    "loadOnlyThis": "tgħabbi l-midja minn dan il-fornitur biss",
+    "message": "Jekk jogħġbok kun konxju li din il-paġna fiha kontenut tal-midja inkorporat minn {provider}. Li tara din il-midja hija soġġetta għat-termini u d-dikjarazzjonijiet tal-privatezza tagħhom. Jekk jogħġbok irreferi għad-dikjarazzjonijiet tal-privatezza tagħhom għal aktar informazzjoni dwar kif tintuża d-dejta tiegħek.",
+    "messageUnkownService": "Sfortunatament dan il-kontenut ma jistax jintwera.",
+    "ofThirdPartyServices": "{0} ta' servizzi ta' kontenut ta' partijiet terzi.",
+    "viewFullList": "Ara l-lista sħiħa",
+    "viewThisExternalLink": "Ara dan il-kontenut permezz ta' link estern"
+  },
+  "error": "Żball",
+  "errorMessage": {
+    "404": "Skużana! Il-paġna li qed tfittex ma teżistix.",
+    "noResults": "0 riżultati",
+    "noResultsDescription": "Jekk jogħġbok aġġusta s-suġġetti li għażilt hawn fuq.",
+    "unknown": "Seħħ żball."
+  },
+  "errors": {
+    "http": {
+      "404": "Ma Nstabx"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} sa {endDate}",
+    "event": "Avveniment | Avvenimenti"
+  },
+  "featured": "Dehru",
+  "footer": {
+    "accessibility": "Aċċessibilità",
+    "cookies": "Cookies",
+    "disclaimer": "L-ispazju komuni Ewropew tad-dejta għall-wirt kulturali huwa inizjattiva tal-Unjoni Ewropea, iffinanzjata mill-Programm Diġitali tal-Ewropa tal-Unjoni Ewropea. Is-servizzi tal-ispazju tad-dejta, inkluż dan is-sit elettroniku, huma mħaddma minn konsorzju mmexxi mill-Fondazzjoni Europeana taħt kuntratt ta’ servizz mal-Kummissjoni Ewropea, numru tal-kuntratt LC-01901432.",
+    "footer": "Footer",
+    "imageDescription": "Ffinanzjat mill-Unjoni Ewropea",
+    "info": "Aktar informazzjoni",
+    "language": "Ippersonalizza l-lingwa tas-sit web",
+    "partners": {
+      "cloudflare": "Imħaddem minn Project Galileo",
+      "contentful": "Mħaddem minn Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Dikjarazzjoni tal-privatezza",
+    "supportingPartners": "Appoġġ għall-imsieħba tekniċi",
+    "terms": "Termini u Politiki",
+    "translationInfo": "Traduzzjonijiet awtomatizzati bl-użu ta' {service}",
+    "translationService": "Servizz ta' Traduzzjoni Elettronika"
+  },
+  "home": {
+    "broughtBy": "Miġjuba lilek minn",
+    "title": "L-ispazju komuni Ewropew tad-dejta għall-wirt kulturali"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Talbiet API ta' kull xahar, bħala medja",
+      "dataProviders": "Istituzzjonijiet Fornitriċi",
+      "hqItems": "tal-oġġetti tagħna huma ta’ kwalità għolja",
+      "items": "Oġġetti",
+      "networkMembers": "Membri tan-netwerk"
+    }
+  },
+  "nav": {
+    "about": "Dwar l-ispazju tad-dejta",
+    "close": "Agħlaq il-menù",
+    "collections": "Esplora l-kollezzjonijiet",
+    "dataSpace": "Esplora l-ispazju tad-dejta",
+    "home": "Paġna Ewlenija",
+    "mainNavigation": "Navigazzjoni prinċipali",
+    "menu": "Menù",
+    "toggle": "Uri l-menù"
+  },
+  "newWindow": "jiftaħ f'tieqa ġdida",
+  "news": "Aħbarijiet | Aħbarijiet",
+  "pagination": {
+    "label": "Paġinazzjoni",
+    "next": "Li jmiss",
+    "of": "Ta",
+    "pageNumber": "Numru tal-paġna",
+    "previous": "Preċedenti"
+  },
+  "portal": "Portal",
+  "project": "Proġett | Proġetti",
+  "projects": {
+    "contract": "Numru tal-kuntratt",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Niżżel il-folja informattiva",
+    "factSheet": "Folja ta’ informazzjoni tal-proġett",
+    "funders": "Finanzjaturi",
+    "funding": "Informazzjoni dwar il-finanzjament",
+    "fundingStream": "Fluss ta' finanzjament",
+    "goals": "Għanijiet tal-proġett",
+    "impact": "Impatt ewlieni tal-proġett",
+    "partners": "Imsieħba tal-proġett",
+    "reports": "Rapporti tal-proġett",
+    "viewFactSheet": "Ara l-folja ta’ informazzjoni"
+  },
+  "results": "{count} riżultat | {count} riżultati",
+  "shareWhere": "Fejn tixtieq taqsam dan?",
+  "skipToMainContent": "Mur għall-kontenut prinċipali",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Din hija l-ewwel slide",
+      "lastSlide": "Din hija l-aħħar slide",
+      "nextSlide": "Slide li jmiss",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Grupp ta' slides {page}",
+      "previousSlide": "Slide preċedenti",
+      "slideLabel": "Slide {slide} Ta {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Għaddej",
+    "training": "Taħriġ | Taħriġ"
+  }
+}

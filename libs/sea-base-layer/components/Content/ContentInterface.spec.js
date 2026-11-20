@@ -1,0 +1,561 @@
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
+import { mockNuxtImport, mountSuspended } from "@nuxt/test-utils/runtime";
+import ContentInterface from "./ContentInterface.vue";
+
+const { useRouteMock } = vi.hoisted(() => ({
+  useRouteMock: vi.fn(() => {
+    return { query: {} };
+  }),
+}));
+mockNuxtImport("useRoute", () => useRouteMock);
+mockNuxtImport("useI18n", () => {
+  return () => {
+    return {
+      d: (datetime) => datetime,
+      locale: "en",
+      localeProperties: { value: { language: "en-GB" } },
+      t: (key) => key,
+    };
+  };
+});
+mockNuxtImport("useAsyncData", () => async (cacheId, callback) => {
+  const result = await callback();
+  return { data: ref(result), error: ref(null) };
+});
+
+const categories = ["network", "postcards"];
+
+const mockBlogEntries = Array.from({ length: 4 }, (key, index) => ({
+  __typename: "BlogPosting",
+  sys: { id: `blog-id${index}` },
+  datePublished: `2023-01-${index + 1}`,
+  name: `Blog post entry ${index}`,
+}));
+
+const mockProjectEntries = Array.from({ length: 4 }, (key, index) => ({
+  __typename: "ProjectPage",
+  sys: { id: `project-id${index}` },
+  project: { startDate: `2025-01-${index + 1}` },
+  name: `Project page entry ${index}`,
+  headline: `Project headline ${index}`,
+}));
+
+const mockEventEntries = Array.from({ length: 4 }, (key, index) => ({
+  __typename: "Event",
+  sys: { id: `event-id${index}` },
+  startDate: `2026-01-${index + 1}`,
+  name: `Event entry ${index}`,
+}));
+
+const fullContentMock = {
+  blogs: mockBlogEntries,
+  projects: mockProjectEntries,
+  events: mockEventEntries,
+};
+const featuredContentMock = {
+  blogs: [
+    {
+      __typename: "BlogPosting",
+      sys: { id: "blog-id-featured" },
+      datePublished: "2023-01-01",
+      name: "Blog post entry featured",
+    },
+  ],
+  projects: [],
+  events: [],
+};
+const mockQuery = vi.fn();
+// Use this function to create custom mock entry data, returned as part of the contentfulResponse mock
+const createMock = (
+  fullContent = fullContentMock,
+  featuredContent = {
+    blogs: [],
+    projects: [],
+    events: [],
+  },
+) => {
+  return (query, options) => {
+    // no featured content by default
+    if (options.tagsFilter) {
+      return contentfulResponse(query, featuredContent);
+    } else {
+      return contentfulResponse(query, fullContent);
+    }
+  };
+};
+const allTypesNoFeaturedContentMock = createMock();
+const allTypesAndFeaturedContentMock = createMock(
+  fullContentMock,
+  featuredContentMock,
+);
+const noContentMock = createMock({ blogs: [] });
+
+// Use this function to create custom mock responses for different test cases
+const contentfulResponse = (query, entries) => {
+  if (query.definitions?.[0]?.name?.value === "BlogPostingsListing") {
+    return Promise.resolve({
+      data: {
+        blogPostingCollection: {
+          total: entries.blogs?.length,
+          items: entries.blogs,
+        },
+      },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "ProjectPagesListing") {
+    return Promise.resolve({
+      data: {
+        projectPageCollection: {
+          total: entries.projects?.length,
+          items: entries.projects,
+        },
+      },
+    });
+  }
+  if (query.definitions?.[0]?.name?.value === "EventsListing") {
+    return Promise.resolve({
+      data: {
+        eventCollection: {
+          total: entries.events?.length,
+          items: entries.events,
+        },
+      },
+    });
+  }
+};
+
+const factory = (props = {}) =>
+  mountSuspended(ContentInterface, {
+    global: {
+      provide: {
+        $contentful: { query: mockQuery },
+      },
+      mocks: {
+        $route: {
+          query: { page: 1 },
+        },
+      },
+      stubs: [
+        "ContentCard",
+        "ContentFeaturedCard",
+        "ContentTagsFilter",
+        "ContentTypeFilter",
+        "GenericCallToActionBanner",
+        "PaginationNavInput",
+      ],
+    },
+    props: {
+      contentTypes: ["blog post", "project", "event"],
+      site: "dataspace-culturalheritage.eu",
+      ...props,
+    },
+    slots: { "error-message": "<div class='error-message' />" },
+  });
+
+describe("components/Content/ContentInterface", () => {
+  beforeEach(() => {
+    mockQuery.mockImplementation(allTypesNoFeaturedContentMock);
+  });
+  afterEach(() => {
+    useRouteMock.mockReset();
+    vi.clearAllMocks();
+  });
+
+  it("fetches and renders content entries", async () => {
+    const wrapper = await factory();
+
+    // calls include featured entries calls
+    expect(mockQuery).toHaveBeenCalledTimes(6);
+    expect(wrapper.findAll("content-card-stub").length).toBe(12);
+    expect(wrapper.findAll("content-featured-card-stub").length).toBe(0);
+  });
+
+  it("fetches and renders featured content entries", async () => {
+    mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
+    const wrapper = await factory();
+
+    // calls include featured entries calls
+    expect(mockQuery).toHaveBeenCalledTimes(6);
+    expect(wrapper.findAll("content-card-stub").length).toBe(12);
+    expect(wrapper.findAll("content-featured-card-stub").length).toBe(1);
+  });
+
+  describe("and page is not 1", () => {
+    it("does fetch but not display a featured content card", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          page: 2,
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(mockQuery).toHaveBeenCalledTimes(6);
+      expect(wrapper.findAll("content-card-stub").length).toBe(12);
+      expect(wrapper.findAll("content-featured-card-stub").length).toBe(0);
+    });
+  });
+
+  describe("selectedTags", () => {
+    it("defaults to an empty array", async () => {
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedTags).toEqual([]);
+    });
+
+    it("has a selected tag when one is present in the URL", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          tags: categories[0],
+        },
+      }));
+      const wrapper = await factory();
+      expect(wrapper.vm.selectedTags.length).toBe(1);
+    });
+
+    it("has multiple tags when present in the URL", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          tags: "network,art,manuscripts",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedTags.length).toBe(3);
+    });
+    it("sorts the tags when multiple are present in the URL", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          tags: "network,art,manuscripts",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedTags[0]).toEqual("art");
+      expect(wrapper.vm.selectedTags[1]).toEqual("manuscripts");
+      expect(wrapper.vm.selectedTags[2]).toEqual("network");
+    });
+  });
+
+  describe("selectedType", () => {
+    it("defaults to false", async () => {
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedType).toBe(false);
+    });
+
+    it('is set to "project" when the type is set in the URL', async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          type: "project",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedType).toStrictEqual({ type: "ProjectPage" });
+    });
+
+    it("contains taxonomy info when the type in the URL requires it", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          type: "event",
+        },
+      }));
+      const wrapper = await factory();
+
+      expect(wrapper.vm.selectedType).toStrictEqual({
+        type: "Event",
+        taxonomy: "eventTypeEvent",
+      });
+    });
+  });
+
+  describe("total", () => {
+    it("defaults to 0", async () => {
+      mockQuery.mockImplementation(noContentMock);
+      const wrapper = await factory();
+
+      const total = wrapper.vm.total;
+
+      expect(total).toEqual(0);
+    });
+
+    it("is based of the response total", async () => {
+      const wrapper = await factory();
+
+      const total = wrapper.vm.total;
+
+      expect(total).toEqual(12);
+    });
+    describe("when there is a featured content entry", () => {
+      it("is based of the sum of the response total and featured content", async () => {
+        mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
+        const wrapper = await factory();
+
+        const total = wrapper.vm.total;
+
+        expect(total).toEqual(13);
+      });
+    });
+    describe("when 0 results", () => {
+      it("renders the error message slot", async () => {
+        mockQuery.mockImplementation(noContentMock);
+        const wrapper = await factory();
+
+        const errorMessage = wrapper.find(".error-message");
+
+        expect(errorMessage.exists()).toBe(true);
+      });
+    });
+  });
+
+  describe("page", () => {
+    it("defaults to 1 when no other value is in the URL", async () => {
+      const wrapper = await factory();
+
+      const page = wrapper.vm.page;
+
+      expect(page).toBe(1);
+    });
+
+    it("uses the page value from the URL when present", async () => {
+      useRouteMock.mockImplementation(() => ({
+        query: {
+          page: "3",
+        },
+      }));
+      const wrapper = await factory();
+
+      const page = wrapper.vm.page;
+
+      expect(page).toBe(3);
+    });
+  });
+  it("normalises blog content correctly", async () => {
+    const wrapper = await factory();
+
+    const firstEntry = wrapper.vm.contentSections.filter(
+      (section) => section.type === "BlogPosting",
+    )[0].entries[0];
+
+    expect(firstEntry.text).toBe("authored.publishedDate");
+    expect(firstEntry.primaryImageOfPage).toBe(null);
+  });
+
+  it("normalises project content correctly", async () => {
+    const wrapper = await factory();
+
+    const firstEntry = wrapper.vm.contentSections.filter(
+      (section) => section.type === "ProjectPage",
+    )[0].entries[0];
+
+    expect(firstEntry.text).toBe("Project headline 0");
+    expect(firstEntry.primaryImageOfPage).toBe(null);
+  });
+
+  it("normalises event content correctly", async () => {
+    const wrapper = await factory();
+
+    const firstEntry = wrapper.vm.contentSections.filter(
+      (section) => section.type === "eventTypeEvent",
+    )[0].entries[0];
+
+    expect(firstEntry.text).toBe("2026-01-1");
+    expect(firstEntry.primaryImageOfPage.image).toBe(undefined);
+  });
+
+  describe("when there is a default card thumbnail", () => {
+    it("is used for when there is no primary image of page", async () => {
+      const defaultCardThumbnail = {
+        image: {
+          url: "https://www.example.eu/img.jpg",
+          contentType: "image/jpeg",
+        },
+      };
+      const wrapper = await factory({ defaultCardThumbnail });
+
+      const firstEntry = wrapper.vm.contentSections[0].entries[0];
+
+      expect(firstEntry.primaryImageOfPage).toStrictEqual(defaultCardThumbnail);
+    });
+  });
+
+  it("inserts CTA banners in between content entries", async () => {
+    const ctaBanners = [
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 1" },
+      { __typename: "PrimaryCallToAction", name: "CTA Banner 2" },
+    ];
+
+    const wrapper = await factory({ ctaBanners });
+
+    // Should return an array with 5 elements: [[4 entries], [4 entries], 'cta-banner-0', [4 entries], 'cta-banner-1']
+    expect(wrapper.vm.contentSections.length).toBe(5);
+    expect(wrapper.vm.contentSections[0].entries.length).toBe(4);
+    expect(wrapper.vm.contentSections[1].entries.length).toBe(4);
+    expect(wrapper.vm.contentSections[2]).toBe(ctaBanners[0]);
+    expect(wrapper.vm.contentSections[3].entries.length).toBe(4);
+    expect(wrapper.vm.contentSections[4]).toBe(ctaBanners[1]);
+  });
+
+  describe("adds featured entries to each section", () => {
+    describe("when there is no featured entry", () => {
+      it("does not display a featured content card", async () => {
+        const wrapper = await factory();
+
+        expect(
+          wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+        ).toBe(false);
+      });
+    });
+
+    describe("when there are featured entries", () => {
+      describe("and no type filter nor tags are selected and on page 1", () => {
+        it("displays a featured content card", async () => {
+          mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
+
+          const wrapper = await factory();
+
+          expect(
+            wrapper.findComponent({ name: "ContentFeaturedCard" }).exists(),
+          ).toBe(true);
+        });
+      });
+
+      describe("and there are more than one featured entries", () => {
+        it("displays one for each section", async () => {
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              ...featuredContentMock,
+              projects: [{ __typename: "ProjectPage" }],
+              events: [{ __typename: "Event" }],
+            }),
+          );
+          const wrapper = await factory();
+
+          expect(wrapper.vm.sectionEntries[0].featuredEntry.__typename).toEqual(
+            "BlogPosting",
+          );
+          expect(wrapper.vm.sectionEntries[1].featuredEntry.__typename).toEqual(
+            "ProjectPage",
+          );
+          expect(wrapper.vm.sectionEntries[2].featuredEntry.__typename).toEqual(
+            "Event",
+          );
+        });
+        it("loads the first card image eagerly and the others lazy", async () => {
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              ...featuredContentMock,
+              projects: [{ __typename: "ProjectPage" }],
+              events: [{ __typename: "Event" }],
+            }),
+          );
+          const wrapper = await factory();
+
+          expect(
+            wrapper.findAll("content-featured-card-stub")[0].attributes("lazy"),
+          ).toEqual("false");
+          expect(
+            wrapper.findAll("content-featured-card-stub")[1].attributes("lazy"),
+          ).toEqual("true");
+        });
+      });
+      describe("when the featured entry is a news post", () => {
+        it("is present in the blog section", async () => {
+          mockQuery.mockImplementation(allTypesAndFeaturedContentMock);
+          const wrapper = await factory();
+
+          expect(wrapper.vm.sectionEntries[0].featuredEntry.name).toEqual(
+            "Blog post entry featured",
+          );
+        });
+      });
+      describe("when the featured entry is a project page", () => {
+        it("is present and uses the headline as text", async () => {
+          const headline = "This is a headline";
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              blogs: [],
+              projects: [
+                {
+                  __typename: "ProjectPage",
+                  datePublished: "2022-12-01",
+                  headline,
+                  name: "featured project",
+                },
+              ],
+              events: [],
+            }),
+          );
+
+          const wrapper = await factory();
+
+          expect(wrapper.vm.sectionEntries[1].featuredEntry.headline).toEqual(
+            headline,
+          );
+        });
+      });
+      describe("when the featured entry is a training course", () => {
+        it("is present in the training section entries", async () => {
+          const startDate = "2025-10-16T00:00:00.000+01:00";
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              blogs: [],
+              projects: [],
+              events: [
+                {
+                  name: "featured training",
+                  contentfulMetadata: {
+                    concepts: [
+                      {
+                        id: "eventTypeTrainingCourse",
+                      },
+                    ],
+                  },
+                  startDate,
+                },
+              ],
+            }),
+          );
+
+          const wrapper = await factory();
+
+          expect(wrapper.vm.sectionEntries[2].featuredEntry.name).toEqual(
+            "featured training",
+          );
+        });
+      });
+      describe("when the featured entry is an event", () => {
+        it("is present in the event section entries", async () => {
+          const startDate = "2025-10-16T00:00:00.000+01:00";
+          const endDate = "2025-15-16T00:00:00.000+01:00";
+          mockQuery.mockImplementation(
+            createMock(fullContentMock, {
+              blogs: [],
+              projects: [],
+              events: [
+                {
+                  name: "featured event",
+                  contentfulMetadata: {
+                    concepts: [
+                      {
+                        id: "eventTypeEvent",
+                      },
+                    ],
+                  },
+                  startDate,
+                  endDate,
+                },
+              ],
+            }),
+          );
+
+          const wrapper = await factory();
+
+          expect(wrapper.vm.sectionEntries[2].featuredEntry.name).toEqual(
+            "featured event",
+          );
+        });
+      });
+    });
+  });
+});

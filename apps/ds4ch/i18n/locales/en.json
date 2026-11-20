@@ -1,0 +1,240 @@
+{
+  "actions": {
+    "close": "close",
+    "downloadFile": "download {file}",
+    "email": "Email",
+    "linkedIn": "LinkedIn profile",
+    "selectLanguage": "(Select your language)",
+    "share": "Share",
+    "shareOn": "Share on {social}"
+  },
+  "added": "Added {date}",
+  "attribution": {
+    "creator": "Creator:",
+    "institution": "Institution:",
+    "show": "Show attribution",
+    "title": "Title:"
+  },
+  "authored": {
+    "by": "by",
+    "publishedDate": "Published {date}"
+  },
+  "content": {
+    "discoverRelated": "Discover related content",
+    "filter": {
+      "events": "Events",
+      "news": "News",
+      "projects": "Projects",
+      "training": "Training",
+      "viewAll": "View all"
+    },
+    "filterContentType": "Filter content by type",
+    "resultsHaveLoaded": "{0} results found",
+    "seeAll": "See all {content}",
+    "seeMore": "See more {content}",
+    "topics": {
+      "featuredTopics": "Featured topics",
+      "label": "Explore more topics",
+      "noOptions": "There are no more topics to select"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Accept all",
+    "acceptSelected": "Accept selected",
+    "consentModal": {
+      "alwaysRequired": "(Always required)",
+      "privacyStatement": "Privacy statement",
+      "servicesCount": "{count} service | {count} services",
+      "text": "Here you can see and customise the services that we'd like to use on this website. To learn more please read our {privacyStatement}.",
+      "title": "Services we would like to use."
+    },
+    "consentNotice": {
+      "learnMore": "Manage cookie settings",
+      "text": "Could we please enable services for security, analytics and third-party content?",
+      "textUpdated": "There have been some changes in services since your last visit. Could we please enable additional services?"
+    },
+    "decline": "Decline",
+    "purposes": {
+      "2D": {
+        "title": "2D media"
+      },
+      "3D": {
+        "title": "3D media"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "These services are essential for the correct functioning of this website. They include language preferences and keep your visit secure. You cannot disable them as the website would not work correctly otherwise.",
+        "title": "Essential services for security and customisation"
+      },
+      "hotjar": {
+        "description": "Collects usage data to help us analyse user interactions. Activates a survey widget giving you the option to respond to our visitor satisfaction surveys.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "These services load image (2D) , 3D, audio, and video items for viewing.",
+        "title": "Media viewing services"
+      },
+      "other": {
+        "title": "Other embedding services"
+      },
+      "socialMedia": {
+        "description": "These services load content from social media platforms.",
+        "title": "Social media embedding services"
+      },
+      "thirdPartyContent": {
+        "description": "These services load content hosted by third parties. Its use is subject to these third parties’ terms, conditions and privacy statement.",
+        "title": "Third-party content"
+      },
+      "usage": {
+        "description": "These services collect the information to help us better understand how the website gets used and where the pain points are, empowering us to make informed choices to improve your experience.",
+        "title": "Services to capture website usage and feedback"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Use this switch to enable or disable all optional services.",
+        "title": "Enable or disable all services"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Remembers security challenge has been passed successfully.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Collects usage data to help us analyse user interactions. Activates a survey widget giving you the option to respond to our visitor satisfaction surveys.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Remembers your preferred interface language for future access.",
+        "title": "Language code"
+      },
+      "matomo": {
+        "description": "Collects anonymous statistics on how visitors interact with the website.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Unknown provider"
+    }
+  },
+  "documentBrowser": {
+    "empty": "This folder is empty"
+  },
+  "embedNotification": {
+    "ifNotAll": "If you don’t want to load all embedded media, you can {0}.",
+    "loadAllEmbeddedContent": "Load all embedded content",
+    "loadOnlyThis": "load media from this provider only",
+    "message": "Please be aware that this page contains media content embedded from {provider}. Viewing this media is subject to their terms and privacy statements. Please refer to their privacy statements for more information on how your data is used.",
+    "messageUnkownService": "Unfortunately this content cannot be shown.",
+    "ofThirdPartyServices": "{0} of third-party content services.",
+    "viewFullList": "View the full list",
+    "viewThisExternalLink": "View this content via an external link"
+  },
+  "error": "Error",
+  "errorMessage": {
+    "404": "Sorry! The page you’re looking for doesn’t exist.",
+    "noResults": "0 results",
+    "noResultsDescription": "Please adjust the topics you have selected above.",
+    "unknown": "An error occurred."
+  },
+  "errors": {
+    "http": {
+      "404": "Not Found"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} to {endDate}",
+    "event": "Event | Events"
+  },
+  "featured": "Featured",
+  "footer": {
+    "accessibility": "Accessibility",
+    "cookies": "Cookies",
+    "disclaimer": "The common European data space for cultural heritage is an initiative of the European Union, financed by the European Union’s Digital Europe Programme. The data space services, including this website, are operated by a consortium led by the Europeana Foundation under a service contract with the European Commission, contract number LC-01901432.",
+    "footer": "Footer",
+    "imageDescription": "Funded by the European Union",
+    "info": "More info",
+    "language": "Customise website language",
+    "partners": {
+      "cloudflare": "Powered by Project Galileo",
+      "contentful": "Powered by Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privacy statement",
+    "supportingPartners": "Supporting technical partners",
+    "terms": "Terms & Policies",
+    "translationInfo": "Automated translations using the {service}",
+    "translationService": "eTranslation Service"
+  },
+  "home": {
+    "broughtBy": "Brought to you by",
+    "title": "The common European data space for cultural heritage"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Monthly API Requests, on average",
+      "dataProviders": "Providing Institutions",
+      "hqItems": "of our items are high quality",
+      "items": "Items",
+      "networkMembers": "Network members"
+    }
+  },
+  "nav": {
+    "about": "About the data space",
+    "close": "Close menu",
+    "collections": "Explore the collections",
+    "dataSpace": "Explore the data space",
+    "home": "Home",
+    "mainNavigation": "Main navigation",
+    "menu": "Menu",
+    "toggle": "Show menu"
+  },
+  "newWindow": "opens in new window",
+  "news": "News | News",
+  "pagination": {
+    "label": "Pagination",
+    "next": "Next",
+    "of": "Of",
+    "pageNumber": "Page number",
+    "previous": "Previous"
+  },
+  "portal": "Portal",
+  "project": "Project | Projects",
+  "projects": {
+    "contract": "Contract number",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Download fact sheet",
+    "factSheet": "Project fact sheet",
+    "funders": "Funders",
+    "funding": "Funding information",
+    "fundingStream": "Funding stream",
+    "goals": "Project goals",
+    "impact": "Key project impact",
+    "partners": "Project partners",
+    "reports": "Project reports",
+    "viewFactSheet": "View fact sheet"
+  },
+  "results": "{count} result | {count} results",
+  "shareWhere": "Where would you like to share this?",
+  "skipToMainContent": "Skip to main content",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "This is the first slide",
+      "lastSlide": "This is the last slide",
+      "nextSlide": "Next slide",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Slide group {page}",
+      "previousSlide": "Previous slide",
+      "slideLabel": "Slide {slide} of {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Ongoing",
+    "training": "Training | Training"
+  }
+}

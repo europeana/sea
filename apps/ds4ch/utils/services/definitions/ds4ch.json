@@ -1,0 +1,28 @@
+[
+  {
+    "cookies": ["^cf_clearance$"],
+    "name": "cloudflare",
+    "purposes": ["essential"],
+    "required": true,
+    "title": "Cloudflare"
+  },
+  {
+    "cookies": ["^i18n_locale_code$"],
+    "name": "i18n",
+    "purposes": ["essential"],
+    "required": true,
+    "title": "Language code"
+  },
+  {
+    "cookies": ["^_pk_", "^mtm_cookie_consent$"],
+    "name": "matomo",
+    "purposes": ["usage"],
+    "title": "Matomo"
+  },
+  {
+    "cookies": ["^_hj$", "^mtm_cookie_consent$"],
+    "name": "hotjar",
+    "purposes": ["usage"],
+    "title": "Hotjar"
+  }
+]

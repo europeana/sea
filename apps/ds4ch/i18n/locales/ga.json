@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "dún",
+    "downloadFile": "íoslódáil {file}",
+    "selectLanguage": "(Roghnaigh do theanga)",
+    "share": "Roinn",
+    "shareOn": "Roinn ar {social}"
+  },
+  "added": "Curtha leis {date}",
+  "attribution": {
+    "creator": "Cruthaitheoir:",
+    "institution": "Institiúid:",
+    "show": "Taispeáin sannadh",
+    "title": "Teideal:"
+  },
+  "authored": {
+    "by": "le",
+    "publishedDate": "Foilsithe {date}"
+  },
+  "content": {
+    "discoverRelated": "Faigh amach ábhar gaolmhar",
+    "filter": {
+      "events": "Imeachtaí",
+      "news": "Nuacht",
+      "projects": "Tionscadail",
+      "training": "Oiliúint",
+      "viewAll": "Féach ar fad"
+    },
+    "filterContentType": "Scagadh ábhair de réir cineáil",
+    "resultsHaveLoaded": "{0} torthaí aimsithe",
+    "seeAll": "Féach ar gach {content}",
+    "seeMore": "Féach tuilleadh {content}",
+    "topics": {
+      "featuredTopics": "Topaicí faoi thrácht",
+      "label": "Iniúchadh a dhéanamh ar níos mó topaicí",
+      "noOptions": "Níl aon ábhair eile le roghnú"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Glac le gach",
+    "acceptSelected": "Glac leis roghnaithe",
+    "consentModal": {
+      "alwaysRequired": "(riachtanach i gcónaí)",
+      "privacyStatement": "Ráiteas príobháideachta",
+      "servicesCount": "Seirbhís {count} | {count} seirbhís",
+      "text": "Anseo is féidir leat na seirbhísí a bheadh muid ag iarraidh a úsáid ar an suíomh gréasáin seo a fheiceáil agus a shaincheapadh. Chun tuilleadh eolais a fháil léigh ár {privacyStatement} le do thoil.",
+      "title": "Seirbhísí ba mhaith linn a úsáid."
+    },
+    "consentNotice": {
+      "learnMore": "Bainistigh socruithe fianán",
+      "text": "An bhféadfaimis seirbhísí a chumasú le haghaidh slándála, anailísíochta agus ábhair tríú páirtí, le do thoil?",
+      "textUpdated": "Tá roinnt athruithe tagtha ar sheirbhísí ó d'fhiosrúchán deireanach. An bhféadfaimis seirbhísí breise a chumasú le do thoil?"
+    },
+    "decline": "Diúltaigh",
+    "purposes": {
+      "2D": {
+        "title": "Meáin 2D"
+      },
+      "3D": {
+        "title": "Meáin 3D"
+      },
+      "audio": {
+        "title": "Fuaim"
+      },
+      "essential": {
+        "description": "Tá na seirbhísí seo riachtanach chun go n-oibreoidh an suíomh gréasáin seo mar is ceart. Cuimsíonn siad sainroghanna teanga agus coimeádann siad do chuairt slán. Ní féidir leat iad a dhíchumasú, mar ní oibreodh an suíomh gréasáin i gceart murach sin.",
+        "title": "Seirbhísí riachtanacha maidir le slándáil agus saincheaptha"
+      },
+      "hotjar": {
+        "description": "Bailíonn sé sonraí úsáide chun cabhrú linn idirghníomhaíochtaí úsáideoirí a anailísiú. Gníomhaíonn sé giuirléid suirbhé a thugann na rogha duit freagra a thabhairt ar ár suirbhéanna sástachta cuairteoirí.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Luchtaíonn na seirbhísí seo míreanna íomhá (2D), 3D, fuaime agus físe le breathnú orthu.",
+        "title": "Seirbhísí féachana meáin"
+      },
+      "other": {
+        "title": "Seirbhísí neadaithe eile"
+      },
+      "socialMedia": {
+        "description": "Luchtaíonn na seirbhísí seo ábhar ó ardáin na meán sóisialta.",
+        "title": "Seirbhísí um neadú na meán sóisialta"
+      },
+      "thirdPartyContent": {
+        "description": "Lódálann na seirbhísí seo inneachar arna óstáil ag tríú páirtithe. Tá a úsáid faoi réir théarmaí, choinníollacha agus ráitis phríobháideachais na dtríú páirtithe seo.",
+        "title": "Ábhar tríú páirtí"
+      },
+      "usage": {
+        "description": "Bailíonn na seirbhísí seo an fhaisnéis chun cabhrú linn tuiscint níos fearr a fháil ar an gcaoi a n-úsáidtear an suíomh Gréasáin agus cá bhfuil na pointí pian, ag cur ar ár gcumas roghanna eolasacha a dhéanamh chun d’eispéireas a fheabhsú.",
+        "title": "Seirbhísí chun úsáid agus aiseolas láithreán gréasáin a ghabháil"
+      },
+      "video": {
+        "title": "Físeán"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Úsáid an lasc seo chun gach seirbhís roghnach a chumasú nó a dhíchumasú.",
+        "title": "Gach seirbhís a chumasú nó a dhíchumasú"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Is cuimhin leis go bhfuil an dúshlán slándála curtha i gcrích go rathúil.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Bailíonn sé sonraí úsáide chun cabhrú linn idirghníomhaíochtaí úsáideoirí a anailísiú. Gníomhaíonn sé giuirléid suirbhé a thugann na rogha duit freagra a thabhairt ar ár suirbhéanna sástachta cuairteoirí.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Cuimhníonn sé ar do theanga chomhéadain roghnaithe le haghaidh rochtana amach anseo.",
+        "title": "Cód teanga"
+      },
+      "matomo": {
+        "description": "Bailíonn sé staitisticí gan ainm ar an gcaoi a n-idirghníomhaíonn cuairteoirí leis an suíomh gréasáin.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Soláthraí anaithnid"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Tá an fillteán seo folamh"
+  },
+  "embedNotification": {
+    "ifNotAll": "Mura bhfuil tú ag iarraidh gach meán leabaithe a luchtú, is féidir leat {0}.",
+    "loadAllEmbeddedContent": "Luchtaigh gach ábhar leabaithe",
+    "loadOnlyThis": "luchtú meáin ón soláthraí seo amháin",
+    "message": "Bí ar an eolas go bhfuil ábhar meán leabaithe ó {provider}. Tá breathnú ar na meáin seo faoi réir a (dtéarmaí) agus a ráitis phríobháideachais. Féach ar a ráitis phríobháideachais le haghaidh tuilleadh eolais ar an gcaoi a (n-úsáidtear) do shonraí.",
+    "messageUnkownService": "Ar an drochuair ní féidir an t-ábhar seo a thaispeáint.",
+    "ofThirdPartyServices": "{0} de sheirbhísí ábhair thríú páirtí.",
+    "viewFullList": "Féach ar an liosta iomlán.",
+    "viewThisExternalLink": "Féach ar an ábhar seo trí nasc seachtrach"
+  },
+  "error": "Earráid",
+  "errorMessage": {
+    "404": "Tá brón orm! Níl an leathanach atá á lorg agat ann.",
+    "noResults": "0 toradh",
+    "noResultsDescription": "Coigeartaigh na hábhair atá roghnaithe agat thuas, le do thoil.",
+    "unknown": "Tharla earráid."
+  },
+  "errors": {
+    "http": {
+      "404": "Níorbh aimsíodh"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} go {endDate}",
+    "event": "Imeacht | Imeachtaí"
+  },
+  "featured": "Ard-Roghnaithe",
+  "footer": {
+    "accessibility": "Inrochtaineacht",
+    "cookies": "Fianáin",
+    "disclaimer": "Is tionscnamh de chuid an Aontais Eorpaigh é an spás sonraí Eorpach coiteann d'oidhreacht chultúrtha, atá maoinithe ag Clár Dhigiteach na hEorpa de chuid an Aontais Eorpaigh. Tá na seirbhísí spáis sonraí, lena n-áirítear an suíomh gréasáin seo, á n-oibriú ag comhaontas faoi cheannaireacht Fhondúireacht Europeana faoi chonradh seirbhíse leis an gCoimisiún Eorpach, uimhir chonartha LC-01901432.",
+    "footer": "Buntásc",
+    "imageDescription": "Maoinithe ag an Aontas Eorpach",
+    "info": "Tuilleadh eolais",
+    "language": "Saincheap teanga na láithreáin ghréasáin",
+    "partners": {
+      "cloudflare": "Cumhachtaithe ag Project Galileo",
+      "contentful": "Cumhachtaithe ag Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Ráiteas príobháideachta",
+    "supportingPartners": "Tacú le comhpháirtithe teicniúla",
+    "terms": "Téarmaí & Beartais",
+    "translationInfo": "Aistriúcháin uathoibrithe ag úsáid na seirbhíse {service}",
+    "translationService": "Seirbhís eAistriúcháin"
+  },
+  "home": {
+    "broughtBy": "Curtha ar fáil ag",
+    "title": "An spás comhchoiteann Eorpach sonraí d'oidhreacht chultúrtha"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Iarratais API míosúla, ar an meán",
+      "dataProviders": "Institiúidí Soláthartha",
+      "hqItems": "dár míreanna ar ardchaighdeán",
+      "items": "Míreanna",
+      "networkMembers": "Baill líonra"
+    }
+  },
+  "nav": {
+    "about": "Maidir leis an spás sonraí",
+    "close": "Dún roghchlár",
+    "collections": "Déan iniúchadh ar na bailiúcháin",
+    "dataSpace": "Déan iniúchadh ar an spás sonraí",
+    "home": "Baile",
+    "mainNavigation": "Príomhloingseoireacht",
+    "menu": "Roghchlár",
+    "toggle": "Taispeáin roghchlár"
+  },
+  "newWindow": "osclaíonn i bhfuinneog nua",
+  "news": "Nuacht | Nuacht",
+  "pagination": {
+    "label": "Leathanaigh",
+    "next": "Ar Aghaidh",
+    "of": "De",
+    "pageNumber": "Uimhir an leathanaigh",
+    "previous": "Roimhe Seo"
+  },
+  "portal": "Tairseach",
+  "project": "Tionscadal | Tionscadail",
+  "projects": {
+    "contract": "Uimhir an chonartha",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Íoslódáil bileog eolais",
+    "factSheet": "Bileog eolais an tionscadail",
+    "funders": "Maoinitheoirí",
+    "funding": "Eolas maoinithe",
+    "fundingStream": "Sruth maoinithe",
+    "goals": "Spriocanna an tionscadail",
+    "impact": "Príomhthionchar an tionscadail",
+    "partners": "Comhpháirtithe tionscadail",
+    "reports": "Tuarascálacha tionscadail",
+    "viewFactSheet": "Féach ar bhileog eolais"
+  },
+  "results": "{count} toradh | {count} torthaí",
+  "shareWhere": "Cá háit ar mhaith leat é seo a roinnt?",
+  "skipToMainContent": "Léim go príomh-ábhar",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Is é seo an chéad sleamhnán",
+      "lastSlide": "Is é seo an sleamhnán deireanach",
+      "nextSlide": "Sleamhnán seo chugainn",
+      "paginationBullet": "Sleamhnán {page}",
+      "paginationBulletGroupedSlides": "Grúpa sleamhnán {page}",
+      "previousSlide": "Sleamhnán roimhe seo",
+      "slideLabel": "Sleamhnán {slide} de {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Ar siúl",
+    "training": "Oiliúint | Oiliúint"
+  }
+}

@@ -1,0 +1,45 @@
+#import "@europeana/sea-base-layer/graphql/fragments/imageFields.graphql"
+#import "../fragments/primaryCallToActionFields.graphql"
+
+query ContentHubPage(
+  $identifier: String!
+  $locale: String!
+  $site: String = "dataspace-culturalheritage.eu"
+  $preview: Boolean = false
+) {
+  contentHubPageCollection(
+    preview: $preview
+    locale: $locale
+    where: { identifier: $identifier, site: $site }
+    limit: 1
+  ) {
+    items {
+      name
+      headline
+      description
+      image {
+        ...imageFields
+      }
+      contentTypes
+      primaryImageOfPage {
+        name
+        nameEN: name(locale: "en-GB")
+        creator
+        provider
+        license
+        url
+        image {
+          ...imageFields
+        }
+      }
+      hasPartCollection(limit: 20) {
+        items {
+          __typename
+          ... on PrimaryCallToAction {
+            ...primaryCallToActionFields
+          }
+        }
+      }
+    }
+  }
+}

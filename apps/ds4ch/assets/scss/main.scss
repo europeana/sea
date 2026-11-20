@@ -1,0 +1,28 @@
+@import "./bootstrap.scss";
+
+@import "@europeana/style/scss/variables";
+@import "@europeana/style/scss/mixins";
+// TODO: split out Montserrat for ds4ch, Ubuntu for Europeana and Open Sans in shared style package
+@import "@europeana/style/scss/fonts";
+@import "@europeana/style/scss/default";
+@import "@europeana/style/scss/badges";
+@import "@europeana/style/scss/cards";
+@import "@europeana/style/scss/form";
+@import "@europeana/style/scss/icons";
+@import "@europeana/style/scss/modal";
+@import "@europeana/style/scss/landing";
+@import "@europeana/style/scss/licenses";
+@import "@europeana/style/scss/texts";
+
+@import "fonts";
+@import "variables";
+@import "default";
+@import "badges";
+@import "buttons";
+@import "cards";
+@import "form";
+@import "grid";
+@import "modal";
+@import "text";
+@import "toasts";
+@import "tooltip";

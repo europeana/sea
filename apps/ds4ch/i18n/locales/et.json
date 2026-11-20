@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "Sulge",
+    "downloadFile": "lae alla {file}",
+    "selectLanguage": "(Vali oma keel)",
+    "share": "Jaga",
+    "shareOn": "Jaga {social}"
+  },
+  "added": "Lisatud {date}",
+  "attribution": {
+    "creator": "Looja:",
+    "institution": "Institutsioon:",
+    "show": "Kuva atribuutika",
+    "title": "Pealkiri:"
+  },
+  "authored": {
+    "by": "poolt",
+    "publishedDate": "Avaldatud {date}"
+  },
+  "content": {
+    "discoverRelated": "Avasta seotud sisu",
+    "filter": {
+      "events": "Sündmused",
+      "news": "Uudised",
+      "projects": "Projektid",
+      "training": "Koolitus",
+      "viewAll": "Vaata kõiki"
+    },
+    "filterContentType": "Filtreeri sisu tüübi järgi",
+    "resultsHaveLoaded": "{0} tulemusi leitud",
+    "seeAll": "Vaata kõiki {content}",
+    "seeMore": "Vaata lähemalt {content}",
+    "topics": {
+      "featuredTopics": "Esiletõstetud teemad",
+      "label": "Avasta rohkem teemasid",
+      "noOptions": "Rohkem teemasid valimiseks pole"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Võtke kõik vastu",
+    "acceptSelected": "Aktsepteeri valitud",
+    "consentModal": {
+      "alwaysRequired": "(Alati nõutav)",
+      "privacyStatement": "Privaatsusavaldus",
+      "servicesCount": "{count} teenus | {count} teenust",
+      "text": "Siin saate vaadata ja kohandada teenuseid, mida soovime sellel veebisaidil kasutada. Lisateabe saamiseks lugege meie {privacyStatement}.",
+      "title": "Teenused, mida sooviksime kasutada."
+    },
+    "consentNotice": {
+      "learnMore": "Halda küpsiste seadeid",
+      "text": "Kas me saaksime palun lubada teenused turvalisuse, analüütika ja kolmanda osapoole sisu jaoks?",
+      "textUpdated": "Teenustes on teie viimase külastuse järel toimunud mõningaid muudatusi. Kas me võiksime palun lubada täiendavaid teenuseid?"
+    },
+    "decline": "Keeldu",
+    "purposes": {
+      "2D": {
+        "title": "2D meedia"
+      },
+      "3D": {
+        "title": "3D meedia"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Need teenused on selle veebisaidi õigeks toimimiseks hädavajalikud. Need hõlmavad keeleeelistusi ja hoiavad teie külastuse turvalisena. Te ei saa neid keelata, kuna vastasel juhul veebisait ei töötaks korralikult.",
+        "title": "Olulised teenused turvalisuse ja kohandamise jaoks"
+      },
+      "hotjar": {
+        "description": "Kogub kasutusandmeid, et aidata meil analüüsida kasutajate interaktsioone. Aktiveerib küsitluse vidina, mis annab teile võimaluse vastata meie külastajate rahulolu küsitlustele.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Need teenused laadivad vaatamiseks pilte (2D) , 3D-, heli- ja videoelemente.",
+        "title": "Meedia vaatamise teenused"
+      },
+      "other": {
+        "title": "Muud sisseehitamise teenused"
+      },
+      "socialMedia": {
+        "description": "Need teenused laadivad sisu sotsiaalmeedia platvormidelt.",
+        "title": "Sotsiaalmeedia sisseehitamise teenused"
+      },
+      "thirdPartyContent": {
+        "description": "Need teenused laadivad sisu, mida hostivad kolmandad osapooled. Selle kasutamisele kehtivad nende kolmandate osapoolte tingimused ja privaatsusavaldus.",
+        "title": "Kolmanda osapoole sisu"
+      },
+      "usage": {
+        "description": "Need teenused koguvad teavet, mis aitab meil paremini mõista, kuidas veebilehte kasutatakse ja kus on valupunktid, mis võimaldab meil teha teadlikke valikuid, et parandada teie kasutuskogemust.",
+        "title": "Teenused veebisaidi kasutamise ja tagasiside kogumiseks"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Selle lüliti abil saate lubada või keelata kõik valikulised teenused.",
+        "title": "Luba või keela kõik teenused"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Mäletab, et turvakontroll on edukalt läbitud.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Kogub kasutusandmeid, et aidata meil analüüsida kasutajate interaktsioone. Aktiveerib küsitluse vidina, mis annab teile võimaluse vastata meie külastajate rahulolu küsitlustele.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Jätab teie eelistatud liidese keele edaspidiseks kasutamiseks meelde.",
+        "title": "Keelekood"
+      },
+      "matomo": {
+        "description": "Kogub anonüümset statistikat selle kohta, kuidas külastajad veebisaidiga suhtlevad.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Tundmatu pakkuja"
+    }
+  },
+  "documentBrowser": {
+    "empty": "See kaust on tühi"
+  },
+  "embedNotification": {
+    "ifNotAll": "Kui te ei soovi kõiki manustatud meediume laadida, saate {0}.",
+    "loadAllEmbeddedContent": "Laadi kõik manustatud sisu",
+    "loadOnlyThis": "laadige meedia ainult sellelt teenusepakkujalt",
+    "message": "Pange tähele, et see lehekülg sisaldab meediasisu, mis on sisseehitatud aadressilt {provider}. Selle meedia vaatamise suhtes kehtivad nende tingimused ja privaatsusavaldused. Lisateavet teie andmete kasutamise kohta leiate nende privaatsusavaldustest.",
+    "messageUnkownService": "Kahjuks ei saa seda sisu näidata.",
+    "ofThirdPartyServices": "{0} kolmanda osapoole sisuteenused.",
+    "viewFullList": "Vaata täielikku nimekirja",
+    "viewThisExternalLink": "Vaadake seda sisu välise lingi kaudu"
+  },
+  "error": "Viga",
+  "errorMessage": {
+    "404": "Vabandust! Otsitavat lehte ei eksisteeri.",
+    "noResults": "0 tulemust",
+    "noResultsDescription": "Palun kohandage ülalpool valitud teemasid.",
+    "unknown": "Ilmnes viga."
+  },
+  "errors": {
+    "http": {
+      "404": "Ei leitud"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} kuni {endDate}",
+    "event": "Sündmus | Sündmused"
+  },
+  "featured": "Esile tõstetud",
+  "footer": {
+    "accessibility": "Juurdepääsetavus",
+    "cookies": "Küpsised",
+    "disclaimer": "Ühine Euroopa kultuuripärandi andmeruum on Euroopa Liidu algatus, mida rahastatakse Euroopa Liidu programmi Digitaalne Euroopa kaudu. Andmeruumi teenuseid, sealhulgas seda veebisaiti, haldab konsortsium, mida juhib Europeana Fond Euroopa Komisjoni teenuslepingu alusel, lepingu number LC-01901432.",
+    "footer": "Jalus",
+    "imageDescription": "Rahastab Euroopa Liit",
+    "info": "Rohkem infot",
+    "language": "Kohandage veebisaidi keelt",
+    "partners": {
+      "cloudflare": "Toetab Project Galileo",
+      "contentful": "Töötab Contentfuli toel",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privaatsusavaldus",
+    "supportingPartners": "Tehniliste partnerite toetamine",
+    "terms": "Tingimused ja eeskirjad",
+    "translationInfo": "Automaatsed tõlked kasutades {service}",
+    "translationService": "eTranslation teenus"
+  },
+  "home": {
+    "broughtBy": "Teieni toodud",
+    "title": "Ühine Euroopa andmeruum kultuuripärandi jaoks"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Igakuised API taotlused keskmiselt",
+      "dataProviders": "Pakkuja Institutsioon",
+      "hqItems": "meie üksustest on kõrge kvaliteediga",
+      "items": "Üksused",
+      "networkMembers": "Võrgustiku liikmed"
+    }
+  },
+  "nav": {
+    "about": "Teave andmeruumi kohta",
+    "close": "Sule menüü",
+    "collections": "Avasta kollektsioone",
+    "dataSpace": "Avastage andme ruum",
+    "home": "Avaleht",
+    "mainNavigation": "Põhinavigatsioon",
+    "menu": "Menüü",
+    "toggle": "Kuva menüü"
+  },
+  "newWindow": "avaneb uues aknas",
+  "news": "Uudised | Uudised",
+  "pagination": {
+    "label": "Paginatsioon",
+    "next": "Järgmine",
+    "of": "Of",
+    "pageNumber": "Lehekülje number",
+    "previous": "Eelmine"
+  },
+  "portal": "Portaal",
+  "project": "Projekt | Projektid",
+  "projects": {
+    "contract": "Lepingu number",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Laadi alla faktileht",
+    "factSheet": "Projekti faktileht",
+    "funders": "Rahastajad",
+    "funding": "Teave rahastamise kohta",
+    "fundingStream": "Rahastamisvoog",
+    "goals": "Projekti eesmärgid",
+    "impact": "Projekti peamine mõju",
+    "partners": "Projekti partnerid",
+    "reports": "Projekti aruanded",
+    "viewFactSheet": "Vaata faktilehte"
+  },
+  "results": "{count} tulemus | {count} tulemused",
+  "shareWhere": "Kus soovite seda jagada?",
+  "skipToMainContent": "Jätka põhisisu juurde",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "See on esimene slaid",
+      "lastSlide": "See on viimane slaid",
+      "nextSlide": "Järgmine slaid",
+      "paginationBullet": "Slaid {page}",
+      "paginationBulletGroupedSlides": "Slaidirühm {page}",
+      "previousSlide": "Eelmine slaid",
+      "slideLabel": "Slaid {slide} \/ {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Pooleli",
+    "training": "Koolitus | Koolitus"
+  }
+}

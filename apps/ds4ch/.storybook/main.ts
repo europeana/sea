@@ -1,0 +1,20 @@
+import type { StorybookConfig } from "@storybook-vue/nuxt";
+
+const config: StorybookConfig = {
+  stories: [
+    "../stories/**/*.mdx",
+    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../../../layers/base/components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+  ],
+  addons: ["@storybook/addon-links", "@storybook/addon-docs"],
+  framework: {
+    name: "@storybook-vue/nuxt",
+    options: {
+      docgen: "vue-component-meta",
+    },
+  },
+  staticDirs: ["../public"],
+};
+
+export default config;

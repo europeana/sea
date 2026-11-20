@@ -1,0 +1,38 @@
+{
+  "name": "@europeana/cats",
+  "version": "0.1.27",
+  "description": "Content(ful) Automated Task Service (CATS)",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "preview": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@types/morgan": "catalog:types",
+    "@types/turndown": "catalog:types",
+    "h3": "catalog:nitro2",
+    "nitropack": "catalog:nitro2",
+    "typescript": "catalog:typescript5",
+    "vite-tsconfig-paths": "catalog:vite7"
+  },
+  "dependencies": {
+    "@bull-board/api": "^9.13.2",
+    "@bull-board/h3": "^9.13.2",
+    "@bull-board/ui": "^9.13.2",
+    "@europeana/zoho-client": "workspace:*",
+    "bullmq": "^5.79.0",
+    "contentful-management": "catalog:contentful",
+    "csv-parse": "^7.0.3",
+    "marked": "catalog:html",
+    "morgan": "catalog:nitro2",
+    "node-fetch-native": "catalog:",
+    "node-html-parser": "catalog:html",
+    "turndown": "catalog:html",
+    "unzip-stream": "^0.3.4"
+  }
+}

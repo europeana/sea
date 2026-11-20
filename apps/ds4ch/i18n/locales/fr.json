@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "fermer",
+    "downloadFile": "télécharger {file}",
+    "selectLanguage": "(Sélectionnez votre langue)",
+    "share": "Partager",
+    "shareOn": "Partager sur {social}"
+  },
+  "added": "Ajouté {date}",
+  "attribution": {
+    "creator": "Créateur :",
+    "institution": "Institution :",
+    "show": "Afficher l'attribution",
+    "title": "Titre :"
+  },
+  "authored": {
+    "by": "par",
+    "publishedDate": "Publié {date}"
+  },
+  "content": {
+    "discoverRelated": "Découvrir du contenu connexe",
+    "filter": {
+      "events": "Événements",
+      "news": "Actualités",
+      "projects": "Projets",
+      "training": "Formation",
+      "viewAll": "Voir tout"
+    },
+    "filterContentType": "Filtrer le contenu par type",
+    "resultsHaveLoaded": "{0} résultats trouvés",
+    "seeAll": "Voir tout {content}",
+    "seeMore": "Voir plus {content}",
+    "topics": {
+      "featuredTopics": "Sujets d'actualité",
+      "label": "Explorer d’autres sujets",
+      "noOptions": "Il n'y a plus de sujets à sélectionner"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Accepter tout",
+    "acceptSelected": "Accepter la sélection",
+    "consentModal": {
+      "alwaysRequired": "(Toujours requis)",
+      "privacyStatement": "Déclaration de confidentialité",
+      "servicesCount": "{count} service | {count} services",
+      "text": "Ici, vous pouvez voir et personnaliser les services que nous souhaitons utiliser sur ce site web. Pour en savoir plus, veuillez lire notre {privacyStatement}.",
+      "title": "Services que nous aimerions utiliser."
+    },
+    "consentNotice": {
+      "learnMore": "Gérer les paramètres des cookies",
+      "text": "Pourrions-nous activer les services de sécurité, d'analyse et de contenu tiers ?",
+      "textUpdated": "Des changements ont été apportés à nos services depuis votre dernière visite. Pourrions-nous activer des services supplémentaires, s’il vous plaît ?"
+    },
+    "decline": "Refuser",
+    "purposes": {
+      "2D": {
+        "title": "Médias 2D"
+      },
+      "3D": {
+        "title": "Médias 3D"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Ces services sont essentiels au bon fonctionnement de ce site web. Ils incluent les préférences linguistiques et assurent la sécurité de votre visite. Vous ne pouvez pas les désactiver, car le site ne fonctionnerait pas correctement autrement.",
+        "title": "Services essentiels pour la sécurité et la personnalisation"
+      },
+      "hotjar": {
+        "description": "Collecte des données d'utilisation pour nous aider à analyser les interactions avec les utilisateurs. Active un widget d'enquête vous donnant la possibilité de répondre à nos enquêtes de satisfaction des visiteurs.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Ces services chargent des éléments d'image (2D), 3D, audio et vidéo en vue de leur visualisation.",
+        "title": "Services de visionnage de médias"
+      },
+      "other": {
+        "title": "Autres services d'intégration"
+      },
+      "socialMedia": {
+        "description": "Ces services chargent le contenu des plateformes de médias sociaux.",
+        "title": "Services d'intégration des médias sociaux"
+      },
+      "thirdPartyContent": {
+        "description": "Ces services chargent du contenu hébergé par des tiers. Son utilisation est soumise aux conditions générales et à la déclaration de confidentialité de ces tiers.",
+        "title": "Contenu de tiers"
+      },
+      "usage": {
+        "description": "Ces services collectent les informations pour nous aider à mieux comprendre comment le site Web est utilisé et où se trouvent les points faibles, nous permettant de faire des choix éclairés pour améliorer votre expérience.",
+        "title": "Services pour capturer l'utilisation du site Web et les commentaires"
+      },
+      "video": {
+        "title": "Vidéo"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Utilisez ce commutateur pour activer ou désactiver tous les services facultatifs.",
+        "title": "Activer ou désactiver tous les services"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Se souvient que le défi de sécurité a été réussi avec succès.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Collecte des données d'utilisation pour nous aider à analyser les interactions avec les utilisateurs. Active un widget d'enquête vous donnant la possibilité de répondre à nos enquêtes de satisfaction des visiteurs.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Se souvient de votre langue d'interface préférée pour un accès futur.",
+        "title": "Code de la langue"
+      },
+      "matomo": {
+        "description": "Collecte des statistiques anonymes sur la façon dont les visiteurs interagissent avec le site web.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Fournisseur inconnu"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Ce dossier est vide"
+  },
+  "embedNotification": {
+    "ifNotAll": "Si vous ne voulez pas charger tous les médias intégrés, vous pouvez {0}.",
+    "loadAllEmbeddedContent": "Charger tout le contenu intégré",
+    "loadOnlyThis": "charger les médias de ce fournisseur uniquement",
+    "message": "Veuillez noter que cette page contient du contenu médiatique intégré à partir de {provider}. La consultation de ces médias est soumise aux conditions d'utilisation et aux déclarations de confidentialité de ces sites. Veuillez consulter leurs déclarations de confidentialité pour plus d'informations sur l'utilisation de vos données.",
+    "messageUnkownService": "Malheureusement, ce contenu ne peut pas être affiché.",
+    "ofThirdPartyServices": "{0} des services de contenu de tiers.",
+    "viewFullList": "Voir la liste complète",
+    "viewThisExternalLink": "Voir ce contenu via un lien externe"
+  },
+  "error": "Erreur",
+  "errorMessage": {
+    "404": "Désolé ! La page que vous recherchez n'existe pas.",
+    "noResults": "0 résultat",
+    "noResultsDescription": "Veuillez ajuster les sujets que vous avez sélectionnés ci-dessus.",
+    "unknown": "Une erreur s’est produite."
+  },
+  "errors": {
+    "http": {
+      "404": "Introuvable"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} à {endDate}",
+    "event": "Événement | Événements"
+  },
+  "featured": "En vedette",
+  "footer": {
+    "accessibility": "Accessibilité",
+    "cookies": "Cookies",
+    "disclaimer": "L'espace européen commun de données pour le patrimoine culturel est une initiative de l'Union européenne, financée par le programme \"Europe numérique\" de l'Union européenne. Les services de l'espace de données, y compris ce site web, sont gérés par un consortium dirigé par la Fondation Europeana dans le cadre d'un contrat de service avec la Commission européenne, numéro de contrat LC-01901432.",
+    "footer": "Pied de page",
+    "imageDescription": "Financé par l'Union européenne",
+    "info": "Plus d'informations",
+    "language": "Personnaliser la langue du site web",
+    "partners": {
+      "cloudflare": "Propulsé par Project Galileo",
+      "contentful": "Propulsé par Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Déclaration de confidentialité",
+    "supportingPartners": "Soutenir les partenaires techniques",
+    "terms": "Conditions et politiques",
+    "translationInfo": "Traductions automatisées à l'aide de {service}",
+    "translationService": "Service eTranslation"
+  },
+  "home": {
+    "broughtBy": "Présenté par",
+    "title": "L’espace européen commun des données pour le patrimoine culturel"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Requêtes API mensuelles, en moyenne",
+      "dataProviders": "Institutions Partenaires",
+      "hqItems": "de nos items sont de haute qualité",
+      "items": "Items",
+      "networkMembers": "Membres du réseau"
+    }
+  },
+  "nav": {
+    "about": "À propos de l'espace de données",
+    "close": "Fermer le menu",
+    "collections": "Explorez les collections",
+    "dataSpace": "Explorer l’espace des données",
+    "home": "Accueil",
+    "mainNavigation": "Navigation principale",
+    "menu": "Menu",
+    "toggle": "Afficher le menu"
+  },
+  "newWindow": "s'ouvre dans une nouvelle fenêtre",
+  "news": "Actualités | Actualités",
+  "pagination": {
+    "label": "Pagination",
+    "next": "Suivant",
+    "of": "De",
+    "pageNumber": "Numéro de page",
+    "previous": "Précédent"
+  },
+  "portal": "Portail",
+  "project": "Projet | Projets",
+  "projects": {
+    "contract": "Numéro de contrat",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Télécharger la fiche d'information",
+    "factSheet": "Fiche d’information du projet",
+    "funders": "Bailleurs de fonds",
+    "funding": "Informations sur le financement",
+    "fundingStream": "Flux de financement",
+    "goals": "Objectifs du projet",
+    "impact": "Impact clé du projet",
+    "partners": "Partenaires du projet",
+    "reports": "Rapports de projet",
+    "viewFactSheet": "Voir la fiche d’information"
+  },
+  "results": "{count} résultat | {count} résultats",
+  "shareWhere": "Où aimeriez-vous partager cela?",
+  "skipToMainContent": "Passer au contenu principal",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Ceci est la première diapositive",
+      "lastSlide": "Ceci est la dernière diapositive",
+      "nextSlide": "Diapositive suivante",
+      "paginationBullet": "Diapositive {page}",
+      "paginationBulletGroupedSlides": "Groupe de diapositives {page}",
+      "previousSlide": "Diapositive précédente",
+      "slideLabel": "Diapositive {slide} sur {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "En cours",
+    "training": "Formation | Formation"
+  }
+}

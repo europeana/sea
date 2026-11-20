@@ -1,6 +1,0 @@
-fragment pdfDocumentFields on Asset {
-  contentType
-  description
-  title
-  url
-}

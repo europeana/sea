@@ -1,0 +1,32 @@
+{
+  "name": "@europeana/ctf-apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
+  "type": "module",
+  "version": "0.1.25",
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@europeana/sea-base-layer": "workspace:*",
+    "@europeana/style": "catalog:",
+    "@vitejs/plugin-vue": "6.0.11",
+    "bootstrap": "catalog:",
+    "happy-dom": "21.0.4",
+    "lodash-es": "catalog:",
+    "nuxt": "catalog:nuxt3",
+    "sass-embedded": "1.108.2",
+    "vue": "catalog:vue3",
+    "vue-router": "5.5.1"
+  },
+  "dependencies": {
+    "@contentful/app-sdk": "catalog:contentful"
+  }
+}

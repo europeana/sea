@@ -1,34 +1,38 @@
-FROM node:24-alpine@sha256:156b55f92e98ccd5ef49578a8cea0df4679826564bad1c9d4ef04462b9f0ded6 AS build-base
+###
+# Stage: Build base
+#
+
+FROM node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5 AS build-base
 
 ARG app
-
-# TODO: use the official installer script instead
-#       @see https://pnpm.io/installation#in-a-docker-container
-RUN wget -q "https://github.com/pnpm/pnpm/releases/download/v11.8.0/pnpm-linux-x64-musl.tar.gz"
-RUN tar -xf pnpm-linux-x64-musl.tar.gz
-RUN mv pnpm dist /bin/
-
 RUN test -n "$app"
+
+# Prevent husky from failing when .git is absent in the Docker build context
+ENV HUSKY=0
+
+RUN corepack enable
 
 WORKDIR /build
 
-RUN mkdir -p packages/apps/${app}
-
 COPY package.json pnpm-* ./
-COPY packages/apps/${app}/package.json ./packages/apps/${app}/
-COPY packages/components packages/directives packages/layers packages/plugins packages/
+COPY apps/${app}/package.json apps/${app}/package.json
+COPY libs/ libs/
 
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
-COPY packages/apps/${app}/ packages/apps/${app}/
+COPY apps/${app}/ apps/${app}/
+
+# Re-run lifecycle/prepare scripts now that full app source (e.g. nuxt.config.ts) is present
+RUN pnpm --filter @europeana/${app} run --if-present postinstall && \
+    pnpm --filter @europeana/${app} run --if-present prepare
+
+#
+###
 
 
-FROM build-base AS build-app
-
-ARG app
-
-RUN pnpm --filter @europeana/${app} run build
-
+###
+# Stage: Build storybook
+#
 
 FROM build-base AS build-storybook
 
@@ -36,15 +40,45 @@ ARG app
 
 RUN pnpm --filter @europeana/${app} run build-storybook
 
+#
+###
 
-FROM nginx:stable@sha256:07fc471b4aa8dc03f312fbd506381b7b84aeb99e48d040aa0593e8c37cdcb154 AS run-storybook
+
+###
+# Stage: Run storybook
+#
+
+FROM nginx:stable@sha256:7fad6c0dff97965adbddf28027d934b111fc0221a554315dc274712f3fba24d3 AS run-storybook
+
 ARG app
 
-COPY --from=build-storybook /build/packages/apps/${app}/storybook-static /usr/share/nginx/html
-RUN ls /usr/share/nginx/html/
+COPY --from=build-storybook /build/apps/${app}/storybook-static /usr/share/nginx/html
+
+#
+###
 
 
-FROM gcr.io/distroless/nodejs24-debian12@sha256:61f4f4341db81820c24ce771b83d202eb6452076f58628cd536cc7d94a10978b AS run-app
+
+###
+# Stage: Build app
+#
+
+FROM build-base AS build-app
+
+ARG app
+
+RUN pnpm --filter @europeana/${app} run build
+
+#
+###
+
+
+
+###
+# Stage: Run app
+#
+
+FROM gcr.io/distroless/nodejs24-debian13@sha256:24bc0fe0225c7518f202a822587dad74fe143b96326b81fe5cc08c1df8bed03e AS run-app
 ARG app
 
 ENV PORT=8080
@@ -53,8 +87,11 @@ EXPOSE ${PORT}
 
 WORKDIR /app
 
-COPY --from=build-app /build/packages/apps/${app}/.output .
+COPY --from=build-app /build/apps/${app}/.output .
 
 USER 1000
 
 CMD ["./server/index.mjs"]
+
+#
+###

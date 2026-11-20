@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Europeana Map</title>
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+      }
+      #europeana-map-container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <div id="europeana-map-container" />
+    <div
+      id="popover"
+      style="background-color: white; padding: 1rem; margin: 0.2rem"
+    >
+      Popover content
+    </div>
+    <script type="module">
+      import { EuropeanaMapWrapper } from "./src/index.js";
+
+      new EuropeanaMapWrapper("#europeana-map-container", {
+        // Uncomment for single feature testing
+        // json: JSON.stringify({ features: [{type:'Feature',id:'http://data.europeana.eu/organization/1',geometry:{type:'Point',coordinates:[18.2924425,57.6396512]}}]}),
+        url: "https://www.europeana.eu/_api/collections/organisations/geo",
+        hash: true,
+        pinPopover: document.getElementById("popover"),
+        controls: {
+          fullscreen: {},
+          zoom: {},
+          attribution: { collapsible: true },
+          keyboardPanAndZoom: {
+            label: "Use arrow keys to pan, -/+ keys zoom the map",
+          },
+          keyboardNavigatePins: {
+            label: "Use arrow keys to navigate pins and clusters",
+            srLabel: {
+              multiple: "Zoom in on cluster",
+              single: "Toggle pin",
+            },
+          },
+        },
+        // Map styles
+        //
+        // OpenStreetmap (default)
+        // style: "openstreetmap",
+        //
+        // @europeana/map-styles -- Protomaps -- localised version
+        //
+        // style:
+        //   "https://cdn.jsdelivr.net/npm/@europeana/map-styles/dist/protomaps/europeana-map-styles.protomaps.en.json",
+        //
+        // @europeana/map-styles -- Versatiles -- native lang version
+        style:
+          "https://cdn.jsdelivr.net/npm/@europeana/map-styles/dist/versatiles/europeana-map-styles.versatiles.json",
+        //
+        // @europeana/map-styles -- Versatiles -- localised version
+        // style:
+        //   "https://cdn.jsdelivr.net/npm/@europeana/map-styles/dist/versatiles/europeana-map-styles.versatiles.en.json",
+        //
+        // Other Mapbox StyleJSON URL
+        // style: "https://tiles.openfreemap.org/styles/liberty",
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "luk",
+    "downloadFile": "hent {file}",
+    "selectLanguage": "(Vælg dit sprog)",
+    "share": "Del",
+    "shareOn": "Del på {social}"
+  },
+  "added": "Tilføjede {date}",
+  "attribution": {
+    "creator": "Oprettet af:",
+    "institution": "Institution:",
+    "show": "Vis tilskrivning",
+    "title": "Titel:"
+  },
+  "authored": {
+    "by": "ved",
+    "publishedDate": "Offentliggjort {date}"
+  },
+  "content": {
+    "discoverRelated": "Opdag relateret indhold",
+    "filter": {
+      "events": "Begivenheder",
+      "news": "Nyheder",
+      "projects": "Projekter",
+      "training": "Træning",
+      "viewAll": "Se alle"
+    },
+    "filterContentType": "Filtrer indhold efter type",
+    "resultsHaveLoaded": "{0} resultater fundet",
+    "seeAll": "Se alle {content}",
+    "seeMore": "Se mere {content}",
+    "topics": {
+      "featuredTopics": "Fremhævede emner",
+      "label": "Udforsk flere emner",
+      "noOptions": "Der er ikke flere emner at vælge"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Accepter alle",
+    "acceptSelected": "Accepter valgt",
+    "consentModal": {
+      "alwaysRequired": "(Altid påkrævet)",
+      "privacyStatement": "Privatlivspolitik",
+      "servicesCount": "{count} tjeneste | {count} tjenester",
+      "text": "Her kan du se og tilpasse de tjenester, vi gerne vil bruge på dette website. Læs venligst vores {privacyStatement} for at få mere at vide.",
+      "title": "Tjenester, vi gerne vil bruge."
+    },
+    "consentNotice": {
+      "learnMore": "Administrer cookie-indstillinger",
+      "text": "Kan vi venligst aktivere tjenester til sikkerhed, analyse og tredjepartsindhold?",
+      "textUpdated": "Der har været nogle ændringer i tjenesterne siden dit sidste besøg. Må vi venligst aktivere yderligere tjenester?"
+    },
+    "decline": "Afvis",
+    "purposes": {
+      "2D": {
+        "title": "2D-medier"
+      },
+      "3D": {
+        "title": "3D-medier"
+      },
+      "audio": {
+        "title": "Lyd"
+      },
+      "essential": {
+        "description": "Disse tjenester er afgørende for, at dette websted fungerer korrekt. De omfatter sprogindstillinger og holder dit besøg sikkert. Du kan ikke deaktivere dem, da hjemmesiden ellers ikke ville fungere korrekt.",
+        "title": "Essentielle tjenester til sikkerhed og tilpasning"
+      },
+      "hotjar": {
+        "description": "Indsamler brugsdata for at hjælpe os med at analysere brugerinteraktioner. Aktiverer en undersøgelses-widget, der giver dig mulighed for at svare på vores undersøgelser af besøgendes tilfredshed.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Disse tjenester indlæser billed- (2D), 3D-, lyd- og videoelementer til visning.",
+        "title": "Tjenester til visning af medier"
+      },
+      "other": {
+        "title": "Andre indlejringstjenester"
+      },
+      "socialMedia": {
+        "description": "Disse tjenester indlæser indhold fra sociale medieplatforme.",
+        "title": "Tjenester til indlejring i sociale medier"
+      },
+      "thirdPartyContent": {
+        "description": "Disse tjenester indlæser indhold, der hostes af tredjeparter. Brugen af dem er underlagt disse tredjeparters vilkår, betingelser og erklæring om beskyttelse af personlige oplysninger.",
+        "title": "Tredjepartsindhold"
+      },
+      "usage": {
+        "description": "Disse tjenester indsamler oplysningerne for at hjælpe os med bedre at forstå, hvordan hjemmesiden bliver brugt, og hvor smertepunkterne er, hvilket giver os mulighed for at træffe informerede valg for at forbedre din oplevelse.",
+        "title": "Tjenester til at registrere brug og feedback på websitet"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Brug denne switch til at aktivere eller deaktivere alle valgfrie tjenester.",
+        "title": "Aktivere eller deaktivere alle tjenester"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Husker, at sikkerhedskontrollen blev bestået.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Indsamler brugsdata for at hjælpe os med at analysere brugerinteraktioner. Aktiverer en undersøgelses-widget, der giver dig mulighed for at svare på vores undersøgelser af besøgendes tilfredshed.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Husker dit foretrukne grænsefladesprog for fremtidig adgang.",
+        "title": "Sprogkode"
+      },
+      "matomo": {
+        "description": "Indsamler anonyme statistikker over, hvordan besøgende interagerer med hjemmesiden.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Ukendt udbyder"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Denne mappe er tom"
+  },
+  "embedNotification": {
+    "ifNotAll": "Hvis du ikke ønsker at indlæse alle indlejrede medier, kan du {0}.",
+    "loadAllEmbeddedContent": "Indlæs alt indlejret indhold",
+    "loadOnlyThis": "indlæs kun medier fra denne udbyder",
+    "message": "Vær opmærksom på, at denne side indeholder medieindhold indlejret fra {provider}. Visning af dette medie er underlagt deres vilkår og erklæringer om beskyttelse af personlige oplysninger. Se deres erklæringer om beskyttelse af personlige oplysninger for at få flere oplysninger om, hvordan dine data bruges.",
+    "messageUnkownService": "Desværre kan dette indhold ikke vises.",
+    "ofThirdPartyServices": "{0} af tredjeparts indholdstjenester.",
+    "viewFullList": "Se hele listen",
+    "viewThisExternalLink": "Se dette indhold via et eksternt link"
+  },
+  "error": "Fejl",
+  "errorMessage": {
+    "404": "Beklager! Den side, du leder efter, findes ikke.",
+    "noResults": "0 resultater",
+    "noResultsDescription": "Juster venligst de emner, du har valgt ovenfor.",
+    "unknown": "Der opstod en fejl."
+  },
+  "errors": {
+    "http": {
+      "404": "Ikke fundet"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} til {endDate}",
+    "event": "Begivenhed | Begivenheder"
+  },
+  "featured": "Udvalgt",
+  "footer": {
+    "accessibility": "Tilgængelighed",
+    "cookies": "Cookies",
+    "disclaimer": "Det fælles europæiske datarum for kulturarv er et EU-initiativ, der finansieres af EU's program for et digitalt Europa. Tjenesterne i datarummet, herunder dette websted, drives af et konsortium ledet af Europeana Foundation i henhold til en servicekontrakt med Europa-Kommissionen, kontraktnummer LC-01901432.",
+    "footer": "Sidefod",
+    "imageDescription": "Finansieret af Den Europæiske Union",
+    "info": "Mere information",
+    "language": "Tilpas hjemmesidens sprog",
+    "partners": {
+      "cloudflare": "Drevet af Project Galileo",
+      "contentful": "Drevet af Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privatlivspolitik",
+    "supportingPartners": "Support til tekniske partnere",
+    "terms": "Vilkår og politikker",
+    "translationInfo": "Automatiserede oversættelser ved hjælp af {service}",
+    "translationService": "eTranslation tjeneste"
+  },
+  "home": {
+    "broughtBy": "Bragt til dig af",
+    "title": "Det fælles europæiske datarum for kulturarv"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Månedlige API-anmodninger i gennemsnit",
+      "dataProviders": "Ejerinstitutioner",
+      "hqItems": "af vores genstande er af høj kvalitet",
+      "items": "Genstande",
+      "networkMembers": "Netværksmedlemmer"
+    }
+  },
+  "nav": {
+    "about": "Om dataområdet",
+    "close": "Luk menu",
+    "collections": "Udforsk samlingerne",
+    "dataSpace": "Udforsk datarummet",
+    "home": "Hjem",
+    "mainNavigation": "Hovednavigation",
+    "menu": "Menu",
+    "toggle": "Vis menu"
+  },
+  "newWindow": "åbner i nyt vindue",
+  "news": "Nyheder | Nyheder",
+  "pagination": {
+    "label": "Paginering",
+    "next": "Næste",
+    "of": "Af",
+    "pageNumber": "Side nummer",
+    "previous": "Forrige"
+  },
+  "portal": "Portal",
+  "project": "Projekt | Projekter",
+  "projects": {
+    "contract": "Kontraktnummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Download faktaark",
+    "factSheet": "Projektfaktaark",
+    "funders": "Finansiører",
+    "funding": "Finansieringsoplysninger",
+    "fundingStream": "Finansieringsstrøm",
+    "goals": "Projektmål",
+    "impact": "Projektets vigtigste indvirkning",
+    "partners": "Projektpartnere",
+    "reports": "Projektrapporter",
+    "viewFactSheet": "Se faktaark"
+  },
+  "results": "{count} resultat | {count} resultater",
+  "shareWhere": "Hvor vil du gerne dele dette?",
+  "skipToMainContent": "Spring til hovedindhold",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Dette er den første slide",
+      "lastSlide": "Dette er det sidste slide",
+      "nextSlide": "Næste slide",
+      "paginationBullet": "Slide {page}",
+      "paginationBulletGroupedSlides": "Slide-gruppe {page}",
+      "previousSlide": "Forrige slide",
+      "slideLabel": "Slide {slide} af {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "I gang",
+    "training": "Træning | Træning"
+  }
+}

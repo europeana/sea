@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "uždaryti",
+    "downloadFile": "parsisiųsti {file}",
+    "selectLanguage": "(Pasirinkite kalbą)",
+    "share": "Dalintis",
+    "shareOn": "Dalintis {social}"
+  },
+  "added": "Pridėta {date}",
+  "attribution": {
+    "creator": "Autorius:",
+    "institution": "Įstaiga:",
+    "show": "Rodyti priskyrimą",
+    "title": "Pavadinimas:"
+  },
+  "authored": {
+    "by": "pagal",
+    "publishedDate": "Paskelbta {date}"
+  },
+  "content": {
+    "discoverRelated": "Atraskite susijusį turinį",
+    "filter": {
+      "events": "Renginiai",
+      "news": "Naujienos",
+      "projects": "Projektai",
+      "training": "Mokymai",
+      "viewAll": "Peržiūrėti visus"
+    },
+    "filterContentType": "Filtruoti turinį pagal tipą",
+    "resultsHaveLoaded": "{0} rasti rezultatai",
+    "seeAll": "Žiūrėti visus {content}",
+    "seeMore": "Žiūrėti daugiau {content}",
+    "topics": {
+      "featuredTopics": "Rekomenduojamos temos",
+      "label": "Naršyti daugiau temų",
+      "noOptions": "Daugiau temų pasirinkti negalima"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Priimti visus",
+    "acceptSelected": "Priimti pasirinktą",
+    "consentModal": {
+      "alwaysRequired": "(Visada būtina)",
+      "privacyStatement": "Privatumo pareiškimas",
+      "servicesCount": "{count} paslauga | {count} paslaugos",
+      "text": "Čia galite matyti ir suasmeninti paslaugas, kurias norėtume naudoti šiame tinklalapyje. Norėdami sužinoti daugiau, perskaitykite mūsų {privacyStatement}.",
+      "title": "Paslaugos, kuriomis norėtume naudotis."
+    },
+    "consentNotice": {
+      "learnMore": "Tvarkyti slapukų nustatymus",
+      "text": "Ar galėtume įjungti saugos, analizės ir trečiųjų šalių turinio paslaugas?",
+      "textUpdated": "Nuo jūsų paskutinio apsilankymo kai kurios paslaugos pasikeitė. Ar galėtume įjungti papildomas paslaugas?"
+    },
+    "decline": "Atmesti",
+    "purposes": {
+      "2D": {
+        "title": "2D medija"
+      },
+      "3D": {
+        "title": "3D medija"
+      },
+      "audio": {
+        "title": "Garso"
+      },
+      "essential": {
+        "description": "Šios paslaugos yra būtinos tinkamam šios svetainės veikimui. Jos apima kalbos nuostatas ir užtikrina jūsų apsilankymo saugumą. Jų išjungti negalite, nes priešingu atveju svetainė neveiktų tinkamai.",
+        "title": "Esminės saugos ir tinkinimo paslaugos"
+      },
+      "hotjar": {
+        "description": "Renka naudojimo duomenis, kad galėtume analizuoti naudotojų sąveiką. Įjungia apklausos valdiklį, suteikiantį jums galimybę atsakyti į mūsų lankytojų pasitenkinimo apklausas.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Šios paslaugos įkelia vaizdus (2D) , 3D, garso ir vaizdo elementus, kad juos būtų galima peržiūrėti.",
+        "title": "Žiniasklaidos peržiūros paslaugos"
+      },
+      "other": {
+        "title": "Kitos įterpimo paslaugos"
+      },
+      "socialMedia": {
+        "description": "Šios paslaugos įkelia turinį iš socialinės žiniasklaidos platformų.",
+        "title": "Socialinės žiniasklaidos įterpimo paslaugos"
+      },
+      "thirdPartyContent": {
+        "description": "Šios paslaugos įkelia trečiųjų šalių priglobtą turinį. Jos naudojimui taikomos šių trečiųjų šalių sąlygos ir privatumo pareiškimas.",
+        "title": "Trečiųjų šalių turinys"
+      },
+      "usage": {
+        "description": "Šios tarnybos renka informaciją, kad galėtume geriau suprasti, kaip svetainė naudojama ir kur yra skausmo taškai, suteikdami mums galimybę rinktis pagrįstai, kad pagerintume jūsų patirtį.",
+        "title": "Paslaugos, skirtos svetainės naudojimui ir atsiliepimams fiksuoti"
+      },
+      "video": {
+        "title": "Vaizdo įrašas"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Šiuo jungikliu galite įjungti arba išjungti visas pasirenkamąsias paslaugas.",
+        "title": "Įgalinti arba išjungti visas paslaugas"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Prisimena, kad saugumo patikrinimas buvo sėkmingai įvykdytas.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Renka naudojimo duomenis, kad galėtume analizuoti naudotojų sąveiką. Įjungia apklausos valdiklį, suteikiantį jums galimybę atsakyti į mūsų lankytojų pasitenkinimo apklausas.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Atsimena jūsų pageidaujamą sąsajos kalbą būsimam naudojimui.",
+        "title": "Kalbos kodas"
+      },
+      "matomo": {
+        "description": "Renka anoniminę statistiką apie tai, kaip lankytojai sąveikauja su svetaine.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Nežinomas tiekėjas"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Šis aplankas tuščias"
+  },
+  "embedNotification": {
+    "ifNotAll": "Jei nenorite įkelti visos įterptosios medijos, galite {0}.",
+    "loadAllEmbeddedContent": "Įkelti visą įterptąjį turinį",
+    "loadOnlyThis": "įkelti mediją tik iš šio teikėjo",
+    "message": "Atkreipkite dėmesį, kad šiame puslapyje yra žiniasklaidos turinio, įterpto iš {provider}. Šios medijos peržiūrai taikomos jų sąlygos ir privatumo pareiškimai. Daugiau informacijos apie tai, kaip naudojami jūsų duomenys, rasite jų privatumo pareiškimuose.",
+    "messageUnkownService": "Deja, šio turinio rodyti negalima.",
+    "ofThirdPartyServices": "{0} trečiųjų šalių turinio paslaugas.",
+    "viewFullList": "Peržiūrėti visą sąrašą",
+    "viewThisExternalLink": "Peržiūrėti šį turinį per išorinę nuorodą"
+  },
+  "error": "Klaida",
+  "errorMessage": {
+    "404": "Atsiprašome! Puslapis, kurio ieškote, neegzistuoja.",
+    "noResults": "0 rezultatai",
+    "noResultsDescription": "Prašome pakoreguoti aukščiau pasirinktus dalykus.",
+    "unknown": "Įvyko klaida."
+  },
+  "errors": {
+    "http": {
+      "404": "Nerasta"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} į {endDate}",
+    "event": "Renginys | Renginiai"
+  },
+  "featured": "Rekomenduojami",
+  "footer": {
+    "accessibility": "Prieinamumas",
+    "cookies": "Slapukai",
+    "disclaimer": "Europos bendra kultūros paveldo duomenų erdvė yra Europos Sąjungos iniciatyva, finansuojama pagal Europos Sąjungos Skaitmeninės Europos programą. Duomenų erdvės paslaugas, įskaitant šią interneto svetainę, teikia Europeana fondo vadovaujamas konsorciumas pagal paslaugų sutartį su Europos Komisija, sutarties numeris LC-01901432.",
+    "footer": "Poraštė",
+    "imageDescription": "Finansuoja Europos Sąjunga",
+    "info": "Daugiau informacijos",
+    "language": "Pasirinkti tinklalapio kalbą",
+    "partners": {
+      "cloudflare": "Veikia su Project Galileo",
+      "contentful": "Veikia su Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Privatumo pareiškimas",
+    "supportingPartners": "Techninių partnerių palaikymas",
+    "terms": "Sąlygos ir politika",
+    "translationInfo": "Automatiniai vertimai naudojant {service}",
+    "translationService": "eVertimo paslauga"
+  },
+  "home": {
+    "broughtBy": "Jums pristato",
+    "title": "Bendra Europos kultūros paveldo duomenų erdvė"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Mėnesio API užklausos, vidutiniškai",
+      "dataProviders": "Teikėjai",
+      "hqItems": "mūsų skaitmeninių objektų yra aukštos kokybės",
+      "items": "Skaitmeniniai objektai",
+      "networkMembers": "Tinklo nariai"
+    }
+  },
+  "nav": {
+    "about": "Apie duomenų erdvę",
+    "close": "Uždaryti meniu",
+    "collections": "Naršykite kolekcijas",
+    "dataSpace": "Tyrinėkite duomenų erdvę",
+    "home": "Pradžia",
+    "mainNavigation": "Pagrindinė navigacija",
+    "menu": "Meniu",
+    "toggle": "Rodyti meniu"
+  },
+  "newWindow": "atsidaro naujame lange",
+  "news": "Naujienos | Naujienos",
+  "pagination": {
+    "label": "Numeracija",
+    "next": "Kitas",
+    "of": "Iš",
+    "pageNumber": "Puslapio numeris",
+    "previous": "Ankstesnis"
+  },
+  "portal": "Portalas",
+  "project": "Projektas | Projektai",
+  "projects": {
+    "contract": "Sutarties numeris",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Atsisiųsti informacinį lapelį",
+    "factSheet": "Projekto informacijos lapas",
+    "funders": "Finansuotojai",
+    "funding": "Finansavimo informacija",
+    "fundingStream": "Finansavimo srautas",
+    "goals": "Projekto tikslai",
+    "impact": "Pagrindinis projekto poveikis",
+    "partners": "Projekto partneriai",
+    "reports": "Projekto ataskaitos",
+    "viewFactSheet": "Peržiūrėti informacinį lapą"
+  },
+  "results": "{count} rezultatas | {count} rezultatai",
+  "shareWhere": "Kur norėtumėte tuo pasidalinti?",
+  "skipToMainContent": "Pereiti prie pagrindinio turinio",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Tai pirmoji skaidrė",
+      "lastSlide": "Tai paskutinė skaidrė",
+      "nextSlide": "Kita skaidrė",
+      "paginationBullet": "Skaidrė {page}",
+      "paginationBulletGroupedSlides": "Skaidrių grupė {page}",
+      "previousSlide": "Ankstesnė skaidrė",
+      "slideLabel": "Skaidrė {slide} iš {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Vyksta",
+    "training": "Mokymai | Mokymai"
+  }
+}

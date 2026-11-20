@@ -1,0 +1,26 @@
+.tooltip {
+  .tooltip-inner {
+    font-weight: 400;
+    padding: 0.5rem;
+    border: 1px solid $lightgrey;
+    max-width: min(100vw, pxToRem(200));
+
+    @media (min-width: $bp-4k) {
+      font-size: calc(var(--bp-4k-increment) * $font-size-14);
+      border-width: calc(var(--bp-4k-increment) * 1px);
+      border-radius: calc(var(--bp-4k-increment) * $border-radius-small);
+      padding: calc(var(--bp-4k-increment) * 0.5rem);
+      max-width: min(100vw, pxToRem(calc(var(--bp-4k-increment) * 200)));
+    }
+
+    a {
+      color: $white;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+}

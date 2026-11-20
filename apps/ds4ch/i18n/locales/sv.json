@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "stäng",
+    "downloadFile": "ladda ner {file}",
+    "selectLanguage": "(Välj ditt språk)",
+    "share": "Dela",
+    "shareOn": "Dela på {social}"
+  },
+  "added": "Lade till {date}",
+  "attribution": {
+    "creator": "Skapare:",
+    "institution": "Institution:",
+    "show": "Visa attribution",
+    "title": "Titel:"
+  },
+  "authored": {
+    "by": "av",
+    "publishedDate": "Publicerad {date}"
+  },
+  "content": {
+    "discoverRelated": "Upptäck relaterat innehåll",
+    "filter": {
+      "events": "Händelser",
+      "news": "Nyheter",
+      "projects": "Projekt",
+      "training": "Utbildning",
+      "viewAll": "Visa alla"
+    },
+    "filterContentType": "Filtrera innehåll efter typ",
+    "resultsHaveLoaded": "{0} resultat hittades",
+    "seeAll": "Se alla {content}",
+    "seeMore": "Se mer {content}",
+    "topics": {
+      "featuredTopics": "Utvalda ämnen",
+      "label": "Utforska fler ämnen",
+      "noOptions": "Det finns inga fler ämnen att välja"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Acceptera alla",
+    "acceptSelected": "Acceptera valt",
+    "consentModal": {
+      "alwaysRequired": "(Krävs alltid)",
+      "privacyStatement": "Integritetspolicy",
+      "servicesCount": "{count} tjänst | {count} tjänster",
+      "text": "Här kan du se och anpassa de tjänster som vi vill använda på denna webbplats. För att få veta mer, läs vår {privacyStatement}.",
+      "title": "Tjänster som vi skulle vilja använda."
+    },
+    "consentNotice": {
+      "learnMore": "Hantera cookieinställningar",
+      "text": "Kan vi aktivera tjänster för säkerhet, analys och tredjepartsinnehåll?",
+      "textUpdated": "Det har skett vissa förändringar i tjänsterna sedan ditt senaste besök. Kan vi aktivera ytterligare tjänster?"
+    },
+    "decline": "Neka",
+    "purposes": {
+      "2D": {
+        "title": "2D-media"
+      },
+      "3D": {
+        "title": "3D-media"
+      },
+      "audio": {
+        "title": "Ljud"
+      },
+      "essential": {
+        "description": "Dessa tjänster är nödvändiga för att den här webbplatsen ska fungera korrekt. De omfattar språkinställningar och håller ditt besök säkert. Du kan inte inaktivera dem eftersom webbplatsen annars inte skulle fungera korrekt.",
+        "title": "Viktiga tjänster för säkerhet och anpassning"
+      },
+      "hotjar": {
+        "description": "Samlar in användningsdata för att hjälpa oss att analysera användarinteraktioner. Aktiverar en undersökningswidget som ger dig möjlighet att svara på våra besökarnöjdhetsundersökningar.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Dessa tjänster laddar bild- (2D), 3D-, ljud- och videoobjekt för visning.",
+        "title": "Tjänster för visning av media"
+      },
+      "other": {
+        "title": "Andra tjänster för inbäddning"
+      },
+      "socialMedia": {
+        "description": "Dessa tjänster laddar innehåll från sociala medieplattformar.",
+        "title": "Tjänster för inbäddning i sociala medier"
+      },
+      "thirdPartyContent": {
+        "description": "Dessa tjänster laddar innehåll som tillhandahålls av tredje part. Dess användning är föremål för dessa tredje parts villkor och sekretesspolicy.",
+        "title": "Innehåll från tredje part"
+      },
+      "usage": {
+        "description": "Dessa tjänster samlar in informationen för att bättre förstå hur webbplatsen används och var smärtpunkterna är, vilket ger oss möjlighet att göra välgrundade val för att förbättra din upplevelse.",
+        "title": "Tjänster för att fånga in webbplatsanvändning och feedback"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Använd den här omkopplaren för att aktivera eller inaktivera alla valfria tjänster.",
+        "title": "Aktivera eller inaktivera alla tjänster"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Påminner om att säkerhetsutmaningen har klarats av framgångsrikt.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Samlar in användningsdata för att hjälpa oss att analysera användarinteraktioner. Aktiverar en undersökningswidget som ger dig möjlighet att svara på våra besökarnöjdhetsundersökningar.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Kommer ihåg ditt föredragna gränssnittsspråk för framtida åtkomst.",
+        "title": "Språkkod"
+      },
+      "matomo": {
+        "description": "Samlar in anonym statistik om hur besökare interagerar med webbplatsen.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Okänd leverantör"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Den här mappen är tom"
+  },
+  "embedNotification": {
+    "ifNotAll": "Om du inte vill ladda all inbäddad media kan du {0}.",
+    "loadAllEmbeddedContent": "Ladda allt inbäddat innehåll",
+    "loadOnlyThis": "ladda media endast från denna leverantör",
+    "message": "Observera att denna sida innehåller medieinnehåll inbäddat från {provider}. Visning av dessa medier är föremål för deras villkor och sekretesspolicyer. Se deras sekretesspolicyer för mer information om hur dina uppgifter används.",
+    "messageUnkownService": "Tyvärr kan detta innehåll inte visas.",
+    "ofThirdPartyServices": "{0} av innehållstjänster från tredje part.",
+    "viewFullList": "Se hela listan",
+    "viewThisExternalLink": "Se detta innehåll via en extern länk"
+  },
+  "error": "Fel",
+  "errorMessage": {
+    "404": "Tyvärr! Sidan du letar efter finns inte.",
+    "noResults": "0 resultat",
+    "noResultsDescription": "Justera de ämnen du har valt ovan.",
+    "unknown": "Ett fel inträffade."
+  },
+  "errors": {
+    "http": {
+      "404": "Hittades inte"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} till {endDate}",
+    "event": "Evenemang | Evenemang"
+  },
+  "featured": "Utvalt",
+  "footer": {
+    "accessibility": "Tillgänglighet",
+    "cookies": "Cookies",
+    "disclaimer": "Det gemensamma europeiska datarummet för kulturarv är ett initiativ från Europeiska unionen, finansierat av Europeiska unionens program för ett digitalt Europa. Datarummets tjänster, inklusive denna webbplats, drivs av ett konsortium lett av Europeana Foundation enligt ett tjänsteavtal med Europeiska kommissionen, kontraktsnummer LC-01901432.",
+    "footer": "Sidfot",
+    "imageDescription": "Finansieras av Europeiska unionen",
+    "info": "Mera info",
+    "language": "Anpassa webbplatsens språk",
+    "partners": {
+      "cloudflare": "Drivs av Project Galileo",
+      "contentful": "Drivs av Contentful",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Integritetspolicy",
+    "supportingPartners": "Stödja tekniska partners",
+    "terms": "Villkor och policyer",
+    "translationInfo": "Automatiska översättningar med hjälp av {service}",
+    "translationService": "tjänsten eTranslation"
+  },
+  "home": {
+    "broughtBy": "Tillhandahålls av",
+    "title": "Det gemensamma europeiska dataområdet för kulturarv"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Månatliga API-förfrågningar, i genomsnitt",
+      "dataProviders": "Tillhandahållande Institutioner",
+      "hqItems": "av våra objekt är av hög kvalitet",
+      "items": "Objekt",
+      "networkMembers": "Nätverksmedlemmar"
+    }
+  },
+  "nav": {
+    "about": "Om datarummet",
+    "close": "Stäng menyn",
+    "collections": "Utforska samlingarna",
+    "dataSpace": "Utforska datarymden",
+    "home": "Hem",
+    "mainNavigation": "Huvudnavigering",
+    "menu": "Meny",
+    "toggle": "Visa meny"
+  },
+  "newWindow": "öppnas i nytt fönster",
+  "news": "Nyheter | Nyheter",
+  "pagination": {
+    "label": "Paginering",
+    "next": "Nästa",
+    "of": "Av",
+    "pageNumber": "Sidonummer",
+    "previous": "Föregående"
+  },
+  "portal": "Portal",
+  "project": "Projekt | Projekt",
+  "projects": {
+    "contract": "Kontraktets nummer",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Ladda ner faktablad",
+    "factSheet": "Projektfaktablad",
+    "funders": "Finansiärer",
+    "funding": "Finansieringsinformation",
+    "fundingStream": "Finansieringsström",
+    "goals": "Projektmål",
+    "impact": "Projektets viktigaste inverkan",
+    "partners": "Projektpartners",
+    "reports": "Projektrapporter",
+    "viewFactSheet": "Visa faktablad"
+  },
+  "results": "{count} resultat | {count} resultat",
+  "shareWhere": "Var skulle du vilja dela detta?",
+  "skipToMainContent": "Hoppa till huvudinnehåll",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Detta är den första bilden",
+      "lastSlide": "Detta är den sista bilden",
+      "nextSlide": "Nästa bild",
+      "paginationBullet": "Bild {page}",
+      "paginationBulletGroupedSlides": "Bildgrupp {page}",
+      "previousSlide": "Föregående bild",
+      "slideLabel": "Bild {slide} av {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Pågående",
+    "training": "Utbildning | Utbildning"
+  }
+}

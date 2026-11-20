@@ -1,0 +1,138 @@
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { Worker, type Job } from "bullmq";
+import { useWorkerOptions } from "@/utils/bullmq";
+import workersPlugin from "@/plugins/workers";
+
+const { mockTranslateWorker, mockZohoWorker } = vi.hoisted(() => ({
+  mockTranslateWorker: {
+    queueName: "translate-worker",
+    processor: vi.fn(),
+    opts: { concurrency: 2 },
+  },
+  mockZohoWorker: {
+    queueName: "zoho-crm-sync-contact",
+    processor: vi.fn(),
+    opts: { removeOnComplete: { count: 0 } },
+  },
+}));
+
+vi.mock("@/utils/bullmq", () => ({
+  useWorkerOptions: vi.fn(),
+}));
+
+vi.mock("@/workers/translate/index", () => ({
+  default: [mockTranslateWorker],
+}));
+
+vi.mock("@/workers/zoho/crm/index", () => ({
+  default: [mockZohoWorker],
+}));
+
+describe("@/plugins/workers", () => {
+  const defaultWorkerOptions = {
+    connection: { host: "localhost", port: 6379 },
+    prefix: "@europeana:sea:cats",
+  };
+
+  let closeHookHandler: (() => Promise<void>) | undefined;
+  const mockNitroApp = {
+    hooks: {
+      hook: vi.fn((event: string, cb: () => Promise<void>) => {
+        if (event === "close") {
+          closeHookHandler = cb;
+        }
+      }),
+    },
+  };
+
+  const mockWorkerClose = vi.fn().mockResolvedValue(undefined);
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    closeHookHandler = undefined;
+
+    vi.mocked(useWorkerOptions).mockReturnValue(
+      defaultWorkerOptions as ReturnType<typeof useWorkerOptions>,
+    );
+
+    vi.mocked(Worker).mockImplementation(function () {
+      return { close: mockWorkerClose } as unknown as Worker;
+    });
+  });
+
+  it("instantiates a single BullMQ Worker per worker definition with merged worker options", () => {
+    workersPlugin(mockNitroApp as never);
+
+    expect(useWorkerOptions).toHaveBeenCalledTimes(2);
+    expect(Worker).toHaveBeenCalledTimes(2);
+
+    expect(Worker).toHaveBeenNthCalledWith(
+      1,
+      "translate-worker",
+      expect.any(Function),
+      {
+        ...defaultWorkerOptions,
+        concurrency: 2,
+      },
+    );
+
+    expect(Worker).toHaveBeenNthCalledWith(
+      2,
+      "zoho-crm-sync-contact",
+      expect.any(Function),
+      {
+        ...defaultWorkerOptions,
+        removeOnComplete: { count: 0 },
+      },
+    );
+  });
+
+  it("delegates execution to worker.processor", async () => {
+    mockZohoWorker.processor.mockResolvedValue({ entryId: "cf-123" });
+
+    workersPlugin(mockNitroApp as never);
+
+    const registeredHandler = vi.mocked(Worker).mock.calls[1][1] as (
+      job: Job,
+    ) => Promise<unknown>;
+
+    const mockJob = { id: "job-42" } as Job;
+    const result = await registeredHandler(mockJob);
+
+    expect(mockZohoWorker.processor).toHaveBeenCalledWith(mockJob);
+    expect(result).toEqual({ entryId: "cf-123" });
+  });
+
+  it("allows worker.opts to override defaults from useWorkerOptions", () => {
+    vi.mocked(useWorkerOptions).mockReturnValue({
+      connection: { host: "localhost", port: 6379 },
+      concurrency: 1,
+    } as ReturnType<typeof useWorkerOptions>);
+
+    workersPlugin(mockNitroApp as never);
+
+    expect(Worker).toHaveBeenNthCalledWith(
+      1,
+      "translate-worker",
+      expect.any(Function),
+      {
+        connection: { host: "localhost", port: 6379 },
+        concurrency: 2,
+      },
+    );
+  });
+
+  it("closes all active workers when Nitro triggers the close hook", async () => {
+    workersPlugin(mockNitroApp as never);
+
+    expect(mockNitroApp.hooks.hook).toHaveBeenCalledWith(
+      "close",
+      expect.any(Function),
+    );
+    expect(closeHookHandler).toBeDefined();
+
+    await closeHookHandler!();
+
+    expect(mockWorkerClose).toHaveBeenCalledTimes(2);
+  });
+});

@@ -1,0 +1,238 @@
+{
+  "actions": {
+    "close": "sulje",
+    "downloadFile": "lataa {file}",
+    "selectLanguage": "(Valitse kielesi)",
+    "share": "Jaa",
+    "shareOn": "Jaa {social}"
+  },
+  "added": "Lisätty {date}",
+  "attribution": {
+    "creator": "Luoja:",
+    "institution": "kulttuuriperintölaitos:",
+    "show": "Näytä attribuutio",
+    "title": "Otsikko:"
+  },
+  "authored": {
+    "by": "by",
+    "publishedDate": "Julkaistu {date}"
+  },
+  "content": {
+    "discoverRelated": "Tutustu aiheeseen liittyvään sisältöön",
+    "filter": {
+      "events": "Tapahtumat",
+      "news": "Uutiset",
+      "projects": "Projektit",
+      "training": "Koulutus",
+      "viewAll": "Näytä kaikki"
+    },
+    "filterContentType": "Suodata sisältö tyypin mukaan",
+    "resultsHaveLoaded": "{0} tuloksia löytyi",
+    "seeAll": "Katso kaikki {content}",
+    "seeMore": "Katso lisää {content}",
+    "topics": {
+      "featuredTopics": "Esittelyssä olevat aiheet",
+      "label": "Tutustu lisää aiheisiin",
+      "noOptions": "Ei ole enempää aiheita valittavaksi"
+    }
+  },
+  "cookies": {
+    "acceptAll": "Hyväksy kaikki",
+    "acceptSelected": "Hyväksy valittu",
+    "consentModal": {
+      "alwaysRequired": "(Pakollinen aina)",
+      "privacyStatement": "Tietosuojaseloste",
+      "servicesCount": "{count} palvelu | {count} palvelua",
+      "text": "Täällä voit nähdä ja mukauttaa palvelut, joita haluaisimme käyttää tällä verkkosivustolla. Lisätietoja saat lukemalla {privacyStatement}.",
+      "title": "Palvelut, joita haluaisimme käyttää."
+    },
+    "consentNotice": {
+      "learnMore": "Hallitse evästeasetuksia",
+      "text": "Voisimmeko ottaa käyttöön palvelut turvallisuutta, analytiikkaa ja kolmannen osapuolen sisältöä varten?",
+      "textUpdated": "Palveluissa on tapahtunut muutoksia edellisen käyntisi jälkeen. Voimmeko ottaa käyttöön lisäpalveluja?"
+    },
+    "decline": "Hylkää",
+    "purposes": {
+      "2D": {
+        "title": "2D-media"
+      },
+      "3D": {
+        "title": "3D media"
+      },
+      "audio": {
+        "title": "Audio"
+      },
+      "essential": {
+        "description": "Nämä palvelut ovat välttämättömiä tämän verkkosivuston moitteettoman toiminnan kannalta. Ne sisältävät kieliasetukset ja pitävät vierailusi turvallisena. Et voi poistaa niitä käytöstä, sillä muuten verkkosivusto ei toimisi oikein.",
+        "title": "Olennaiset turvallisuus- ja mukautuspalvelut"
+      },
+      "hotjar": {
+        "description": "Kerää käyttäjätietoja, jotta voimme analysoida käyttäjien vuorovaikutusta. Aktivoi kyselywidgetin, jonka avulla voit vastata kävijöiden tyytyväisyyskyselyihimme.",
+        "title": "Hotjar"
+      },
+      "mediaViewing": {
+        "description": "Nämä palvelut lataavat kuvia (2D) , 3D-, ääni- ja videokohteita katselua varten.",
+        "title": "Median katselupalvelut"
+      },
+      "other": {
+        "title": "Muut sulauttamispalvelut"
+      },
+      "socialMedia": {
+        "description": "Nämä palvelut lataavat sisältöä sosiaalisen median alustoilta.",
+        "title": "Sosiaalisen median upotuspalvelut"
+      },
+      "thirdPartyContent": {
+        "description": "Nämä palvelut lataavat kolmansien osapuolten isännöimää sisältöä. Sen käyttöä koskevat näiden kolmansien osapuolten ehdot ja tietosuojalausunto.",
+        "title": "Kolmannen osapuolen sisältö"
+      },
+      "usage": {
+        "description": "Nämä palvelut keräävät tietoja, jotka auttavat meitä ymmärtämään paremmin, miten verkkosivustoa käytetään ja missä kipupisteet ovat, mikä antaa meille mahdollisuuden tehdä tietoon perustuvia valintoja kokemuksesi parantamiseksi.",
+        "title": "Palvelut verkkosivuston käytön ja palautteen keräämiseen"
+      },
+      "video": {
+        "title": "Video"
+      }
+    },
+    "service": {
+      "disableAll": {
+        "description": "Käytä tätä kytkintä ottaaksesi käyttöön tai poistaaksesi käytöstä kaikki valinnaiset palvelut.",
+        "title": "Ota kaikki palvelut käyttöön tai poista ne käytöstä"
+      }
+    },
+    "services": {
+      "cloudflare": {
+        "description": "Muistaa, että turvahaaste on läpäisty onnistuneesti.",
+        "title": "Cloudflare"
+      },
+      "hotjar": {
+        "description": "Kerää käyttäjätietoja, jotta voimme analysoida käyttäjien vuorovaikutusta. Aktivoi kyselywidgetin, jonka avulla voit vastata kävijöiden tyytyväisyyskyselyihimme.",
+        "title": "Hotjar"
+      },
+      "i18n": {
+        "description": "Muistaa valitsemasi käyttöliittymäkielen tulevaa käyttöä varten.",
+        "title": "Kielikoodi"
+      },
+      "matomo": {
+        "description": "Kerää anonyymejä tilastoja siitä, miten kävijät ovat vuorovaikutuksessa verkkosivuston kanssa.",
+        "title": "Matomo"
+      },
+      "unknownProvider": "Tuntematon palveluntarjoaja"
+    }
+  },
+  "documentBrowser": {
+    "empty": "Tämä kansio on tyhjä"
+  },
+  "embedNotification": {
+    "ifNotAll": "Jos et halua ladata kaikkea upotettua mediaa, voit {0}.",
+    "loadAllEmbeddedContent": "Lataa kaikki upotettu sisältö",
+    "loadOnlyThis": "lataa mediaa vain tältä palveluntarjoajalta",
+    "message": "Huomaa, että tämä sivu sisältää mediasisältöä, joka on upotettu osoitteesta {provider}. Tämän median katsominen on niiden ehtojen ja tietosuojaselosteiden alaista. Lisätietoja tietojesi käytöstä saat heidän tietosuojaselosteistaan.",
+    "messageUnkownService": "Valitettavasti tätä sisältöä ei voida näyttää.",
+    "ofThirdPartyServices": "{0} kolmansien osapuolten sisältöpalvelut.",
+    "viewFullList": "Näytä koko luettelo",
+    "viewThisExternalLink": "Katso tämä sisältö ulkoisen linkin kautta"
+  },
+  "error": "Virhe",
+  "errorMessage": {
+    "404": "Anteeksi! Etsimääsi sivua ei ole olemassa.",
+    "noResults": "0 tulosta",
+    "noResultsDescription": "Muokkaa yllä valitsemiasi aiheita.",
+    "unknown": "Tapahtui virhe."
+  },
+  "errors": {
+    "http": {
+      "404": "Ei löytynyt"
+    }
+  },
+  "event": {
+    "dateRange": "{startDate} – {endDate}",
+    "event": "Tapahtuma | Tapahtumat"
+  },
+  "featured": "Esittelyssä",
+  "footer": {
+    "accessibility": "Saavutettavuus",
+    "cookies": "Evästeet",
+    "disclaimer": "Kulttuuriperinnön yhteinen eurooppalainen data-avaruus on Euroopan unionin aloite, jota rahoitetaan Euroopan unionin Digitaalinen Eurooppa -ohjelmasta. Data-avaruuspalveluja, mukaan lukien tämä verkkosivusto, ylläpitää Europeana-säätiön johtama konsortio Euroopan komission kanssa tehdyn palvelusopimuksen nojalla, sopimusnumero LC-01901432.",
+    "footer": "Alatunniste",
+    "imageDescription": "Euroopan unionin rahoittama",
+    "info": "Lisätietoja",
+    "language": "Muokkaa verkkosivuston kieltä",
+    "partners": {
+      "cloudflare": "Voimanlähteenä Project Galileo",
+      "contentful": "Contentfulin tarjoama",
+      "lokalise": "Lokalise"
+    },
+    "privacy": "Tietosuojaseloste",
+    "supportingPartners": "Teknisten kumppanien tukeminen",
+    "terms": "Ehdot ja käytännöt",
+    "translationInfo": "Automaattiset käännökset käyttäen {service}",
+    "translationService": "eTranslation-palvelu"
+  },
+  "home": {
+    "broughtBy": "Tuotu sinulle",
+    "title": "Yhteinen eurooppalainen kulttuuriperintöä koskeva dataavaruus"
+  },
+  "landing": {
+    "counts": {
+      "apiRequests": "Kuukausittaiset API-pyynnöt keskimäärin",
+      "dataProviders": "Aineiston Tarjoajat",
+      "hqItems": "aineistoistamme on korkealaatuisia",
+      "items": "Aineistot",
+      "networkMembers": "Verkoston jäsenet"
+    }
+  },
+  "nav": {
+    "about": "Tietoa data-avaruudesta",
+    "close": "Sulje valikko",
+    "collections": "Tutustu kokoelmiin",
+    "dataSpace": "Tutustu tietoavaruuteen",
+    "home": "Etusivu",
+    "mainNavigation": "Päänavigointi",
+    "menu": "Valikko",
+    "toggle": "Näytä valikko"
+  },
+  "newWindow": "avautuu uuteen ikkunaan",
+  "news": "Uutiset | Uutiset",
+  "pagination": {
+    "label": "Sivunumerointi",
+    "next": "Seuraava",
+    "of": "Of",
+    "pageNumber": "Sivunumero",
+    "previous": "Edellinen"
+  },
+  "portal": "Portaali",
+  "project": "Projekti | Projektit",
+  "projects": {
+    "contract": "Sopimuksen numero",
+    "dates": "{startDate} - {endDate}",
+    "downloadFactSheet": "Lataa tietolehti",
+    "factSheet": "Hankkeen tietoesite",
+    "funders": "Rahoittajat",
+    "funding": "Rahoitustiedot",
+    "fundingStream": "Rahoitusvirta",
+    "goals": "Projektin tavoitteet",
+    "impact": "Hankkeen keskeinen vaikutus",
+    "partners": "Hankekumppanit",
+    "reports": "Projektiraportit",
+    "viewFactSheet": "Näytä tietoesite"
+  },
+  "results": "{count} tulos | {count} tulokset",
+  "shareWhere": "Missä haluaisit jakaa tämän?",
+  "skipToMainContent": "Siirry pääsisältöön",
+  "swiper": {
+    "a11y": {
+      "firstSlide": "Tämä on ensimmäinen dia",
+      "lastSlide": "Tämä on viimeinen dia",
+      "nextSlide": "Seuraava dia",
+      "paginationBullet": "Dia {page}",
+      "paginationBulletGroupedSlides": "Dia-ryhmä {page}",
+      "previousSlide": "Edellinen dia",
+      "slideLabel": "Dia {slide} \/ {totalSlides}"
+    }
+  },
+  "training": {
+    "dateRange": "{startDate} - {endDate}",
+    "ongoing": "Käynnissä",
+    "training": "Koulutus | Koulutus"
+  }
+}

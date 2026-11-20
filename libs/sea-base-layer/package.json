@@ -1,0 +1,27 @@
+{
+  "name": "@europeana/sea-base-layer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/europeana/sea"
+  },
+  "type": "module",
+  "version": "0.1.25",
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "build": "nuxt build",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@elastic/apm-rum-vue": "2.1.15",
+    "@europeana/feedback-widget": "workspace:*",
+    "@europeana/style": "catalog:frontend",
+    "@nuxtjs/i18n": "catalog:nuxt3",
+    "@rollup/plugin-graphql": "3.0.0",
+    "bootstrap": "catalog:",
+    "filesize": "11.0.34",
+    "marked": "catalog:html",
+    "nuxt": "catalog:nuxt3",
+    "vue": "catalog:vue3",
+    "vue-matomo": "4.2.0"
+  }
+}

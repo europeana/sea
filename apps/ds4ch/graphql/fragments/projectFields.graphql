@@ -1,0 +1,32 @@
+#import "../fragments/illustrationFields.graphql"
+
+fragment projectFields on Project {
+  name
+  logo {
+    ...illustrationFields
+  }
+  startDate
+  endDate
+  goals
+  testimonial {
+    ...testimonialCardFields
+  }
+  partners
+  fundingStream {
+    url
+    text
+  }
+  contractNumber
+  fundingLogosCollection {
+    items {
+      ...illustrationFields
+    }
+  }
+  impactMetrics
+  reportsLink
+  factsheetLink
+}
+fragment testimonialCardFields on TestimonialCard {
+  text
+  attribution
+}
