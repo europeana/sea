@@ -22,7 +22,7 @@
     "happy-dom": "21.0.4",
     "lodash-es": "catalog:",
     "nuxt": "catalog:nuxt3",
-    "sass-embedded": "1.106.1",
+    "sass-embedded": "1.108.2",
     "vue": "catalog:vue3",
     "vue-router": "5.5.1"
   },
