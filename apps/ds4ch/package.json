@@ -21,7 +21,7 @@
     "@europeana/style": "catalog:",
     "@europeana/vue-contentful-graphql": "workspace:*",
     "@europeana/vue-visible-on-scroll": "workspace:*",
-    "@lottiefiles/dotlottie-vue": "0.13.2",
+    "@lottiefiles/dotlottie-vue": "0.13.3",
     "@nuxtjs/i18n": "catalog:nuxt3",
     "@nuxtjs/storybook": "catalog:nuxt3",
     "@storybook/addon-docs": "10.6.7",
