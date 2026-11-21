@@ -520,8 +520,8 @@ importers:
         specifier: workspace:*
         version: link:../../libs/vue-visible-on-scroll
       '@lottiefiles/dotlottie-vue':
-        specifier: 0.13.2
-        version: 0.13.2(vue@3.5.45(typescript@5.9.3))
+        specifier: 0.13.3
+        version: 0.13.3(vue@3.5.45(typescript@5.9.3))
       '@nuxtjs/i18n':
         specifier: catalog:nuxt3
         version: 9.5.6(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(magicast@0.5.5)(rollup@4.68.7)(supports-color@10.2.2)(vue@3.5.45(typescript@5.9.3))
@@ -1801,8 +1801,8 @@ packages:
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
 
-  '@lottiefiles/dotlottie-vue@0.13.2':
-    resolution: {integrity: sha512-I/VP3isVnUQKZNAMC2HoClP2fIbmAZb557sZe/0xSGvFW25hHsl2el7kJVUpuWQ7flQB1th3ItdIlvoyMxIbTA==}
+  '@lottiefiles/dotlottie-vue@0.13.3':
+    resolution: {integrity: sha512-ArBFRh4FiLFO8j5uYIGS8dKx0EOdkfkCfpdyTRFXnWdhIrCQc8V0IHHP0urksOZc3uFn515unl/P4P3d8NT4gQ==}
     engines: {node: '>=18.17.0', npm: '>=9.5.0'}
     peerDependencies:
       vue: ^3.3.4
@@ -10887,7 +10887,7 @@ snapshots:
 
   '@keyv/serialize@1.1.1': {}
 
-  '@lottiefiles/dotlottie-vue@0.13.2(vue@3.5.45(typescript@5.9.3))':
+  '@lottiefiles/dotlottie-vue@0.13.3(vue@3.5.45(typescript@5.9.3))':
     dependencies:
       '@lottiefiles/dotlottie-web': 0.83.2
       vue: 3.5.45(typescript@5.9.3)
