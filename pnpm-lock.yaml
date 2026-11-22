@@ -209,8 +209,8 @@ catalogs:
       specifier: 5.3.9
       version: 5.3.9
     content-disposition:
-      specifier: 3.0.0
-      version: 3.0.0
+      specifier: 3.1.0
+      version: 3.1.0
     lodash-es:
       specifier: 4.18.1
       version: 4.18.1
@@ -669,7 +669,7 @@ importers:
     dependencies:
       content-disposition:
         specifier: 'catalog:'
-        version: 3.0.0
+        version: 3.1.0
     devDependencies:
       '@rollup/plugin-node-resolve':
         specifier: catalog:rollup4
@@ -5014,8 +5014,8 @@ packages:
   constantinople@4.0.1:
     resolution: {integrity: sha512-vCrqcSIq4//Gx74TXXCGnHpulY1dskqLTFGDmhrGxzeXL8lF8kvXv6mpNWlJj1uD4DW23D4ljAqbY4RRaaUZIw==}
 
-  content-disposition@3.0.0:
-    resolution: {integrity: sha512-ZH/0Xs9rMIFWCOmGdmS9eHBTF62qqQYNz4nVjQhkdIO/a0fCP4UIM3mRz/wiqL0L14YgAz/1xio4OaSY4+ON/A==}
+  content-disposition@3.1.0:
+    resolution: {integrity: sha512-6lwVDK9bsenmMu7hxcLuUiu+FzFBDAdfQR1LKbE+SCo7/Qfpm2NG8X9f8AJgumfoVID/4r1stSxcmCeiT7pfkQ==}
     engines: {node: '>=22'}
 
   content-type@3.1.1:
@@ -14200,7 +14200,7 @@ snapshots:
       '@babel/parser': 7.29.14
       '@babel/types': 7.29.14
 
-  content-disposition@3.0.0: {}
+  content-disposition@3.1.0: {}
 
   content-type@3.1.1: {}
 
