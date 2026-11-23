@@ -38,8 +38,6 @@ export const createOrUpdateEntry = async (
   const client = useContentfulClient();
   let entry = await findEntry(query);
 
-  fields = await omitInvalidArrayFieldValues(contentTypeId, fields);
-
   if (entry) {
     entry.fields = {
       ...entry.fields,
@@ -68,32 +66,4 @@ export const findEntry = async (
   const response = await client.entry.getMany({ query });
 
   return response.items?.[0] || null;
-};
-
-const omitInvalidArrayFieldValues = async (
-  contentTypeId: string,
-  fields: KeyValueMap,
-): Promise<KeyValueMap> => {
-  const client = useContentfulClient();
-  const contentType = await client.contentType.get({ contentTypeId });
-  const locale = useRuntimeConfig().contentful?.defaultLocale;
-
-  for (const contentTypeField of contentType.fields) {
-    if (
-      Array.isArray(fields[contentTypeField.id]?.[locale]) &&
-      contentTypeField.type === "Array"
-    ) {
-      const inValidation = contentTypeField.items?.validations?.find(
-        (validation) => validation.in,
-      );
-
-      if (inValidation) {
-        fields[contentTypeField.id][locale] = fields[contentTypeField.id][
-          locale
-        ].filter((value) => inValidation.in?.includes(value));
-      }
-    }
-  }
-
-  return fields;
 };
