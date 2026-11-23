@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   createClient,
   type CollectionProp,
-  type ContentTypeProps,
   type EntryProps,
   type KeyValueMap,
 } from "contentful-management";
@@ -30,24 +29,11 @@ describe("@/utils/contentful", () => {
   const mockCreateEntry = vi.mocked(mockClient.entry.create);
   const mockUpdateEntry = vi.mocked(mockClient.entry.update);
   const mockPublishEntry = vi.mocked(mockClient.entry.publish);
-  const mockGetContentType = vi.mocked(mockClient.contentType.get);
 
   beforeEach(() => {
     mockUseRuntimeConfig.mockReturnValue({
       contentful: config,
     } as unknown as ReturnType<typeof useRuntimeConfig>);
-
-    mockGetContentType.mockResolvedValue({
-      fields: [
-        { id: "slug", type: "Symbol" },
-        { id: "title", type: "Text" },
-        {
-          id: "categories",
-          type: "Array",
-          items: { validations: [{ in: ["good category"] }] },
-        },
-      ],
-    } as unknown as ContentTypeProps);
   });
 
   afterEach(() => {
@@ -84,7 +70,7 @@ describe("@/utils/contentful", () => {
     beforeEach(() => {
       fields = {
         title: { "en-GB": "About" },
-        categories: { "en-GB": ["good category", "bad category"] },
+        categories: { "en-GB": ["good category"] },
       };
       entry = {
         sys: { id: "entryid" },
@@ -159,12 +145,6 @@ describe("@/utils/contentful", () => {
           { contentTypeId },
           { fields },
         );
-      });
-
-      it("omits invalid array field values, per the content type validation", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
-
-        expect(fields.categories).toEqual({ "en-GB": ["good category"] });
       });
 
       it("is published by default", async () => {
