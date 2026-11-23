@@ -6,7 +6,11 @@
   "extends": [
     "config:best-practices",
     ":automergeMinor",
-    "security:minimumReleaseAgeNpm"
+    "security:minimumReleaseAgeNpm",
+    "group:storybook",
+    "group:jsUnitTest",
+    "group:definitelyTyped",
+    "group:rollup"
   ],
   "platformAutomerge": true,
   "prConcurrentLimit": 10,
@@ -19,6 +23,39 @@
       "matchManagers": ["npm"],
       "matchDepNames": ["pnpm"],
       "groupName": "pnpm"
+    },
+    {
+      "extends": ["packages:eslint"],
+      "matchPackageNames": ["@nuxt/eslint"],
+      "groupName": "eslint ecosystem",
+      "groupSlug": "eslint",
+      "separateMajorMinor": false
+    },
+    {
+      "groupName": "storybook ecosystem",
+      "groupSlug": "storybook-ecosystem",
+      "matchPackageNames": [
+        "storybook",
+        "@storybook/**",
+        "@nuxtjs/storybook",
+        "msw-storybook-addon"
+      ],
+      "separateMajorMinor": false
+    },
+    {
+      "groupName": "bull-board & bullmq",
+      "groupSlug": "bullmq",
+      "matchPackageNames": ["@bull-board/**", "bullmq"]
+    },
+    {
+      "groupName": "openlayers",
+      "groupSlug": "openlayers",
+      "matchPackageNames": ["ol", "ol-mapbox-style"]
+    },
+    {
+      "groupName": "contentful",
+      "groupSlug": "contentful",
+      "matchPackageNames": ["@contentful/**", "contentful-management"]
     }
   ]
 }
