@@ -8,8 +8,7 @@
     ":automergeMinor",
     "security:minimumReleaseAgeNpm",
     "group:jsUnitTest",
-    "group:definitelyTyped",
-    "group:rollup"
+    "group:definitelyTyped"
   ],
   "platformAutomerge": true,
   "prConcurrentLimit": 10,
@@ -39,6 +38,12 @@
         "@nuxtjs/storybook",
         "msw-storybook-addon"
       ],
+      "separateMajorMinor": false
+    },
+    {
+      "groupName": "rollup ecosystem",
+      "groupSlug": "rollup",
+      "matchPackageNames": ["rollup", "@rollup/**"],
       "separateMajorMinor": false
     },
     {
