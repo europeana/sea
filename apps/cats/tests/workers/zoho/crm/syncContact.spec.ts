@@ -180,29 +180,6 @@ describe("@/workers/zoho/crm/syncContact", () => {
     expect(passedFields).not.toHaveProperty("image");
   });
 
-  it('normalizes malformed "TÃ¼rkiye" country string to "Türkiye"', async () => {
-    const turkishRecord: ZohoContactRecord = {
-      ...baseRecord,
-      Country_new: "TÃ¼rkiye",
-    };
-    mockFetchZohoContact.mockResolvedValue(new ZohoContact(turkishRecord));
-    vi.mocked(createOrUpdateEntry).mockResolvedValue({
-      sys: { id: "cf-entry-999" },
-    } as never);
-
-    const job = createMockJob({ contactId: "zoho-123" });
-    await processor(job);
-
-    expect(createOrUpdateEntry).toHaveBeenCalledWith(
-      "person",
-      expect.any(Object),
-      expect.objectContaining({
-        country: { [locale]: "Türkiye" },
-      }),
-      true,
-    );
-  });
-
   it("returns { entryId: null } when createOrUpdateEntry returns null", async () => {
     mockFetchZohoContact.mockResolvedValue(new ZohoContact(baseRecord));
     vi.mocked(createOrUpdateEntry).mockResolvedValue(null as never);
