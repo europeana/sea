@@ -1,5 +1,6 @@
 import {
   createClient,
+  CreateEntryProps,
   EntryProps,
   PlainClientAPI,
   QueryOptions,
@@ -30,9 +31,12 @@ export const useContentfulClient = (): PlainClientAPI => {
 };
 
 export const createOrUpdateEntry = async (
-  contentTypeId: string,
+  params: {
+    contentTypeId: string;
+    entryId?: string;
+  },
   query: QueryOptions,
-  fields: KeyValueMap,
+  entryProps: CreateEntryProps,
   publish: boolean = true,
 ): Promise<EntryProps<KeyValueMap> | null> => {
   const client = useContentfulClient();
@@ -41,11 +45,21 @@ export const createOrUpdateEntry = async (
   if (entry) {
     entry.fields = {
       ...entry.fields,
-      ...fields,
+      ...entryProps.fields,
     };
     entry = await client.entry.update({ entryId: entry.sys.id }, entry);
   } else {
-    entry = await client.entry.create({ contentTypeId }, { fields });
+    if (params.entryId) {
+      entry = await client.entry.createWithId(
+        params as {
+          contentTypeId: string;
+          entryId: string;
+        },
+        entryProps,
+      );
+    } else {
+      entry = await client.entry.create(params, entryProps);
+    }
   }
 
   if (entry) {

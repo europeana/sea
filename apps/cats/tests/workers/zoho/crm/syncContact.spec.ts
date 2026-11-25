@@ -77,24 +77,29 @@ describe("@/workers/zoho/crm/syncContact", () => {
       "id,Full_Name,Public_email,LinkedIn,Communities,Contact_Participation,Country_new,Title,Europeana_Initiative_role_chair,Europeana_Initiative_role_vice_chair,Europeana_Initiative_role_treasurer,Europeana_Initiative_role_member",
     );
     expect(createOrUpdateEntry).toHaveBeenCalledWith(
-      "person",
       {
-        content_type: "person",
-        "fields.zohoId": "zoho-123",
+        contentTypeId: "zohoContact",
+        entryId: `zohoContact-zoho-123`,
       },
       {
-        name: { [locale]: "Ada Lovelace" },
-        email: { [locale]: "ada@example.org" },
-        participation: { [locale]: ["Speaker"] },
-        title: { [locale]: "Mathematician" },
-        country: { [locale]: "United Kingdom" },
-        communities: { [locale]: ["Tech", "History"] },
-        url: { [locale]: "https://linkedin.com" },
-        roleChair: { [locale]: [] },
-        roleMember: { [locale]: [] },
-        roleTreasurer: { [locale]: [] },
-        roleViceChair: { [locale]: [] },
-        zohoId: { [locale]: "zoho-123" },
+        content_type: "zohoContact",
+        "fields.identifier": "zoho-123",
+      },
+      {
+        fields: {
+          name: { [locale]: "Ada Lovelace" },
+          email: { [locale]: "ada@example.org" },
+          participation: { [locale]: ["Speaker"] },
+          title: { [locale]: "Mathematician" },
+          country: { [locale]: "United Kingdom" },
+          communities: { [locale]: ["Tech", "History"] },
+          linkedInUrl: { [locale]: "https://linkedin.com" },
+          roleChair: { [locale]: [] },
+          roleMember: { [locale]: [] },
+          roleTreasurer: { [locale]: [] },
+          roleViceChair: { [locale]: [] },
+          identifier: { [locale]: "zoho-123" },
+        },
       },
       true,
     );
@@ -113,16 +118,22 @@ describe("@/workers/zoho/crm/syncContact", () => {
     const result = await processor(job);
 
     expect(mockFetchZohoContact).not.toHaveBeenCalled();
+
     expect(createOrUpdateEntry).toHaveBeenCalledWith(
-      "person",
       {
-        content_type: "person",
-        "fields.zohoId": "zoho-123",
+        contentTypeId: "zohoContact",
+        entryId: `zohoContact-zoho-123`,
       },
-      expect.objectContaining({
-        name: { [locale]: "Ada Lovelace" },
-        zohoId: { [locale]: "zoho-123" },
-      }),
+      {
+        content_type: "zohoContact",
+        "fields.identifier": "zoho-123",
+      },
+      {
+        fields: expect.objectContaining({
+          name: { [locale]: "Ada Lovelace" },
+          identifier: { [locale]: "zoho-123" },
+        }),
+      },
       true,
     );
     expect(result).toEqual({ entryId: "cf-entry-999" });
@@ -144,19 +155,24 @@ describe("@/workers/zoho/crm/syncContact", () => {
     await processor(job);
 
     expect(createOrUpdateEntry).toHaveBeenCalledWith(
-      "person",
+      {
+        contentTypeId: "zohoContact",
+        entryId: `zohoContact-zoho-123`,
+      },
       expect.any(Object),
-      expect.objectContaining({
-        image: {
-          [locale]: {
-            sys: {
-              type: "Link",
-              linkType: "Asset",
-              id: "asset-777",
+      {
+        fields: expect.objectContaining({
+          image: {
+            [locale]: {
+              sys: {
+                type: "Link",
+                linkType: "Asset",
+                id: "asset-777",
+              },
             },
           },
-        },
-      }),
+        }),
+      },
       true,
     );
   });

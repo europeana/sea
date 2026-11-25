@@ -27,6 +27,7 @@ describe("@/utils/contentful", () => {
 
   const mockGetManyEntries = vi.mocked(mockClient.entry.getMany);
   const mockCreateEntry = vi.mocked(mockClient.entry.create);
+  const mockCreateEntryWithId = vi.mocked(mockClient.entry.createWithId);
   const mockUpdateEntry = vi.mocked(mockClient.entry.update);
   const mockPublishEntry = vi.mocked(mockClient.entry.publish);
 
@@ -60,6 +61,7 @@ describe("@/utils/contentful", () => {
 
   describe("createOrUpdateEntry", () => {
     const contentTypeId = "page";
+    const entryId = "custom-entry-id";
     const query = {
       content_type: "page",
     };
@@ -91,13 +93,13 @@ describe("@/utils/contentful", () => {
       });
 
       it("gets the updated fields", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
+        await createOrUpdateEntry({ contentTypeId }, query, { fields });
 
         expect(entry.fields.title).toEqual(fields.title);
       });
 
       it("omits invalid array field values, per the content type validation", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
+        await createOrUpdateEntry({ contentTypeId }, query, { fields });
 
         expect(entry.fields.categories).toEqual({
           "en-GB": ["good category"],
@@ -105,7 +107,7 @@ describe("@/utils/contentful", () => {
       });
 
       it("updated via the SDK", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
+        await createOrUpdateEntry({ contentTypeId }, query, { fields });
 
         expect(mockUpdateEntry).toHaveBeenCalledWith(
           { entryId: "entryid" },
@@ -114,7 +116,7 @@ describe("@/utils/contentful", () => {
       });
 
       it("is published by default", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
+        await createOrUpdateEntry({ contentTypeId }, query, { fields });
 
         expect(mockPublishEntry).toHaveBeenCalledWith(
           { entryId: "entryid" },
@@ -123,7 +125,7 @@ describe("@/utils/contentful", () => {
       });
 
       it("is optionally not published", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields, false);
+        await createOrUpdateEntry({ contentTypeId }, query, { fields }, false);
 
         expect(mockPublishEntry).not.toHaveBeenCalled();
       });
@@ -136,30 +138,75 @@ describe("@/utils/contentful", () => {
           items: [],
         } as unknown as CollectionProp<EntryProps<KeyValueMap>>);
         mockCreateEntry.mockResolvedValue(entry);
+        mockCreateEntryWithId.mockResolvedValue(entry);
       });
 
-      it("created via the SDK", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
+      describe("without entryId", () => {
+        it("created via the SDK", async () => {
+          await createOrUpdateEntry({ contentTypeId }, query, { fields });
 
-        expect(mockCreateEntry).toHaveBeenCalledWith(
-          { contentTypeId },
-          { fields },
-        );
+          expect(mockCreateEntry).toHaveBeenCalledWith(
+            { contentTypeId },
+            { fields },
+          );
+          expect(mockCreateEntryWithId).not.toHaveBeenCalled();
+        });
+
+        it("is published by default", async () => {
+          await createOrUpdateEntry({ contentTypeId }, query, { fields });
+
+          expect(mockPublishEntry).toHaveBeenCalledWith(
+            { entryId: "entryid" },
+            entry,
+          );
+        });
+
+        it("is optionally not published", async () => {
+          await createOrUpdateEntry(
+            { contentTypeId },
+            query,
+            { fields },
+            false,
+          );
+
+          expect(mockPublishEntry).not.toHaveBeenCalled();
+        });
       });
 
-      it("is published by default", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields);
+      describe("with entryId", () => {
+        it("created with ID via the SDK", async () => {
+          await createOrUpdateEntry({ contentTypeId, entryId }, query, {
+            fields,
+          });
 
-        expect(mockPublishEntry).toHaveBeenCalledWith(
-          { entryId: "entryid" },
-          entry,
-        );
-      });
+          expect(mockCreateEntryWithId).toHaveBeenCalledWith(
+            { contentTypeId, entryId },
+            { fields },
+          );
+          expect(mockCreateEntry).not.toHaveBeenCalled();
+        });
 
-      it("is optionally not published", async () => {
-        await createOrUpdateEntry(contentTypeId, query, fields, false);
+        it("is published by default", async () => {
+          await createOrUpdateEntry({ contentTypeId, entryId }, query, {
+            fields,
+          });
 
-        expect(mockPublishEntry).not.toHaveBeenCalled();
+          expect(mockPublishEntry).toHaveBeenCalledWith(
+            { entryId: "entryid" },
+            entry,
+          );
+        });
+
+        it("is optionally not published", async () => {
+          await createOrUpdateEntry(
+            { contentTypeId, entryId },
+            query,
+            { fields },
+            false,
+          );
+
+          expect(mockPublishEntry).not.toHaveBeenCalled();
+        });
       });
     });
   });

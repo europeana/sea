@@ -36,6 +36,7 @@ vi.mock("contentful-management", () => {
     },
     entry: {
       create: vi.fn().mockResolvedValue(mockEntry),
+      createWithId: vi.fn().mockResolvedValue(mockEntry),
       get: vi.fn().mockResolvedValue(mockEntry),
       getMany: vi.fn(),
       publish: vi.fn(),
