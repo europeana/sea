@@ -48,7 +48,7 @@ RUN pnpm --filter @europeana/${app} run build-storybook
 # Stage: Run storybook
 #
 
-FROM nginx:stable@sha256:7fad6c0dff97965adbddf28027d934b111fc0221a554315dc274712f3fba24d3 AS run-storybook
+FROM nginx:stable@sha256:755983e0e0e568e4c86297cc91485d7a6f9fb73e42d8a19cdba3eac9e8b8cfc9 AS run-storybook
 
 ARG app
 
