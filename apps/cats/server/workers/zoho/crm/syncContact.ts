@@ -2,7 +2,7 @@ import { Job } from "bullmq";
 import { useRuntimeConfig } from "nitropack/runtime";
 
 import { ZohoContact, ZohoContactRecord } from "@europeana/zoho-client";
-import { PersonEntry, PersonEntryFields } from "@/types/contentful";
+import { ZohoContactEntry, ZohoContactEntryFields } from "@/types/contentful";
 import { createOrUpdateEntry } from "@/utils/contentful";
 import { useZoho } from "@/utils/zoho";
 
@@ -27,7 +27,7 @@ export const processor = async (
   job: Job,
 ): Promise<{ entryId: string | null }> => {
   const contentfulLocale = useRuntimeConfig().contentful?.defaultLocale;
-  const contentfulContentTypeId = "person";
+  const contentfulContentTypeId = "zohoContact";
 
   const zohoContact = await findZohoContact(job);
 
@@ -38,21 +38,24 @@ export const processor = async (
 
   const photoAssetId = await getPhotoAssetId(job);
   if (photoAssetId) {
-    addImageToPersonEntryFields(fields, photoAssetId);
+    addImageToZohoContactEntryFields(fields, photoAssetId);
   }
 
-  const contentfulPersonEntry: PersonEntry | null = (await createOrUpdateEntry(
-    contentfulContentTypeId,
+  const contentfulEntry: ZohoContactEntry | null = (await createOrUpdateEntry(
+    {
+      contentTypeId: contentfulContentTypeId,
+      entryId: `zohoContact-${zohoContact.id}`,
+    },
     {
       content_type: contentfulContentTypeId,
-      "fields.zohoId": zohoContact.id,
+      "fields.identifier": zohoContact.id,
     },
-    fields,
+    { fields },
     true,
-  )) as PersonEntry;
+  )) as ZohoContactEntry;
 
-  if (contentfulPersonEntry) {
-    return { entryId: contentfulPersonEntry.sys.id };
+  if (contentfulEntry) {
+    return { entryId: contentfulEntry.sys.id };
   } else {
     return { entryId: null };
   }
@@ -63,20 +66,20 @@ export const opts = {};
 const mapZohoContactToContentfulPersonEntryFields = (
   zohoContact: ZohoContact,
   locale: string,
-): PersonEntryFields => {
+): ZohoContactEntryFields => {
   return {
     name: { [locale]: zohoContact.name },
+    identifier: { [locale]: zohoContact.id },
     email: { [locale]: zohoContact.email },
     participation: { [locale]: zohoContact.participation },
     title: { [locale]: zohoContact.jobTitle },
+    linkedInUrl: { [locale]: zohoContact.linkedIn },
     country: { [locale]: zohoContact.country },
     communities: { [locale]: zohoContact.communities },
     roleChair: { [locale]: zohoContact.roleChair },
     roleMember: { [locale]: zohoContact.roleMember },
     roleTreasurer: { [locale]: zohoContact.roleTreasurer },
     roleViceChair: { [locale]: zohoContact.roleViceChair },
-    url: { [locale]: zohoContact.linkedIn },
-    zohoId: { [locale]: zohoContact.id },
   };
 };
 
@@ -109,8 +112,8 @@ const getPhotoAssetId = async (job: Job): Promise<string | undefined> => {
   return photoJobKey ? childrenValues[photoJobKey]?.assetId : undefined;
 };
 
-const addImageToPersonEntryFields = (
-  fields: PersonEntryFields,
+const addImageToZohoContactEntryFields = (
+  fields: ZohoContactEntryFields,
   imageAssetId: string,
 ) => {
   const contentfulLocale = useRuntimeConfig().contentful?.defaultLocale;
