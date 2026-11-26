@@ -30,5 +30,7 @@ export default defineConfig({
         "**/tests/**",
       ],
     },
+    // silence noisy warnings
+    onConsoleLog: (log) => !log.startsWith("<Suspense>"),
   },
 });
