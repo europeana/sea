@@ -78,7 +78,7 @@ RUN pnpm --filter @europeana/${app} run build
 # Stage: Run app
 #
 
-FROM gcr.io/distroless/nodejs24-debian13@sha256:24bc0fe0225c7518f202a822587dad74fe143b96326b81fe5cc08c1df8bed03e AS run-app
+FROM gcr.io/distroless/nodejs24-debian13@sha256:235cae47d37e0ba4ab70a723ed0bfd4f619c04d16d4226371d5d0c71a52f9211 AS run-app
 ARG app
 
 ENV PORT=8080
