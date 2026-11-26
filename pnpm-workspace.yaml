@@ -63,7 +63,7 @@ catalogs:
   vue3:
     vue: "3.5.46"
     "@vue/test-utils": "2.6.0"
-    "@vueuse/core": "14.4.0"
+    "@vueuse/core": "15.1.0"
 minimumReleaseAgeExclude:
   - "@europeana/style"
   - "@europeana/feedback-widget@0.5.6"
