@@ -47,7 +47,7 @@ catalogs:
     "@rollup/plugin-typescript": "12.3.1"
     rollup: 4.68.8
   typescript5:
-    typescript: 5.9.3
+    typescript: 7.0.2
   types:
     "@types/morgan": "1.9.10"
     "@types/node": 26.6.6
