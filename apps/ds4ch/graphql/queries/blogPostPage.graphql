@@ -60,9 +60,9 @@ query BlogPostPage(
             text
             hasPartCollection {
               items {
-                ... on Person {
+                ... on ZohoContact {
                   name
-                  url
+                  linkedInUrl
                   image {
                     ...imageFields
                   }
