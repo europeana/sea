@@ -47,8 +47,7 @@
     },
     {
       "groupName": "Nuxt Test Utils & Vitest",
-      "matchPackageNames": ["@nuxt/test-utils"],
-      "matchPackagePatterns": ["^vitest$", "^@vitest/"]
+      "matchPackageNames": ["@nuxt/test-utils", "/^vitest$/", "/^@vitest//"]
     },
     {
       "groupName": "bull-board & bullmq",
