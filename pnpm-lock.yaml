@@ -196,8 +196,8 @@ settings:
 catalogs:
   contentful:
     '@contentful/app-sdk':
-      specifier: 4.76.1
-      version: 4.76.1
+      specifier: 5.2.0
+      version: 5.2.0
     contentful-management:
       specifier: 12.21.0
       version: 12.21.0
@@ -472,7 +472,7 @@ importers:
     dependencies:
       '@contentful/app-sdk':
         specifier: catalog:contentful
-        version: 4.76.1(supports-color@10.2.2)
+        version: 5.2.0(supports-color@10.2.2)
     devDependencies:
       '@europeana/sea-base-layer':
         specifier: workspace:*
@@ -1021,8 +1021,8 @@ packages:
     resolution: {integrity: sha512-sGEA473TlCvhCGNoTBY9OXZVWdscIXdGt0dm8EpB+2MRfmt8LNh/X56P/T3nCtEB+eH5qGEa3odphSAoUxSfSQ==}
     engines: {node: '>=22.12.0'}
 
-  '@contentful/app-sdk@4.76.1':
-    resolution: {integrity: sha512-ed+MurH6kywwtqiQRJtjgRIsKEx7Mk/+zNGRI40RS4PS/vJcabUaOzytkB+9UR+vjHWZztCURdSZxh4SqBmJwA==}
+  '@contentful/app-sdk@5.2.0':
+    resolution: {integrity: sha512-YBna4SmWSdg5BaM1jxejFuRPN2nwEdQ/EDOvCAst6hM1JJyAtFypQnS7abHJn/Ni0gL8BHlQARQyA00FzEx7PA==}
 
   '@contentful/rich-text-types@17.2.7':
     resolution: {integrity: sha512-aIdozk8vk5gsYcallOrwEiL6+GSlMXZorDOmiVELfpbVaXMJPJPlf2CBw3LUzviAqCw0UPQcKHHCwG7SdY7u5w==}
@@ -10091,7 +10091,7 @@ snapshots:
       conventional-commits-parser: 7.1.4
       picocolors: 1.1.1
 
-  '@contentful/app-sdk@4.76.1(supports-color@10.2.2)':
+  '@contentful/app-sdk@5.2.0(supports-color@10.2.2)':
     dependencies:
       contentful-management: 12.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
     transitivePeerDependencies:

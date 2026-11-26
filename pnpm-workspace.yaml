@@ -16,7 +16,7 @@ catalog:
   rimraf: 6.1.4
 catalogs:
   contentful:
-    "@contentful/app-sdk": 4.76.1
+    "@contentful/app-sdk": 5.2.0
     contentful-management: 12.21.0
   eslint10:
     "@eslint/compat": "2.1.1"
