@@ -1,16 +1,17 @@
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  vi,
-} from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import gql from "graphql-tag";
 import fetch from "node-fetch-native";
 
 import { query } from "./query.js";
+
+vi.mock("node-fetch-native", () => {
+  return {
+    default: vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ data: {} }),
+    }),
+  };
+});
 
 const config = {
   accessToken: {
@@ -22,17 +23,6 @@ const config = {
 };
 
 describe("query", () => {
-  beforeAll(() => {
-    vi.mock("node-fetch-native", () => {
-      return {
-        default: vi.fn().mockResolvedValue({
-          ok: true,
-          json: () => Promise.resolve({ data: {} }),
-        }),
-      };
-    });
-  });
-
   afterEach(() => {
     vi.clearAllMocks();
   });
