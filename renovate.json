@@ -7,7 +7,6 @@
     "config:best-practices",
     ":automergeMinor",
     "security:minimumReleaseAgeNpm",
-    "group:jsUnitTest",
     "group:definitelyTyped"
   ],
   "platformAutomerge": true,
@@ -45,6 +44,11 @@
       "groupSlug": "rollup",
       "matchPackageNames": ["rollup", "@rollup/**"],
       "separateMajorMinor": false
+    },
+    {
+      "groupName": "Nuxt Test Utils & Vitest",
+      "matchPackageNames": ["@nuxt/test-utils"],
+      "matchPackagePatterns": ["^vitest$", "^@vitest/"]
     },
     {
       "groupName": "bull-board & bullmq",
