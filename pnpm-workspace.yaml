@@ -35,7 +35,7 @@ catalogs:
   nitro2:
     h3: "1.15.11"
     morgan: "1.12.1"
-    nitropack: "2.13.6"
+    nitropack: "2.14.0"
   nuxt3:
     "@nuxt/test-utils": 3.23.0
     "@nuxtjs/i18n": 9.5.6
