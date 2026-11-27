@@ -241,8 +241,8 @@ catalogs:
       version: 8.74.0
   html:
     marked:
-      specifier: 18.2.1
-      version: 18.2.1
+      specifier: 18.3.0
+      version: 18.3.0
     node-html-parser:
       specifier: 9.0.7
       version: 9.0.7
@@ -420,7 +420,7 @@ importers:
         version: 7.0.3
       marked:
         specifier: catalog:html
-        version: 18.2.1
+        version: 18.3.0
       morgan:
         specifier: catalog:nitro2
         version: 1.12.1(supports-color@10.2.2)
@@ -621,7 +621,7 @@ importers:
         version: 11.0.35
       marked:
         specifier: catalog:html
-        version: 18.2.1
+        version: 18.3.0
       nuxt:
         specifier: catalog:nuxt3
         version: 3.21.11(@oxc-project/types@0.156.0)(@parcel/watcher@2.6.0)(@types/node@26.6.6)(@vue/compiler-sfc@3.5.46)(acorn@8.19.0)(bare-buffer@3.7.3)(cac@6.7.14)(commander@14.0.3)(confbox@0.3.2)(db0@0.3.4)(dotenv@17.4.2)(esbuild@0.28.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(giget@3.3.1)(ioredis@5.11.1(supports-color@10.2.2))(lightningcss@1.33.0)(magicast@0.5.5)(optionator@0.9.4)(rolldown@1.2.19)(rollup-plugin-visualizer@7.3.0(rolldown@1.2.19)(rollup@4.68.8))(rollup@4.68.8)(sass-embedded@1.108.2)(sass@1.108.2)(srvx@1.0.8)(supports-color@10.2.2)(terser@5.51.4)(typescript@7.0.2)(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(lightningcss@1.33.0)(sass-embedded@1.108.2)(sass@1.108.2)(terser@5.51.4)(yaml@2.9.1))(yaml@2.9.1)
@@ -6571,8 +6571,8 @@ packages:
   mapbox-to-css-font@3.3.0:
     resolution: {integrity: sha512-ZZBIPdxHF2Lte55vK/I0cR6mpMKeNHeFuVv07gqBuXmVqUtWHPThQuqR0eRhpLKO76Xt/r9ytanvSRIS/GmyAA==}
 
-  marked@18.2.1:
-    resolution: {integrity: sha512-ii4bxCTCqqwpT86XZWgJNs+ZnAIZksmLGYMViWA7PDIXYIeNo1x6cDdX3JOip9NM/cI6p8z57FxliACboTruMA==}
+  marked@18.3.0:
+    resolution: {integrity: sha512-ed8zmPXlBb3UfGXN5iHMQyMhFpdqLgoV5umUXx/Q1R+FW3q8VpqpyoKUwlENL9appo2UMvNLURDVaT3AMOryGA==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -15990,7 +15990,7 @@ snapshots:
 
   mapbox-to-css-font@3.3.0: {}
 
-  marked@18.2.1: {}
+  marked@18.3.0: {}
 
   math-intrinsics@1.1.0: {}
 
