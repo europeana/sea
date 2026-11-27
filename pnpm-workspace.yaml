@@ -33,7 +33,7 @@ catalogs:
     node-html-parser: "9.0.7"
     turndown: "7.2.5"
   nitro2:
-    h3: "1.15.11"
+    h3: "2.0.8"
     morgan: "1.12.1"
     nitropack: "2.14.0"
   nuxt3:
