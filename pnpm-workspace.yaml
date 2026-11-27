@@ -46,6 +46,7 @@ catalogs:
     "@rollup/plugin-terser": "1.0.2"
     "@rollup/plugin-typescript": "12.3.1"
     rollup: 4.68.8
+    rollup-plugin-dts: 6.5.1
   typescript5:
     typescript: 5.9.3
   types:
