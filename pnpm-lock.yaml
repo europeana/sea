@@ -267,8 +267,8 @@ catalogs:
       specifier: 9.5.6
       version: 9.5.6
     '@nuxtjs/storybook':
-      specifier: 10.0.3
-      version: 10.0.3
+      specifier: 10.0.4
+      version: 10.0.4
     nuxt:
       specifier: 3.21.11
       version: 3.21.11
@@ -515,7 +515,7 @@ importers:
         version: 9.5.6(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(magicast@0.5.5)(rollup@4.68.8)(supports-color@10.2.2)(vue@3.5.46(typescript@5.9.3))
       '@nuxtjs/storybook':
         specifier: catalog:nuxt3
-        version: 10.0.3(8ab3c0130f0c88ab9e9bc3dd104fbc3b)
+        version: 10.0.4(8ab3c0130f0c88ab9e9bc3dd104fbc3b)
       '@storybook/addon-docs':
         specifier: 10.6.8
         version: 10.6.8(@types/react@19.3.3)(storybook@10.6.8(@types/react@19.3.3)(prettier@3.10.1)(react@19.3.1))
@@ -2143,8 +2143,8 @@ packages:
     resolution: {integrity: sha512-PhrQtJT6Di9uoslL5BTrBFqntFlfCaUKlO3T9ORJwmWFdowPqQeFjQ9OjVbKA6TNWr3kQhDqLbIcGlhbuG1USQ==}
     engines: {node: '>=18.12.0'}
 
-  '@nuxtjs/storybook@10.0.3':
-    resolution: {integrity: sha512-nLXuuj3MMNt8zDhYnHlVfqcNn5b2Y+KUMRKVG4TRDgZqa/2ZMTTL8HwQM3do9GOpvDcyHa1PcvlLMx1R96bsag==}
+  '@nuxtjs/storybook@10.0.4':
+    resolution: {integrity: sha512-zITh3Ucb7mqjZGMZWHsYkhvFrlLcYGJ8kZwR/UULicfxoER7zPrStoKYKOZfEqKanvrQRgcUZv8P94tOdScPqA==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       storybook: ^10.6.0
@@ -3515,8 +3515,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@storybook-vue/nuxt@10.0.3':
-    resolution: {integrity: sha512-2/D7bWPxieEuPQVcr6WcA0YKXOJZ3nmZBn9d77TrAJbL13upHBudyIhdJLlNV6tL8mxWP7DWzFFDYyAJOSzoMQ==}
+  '@storybook-vue/nuxt@10.0.4':
+    resolution: {integrity: sha512-7FJLafYArQj4qY9pHKBEXbuYx2V2/mfxePtYZQtDzA1IoBtNj8GR9+gEUlnYcc+T5mMkH/H9ciIpk/qWs2fPPw==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       nuxt: ^3.18.1 || ^4.0.0
@@ -11240,11 +11240,11 @@ snapshots:
       - supports-color
       - vue
 
-  '@nuxtjs/storybook@10.0.3(8ab3c0130f0c88ab9e9bc3dd104fbc3b)':
+  '@nuxtjs/storybook@10.0.4(8ab3c0130f0c88ab9e9bc3dd104fbc3b)':
     dependencies:
       '@nuxt/devtools-kit': 3.4.4(@nuxt/schema@4.7.0)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(oxc-parser@0.143.0)(rolldown@1.2.19)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.19)(rollup@4.68.8)(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(lightningcss@1.33.0)(sass-embedded@1.108.2)(sass@1.108.2)(terser@5.51.4)(yaml@2.9.1)))(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(lightningcss@1.33.0)(sass-embedded@1.108.2)(sass@1.108.2)(terser@5.51.4)(yaml@2.9.1))
       '@nuxt/kit': 4.7.0(@nuxt/schema@4.7.0)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(oxc-parser@0.143.0)(rolldown@1.2.19)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.19)(rollup@4.68.8)(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(lightningcss@1.33.0)(sass-embedded@1.108.2)(sass@1.108.2)(terser@5.51.4)(yaml@2.9.1)))
-      '@storybook-vue/nuxt': 10.0.3(d80252c3cfaf96a4eb0431860dd6a905)
+      '@storybook-vue/nuxt': 10.0.4(d80252c3cfaf96a4eb0431860dd6a905)
       chalk: 5.6.2
       consola: 3.4.2
       defu: 6.1.7
@@ -12144,7 +12144,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@storybook-vue/nuxt@10.0.3(d80252c3cfaf96a4eb0431860dd6a905)':
+  '@storybook-vue/nuxt@10.0.4(d80252c3cfaf96a4eb0431860dd6a905)':
     dependencies:
       '@nuxt/kit': 4.7.0(@nuxt/schema@4.7.0)(confbox@0.3.2)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magic-string@1.4.5)(mlly@1.8.2)(oxc-parser@0.143.0)(rolldown@1.2.19)(unplugin@3.7.0(esbuild@0.28.2)(rolldown@1.2.19)(rollup@4.68.8)(vite@7.3.8(@types/node@26.6.6)(jiti@2.7.0)(lightningcss@1.33.0)(sass-embedded@1.108.2)(sass@1.108.2)(terser@5.51.4)(yaml@2.9.1)))
       '@nuxt/schema': 4.7.0
