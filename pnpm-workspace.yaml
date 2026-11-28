@@ -37,7 +37,7 @@ catalogs:
     morgan: "1.12.1"
     nitropack: "2.14.0"
   nuxt3:
-    "@nuxt/test-utils": 3.23.0
+    "@nuxt/test-utils": 4.4.0
     "@nuxtjs/i18n": 9.5.6
     "@nuxtjs/storybook": 10.0.4
     nuxt: 3.21.11
@@ -58,8 +58,8 @@ catalogs:
     vite: "7.3.8"
     "vite-tsconfig-paths": "6.1.1"
   vitest4:
-    "@vitest/coverage-v8": "4.1.12"
-    vitest: "4.1.12"
+    "@vitest/coverage-v8": "5.1.2"
+    vitest: "5.1.2"
   vue3:
     vue: "3.5.46"
     "@vue/test-utils": "2.6.0"
